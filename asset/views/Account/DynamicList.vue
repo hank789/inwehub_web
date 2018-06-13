@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">{{user_uuid == uuid ? '我的动态' : 'Ta的动态'}}</h1>
+      <h1 class="mui-title">{{'Ta的动态'}}</h1>
     </header>
 
     <div class="mui-content">
@@ -10,8 +10,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'feed/list'"
-        :prevOtherData="dataList"
-        :nextOtherData="dataList"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
         :pageMode = "true"
         :isShowUpToRefreshDescription="false"
         :list="list"
@@ -19,176 +19,194 @@
         class="listWrapper"
       >
         <template v-for="(item, index) in list">
-          <div @tap.stop.prevent="toDetail(item)">
-            <div v-if="item.feed_type === 5 && item.feed.domain === ''">
-              <!--x发布了发现-->
-              <DiscoverShare
-                :data="item"
-                ref="discoverShare"
-                @comment="comment"
-              ></DiscoverShare>
+
+          <!-- 发布了分享 -->
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
+            <div class="container-avatarAndTwoLineText">
+              <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="mui-media-body">
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                </div>
+                <div class="lineWrapper-2">{{ item.created_at }}
+                  <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                </div>
+              </div>
             </div>
-            <!--x回答了专业问答-->
-            <AnswerMajor v-if="item.feed_type === 1" :data="item"></AnswerMajor>
-
-            <!--x回答了互动问答-->
-            <AnswerInteraction v-else-if="item.feed_type === 2" :data="item"></AnswerInteraction>
-
-            <!--x发布了互动问答-->
-            <CreateFreeQuestion v-else-if="item.feed_type === 3" :data="item"></CreateFreeQuestion>
-
-            <!--x发布了文章-->
-            <SubmitReadhubAriticle v-else-if="item.feed_type === 5 && item.feed.domain !== ''" :data="item"
-                                   @comment="comment"
-            ></SubmitReadhubAriticle>
-
-            <!--x关注了互动问答-->
-            <FllowFreeQuestion v-else-if="item.feed_type === 6" :data="item" ></FllowFreeQuestion>
-
-            <!--x关注了新的朋友-->
-            <FllowUser v-else-if="item.feed_type === 7" :data="item"></FllowUser>
-
-            <!--x评论了专业回答-->
-            <CommentPayQustion v-else-if="item.feed_type === 8" :data="item"></CommentPayQustion>
-
-            <!--x评论了互动回答-->
-            <CommentFreeQuestion v-else-if="item.feed_type === 9" :data="item"></CommentFreeQuestion>
-
-            <!--x评论了文章-->
-            <CommentReadhubAriticle v-else-if="item.feed_type === 10" :data="item"></CommentReadhubAriticle>
-
-            <!--x赞了专业回答-->
-            <UpvotePayQuestion v-else-if="item.feed_type === 11" :data="item"></UpvotePayQuestion>
-
-            <!--x赞了互动回答-->
-            <UpvoteFreeQuestion v-else-if="item.feed_type === 12" :data="item"></UpvoteFreeQuestion>
-
-            <!--x赞了文章-->
-            <UpvoteReadhubAriticle v-else-if="item.feed_type === 13" :data="item"></UpvoteReadhubAriticle>
+            <div class="contentWrapper"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
+            <div v-if="item.feed.img" class="container-images container-images-discover">
+              <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
+            </div>
+            <div v-if="item.feed.files" class="container-pdf-list">
+              <div v-for="file in item.feed.files" class="pdf"><span class="text-line-2">{{file.name}}</span></div>
+            </div>
+            <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
 
           </div>
+
+          <!-- 发布了文章 -->
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 5">
+            <div class="container-avatarAndTwoLineText">
+              <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="mui-media-body">
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                </div>
+                <div class="lineWrapper-2">{{ item.created_at }}
+                  <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="contentWrapper text-line-3">{{ item.feed.title }}<span class="url">-{{ item.feed.domain }}</span></div>
+            <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div>
+            <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+          </div>
+
+          <!-- 回答 -->
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-question" v-if="item.feed_type <= 3 || item.feed_type === 6 || item.feed_type === 11 || item.feed_type === 12 || item.feed_type === 14">
+            <div class="container-avatarAndTwoLineText">
+              <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="mui-media-body">
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                </div>
+                <div class="lineWrapper-2">{{ item.created_at }}</div>
+              </div>
+            </div>
+            <div class="contentWrapper"><span v-if="!item.feed.answer_id && item.feed.price > 0" class="component-label component-label-warn">{{ item.feed.status_description }}</span><span v-if="!item.feed.answer_id" v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>{{ item.feed.answer_id?item.feed.answer_content:item.feed.question_title }}</div>
+            <div class="container-remarks">{{ item.feed.answer_id ? item.feed.comment_number+'评论' : item.feed.answer_number+'回答' }}<span class="line-wall"></span>{{ item.feed.answer_id ? item.feed.support_number+'点赞' : item.feed.follow_number+'关注' }}<span v-if="item.feed.average_rate" class="line-wall"></span>{{item.feed.average_rate?item.feed.average_rate+'好评':''}}</div>
+            <div v-if="item.feed.answer_id" class="contentWrapper contentWrapper-question"><span v-if="item.feed.price > 0" class="component-label component-label-warn">{{ item.feed.status_description }}</span><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>{{ item.feed.question_title }}</div>
+          </div>
+
+
+          <div class="line-river-big"></div>
         </template>
+
       </RefreshList>
     </div>
   </div>
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
-  import DiscoverShare from '../../components/feed/DiscoverShare.vue'
-  import AnswerMajor from '../../components/feed/AnswerMajor'
-  import AnswerInteraction from '../../components/feed/AnswerInteraction'
-  import CreateFreeQuestion from '../../components/feed/CreateFreeQuestion'
-  import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
-  import FllowFreeQuestion from '../../components/feed/FllowFreeQuestion'
-  import FllowUser from '../../components/feed/FllowUser'
-  import CommentPayQustion from '../../components/feed/CommentPayQustion'
-  import CommentFreeQuestion from '../../components/feed/CommentFreeQuestion'
-  import CommentReadhubAriticle from '../../components/feed/CommentReadhubAriticle'
-  import UpvotePayQuestion from '../../components/feed/UpvotePayQuestion'
-  import UpvoteFreeQuestion from '../../components/feed/UpvoteFreeQuestion'
-  import UpvoteReadhubAriticle from '../../components/feed/UpvoteReadhubAriticle'
-  import { getLocalUserInfo } from '../../utils/user'
-  const currentUser = getLocalUserInfo()
+  import userAbility from '../../utils/userAbility'
+  import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
+  import { goThirdPartyArticle } from '../../utils/webview'
+
   export default {
     data () {
       return {
         list: [],
-        emptyDescription: '暂无您关注的内容',
-        dataList: {},
-        uuid: currentUser.uuid,
+        search_type: 5, // 1:关注,2:全部,3:问答,4:分享,5:他的动态,6:推荐,默认2
+        emptyDescription: '暂无内容',
         user_uuid: ''
       }
     },
     components: {
-      RefreshList,
-      DiscoverShare,
-      AnswerMajor,
-      AnswerInteraction,
-      CreateFreeQuestion,
-      SubmitReadhubAriticle,
-      FllowFreeQuestion,
-      FllowUser,
-      CommentPayQustion,
-      CommentFreeQuestion,
-      CommentReadhubAriticle,
-      UpvotePayQuestion,
-      UpvoteFreeQuestion,
-      UpvoteReadhubAriticle
+      RefreshList
     },
-    created () {
-      if (this.$route.query.id) {
-        this.dataList = {
-          search_type: 5,
-          uuid: this.$route.query.id
-        }
-        this.user_uuid = this.$route.query.id
+    computed: {
+      prevOtherData () {
+        return {search_type: this.search_type, uuid: this.user_uuid}
+      },
+      nextOtherData () {
+        return {search_type: this.search_type, uuid: this.user_uuid}
       }
     },
+    watch: {
+      '$route' () {
+        this.getData()
+      }
+    },
+    created () {
+      this.getData()
+    },
     methods: {
-      comment (submissionId, parentId, commentTargetUsername, list, component) {
-        // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
-        var commentTarget = {
-          submissionId: submissionId,
-          parentId: parentId || 0,
-          commentList: list
+      getData () {
+        if (this.$route.query.id) {
+          this.user_uuid = this.$route.query.id
         }
-        var data = {
-          targetUsername: commentTargetUsername || '',
-          commentData: commentTarget
+      },
+      messagecountchange (obj) {
+        if (obj.contact_id) {
+          this.contact_id = obj.contact_id
+          this.unread_count = obj.unread_count
         }
-        this.commentTargetComponent = component
-        this.$refs.ctextarea.comment(data)
+      },
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
+      switchSearchType (filter) {
+        this.search_type = filter
+      },
+      textToLink (text) {
+        return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
+      toResume (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+      goArticle: function (article) {
+        goThirdPartyArticle(
+          article.view_url,
+          article.id,
+          article.title,
+          article.comment_url,
+          article.img_url
+        )
       },
       toDetail (item) {
-        if (item.feed_type === 7) item.url += '?goback=1'
-
         switch (item.feed_type) {
-          case 2:
-          case 9:
-          case 12:
           case 1:
+          case 2:
           case 3:
-          case 4:
           case 6:
-          case 7:
-          case 8:
           case 11:
-            this.$router.pushPlus(item.url, 'list-detail-page')
-            break
-          case 10:
+          case 12:
+          case 14:
+          case 15:
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 5:
-            if (item.feed_type === 5 && item.feed.domain === '') {
-              // ...
-            } else {
-              var linkArticle = {
-                view_url: item.url,
-                id: item.feed.submission_id,
-                title: item.feed.title,
-                comment_url: item.feed.comment_url,
-                img_url: item.feed.img
-              }
-              this.goArticle(linkArticle)
-            }
-            break
-          case 13:
-            var article = {
+            var linkArticle = {
               view_url: item.url,
               id: item.feed.submission_id,
               title: item.feed.title,
               comment_url: item.feed.comment_url,
               img_url: item.feed.img
             }
-            this.goArticle(article)
+            this.goArticle(linkArticle)
             break
           default:
+            this.$router.pushPlus(item.url, 'list-detail-page')
             break
         }
       }
     },
     mounted () {
-      console.error(currentUser.uuid)
     },
     updated () {}
   }
