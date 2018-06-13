@@ -212,6 +212,20 @@ const routes = [
     }
   },
   { // 问答社区(专业和互动)
+    path: '/askCommunity/major/:id',
+    name: 'askCommunity-major-detail',
+    meta: {
+      title: '问答社区',
+      wechatHideHeader: true
+    },
+    component: componets.AskCommunityMajorDetail,
+    beforeEnter: (to, from, next) => {
+      next({
+        path: '/ask/offer/answers/' + to.params.id
+      })
+    }
+  },
+  { // 问答社区(专业和互动)
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
     meta: {
@@ -220,7 +234,9 @@ const routes = [
     },
     component: componets.AskCommunityMajorList,
     beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
+      next({
+        path: '/ask/offers'
+      })
     }
   },
   { // 问答社区(悬赏问答)
@@ -260,7 +276,12 @@ const routes = [
       title: '问答社区-互动回答-回答列表',
       wechatHideHeader: true
     },
-    component: componets.AskCommunityInteractionAnswers
+    component: componets.AskCommunityInteractionAnswers,
+    beforeEnter: (to, from, next) => {
+      next({
+        path: '/ask/offer/answers/' + to.params.id
+      })
+    }
   },
   { // 问答社区-互动回答-问答详情；
     path: '/askCommunity/interaction/:id',
@@ -269,7 +290,12 @@ const routes = [
       title: '问答社区-互动问答详情',
       wechatHideHeader: false
     },
-    component: componets.AskCommunityInteractionDetail
+    component: componets.AskCommunityInteractionDetail,
+    beforeEnter: (to, from, next) => {
+      next({
+        path: '/ask/offer/' + to.params.id
+      })
+    }
   },
   { // 邀请用户
     path: '/RecommendInvitation/:id',
@@ -1472,7 +1498,9 @@ const routes = [
       wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
+      next({
+        path: '/ask/offer/answers/' + to.params.id
+      })
     }
   },
   { // asks
@@ -1532,7 +1560,9 @@ const routes = [
       wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
+      next({
+        path: '/ask/offer/' + to.params.id
+      })
     }
   },
   { // answerrefuse
