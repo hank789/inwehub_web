@@ -44,7 +44,6 @@
       }
     },
     props: {
-
       uuid: {
         default: ''
       },
@@ -80,6 +79,10 @@
         type: Boolean,
         default: false
       },
+      isNiming: {
+        type: Boolean,
+        default: false
+      },
       time: {
         type: String,
         default: ''
@@ -95,6 +98,11 @@
         if (!uuid) {
           return false
         }
+
+        if (this.isNiming) {
+          return false
+        }
+
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       collectProfessor: function () {

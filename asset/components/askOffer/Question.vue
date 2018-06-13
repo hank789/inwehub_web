@@ -11,6 +11,7 @@
       :isExpert="ask.is_expert?1:0"
       :isShowPositionAndCompany="isShowPositionAndCompany"
       :time="ask.created_at"
+      :isNiming="!!ask.hide"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
