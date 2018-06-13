@@ -77,7 +77,7 @@
               </div>
             </div>
             <div class="contentWrapper text-line-3">{{ item.feed.title }}<span class="url">-{{ item.feed.domain }}</span></div>
-            <div class="container-image"><img :src="item.feed.img"></div>
+            <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div>
             <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
           </div>
 
