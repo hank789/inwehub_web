@@ -117,6 +117,7 @@
   import HomeSearch from '../components/search/Home'
   import userAbility from '../utils/userAbility'
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../utils/dom'
+  import { goThirdPartyArticle } from '../utils/webview'
 
   const Feed = {
     data: () => ({
@@ -170,6 +171,15 @@
           return false
         }
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+      goArticle: function (article) {
+        goThirdPartyArticle(
+          article.view_url,
+          article.id,
+          article.title,
+          article.comment_url,
+          article.img_url
+        )
       },
       toDetail (item) {
         switch (item.feed_type) {
