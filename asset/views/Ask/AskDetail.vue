@@ -2,13 +2,13 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">专业问答</h1>
+      <h1 class="mui-title">问答</h1>
     </header>
 
     <div class="mui-content absolute" v-show="!loading">
       <!--标签-->
-      <div class="tags" v-if="ask.question.tags.length">
-        <p v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</p>
+      <div class="container-label" v-if="ask.question.tags.length">
+        <span v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
       </div>
 
       <Question
@@ -21,11 +21,13 @@
               :isFollow="true"
       ></Answer>
 
-      <div class="detail-answer-wait" v-show="ask.question.status!=6&&ask.question.status!=7">
-        <svg class="icon" aria-hidden="true">
+      <div class="detail-answer-wait" v-show="ask.question.status != 6 && ask.question.status != 7">
+        <div class="component-title-home"><div class="left">回答</div></div>
+        <div class="line-river line-river-full"></div>
+        <svg class="icon margin-top-26" aria-hidden="true">
           <use xlink:href="#icon-zanwushuju"></use>
         </svg>
-        <p>正在等待专家回答</p>
+        <p>正在等待回答者</p>
       </div>
 
       <div class="buttonWrapper" v-show="ask.question.status===6">
@@ -40,10 +42,6 @@
                    :readOnly="true"
       ></Star-Rating>
 
-      <Timeline
-        :timelines="timelines"
-      ></Timeline>
-
       <Discuss
         class="messageWrapper"
         :listApi="'answer/commentList'"
@@ -57,8 +55,6 @@
         ref="discuss"
         v-if="ask.question.status==6||ask.question.status==7"
       ></Discuss>
-
-
     </div>
 
     <Share
@@ -243,7 +239,7 @@
 
 
 <style scoped>
-  .mui-table-view-cell:after {
+  .mui-table-view:after {
     display: none;
   }
 
@@ -252,11 +248,12 @@
   }
 
   .detail-answer-wait {
+    margin-top:0.266rem;
     width: 100%;
     background: #FFFFFF;
     margin-bottom: 0.266rem;
     text-align: center;
-    padding: 0.533rem 0;
+    padding: 0 0 0.533rem 0;
   }
 
   .detail-answer-wait svg {
@@ -307,5 +304,10 @@
   /*margin*/
   .detail-answer{
     margin-bottom: 0rem;
+  }
+
+  .container-label{
+    background:#fff;
+    padding:0.266rem 0.426rem 0.053rem;
   }
 </style>

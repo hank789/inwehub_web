@@ -56,7 +56,7 @@
         apiRequest(`profile/update`, data).then(res => {
           if (res !== false) {
             window.mui.toast('保存成功')
-            window.mui.back()
+            window.mui.muiOldBack()
           }
         })
       }

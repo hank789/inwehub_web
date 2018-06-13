@@ -1,14 +1,13 @@
 <template>
   <div>
+    <div class="message_title">
+      <p>留言</p>
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment(0, '', list)">
+        <use xlink:href="#icon-xiugai"></use>
+      </svg>
+      <i class="bot"></i>
+    </div>
     <div class="message">
-      <div class="message_title">
-        <p>留言</p>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment(0, '', list)">
-          <use xlink:href="#icon-xiugai"></use>
-        </svg>
-        <i class="bot"></i>
-      </div>
-
       <div class="listWrapper empty" v-show="list.length === 0">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zanwushuju"></use>
@@ -370,6 +369,7 @@
   }
 
   .message_title {
+    padding:0 .41333rem;
     width: 100%;
     height: 1.173rem;
     position: relative;
@@ -379,8 +379,9 @@
 
   .message_title p {
     float: left;
-    font-size: 0.426rem;
-    color: #444444;
+    font-family: PingFangSC-Medium;
+    font-size: .42667rem;
+    color: #444;
 
   }
 

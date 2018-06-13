@@ -131,6 +131,7 @@
   }
   .small.-group{
     padding-top:0.266rem;
+    padding-bottom:0.266rem;
     position: relative;
   }
   .-group{

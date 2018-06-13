@@ -19,7 +19,7 @@
               <span>{{ item.description }}</span>
             </div>
 
-            <div class="time">{{ item.created_at.split(' ')[0].replace(/-/g, '/') }}</div>
+            <div class="time">{{ item.created_at }}</div>
 
           </div>
           <div class="vertbar" v-show="index != timelines.length-1"></div>

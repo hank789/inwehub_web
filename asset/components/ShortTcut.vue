@@ -143,7 +143,7 @@
               this.$router.pushPlus('/ask')
               break
             case 6:
-              this.$router.pushPlus('/ask/interaction')
+              this.$router.pushPlus('/ask')
               break
             case 7:
               this.$router.pushPlus('/discover/publishArticles')

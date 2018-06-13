@@ -1,5 +1,5 @@
 import router from '../modules/index/routers/index'
-import { goBack, goThirdPartyArticle } from './webview'
+import { goBack, goThirdPartyArticle, getPrevWebview } from './webview'
 import { setIncBadgeNumber } from './notice'
 import userAbility from './userAbility'
 import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from './allPlatform'
@@ -188,11 +188,32 @@ function openVendorUrl (containerDiv) {
   }
 }
 
-function openVendorUrlByUrl (url) {
+function openVendorUrlByUrl (url, title = '') {
   var href = url
   if (window.plus) {
     console.log('plus 打开')
-    router.pushPlus('/webview/vendor/' + encodeURIComponent(href))
+    if (title) {
+      title = encodeURIComponent(title)
+    }
+    router.pushPlus('/webview/vendor/' + encodeURIComponent(href) + '/' + title, 'backAndClose')
+  } else {
+    console.log('window.open 打开')
+    window.open(href)
+  }
+}
+
+function openFileUrl (url, title = '') {
+  var href = url
+  if (window.plus) {
+    console.log('plus 打开')
+    if (title) {
+      title = encodeURIComponent(title)
+    }
+    if (window.mui.os.ios) {
+      router.pushPlus('/webview/vendor/' + encodeURIComponent(href) + '/' + title, 'backAndClose')
+    } else {
+      window.plus.runtime.openURL(url)
+    }
   } else {
     console.log('window.open 打开')
     window.open(href)
@@ -468,6 +489,36 @@ function AppPageInit (context) {
     lockOrientation('portrait-primary')
 
     if (window.mui.os.plus) {
+      // 预加载页面
+      var listPageWebview = window.mui.preload({
+        url: process.env.NODE_ENV === 'development' ? 'index.html#/my' : '/public/index.html#/my',
+        id: 'list-page',
+        styles: {
+          popGesture: 'hide'
+        },
+        extras: {preload: true, custom_preload: true}
+      })
+      listPageWebview.addEventListener('popGesture', (e) => {
+        console.log('run in event popGesture')
+        if (e.type === 'end' && e.result === true) {
+          var parentWebview = getPrevWebview() // self.opener()
+          if (parentWebview) {
+            console.log('calledEvent: popGesture：' + parentWebview.id)
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshData', {childId: 'list-page'})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
+
+            // 触发父页面的自定义事件(refresh),从而进行刷新
+            window.mui.fire(parentWebview, 'refreshPageData', {childId: 'list-page', type: 'back'})
+            // 刷新当前页数据
+            // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
+
+            window.mui.fire(parentWebview, 'autoHeight', {childId: 'list-page'})
+          }
+        }
+      }, false)
       // 监听自定义事件，前往页面
       document.addEventListener('go_to_target_page', (event) => {
         var url = event.detail.url
@@ -585,22 +636,24 @@ function AppInit (context) {
             case 'question_answer_confirmed':
               // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
               // router.go(-1);
-              router.pushPlus('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()))
+              router.pushPlus('/ask/detail/' + payload.object_id + '?time=' + Date.parse(new Date()))
               break
             case 'pay_question_answered_askCommunity':
               router.pushPlus('/askCommunity/major/' + payload.object_id)
               break
             case 'free_question_answered':
-              router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+              router.pushPlus('/ask/offer/' + payload.object_id)
               break
+            case 'pay_answer_awake':
             case 'pay_answer':
             case 'answer':
               // router.go(-1);
               // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
               router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
               break
+            case 'free_answer_awake':
             case 'free_answer':
-              router.pushPlus('/askCommunity/interaction/answers/' + payload.object_id)
+              router.pushPlus('/ask/offer/answers/' + payload.object_id)
               break
             case 'authentication_success':
               // 专家认证成功
@@ -690,7 +743,7 @@ function AppInit (context) {
               break
             case 'free_answer_new_comment':
               // 互动问答新的回复
-              router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+              router.pushPlus('/ask/offer/' + payload.object_id)
               break
             case 'pay_answer_new_support':
               // 专业回答赞
@@ -698,7 +751,7 @@ function AppInit (context) {
               break
             case 'free_answer_new_support':
               // 专业回答赞
-              router.pushPlus('/askCommunity/interaction/' + payload.object_id)
+              router.pushPlus('/ask/offer/' + payload.object_id)
               break
             case 'im_message':
               // 聊天信息
@@ -846,6 +899,7 @@ export {
   openWebviewRefresh,
   openAppUrlByUrl,
   openVendorUrlByUrl,
+  openFileUrl,
   AppInit,
   AppPageInit,
   setClipboardText,

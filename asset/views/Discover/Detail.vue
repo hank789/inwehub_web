@@ -29,8 +29,12 @@
               <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
             </div>
 
-            <!--<Images v-if="detail.type === 'text'" :images="detail.data.img" class="newestList container-images-discover"></Images>-->
-            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img">
+
+            <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
+              <div class="pdf" v-for="(pdf, index) in detail.data.files" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
+            </div>
+
+            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
               <template v-for="(image, index) in detail.data.img">
                 <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
                      :data-preview-group="1"/>
@@ -151,7 +155,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl} from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl} from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
@@ -261,6 +265,9 @@
       RecommendList
     },
     methods: {
+      seePdf (pdf) {
+        openFileUrl(pdf.url, pdf.name)
+      },
       typeDesc (type) {
         switch (type) {
           case -1:
@@ -353,7 +360,6 @@
         )
       },
       refreshPageData () {
-        this.loading = 1
         this.detail.data.img = []
         this.getDetail()
         this.$refs.ctextarea.refreshPageData()
@@ -749,5 +755,8 @@
     }
   }
 
+  .container-pdf-list{
+    padding:0.266rem 0.4rem;
+  }
 </style>
 

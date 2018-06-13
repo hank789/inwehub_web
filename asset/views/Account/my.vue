@@ -17,9 +17,9 @@
               </svg>
             </div>
          <div class="my-detail">
-              <span @tap.stop.prevent="$router.pushPlus('/my/Growth', 'list-detail-page')">等级详情 ></span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/Growth')">等级详情 ></span>
               <i></i>
-              <span @tap.stop.prevent="$router.pushPlus('/my/advantage', 'backAndClose')">我的擅长 ></span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/advantage')">我的擅长 ></span>
 
             </div>
           </div>
@@ -122,14 +122,14 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/feedback/advise', 'list-detail-page')">
+        <li @tap.stop.prevent="$router.pushPlus('/feedback/advise')">
           <span>反馈建议</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/setting', 'list-detail-page')">
+        <li @tap.stop.prevent="$router.pushPlus('/setting')">
           <span>设置</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>

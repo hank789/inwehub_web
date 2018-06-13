@@ -212,6 +212,20 @@ const routes = [
     }
   },
   { // 问答社区(专业和互动)
+    path: '/askCommunity/major/:id',
+    name: 'askCommunity-major-detail',
+    meta: {
+      title: '问答社区',
+      wechatHideHeader: true
+    },
+    component: componets.AskCommunityMajorDetail,
+    beforeEnter: (to, from, next) => {
+      next({
+        path: '/ask/offer/answers/' + to.params.id
+      })
+    }
+  },
+  { // 问答社区(专业和互动)
     path: '/askCommunity/majors',
     name: 'askCommunity-major-list',
     meta: {
@@ -220,17 +234,40 @@ const routes = [
     },
     component: componets.AskCommunityMajorList,
     beforeEnter: (to, from, next) => {
+      next({
+        path: '/ask/offers'
+      })
+    }
+  },
+  { // 问答社区(悬赏问答)
+    path: '/ask/offers',
+    name: 'ask-offer-list',
+    meta: {
+      title: '问答社区',
+      wechatHideHeader: true
+    },
+    component: componets.AskOfferIndex,
+    beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
   },
-  { // 问答社区-专业回答-问答详情；
-    path: '/askCommunity/major/:id',
-    name: 'ask-major-detail',
+  { // 问答社区-悬赏问答-回答列表页
+    path: '/ask/offer/answers/:id',
+    name: 'ask-offer-answers',
     meta: {
-      title: '问答社区-专业问答详情',
+      title: '问答社区-悬赏问答-回答列表页',
       wechatHideHeader: false
     },
-    component: componets.AskCommunityMajorDetail
+    component: componets.AskOfferList
+  },
+  { // 问答社区-悬赏问答-问答详情；
+    path: '/ask/offer/:id',
+    name: 'ask-offer-detail',
+    meta: {
+      title: '问答社区-悬赏问答-详情页',
+      wechatHideHeader: false
+    },
+    component: componets.AskOfferDetail
   },
   { // 问答社区-互动回答-回答列表；
     path: '/askCommunity/interaction/answers/:id',
@@ -239,7 +276,12 @@ const routes = [
       title: '问答社区-互动回答-回答列表',
       wechatHideHeader: true
     },
-    component: componets.AskCommunityInteractionAnswers
+    component: componets.AskCommunityInteractionAnswers,
+    beforeEnter: (to, from, next) => {
+      next({
+        path: '/ask/offer/answers/' + to.params.id
+      })
+    }
   },
   { // 问答社区-互动回答-问答详情；
     path: '/askCommunity/interaction/:id',
@@ -248,7 +290,12 @@ const routes = [
       title: '问答社区-互动问答详情',
       wechatHideHeader: false
     },
-    component: componets.AskCommunityInteractionDetail
+    component: componets.AskCommunityInteractionDetail,
+    beforeEnter: (to, from, next) => {
+      next({
+        path: '/ask/offer/' + to.params.id
+      })
+    }
   },
   { // 邀请用户
     path: '/RecommendInvitation/:id',
@@ -562,7 +609,7 @@ const routes = [
   {
     path: '/discover',
     name: 'discover',
-    component: componets.DiscoverSearchFollow,
+    component: componets.Feed,
     meta: {
       title: '发现',
       keepAlive: true,
@@ -1254,7 +1301,7 @@ const routes = [
     }
   },
   { // ask
-    path: '/ask',
+    path: '/ask/:uuid?',
     name: 'ask',
     component: componets.AskAsk,
     meta: {
@@ -1443,7 +1490,7 @@ const routes = [
     }
   },
   { // ask-detail
-    path: '/ask/:id',
+    path: '/ask/detail/:id',
     name: 'ask-detail',
     component: componets.AskAskDetail,
     meta: {
@@ -1451,7 +1498,9 @@ const routes = [
       wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
+      next({
+        path: '/ask/offer/answers/' + to.params.id
+      })
     }
   },
   { // asks
@@ -1511,7 +1560,9 @@ const routes = [
       wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
+      next({
+        path: '/ask/offer/' + to.params.id
+      })
     }
   },
   { // answerrefuse
@@ -2155,7 +2206,7 @@ const routes = [
     component: componets.Webviewnotice
   },
   {
-    path: '/webview/vendor/:url',
+    path: '/webview/vendor/:url/:title',
     name: 'webview-vendor',
     meta: {
       title: 'vendor'

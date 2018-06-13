@@ -4,7 +4,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">邀请注册</h1>
     </header>
-    <div class="mui-content absolute">
+    <div class="mui-content">
       <div class="Invitation_t">
         <img src="../../statics/images/invitation-register.png" class="Invitation_img"/>
       </div>
@@ -163,7 +163,6 @@
 
   .mui-content {
     background: #FFFFFF;
-    position: relative;
   }
 
   .Invitation_t {

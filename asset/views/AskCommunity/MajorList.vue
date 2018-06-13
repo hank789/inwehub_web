@@ -25,9 +25,17 @@
             :nextOtherData="{}"
             class="listWrapper"
           >
-            <AskCommunityListItem
-              :list= "list">
-            </AskCommunityListItem>
+            <template v-for="(item, index) in list">
+              <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
+                <div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
+                <div class="question text-line-3">
+                  <label class="component-label" :class="getStateClass(item.status)">{{item.price}}元悬赏中</label><span v-html="textToLink(item.description)"></span>
+                </div>
+                <div class="statistics">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div>
+              </div>
+              <div class="line-river-big"></div>
+            </template>
+
           </RefreshList>
          <div class="switch"  @tap.stop.prevent="orderBy()">
            <svg class="icon" aria-hidden="true">
@@ -42,6 +50,7 @@
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
+  import { textToLinkHtml } from '../../utils/dom'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
 
   const MajorList = {
@@ -64,6 +73,26 @@
       AskCommunityListItem
     },
     methods: {
+      getStateClass (state) {
+        switch (state) {
+          case 8:
+            return 'component-label-success'
+          case 9:
+            return 'component-label-fail'
+          default:
+            return 'component-label-warn'
+        }
+      },
+      toDetail (id, type) {
+        if (type === 1) {
+          this.$router.pushPlus('/askCommunity/major/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        } else {
+          this.$router.pushPlus('/ask/offer/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+        }
+      },
+      textToLink (text) {
+        return textToLinkHtml(' ' + text)
+      },
       orderBy () {
         if (this.sort === 1) {
           this.sort = 2
@@ -83,34 +112,6 @@
 </script>
 
 <style lang="less" scoped>
-  /*清掉自带样式*/
-
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
-
-  .bot {
-    position: absolute;
-    right: 4%;
-    bottom: 0;
-    left: 4%;
-    height: 0.026rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
-  }
-
-
   /*滚动区域*/
   .mui-content {
     background: #ffffff;

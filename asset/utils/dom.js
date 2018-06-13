@@ -74,6 +74,9 @@ function textToLinkHtml (text) {
 }
 
 function secureHtml (html) {
+  if (typeof (html) !== 'string') {
+    return ''
+  }
   html = html.replace(/<\/?p>/g, '')
   html = html.replace(/<br>/g, '')
   return html

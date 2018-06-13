@@ -58,7 +58,7 @@
     methods: {
       toDetail (item) {
         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/' + item.answer_id, 'list-detail-page', true, 'pop-in', 'hide', true)
+          this.$router.pushPlus('/ask/offer/' + item.answer_id, 'list-detail-page', true, 'pop-in', 'hide', true)
         } else {
           this.$router.pushPlus('/askCommunity/major/' + item.question_id, 'list-detail-page', true, 'pop-in', 'hide', true)
         }

@@ -21,8 +21,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'tags/questions'"
-        :prevOtherData="{tag_name:tagName}"
-        :nextOtherData="{tag_name:tagName}"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
         :pageMode = true
         class="listWrapper"
       >
@@ -112,7 +112,20 @@
         this.tagName = this.$route.params.tag
       }
     },
+    computed: {
+      prevOtherData () {
+        return {tag_name: this.tagName}
+      },
+      nextOtherData () {
+        return {tag_name: this.tagName}
+      }
+    },
     methods: {
+      refreshPageData () {
+        if (this.$route.params.tag) {
+          this.tagName = this.$route.params.tag
+        }
+      },
       toAvatar (uuid) {
         if (!uuid) {
           return false
@@ -121,7 +134,7 @@
       },
       toDetail (item) {
         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
+          this.$router.pushPlus('/ask/offer/answers/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
         } else {
           this.$router.pushPlus('/askCommunity/major/' + item.id, 'list-detail-page', true, 'pop-in', 'hide', true)
         }
@@ -393,5 +406,7 @@
   .hasFollowers .listWrapper{
     top: 6.29rem;
   }
-
+  .mui-table-view-cell:after{
+    display: none;
+  }
 </style>

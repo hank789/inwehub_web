@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动问答', "")}}</div>
-        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">互动问答</div>
+        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/ask/offers')">互动问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <div class="freeQuestion-time">
           <timeago :since="timeago(data.created_at)" :auto-update="60">
@@ -21,7 +21,7 @@
     <div class="text-16-444 text-line-3 textToLink margin-10-0-0" v-html="textToLink(data.feed.content)"></div>
 
 
-    <div class="container-answer margin-10-0-0"  @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id, 'list-detail-page')">
+    <div class="container-answer margin-10-0-0"  @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + data.feed.question_id, 'list-detail-page')">
       <div class="color-808080 font-14 text-line-5">
         <div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>
         <span class="textToLink" v-html="textToLink(data.feed.title)"></span>

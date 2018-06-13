@@ -24,7 +24,7 @@ function getAskCommunityMajorDetail (questionId, questionDescription, answerUser
  */
 function getAskCommunityInteractionDetail (answerId, questionDescription, answerUsername) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/interaction/' + answerId
-  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/' + answerId
+  var link = process.env.H5_ROOT + '/#' + '/ask/offer/' + answerId
 
   return {
     title: '问答|' + questionDescription + '-' + answerUsername + '的回答',
@@ -40,8 +40,8 @@ function getAskCommunityInteractionDetail (answerId, questionDescription, answer
  * 互动问答回答列表页-微信分享模版
  */
 function getAskCommunityInteractionAnswers (questionId, description, answerNum, followNum) {
-  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/askCommunity/interaction/answers/' + questionId
-  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/answers/' + questionId
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/ask/offer/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/ask/offer/answers/' + questionId
 
   return {
     title: '问答|' + description,
@@ -126,8 +126,8 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
  * @returns {{title: string, link: *, content: (*|String), imageUrl: *, thumbUrl: string, shareName: string}}
  */
 function getInviteAnswerDetail (questionId, description, answernum, followednum) {
-  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/askCommunity/interaction/answers/' + questionId
-  var link = process.env.H5_ROOT + '/#' + '/askCommunity/interaction/answers/' + questionId
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/ask/offer/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/ask/offer/answers/' + questionId
 
   return {
     title: '邀您回答|' + description,

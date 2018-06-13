@@ -64,6 +64,9 @@
       isUuid: currentUser.uuid
     }),
     created () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
+      this.uuid = currentUser.uuid
+      this.isUuid = currentUser.uuid
       if (this.$route.params.id) {
         this.uuid = this.$route.params.id
       }

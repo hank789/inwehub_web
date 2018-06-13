@@ -200,6 +200,7 @@ window.mui.back = function () {
   if (window.mui.os.plus) {
     console.log('run event back')
     var currentWebview = window.plus.webview.currentWebview()
+    // 'resume-page','list-page'
     var needHide = [
       'inwehub_notice_view',
       'list-detail-page',

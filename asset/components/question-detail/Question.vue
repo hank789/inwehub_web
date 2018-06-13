@@ -10,6 +10,7 @@
       :isFollowed="ask.is_followed?true:false"
       :isExpert="ask.is_expert?1:0"
       :isShowPositionAndCompany="isShowPositionAndCompany"
+      :time="ask.created_at"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
@@ -20,8 +21,16 @@
 
 
     <div class="footer">
-      <span class="amount">提问金额￥{{ ask.price }}元</span>
-      <span class="timeAgo">{{ ask.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
+      <div class="component-card-money">
+        <div class="left">
+          <div class="money">{{ask.price}}<span>元</span></div>
+          <label>{{getStateDesc(ask.state)}}</label>
+        </div>
+        <div class="right">
+          <div class="desc text-line-2">{{ask.status_description}}</div>
+        </div>
+        <div class="line-split"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -42,7 +51,9 @@
     props: {
       ask: {
         type: Object,
-        default: {}
+        default: {
+          description: ''
+        }
       },
       isFollow: {
         type: Boolean,
@@ -58,12 +69,25 @@
     },
     methods: {
       textToLink (text) {
+        if (!text) {
+          return ''
+        }
         return secureHtml(textToLinkHtml(text))
       },
       setFollowStatus (status) {
         this.ask.is_followed = status
       },
       getHtml (id, options, callback) {
+      },
+      getStateDesc (state) {
+        switch (state) {
+          case 8:
+            return '已采纳'
+          case 9:
+            return '已关闭'
+          default:
+            return '悬赏中'
+        }
       }
     }
   }

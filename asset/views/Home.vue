@@ -71,7 +71,7 @@
       <div class="line-river"></div>
       <ul class="recommend">
         <template v-for="(item, index) in list">
-          <li  @tap.stop.prevent="goDetial(item.read_type,item)">
+          <li  @tap.stop.prevent="goDetail(item.read_type,item)">
             <div class="logo">
               <img class="lazyImg" v-lazy="item.data.img"/>
             </div>
@@ -187,9 +187,7 @@
         }
       }
     },
-    created () {
-      this.refreshPageData()
-    },
+    created () {},
     components: {
       HomeSearch,
       swiper,
@@ -199,6 +197,7 @@
       if (this.$refs.mySwiper) {
         this.$refs.mySwiper.swiper.autoplay.run()
       }
+      this.refreshPageData()
     },
     computed: {
       swiper () {
@@ -226,11 +225,7 @@
         console.log(item)
       },
       toDetail (item) {
-        if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
-        } else {
-          this.$router.pushPlus('/ask/' + item.id)
-        }
+        this.$router.pushPlus('/ask/offer/answers/' + item.id)
       },
       toAvatar (uuid) {
         if (!uuid) {
@@ -277,7 +272,7 @@
       goLink: function (url) {
         openUrlByUrl(url)
       },
-      goDetial (type, recommend) {
+      goDetail (type, recommend) {
         switch (type) {
           case 1:
             if (recommend.data.type === 'link') {
@@ -296,7 +291,7 @@
             this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
             break
           case 3:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + recommend.source_id)
+            this.$router.pushPlus('/ask/offer/answers/' + recommend.source_id)
             break
           case 4:
             this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
@@ -305,7 +300,7 @@
             this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
             break
           case 6:
-            this.$router.pushPlus('/askCommunity/interaction/' + recommend.source_id)
+            this.$router.pushPlus('/ask/offer/' + recommend.source_id)
             break
           default:
 
@@ -323,13 +318,7 @@
           }
           if (response.data.data) {
             if (response.data.data.is_valid) {
-              switch (type) {
-                case 1:
-                  this.$router.pushPlus('/askCommunity/majors')
-                  break
-                case 2:
-                  this.$router.pushPlus('/askCommunity/majors')
-              }
+              this.$router.pushPlus('/ask/offers')
             } else {
               userAbility.jumpJudgeGrade(this)
             }
@@ -337,7 +326,7 @@
         })
       },
       getData () {
-        postRequest(`recommendRead`, {}).then(response => {
+        postRequest(`recommendRead`, {perPage: 5}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)

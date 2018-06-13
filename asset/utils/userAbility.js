@@ -101,7 +101,7 @@ var UserAbility = () => {
     var userInfo = getLocalUserInfo()
 
     if (userInfo.user_level >= 1) {
-      router.pushPlus('/askCommunity/majors')
+      router.pushPlus('/ask/offers')
     } else {
       var dialog = getDialogObj(context)
       if (dialog) {

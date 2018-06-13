@@ -88,8 +88,7 @@
         postRequest(`question/info`, {id: id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
+            window.mui.toast(response.data.message)
             return
           }
 

@@ -305,7 +305,7 @@
         </svg>
         发私信
       </p>
-      <p @tap.stop.prevent="goAsk('/ask?id='+uuid)">向Ta咨询</p>
+      <p @tap.stop.prevent="goAsk('/ask/'+uuid)">向Ta咨询</p>
     </div>
 
   </div>
@@ -320,8 +320,6 @@
   import { getResumeDetail } from '../../utils/shareTemplate'
   import { isLogined } from '../../utils/auth'
 
-  const currentUser = getLocalUserInfo()
-
   export default {
     data: () => ({
       isLogined: isLogined(),
@@ -334,9 +332,9 @@
         thumbUrl: ''
       },
       im_tokenMsg: '',
-      percent: currentUser.account_info_complete_percent,
-      uuid: currentUser.uuid,
-      cuuid: currentUser.uuid,
+      percent: 0,
+      uuid: '',
+      cuuid: '',
       showQrCode: false,
       isShare: false,
       canBack: false,
@@ -414,6 +412,10 @@
         if (this.$route.query.goback) {
           this.canBack = true
         }
+
+        this.uuid = currentUser.uuid
+        this.cuuid = currentUser.uuid
+
         var from = this.$router.currentRoute.name
         // var fullUrl = process.env.H5_ROOT
 

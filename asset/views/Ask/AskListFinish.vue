@@ -105,11 +105,7 @@
     }),
     methods: {
       toDetail (item) {
-        if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
-        } else {
-          this.$router.pushPlus('/ask/' + item.id)
-        }
+        this.$router.pushPlus('/ask/offer/answers/' + item.id)
       },
       pulldownRefresh () {
         setTimeout(() => {

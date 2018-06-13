@@ -172,10 +172,10 @@
             if (response.data.data.is_valid) {
               switch (type) {
                 case 1:
-                  this.$router.pushPlus('/askCommunity/majors')
+                  this.$router.pushPlus('/ask/offers')
                   break
                 case 2:
-                  this.$router.pushPlus('/askCommunity/majors')
+                  this.$router.pushPlus('/ask/offers')
               }
             } else {
               userAbility.jumpJudgeGrade(this)
@@ -202,7 +202,7 @@
             this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
             break
           case 3:
-            this.$router.pushPlus('/askCommunity/interaction/answers/' + recommend.source_id)
+            this.$router.pushPlus('/ask/offer/answers/' + recommend.source_id)
             break
           case 4:
             this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
@@ -211,7 +211,7 @@
             this.$router.pushPlus('/EnrollmentStatus/' + recommend.source_id)
             break
           case 6:
-            this.$router.pushPlus('/askCommunity/interaction/' + recommend.source_id)
+            this.$router.pushPlus('/ask/offer/' + recommend.source_id)
             break
           default:
 

@@ -3,15 +3,13 @@
     <HomeSearch :unread_count="unread_count" :contact_id="contact_id"></HomeSearch>
 
     <div class="mui-content feedWrapper">
-      <!--search-->
-      <!--菜单-->
-      <!--导航栏-->
       <div class="menu">
         <span class="font-family-medium">关注<i></i></span>
         <span @tap.stop.prevent="$router.replace('/discoverGroup')">圈子</span>
         <span @tap.stop.prevent="$router.replace('/discoverRecommend')">推荐</span>
         <i class="bot"></i>
       </div>
+
       <!--列表-->
       <RefreshList
         ref="RefreshList"

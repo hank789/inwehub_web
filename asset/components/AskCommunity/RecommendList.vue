@@ -1,14 +1,27 @@
 <template>
   <div class="recommentListWrapper" v-if="list.length">
     <div class="component-title-home"><div class="left">相关问答</div></div>
-    <div class="line-river"></div>
-    <AskCommunityListItem :list="list"></AskCommunityListItem>
+    <div class="line-river line-river-full"></div>
+
+    <template v-for="(item, index) in list">
+      <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
+        <div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
+        <div class="question text-line-3">
+          <label class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
+        </div>
+        <div v-if="item.question_type == 2" class="statistics"><div class="container-remarks">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div></div>
+        <div v-else class="statistics"><div class="container-remarks">{{item.comment_number}}评论<span class="line-wall"></span>{{item.support_number}}点赞</div></div>
+      </div>
+      <div class="line-river" v-if="list.length-1 !== index"></div>
+    </template>
   </div>
 </template>
 
 <script>
   import { postRequest } from '../../utils/request'
   import AskCommunityListItem from './AskCommunityListItem.vue'
+  import { textToLinkHtml } from '../../utils/dom'
+  import { getQuestionStateClass } from '../../utils/ask'
 
   const RecommentsList = {
     name: 'RecommentsList',
@@ -26,6 +39,12 @@
       }
     },
     methods: {
+      toDetail (id, type) {
+        this.$router.pushPlus('/ask/offer/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+      },
+      getStateClass (state) {
+        return getQuestionStateClass(state)
+      },
       getDetail () {
         postRequest(`question/relatedQuestion`, {id: this.did, limit: 2}).then(response => {
           var code = response.data.code
@@ -36,6 +55,9 @@
 
           this.list = response.data.data
         })
+      },
+      textToLink (text) {
+        return textToLinkHtml(' ' + text)
       }
     },
     mounted () {
@@ -52,26 +74,5 @@
 <style scoped="scoped">
 .recommentListWrapper{
   background:#fff;
-  margin-bottom:0.266rem;
 }
-.line-river:after{
-  display: none;
-}
-</style>
-<style>
-  .recommentListWrapper ul li{
-    position: relative;
-    margin-bottom:0;
-  }
-  .recommentListWrapper ul li:after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: .4rem;
-    right: .4rem;
-    height: .02667rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: #dcdcdc;
-  }
 </style>

@@ -58,6 +58,13 @@
         default: ''
       }
     },
+    watch: {
+      tagName: function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+          this.getTagInfo()
+        }
+      }
+    },
     methods: {
       getTagInfo () {
         postRequest('tags/tagInfo', {

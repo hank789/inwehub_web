@@ -192,7 +192,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   })
 
   console.log('bodyWebviewUrl:' + webview.getURL())
-  if (webview.getURL() !== url) {
+  if (webview.getURL() !== url && webview.getURL()) {
     webview.clear()
     webview.loadURL(url)
   }
@@ -450,6 +450,7 @@ function goVendorUrl (url, callback) {
       },
       backButtonAutoControl: 'hide',
       popGesture: 'hide',
+      scalable: true,
       top: (immersedHeight + 44) + 'px'
     }
   })

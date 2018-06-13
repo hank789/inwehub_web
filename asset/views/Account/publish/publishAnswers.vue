@@ -57,6 +57,9 @@
       isUuid: currentUser.uuid
     }),
     created () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
+      this.uuid = currentUser.uuid
+      this.isUuid = currentUser.uuid
       if (this.$route.params.id) {
         this.uuid = this.$route.params.id
       }
@@ -71,7 +74,7 @@
       },
       toDetail (item) {
         if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/' + item.id)
+          this.$router.pushPlus('/ask/offer/' + item.id)
         } else {
           if (this.isUuid === this.$route.params.id) {
             this.$router.pushPlus('/answer/' + item.question_id)

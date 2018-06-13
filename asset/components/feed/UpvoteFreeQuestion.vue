@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="mui-media-body freeQuestion-content">{{data.title.replace('互动问答', "")}}</div>
-        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/askCommunity/majors')">互动问答</div>
+        <div class="freeQuestion" @tap.stop.prevent="$router.pushPlus('/ask/offers')">互动问答</div>
         <div class="freeQuestion—support" v-if="data.top"><i></i>顶</div>
         <div class="freeQuestion-time">
           <timeago :since="timeago(data.created_at)" :auto-update="60">
@@ -20,7 +20,7 @@
     </div>
     <div class="text-16-444 text-line-3 textToLink margin-10-0-0" @tap.stop.prevent="$router.pushPlus(data.url)" v-html="textToLink(data.feed.answer_content)"></div>
 
-    <div class="container-answer margin-10-0-0" @tap.stop.prevent="$router.pushPlus('/askCommunity/interaction/answers/' + data.feed.question_id, 'list-detail-page')">
+    <div class="container-answer margin-10-0-0" @tap.stop.prevent="$router.pushPlus('/ask/offer/answers/' + data.feed.question_id, 'list-detail-page')">
       <div class="color-808080 font-14  text-line-5"><div class="tagSelect" v-for="item in data.feed.tags" @tap.stop.prevent="toTagDetail(item.name)">#{{item.name}}#</div>{{data.feed.question_title}}</div>
       <div class="interval margin-top-6">{{data.feed.question_answer_num}}人回答<i></i>{{data.feed.follow_question_num}}人关注</div>
     </div>

@@ -31,7 +31,7 @@
             <p class="mui-ellipsis-2" v-html="textToLink(ask.description)"></p>
             <p>
               <span  class="label" :class="'label_' + ask.status">{{ask.status_description}}</span>
-              <span>{{ask.created_at.split(' ')[0].replace(/-/g, '/') }}</span>
+              <span>{{ask.created_at}}</span>
             </p>
             <i class="bot"></i>
           </li>
@@ -59,6 +59,9 @@
       isUuid: currentUser.uuid
     }),
     created () {
+      const currentUser = localEvent.getLocalItem('UserInfo')
+      this.uuid = currentUser.uuid
+      this.isUuid = currentUser.uuid
       if (this.$route.params.id) {
         this.uuid = this.$route.params.id
       }
@@ -73,11 +76,7 @@
         return secureHtml(textToLinkHtml(text))
       },
       toDetail (item) {
-        if (item.question_type === 2) {
-          this.$router.pushPlus('/askCommunity/interaction/answers/' + item.id)
-        } else {
-          this.$router.pushPlus('/ask/' + item.id)
-        }
+        this.$router.pushPlus('/ask/offer/answers/' + item.id)
       }
     },
     mounted () {

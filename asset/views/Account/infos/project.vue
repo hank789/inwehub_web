@@ -345,7 +345,7 @@
           // 操作成删除保存的公司
           localEvent.clearLocalItem('project' + this.type + '_company' + this.user_id)
           this.bak = ''
-          this.clearData()
+          if (!this.id) this.clearData()
           window.mui.back()
         })
       }

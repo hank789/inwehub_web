@@ -2,28 +2,20 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
-      <h1 class="mui-title">提问</h1>
+      <h1 class="mui-title">{{ pageTitle }}</h1>
+      <a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" @tap.stop.prevent="showMoney();">发布</a>
     </header>
 
-    <div class="mui-content absolute askWrapper">
+    <div class="mui-content">
+      <!--new-->
+      <div class="container-label padding-10-16-0" v-if="tag.length">
+        <span v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</span>
+      </div>
+      <div class="textarea-wrapper padding-10-16-0">
+        <textarea id="description" v-model.trim="description" @focus="textareaFocus"
+                  @blur="textareaBlur"></textarea>
+      </div>
 
-      <div class="category">
-          <p >付费问答 <i></i></p>
-          <p @tap.stop.prevent="$router.replace('/ask/interaction')">互动问答</p>
-        <button class="mui-btn mui-btn-block mui-btn-primary" type="button" @tap.stop.prevent="selectType()">
-          <span  v-if="tags.length || newTags.length">修改分类</span>
-          <span  v-else>问题分类</span>
-        </button>
-      </div>
-      <div class="ask_tags" v-if="tag.length">
-        <p v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</p>
-      </div>
-      <div class="form form-ask">
-        <div class="textarea-wrapper">
-          <textarea id="description" v-model.trim="description" @focus="textareaFocus"
-                    @blur="textareaBlur"></textarea>
-        </div>
-      </div>
       <!--展示图片-->
       <div class="container-images" :class="'container-images-' + (images.length + 1)">
         <div class="container-image" v-for="(image, index) in images">
@@ -31,40 +23,21 @@
             <use xlink:href="#icon-times1"></use>
           </svg>
           <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
-        </div><div class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
+        </div><div  style="display:none" class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
       </div>
 
-
-      <div class="fixedDiv">
-        <div class="fixedContainer">
-          <span class="niming" @tap.stop.prevent="toggleHide"><label class="nimingCheckbox"
-                                                                     :class="{'active':hide}"></label>匿名</span>
-          <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
-        </div>
-
-        <div class="button-wrapper" v-show="!isShowMoneyDev">
-          <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="showMoney();">
-            提好问题了
-          </button>
-        </div>
-
-        <div class="help">
-          <div class="item" @tap.stop.prevent="$router.pushPlus('/help/ask')">如何提一个好问题？</div>
-          <div class="item" @tap.stop.prevent="fenhongxize()">问答被查看后我的分成细则？</div>
-
-
-          <div class="button-wrapper">
-            <button type="button" class="mui-btn mui-btn-block mui-btn-primary"
-                    @tap.stop.prevent="toAskCommunity">
-              去问答社区看看
-
-            </button>
-          </div>
-        </div>
+      <div class="container-textareaMenu">
+        <div class="leftParter"><span class="item" @tap.stop.prevent="toggleHide">
+            <div class="component-radio" :class="{active: this.hide}"></div><span class="noImportant">匿名</span></span><span class="item" @tap.stop.prevent="uploadImage">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tupian"></use>
+            </svg></span></div>
+        <div class="rightParter"><span class="item" @tap.stop.prevent="selectType()">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-biaoqian2"></use>
+            </svg><label v-if="tags.length || newTags.length">修改</label><label v-else>选标签</label></span></div>
       </div>
     </div>
-
-
 
     <!--上传图片-->
     <uploadImage ref="uploadImage"
@@ -81,8 +54,20 @@
       :pay_money="money"
       @pay_success="goAsk"
       @payMoneyChange="payMoneyChange"
+      v-if="payMethod === 'select'"
     >
     </pay>
+
+    <payInput
+      ref="pay"
+      :payItems="payItems"
+      :pay_object_type="'ask'"
+      :pay_object_id="0"
+      :pay_money="money"
+      @pay_success="goAsk"
+      @payMoneyChange="payMoneyChange"
+      v-else
+    ></payInput>
 
   </div>
 </template>
@@ -92,6 +77,7 @@
   import { ASK_INFO, ASK_TYPE_SELECT } from '../../stores/types'
   import { postRequest } from '../../utils/request'
   import pay from '../../components/pay/pay.vue'
+  import payInput from '../../components/pay/payInput.vue'
   import { setStatusBarBackgroundAndStyle } from '../../utils/statusBar'
   import { alertFenhongxize } from '../../utils/dialogList'
   import localEvent from '../../stores/localStorage'
@@ -117,11 +103,14 @@
       hide: 0,
       descMaxLength: 1000,
       isShowMoneyDev: false,
-      descPlaceholder: '1.请精确描述输入问题详情，并等待平台专家回答' + '\n' + '2.答案每被查看一次，你和回答者可从中获取分成' + '\n' + '3.请根据问题难易程度等合理选择支付金额'
+      descPlaceholder: '输入问题描述',
+      pageTitle: '悬赏提问',
+      payMethod: 'input' // 支付方式, input式还是select式
     }),
     components: {
       pay,
-      uploadImage
+      uploadImage,
+      payInput
     },
     activated: function () {
       this.initData()
@@ -134,14 +123,6 @@
       setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
       this.textareaBlur()
-
-      // 弹窗
-      var font = '<p style="text-align: left; font-size:0.373rem; color: #444444;  margin-top:0.4rem;">' +
-                  '</p>' +
-                  '<p style="text-align: left; font-size:0.373rem; color: #444444;  margin-top:0.4rem;">' +
-                  '专家准入具有较高门槛，我们会根据您的提问自动匹配回答专家，提问请遵守相关问答规范。' +
-                  '</p>'
-      window.mui.alert(font, '什么是专业问答？', '确定', function () {}, 'div')
     },
     computed: {
       type () {
@@ -151,23 +132,7 @@
         return this.description.length
       }
     },
-    created () {
-      if (this.$route.query.id) {
-        var id = this.$route.query.id
-        if (id) {
-          this.uid = id
-        }
-      }
-
-      var info = this.$store.state.askType.info
-      if (info.money || info.desc) {
-        this.money = info.money
-        this.description = info.desc
-        this.hide = info.hide
-        this.selectOther = info.selectOther
-      }
-      this.check()
-    },
+    created () {},
     methods: {
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
@@ -184,6 +149,21 @@
         }
       },
       initData () {
+        if (this.$route.params.uuid) {
+          this.uid = this.$route.params.uuid
+        } else {
+          this.uid = 0
+        }
+
+        var info = this.$store.state.askType.info
+        if (info.money || info.desc) {
+          this.money = info.money
+          this.description = info.desc
+          this.hide = info.hide
+          this.selectOther = info.selectOther
+        }
+        this.check()
+
         // 取标签；
         this.tag = localEvent.getLocalItem('selected_ask_skill_tags' + this.id)
         // 返回时重新取值
@@ -261,6 +241,11 @@
           return
         }
 
+        if (!this.tags.length) {
+          window.mui.toast('请选择标签')
+          return
+        }
+
         this.$refs.pay.showSelectMoney()
       },
       speech () {
@@ -302,7 +287,26 @@
             return
           }
 
+          if (response.data.data.title) {
+            this.pageTitle = response.data.data.title
+          }
+
+          if (response.data.data.help_tips) {
+            response.data.data.help_tips = response.data.data.help_tips.replace(/\\n/g, '\n')
+            if (response.data.data.help_tips !== this.descPlaceholder) {
+              if (this.description === this.descPlaceholder) {
+                this.description = response.data.data.help_tips
+              }
+              this.descPlaceholder = response.data.data.help_tips
+            }
+          }
+
           this.payItems = response.data.data.pay_items
+          if (response.data.data.must_apple_pay) {
+            this.payMethod = 'select'
+          } else {
+            this.payMethod = 'input'
+          }
 
           for (var i in this.payItems) {
             var item = this.payItems[i]
@@ -369,7 +373,7 @@
         postRequest(`question/store`, data).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
+            window.mui.toast(response.data.message)
             return
           }
 
@@ -398,6 +402,7 @@
       }
     },
     watch: {
+      '$route': 'refreshPageData',
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength)
@@ -416,64 +421,14 @@
 
 
 <style scoped>
+
   .component-photograph{
     width:1.626rem !important;
     height:1.626rem !important;
   }
-  /*导航栏*/
-  .askWrapper .category {
-    background: #fff;
-    /*padding: 0.4rem 0.453rem;*/
-    height:1.173rem;
-    position: relative;
-    padding-left: 4%;
-  }
-  .askWrapper .category  p{
-    display: inline-block;
-    line-height: 1.2rem;
-    font-size:0.426rem;
-    color: #444444;
-    text-align: left;
-  }
-  .askWrapper .category  p:nth-of-type(1){
-    display: inline-block;
-    color: #444444;
-    font-weight: 500;
-    position: relative;
-  }
-  .askWrapper .category p:nth-of-type(1):after {
-    position: absolute;
-    width:1.706rem;
-    bottom: 0;
-    left: 0;
-    height: 0.053rem;
-    z-index: 999;
-    content: '';
-    background-color: #009FE8;
-  }
-  .askWrapper .category  p:nth-of-type(2){
-    margin-left: 0.8rem;
-  }
-
-
-  .askWrapper .category button {
-    position: absolute;
-    border: 0.026rem solid #03aef9;
-    background-color: #03aef9;
-    width: auto;
-    font-size: 0.373rem;
-    padding: 0rem 0.453rem;
-    height: 0.906rem;
-    right: 0.266rem;
-    top: 0.09rem;
-  }
-
-  .mui-content > .mui-table-view:first-child {
-    margin-top: 0;
-  }
 
   .mui-content {
-    background-color: #fff;
+    background-color: #f3f4f6;
   }
 
   .mui-ios .mui-content{
@@ -484,187 +439,18 @@
     padding-top: 0;
   }
 
-  .form-ask {
-    padding-top: 0;
-    background: #fff;
+  .textarea-wrapper {
     height: 5.386rem;
     width: 100%;
-    z-index: 0;
-  }
-
-  .form-ask textarea {
-    width: 100%;
-    height: 100%;
-    border: none;
-    margin: 0;
-    padding: 0.266rem 0.453rem;
-    color: #9b9b9b;
-  }
-
-  .form-ask .button-wrapper {
-    margin-top: 0.4rem;
-    padding: 0 2.133rem
-  }
-
-  .textarea-wrapper {
-    height: 100%;
-    background: #f3f4f6;
   }
 
   .textarea-wrapper textarea {
     background: #f3f4f6;
+    border:none;
+    padding:0;
   }
 
-  .mui-bar .mui-btn-link {
-    color: #fff;
-  }
-
-  .mui-bar .mui-btn-nav.mui-pull-left {
-    margin-left: 0.133rem;
-  }
-
-  .fixedContainer {
-    position: relative;
-    background: #f3f4f6;
-    padding: 0.133rem 0.266rem;
-  }
-
-  .fixedContainer .counter {
-    float: right;
-    color: #c8c8c8;
-  }
-
-  .fixedContainer .niming {
-    color: #808080;
-    position: relative;
-    font-size: 0.373rem;
-    padding-left: 0.24rem;
-  }
-
-  .fixedContainer .niming input {
-    position: absolute;
-    top: 0.106rem;
-    left: 0;
-    vertical-align: bottom;
-  }
-
-  .fixedDiv .title {
-    margin: 0.266rem 0;
-    text-align: center;
-    color: #8b8b8b;
-    height: 0.853rem;
-  }
-
-  .fixedDiv {
-    padding-bottom: 0.266rem;
-    background-color: #fff;
-    width: 100%;
-  }
-
-  .fixedDiv .select span {
-    border: 0.026rem solid #b6b6b6;
-    border-radius: 0.133rem;
-    padding: 0 0.266rem;
-    display: inline-block;
-    height: 0.853rem;
-    margin-right: 0.16rem;
-    margin-bottom: 0.266rem;
-    text-align: center;
-    line-height: 0.853rem;
-    position: relative;
-  }
-
-  .fixedDiv .select span.active {
-    border: 0.026rem solid #4a90e2;
-  }
-
-  .fixedDiv .button-wrapper {
-    margin-top: 0.4rem;
-    padding: 0 0.4rem;
-  }
-
-  .fixedDiv .button-wrapper button {
-    background: #03aef9;
-    color: #f2f2f2;
-    border-radius: 0.133rem;
-    border: 0.026rem solid #03aef9;
-  }
-
-  .help {
-    color: #03aef9;
-    font-size: 0.373rem;
-    padding: 0 0.4rem;
-
-  }
-
-  .help .item {
-    padding: 0.266rem 0 0;
-  }
-
-  .help .button-wrapper {
-    margin-top: 1.226rem;
-    padding: 0 2rem;
-  }
-
-  .help .button-wrapper button {
-    border-radius: 1.333rem;
-    border: 0.026rem solid #dcdcdc;
-    background: #fff;
-    color: #444;
-    padding: 0.133rem 0;
-  }
-
-  .nimingCheckbox {
-    display: inline-block;
-    width: 0.426rem;
-    height: 0.426rem;
-    position: relative;
-    border: 0.026rem solid #c8c8c8;
-    border-radius: 50%;
-    top: 0.08rem;
-    right: 0.133rem;
-  }
-
-  .nimingCheckbox.active:after {
-    content: ' ';
-    display: inline-block;
-    width: 0.106rem;
-    height: 0.106rem;
-    position: absolute;
-    border: 0.026rem solid #03aef9;
-    background-color: #03aef9;
-    border-radius: 50%;
-    left: 50%;
-    margin-left: -0.08rem;
-    top: 50%;
-    margin-top: -0.08rem;
-  }
-
-  @media screen and (max-width: 374px) {
-    .form-ask {
-      height: 5.866rem;
-    }
-  }
   .container-images{
     background: #F3F4F5;
-  }
-  /*标签样式*/
-  .ask_tags{
-    width:100%;
-    background: #f3f4f6;
-    overflow: hidden;
-    padding: 0  0.426rem 0rem 0.186rem;
-  }
-  .ask_tags p{
-    margin: 0;
-    padding: 0;
-    float: left;
-    background: #a8dff7;
-    color:#FFFFFF;
-    padding: 0rem 0.213rem;
-    border-radius:1.333rem;
-    margin-top: 0.24rem;
-    margin-left: 0.24rem;
-    font-size:0.32rem;
   }
 </style>
