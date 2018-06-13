@@ -7,7 +7,7 @@
       <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
         <div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
         <div class="question text-line-3">
-          <label class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
+          <label v-if="item.price > 0" class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
         </div>
         <div v-if="item.question_type == 2" class="statistics"><div class="container-remarks">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div></div>
         <div v-else class="statistics"><div class="container-remarks">{{item.comment_number}}评论<span class="line-wall"></span>{{item.support_number}}点赞</div></div>
