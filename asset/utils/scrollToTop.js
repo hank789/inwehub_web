@@ -45,10 +45,10 @@ function scrollToTop (context) {
     }, 500)
   }
 
-  if (document.querySelector('.mui-tab-item.mui-active')) {
+  if (document.querySelector('.container-footer > .menu.active')) {
     console.log('发现底部菜单选项，绑定双击事件')
     window.scrollEventContext = context
-    document.querySelector('.mui-tab-item.mui-active').addEventListener('doubletap', eventCallback)
+    document.querySelector('.container-footer > .menu.active').addEventListener('doubletap', eventCallback)
   }
 
   if (context.querySelector('header')) {
