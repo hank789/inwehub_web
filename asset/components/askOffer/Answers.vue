@@ -22,7 +22,7 @@
         @setFollowStatus="setFollowStatus"
       ></UserInfo>
 
-      <div class="content mui-ellipsis-3 textToLink" v-html="item.content ? textToLink(item.content) : '[图片]'"></div>
+      <div class="content mui-ellipsis-3 textToLink" v-html="item.content ? textToLink(item.content) : (item.is_best_answer ? '[查看最佳回答]' : '[图片]')"></div>
 
       <div class="itemFooter">
         <div class="container-remarks">
