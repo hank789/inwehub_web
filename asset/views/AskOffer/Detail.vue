@@ -390,6 +390,16 @@
                 isLight: true
               })
             }
+            if (this.ask.answer.content && this.uuid !== this.ask.answer.uuid) {
+              options.push({
+                icon: '#icon-weituoban',
+                text: '评价',
+                number: 0,
+                disable: false,
+                rightLine: false,
+                isLight: true
+              })
+            }
           }
         }
 
