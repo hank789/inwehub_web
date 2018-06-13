@@ -43,9 +43,9 @@
         v-if="ask.question.id"
       ></RecommentList>
 
-      <div class="line-river-big" v-if="ask.question.status===7 && ask.feedback && ask.feedback.description"></div>
+      <div class="line-river-big" v-if="ask.feedback && ask.feedback.description"></div>
 
-      <Star-Rating v-if="ask.question.status===7 && ask.feedback && ask.feedback.description"
+      <Star-Rating v-if="ask.feedback && ask.feedback.description"
                    :description="ask.feedback.description"
                    :rating="ask.feedback.rate_star"
                    :readOnly="true"
@@ -390,7 +390,7 @@
                 isLight: true
               })
             }
-            if (this.ask.answer.content && this.uuid !== this.ask.answer.uuid) {
+            if (this.ask.answer.content && this.uuid !== this.ask.answer.uuid && this.ask.feedback.length <= 0) {
               options.push({
                 icon: '#icon-weituoban',
                 text: '评价',
