@@ -24,19 +24,23 @@ function selectFileH5 (acceptType = '', callback) {
         var file = fileInput.files[0]
 
         var size = file.size / 1000  // kb
-        if (size > 5120) {
-          var warningText = '单张不允许超过5M！'
 
-          if (acceptType === 'img') {
+        var warningText = ''
+
+        if (acceptType === 'pdf') {
+          if (size > 20480) {
+            warningText = '单个文件不允许超过20M！'
+            window.mui.alert(warningText)
+            return false
+          }
+        }
+
+        if (acceptType === 'img') {
+          if (size > 5120) {
             warningText = '单张不允许超过5M！'
+            window.mui.alert(warningText)
+            return false
           }
-
-          if (acceptType === 'pdf') {
-            warningText = '单个文件不允许超过5M！'
-          }
-
-          window.mui.alert(warningText)
-          return false
         }
 
         if (acceptType === 'pdf') {
