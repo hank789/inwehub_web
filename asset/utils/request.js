@@ -164,6 +164,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
         window.mui.closeUploadWaiting()
       }
 
+      console.log(url)
       console.log('网络异常:' + e)
       Raven.captureException(JSON.stringify(e))
       return Promise.reject(e)
