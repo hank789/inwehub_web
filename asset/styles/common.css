@@ -1805,6 +1805,7 @@ a {
 
 
 .container-tabs {
+  background:#fff;
   height: 1.04rem;
   line-height: 1.04rem;
   display: -webkit-box;

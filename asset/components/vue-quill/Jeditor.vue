@@ -28,7 +28,7 @@
       </quill-editor>
 
 
-      <span class="counter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
+      <span class="counter" v-if="isShowCounter"><span>{{ descLength }}</span><span>/</span><span>{{ descMaxLength }}</span></span>
     </div>
   </div>
 </template>
@@ -80,6 +80,10 @@
       isMonitorHashSymbol: {
         type: Boolean,
         default: false
+      },
+      isShowCounter: {
+        type: Boolean,
+        default: true
       },
       allowBr: {  // 是否允许换行
         type: Boolean,

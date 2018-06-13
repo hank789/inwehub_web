@@ -25,6 +25,7 @@
           :isMonitorAddressAppear="true"
           :isMonitorHashSymbol="true"
           :isMonitorSmallSpan="true"
+          :isShowCounter="false"
           @ready="onEditorReady($event)"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
@@ -656,7 +657,7 @@
   }
 
   .mui-content{
-    background: #fff;
+    background:#f3f4f6;
   }
 
   .mui-ios .mui-content{
