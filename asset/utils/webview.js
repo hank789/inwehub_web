@@ -244,7 +244,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   ])
   view.addEventListener('click', () => {
     console.log('准备跳转:' + commentUrl)
-    openWebviewByUrl('read_comment_link_' + id, commentUrl)
+    openWebviewByUrl('list-detail-page', commentUrl)
   }, false)
 
   embed.append(view)
