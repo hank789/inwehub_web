@@ -636,7 +636,7 @@ function AppInit (context) {
             case 'question_answer_confirmed':
               // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
               // router.go(-1);
-              router.pushPlus('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()))
+              router.pushPlus('/ask/detail/' + payload.object_id + '?time=' + Date.parse(new Date()))
               break
             case 'pay_question_answered_askCommunity':
               router.pushPlus('/askCommunity/major/' + payload.object_id)
