@@ -35,9 +35,6 @@
 
       </RefreshList>
       <div class="switch"  @tap.stop.prevent="orderBy()">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shaixuanpaixu_"></use>
-        </svg>
         {{sort === 2 ? '最新' : '最热'}}
          </div>
     </div>
