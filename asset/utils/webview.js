@@ -450,6 +450,7 @@ function goVendorUrl (url, callback) {
       },
       backButtonAutoControl: 'hide',
       popGesture: 'hide',
+      scalable: true,
       top: (immersedHeight + 44) + 'px'
     }
   })
