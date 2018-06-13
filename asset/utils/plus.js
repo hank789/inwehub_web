@@ -202,6 +202,24 @@ function openVendorUrlByUrl (url, title = '') {
   }
 }
 
+function openFileUrl (url, title = '') {
+  var href = url
+  if (window.plus) {
+    console.log('plus 打开')
+    if (title) {
+      title = encodeURIComponent(title)
+    }
+    if (window.mui.os.ios) {
+      router.pushPlus('/webview/vendor/' + encodeURIComponent(href) + '/' + title, 'backAndClose')
+    } else {
+      window.plus.runtime.openURL(url)
+    }
+  } else {
+    console.log('window.open 打开')
+    window.open(href)
+  }
+}
+
 /**
  * 打开app内的网页
  */
@@ -881,6 +899,7 @@ export {
   openWebviewRefresh,
   openAppUrlByUrl,
   openVendorUrlByUrl,
+  openFileUrl,
   AppInit,
   AppPageInit,
   setClipboardText,

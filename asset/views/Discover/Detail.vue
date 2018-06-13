@@ -155,7 +155,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl, openVendorUrlByUrl} from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl} from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
@@ -266,7 +266,7 @@
     },
     methods: {
       seePdf (pdf) {
-        openVendorUrlByUrl(pdf.url, pdf.name)
+        openFileUrl(pdf.url, pdf.name)
       },
       typeDesc (type) {
         switch (type) {
