@@ -406,5 +406,7 @@
   .hasFollowers .listWrapper{
     top: 6.29rem;
   }
-
+  .mui-table-view-cell:after{
+    display: none;
+  }
 </style>
