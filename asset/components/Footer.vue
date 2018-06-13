@@ -26,7 +26,7 @@
             <use xlink:href="#icon-faxian-hover"></use>
           </svg>
         </div>
-        <div class="desc">发现</div>
+        <div class="desc">关注</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.push('/discover')" v-else>
         <div class="iconWrapper">
@@ -34,7 +34,7 @@
             <use xlink:href="#icon-faxian1"></use>
           </svg>
         </div>
-        <div class="desc">发现</div>
+        <div class="desc">关注</div>
       </div>
 
       <div class="menu" @tap.stop.prevent="show()">
