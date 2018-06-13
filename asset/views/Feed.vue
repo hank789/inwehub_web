@@ -82,7 +82,7 @@
           </div>
 
          <!-- 回答 -->
-          <div @tap.stop.prevent="toDetail(item)" class="container-feed-question" v-if="item.feed_type <= 3 || item.feed_type === 6 || item.feed_type === 11 || item.feed_type === 12">
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-question" v-if="item.feed_type <= 3 || item.feed_type === 6 || item.feed_type === 11 || item.feed_type === 12 || item.feed_type === 14">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
                 <div class="avatarInner"><img :src="item.user.avatar">
@@ -179,6 +179,7 @@
           case 6:
           case 11:
           case 12:
+          case 14:
           case 15:
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
