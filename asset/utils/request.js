@@ -15,12 +15,12 @@ export const createRequestURI = PATH => `${baseURL}/${PATH}`
 export const createAPI = PATH => `${api}/${PATH}`
 
 // 注入access-token验证
-export const addAccessToken = () => {
+export const addAccessToken = (timeout) => {
   const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
   axios.defaults.headers.common = {
     'Authorization': 'bearer ' + UserLoginInfo.token
   }
-  axios.defaults.timeout = 8000
+  axios.defaults.timeout = timeout
   return axios
 }
 
@@ -35,7 +35,7 @@ export function apiRequest (url, data, showWaiting = true) {
     data.current_version = appVersion.version
   }
 
-  var proObj = addAccessToken().post(createAPI(url), data,
+  var proObj = addAccessToken(8000).post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
@@ -113,6 +113,7 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
   }
 
   var appVersion = localEvent.getLocalItem('app_version')
+  var timeout = 8000
   if (appVersion) {
     data.current_version = appVersion.version
   }
@@ -123,9 +124,10 @@ export function postRequest (url, data, showWaiting = true, options = {}) {
 
   if (options.onUploadProgress) {
     config.onUploadProgress = options.onUploadProgress
+    timeout = 300000
   }
 
-  var proObj = addAccessToken().post(createAPI(url), data, config)
+  var proObj = addAccessToken(timeout).post(createAPI(url), data, config)
     .then(response => {
       if (options.onUploadProgress) {
         window.mui.closeUploadWaiting()
