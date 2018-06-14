@@ -2315,7 +2315,9 @@ a {
   margin-top: 0.266rem;
   font-size: 0.426rem;
   line-height: 0.56rem;
-  color: #444; }
+  color: #444;
+  white-space: pre-wrap !important;
+  word-wrap: break-word;}
 .container-feed-question .contentWrapper .component-label {
   margin-right: 0.133rem;
   position: relative;
