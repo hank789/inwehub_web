@@ -241,11 +241,6 @@
           return
         }
 
-        if (!this.tags.length) {
-          window.mui.toast('请选择标签')
-          return
-        }
-
         this.$refs.pay.showSelectMoney()
       },
       speech () {
