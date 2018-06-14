@@ -4,7 +4,7 @@
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <h1 class="mui-title">待您回答</h1>
     </header>
-    <div class="mui-content absolute">
+    <div class="mui-content">
         <div class="title">
           <p>根据您的擅长和关注推荐以下问答</p>
           <p @tap.stop.prevent="change()">换一批</p>
@@ -17,12 +17,12 @@
               <span class="mui-ellipsis-3">{{item.title}}</span>
             </p>
             <p>{{item.answer_number}}人回答  |  {{item.follow_number}}关注</p>
-            <i class="bot"></i>
+            <i class="bot" v-if="index !== list.length-1"></i>
           </li>
         </ul>
       <Empty v-else></Empty>
-      <div class="tags" @tap.stop.prevent="$router.pushPlus('/my/advantage')">丰富我的擅长</div>
     </div>
+    <div class="tags" @tap.stop.prevent="$router.pushPlus('/my/advantage')">丰富我的擅长</div>
   </div>
 </template>
 <script>
@@ -116,6 +116,7 @@
   }
   .mui-content{
     background: #FFFFFF;
+    bottom:1.173rem;
   }
   .title{
     width:100%;
@@ -183,7 +184,7 @@
     line-height: 1.173rem;
     font-size:0.4rem;
     color: #03aef9;
-    position: fixed;
+    position: absolute;
     bottom: 0;
   }
 </style>
