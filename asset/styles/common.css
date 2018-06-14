@@ -1873,8 +1873,9 @@ a {
   text-align: center; }
 
 
-.container-label span {
+.container-label span, .container-label .swiper-slide {
   border: 1px solid #DCDCDC; /* px不转换 */
+  width:auto !important;
   font-size: 0.32rem;
   display: inline-block;
   color: #235280;

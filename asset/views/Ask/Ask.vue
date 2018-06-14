@@ -8,10 +8,11 @@
 
     <div class="mui-content">
       <!--new-->
-      <div class="container-label padding-10-16-0" v-if="tag.length">
-        <span v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</span>
-      </div>
-      <div class="textarea-wrapper padding-10-16-0" :class="{'textareaWrapperHasImage': images.length > 0}">
+      <swiper :options="swiperOption" class="container-label padding-10-16-0" v-if="tag.length">
+        <swiper-slide v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</swiper-slide>
+      </swiper>
+
+      <div class="textarea-wrapper padding-10-16-0" :class="{'textareaWrapperHasImage': images.length > 0, 'textareaWrapperHasTag': tag.length}">
         <textarea id="description" v-model.trim="description" @focus="textareaFocus"
                   @blur="textareaBlur"></textarea>
       </div>
@@ -454,6 +455,10 @@
 
   .textareaWrapperHasImage{
     bottom:3.466rem;
+  }
+
+  .textareaWrapperHasTag{
+    top:34px;
   }
 
   .textarea-wrapper textarea {
