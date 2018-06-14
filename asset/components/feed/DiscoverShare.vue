@@ -30,6 +30,10 @@
       :isImagePreview="false"
     ></Images>
 
+    <div v-if="data.feed.files.length" class="container-pdf-list margin-10-0-0">
+      <div v-for="file in data.feed.files" class="pdf"><span class="text-line-2">{{file.name}}</span></div>
+    </div>
+
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
       <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
         <svg class="icon" aria-hidden="true">

@@ -1873,8 +1873,9 @@ a {
   text-align: center; }
 
 
-.container-label span {
+.container-label span, .container-label .swiper-slide {
   border: 1px solid #DCDCDC; /* px不转换 */
+  width:auto !important;
   font-size: 0.32rem;
   display: inline-block;
   color: #235280;
@@ -2315,7 +2316,9 @@ a {
   margin-top: 0.266rem;
   font-size: 0.426rem;
   line-height: 0.56rem;
-  color: #444; }
+  color: #444;
+  white-space: pre-wrap !important;
+  word-wrap: break-word;}
 .container-feed-question .contentWrapper .component-label {
   margin-right: 0.133rem;
   position: relative;
@@ -2397,4 +2400,23 @@ a {
   margin-top: 0.053rem;
   color: #B4B4B6;
   font-size: 0.32rem; }
+
+
+.container-upload-images .image {
+  margin: 0.133rem;
+  display: inline-block;
+  width: 1.62667rem;
+  height: 1.62667rem;
+  border-radius: .10667rem;
+  position: relative; }
+.container-upload-images .image img {
+  border-radius: 0.133rem;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover; }
+.container-upload-images .image .icon {
+  position: absolute;
+  right: -0.133rem;
+  top: -0.133rem; }
 

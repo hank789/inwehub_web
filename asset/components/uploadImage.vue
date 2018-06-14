@@ -51,6 +51,10 @@
       },
       changeAvatarH5: function () {
         selectFileH5('img', (file, base64) => {
+          if (this.images > this.ImageMaximum) {
+            window.mui.alert('最多可上传：' + this.ImageMaximum)
+            return
+          }
           var imgInfo = {
             name: file.name,
             size: file.size,

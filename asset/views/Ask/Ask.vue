@@ -8,27 +8,25 @@
 
     <div class="mui-content">
       <!--new-->
-      <div class="container-label padding-10-16-0" v-if="tag.length">
-        <span v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</span>
-      </div>
-      <div class="textarea-wrapper padding-10-16-0">
+      <swiper :options="swiperOption" class="container-label padding-10-16-0" v-if="tag.length">
+        <swiper-slide v-for="(tagName, index) in tag" :key="'tag_'+index" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</swiper-slide>
+      </swiper>
+
+      <div class="textarea-wrapper padding-10-16-0" :class="{'textareaWrapperHasImage': images.length > 0, 'textareaWrapperHasTag': tag.length}">
         <textarea id="description" v-model.trim="description" @focus="textareaFocus"
                   @blur="textareaBlur"></textarea>
       </div>
 
       <!--展示图片-->
-      <div class="container-images" :class="'container-images-' + (images.length + 1)">
-        <div class="container-image" v-for="(image, index) in images">
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
-            <use xlink:href="#icon-times1"></use>
-          </svg>
-          <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
-        </div><div  style="display:none" class="container-image component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
-      </div>
+      <swiper :options="swiperOption" class="container-upload-images" v-show="images.length">
+        <swiper-slide class="image" v-for="(image, index) in images" :key="'image_'+index" ><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+          <use xlink:href="#icon-times1"></use>
+        </svg></swiper-slide>
+      </swiper>
 
       <div class="container-textareaMenu">
         <div class="leftParter"><span class="item" @tap.stop.prevent="toggleHide">
-            <div class="component-radio" :class="{active: this.hide}"></div><span class="noImportant">匿名</span></span><span class="item" @tap.stop.prevent="uploadImage">
+            <div class="component-radio" :class="{active: this.hide}"></div><span class="noImportant">匿名</span></span><span class="item" @tap.stop.prevent="uploadImage" v-if="images.length < maxImageCount">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-tupian"></use>
             </svg></span></div>
@@ -86,9 +84,15 @@
   const currentUser = getLocalUserInfo()
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   const Ask = {
     data: () => ({
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        freeMode: true
+      },
       id: currentUser.user_id,
       images: [],
       maxImageCount: 9,
@@ -110,7 +114,9 @@
     components: {
       pay,
       uploadImage,
-      payInput
+      payInput,
+      swiper,
+      swiperSlide
     },
     activated: function () {
       this.initData()
@@ -241,7 +247,7 @@
           return
         }
 
-        if (!this.tags.length) {
+        if (!this.tags.length && !this.newTags.length) {
           window.mui.toast('请选择标签')
           return
         }
@@ -440,8 +446,19 @@
   }
 
   .textarea-wrapper {
-    height: 5.386rem;
+    position: absolute;
+    top:0;
+    left:0;
+    bottom:1.44rem;
     width: 100%;
+  }
+
+  .textareaWrapperHasImage{
+    bottom:3.466rem;
+  }
+
+  .textareaWrapperHasTag{
+    top:34px;
   }
 
   .textarea-wrapper textarea {
@@ -450,7 +467,11 @@
     padding:0;
   }
 
-  .container-images{
+  .container-upload-images{
     background: #F3F4F5;
+    position: absolute;
+    bottom:1.333rem;
+    left:0.133rem;
+    width:100%;
   }
 </style>
