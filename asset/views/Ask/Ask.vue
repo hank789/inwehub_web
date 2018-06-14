@@ -9,7 +9,7 @@
     <div class="mui-content">
       <!--new-->
       <swiper :options="swiperOption" class="container-label padding-10-16-0" v-if="tag.length">
-        <swiper-slide v-for="(tagName, index) in tag" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</swiper-slide>
+        <swiper-slide v-for="(tagName, index) in tag" :key="'tag_'+index" @tap.stop.prevent="toTagDetail(tagName.text)">{{tagName.text}}</swiper-slide>
       </swiper>
 
       <div class="textarea-wrapper padding-10-16-0" :class="{'textareaWrapperHasImage': images.length > 0, 'textareaWrapperHasTag': tag.length}">
@@ -19,7 +19,7 @@
 
       <!--展示图片-->
       <swiper :options="swiperOption" class="container-upload-images" v-show="images.length">
-        <swiper-slide class="image" v-for="(image, index) in images"><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+        <swiper-slide class="image" v-for="(image, index) in images" :key="'image_'+index" ><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
           <use xlink:href="#icon-times1"></use>
         </svg></swiper-slide>
       </swiper>
