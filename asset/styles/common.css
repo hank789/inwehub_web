@@ -2400,3 +2400,22 @@ a {
   color: #B4B4B6;
   font-size: 0.32rem; }
 
+
+.container-upload-images .image {
+  margin: 0.133rem;
+  display: inline-block;
+  width: 1.62667rem;
+  height: 1.62667rem;
+  border-radius: .10667rem;
+  position: relative; }
+.container-upload-images .image img {
+  border-radius: 0.133rem;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover; }
+.container-upload-images .image .icon {
+  position: absolute;
+  right: -0.133rem;
+  top: -0.133rem; }
+

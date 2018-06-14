@@ -793,7 +793,7 @@
   .help{
     text-align: center;
     color:#B4B4B6;
-    font-size:12px;
+    font-size:0.32rem;
   }
   .help span{
     color:#03AEF9;
