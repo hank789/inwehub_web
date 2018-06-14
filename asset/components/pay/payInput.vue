@@ -121,7 +121,7 @@
       getSupportPayMethods () {
         if (window.mui.os.plus) {
           if (window.mui.os.ios) {
-            return 'apple'
+            return 'wechat' // 'apple'
           } else {
             return 'wechat'
           }
@@ -284,7 +284,7 @@
         var id = ''
         if (window.mui.os.plus) {
           if (window.mui.os.ios && this.iapPay) {
-            id = 'appleiap'
+            id = 'wxpay'  // 'appleiap'
           } else {
             id = 'wxpay'
           }
