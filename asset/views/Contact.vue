@@ -12,16 +12,20 @@
         :list="list"
         v-model="lastList"
         :search="search">
+
         <div slot="header" class="indexHeader">
           <div class="searchWrapper">
-            <input type="text"
-                   placeholder="输入用户名" v-model.trim="search">
+            <input type="text" placeholder="输入用户名" v-model.trim="search">
           </div>
 
-          <div class="notFound">
-            找不到成员？<span>添加新的关注</span> 或 <span @tap.stop.prevent="toFollowMore()">微信直接邀请</span>
+          <div class="component-link margin-5-0-0" @tap.stop.prevent="getContacts">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-tongxunlu"></use>
+            </svg><span>寻找通讯录好友</span>
+            <svg class="icon arrow" aria-hidden="true">
+              <use xlink:href="#icon-chakangengduojiantou"></use>
+            </svg>
           </div>
-
         </div>
 
         <div class="indexTitle">
@@ -81,6 +85,7 @@
   import { postRequest } from '../utils/request'
   import Share from '../components/Share.vue'
   import { getInviteAnswerDetail } from '../utils/shareTemplate'
+  import userAbility from '../utils/userAbility'
 
   export default {
     data () {
@@ -106,6 +111,9 @@
     },
     computed: {},
     methods: {
+      getContacts () {
+        userAbility.getLocalContact(this)
+      },
       shareSuccess () {
 
       },
