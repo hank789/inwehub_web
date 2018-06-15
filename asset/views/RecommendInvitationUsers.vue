@@ -11,6 +11,14 @@
           <use xlink:href="#icon-chakangengduojiantou"></use>
         </svg>
       </div>
+      <div class="line-river line-river-full"></div>
+      <div class="invitation-fouce-user" @tap.stop.prevent='toShare()'>
+        邀请微信好友
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-chakangengduojiantou"></use>
+        </svg>
+      </div>
+      <div class="line-river-big"></div>
       <div class="invitation-recommend">
         <p @tap.stop.prevent="change()">
           <svg class="icon" aria-hidden="true">
@@ -55,11 +63,25 @@
       </ul>
 
     </div>
+
+    <Share :title="shareOptions.title"
+           :shareName="shareOptions.shareName"
+           :link="shareOptions.link"
+           :hideShareBtn="true"
+           :content="shareOptions.content"
+           :imageUrl="shareOptions.imageUrl"
+           :thumbUrl="shareOptions.thumbUrl"
+           :targetId="question_id"
+           :targetType="'recommendInvitation'"
+           ref="shareComponent"></Share>
+
   </div>
 </template>
 <script>
   import RefreshList from '../components/refresh/List.vue'
   import { postRequest } from '../utils/request'
+  import Share from '../components/Share.vue'
+  import { getInviteAnswerDetail } from '../utils/shareTemplate'
 
   const PublishAnswers = {
     data: () => ({
@@ -67,18 +89,41 @@
       question_id: '',
       page: 1,
       loading: 1,
-      invitation_user_id: []
+      invitation_user_id: [],
+      shareOptions: {
+        link: '',
+        shareName: '',
+        title: '',
+        content: '',
+        imageUrl: '',
+        thumbUrl: ''
+      }
     }),
     created () {
       this.question_id = this.$route.params.id
+
+      var title = encodeURIComponent(this.$route.query.title.replace(/\s/g, '').substr(0, 200))
+      var answerNum = this.$route.query.answernum ? this.$route.query.answernum : 0
+      var followedNum = this.$route.query.followednum ? this.$route.query.followednum : 0
+
+      this.shareOptions = getInviteAnswerDetail(
+        this.question_id,
+        title,
+        answerNum,
+        followedNum
+      )
     },
     computed: {
 
     },
     components: {
-      RefreshList
+      RefreshList,
+      Share
     },
     methods: {
+      toShare () {
+        this.$refs.shareComponent.share()
+      },
       allInvitation () {
         this.invitation_user_id = []
         for (var index in this.list) {
@@ -170,13 +215,13 @@
     background-color: rgb(220, 220, 220);
   }
   .mui-content{
-    background: #FFFFFF;
+    background: #fff;
   }
   /*邀请好友*/
   .invitation-fouce-user{
     width:100%;
     height:1.173rem;
-    background: #f3f4f6;
+    background: #fff;
     padding: 0 4%;
     line-height: 1.173rem;
     font-size:0.373rem;
@@ -191,7 +236,6 @@
   .invitation-recommend{
     width:100%;
     height:1.173rem;
-    border-top: 0.026rem solid #dcdcdc;
     border-bottom: 0.026rem solid #dcdcdc;
     background: #FFFFFF;
     position: relative;
