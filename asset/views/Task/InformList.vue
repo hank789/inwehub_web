@@ -2,6 +2,7 @@
 
   <div>
     <header class="mui-bar mui-bar-nav">
+      <span class="mui-pull-left settingBtn" @tap.stop.prevent="toSetting">设置</span>
       <h1 class="mui-title">通知</h1>
       <a class="mui-icon mui-pull-right" @tap.stop.prevent="allRead()">
         <svg class="icon" aria-hidden="true">
@@ -172,6 +173,9 @@
       Options
     },
     methods: {
+      toSetting () {
+        this.$router.pushPlus('/push/setting')
+      },
       allRead () {
         this.$refs.allOptions.toggle()
       },
@@ -476,10 +480,17 @@
     }
   }
   header svg{
-     font-size: 0.533rem;
-     margin-bottom: 0.266rem;
+    font-size: 15px;
+    color:#808080;
+    line-height: 21px;
   }
   .type_2 img{
     border-radius: 0.266rem;
+  }
+  .settingBtn{
+    padding-top:0.266rem;
+    font-size:15px;
+    font-family:PingFangSC-Medium;
+    color:#808080;
   }
 </style>
