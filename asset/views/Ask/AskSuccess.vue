@@ -84,17 +84,6 @@
         }
 
         this.id = id
-
-        postRequest(`question/info`, {id: id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-
-          this.ask = response.data.data
-          this.loading = 0
-        })
       },
       getTime (time) {
         let newDate = new Date()

@@ -403,7 +403,7 @@
             )
           }
 
-          this.$router.replace({path: '/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend})
+          this.$router.replace('/pay/ask/' + id + '?money=' + result.price + '&timeend=' + timeend)
         })
       }
     },

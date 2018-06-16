@@ -20,9 +20,7 @@ export const addAccessToken = (timeout) => {
   axios.defaults.headers.common = {
     'Authorization': 'bearer ' + UserLoginInfo.token
   }
-  if (timeout > 0) {
-    axios.defaults.timeout = timeout
-  }
+  axios.defaults.timeout = timeout
   return axios
 }
 
@@ -177,7 +175,7 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
         console.log(errorMsg)
-        if (errorMsg === 'Error: Network Error' || errorMsg === 'Error: timeout of 8000ms exceeded') {
+        if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
           errorMsg = '网络异常'
           router.push('/exception')
         }
