@@ -20,7 +20,9 @@ export const addAccessToken = (timeout) => {
   axios.defaults.headers.common = {
     'Authorization': 'bearer ' + UserLoginInfo.token
   }
-  axios.defaults.timeout = timeout
+  if (timeout > 0) {
+    axios.defaults.timeout = timeout
+  }
   return axios
 }
 
@@ -35,7 +37,7 @@ export function apiRequest (url, data, showWaiting = true) {
     data.current_version = appVersion.version
   }
 
-  var proObj = addAccessToken(8000).post(createAPI(url), data,
+  var proObj = addAccessToken(0).post(createAPI(url), data,
     {
       validateStatus: status => status === 200
     }
@@ -107,13 +109,12 @@ export function apiRequest (url, data, showWaiting = true) {
 }
 
 // 对后端数据进行请求；（showWaiting = true 加载gif）
-export function postRequest (url, data, showWaiting = true, options = {}) {
+export function postRequest (url, data, showWaiting = true, options = {}, timeout = 0) {
   if (showWaiting) {
     window.mui.waiting()
   }
 
   var appVersion = localEvent.getLocalItem('app_version')
-  var timeout = 8000
   if (appVersion) {
     data.current_version = appVersion.version
   }
