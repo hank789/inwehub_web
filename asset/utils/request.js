@@ -82,7 +82,7 @@ export function apiRequest (url, data, showWaiting = true) {
         window.mui.closeWaiting()
       }
 
-      console.log('网络异常:' + e)
+      console.log(JSON.stringify(e))
       Raven.captureException(JSON.stringify(e))
       return Promise.reject(e)
     })
@@ -93,7 +93,7 @@ export function apiRequest (url, data, showWaiting = true) {
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
         console.log(errorMsg)
-        if (errorMsg === 'Error: Network Error' || errorMsg === 'Error: timeout of 8000ms exceeded') {
+        if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
           errorMsg = '网络异常'
           router.push('/exception')
         }
@@ -164,7 +164,7 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
       }
 
       console.log(url)
-      console.log('网络异常:' + e)
+      console.log(JSON.stringify(e))
       Raven.captureException(JSON.stringify(e))
       return Promise.reject(e)
     })
