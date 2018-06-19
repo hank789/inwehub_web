@@ -460,7 +460,7 @@
   }
 
   .textareaWrapperHasTag{
-    top:34px;
+    top:0.906rem;
   }
 
   .textarea-wrapper textarea {

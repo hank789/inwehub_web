@@ -2423,68 +2423,84 @@ a {
 
 .container-dialog-box {
   background: #03AEF9;
-  border-radius: 18px;
-  width: 300px;
-  height: 367px;
+  border-radius: 0.48rem;
+  width: 8rem;
+  height: 9.786rem;
   position: relative; }
 .container-dialog-box .dialog-box-title {
   font-family: PingFangSC-Light;
   color: #fff;
-  font-size: 16px;
+  font-size: 0.426rem;
   text-align: center;
-  padding-top: 38px; }
+  padding-top: 1.013rem; }
 .container-dialog-box .dialog-box-title .line-wall-circle {
   display: inline-block;
-  width: 4px;
-  height: 4px;
+  width: 0.106rem;
+  height: 0.106rem;
   background: #fff;
   border-radius: 50%;
-  vertical-align: 3px;
-  margin: 0 7px; }
+  vertical-align: 0.08rem;
+  margin: 0 0.186rem; }
 .container-dialog-box .dialog-box-title .dialog-box-title2 {
-  margin-top: 1px; }
+  margin-top: 0.026rem; }
 .container-dialog-box .dialog-box-close {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 10px;
+  padding: 0.266rem;
   color: #fff;
   opacity: 0.499;
-  font-size: 21px; }
+  font-size: 0.56rem; }
 .container-dialog-box .dialog-box-content {
   text-align: left;
-  width: 240px;
-  height: 216px;
+  width: 6.4rem;
+  height: 5.76rem;
   position: absolute;
   background: #fff;
-  top: 107px;
-  left: 26px;
-  font-size: 25px;
+  top: 2.853rem;
+  left: 0.693rem;
+  font-size: 0.666rem;
   color: #808080;
   font-family: PingFangSC-Medium; }
 .container-dialog-box .dialog-box-content .dbc1 {
-  margin-top: 36px;
-  padding-left: 26px; }
+  margin-top: 0.96rem;
+  padding-left: 0.693rem; }
 .container-dialog-box .dialog-box-content .dbc1 label {
-  border: 1px solid #03AEF9;
+  border: 0.026rem solid #03AEF9;
   color: #03AEF9;
-  font-size: 15px;
-  padding: 0 6px; }
+  font-size: 0.4rem;
+  padding: 0 0.16rem; }
 .container-dialog-box .dialog-box-content .dbc2 {
-  margin-top: 22px;
-  padding-left: 24px; }
+  margin-top: 0.586rem;
+  padding-left: 0.64rem; }
 .container-dialog-box .dialog-box-content .dbc2 .percent {
-  font-size: 51px;
+  font-size: 1.36rem;
   font-family: PingFangSC-Medium;
   color: #03AEF9;
-  vertical-align: -3px;
-  margin-right: 2px; }
+  vertical-align: -0.08rem;
+  margin-right: 0.053rem; }
 .container-dialog-box .dialog-box-content .dbc3 {
-  margin-top: 14px;
-  margin-left: 25px; }
+  margin-top: 0.373rem;
+  margin-left: 0.666rem; }
 .container-dialog-box .dialog-box-content .dbc3 .time {
   color: #03AEF9;
   font-family: PingFangSC-Medium;
-  font-size: 32px;
-  vertical-align: -3px;
-  margin-right: 2px; }
+  font-size: 0.853rem;
+  vertical-align: -0.08rem;
+  margin-right: 0.053rem; }
+
+.component-search {
+  width: 6.586rem;
+  height: 0.906rem;
+  line-height: 0.906rem;
+  background: #f3f4f6;
+  border-radius: 1.333rem;
+  opacity: 0.9477;
+  font-size: 0.373rem;
+  text-align: center;
+  color: #C8C8C8; }
+.component-search .icon {
+  font-size: 0.453rem;
+  color: #444;
+  vertical-align: -0.08rem;
+  margin-right: 0.133rem; }
