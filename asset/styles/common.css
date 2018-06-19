@@ -2504,3 +2504,47 @@ a {
   color: #444;
   vertical-align: -0.08rem;
   margin-right: 0.133rem; }
+
+
+.component-button-pill-fixed {
+  width: 1.64rem;
+  height: 0.72rem;
+  border-radius: 1.333rem;
+  color: #fff;
+  font-size: 0.373rem;
+  line-height: 0.72rem;
+  background-color: #03AEF9;
+  text-align: center; }
+.component-button-pill-fixed.disable {
+  background: #DCDCDC;
+  color: #B4B4B6; }
+
+.container-list-group .list-item-group {
+  padding: 0.266rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+.container-list-group .list-item-group .ligL img {
+  width: 1.173rem;
+  height: 1.173rem;
+  border-radius: 0.133rem; }
+.container-list-group .list-item-group .ligC {
+  padding-left: 0.266rem;
+  padding-top: 0.133rem;
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+  vertical-align: top; }
+.container-list-group .list-item-group .ligC .ligC1 {
+  font-size: 0.373rem;
+  font-family: PingFangSC-Medium;
+  color: #444; }
+.container-list-group .list-item-group .ligC .ligC2 {
+  font-size: 0.32rem;
+  color: #B4B4B6; }
+.container-list-group .list-item-group .ligR {
+  vertical-align: top;
+  padding-top: 0.266rem; }
