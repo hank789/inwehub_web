@@ -35,7 +35,7 @@
     }),
     methods: {
       refresh () {
-        this.$router.go(-1)
+        this.$router.pushPlus('/home')
       }
     },
     created () {

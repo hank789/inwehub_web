@@ -33,7 +33,7 @@
         this.$router.replace('/home')
       },
       getBoot_guide () {
-        postRequest(`system/boot_guide`, {}, false).then(response => {
+        postRequest(`system/boot_guide`, {}, false, {}, 6000).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
