@@ -122,6 +122,8 @@
       this.initData()
     },
     mounted () {
+      userAbility.showFreeAskGuide(this)
+
       window.mui.previewImage()
       autoTextArea()
       this.initData()

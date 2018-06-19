@@ -13,7 +13,7 @@ import {getLocalUserInfo, isCompanyStatus, getLocalUuid} from '../utils/user'
 import router from '../modules/index/routers/index'
 import {alertZoom, alertSimple, getDialogObj, alertHtml} from '../utils/dialog'
 import {postRequest} from '../utils/request'
-import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat } from '../utils/dialogList'
+import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat, alertFreeAskGuide } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
 import { getContacts } from '../utils/plus'
 import { isLogined } from '../utils/auth'
@@ -464,6 +464,14 @@ var UserAbility = () => {
     }
   }
 
+  function showFreeAskGuide (context) {
+    var history = parseInt(localEvent.getLocalItem('showFreeAskGuide_' + getLocalUuid()))
+    if (!history) {
+      localEvent.setLocalItem('showFreeAskGuide_' + getLocalUuid(), 1)
+      alertFreeAskGuide(context)
+    }
+  }
+
   return {
     canDo: canDo,
     jumpToAddProject: jumpToAddProject,
@@ -485,7 +493,8 @@ var UserAbility = () => {
     jumpToChat: jumpToChat,
     alertGroups: alertGroups,
     jumpToResume: jumpToResume,
-    getLocalContact: getLocalContact
+    getLocalContact: getLocalContact,
+    showFreeAskGuide: showFreeAskGuide
   }
 }
 

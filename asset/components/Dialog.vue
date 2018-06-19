@@ -464,7 +464,7 @@
 
     <div id="freeAskGuideDialog">
       <div class="container-dialog-box">
-        <div class="dialog-box-close">
+        <div class="dialog-box-close alertClose">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-guanbi"></use>
           </svg>
