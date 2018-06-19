@@ -2420,3 +2420,71 @@ a {
   right: -0.133rem;
   top: -0.133rem; }
 
+
+.container-dialog-box {
+  background: #03AEF9;
+  border-radius: 18px;
+  width: 300px;
+  height: 367px;
+  position: relative; }
+.container-dialog-box .dialog-box-title {
+  font-family: PingFangSC-Light;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+  padding-top: 38px; }
+.container-dialog-box .dialog-box-title .line-wall-circle {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  vertical-align: 3px;
+  margin: 0 7px; }
+.container-dialog-box .dialog-box-title .dialog-box-title2 {
+  margin-top: 1px; }
+.container-dialog-box .dialog-box-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px;
+  color: #fff;
+  opacity: 0.499;
+  font-size: 21px; }
+.container-dialog-box .dialog-box-content {
+  text-align: left;
+  width: 240px;
+  height: 216px;
+  position: absolute;
+  background: #fff;
+  top: 107px;
+  left: 26px;
+  font-size: 25px;
+  color: #808080;
+  font-family: PingFangSC-Medium; }
+.container-dialog-box .dialog-box-content .dbc1 {
+  margin-top: 36px;
+  padding-left: 26px; }
+.container-dialog-box .dialog-box-content .dbc1 label {
+  border: 1px solid #03AEF9;
+  color: #03AEF9;
+  font-size: 15px;
+  padding: 0 6px; }
+.container-dialog-box .dialog-box-content .dbc2 {
+  margin-top: 22px;
+  padding-left: 24px; }
+.container-dialog-box .dialog-box-content .dbc2 .percent {
+  font-size: 51px;
+  font-family: PingFangSC-Medium;
+  color: #03AEF9;
+  vertical-align: -3px;
+  margin-right: 2px; }
+.container-dialog-box .dialog-box-content .dbc3 {
+  margin-top: 14px;
+  margin-left: 25px; }
+.container-dialog-box .dialog-box-content .dbc3 .time {
+  color: #03AEF9;
+  font-family: PingFangSC-Medium;
+  font-size: 32px;
+  vertical-align: -3px;
+  margin-right: 2px; }

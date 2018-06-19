@@ -462,6 +462,26 @@
     </div>
     <!--bot-->
 
+    <div id="freeAskGuideDialog">
+      <div class="container-dialog-box">
+        <div class="dialog-box-close">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanbi"></use>
+          </svg>
+        </div>
+        <div class="dialog-box-title">
+          <div class="dialog-box-title1">快速<span class="line-wall-circle"></span>高效<span class="line-wall-circle"></span>有质</div>
+          <div class="dialog-box-title2">解决企业服务领域问题</div>
+        </div>
+        <div class="dialog-box-content">
+          <div class="dbc1">
+            <label>通过付费悬赏</label>
+          </div>
+          <div class="dbc2"><span class="percent">83%</span>的问题</div>
+          <div class="dbc3"><span class="time">24</span>小时得到解答</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script type="text/javascript">
