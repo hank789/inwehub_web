@@ -12,6 +12,7 @@ const ActivityActiveList = () => import(/* webpackChunkName: "ActivityActiveList
 const ActivityOpportunityList = () => import(/* webpackChunkName: "ActivityOpportunityList" */ '../../../views/Activity/OpportunityList.vue')
 const ActivityEnrollmentStatus = () => import(/* webpackChunkName: "ActivityEnrollmentStatus" */ '../../../views/Activity/EnrollmentStatus.vue')
 const NewcomerGuidanceStepOne = () => import(/* webpackChunkName: "NewcomerGuidanceStepOne" */ '../../../views/NewcomerGuidance/StepOne.vue')
+const NewcomerGuidanceStepGroup = () => import(/* webpackChunkName: "NewcomerGuidanceStepGroup" */ '../../../views/NewcomerGuidance/StepGroup.vue')
 const NewcomerGuidanceStepTwo = () => import(/* webpackChunkName: "NewcomerGuidanceStepTwo" */ '../../../views/NewcomerGuidance/StepTwo.vue')
 const NewcomerGuidanceStepThree = () => import(/* webpackChunkName: "NewcomerGuidanceStepThree" */ '../../../views/NewcomerGuidance/StepThree.vue')
 const NewcomerGuidanceStepThreeApp = () => import(/* webpackChunkName: "NewcomerGuidanceStepThreeApp" */ '../../../views/NewcomerGuidance/StepThreeApp.vue')
@@ -203,6 +204,7 @@ export {
   ActivityOpportunityList,
   ActivityEnrollmentStatus,
   NewcomerGuidanceStepOne,
+  NewcomerGuidanceStepGroup,
   NewcomerGuidanceStepTwo,
   NewcomerGuidanceStepThree,
   NewcomerGuidanceStepThreeApp,
