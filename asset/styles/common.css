@@ -2205,7 +2205,7 @@ a {
 
 .line-river-after {
   position: relative;
-  height: 1px;
+  height: 1px; /* px不转换 */
   width: 100%; }
 .line-river-after:after {
   position: absolute;
@@ -2214,13 +2214,13 @@ a {
   right: 0;
   content: '';
   background-color: #dcdcdc;
-  height: 1px;
+  height: 1px; /* px不转换 */
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5); }
 
 .line-river-after-short:after {
-  left: 15px;
-  right: 15px; }
+  left: 0.4rem;
+  right: 0.4rem; }
 
 @media (-webkit-device-pixel-ratio: 3) {
   .line-river-direct {
@@ -2519,34 +2519,34 @@ a {
   color: #B4B4B6; }
 
 .container-list-group .list-item-group {
-  padding: 10px 15px;
+  padding: 0.266rem 0.4rem;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: distribute;
   justify-content: space-around;
-  height: 64px;
+  height: 1.706rem;
   overflow: hidden; }
 .container-list-group .list-item-group .ligL img {
-  width: 44px;
-  height: 44px;
-  border-radius: 5px; }
+  width: 1.173rem;
+  height: 1.173rem;
+  border-radius: 0.133rem; }
 .container-list-group .list-item-group .ligC {
-  line-height: 18px;
-  padding-left: 11px;
-  padding-top: 5px;
+  line-height: 0.48rem;
+  padding-left: 0.293rem;
+  padding-top: 0.133rem;
   -webkit-box-flex: 2;
   -ms-flex-positive: 2;
   flex-grow: 2;
   vertical-align: top; }
 .container-list-group .list-item-group .ligC .ligC1 {
-  font-size: 14px;
+  font-size: 0.373rem;
   font-family: PingFangSC-Medium;
   color: #444; }
 .container-list-group .list-item-group .ligC .ligC2 {
-  font-size: 12px;
+  font-size: 0.32rem;
   color: #B4B4B6; }
 .container-list-group .list-item-group .ligR {
   vertical-align: top;
-  padding-top: 6px; }
+  padding-top: 0.16rem; }

@@ -8,7 +8,7 @@
         </svg>
         <div class="next-step" @tap.stop.prevent="close()">完成</div>
         <div class="invitation-text">
-          <p>关注几个互动问答</p>
+          <p>关注几个问答</p>
           <p>参考更多用户的解答</p>
         </div>
       </div>
