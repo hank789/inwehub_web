@@ -403,9 +403,9 @@
     top:4.584rem;
   }
 
-  .hasFollowers .listWrapper{
-    top: 6.29rem;
-  }
+  /*.hasFollowers .listWrapper{*/
+    /*top: 6.29rem;*/
+  /*}*/
   .mui-table-view-cell:after{
     display: none;
   }

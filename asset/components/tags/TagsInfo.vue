@@ -12,25 +12,25 @@
       <div class="tag-r">
         <p>
           <span>{{tagDetail.name}}</span>
-          <span class="grey" v-if="tagDetail.is_followed" @tap.stop.prevent="collectTag(tagDetail.id)">已关注</span>
-          <span  v-else @tap.stop.prevent="collectTag(tagDetail.id)">关注</span>
+          <!--<span class="grey" v-if="tagDetail.is_followed" @tap.stop.prevent="collectTag(tagDetail.id)">已关注</span>-->
+          <!--<span  v-else @tap.stop.prevent="collectTag(tagDetail.id)">关注</span>-->
         </p>
         <p class="mui-ellipsis-3">{{tagDetail.summary}}</p>
       </div>
     </div>
-    <div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + encodeURIComponent(tagDetail.name))" v-if="tagDetail.followers">
-      <div class="tag-people">
-        <p class="number"><span>{{tagDetail.followers}}</span>  /关注</p>
-        <div class="tag-avatar">
-          <template  v-for="(item, index) in tagDetail.followed_users">
-            <img :src="item.avatar" />
-          </template>
-           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-           </svg>
-        </div>
-      </div>
-    </div>
+    <!--<div class="tag-focus" @tap.stop.prevent="$router.pushPlus('/tag/FocusMembers?tagname=' + encodeURIComponent(tagDetail.name))" v-if="tagDetail.followers">-->
+      <!--<div class="tag-people">-->
+        <!--<p class="number"><span>{{tagDetail.followers}}</span>  /关注</p>-->
+        <!--<div class="tag-avatar">-->
+          <!--<template  v-for="(item, index) in tagDetail.followed_users">-->
+            <!--<img :src="item.avatar" />-->
+          <!--</template>-->
+           <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
+           <!--</svg>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 </template>
 <script>

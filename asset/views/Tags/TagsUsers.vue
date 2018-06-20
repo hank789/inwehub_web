@@ -279,7 +279,7 @@
     top:4.584rem;
   }
 
-  .hasFollowers .listWrapper{
-    top: 6.29rem;
-  }
+  /*.hasFollowers .listWrapper{*/
+    /*top: 6.29rem;*/
+  /*}*/
 </style>
