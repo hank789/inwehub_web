@@ -2518,6 +2518,7 @@ a {
   background: #DCDCDC;
   color: #B4B4B6; }
 
+
 .container-list-group .list-item-group {
   padding: 0.266rem 0.4rem;
   width: 100%;
@@ -2551,8 +2552,6 @@ a {
   vertical-align: top;
   padding-top: 0.16rem; }
 
-
-
 .container-list-discuss {
   padding: 0 15px; }
 .container-list-discuss .list-item-discuss {
@@ -2572,7 +2571,7 @@ a {
   -webkit-box-flex: 2;
   -ms-flex-positive: 2;
   flex-grow: 2;
-  padding-left: 10px; }
+  padding-left: 5px; }
 .container-list-discuss .list-item-discuss .lidR .lidR1 {
   color: #808080;
   font-size: 13px; }
@@ -2581,7 +2580,8 @@ a {
   margin: 0 5px; }
 .container-list-discuss .list-item-discuss .lidR .lidR2 {
   color: #444444;
-  font-size: 14px; }
+  font-size: 14px;
+  line-height: 19px; }
 .container-list-discuss .list-item-discuss .lidR .lidR3 {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2594,8 +2594,9 @@ a {
 .container-list-discuss .list-item-discuss .lidR .lidR3 .lidROption.active {
   color: #03AEF9; }
 .container-list-discuss .list-item-discuss .lidR .lidR3 .lidROption .icon {
-  font-size: 14.5px;
-  margin-right: 5px; }
+  font-size: 14.5px; }
+.container-list-discuss .list-item-discuss .lidR .lidR3 .lidROption span {
+  margin-left: 5px; }
 .container-list-discuss .list-item-discuss.list-item-discuss-children {
   background-color: #F7F8FA;
   margin-left: 40px;
@@ -2604,6 +2605,30 @@ a {
   border-radius: 4px 4px 0 0; }
 .container-list-discuss .list-item-discuss.list-item-discuss-children:last-child {
   margin-bottom: 10px;
+  padding-bottom: 10px;
   border-radius: 0 0 4px 4px; }
 .container-list-discuss .line-river-after:after {
   left: 40px !important; }
+
+
+.component-block-title {
+  height: 44px;
+  line-height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 15.5px; }
+.component-block-title .left {
+  font-family: "PingFangSC-Medium";
+  font-size: 16px;
+  color: #444; }
+.component-block-title .right {
+  color: #808080;
+  font-size: 15px; }
+.component-block-title .right svg {
+  font-size: 18.5px;
+  vertical-align: -3px;
+  margin-right: 7px; }
