@@ -1,21 +1,34 @@
 <template>
   <div>
-    <div class="component-comment-reply" v-for="(child, childIndex) in children" v-show="childIndex < 2 || isShow" :key="child.id" @tap.stop.prevent="clickComment(child, children)">
-
-      <div class="who"><span class="from">{{ child.owner.name }}</span>
-        <div class="triangle-right triangle-right-6"></div><span class="to">{{ parentOwnerName }}</span>
-        <div class="time">{{ child.created_at.replace(/-/g, '/') }}</div>
+  <template v-for="(child, childIndex) in children">
+    <div class="list-item-discuss list-item-discuss-children" v-show="childIndex < 2 || isShow" :key="child.id" @tap.stop.prevent="clickComment(child, children)">
+      <div class="lidL">
+        <img :src="child.owner.avatar"/>
       </div>
-      <div class="text textToLink" v-html="textToLink(child.content)"></div>
+      <div class="lidR">
+        <div class="lidR1">{{ child.owner.name }}<span>回复</span>{{ parentOwnerName }}</div>
+        <div class="lidR2 textToLink" v-html="textToLink(child.content)"></div>
+        <div class="lidR3">
+          <div class="lidRtime"><timeago :since="timeago(child.created_at)" :auto-update="0">
+          </timeago></div>
+          <div class="lidROption" style="display: none;">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zan"></use>
+            </svg><span>34</span>
+          </div>
+        </div>
+      </div>
+     </div>
 
-      <DiscussReplay
+    <DiscussReplay
         v-if="child.children.length"
         :children="child.children"
         :parentOwnerName="child.owner.name"
         :isShow="isShow"
         @comment="clickComment"
       ></DiscussReplay>
-    </div>
+
+  </template>
   </div>
 </template>
 
@@ -54,6 +67,11 @@
 
     },
     methods: {
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       textToLink (text) {
         return textToLinkHtml(text)
       },

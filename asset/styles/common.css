@@ -2607,6 +2607,8 @@ a {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-radius: 0 0 4px 4px; }
+.container-list-discuss .list-item-discuss.list-item-discuss-children:first-child:last-child {
+  border-radius: 4px; }
 .container-list-discuss .line-river-after:after {
   left: 40px !important; }
 

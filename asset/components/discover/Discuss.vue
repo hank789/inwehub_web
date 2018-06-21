@@ -1,12 +1,15 @@
 <template>
   <div>
-    <div class="message_title">
-      <p>留言</p>
-      <svg class="icon" aria-hidden="true" @tap.stop.prevent="comment(0, '', list)">
-        <use xlink:href="#icon-xiugai"></use>
-      </svg>
-      <i class="bot"></i>
+    <div class="component-block-title">
+      <div class="left">留言</div>
+      <div class="right">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-paixu"></use>
+        </svg>最赞
+      </div>
     </div>
+    <div class="line-river-after"></div>
+
     <div class="message">
       <div class="listWrapper empty" v-show="list.length === 0">
         <svg class="icon" aria-hidden="true">
@@ -15,22 +18,32 @@
         <p>暂无留言</p>
       </div>
 
-      <div class="listWrapper" v-show="list.length !== 0 && showList">
+      <div class="container-list-discuss" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-          <ul class="message_detail">
-            <li v-for="(item, index) in list" @tap.stop.prevent="clickComment(item, list)" :key="index">
-              <div class="message_t">
-                <p @tap.stop.prevent="toResume(item.owner.uuid)">
-                  <img :src="item.owner.avatar"/>
-                  <svg class="icon" aria-hidden="true" v-show="item.owner.is_expert">
-                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                  </svg>
-                </p>
-                <p class="mui-ellipsis">{{ item.owner.name }}</p>
-                <p>{{ item.created_at.replace(/-/g, '/') }}</p>
+          <template v-for="(item, index) in list">
+            <div class="list-item-discuss"  @tap.stop.prevent="clickComment(item, list)" :key="index">
+              <div class="lidL" @tap.stop.prevent="toResume(item.owner.uuid)">
+                <img :src="item.owner.avatar"/>
+                <svg class="icon" aria-hidden="true" v-show="item.owner.is_expert">
+                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                </svg>
               </div>
-              <div id='message_b' class="message_b textToLink" v-html="textToLink(item.content)"></div>
+              <div class="lidR">
+                <div class="lidR1">{{ item.owner.name }}</div>
+                <div class="lidR2 textToLink" v-html="textToLink(item.content)"></div>
+                <div class="lidR3">
+                  <div class="lidRtime"> <timeago :since="timeago(item.created_at)" :auto-update="0">
+                  </timeago></div>
+                  <div class="lidROption" style="display: none;">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-zan"></use>
+                    </svg><span>34</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+            <div class="list-item-discuss-childrens" v-if="item.children.length">
               <DiscussReplay
                 v-if="item.children.length"
                 :children="item.children"
@@ -38,12 +51,11 @@
                 :isShow="!!item.moreReply"
                 @comment="clickComment"
               ></DiscussReplay>
+            </div>
 
-              <div class="text-13-03aef9 moreReply" @tap.stop.prevent="moreReply(item)" v-if="item.children.length>2 && !item.moreReply">查看全部{{item.children.length}}条回复</div>
+            <div class="line-river-after" v-if="index !== list.length-1"></div>
 
-              <!--<i class="bot" v-show="list.length-1 !== index"></i>-->
-            </li>
-          </ul>
+          </template>
         </div>
       </div>
     </div>
@@ -116,6 +128,11 @@
     },
     computed: {},
     methods: {
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       rootComment () {
         this.comment(0, '', this.list)
       },
@@ -338,177 +355,6 @@
 </script>
 
 <style scoped="scoped">
-  div,
-  span,
-  p,
-  ul,
-  li,
-  i,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .bot {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0rem;
-    height: 0.026rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
-  }
-
-  .message {
-    width: 100%;
-    background: #FFFFFF;
-    overflow: hidden;
-    padding: 0 0.4rem 0.4rem 0.4rem;
-  }
-
-  .message_title {
-    padding:0 .41333rem;
-    width: 100%;
-    height: 1.173rem;
-    position: relative;
-    line-height: 1.173rem;
-
-  }
-
-  .message_title p {
-    float: left;
-    font-family: PingFangSC-Medium;
-    font-size: .42667rem;
-    color: #444;
-
-  }
-
-  .message_title svg {
-    float: right;
-    font-size: 0.506rem;
-    color: #03aef9;
-    margin-top: 0.32rem;
-  }
-
-  .message_detail {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .message_detail li {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    padding: 0.32rem 0 0.32rem 0;
-    border-bottom: 0.026rem solid #dcdcdc;
-  }
-  .message_detail li:nth-last-of-type(1){
-    padding: 0.32rem 0 0 0;
-    border-bottom: none;
-  }
-
-  .message_b {
-    font-size: 0.373rem;
-    color: #444444;
-    margin-top: 0.186rem;
-  }
-
-  .message_t {
-    width: 100%;
-    height: 0.853rem;
-  }
-
-  .message_t p:nth-child(1) {
-    width: 0.853rem;
-    height: 0.853rem;
-    float: left;
-    position: relative;
-  }
-
-  .message_t p:nth-child(1) img {
-    width: 0.853rem;
-    height: 0.853rem;
-    border-radius: 50%;
-  }
-
-  .message_t p:nth-child(1) svg {
-    font-size: 0.426rem;
-    color: #03aef9;
-    position: absolute;
-    bottom: 0;
-    right: -0.133rem;
-  }
-
-  .message_t p:nth-child(2) {
-    float: left;
-    margin-left: 0.266rem;
-    height: 0.853rem;
-    line-height: 0.853rem;
-  }
-
-  .message_t p:nth-child(3) {
-    float: right;
-    height:100%;
-    line-height: 0.853rem;
-    font-size: 0.346rem;
-    color: #c8c8c8;
-  }
-
-  .message_t p:nth-child(2) span:nth-child(2) {
-    color: #c8c8c8;
-  }
-
-  .listWrapper {
-  }
-
-  .commentWrapper {
-    background: #ececee;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    min-height: 1.2rem;
-    overflow: hidden;
-    padding: 0.133rem 0.4rem;
-    z-index: 77;
-  }
-
-  .commentWrapper .textareaWrapper {
-    position: relative;
-    background: #fff;
-    border-radius: 0.133rem;
-    min-height: 0.933rem;
-  }
-
-  .commentWrapper textarea {
-    border: none;
-    display: inline-block;
-    width: 100%;
-    height: 0.533rem;
-    margin: 0.16rem 0 0;
-    padding: 0 0.826rem 0 0.133rem;
-    font-size: 0.373rem;
-
-  }
-
-  .commentWrapper textarea::placeholder {
-    color: #c8c8c8;
-  }
-
-  .commentWrapper .icon {
-    position: absolute;
-    right: 0.133rem;
-    color: #03aef9;
-    font-size: 0.693rem;
-    bottom: 0.133rem;
-  }
-
-  .empty {
-
-  }
-
   .empty {
     width: 100%;
     background: #FFFFFF;
@@ -528,16 +374,13 @@
     text-align: center;
   }
 
-  .component-comment-reply{
-    margin-top:0.133rem;
+  .lidL{
+    position: relative;
   }
 
-  .moreReply{
-    margin-top:0.133rem;
-  }
-
-  #sheet_comment_del li {
-    color:#4990E2 !important;
-    padding:0.346rem 0.4rem;
+  .lidL .icon{
+    position: absolute;
+    top:20px;
+    right:-3px;
   }
 </style>
