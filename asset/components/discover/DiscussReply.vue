@@ -11,10 +11,10 @@
         <div class="lidR3">
           <div class="lidRtime"><timeago :since="timeago(child.created_at)" :auto-update="0">
           </timeago></div>
-          <div class="lidROption" style="display: none;">
+          <div class="lidROption" @tap.stop.prevent="vote(child)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zan"></use>
-            </svg><span>34</span>
+            </svg><span v-if="child.supports">{{ child.supports }}</span>
           </div>
         </div>
       </div>
@@ -26,6 +26,7 @@
         :parentOwnerName="child.owner.name"
         :isShow="isShow"
         @comment="clickComment"
+        @vote="vote"
       ></DiscussReplay>
 
   </template>
@@ -74,6 +75,9 @@
       },
       textToLink (text) {
         return textToLinkHtml(text)
+      },
+      vote (item) {
+        this.$emit('vote', item)
       },
       clickComment (comment, children) {
         this.$emit('comment', comment, children)

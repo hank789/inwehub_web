@@ -2,10 +2,10 @@
   <div>
     <div class="component-block-title">
       <div class="left">留言</div>
-      <div class="right">
+      <div class="right" @tap.stop.prevent="switchMode">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-paixu"></use>
-        </svg>最赞
+        </svg>{{mode}}
       </div>
     </div>
     <div class="line-river-after"></div>
@@ -34,10 +34,10 @@
                 <div class="lidR3">
                   <div class="lidRtime"> <timeago :since="timeago(item.created_at)" :auto-update="0">
                   </timeago></div>
-                  <div class="lidROption" style="display: none;">
+                  <div class="lidROption" @tap.stop.prevent="vote(item)">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-zan"></use>
-                    </svg><span>34</span>
+                    </svg><span v-if="item.supports">{{item.supports}}</span>
                   </div>
                 </div>
               </div>
@@ -50,6 +50,7 @@
                 :parentOwnerName="item.owner.name"
                 :isShow="!!item.moreReply"
                 @comment="clickComment"
+                @vote="vote"
               ></DiscussReplay>
             </div>
 
@@ -97,7 +98,8 @@
       delCommentId: 0,
       delList: null,
       page: 1,
-      list: []
+      list: [],
+      mode: '最赞'
     }),
     props: {
       listApi: {
@@ -128,6 +130,14 @@
     },
     computed: {},
     methods: {
+      vote (item) {
+        window.mui.toast(item.id)
+        // @todo 接后台接口
+      },
+      switchMode () {
+        this.mode = this.mode === '最赞' ? '最新' : '最赞'
+        // @todo 接后台接口
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
@@ -380,7 +390,7 @@
 
   .lidL .icon{
     position: absolute;
-    top:20px;
-    right:-3px;
+    top:0.533rem;
+    right:-0.08rem;
   }
 </style>

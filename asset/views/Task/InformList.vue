@@ -480,16 +480,16 @@
     }
   }
   header svg{
-    font-size: 15px;
+    font-size: 0.4rem;
     color:#808080;
-    line-height: 21px;
+    line-height: 0.56rem;
   }
   .type_2 img{
     border-radius: 0.266rem;
   }
   .settingBtn{
     padding-top:0.266rem;
-    font-size:15px;
+    font-size:0.4rem;
     font-family:PingFangSC-Medium;
     color:#808080;
   }
