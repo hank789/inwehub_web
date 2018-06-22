@@ -15,6 +15,7 @@
                     :isEnableHashSymbol="true"
                     :isMonitorSmallSpan="true"
                     :allowBr="allowBr"
+                    :allowRichStyle="allowRichStyle"
                     @change="onEditorChange($event)"
                     @blur="onEditorBlur($event)"
                     @focus="onEditorFocus($event)"
@@ -86,6 +87,10 @@
         default: true
       },
       allowBr: {  // 是否允许换行
+        type: Boolean,
+        default: true
+      },
+      allowRichStyle: {  // 是否允许粘贴原样式
         type: Boolean,
         default: true
       }

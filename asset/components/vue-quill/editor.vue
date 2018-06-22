@@ -62,6 +62,10 @@
       allowBr: {  // 是否允许换行
         type: Boolean,
         default: true
+      },
+      allowRichStyle: {  // 是否允许粘贴原样式
+        type: Boolean,
+        default: true
       }
     },
     mounted () {
@@ -314,20 +318,41 @@
           self.options.scrollingContainer = '.mui-content'
           self.quill = new window.Quill(self.$refs.editor, self.options)
 
+          if (!this.allowRichStyle) {
+            self.quill.clipboard.addMatcher(Node.ELEMENT_NODE, (node, delta) => {
+              let ops = []
+              delta.ops.forEach(op => {
+                if (op.insert && typeof op.insert === 'string') {
+                  ops.push({
+                    insert: op.insert
+                  })
+                }
+              })
+              delta.ops = ops
+              return delta
+            })
+          }
+
           if (self.value || self.content) {
             self.quill.pasteHTML(self.value || self.content)
           }
 
           self.quill.on('selection-change', (range) => {
             if (!range) {
-              self.$emit('blur', self.quill)
+              if (self.quill.hasFocus()) {
+                self.$emit('blur', self.quill)
+              }
             } else {
-              self.$emit('focus', self.quill)
+              if (!self.quill.hasFocus()) {
+                self.$emit('focus', self.quill)
+              }
             }
           })
 
           self.quill.on('update', () => {
-            self.$emit('blur', self.quill)
+            if (self.quill.hasFocus()) {
+              self.$emit('blur', self.quill)
+            }
           })
 
           self.quill.on('selection-change', (range, oldRange, source) => {

@@ -12,6 +12,7 @@
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
           :allowBr="false"
+          :allowRichStyle="false"
           @ready="onEditorReady($event)"
           @smallSpanArrChange="smallSpanArrChange"
           @onEditorBlur="onEditorBlur"
