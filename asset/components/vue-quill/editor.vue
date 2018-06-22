@@ -338,10 +338,10 @@
           }
 
           self.quill.on('selection-change', (range) => {
+            console.log('quill selection-change: range:' + JSON.stringify(range))
             if (!range) {
-              if (self.quill.hasFocus()) {
-                self.$emit('blur', self.quill)
-              }
+              self.$emit('blur', self.quill)
+              return
             } else {
               if (!self.quill.hasFocus()) {
                 self.$emit('focus', self.quill)

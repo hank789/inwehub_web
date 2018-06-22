@@ -2226,8 +2226,8 @@ a {
   .line-river-direct {
     height: 0.013rem; }
   .line-river-after:after {
-    -webkit-transform: scaleX(0.5);
-    transform: scaleX(0.5); }
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5); }
   .line-wall {
     width: 0.013rem; } }
 
