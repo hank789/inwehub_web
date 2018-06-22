@@ -11,7 +11,7 @@
         <div class="lidR3">
           <div class="lidRtime"><timeago :since="timeago(child.created_at)" :auto-update="0">
           </timeago></div>
-          <div class="lidROption" @tap.stop.prevent="vote(child)">
+          <div class="lidROption" @tap.stop.prevent="vote(child)" :class="{active:child.is_supported}">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zan"></use>
             </svg><span v-if="child.supports">{{ child.supports }}</span>

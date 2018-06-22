@@ -34,7 +34,7 @@
                 <div class="lidR3">
                   <div class="lidRtime"> <timeago :since="timeago(item.created_at)" :auto-update="0">
                   </timeago></div>
-                  <div class="lidROption" @tap.stop.prevent="vote(item)">
+                  <div class="lidROption" @tap.stop.prevent="vote(item)" :class="{active:item.is_supported}">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-zan"></use>
                     </svg><span v-if="item.supports">{{item.supports}}</span>
@@ -99,7 +99,8 @@
       delList: null,
       page: 1,
       list: [],
-      mode: '最赞'
+      mode: '最新',
+      order_by: 1
     }),
     props: {
       listApi: {
@@ -131,12 +132,34 @@
     computed: {},
     methods: {
       vote (item) {
-        window.mui.toast(item.id)
-        // @todo 接后台接口
+        postRequest('support/comment', {
+          id: item.id
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'support') {
+            // 已点赞
+            item.supports++
+            item.is_supported = 1
+          } else {
+            // 取消点赞
+            item.supports--
+            item.is_supported = 0
+          }
+        })
       },
       switchMode () {
-        this.mode = this.mode === '最赞' ? '最新' : '最赞'
-        // @todo 接后台接口
+        if (this.mode === '最新') {
+          this.order_by = 1
+          this.mode = '最赞'
+        } else {
+          this.order_by = 2
+          this.mode = '最新'
+        }
+        this.resetList()
       },
       timeago (time) {
         let newDate = new Date()
@@ -317,7 +340,7 @@
         if (!this.listParams) {
           return false
         }
-        var params = Object.assign({page: this.page}, this.listParams)
+        var params = Object.assign({page: this.page, order_by: this.order_by}, this.listParams)
         postRequest(this.listApi, params).then(response => {
           var code = response.data.code
           if (code !== 1000) {
