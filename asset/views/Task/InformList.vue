@@ -480,9 +480,10 @@
     }
   }
   header svg{
-    font-size: 0.4rem;
+    font-size: 0.453rem;
     color:#808080;
-    line-height: 0.56rem;
+    position: relative;
+    top:-0.133rem;
   }
   .type_2 img{
     border-radius: 0.266rem;
