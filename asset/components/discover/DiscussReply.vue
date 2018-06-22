@@ -2,7 +2,7 @@
   <div>
   <template v-for="(child, childIndex) in children">
     <div class="list-item-discuss list-item-discuss-children" v-show="childIndex < 2 || isShow" :key="child.id" @tap.stop.prevent="clickComment(child, children)">
-      <div class="lidL">
+      <div class="lidL" @tap.stop.prevent="toResume(child.owner.uuid)">
         <img :src="child.owner.avatar"/>
       </div>
       <div class="lidR">
@@ -68,6 +68,12 @@
 
     },
     methods: {
+      toResume (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()), 'list-detail-page')
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
