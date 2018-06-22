@@ -168,7 +168,7 @@ const routes = [
       title: '新人引导第一步',
       wechatHideHeader: true
     },
-    component: componets.NewcomerGuidanceStepOne,
+    component: componets.NewcomerGuidanceStepGroup,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
@@ -2206,7 +2206,7 @@ const routes = [
     component: componets.Webviewnotice
   },
   {
-    path: '/webview/vendor/:url/:title',
+    path: '/webview/vendor/:url/:title?',
     name: 'webview-vendor',
     meta: {
       title: 'vendor'

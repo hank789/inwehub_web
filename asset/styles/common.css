@@ -2204,9 +2204,9 @@ a {
   overflow: hidden; }
 
 .line-river-after {
-  display: inline-block;
   position: relative;
-  height: 0.026rem; }
+  height: 1px; /* px不转换 */
+  width: 100%; }
 .line-river-after:after {
   position: absolute;
   top: 0;
@@ -2214,12 +2214,11 @@ a {
   right: 0;
   content: '';
   background-color: #dcdcdc;
-  width: 100%;
-  height: 0.026rem;
+  height: 1px; /* px不转换 */
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5); }
 
-.line-river-after-short :after {
+.line-river-after-short:after {
   left: 0.4rem;
   right: 0.4rem; }
 
@@ -2227,8 +2226,8 @@ a {
   .line-river-direct {
     height: 0.013rem; }
   .line-river-after:after {
-    -webkit-transform: scaleX(0.5);
-    transform: scaleX(0.5); }
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5); }
   .line-wall {
     width: 0.013rem; } }
 
@@ -2420,3 +2419,218 @@ a {
   right: -0.133rem;
   top: -0.133rem; }
 
+
+.container-dialog-box {
+  background: #03AEF9;
+  border-radius: 0.48rem;
+  width: 8rem;
+  height: 9.786rem;
+  position: relative; }
+.container-dialog-box .dialog-box-title {
+  font-family: PingFangSC-Light;
+  color: #fff;
+  font-size: 0.426rem;
+  text-align: center;
+  padding-top: 1.013rem; }
+.container-dialog-box .dialog-box-title .line-wall-circle {
+  display: inline-block;
+  width: 0.106rem;
+  height: 0.106rem;
+  background: #fff;
+  border-radius: 50%;
+  vertical-align: 0.08rem;
+  margin: 0 0.186rem; }
+.container-dialog-box .dialog-box-title .dialog-box-title2 {
+  margin-top: 0.026rem; }
+.container-dialog-box .dialog-box-close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.266rem;
+  color: #fff;
+  opacity: 0.499;
+  font-size: 0.56rem; }
+.container-dialog-box .dialog-box-content {
+  text-align: left;
+  width: 6.4rem;
+  height: 5.76rem;
+  position: absolute;
+  background: #fff;
+  top: 2.853rem;
+  left: 0.693rem;
+  font-size: 0.666rem;
+  color: #808080;
+  font-family: PingFangSC-Medium; }
+.container-dialog-box .dialog-box-content .dbc1 {
+  margin-top: 0.96rem;
+  padding-left: 0.693rem; }
+.container-dialog-box .dialog-box-content .dbc1 label {
+  border: 0.026rem solid #03AEF9;
+  color: #03AEF9;
+  font-size: 0.4rem;
+  padding: 0 0.16rem; }
+.container-dialog-box .dialog-box-content .dbc2 {
+  margin-top: 0.586rem;
+  padding-left: 0.64rem; }
+.container-dialog-box .dialog-box-content .dbc2 .percent {
+  font-size: 1.36rem;
+  font-family: PingFangSC-Medium;
+  color: #03AEF9;
+  vertical-align: -0.08rem;
+  margin-right: 0.053rem; }
+.container-dialog-box .dialog-box-content .dbc3 {
+  margin-top: 0.373rem;
+  margin-left: 0.666rem; }
+.container-dialog-box .dialog-box-content .dbc3 .time {
+  color: #03AEF9;
+  font-family: PingFangSC-Medium;
+  font-size: 0.853rem;
+  vertical-align: -0.08rem;
+  margin-right: 0.053rem; }
+
+.component-search {
+  width: 6.586rem;
+  height: 0.906rem;
+  line-height: 0.906rem;
+  background: #f3f4f6;
+  border-radius: 1.333rem;
+  opacity: 0.9477;
+  font-size: 0.373rem;
+  text-align: center;
+  color: #C8C8C8; }
+.component-search .icon {
+  font-size: 0.453rem;
+  color: #444;
+  vertical-align: -0.08rem;
+  margin-right: 0.133rem; }
+
+
+.component-button-pill-fixed {
+  width: 1.64rem;
+  height: 0.72rem;
+  border-radius: 1.333rem;
+  color: #fff;
+  font-size: 0.373rem;
+  line-height: 0.72rem;
+  background-color: #03AEF9;
+  text-align: center; }
+.component-button-pill-fixed.disable {
+  background: #DCDCDC;
+  color: #B4B4B6; }
+
+
+.container-list-group .list-item-group {
+  padding: 0.266rem 0.4rem;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  height: 1.706rem;
+  overflow: hidden; }
+.container-list-group .list-item-group .ligL img {
+  width: 1.173rem;
+  height: 1.173rem;
+  border-radius: 0.133rem; }
+.container-list-group .list-item-group .ligC {
+  line-height: 0.48rem;
+  padding-left: 0.293rem;
+  padding-top: 0.133rem;
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+  vertical-align: top; }
+.container-list-group .list-item-group .ligC .ligC1 {
+  font-size: 0.373rem;
+  font-family: PingFangSC-Medium;
+  color: #444; }
+.container-list-group .list-item-group .ligC .ligC2 {
+  font-size: 0.32rem;
+  color: #B4B4B6; }
+.container-list-group .list-item-group .ligR {
+  vertical-align: top;
+  padding-top: 0.16rem; }
+
+.container-list-discuss {
+  padding: 0 0.4rem; }
+.container-list-discuss .list-item-discuss {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  padding: 0.266rem 0; }
+.container-list-discuss .list-item-discuss .lidL {
+  width: 0.906rem; }
+.container-list-discuss .list-item-discuss .lidL img {
+  width: 0.906rem;
+  height: 0.906rem;
+  border-radius: 50%; }
+.container-list-discuss .list-item-discuss .lidR {
+  -webkit-box-flex: 2;
+  -ms-flex-positive: 2;
+  flex-grow: 2;
+  padding-left: 0.133rem; }
+.container-list-discuss .list-item-discuss .lidR .lidR1 {
+  color: #808080;
+  font-size: 0.346rem; }
+.container-list-discuss .list-item-discuss .lidR .lidR1 span {
+  color: #B4B4B6;
+  margin: 0 0.133rem; }
+.container-list-discuss .list-item-discuss .lidR .lidR2 {
+  color: #444444;
+  font-size: 0.373rem;
+  line-height: 0.506rem; }
+.container-list-discuss .list-item-discuss .lidR .lidR3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  color: #B4B4B6;
+  font-size: 0.32rem; }
+.container-list-discuss .list-item-discuss .lidR .lidR3 .lidROption.active {
+  color: #03AEF9; }
+.container-list-discuss .list-item-discuss .lidR .lidR3 .lidROption .icon {
+  font-size: 0.386rem; }
+.container-list-discuss .list-item-discuss .lidR .lidR3 .lidROption span {
+  margin-left: 0.133rem; }
+.container-list-discuss .list-item-discuss.list-item-discuss-children {
+  background-color: #F7F8FA;
+  margin-left: 1.04rem;
+  padding: 0.266rem 0.266rem 0; }
+.container-list-discuss .list-item-discuss.list-item-discuss-children:first-child {
+  border-radius: 0.106rem 0.106rem 0 0; }
+.container-list-discuss .list-item-discuss.list-item-discuss-children:last-child {
+  margin-bottom: 0.266rem;
+  padding-bottom: 0.266rem;
+  border-radius: 0 0 0.106rem 0.106rem; }
+.container-list-discuss .list-item-discuss.list-item-discuss-children:first-child:last-child {
+  border-radius: 0.106rem; }
+.container-list-discuss .line-river-after:after {
+  left: 1.066rem !important; }
+
+
+.component-block-title {
+  height: 1.173rem;
+  line-height: 1.173rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0 0.413rem; }
+.component-block-title .left {
+  font-family: "PingFangSC-Medium";
+  font-size: 0.426rem;
+  color: #444; }
+.component-block-title .right {
+  color: #808080;
+  font-size: 0.4rem; }
+.component-block-title .right svg {
+  font-size: 0.493rem;
+  vertical-align: -0.08rem;
+  margin-right: 0.186rem; }

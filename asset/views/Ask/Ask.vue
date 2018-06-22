@@ -122,6 +122,8 @@
       this.initData()
     },
     mounted () {
+      userAbility.showFreeAskGuide(this)
+
       window.mui.previewImage()
       autoTextArea()
       this.initData()
@@ -458,7 +460,7 @@
   }
 
   .textareaWrapperHasTag{
-    top:34px;
+    top:0.906rem;
   }
 
   .textarea-wrapper textarea {

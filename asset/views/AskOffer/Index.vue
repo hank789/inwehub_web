@@ -2,7 +2,12 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">问答社区</h1>
+      <h1 class="mui-title"></h1>
+      <div class="component-search" @tap.stop.prevent="toSearch">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-sousuo"></use>
+        </svg>搜搜看，再提问
+    </div>
       <a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" @tap.stop.prevent="addQuestion();">提问题</a>
     </header>
 
@@ -47,6 +52,8 @@
   import { textToLinkHtml } from '../../utils/dom'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
   import { getQuestionStateClass } from '../../utils/ask'
+  import { alertFreeAskGuide } from '../../utils/dialogList'
+  import userAbility from '../../utils/userAbility'
 
   const MajorList = {
     data: () => ({
@@ -69,6 +76,9 @@
       AskCommunityListItem
     },
     methods: {
+      toSearch () {
+        this.$router.pushPlus('/searchQuestion', 'list-detail-page-three')
+      },
       switchFilter (filter) {
         this.filter = filter
       },
@@ -97,6 +107,7 @@
       }
     },
     mounted () {
+      userAbility.showFreeAskGuide(this)
     }
   }
   export default MajorList
@@ -104,6 +115,11 @@
 
 <style lang="less" scoped>
   /*滚动区域*/
+  .component-search{
+    position: absolute;
+    top: 0.133rem;
+    left: 1.226rem;
+  }
   .mui-content {
     background: #ffffff;
 

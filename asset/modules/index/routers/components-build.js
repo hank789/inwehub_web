@@ -11,6 +11,7 @@ import SearchSearchUser from '../../../views/Search/SearchUser.vue'
 import ActivityOpportunityList from '../../../views/Activity/OpportunityList.vue'
 import ActivityEnrollmentStatus from '../../../views/Activity/EnrollmentStatus.vue'
 import NewcomerGuidanceStepOne from '../../../views/NewcomerGuidance/StepOne.vue'
+import NewcomerGuidanceStepGroup from '../../../views/NewcomerGuidance/StepGroup.vue'
 import NewcomerGuidanceStepTwo from '../../../views/NewcomerGuidance/StepTwo.vue'
 import NewcomerGuidanceStepThree from '../../../views/NewcomerGuidance/StepThree.vue'
 import NewcomerGuidanceStepThreeApp from '../../../views/NewcomerGuidance/StepThreeApp.vue'
@@ -367,5 +368,6 @@ export {
   AddressBooks,
   AskOfferIndex,
   AskOfferList,
-  AskOfferDetail
+  AskOfferDetail,
+  NewcomerGuidanceStepGroup
 }

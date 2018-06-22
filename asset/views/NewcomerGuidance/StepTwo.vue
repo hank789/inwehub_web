@@ -8,8 +8,8 @@
         </svg>
         <div class="next-step" @tap.stop.prevent="toNext()">下一步</div>
         <div class="invitation-text">
+          <p>了解Ta的平台动态</p>
           <p>关注您感兴趣的人</p>
-          <p>关注Ta在平台上的动态</p>
         </div>
       </div>
 

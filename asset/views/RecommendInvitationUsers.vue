@@ -102,7 +102,7 @@
     created () {
       this.question_id = this.$route.params.id
 
-      var title = encodeURIComponent(this.$route.query.title.replace(/\s/g, '').substr(0, 200))
+      var title = this.$route.query.title.replace(/\s/g, '').substr(0, 200)
       var answerNum = this.$route.query.answernum ? this.$route.query.answernum : 0
       var followedNum = this.$route.query.followednum ? this.$route.query.followednum : 0
 

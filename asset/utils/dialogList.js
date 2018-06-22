@@ -346,6 +346,24 @@ function alertNoticeOpenNotifitionPermission (context, callback) {
   }
 }
 
+/**
+ * 悬赏问答指引
+ * @param context
+ * @param signDaily
+ */
+function alertFreeAskGuide (context) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('freeAskGuideDialog', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num > -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -366,5 +384,6 @@ export {
   alertSignIn,
   alertGetCredits,
   alertGetCoupon,
-  alertNoticeOpenNotifitionPermission
+  alertNoticeOpenNotifitionPermission,
+  alertFreeAskGuide
 }
