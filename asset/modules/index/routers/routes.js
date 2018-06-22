@@ -2206,7 +2206,7 @@ const routes = [
     component: componets.Webviewnotice
   },
   {
-    path: '/webview/vendor/:url/:title',
+    path: '/webview/vendor/:url/:title?',
     name: 'webview-vendor',
     meta: {
       title: 'vendor'
