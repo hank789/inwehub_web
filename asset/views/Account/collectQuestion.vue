@@ -11,7 +11,6 @@
       <div class="menu">
         <span @tap.stop.prevent="$router.replace('/collectUser')">用户</span>
         <span @tap.stop.prevent="$router.replace('')">问答<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
         <i class="bot"></i>
       </div>
       <!--内容区域-->

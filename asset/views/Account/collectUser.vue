@@ -14,7 +14,6 @@
       <div class="menu" v-if="!type">
         <span class="font-family-medium" @tap.stop.prevent="">用户<i></i></span>
         <span class="font-family-medium" @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
-        <span class="font-family-medium" @tap.stop.prevent="$router.replace('/collectTags')">标签</span>
         <i class="bot"></i>
       </div>
 
