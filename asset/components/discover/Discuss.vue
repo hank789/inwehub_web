@@ -153,10 +153,10 @@
       },
       switchMode () {
         if (this.mode === '最新') {
-          this.order_by = 1
+          this.order_by = 2
           this.mode = '最赞'
         } else {
-          this.order_by = 2
+          this.order_by = 1
           this.mode = '最新'
         }
         this.resetList()
