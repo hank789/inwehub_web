@@ -81,7 +81,8 @@
       getData () {
         postRequest('group/recommend', {
           page: 1,
-          perPage: 20
+          perPage: 20,
+          type: 2
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
