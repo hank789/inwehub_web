@@ -295,6 +295,8 @@
           id,
           children: [],
           content: msg,
+          is_supported: 0,
+          supports: 0,
           owner: {
             is_expert: userInfo.is_expert,
             avatar: userInfo.avatar_url,
