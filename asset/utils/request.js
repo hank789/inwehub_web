@@ -4,6 +4,7 @@ import { logout } from '../utils/auth'
 import { rebootAuth } from '../utils/wechat'
 import router from '../modules/index/routers/index'
 import Raven from 'raven-js'
+import qs from 'qs'
 
 const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
@@ -18,7 +19,8 @@ export const createAPI = PATH => `${api}/${PATH}`
 export const addAccessToken = (timeout) => {
   const UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
   axios.defaults.headers.common = {
-    'Authorization': 'bearer ' + UserLoginInfo.token
+    'Authorization': 'bearer ' + UserLoginInfo.token,
+    'Content-Type': 'application/x-www-form-urlencoded'
   }
   axios.defaults.timeout = timeout
   return axios
@@ -35,7 +37,7 @@ export function apiRequest (url, data, showWaiting = true) {
     data.current_version = appVersion.version
   }
 
-  var proObj = addAccessToken(0).post(createAPI(url), data,
+  var proObj = addAccessToken(0).post(createAPI(url), qs.stringify(data),
     {
       validateStatus: status => status === 200
     }
@@ -126,7 +128,7 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
     timeout = 300000
   }
 
-  var proObj = addAccessToken(timeout).post(createAPI(url), data, config)
+  var proObj = addAccessToken(timeout).post(createAPI(url), qs.stringify(data), config)
     .then(response => {
       if (options.onUploadProgress) {
         window.mui.closeUploadWaiting()
