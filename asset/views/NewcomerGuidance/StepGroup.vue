@@ -39,7 +39,6 @@
 </template>
 <script>
   import { postRequest } from '../../utils/request'
-  import Vue from 'vue'
   import localEvent from '../../stores/localStorage'
 
   export default {

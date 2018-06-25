@@ -101,7 +101,7 @@ Vue.use(TimeAgo, {
   }
 })
 
-import { showWebview, clearAllWebViewCache, getPrevWebview } from '../../utils/webview'
+import { showWebview, clearAllWebViewCache } from '../../utils/webview'
 import localEvent from '../../stores/localStorage'
 
 import refreshPageData from '../../plugins/refreshPageData'
