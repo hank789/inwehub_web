@@ -1,5 +1,5 @@
 import router from '../modules/index/routers/index'
-import { goBack, goThirdPartyArticle, getPrevWebview } from './webview'
+import { goThirdPartyArticle, getPrevWebview } from './webview'
 import { setIncBadgeNumber } from './notice'
 import userAbility from './userAbility'
 import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from './allPlatform'
@@ -482,8 +482,7 @@ function AppPageInit (context) {
   console.log('AppPageInit(context) fired')
   window.mui.plusReady(function () {
     window.mui.init({
-      swipeBack: true, // 启用右滑关闭功能
-      beforeback: goBack
+      swipeBack: true // 启用右滑关闭功能
     })
 
     lockOrientation('portrait-primary')
@@ -498,25 +497,23 @@ function AppPageInit (context) {
         },
         extras: {preload: true, custom_preload: true}
       })
-      listPageWebview.addEventListener('popGesture', (e) => {
-        console.log('run in event popGesture')
-        if (e.type === 'end' && e.result === true) {
-          var parentWebview = getPrevWebview() // self.opener()
-          if (parentWebview) {
-            console.log('calledEvent: popGesture：' + parentWebview.id)
+      listPageWebview.addEventListener('hide', (e) => {
+        console.log('run in event hide')
+        var parentWebview = getPrevWebview() // self.opener()
+        if (parentWebview) {
+          console.log('calledEvent: hide：' + parentWebview.id)
 
-            // 触发父页面的自定义事件(refresh),从而进行刷新
-            window.mui.fire(parentWebview, 'refreshData', {childId: 'list-page'})
-            // 刷新当前页数据
-            // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
+          // 触发父页面的自定义事件(refresh),从而进行刷新
+          window.mui.fire(parentWebview, 'refreshData', {childId: 'list-page'})
+          // 刷新当前页数据
+          // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
 
-            // 触发父页面的自定义事件(refresh),从而进行刷新
-            window.mui.fire(parentWebview, 'refreshPageData', {childId: 'list-page', type: 'back'})
-            // 刷新当前页数据
-            // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
+          // 触发父页面的自定义事件(refresh),从而进行刷新
+          window.mui.fire(parentWebview, 'refreshPageData', {childId: 'list-page', type: 'back'})
+          // 刷新当前页数据
+          // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
 
-            window.mui.fire(parentWebview, 'autoHeight', {childId: 'list-page'})
-          }
+          window.mui.fire(parentWebview, 'autoHeight', {childId: 'list-page'})
         }
       }, false)
       // 监听自定义事件，前往页面
@@ -527,7 +524,6 @@ function AppPageInit (context) {
         var ws = window.plus.webview.currentWebview()
         var currentUrl = getWebviewNewUrl()
         console.log('go_to_target_page currentUrl:' + currentUrl + ', url:' + url)
-
         router.replace(url, () => {
           window.mui.fire(ws, 'autoHeight', true)
           if (currentUrl === url || (currentUrl === '/home' && url === '/home?refresh=1')) {

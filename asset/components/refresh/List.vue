@@ -16,7 +16,6 @@
 
   import { postRequest } from '../../utils/request'
   import Empty from '../../components/Empty.vue'
-  import { goBack } from '../../utils/webview'
 
   export default {
     data () {
@@ -354,7 +353,6 @@
     },
     mounted () {
       window.mui.init({
-        beforeback: goBack,
         pullRefresh: {
           container: this.$el,
           down: {
