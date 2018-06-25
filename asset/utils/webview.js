@@ -91,10 +91,10 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
         }
       })
       console.log('openWindow url:' + url + ', popGesture: ' + popGesture + ',aniShow:' + aniShow)
-      console.log('bind event hide')
-      if (id !== window.plus.runtime.appid) {
-        webview.addEventListener('hide', (e) => {
-          console.log('run in event hide')
+      console.log('bind event popGesture')
+      webview.addEventListener('popGesture', (e) => {
+        console.log('run in event popGesture')
+        if (e.type === 'end' && e.result === true) {
           var parentWebview = getPrevWebview() // self.opener()
           if (parentWebview) {
             console.log('calledEvent: popGesture：' + parentWebview.id)
@@ -111,8 +111,8 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
 
             window.mui.fire(parentWebview, 'autoHeight', {childId: webview.id})
           }
-        }, false)
-      }
+        }
+      }, false)
       if (reload) {
         webview.loadURL(url)
       }
@@ -299,6 +299,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
  * 显示webview并绑定侧滑关闭事件
  */
 function showWebview () {
+  console.log('准备为新webview绑定侧滑返回事件')
   if (window.mui.os.plus) {
     window.mui.plusReady(() => {
       var self = window.plus.webview.currentWebview()
