@@ -221,6 +221,16 @@ window.mui.back = function () {
     } else if (needHide.indexOf(currentWebview.id) !== -1) {
       console.log('back 准备隐藏当前webview')
       currentWebview.hide()
+      // 获得父页面的webview
+      var parentWebview = getPrevWebview() // self.opener()
+      if (parentWebview) {
+        // 触发父页面的自定义事件(refresh),从而进行刷新
+        window.mui.fire(parentWebview, 'refreshData')
+        // 触发父页面的自定义事件(refresh),从而进行刷新
+        window.mui.fire(parentWebview, 'refreshPageData', {childId: currentWebview.id, type: 'back'})
+        // 子页面也刷新数据
+        // window.mui.fire(currentWebview, 'refreshData')
+      }
       return
     } else if (window.mui.os.plus || needWebviewBack.indexOf(currentWebview.id) !== -1) {
       console.log('back 准备close当前webview')
