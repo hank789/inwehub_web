@@ -189,6 +189,7 @@ const AddressBooks = () => import(/* webpackChunkName: "AddressBooks" */ '../../
 const AskOfferIndex = () => import(/* webpackChunkName: "AskOffer" */ '../../../views/AskOffer/Index.vue')
 const AskOfferList = () => import(/* webpackChunkName: "AskOfferList" */ '../../../views/AskOffer/List.vue')
 const AskOfferDetail = () => import(/* webpackChunkName: "AskOfferDetail" */ '../../../views/AskOffer/Detail.vue')
+const ShareReview = () => import(/* webpackChunkName: "ShareReview" */ '../../../views/Share/review.vue')
 
 export {
   Login,
@@ -375,5 +376,6 @@ export {
   AddressBooks,
   AskOfferIndex,
   AskOfferList,
-  AskOfferDetail
+  AskOfferDetail,
+  ShareReview
 }

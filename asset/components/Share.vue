@@ -42,12 +42,15 @@
       <div class="more">
         <div class="single" @tap.stop.prevent="shareImageToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
+          <p>微信好友</p>
         </div>
         <div class="single" @tap.stop.prevent="shareImageToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
+          <p>朋友圈</p>
         </div>
         <div class="single" @tap.stop.prevent="saveImage()">
           <img src="../statics/images/save-image@2x.png"/>
+          <p>生成图片</p>
         </div>
       </div>
     </div>
