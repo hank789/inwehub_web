@@ -31,6 +31,7 @@
         <div class="single" @tap.stop.prevent="toPreviewImage()"
              v-if="this.DomConvertImage && isShowSharePng()">
           <img src="../statics/images/sharePng@2x.png"/>
+          <p>生成图片</p>
         </div>
       </div>
     </div>
@@ -304,7 +305,6 @@
         } else {
           var node = document.getElementById(this.DomConvertImageId)
           console.log('id:' + this.DomConvertImageId)
-          console.log(node)
           if (node) {
             window.mui.waiting()
             domtoimage.toPng(node, {quality: 1}).then((dataUrl) => {
