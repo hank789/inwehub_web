@@ -33,6 +33,11 @@
           <img src="../statics/images/sharePng@2x.png"/>
           <p>生成图片</p>
         </div>
+        <div class="single" @tap.stop.prevent="toPreviewApiImage()"
+             v-if="this.showPreviewApiImage">
+          <img src="../statics/images/sharePng@2x.png"/>
+          <p>生成图片</p>
+        </div>
       </div>
     </div>
 
@@ -70,7 +75,7 @@
   import Share from '../utils/share'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
-  import { getLocalUrl, saveImageByBase64, createImageThumb, setClipboardText } from '../utils/plus'
+  import { getLocalUrl, saveImageByBase64, createImageThumb, setClipboardText, dowloadFile } from '../utils/plus'
   import localEvent from '../stores/localStorage'
 
   export default {
@@ -123,6 +128,18 @@
       DomConvertImageId: {
         type: String,
         default: 'router-view'
+      },
+      showPreviewApiImage: { // 是否显示后台图片预览引导按钮
+        type: Boolean,
+        default: false
+      },
+      apiReviewUrl: { // api预览页url
+        type: String,
+        default: ''
+      },
+      apiImageUrl: { // api预览页url
+        type: String,
+        default: ''
       },
       ImagePreview: {
         type: Boolean,
@@ -355,23 +372,51 @@
           }
         }
       },
+      toPreviewApiImage () {
+        window.mui('#shareWrapper').popover('toggle')
+        this.$router.pushPlus(this.apiReviewUrl)
+      },
       toPreviewImage () {
         window.mui('#shareWrapper').popover('toggle')
         this.$router.pushPlus('/invitation/preview')
       },
       shareImageToHaoyou () {
-        this.createImage(() => {
-          if (this.sendHaoyou) {
-            this.sendHaoyou()
+        if (this.showPreviewApiImage) {
+          var data = {
+            title: '',
+            link: '',
+            content: '',
+            imageUrl: this.apiImageUrl,
+            thumbUrl: this.apiImageUrl
           }
-        })
+          Share.setData(data)
+          this.sendHaoyou()
+        } else {
+          this.createImage(() => {
+            if (this.sendHaoyou) {
+              this.sendHaoyou()
+            }
+          })
+        }
       },
       shareImageToPengyouQuan () {
-        this.createImage(() => {
-          if (this.sendPengYouQuan) {
-            this.sendPengYouQuan()
+        if (this.showPreviewApiImage) {
+          var data = {
+            title: '',
+            link: '',
+            content: '',
+            imageUrl: this.apiImageUrl,
+            thumbUrl: this.apiImageUrl
           }
-        })
+          Share.setData(data)
+          this.sendPengYouQuan()
+        } else {
+          this.createImage(() => {
+            if (this.sendPengYouQuan) {
+              this.sendPengYouQuan()
+            }
+          })
+        }
       },
       successCallback () {
         this.$emit('success')
@@ -454,17 +499,32 @@
         }, 150)
       },
       saveImage () {
-        this.createImage(() => {
+        if (this.showPreviewApiImage) {
           window.mui.plusReady(() => {
-            window.plus.gallery.save(this.imagePath, function () {
-              console.log('保存图片到相册成功')
-              window.mui.toast('保存成功')
-            }, function () {
-              console.log('保存图片到相册失败')
-              window.mui.toast('保存失败')
+            var localFileName = this.apiImageUrl.match(/[^\\/]+?$/)
+            dowloadFile(this.apiImageUrl, '_downloads/' + localFileName, (url) => {
+              window.plus.gallery.save(url, function () {
+                console.log('保存图片到相册成功')
+                window.mui.toast('保存成功')
+              }, function () {
+                console.log('保存图片到相册失败')
+                window.mui.toast('保存失败')
+              })
             })
           })
-        })
+        } else {
+          this.createImage(() => {
+            window.mui.plusReady(() => {
+              window.plus.gallery.save(this.imagePath, function () {
+                console.log('保存图片到相册成功')
+                window.mui.toast('保存成功')
+              }, function () {
+                console.log('保存图片到相册失败')
+                window.mui.toast('保存失败')
+              })
+            })
+          })
+        }
       },
       hide () {
         this.$emit('hide')
@@ -540,13 +600,14 @@
     .more {
       background: #fff;
       padding: 0.266rem;
+
       .single {
         height: 1.866rem;
         display: inline-block;
         img {
           width: 1.25rem;
           height: 1.25rem;
-          margin: 0 0.266rem;
+          margin: 0 0.24rem;
         }
         p{
           font-size: 0.32rem;

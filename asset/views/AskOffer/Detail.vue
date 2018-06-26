@@ -78,6 +78,8 @@
       :thumbUrl="shareImg"
       :targetId="id"
       :targetType="'answer'"
+      :showPreviewApiImage="true"
+      :apiReviewUrl="'/share/review/question/' + this.ask.question.id"
       @success="shareSuccess"
       @fail="shareFail"
       ref="ShareBtn"

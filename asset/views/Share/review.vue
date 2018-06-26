@@ -20,6 +20,8 @@
       :DomConvertImage="true"
       :targetId="rcCode"
       :targetType="'invite_register'"
+      :showPreviewApiImage="true"
+      :apiImageUrl="url"
       @success="shareSuccess"
       :DomConvertImageId="'shareContentWrapper'"
       @fail="shareFail"
