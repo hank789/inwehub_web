@@ -53,7 +53,7 @@
           <img src="../statics/images/pengyouquan.png"/>
           <p>朋友圈</p>
         </div>
-        <div class="single" @tap.stop.prevent="saveImage()">
+        <div class="single" @tap.stop.prevent="saveImage()" v-if="isShowApiSharePng()">
           <img src="../statics/images/save-image@2x.png"/>
           <p>生成图片</p>
         </div>
@@ -219,6 +219,16 @@
           return false
         }
         return !!window.mui.os.android // !!window.mui.os.android   window.mui.os.plus
+      },
+      isShowApiSharePng () {
+        if (!this.showPreviewApiImage) {
+          return this.isShowSharePng()
+        } else {
+          if (window.mui.os.plus) {
+            return true
+          }
+          return false
+        }
       },
       bindShare () {
         if (this.$router.currentRoute.meta.wechatHideHeader && window.mui.os.wechat) {
