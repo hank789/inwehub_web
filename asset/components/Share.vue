@@ -391,13 +391,14 @@
         this.$router.pushPlus('/invitation/preview')
       },
       shareImageToHaoyou () {
+        console.log('showPreviewApiImage:' + this.showPreviewApiImage)
         if (this.showPreviewApiImage) {
           var data = {
-            title: '',
-            link: '',
+            title: null,
+            link: null,
             content: '',
             imageUrl: this.apiImageUrl,
-            thumbUrl: this.apiImageUrl
+            thumbUrl: null // this.apiImageUrl
           }
           Share.setData(data)
           this.sendHaoyou()
@@ -412,11 +413,11 @@
       shareImageToPengyouQuan () {
         if (this.showPreviewApiImage) {
           var data = {
-            title: '',
-            link: '',
+            title: null,
+            link: null,
             content: '',
             imageUrl: this.apiImageUrl,
-            thumbUrl: this.apiImageUrl
+            thumbUrl: null // this.apiImageUrl
           }
           Share.setData(data)
           this.sendPengYouQuan()

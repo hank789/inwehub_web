@@ -48,14 +48,14 @@ var Share = () => {
         if (wechat.nativeClient) {
           self.context.sendHaoyou = () => {
             var data = {
-              content: stripTags(self.data.content).substr(0, 150),
+              content: self.data.content ? stripTags(self.data.content).substr(0, 150) : self.data.content,
               href: self.data.link,
-              title: stripTags(self.data.title).substr(0, 150),
+              title: self.data.title ? stripTags(self.data.title).substr(0, 150) : self.data.title,
               pictures: [self.data.imageUrl],
-              thumbs: [self.data.thumbUrl],
+              thumbs: self.data.thumbUrl ? [self.data.thumbUrl] : null,
               extra: {scene: 'WXSceneSession'}
             }
-
+            console.log('sendHaoyou-data:' + JSON.stringify(data))
             wechat.send(data, () => {
               self.successCallback()
             }, (error) => {
