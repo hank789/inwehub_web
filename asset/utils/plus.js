@@ -21,15 +21,19 @@ function dowloadFile (uri, path, callback) {
       }, function (download, status) {
         console.log('download finished status:' + status + ', filename:' + download.filename)
         var fileName = download.filename
-        var newurl = window.plus.io.convertLocalFileSystemURL(fileName)
-        console.log('download newurl:' + newurl)
-        window.plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
+
+        if (window.mui.os.android) {
+          fileName = window.plus.io.convertLocalFileSystemURL(fileName)
+        }
+
+        console.log('download newurl:' + fileName)
+        window.plus.io.resolveLocalFileSystemURL(fileName, function (entry) {
           var newurl = entry.toRemoteURL()
           console.log('已下载到:' + newurl)
           callback(newurl)
         }, function (e) {
-          callback(newurl)
-          console.log('已下载到:' + newurl)
+          callback(fileName)
+          console.log('已下载到:' + fileName)
           console.log('Resolve file URL failed:' + JSON.stringify(e))
         })
       })

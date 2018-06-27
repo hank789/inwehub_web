@@ -62,6 +62,9 @@
     },
     computed: {},
     methods: {
+      refreshPageData () {
+
+      },
       imageMounted () {
         this.$refs.ShareBtn.createImage((url) => {
           this.$refs.imagesCommponent.changeImage(url)

@@ -512,15 +512,12 @@
       saveImage () {
         if (this.showPreviewApiImage) {
           window.mui.plusReady(() => {
-            var localFileName = this.apiImageUrl.match(/[^\\/]+?$/)
-            dowloadFile(this.apiImageUrl, '_downloads/' + localFileName, (url) => {
-              window.plus.gallery.save(url, function () {
-                console.log('保存图片到相册成功')
-                window.mui.toast('保存成功')
-              }, function () {
-                console.log('保存图片到相册失败')
-                window.mui.toast('保存失败')
-              })
+            window.plus.gallery.save(this.apiImageUrl, function () {
+              console.log('保存图片到相册成功')
+              window.mui.toast('保存成功')
+            }, function () {
+              console.log('保存图片到相册失败')
+              window.mui.toast('保存失败')
             })
           })
         } else {

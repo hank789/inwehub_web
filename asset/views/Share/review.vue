@@ -35,6 +35,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { getInvitation } from '../../utils/shareTemplate'
   import { postRequest } from '../../utils/request'
+  import { dowloadFile } from '../../utils/plus'
 
   const Index = {
     data: () => ({
@@ -63,32 +64,44 @@
     },
     computed: {},
     methods: {
-      shareSuccess () {
+      refreshPageData () {
+        this.getData()
+      },
+      shareSuccess () {},
+      getData () {
+        this.id = this.$route.params.id
+        this.type = this.$route.params.type
 
+        postRequest('question/getShareImage', {
+          id: this.id
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.url = response.data.data.url
+          // var localFileName = this.url.match(/[^\\/]+?$/)
+          var localFileName = 'question_share.png'
+          dowloadFile(this.url, '_www/' + localFileName, (url) => {
+            this.url = url
+          })
+        })
+
+        var user = getLocalUserInfo()
+        this.rcCode = user.rc_code || 0
+        this.shareOption = getInvitation(user.name, this.rcCode)
       },
       shareFail () {
       },
       getImage () {
       }
     },
+    watch: {
+      '$route': 'refreshPageData'
+    },
     created () {
-      this.id = this.$route.params.id
-      this.type = this.$route.params.type
-
-      postRequest('question/getShareImage', {
-        id: this.id
-      }).then(response => {
-        var code = response.data.code
-        if (code !== 1000) {
-          window.mui.alert(response.data.message)
-          return
-        }
-        this.url = response.data.data.url
-      })
-
-      var user = getLocalUserInfo()
-      this.rcCode = user.rc_code || 0
-      this.shareOption = getInvitation(user.name, this.rcCode)
+      this.getData()
     }
   }
   export default Index
