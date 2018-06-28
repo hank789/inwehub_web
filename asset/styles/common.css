@@ -2641,3 +2641,22 @@ a {
   font-size: 0.493rem;
   vertical-align: -0.08rem;
   margin-right: 0.186rem; }
+
+
+.component-feed-item-guide {
+  text-align: center;
+  background: #fff;
+  padding: 0.186rem 0 0.4rem; }
+.component-feed-item-guide .icon {
+  color: #B4B4B6;
+  font-size: 1.04rem; }
+.component-feed-item-guide .desc {
+  margin-top: 0.053rem;
+  color: #808080;
+  font-size: 0.346rem; }
+.component-feed-item-guide button {
+  padding: 0.24rem 0.666rem;
+  margin-top: 0.133rem;
+  background: #03AEF9;
+  color: #fff;
+  border: none; }
