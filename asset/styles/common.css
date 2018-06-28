@@ -2527,7 +2527,7 @@ a {
   display: flex;
   -ms-flex-pack: distribute;
   justify-content: space-around;
-  height: 1.706rem;
+  height: 2.026rem;
   overflow: hidden; }
 .container-list-group .list-item-group .ligL img {
   width: 1.173rem;
@@ -2536,7 +2536,7 @@ a {
 .container-list-group .list-item-group .ligC {
   line-height: 0.48rem;
   padding-left: 0.293rem;
-  padding-top: 0.133rem;
+  padding-top: 0;
   -webkit-box-flex: 2;
   -ms-flex-positive: 2;
   flex-grow: 2;
@@ -2545,12 +2545,17 @@ a {
   font-size: 0.373rem;
   font-family: PingFangSC-Medium;
   color: #444; }
+.container-list-group .list-item-group .ligC .ligCM {
+  font-size: 0.346rem;
+  color: #808080;
+  width: 6.106rem; }
 .container-list-group .list-item-group .ligC .ligC2 {
   font-size: 0.32rem;
   color: #B4B4B6; }
 .container-list-group .list-item-group .ligR {
   vertical-align: top;
   padding-top: 0.16rem; }
+
 
 .container-list-discuss {
   padding: 0 0.4rem; }

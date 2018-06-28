@@ -3,9 +3,6 @@
     <div style="background: #f3f4f6"></div>
     <div class="mui-content">
       <div class="invitation-title">
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close()">
-          <use xlink:href="#icon-guanbi"></use>
-        </svg>
         <div class="next-step" @tap.stop.prevent="submit()">下一步</div>
         <div class="invitation-text">
           <p>开启InweHub之旅</p>
@@ -15,12 +12,13 @@
 
       <div class="container-list-group">
         <template v-for="(item, index) in list">
-          <div class="list-item-group">
+          <div class="list-item-group" @tap.stop.prevent="toDetail(item)">
             <div class="ligL">
               <img :src="item.logo"/>
             </div>
             <div class="ligC">
               <div class="ligC1">{{item.name.length > 10 ? item.name.substr(0, 10) + '...' : item.name }}</div>
+              <div class="ligCM text-line-1">{{item.description}}</div>
               <div class="ligC2">{{item.subscribers}}人气 {{item.articles}}分享</div>
             </div>
             <div class="ligR">
@@ -53,6 +51,9 @@
     computed: {},
     components: {},
     methods: {
+      toDetail (item) {
+        this.$router.pushPlus('/group/detail/' + item.id)
+      },
       joinGroup (item) {
         postRequest(`group/join`, {id: item.id}).then(response => {
           var code = response.data.code
