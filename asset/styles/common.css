@@ -2548,7 +2548,9 @@ a {
 .container-list-group .list-item-group .ligC .ligCM {
   font-size: 0.346rem;
   color: #808080;
-  width: 6.106rem; }
+  width: 6.106rem;
+  padding: 0.106rem 0rem;
+}
 .container-list-group .list-item-group .ligC .ligC2 {
   font-size: 0.32rem;
   color: #B4B4B6; }
