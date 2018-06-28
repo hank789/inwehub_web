@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="line-river-big"></div>
+          <div class="line-river-big" v-if="index === 2"></div>
 
           <!-- 发布了分享 -->
           <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
