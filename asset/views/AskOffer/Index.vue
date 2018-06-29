@@ -52,7 +52,6 @@
   import { textToLinkHtml } from '../../utils/dom'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
   import { getQuestionStateClass } from '../../utils/ask'
-  import { alertFreeAskGuide } from '../../utils/dialogList'
   import userAbility from '../../utils/userAbility'
 
   const MajorList = {

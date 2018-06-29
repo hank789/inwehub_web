@@ -25,7 +25,7 @@
     }),
     created () {
       openFullscreen()
-      this.getBoot_guide()
+      this.toHome()
     },
     methods: {
       toHome () {

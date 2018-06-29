@@ -10,19 +10,31 @@ import { checkUpdate } from './updateVersion'
 
 function dowloadFile (uri, path, callback) {
   window.mui.plusReady(() => {
-    console.log('download:' + uri)
+    console.log('dowloadFile uri:' + uri)
 
-    function download () {
+    function download (uri) {
+      console.log('dowload uri:' + uri)
+
       // 重新下载
       var downLoader = window.plus.downloader.createDownload(uri, {
         filename: path
       }, function (download, status) {
+        console.log('download finished status:' + status + ', filename:' + download.filename)
         var fileName = download.filename
-        var newurl = window.plus.io.convertLocalFileSystemURL(fileName)
-        window.plus.io.resolveLocalFileSystemURL(newurl, function (entry) {
+
+        if (window.mui.os.android) {
+          fileName = window.plus.io.convertLocalFileSystemURL(fileName)
+        }
+
+        console.log('download newurl:' + fileName)
+        window.plus.io.resolveLocalFileSystemURL(fileName, function (entry) {
           var newurl = entry.toRemoteURL()
           console.log('已下载到:' + newurl)
           callback(newurl)
+        }, function (e) {
+          callback(fileName)
+          console.log('已下载到:' + fileName)
+          console.log('Resolve file URL failed:' + JSON.stringify(e))
         })
       })
       downLoader.start()
@@ -32,14 +44,14 @@ function dowloadFile (uri, path, callback) {
     window.plus.io.resolveLocalFileSystemURL(path, function (entry) {
       entry.remove(function (entry) {
         console.log('文件删除成功:' + path)
-        download()
+        download(uri)
       }, function (e) {
         console.log('文件删除失败:' + path)
-        download()
+        download(uri)
       })
     }, function (e) {
       console.log('图片不存在,联网下载:')
-      download()
+      download(uri)
     })
   })
 }

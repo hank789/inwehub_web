@@ -183,6 +183,7 @@ import AddressBooks from '../../../views/Account/addressBooks.vue'
 import AskOfferIndex from '../../../views/AskOffer/Index.vue'
 import AskOfferList from '../../../views/AskOffer/List.vue'
 import AskOfferDetail from '../../../views/AskOffer/Detail.vue'
+import ShareReview from '../../../views/Share/review.vue'
 
 export {
   Login,
@@ -369,5 +370,6 @@ export {
   AskOfferIndex,
   AskOfferList,
   AskOfferDetail,
-  NewcomerGuidanceStepGroup
+  NewcomerGuidanceStepGroup,
+  ShareReview
 }

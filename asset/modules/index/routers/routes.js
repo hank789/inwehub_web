@@ -2124,6 +2124,15 @@ const routes = [
     },
     component: componets.ProjectList
   },
+  { // 图片分享预览
+    path: '/share/review/:type/:id',
+    name: 'share-review',
+    meta: {
+      title: '图片分享预览',
+      wechatHideHeader: true
+    },
+    component: componets.ShareReview
+  },
   { // 项目-预览
     path: '/project/review',
     name: 'project-review',

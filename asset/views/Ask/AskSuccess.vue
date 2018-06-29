@@ -37,7 +37,6 @@
 
 <script>
   import { NOTICE } from '../../stores/types'
-  import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
 
   const currentUser = localEvent.getLocalItem('UserInfo')
