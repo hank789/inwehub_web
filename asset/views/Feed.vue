@@ -23,7 +23,7 @@
 
         <template v-for="(item, index) in list">
 
-          <div class="component-feed-item-guide" v-if="index === 2">
+          <div class="component-feed-item-guide" v-if="index === 2 && search_type === 6">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-gongkai"></use>
             </svg>
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="line-river-big" v-if="index === 2"></div>
+          <div class="line-river-big" v-if="index === 2 && search_type === 6"></div>
 
           <!-- 发布了分享 -->
           <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
