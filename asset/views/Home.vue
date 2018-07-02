@@ -326,13 +326,13 @@
         })
       },
       getData () {
-        postRequest(`recommendRead`, {perPage: 5}).then(response => {
+        postRequest(`recommendRead`, {perPage: 10}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
             return
           }
-          this.list = response.data.data.data.slice(0, 5)
+          this.list = response.data.data.data
         })
       },
       getHomeData () {

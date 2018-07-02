@@ -101,7 +101,7 @@ Vue.use(TimeAgo, {
   }
 })
 
-import { showWebview, clearAllWebViewCache } from '../../utils/webview'
+import { showWebview, clearAllWebViewCache, getPrevWebview } from '../../utils/webview'
 import localEvent from '../../stores/localStorage'
 
 import refreshPageData from '../../plugins/refreshPageData'
@@ -193,6 +193,7 @@ import { toast } from '../../utils/toast'
 window.mui.toast = toast
 
 import { autoBlur } from '../../utils/dom'
+
 window.mui.muiOldBack = window.mui.back
 window.mui.back = function () {
   autoBlur()
