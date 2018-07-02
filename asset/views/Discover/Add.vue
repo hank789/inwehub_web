@@ -8,11 +8,6 @@
     </header>
 
     <div class="mui-content">
-      <div class="container-tabs">
-        <div class="tab" @tap.stop.prevent="$router.replace('/discover/publishArticles')"><span>文章链接</span></div>
-        <div class="tab active"><span>图文分享</span></div>
-      </div>
-
       <div class="component-textareaWithImage">
         <Jeditor
           ref="myAddEditor"
@@ -81,13 +76,18 @@
             <use xlink:href="#icon-wenjian"></use>
           </svg>
         </span>
+        <span @tap.stop.prevent="promptUrl" :class="{'disable': !isUploadLink}">
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-lianjie1"></use>
+          </svg>
+        </span>
         <div class="component-labelWithIcon selectGroup float-right text-line-1" v-if="address" @tap.stop.prevent="selectGroup">
         <template v-if="selectedGroup.name"><svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-wodequanzi-shouye"></use>
         </svg> {{selectedGroup.name}}</template>
         <template v-else> <svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-wodequanzi-shouye"></use>
-        </svg> 选择圈子</template>
+        </svg> 选圈子</template>
         </div>
         <div class="component-labelWithIcon selectedAddress float-right text-line-1" v-if="address" @tap.stop.prevent="toAddress">
         <svg class="icon" aria-hidden="true">
@@ -118,6 +118,7 @@
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { fetchArticle } from '../../utils/url'
 
   export default {
     data () {
@@ -149,7 +150,8 @@
         text: '',
         html: '',
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…',
-        selectedGroup: null
+        selectedGroup: null,
+        links: []
       }
     },
     computed: {
@@ -160,6 +162,9 @@
         if (this.pdfs.length) {
           return false
         }
+        if (this.links.length) {
+          return false
+        }
         return true
       },
       isUploadPdf () {
@@ -167,6 +172,21 @@
           return false
         }
         if (this.images.length) {
+          return false
+        }
+        if (this.links.length) {
+          return false
+        }
+        return true
+      },
+      isUploadLink () {
+        if (this.pdfs.length >= this.maxPdfCount) {
+          return false
+        }
+        if (this.images.length) {
+          return false
+        }
+        if (this.links.length) {
           return false
         }
         return true
@@ -472,6 +492,21 @@
         }, 200)
         this.$refs.uploadFile.uploadFile('pdf')
       },
+      promptUrl () {
+        window.mui.prompt('插入超链接', '输入链接地址', ' ', ['取消', '确定'], (e) => {
+          if (e.index === 1) {
+            if (e.value) {
+              fetchArticle(this, e.value, (data) => {
+                this.links.push({
+                  url: e.value,
+                  title: data.title,
+                  img_url: data.img_url
+                })
+              })
+            }
+          }
+        }, 'div')
+      },
       uploadFileSuccess (pdfs) {
         this.pdfs = pdfs
       },
@@ -683,7 +718,6 @@
   }
   .selectGroup{
     background:#03AEF9;
-    width:2.32rem;
   }
 
   .selectedAddress{
