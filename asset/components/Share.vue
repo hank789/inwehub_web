@@ -269,9 +269,9 @@
         }
 
         if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
         } else {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
@@ -295,9 +295,9 @@
           this.sendPengYouQuan()
         }
         if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
         } else {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
