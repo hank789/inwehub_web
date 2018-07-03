@@ -22,16 +22,28 @@
           <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">
             删除
           </div>
-
+          <div class="timeData">
+            <span>
+              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
+            </span>
+          </div>
+          <div class="line"></div>
+          <!-- 来自 -->
+          <div class="from">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-wodequanzi-shouye"></use>
+            </svg>
+            <p>来自<span>大话君和朋友们</span></p>
+          </div>
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
-
-              <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+              <span v-html="textToLink(detail.title)"></span>
+              <span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
             </div>
 
 
             <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
-              <div class="pdf" v-for="(pdf, index) in detail.data.files" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
+              <div class="pdf" v-for="(pdf, index) in detail.data.files" :key="index" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
             </div>
 
             <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
@@ -53,28 +65,52 @@
 
           <div class="timeContainer">
             <span>{{detail.views}}浏览</span>
-            <span>
-          <timeago :since="timeago(detail.created_at)" :auto-update="60">
-          </timeago>
-        </span>
+            <!-- <span>
+              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
+            </span> -->
             <span>著作权归作者所有</span>
           </div>
-          <div class="address" v-show="detail.data.current_address_name">
+          <!-- 分享 -->
+          <div class="share">
+            <div class="location" v-show="detail.data.current_address_name">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-dingwei1"></use>
+              </svg>
+              <span>{{detail.data.current_address_name}}</span>
+            </div>
+            <div class="shareGo">
+              <P>分享到</P>
+              <div class="shareList">
+                <ul>
+                  <li @tap.stop.prevent="weChatFriend">
+                    <img src="../../statics/images/wechat_@2x.png" />
+                    <p>微信好友</p>
+                  </li>
+                  <li @tap.stop.prevent="weChatFriendGroup">
+                    <img src="../../statics/images/page_1@2x.png" />
+                    <p>朋友圈</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="address" v-show="detail.data.current_address_name">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dingwei1"></use>
             </svg>
             <span>{{detail.data.current_address_name}}</span>
-          </div>
+          </div> -->
         </div>
 
-        <div class="river"></div>
+        <!-- <div class="river"></div> -->
         <!--圈子信息-->
-        <div class="groupsList" v-if="detail.group !== null">
+        <!-- <div class="groupsList" v-if="detail.group !== null">
           <groups-list class="small detail"
                        :list="detail.group"
                        :type="'small'"
           ></groups-list>
-        </div>
+        </div> -->
 
         <div class="river" v-if="detail.supporter_list.length"></div>
         <!--点赞-->
@@ -82,7 +118,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dianzan1"></use>
           </svg>
-          <span v-for="(item, index) in detail.supporter_list"
+          <span v-for="(item, index) in detail.supporter_list" :key="index"
                 @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
         </div>
 
@@ -265,6 +301,13 @@
       RecommendList
     },
     methods: {
+      weChatFriend () {
+        // console.log("12312312")
+        this.$refs.ShareBtn.shareToHaoyou()
+      },
+      weChatFriendGroup () {
+        this.$refs.ShareBtn.shareToPengyouQuan()
+      },
       seePdf (pdf) {
         openFileUrl(pdf.url, pdf.name)
       },
@@ -556,6 +599,12 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+.line {
+    width: 92%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    border-top: 1px solid #DCDCDC;
+  }
   .detail-discover {
     padding-bottom: 0.133rem;
     margin-top: 0 !important;
@@ -572,8 +621,9 @@
   .contentWrapper {
     padding: 0 0.4rem;
     white-space: pre-line !important;
-    font-size: 0.4rem;
+    font-size: 16px;
     color: #444;
+    line-height: 26px;
   }
 
   .contentWrapper .tags {
@@ -596,9 +646,10 @@
     color: #B4B4B6;
     padding: 0 0.4rem;
     background: #fff;
+    margin-top: 26px;
   }
 
-  .timeContainer span:nth-of-type(3) {
+  .timeContainer span:nth-of-type(2) {
     float: right;
   }
 
@@ -656,16 +707,95 @@
   /*删除按钮*/
   .discover_datail_dalete {
     width: 1.52rem;
-    height: 0.506rem;
+    height: 27px;
     border: 0.026rem solid #444444;
     text-align: center;
-    line-height: 0.453rem;
+    line-height: 27px;
     font-size: 0.346rem;
     color: #444444;
     border-radius: 1.333rem;
     position: absolute;
     right: 0.426rem;
     top: 0.426rem;
+  }
+  .timeData {
+    position: absolute;
+    top: 34px;
+    left: 62px;
+    font-size: 12px;
+    color: #C8C8C8;
+    margin-top: -4px;
+  }
+  // 来自
+  .from {
+    padding: 0 17px;
+    margin-bottom: 15px;
+    .icon {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+    }
+    p {
+      font-size: 15px;
+      color: #B4B4B6;
+      margin: 0px;
+      display: inline-block;
+      font-family: "PingFangSC-Medium";
+    }
+    span {
+      color: #235280;
+    }
+  }
+  .share {
+    padding: 0 17px;
+    .location {
+      .icon {
+        color: #C8C8C8;
+        vertical-align: middle;
+      }
+    }
+    span {
+      margin-left: -4px;
+      font-size: 12px;
+      color: #808080;
+    }
+    .shareGo {
+      margin: 26px auto 0;
+      text-align: center;
+      p {
+        font-size: 14px;
+        color: #808080;
+      }
+      .shareList {
+        margin-top: -15px;
+        text-align: center;
+        ul {
+          width: 100%;
+          padding: 0;
+          display: inline-block;
+          li{
+            margin: 0 13px;
+            display: inline-block;
+            &:nth-of-type(1) {
+              img {
+                width: 37px;
+                height: 30px;
+              }
+            }
+            &:nth-of-type(2) {
+              img {
+                width: 30px;
+                height: 30px;
+              }
+            }
+          }
+          p {
+            font-size: 12px;
+            color: #B4B4B6;
+          }
+        }
+      }
+    }
   }
 
   .groups {

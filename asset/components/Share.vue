@@ -2,7 +2,7 @@
   <div>
     <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-fenxiang"></use>
+        <use xlink:href="#icon-shoucang-xiao"></use>
       </svg>
     </a>
 
