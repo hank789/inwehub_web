@@ -32,14 +32,11 @@
           @smallSpanArrChange="smallSpanArrChange"
         ></Jeditor>
 
-        <div class="container-images" :class="'container-images-' + (images.length + 1)">
-          <div class="container-image" v-for="(image, index) in images">
-            <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
-              <use xlink:href="#icon-times1"></use>
-            </svg>
-            <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
-          </div><div class="container-image component-photograph" v-if="images.length < maxImageCount" style="display: none;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
-        </div>
+        <swiper :options="swiperOption" class="container-upload-images" v-show="images.length">
+          <swiper-slide class="image" v-for="(image, index) in images" :key="'image_'+index" ><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+            <use xlink:href="#icon-times1"></use>
+          </svg></swiper-slide>
+        </swiper>
 
         <swiper :options="swiperOption" class="container-pdfs" v-show="pdfs.length">
           <swiper-slide v-for="(pdf, index) in pdfs" :key="index" class="pdf">
@@ -58,12 +55,12 @@
     <div class="container-bottom-menus">
         <span @tap.stop.prevent="toUser">
           <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-icon-test1"></use>
+            <use xlink:href="#icon-icon-test2"></use>
           </svg>
         </span>
       <span @tap.stop.prevent="totags">
           <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-icon-test"></use>
+            <use xlink:href="#icon-biaoqian2"></use>
           </svg>
         </span>
         <span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">
@@ -87,7 +84,7 @@
         </svg> {{selectedGroup.name}}</template>
         <template v-else> <svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-wodequanzi-shouye"></use>
-        </svg> 选圈子</template>
+        </svg> 选则圈子</template>
         </div>
         <div class="component-labelWithIcon selectedAddress float-right text-line-1" v-if="address" @tap.stop.prevent="toAddress">
         <svg class="icon" aria-hidden="true">
@@ -702,6 +699,7 @@
   .container-bottom-menus{
     position: absolute;
     padding-left: 0.2rem;
+    background: #fff;
     left:0;
   }
   .container-bottom-menus span{
@@ -718,6 +716,7 @@
   }
   .selectGroup{
     background:#03AEF9;
+    width:2.32rem;
   }
 
   .selectedAddress{
