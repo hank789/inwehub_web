@@ -184,22 +184,28 @@ function initDocRem () {
 
 /**
  * 滑动页面
+ *
+ * toUp --- 手指上滑触发
+ * toUpEnd --- 手指上滑到底部
+ * toDown --- 手指下滑
+ * toDownEnd --- 手指下滑到顶部
  */
 function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
   var prevTop = 0
   var container = document.querySelector(element)
 
   container.addEventListener('scroll', function (e) {
+    console.log('top:' + container.scrollTop + ', clientHeight:' + container.clientHeight + ', scrollHeight:' + container.scrollHeight)
+
     if (container.scrollTop > prevTop) {
       prevTop = container.scrollTop
 
       // 手指上滑
-      console.log('top:' + container.scrollTop + ', clientHeight:' + container.clientHeight + ', scrollHeight:' + container.scrollHeight)
       if (container.scrollTop >= container.scrollHeight - container.clientHeight) {
         // 页面已到底部
-        if (toUpEnd) { toUpEnd(container.scrollHeight - container.clientHeight) }
+        if (toUpEnd) { toUpEnd(container) }
       } else {
-        if (toUp) { toUp() }
+        if (toUp) { toUp(container) }
       }
     } else if (container.scrollTop < prevTop) {
       prevTop = container.scrollTop
@@ -207,9 +213,9 @@ function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
       // 手指下滑
       if (container.scrollTop === 0) {
         // 页面已到顶部
-        if (toDownEnd) { toDownEnd() }
+        if (toDownEnd) { toDownEnd(container) }
       } else {
-        if (toDown) { toDown() }
+        if (toDown) { toDown(container) }
       }
     }
   })
@@ -250,6 +256,8 @@ var ainimationProgress = (callback, compareCallback) => {
     setTimeout(ainimationProgress(callback, compareCallback), 100)
   }
 }
+
+
 
 export {
   queryParent,
