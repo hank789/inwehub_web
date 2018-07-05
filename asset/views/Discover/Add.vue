@@ -21,6 +21,7 @@
           :isMonitorHashSymbol="true"
           :isMonitorSmallSpan="true"
           :isShowCounter="false"
+          :allowRichStyle="false"
           @ready="onEditorReady($event)"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
