@@ -6,8 +6,8 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <div class="topImg">
-        <img src="../../statics/images/topImg.png" alt="">
+      <div class="topImg" v-if="!detail.data.img">
+        <img :src="detail.data.img" alt="">
       </div>
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
         <div class="mui-table-view detail-discover">
@@ -30,7 +30,7 @@
               <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
             </span>
           </div>
-          <div class="detailTitle mui-table-view-cell" v-text="article"></div>
+          <div class="detailTitle" v-if="detail.data.title" v-text="detail.data.title"></div>
           <div class="line-river"></div>
           <!-- 来自 -->
           <div class="from">
@@ -261,7 +261,7 @@
         noback: false,
         title: '分享',
         oldTitle: '分享',
-        article: '2018软件行业现状及展望-来自于技术驱动行业知名风投BatteryVentures',
+        // article: detail.data.title,
         detail: {
           group: {
             is_joined: '',
@@ -651,7 +651,9 @@
       window.mui.previewImage()
       autoTextArea()
       scrollPage('.mui-content', () => {  //手指上滑触发
-        this.title = this.article
+        if (detail.data.title) {
+          this.title = this.detail.data.title
+        }
       },() => {},() => {},() => {  //上滑到顶部
         this.title = this.oldTitle
       })

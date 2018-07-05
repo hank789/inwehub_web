@@ -183,7 +183,7 @@
 
   .mui-media-body {
     padding-left: 0.266rem;
-    min-height: 0.8rem;
+    min-height: 1.2rem;
   }
 
   .mui-table-view-cell:after {
