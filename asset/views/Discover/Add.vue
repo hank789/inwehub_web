@@ -45,6 +45,25 @@
           </svg>
           </swiper-slide>
         </swiper>
+        <!-- 新增链接样式 -->
+        <div class="link" v-if="showLink" v-for="(link, index) in links" :key="index">
+          <div class="linkBox">
+            <!-- 没有图片的样式 -->
+            <span class="linkIimg" v-if="!link.img_url">
+              <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+              </svg>
+            </span>
+            <!-- 有图片的样式 -->
+            <img v-else :src="link.img_url" alt="">
+            <div class="linkContent">{{link.title}}<div>{{link.url}}</div></div>
+          </div>
+          <div class="linkClose" @tap.stop.prevent="linkClose">
+            <svg class="icon" aria-hidden="true" >
+              <use xlink:href="#icon-times1"></use>
+            </svg>
+          </div>
+        </div>
 
       </div>
       <div class="component-button-5-03aef9 button-wrapper padding-20-15" id="button-wrapper">
@@ -148,7 +167,8 @@
         html: '',
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…',
         selectedGroup: null,
-        links: []
+        links: [],
+        showLink: true
       }
     },
     computed: {
@@ -224,6 +244,12 @@
       window.mui.previewImage()
     },
     methods: {
+      linkClose () {
+        this.showLink = !this.showLink
+        // let parent = document.querySelector('.component-textareaWithImage')
+        // parent.removeChild(parent.querySelector('.link'))
+        // console.log("1212112")
+      },
       readGroup () {
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
@@ -603,6 +629,56 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+// 新增链接样式
+  .link {
+    margin-top: 10px;
+    padding: 0 19px 0 13px;
+    position: relative;
+    .linkBox {
+      padding: 10px;
+      border-radius: 4px;
+      background: #fff;
+      .linkIimg {
+        width: 44px;
+        height: 44px;
+        float: left;
+        text-align: center;
+        line-height: 50px;
+        margin-right: 10px;
+        border-radius: 4px;
+        background: #ECECEE;
+        .icon {
+          color: #C8C8C8;
+          font-size: 28px;
+        }
+      }
+      img {
+        width: 44px;
+        height: 44px;
+        float: left;
+        margin-right: 10px;
+        border-radius: 4px;
+      }
+      .linkContent {
+        font-size: 14px;
+        color: #808080;
+        div {
+          color: #B4B4B6;
+          word-wrap: break-word;
+        }
+      }
+    }
+    .linkClose {
+      position: absolute;
+      top: -8px;
+      right: 12px;
+      .icon {
+        width: 16px;
+        height: 16px;
+        color: #808080;
+      }
+    }
+  }
   .container-pdfs{
     padding:0.266rem;
     height:2.24rem;

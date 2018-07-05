@@ -2,10 +2,13 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!noback"></a>
-      <h1 class="mui-title">分享</h1>
+      <h1 class="mui-title" v-text="title"></h1>
     </header>
 
     <div class="mui-content" v-show="!loading">
+      <div class="topImg">
+        <img src="../../statics/images/topImg.png" alt="">
+      </div>
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
         <div class="mui-table-view detail-discover">
           <UserInfo
@@ -27,13 +30,14 @@
               <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
             </span>
           </div>
-          <div class="line"></div>
+          <div class="detailTitle mui-table-view-cell" v-text="article"></div>
+          <div class="line-river"></div>
           <!-- 来自 -->
           <div class="from">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-wodequanzi-shouye"></use>
             </svg>
-            <p>来自<span>大话君和朋友们</span></p>
+            <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
           </div>
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
@@ -62,6 +66,26 @@
           <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
                @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
         </div>
+        <!-- 新增链接样式 -->
+          <div class="link">
+            <div class="linkBox">
+              <img src="../../statics/images/linkImg.png" alt="">
+              <div class="linkContent">
+                传统大型企业的IT咨询项目加实施落地，施方法论是否可以敏捷化？大型企业大型… 
+                <div>www.inwehub.com</div>
+              </div>
+            </div>
+          </div>
+          <!-- 没有图片的样式 -->
+          <div class="link">
+            <div class="linkBox">
+              <img src="../../statics/images/linkImg.png" alt="">
+              <div class="linkContent">
+                点击查看原文
+                <div>www.inwehub.com</div>
+              </div>
+            </div>
+          </div>
 
           <div class="timeContainer">
             <span>{{detail.views}}浏览</span>
@@ -69,6 +93,27 @@
               <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
             </span> -->
             <span>著作权归作者所有</span>
+          </div>
+          <!-- 关联问答 -->
+          <div class="answer">
+            <div class="answerBox">
+              <div class="answerContent">
+                <span class="price">
+                  <span></span>88元
+                </span>
+                求助专家，项目中的变更管理，感觉是开始做项目经理以来最头疼的问题，有时候是因为项目开始阶段与客户订的需求边界…
+              </div>
+              <div class="followAnswer">
+                <span class="follow">43人关注 </span>
+                <span class="rightLine"></span>
+                <div class="replay">
+                  <img src="../../statics/images/balance1.png" alt="">
+                  <img src="../../statics/images/balance1.png" alt="">
+                  <img src="../../statics/images/balance1.png" alt="">
+                  <span>等12人回答</span>
+                </div>
+              </div>
+            </div>
           </div>
           <!-- 分享 -->
           <div class="share">
@@ -104,7 +149,7 @@
         </div>
 
         <!-- <div class="river"></div> -->
-        <!--圈子信息-->
+        <!-- 圈子信息 -->
         <!-- <div class="groupsList" v-if="detail.group !== null">
           <groups-list class="small detail"
                        :list="detail.group"
@@ -195,7 +240,7 @@
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
-  import {textToLinkHtml, transferTagToLink} from '../../utils/dom'
+  import {textToLinkHtml, transferTagToLink, scrollPage} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   import RecommendList from '../../components/discover/RecommendList.vue'
 
@@ -214,11 +259,15 @@
         uuid: currentUser.uuid,
         slug: '',
         noback: false,
+        title: '分享',
+        oldTitle: '分享',
+        article: '2018软件行业现状及展望-来自于技术驱动行业知名风投BatteryVentures',
         detail: {
           group: {
             is_joined: '',
             id: '',
-            public: ''
+            public: '',
+            name: ''
           },
           owner: {
             id: '',
@@ -301,8 +350,15 @@
       RecommendList
     },
     methods: {
+      pageScroll() {
+        console.log("2333")
+        scrollPage('.mui-content')
+      },
+      toDetail(item) {
+        this.$router.pushPlus('/group/detail/' + item.id)
+      },
+      // 分享微信好友、朋友圈
       weChatFriend () {
-        // console.log("12312312")
         this.$refs.ShareBtn.shareToHaoyou()
       },
       weChatFriendGroup () {
@@ -594,16 +650,29 @@
       })
       window.mui.previewImage()
       autoTextArea()
+      scrollPage('.mui-content', () => {  //手指上滑触发
+        this.title = this.article
+      },() => {},() => {},() => {  //上滑到顶部
+        this.title = this.oldTitle
+      })
     }
   }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-.line {
-    width: 92%;
-    margin: 0 auto;
-    margin-bottom: 15px;
-    border-top: 1px solid #DCDCDC;
+  .topImg {
+    margin-top: 10px;
+    img {
+      width: 375px;
+      height: 200px;
+    }
+  }
+  .detailTitle {
+    font-size: 19px;
+    line-height: 30px;
+    margin-top: -6px;
+    padding: 0px 16px 15px;
+    font-family:PingFangSC-Medium;
   }
   .detail-discover {
     padding-bottom: 0.133rem;
@@ -721,7 +790,7 @@
   .timeData {
     position: absolute;
     top: 34px;
-    left: 62px;
+    left: 60px;
     font-size: 12px;
     color: #C8C8C8;
     margin-top: -4px;
@@ -729,20 +798,23 @@
   // 来自
   .from {
     padding: 0 17px;
-    margin-bottom: 15px;
+    margin: 15px 0;
     .icon {
       width: 20px;
       height: 20px;
-      vertical-align: middle;
+      // vertical-align: middle;
     }
-    p {
+    div {
+      width: 70%;
       font-size: 15px;
       color: #B4B4B6;
       margin: 0px;
+      vertical-align: top;
       display: inline-block;
       font-family: "PingFangSC-Medium";
     }
     span {
+      margin-left: 3px;
       color: #235280;
     }
   }
@@ -793,6 +865,100 @@
             font-size: 12px;
             color: #B4B4B6;
           }
+        }
+      }
+    }
+  }
+  // 新增链接样式
+  .link {
+    margin-top: 10px;
+    padding: 0 19px 0 13px;
+    .linkBox {
+      padding: 10px;
+      border-radius: 4px;
+      background: #F7F8FA;
+      img {
+        width: 44px;
+        height: 44px;
+        float: left;
+        margin-right: 10px;
+        border-radius: 4px;
+      }
+      .linkContent {
+        font-size: 14px;
+        color: #808080;
+        div {
+          color: #B4B4B6;
+        }
+      }
+    }
+  }
+  // 关联问答
+  .answer {
+    padding: 0 16px;
+    margin-top: 22px;
+    .answerBox {
+      padding: 15px 15px 16px;
+      border-radius: 4px;
+      border: 1px solid #DCDCDC;
+      .answerContent {
+        font-size: 14px;
+        color: #444;
+        .price {
+          // width: 39px;
+          height: 17px;
+          padding: 0 4px;
+          font-size: 11px;
+          color: #235280;
+          text-align: right;
+          line-height: 17px;
+          border-radius: 4px;
+          background: #A8DFF7;
+          display: inline-block;
+          span {
+            width: 3px;
+            height: 3px;
+            margin-top: -3px;
+            margin-right: 3px;
+            border-radius: 50%;
+            background: #fff;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+    .followAnswer {
+      margin-top: 7px;
+      .follow {
+        font-size: 12px;
+        color: #808080;
+        line-height: 20px;
+        vertical-align: top;
+        display: inline-block;
+      }
+      .rightLine {
+        width: 1px;
+        height: 11px;
+        margin: -10px 16px 0 4px;
+        vertical-align: middle;
+        display: inline-block;
+        background: #DCDCDC;
+      }
+      .replay {
+        display: inline-block;
+        img {
+          width: 20px;
+          height: 20px;
+          margin-left: -12px;
+          border: 2px solid #fff;
+          border-radius: 50%;
+        }
+        span {
+          font-size: 12px;
+          color: #808080;
+          line-height: 20px; 
+          vertical-align: top;
         }
       }
     }
