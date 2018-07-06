@@ -956,7 +956,7 @@
         }
         div {
           color: #B4B4B6;
-          word-break: break-word;
+          word-break: break-all;
         }
       }
     }
