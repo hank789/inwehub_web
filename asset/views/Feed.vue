@@ -92,6 +92,7 @@
             </div>
             <!-- 新增链接样式 -->
             <div class="newLink">
+              <div class="contentWrapper">{{item.feed.title}}</div>
               <div class="newLinkBox">
                 <img v-if="item.feed.img" :src="item.feed.img" alt="">
                 <div class="linkContent">{{item.feed.article_title}}</div>
@@ -274,6 +275,7 @@
     margin-top: 9px;
     // padding: 0 16px;
     .newLinkBox {
+      margin-top: 10px;
       padding: 15px 15px 11px;
       background: #F7F8FA;
       border-radius: 4px;
