@@ -8,7 +8,7 @@
     <div class="mui-content" v-show="!loading">
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
 
-        <div class="topImg" v-if="detail.type === 'article' && detail.data.img">
+        <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
           <img v-lazy="detail.data.img" class="lazyImg">
         </div>
 
@@ -709,6 +709,13 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .lineMargin {
     margin-top: -6px; 
+  }
+  .container-image {
+    height: 200px;
+    border-radius: 0;
+    img {
+      border-radius: 0;
+    }
   }
   .topImg {
     margin-top: 0.266rem;

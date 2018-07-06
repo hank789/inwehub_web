@@ -95,7 +95,7 @@
               <div class="contentWrapper">{{item.feed.title}}</div>
               <div class="newLinkBox">
                 <img v-if="item.feed.img" :src="item.feed.img" alt="">
-                <div class="linkContent">{{item.feed.article_title}}</div>
+                <div class="linkContent" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
                 <div class="link">{{item.feed.domain}} </div>
               </div>
             </div>
@@ -276,7 +276,7 @@
     // padding: 0 0.426rem;
     .newLinkBox {
       margin-top: 0.266rem;
-      padding: 0.4rem 0.4rem 0.293rem;
+      padding: 0.293rem 0.4rem 0.293rem;
       background: #F7F8FA;
       border-radius: 0.106rem;
       img {
