@@ -50,7 +50,7 @@
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
               <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
 
-              <div class="richText" v-else>
+              <div class="richText" v-show="detail.type === 'article'">
                 <div class="quill-editor">
                   <div class="ql-container ql-snow">
                     <div class="ql-editor discoverContent">
@@ -112,22 +112,20 @@
           </div>
 
           <!-- 关联问答 -->
-          <div class="answer">
+          <div class="answer" v-if="detail.related_question">
             <div class="answerBox">
               <div class="answerContent">
                 <span class="price">
-                  <span></span>88元
+                  <span></span>{{detail.related_question.status_description}}
                 </span>
-                求助专家，项目中的变更管理，感觉是开始做项目经理以来最头疼的问题，有时候是因为项目开始阶段与客户订的需求边界…
+               {{detail.related_question.title}}
               </div>
               <div class="followAnswer">
-                <span class="follow">43人关注 </span>
+                <span class="follow">{{detail.related_question.follow_number}}人关注 </span>
                 <span class="rightLine"></span>
                 <div class="replay">
-                  <img src="../../statics/images/balance1.png" alt="">
-                  <img src="../../statics/images/balance1.png" alt="">
-                  <img src="../../statics/images/balance1.png" alt="">
-                  <span>等12人回答</span>
+                  <img v-for="(answerUser, index) in detail.related_question.answer_users" :src="answerUser.avatar">
+                  <span>等{{detail.related_question.answer_number}}人回答</span>
                 </div>
               </div>
             </div>
@@ -379,7 +377,7 @@
         html = html.replace(/<a href="/g, "<span class='vendorUrl text-content' href=\"")
         html = html.replace(/<\/a>/g, '</span>')
 
-        var answerContentWrapper = this.$el.querySelector('.answerContent')
+        var answerContentWrapper = this.$el.querySelector('.discoverContent')
         html = addPreviewAttrForImg(html)
         html = html.replace(/(<p><br><\/p>)*$/, '')
         answerContentWrapper.innerHTML = html
