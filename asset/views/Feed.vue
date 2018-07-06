@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="contentWrapper"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
-            
+
 
             <div v-if="item.feed.img" class="container-images container-images-discover">
               <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
@@ -94,8 +94,8 @@
             <div class="newLink">
               <div class="contentWrapper">{{item.feed.title}}</div>
               <div class="newLinkBox">
-                <div class="container-image" v-if="item.feed.img">
-                  <img :src="item.feed.img" alt="">
+                <div class="container-image lazyImg" v-if="item.feed.img">
+                  <img class="lazyImg" v-lazy="item.feed.img" :src="item.feed.img" alt="">
                 </div>
                 
                 <div class="linkContent" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
@@ -239,14 +239,17 @@
           case 1:
           case 2:
           case 3:
+          case 5:
           case 6:
           case 11:
           case 12:
           case 14:
           case 15:
+          case 16:
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
-          case 5:
+          case -1:
+            // 已废弃
             var linkArticle = {
               view_url: item.url,
               id: item.feed.submission_id,
@@ -283,8 +286,8 @@
       background: #F7F8FA;
       border-radius: 0.106rem;
       img {
-        width: 8.373rem;
-        height: 2.986rem;
+        // width: 8.373rem;
+        // height: 2.986rem;
         border-radius: 0.106rem;
       }
       .linkContent {
