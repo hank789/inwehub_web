@@ -2667,8 +2667,6 @@ a {
 .container-editor .ql-toolbar.ql-snow {
   border: none;
   border-bottom: 0.026rem solid #E0E8EF; }
-.container-editor .ql-toolbar.ql-snow p {
-  margin-bottom: 0.693rem !important; }
 .container-editor .ql-toolbar.ql-snow .ql-stroke {
   stroke: #7C93B2;
   color: #7C93B2; }
@@ -2682,8 +2680,7 @@ a {
   color: #7C93B2; }
 .container-editor .ql-container {
   border: none !important;
-  margin-top: 0.266rem;
-  max-height: 13.333rem; }
+  margin-top: 0.266rem; }
 .container-editor .ql-editor {
   color: #4A5F7B;
   line-height: 0.693rem;
@@ -2694,6 +2691,8 @@ a {
   color: #B1BDCC !important;
   font-size: 0.426rem !important;
   font-style: normal !important; }
+.container-editor .ql-editor p {
+  margin-bottom: 0.693rem !important; }
 .container-editor .ql-editor h1 {
   color: #4A5F7B;
   font-size: 0.48rem !important;
@@ -2759,3 +2758,4 @@ a {
   margin-left: -2.4em; }
 .container-editor-app .ql-editor blockquote {
   border-left: 0.08rem solid #DCDCDC !important; }
+
