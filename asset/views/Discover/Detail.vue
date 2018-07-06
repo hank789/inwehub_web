@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <div class="topImg" v-if="!detail.data.img">
+      <div class="topImg" v-if="detail.type === 'article'">
         <img :src="detail.data.img" alt="">
       </div>
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
@@ -30,7 +30,7 @@
               <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
             </span>
           </div>
-          <div class="detailTitle" v-if="detail.data.title" v-text="detail.data.title"></div>
+          <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
           <div class="line-river"></div>
           <!-- 来自 -->
           <div class="from">
@@ -40,9 +40,20 @@
             <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
           </div>
           <div class="discoverContentWrapper">
+            <!-- 内容 -->
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
-              <span v-html="textToLink(detail.title)"></span>
+              <span v-if="!detail.type === 'article'" v-html="textToLink(detail.title)"></span>
+              <quill-editor v-else
+                class="hiddenWrapper"
+                ref="myTextEditorRead"
+                :articleContent="detail.data.description"
+                :options="editorOptionRead"
+                @ready="onEditorReadyRead($event)"
+                @change="change"
+              >
+              </quill-editor>
               <span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+              
             </div>
 
 
@@ -72,16 +83,6 @@
               <img src="../../statics/images/linkImg.png" alt="">
               <div class="linkContent">
                 传统大型企业的IT咨询项目加实施落地，施方法论是否可以敏捷化？大型企业大型… 
-                <div>www.inwehub.com</div>
-              </div>
-            </div>
-          </div>
-          <!-- 没有图片的样式 -->
-          <div class="link">
-            <div class="linkBox">
-              <img src="../../statics/images/linkImg.png" alt="">
-              <div class="linkContent">
-                点击查看原文
                 <div>www.inwehub.com</div>
               </div>
             </div>
@@ -250,10 +251,19 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
+  import { quillEditor } from '../../components/vue-quill'
 
   export default {
     data () {
       return {
+        editorOptionRead: {
+          placeholder: ' ',
+          modules: {
+            toolbar: []
+          },
+          readOnly: true
+        },
+        editorReadObj: {},
         userId: currentUser.user_id,
         name: currentUser.name,
         uuid: currentUser.uuid,
@@ -277,8 +287,10 @@
           },
           id: 0,
           supporter_list: [],
+          title: '',
           data: {
-            img: []
+            img: [],
+            description: ''
           },
           created_at: ''
         },
@@ -347,9 +359,40 @@
       commentTextarea,
       groupsList,
       FooterMenu,
-      RecommendList
+      RecommendList,
+      quillEditor
     },
     methods: {
+      change (editor) {
+        var html = editor.html
+        html = textToLinkHtml(html)
+
+        html = html.replace(/<a href="/g, "<span class='vendorUrl text-content' href=\"")
+        html = html.replace(/<\/a>/g, '</span>')
+
+        var answerContentWrapper = this.$el.querySelector('.answerContent')
+        html = addPreviewAttrForImg(html)
+        html = html.replace(/(<p><br><\/p>)*$/, '')
+        answerContentWrapper.innerHTML = html
+
+        window.mui.previewImage()
+
+        var that = this
+
+        setTimeout(() => {
+          openVendorUrl(answerContentWrapper)
+          var aList = this.$el.querySelectorAll('a[href^="http"]')
+          for (let i = 0; i < aList.length; i++) {
+            aList[i].addEventListener('click', function (e) {
+              e.preventDefault()
+              that.$router.pushPlus('/webview/vendor/' + encodeURIComponent(this.href))
+            }, false)
+          }
+        }, 100)
+      },
+      onEditorReadyRead (editor) {
+        this.editorReadObj = editor
+      },
       pageScroll() {
         console.log("2333")
         scrollPage('.mui-content')
@@ -645,14 +688,19 @@
       this.getDetail()
     },
     mounted () {
+      if (this.answer && this.answer.content) {
+        var content = this.detail.data.description
+        var objs = JSON.parse(content)
+        this.editorReadObj.setContents(objs)
+      }
       pageRefresh(this, () => {
         this.refreshPageData()
       })
       window.mui.previewImage()
       autoTextArea()
       scrollPage('.mui-content', () => {  //手指上滑触发
-        if (detail.data.title) {
-          this.title = this.detail.data.title
+        if (this.detail.type === 'article') {
+          this.title = this.detail.title
         }
       },() => {},() => {},() => {  //上滑到顶部
         this.title = this.oldTitle
