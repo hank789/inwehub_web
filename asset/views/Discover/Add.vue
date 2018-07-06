@@ -841,6 +841,7 @@
   #discoverAddJeditor .textarea-wrapper{
     border:none;
     background: #f3f4f6;
+    padding:0 0.266rem;
   }
 
   #discoverAddJeditor .counter{
