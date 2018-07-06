@@ -36,7 +36,7 @@
 
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
-          <div class="line-river"></div>
+          <div class="line-river lineMargin"></div>
 
           <!-- 来自 -->
           <div class="from">
@@ -707,6 +707,9 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .lineMargin {
+    margin-top: -6px; 
+  }
   .topImg {
     margin-top: 0.266rem;
     img {
@@ -957,6 +960,9 @@
         div {
           color: #B4B4B6;
           word-break: break-all;
+        }
+        .text-line-1 {
+          font-size: 12px;
         }
       }
     }
