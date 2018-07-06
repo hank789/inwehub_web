@@ -713,17 +713,17 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .topImg {
-    margin-top: 10px;
+    margin-top: 0.266rem;
     img {
-      width: 375px;
-      height: 200px;
+      width: 10rem;
+      height: 5.333rem;
     }
   }
   .detailTitle {
-    font-size: 19px;
-    line-height: 30px;
-    margin-top: -6px;
-    padding: 0px 16px 15px;
+    font-size: 0.506rem;
+    line-height: 0.8rem;
+    margin-top: -0.16rem;
+    padding: 0rem 0.426rem 0.4rem;
     font-family:PingFangSC-Medium;
   }
   .detail-discover {
@@ -742,9 +742,9 @@
   .contentWrapper {
     padding: 0 0.4rem;
     white-space: pre-line !important;
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444;
-    line-height: 26px;
+    line-height: 0.693rem;
   }
 
   .contentWrapper .tags {
@@ -767,7 +767,7 @@
     color: #B4B4B6;
     padding: 0 0.4rem;
     background: #fff;
-    margin-top: 26px;
+    margin-top: 0.693rem;
   }
 
   .timeContainer span:nth-of-type(2) {
@@ -828,10 +828,10 @@
   /*删除按钮*/
   .discover_datail_dalete {
     width: 1.52rem;
-    height: 27px;
+    height: 0.72rem;
     border: 0.026rem solid #444444;
     text-align: center;
-    line-height: 27px;
+    line-height: 0.72rem;
     font-size: 0.346rem;
     color: #444444;
     border-radius: 1.333rem;
@@ -841,37 +841,37 @@
   }
   .timeData {
     position: absolute;
-    top: 34px;
-    left: 60px;
-    font-size: 12px;
+    top: 0.906rem;
+    left: 1.6rem;
+    font-size: 0.32rem;
     color: #C8C8C8;
-    margin-top: -4px;
+    margin-top: -0.106rem;
   }
   // 来自
   .from {
-    padding: 0 17px;
-    margin: 15px 0;
+    padding: 0 0.453rem;
+    margin: 0.4rem 0;
     .icon {
-      width: 20px;
-      height: 20px;
+      width: 0.533rem;
+      height: 0.533rem;
       // vertical-align: middle;
     }
     div {
       width: 70%;
-      font-size: 15px;
+      font-size: 0.4rem;
       color: #B4B4B6;
-      margin: 0px;
+      margin: 0rem;
       vertical-align: top;
       display: inline-block;
       font-family: "PingFangSC-Medium";
     }
     span {
-      margin-left: 3px;
+      margin-left: 0.08rem;
       color: #235280;
     }
   }
   .share {
-    padding: 0 17px;
+    padding: 0 0.453rem;
     .location {
       .icon {
         color: #C8C8C8;
@@ -879,42 +879,42 @@
       }
     }
     span {
-      margin-left: -4px;
-      font-size: 12px;
+      margin-left: -0.106rem;
+      font-size: 0.32rem;
       color: #808080;
     }
     .shareGo {
-      margin: 26px auto 0;
+      margin: 0.693rem auto 0;
       text-align: center;
       p {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #808080;
       }
       .shareList {
-        margin-top: -15px;
+        margin-top: -0.4rem;
         text-align: center;
         ul {
           width: 100%;
           padding: 0;
           display: inline-block;
           li{
-            margin: 0 13px;
+            margin: 0 0.346rem;
             display: inline-block;
             &:nth-of-type(1) {
               img {
-                width: 37px;
-                height: 30px;
+                width: 0.986rem;
+                height: 0.8rem;
               }
             }
             &:nth-of-type(2) {
               img {
-                width: 30px;
-                height: 30px;
+                width: 0.8rem;
+                height: 0.8rem;
               }
             }
           }
           p {
-            font-size: 12px;
+            font-size: 0.32rem;
             color: #B4B4B6;
           }
         }
@@ -923,35 +923,35 @@
   }
   // 新增链接样式
   .link {
-    margin-top: 10px;
-    padding: 0 19px 0 13px;
+    margin-top: 0.266rem;
+    padding: 0 0.506rem 0 0.346rem;
     .linkBox {
-      padding: 10px;
-      border-radius: 4px;
+      padding: 0.266rem;
+      border-radius: 0.106rem;
       background: #F7F8FA;
       .linkIimg {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         float: left;
         text-align: center;
-        line-height: 50px;
-        margin-right: 10px;
-        border-radius: 4px;
+        line-height: 1.333rem;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
         background: #ECECEE;
         .icon {
           color: #C8C8C8;
-          font-size: 28px;
+          font-size: 0.746rem;
         }
       }
       img {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         float: left;
-        margin-right: 10px;
-        border-radius: 4px;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
       }
       .linkContent {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #808080;
         div {
           color: #B4B4B6;
@@ -962,31 +962,31 @@
   }
   // 关联问答
   .answer {
-    padding: 0 16px;
-    margin-top: 22px;
+    padding: 0 0.426rem;
+    margin-top: 0.586rem;
     .answerBox {
-      padding: 15px 15px 16px;
-      border-radius: 4px;
-      border: 1px solid #DCDCDC;
+      padding: 0.4rem 0.4rem 0.426rem;
+      border-radius: 0.106rem;
+      border: 0.026rem solid #DCDCDC;
       .answerContent {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #444;
         .price {
-          // width: 39px;
-          height: 17px;
-          padding: 0 4px;
-          font-size: 11px;
+          // width: 1.04rem;
+          height: 0.453rem;
+          padding: 0 0.106rem;
+          font-size: 0.293rem;
           color: #235280;
           text-align: right;
-          line-height: 17px;
-          border-radius: 4px;
+          line-height: 0.453rem;
+          border-radius: 0.106rem;
           background: #A8DFF7;
           display: inline-block;
           span {
-            width: 3px;
-            height: 3px;
-            margin-top: -3px;
-            margin-right: 3px;
+            width: 0.08rem;
+            height: 0.08rem;
+            margin-top: -0.08rem;
+            margin-right: 0.08rem;
             border-radius: 50%;
             background: #fff;
             display: inline-block;
@@ -996,18 +996,18 @@
       }
     }
     .followAnswer {
-      margin-top: 7px;
+      margin-top: 0.186rem;
       .follow {
-        font-size: 12px;
+        font-size: 0.32rem;
         color: #808080;
-        line-height: 20px;
+        line-height: 0.533rem;
         vertical-align: top;
         display: inline-block;
       }
       .rightLine {
-        width: 1px;
-        height: 11px;
-        margin: -10px 16px 0 4px;
+        width: 0.026rem;
+        height: 0.293rem;
+        margin: -0.266rem 0.426rem 0 0.106rem;
         vertical-align: middle;
         display: inline-block;
         background: #DCDCDC;
@@ -1015,16 +1015,16 @@
       .replay {
         display: inline-block;
         img {
-          width: 20px;
-          height: 20px;
-          margin-left: -12px;
-          border: 2px solid #fff;
+          width: 0.533rem;
+          height: 0.533rem;
+          margin-left: -0.32rem;
+          border: 0.053rem solid #fff;
           border-radius: 50%;
         }
         span {
-          font-size: 12px;
+          font-size: 0.32rem;
           color: #808080;
-          line-height: 20px;
+          line-height: 0.533rem;
           vertical-align: top;
         }
       }

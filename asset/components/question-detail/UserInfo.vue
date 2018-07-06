@@ -150,8 +150,8 @@
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 34px;
-    width: 34px;
+    height: 0.906rem;
+    width: 0.906rem;
     font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
@@ -209,7 +209,7 @@
   .followButton {
     display: inline-block;
     border: 0.026rem solid #DCDCDC;
-    line-height: 27px;
+    line-height: 0.72rem;
     border-radius: 1.333rem;
     font-size: 0.346rem;
     color: #03aef9;
@@ -222,10 +222,10 @@
   }
 
   .mui-media-body {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
     position: relative;
-    margin-top: -5px;
+    margin-top: -0.133rem;
   }
 
   .mui-media-body .followWrapper {
@@ -240,8 +240,8 @@
 
   .avatarInner .icon {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 0.533rem;
+    height: 0.533rem;
     right: -0.1rem;
     bottom: -0.07rem;
     font-size: 0.64rem;

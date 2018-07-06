@@ -272,22 +272,22 @@
     bottom: 50px; /* px不转换 */
   }
   .newLink {
-    margin-top: 9px;
-    // padding: 0 16px;
+    margin-top: 0.24rem;
+    // padding: 0 0.426rem;
     .newLinkBox {
-      margin-top: 10px;
-      padding: 15px 15px 11px;
+      margin-top: 0.266rem;
+      padding: 0.4rem 0.4rem 0.293rem;
       background: #F7F8FA;
-      border-radius: 4px;
+      border-radius: 0.106rem;
       img {
-        width: 314px;
-        height: 112px;
-        border-radius: 4px;
+        width: 8.373rem;
+        height: 2.986rem;
+        border-radius: 0.106rem;
       }
       .linkContent {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #808080;
-        line-height: 20px;
+        line-height: 0.533rem;
       }
       .link {
         color: #B4B4B6;
