@@ -701,12 +701,6 @@
       })
       window.mui.previewImage()
       autoTextArea()
-      scrollPage('.mui-content', () => {
-        if (this.detail.type === 'article') {
-          this.title = this.detail.title
-        }}, () => {}, () => {}, () => {
-        this.title = this.oldTitle
-      })
     }
   }
 </script>
