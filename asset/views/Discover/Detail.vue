@@ -8,8 +8,8 @@
     <div class="mui-content" v-show="!loading">
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
 
-        <div class="topImg" v-if="detail.type === 'article'">
-          <img :src="detail.data.img">
+        <div class="topImg" v-if="detail.type === 'article' && detail.data.img">
+          <img v-lazy="detail.data.img" class="lazyImg">
         </div>
 
         <div class="mui-table-view detail-discover">
@@ -68,7 +68,6 @@
               >
               </quill-editor>
             </div>
-
 
             <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
               <div class="pdf" v-for="(pdf, index) in detail.data.files" :key="index" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
@@ -565,7 +564,6 @@
         }
 
         var contentWrapper = document.querySelector('.discoverContentWrapper')
-        console.warn('contentWrapperHeight:' + contentWrapper.offsetHeight)
         if (contentWrapper && contentWrapper.offsetHeight > 300) {
           contentWrapper.classList.add('shortContentWrapper')
         }
