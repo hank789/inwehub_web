@@ -498,7 +498,7 @@
         goThirdPartyArticle(
           detail.data.url,
           detail.id,
-          detail.title,
+          detail.data.title,
           '/c/' + detail.category_id + '/' + detail.slug,
           detail.data.img
         )
