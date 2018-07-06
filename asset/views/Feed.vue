@@ -288,7 +288,7 @@
         font-size: 0.373rem;
         color: #808080;
         line-height: 0.533rem;
-        margin-top: 4px;
+        margin-top: 0.106rem;
       }
       .link {
         color: #B4B4B6;
