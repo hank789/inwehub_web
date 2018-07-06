@@ -96,7 +96,8 @@
               </span>
               <img class="lazyImg" v-lazy="detail.data.img" v-else>
               <div class="linkContent">
-                <div class="text-line-2">{{detail.data.title}}</div>
+                <div v-if="detail.data.title" class="text-line-2">{{detail.data.title}}</div>
+                <span v-else class="seat"></span>
                 <div class="text-line-1">{{detail.data.url}}</div>
               </div>
             </div>
@@ -947,6 +948,11 @@
       .linkContent {
         font-size: 0.373rem;
         color: #808080;
+        .seat {
+          width: 0.266rem;
+          height: 0.4rem;
+          display: inline-block;
+        }
         div {
           color: #B4B4B6;
           word-break: break-word;

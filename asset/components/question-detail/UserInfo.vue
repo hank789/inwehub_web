@@ -230,7 +230,7 @@
 
   .mui-media-body .followWrapper {
     position: absolute;
-    top: 0;
+    top: 4px;
     right: 0;
   }
 
