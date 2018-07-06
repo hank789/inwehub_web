@@ -2662,10 +2662,35 @@ a {
   border: none; }
 
 
+.container-editor {
+  margin-bottom: 30px; }
+.container-editor .ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid #E0E8EF; }
+.container-editor .ql-toolbar.ql-snow .ql-stroke {
+  stroke: #7C93B2;
+  color: #7C93B2; }
+.container-editor .ql-toolbar.ql-snow .ql-fill {
+  fill: #7C93B2; }
+.container-editor .ql-toolbar.ql-snow .ql-picker {
+  color: #7C93B2; }
+.container-editor .ql-toolbar.ql-snow .ql-picker.ql-header .ql-picker-label::before, .container-editor .ql-toolbar.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+  color: #7C93B2; }
+.container-editor .ql-toolbar.ql-snow .ql-picker.ql-expanded .ql-picker-label {
+  color: #7C93B2; }
+.container-editor .ql-container {
+  border: none !important;
+  margin-top: 10px; }
 .container-editor .ql-editor {
   color: #4A5F7B;
   line-height: 26px;
-  font-size: 16px; }
+  font-size: 16px;
+  padding: 0; }
+.container-editor .ql-editor.ql-blank::before {
+  left: 0 !important;
+  color: #B1BDCC !important;
+  font-size: 16px !important;
+  font-style: normal !important; }
 .container-editor .ql-editor h1 {
   color: #4A5F7B;
   font-size: 18px !important;
@@ -2682,12 +2707,50 @@ a {
   margin-left: -2.4em; }
 .container-editor .ql-editor blockquote {
   border-left: 3px solid #E0E8EF !important; }
+.container-editor.container-editor-add {
+  width: 100%;
+  background: #fff;
+  padding: 20px 30px; }
+.container-editor.container-editor-add textarea {
+  margin-top: 20px;
+  width: 100%;
+  height: 65px;
+  padding: 10px 0;
+  overflow-y: auto;
+  border: none;
+  font-family: PingFangSC-Medium;
+  font-size: 28px;
+  color: #4A5F7B;
+  line-height: 44px;
+  border-radius: 0;
+  border-top: 1px solid #E0E8EF;
+  border-bottom: 1px solid #E0E8EF; }
+.container-editor.container-editor-add textarea::-webkit-input-placeholder {
+  color: #B1BDCC; }
+.container-editor.container-editor-add textarea:-ms-input-placeholder {
+  color: #B1BDCC; }
+.container-editor.container-editor-add textarea::-ms-input-placeholder {
+  color: #B1BDCC; }
+.container-editor.container-editor-add textarea::placeholder {
+  color: #B1BDCC; }
 
 .container-editor-app .ql-editor {
   color: #444;
   line-height: 26px;
   font-size: 16px; }
+.container-editor-app .ql-editor h1 {
+  color: #444;
+  font-size: 17px !important;
+  line-height: 27px;
+  font-family: PingFangSC-Medium; }
 .container-editor-app .ql-editor a {
-  color: #1C3F6D; }
+  color: #1C3F6D;
+  text-decoration: none !important; }
+.container-editor-app .ql-editor ol, .container-editor-app .ql-editor ul {
+  padding-left: 0 !important; }
+.container-editor-app .ql-editor li:before {
+  margin-left: -1.9em; }
+.container-editor-app .ql-editor ul li::before {
+  margin-left: -2.4em; }
 .container-editor-app .ql-editor blockquote {
   border-left: 3px solid #DCDCDC !important; }

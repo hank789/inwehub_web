@@ -50,7 +50,7 @@
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
               <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
 
-              <div class="richText" v-show="detail.type === 'article'">
+              <div class="richText container-editor container-editor-app" v-show="detail.type === 'article'">
                 <div class="quill-editor">
                   <div class="ql-container ql-snow">
                     <div class="ql-editor discoverContent">
