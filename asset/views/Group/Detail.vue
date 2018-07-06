@@ -318,7 +318,7 @@
         )
       },
       toDetail (item) {
-        this.$router.pushPlus(item.url, 'list-detail-page')
+        this.$router.pushPlus(item.comment_url, 'list-detail-page')
       },
       toDiscoverAdd () {
         localEvent.setLocalItem('selectedGroup' + getLocalUserId(), {
