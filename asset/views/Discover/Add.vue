@@ -8,12 +8,7 @@
     </header>
 
     <div class="mui-content">
-      <div class="container-tabs">
-        <div class="tab" @tap.stop.prevent="$router.replace('/discover/publishArticles')"><span>文章链接</span></div>
-        <div class="tab active"><span>图文分享</span></div>
-      </div>
-
-      <div class="component-textareaWithImage">
+      <div class="component-textareaWithImage container-editor container-editor-app">
         <Jeditor
           ref="myAddEditor"
           id="discoverAddJeditor"
@@ -26,6 +21,7 @@
           :isMonitorHashSymbol="true"
           :isMonitorSmallSpan="true"
           :isShowCounter="false"
+          :allowRichStyle="false"
           @ready="onEditorReady($event)"
           @onEditorBlur="onEditorBlur"
           @onEditorFocus="onEditorFocus"
@@ -37,14 +33,11 @@
           @smallSpanArrChange="smallSpanArrChange"
         ></Jeditor>
 
-        <div class="container-images" :class="'container-images-' + (images.length + 1)">
-          <div class="container-image" v-for="(image, index) in images">
-            <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
-              <use xlink:href="#icon-times1"></use>
-            </svg>
-            <img :id="'image_' + index" :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/>
-          </div><div class="container-image component-photograph" v-if="images.length < maxImageCount" style="display: none;"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
-        </div>
+        <swiper :options="swiperOption" class="container-upload-images" v-show="images.length">
+          <swiper-slide class="image" v-for="(image, index) in images" :key="'image_'+index" ><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+            <use xlink:href="#icon-times1"></use>
+          </svg></swiper-slide>
+        </swiper>
 
         <swiper :options="swiperOption" class="container-pdfs" v-show="pdfs.length">
           <swiper-slide v-for="(pdf, index) in pdfs" :key="index" class="pdf">
@@ -53,6 +46,29 @@
           </svg>
           </swiper-slide>
         </swiper>
+        <!-- 新增链接样式 -->
+        <div class="link" v-if="links.length" v-for="(link, index) in links" :key="index">
+          <div class="linkBox">
+            <!-- 没有图片的样式 -->
+            <span class="linkIimg" v-if="!link.img_url">
+              <svg class="icon" aria-hidden="true" >
+                <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+              </svg>
+            </span>
+            <!-- 有图片的样式 -->
+            <img v-else class="lazyImg" v-lazy="link.img_url" alt="">
+            <div class="linkContent">
+              <span v-if="link.title" class="text-line-2">{{link.title}}</span>
+              <span v-else class="seat"></span>
+              <div class="text-line-1">{{link.url}}</div>
+            </div>
+          </div>
+          <div class="linkClose" @tap.stop.prevent="linkClose">
+            <svg class="icon" aria-hidden="true" >
+              <use xlink:href="#icon-times1"></use>
+            </svg>
+          </div>
+        </div>
 
       </div>
       <div class="component-button-5-03aef9 button-wrapper padding-20-15" id="button-wrapper">
@@ -63,12 +79,12 @@
     <div class="container-bottom-menus">
         <span @tap.stop.prevent="toUser">
           <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-icon-test1"></use>
+            <use xlink:href="#icon-icon-test2"></use>
           </svg>
         </span>
       <span @tap.stop.prevent="totags">
           <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-icon-test"></use>
+            <use xlink:href="#icon-biaoqian2"></use>
           </svg>
         </span>
         <span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">
@@ -79,6 +95,11 @@
         <span @tap.stop.prevent="uploadPdf" :class="{'disable': !isUploadPdf}">
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-wenjian"></use>
+          </svg>
+        </span>
+        <span @tap.stop.prevent="promptUrl" :class="{'disable': !isUploadLink}">
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-lianjie1"></use>
           </svg>
         </span>
         <div class="component-labelWithIcon selectGroup float-right text-line-1" v-if="address" @tap.stop.prevent="selectGroup">
@@ -118,6 +139,7 @@
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { fetchArticle } from '../../utils/url'
 
   export default {
     data () {
@@ -149,7 +171,9 @@
         text: '',
         html: '',
         descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…',
-        selectedGroup: null
+        selectedGroup: null,
+        links: [],
+        showLink: true
       }
     },
     computed: {
@@ -160,6 +184,9 @@
         if (this.pdfs.length) {
           return false
         }
+        if (this.links.length) {
+          return false
+        }
         return true
       },
       isUploadPdf () {
@@ -167,6 +194,21 @@
           return false
         }
         if (this.images.length) {
+          return false
+        }
+        if (this.links.length) {
+          return false
+        }
+        return true
+      },
+      isUploadLink () {
+        if (this.pdfs.length >= this.maxPdfCount) {
+          return false
+        }
+        if (this.images.length) {
+          return false
+        }
+        if (this.links.length) {
           return false
         }
         return true
@@ -207,6 +249,21 @@
       window.mui.previewImage()
     },
     methods: {
+      quickUrl () {
+        if (this.$route.query.url) {
+          var url = this.$route.query.url
+          if (!this.selectedGroup) {
+            this.selectedGroup = {
+              id: 39,
+              name: '观点洞见'
+            }
+          }
+          this.fetchUrlInfo(url)
+        }
+      },
+      linkClose () {
+        this.links = []
+      },
       readGroup () {
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
       },
@@ -417,6 +474,7 @@
 
         this.getAddress()
         this.readGroup()
+        this.quickUrl()
       },
       onEditorChange (editor) {
         this.html = editor.html
@@ -472,6 +530,27 @@
         }, 200)
         this.$refs.uploadFile.uploadFile('pdf')
       },
+      fetchUrlInfo (url) {
+        fetchArticle(this, url, (data) => {
+          this.links = [{
+            url: url,
+            title: data.title,
+            img_url: data.img_url
+          }]
+        })
+      },
+      promptUrl () {
+        if (!this.isUploadLink) {
+          return
+        }
+        window.mui.prompt('插入链接卡片', '输入链接地址', ' ', ['取消', '确定'], (e) => {
+          if (e.index === 1) {
+            if (e.value) {
+              this.fetchUrlInfo(e.value)
+            }
+          }
+        }, 'div')
+      },
       uploadFileSuccess (pdfs) {
         this.pdfs = pdfs
       },
@@ -488,6 +567,7 @@
         this.pdfs = []
         this.description = {}
         this.images = []
+        this.links = []
         this.percentCompleted = 0
         this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
@@ -525,6 +605,11 @@
           current_address_longitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.longt : '',
           current_address_latitude: this.selectedAddress && this.selectedAddress !== '不显示位置' && this.selectedAddress !== '所在位置' ? this.position.lat : '',
           group_id: this.selectedGroup.id
+        }
+
+        if (this.links.length) {
+          data.url = this.links[0].url
+          data.type = 'link'
         }
 
         for (var i in this.images) {
@@ -571,6 +656,61 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+// 新增链接样式
+  .link {
+    margin-top: 0.266rem;
+    padding: 0 0.506rem 0 0.346rem;
+    position: relative;
+    .linkBox {
+      padding: 0.266rem;
+      border-radius: 0.106rem;
+      background: #fff;
+      .linkIimg {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        text-align: center;
+        line-height: 1.333rem;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
+        background: #ECECEE;
+        .icon {
+          color: #C8C8C8;
+          font-size: 0.746rem;
+        }
+      }
+      img {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
+      }
+      .linkContent {
+        font-size: 0.373rem;
+        color: #808080;
+        .seat {
+          width: 0.266rem;
+          height: 0.4rem;
+          display: inline-block;
+        }
+        div {
+          color: #B4B4B6;
+          word-wrap: break-word;
+        }
+      }
+    }
+    .linkClose {
+      position: absolute;
+      top: -0.213rem;
+      right: 0.32rem;
+      .icon {
+        width: 0.426rem;
+        height: 0.426rem;
+        color: #808080;
+      }
+    }
+  }
   .container-pdfs{
     padding:0.266rem;
     height:2.24rem;
@@ -667,6 +807,7 @@
   .container-bottom-menus{
     position: absolute;
     padding-left: 0.2rem;
+    background: #fff;
     left:0;
   }
   .container-bottom-menus span{
@@ -701,6 +842,7 @@
   #discoverAddJeditor .textarea-wrapper{
     border:none;
     background: #f3f4f6;
+    padding:0 0.266rem;
   }
 
   #discoverAddJeditor .counter{

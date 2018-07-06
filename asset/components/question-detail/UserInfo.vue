@@ -28,8 +28,12 @@
         <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
         <span class="followButton" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
       </div>
+      <!-- <div class="timeData">
+        <span>
+          <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
+        </span>
+      </div> -->
     </div>
-
   </div>
 </template>
 <script type="text/javascript">
@@ -40,7 +44,10 @@
   export default {
     data () {
       return {
-        localUuid: 0
+        localUuid: 0,
+        detail: {
+          created_at: ''
+        }
       }
     },
     props: {
@@ -105,6 +112,11 @@
 
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       collectProfessor: function () {
         if (!this.uuid) {
           return
@@ -131,14 +143,15 @@
 </script>
 
 <style scoped="scoped">
+  
   .avatar {
     z-index: 0;
     color: #ffffff;
     float: left;
     background-color: #bdbdbd;
     display: inline-block;
-    height: 1.2rem;
-    width: 1.2rem;
+    height: 0.906rem;
+    width: 0.906rem;
     font-size: 0.533rem;
     text-align: center;
     border-radius: 50%;
@@ -170,7 +183,7 @@
 
   .mui-media-body {
     padding-left: 0.266rem;
-    min-height: 0.666rem;
+    min-height: 1.2rem;
   }
 
   .mui-table-view-cell:after {
@@ -195,8 +208,8 @@
 
   .followButton {
     display: inline-block;
-    border: 0.026rem solid #03aef9;
-    line-height: 0.453rem;
+    border: 0.026rem solid #DCDCDC;
+    line-height: 0.72rem;
     border-radius: 1.333rem;
     font-size: 0.346rem;
     color: #03aef9;
@@ -209,12 +222,15 @@
   }
 
   .mui-media-body {
+    font-size: 0.346rem;
+    color: #808080;
     position: relative;
+    margin-top: -0.133rem;
   }
 
   .mui-media-body .followWrapper {
     position: absolute;
-    top: 0;
+    top: 0.106rem;
     right: 0;
   }
 
@@ -224,8 +240,10 @@
 
   .avatarInner .icon {
     position: absolute;
-    right: -0.16rem;
-    bottom: -0.026rem;
+    width: 0.533rem;
+    height: 0.533rem;
+    right: -0.1rem;
+    bottom: -0.07rem;
     font-size: 0.64rem;
     color: #03aef9;
   }

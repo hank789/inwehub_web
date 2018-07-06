@@ -275,17 +275,18 @@
       goDetail (type, recommend) {
         switch (type) {
           case 1:
-            if (recommend.data.type === 'link') {
-              goThirdPartyArticle(
-                recommend.data.url,
-                recommend.source_id,
-                recommend.data.title,
-                '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
-                recommend.data.img
-              )
-            } else {
-              this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
-            }
+            this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
+//            if (recommend.data.type === 'link') {
+//              goThirdPartyArticle(
+//                recommend.data.url,
+//                recommend.source_id,
+//                recommend.data.title,
+//                '/c/' + recommend.data.category_id + '/' + recommend.data.slug,
+//                recommend.data.img
+//              )
+//            } else {
+//              this.$router.pushPlus('/c/' + recommend.data.category_id + '/' + recommend.data.slug)
+//            }
             break
           case 2:
             this.$router.pushPlus('/askCommunity/major/' + recommend.source_id)
@@ -326,13 +327,13 @@
         })
       },
       getData () {
-        postRequest(`recommendRead`, {perPage: 5}).then(response => {
+        postRequest(`recommendRead`, {perPage: 10}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
             return
           }
-          this.list = response.data.data.data.slice(0, 5)
+          this.list = response.data.data.data
         })
       },
       getHomeData () {

@@ -20,10 +20,12 @@
       <!--内容区域-->
       <RefreshList
         ref="RefreshList"
+        :pageMode="true"
         v-model="list"
         :api="'readhub/mySubmission'"
         :prevOtherData="{type:0,uuid: this.$route.params.id}"
         :nextOtherData="{type:0,uuid: this.$route.params.id}"
+
         class="listWrapper">
         <ul class="answer">
           <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
@@ -92,21 +94,7 @@
         return newDate
       },
       toDetail (data) {
-        switch (data.type) {
-          case 'text':
-            this.$router.pushPlus(data.comment_url, 'list-detail-page')
-            break
-          case 'link':
-            goThirdPartyArticle(
-              data.submission_url,
-              data.id,
-              data.title,
-              data.comment_url,
-              data.img
-            )
-            break
-          default:
-        }
+        this.$router.pushPlus(data.comment_url, 'list-detail-page')
       }
     },
     mounted () {

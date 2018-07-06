@@ -2,7 +2,7 @@
   <div>
     <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-fenxiang"></use>
+        <use xlink:href="#icon-shoucang-xiao"></use>
       </svg>
     </a>
 
@@ -269,9 +269,9 @@
         }
 
         if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
         } else {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
@@ -295,9 +295,9 @@
           this.sendPengYouQuan()
         }
         if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
         } else {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#shareWrapper').popover('hide')
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()

@@ -57,6 +57,8 @@
               </div>
             </div>
             <div class="contentWrapper"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
+
+
             <div v-if="item.feed.img" class="container-images container-images-discover">
               <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
             </div>
@@ -67,7 +69,46 @@
 
           </div>
 
-          <!-- 发布了文章 -->
+          <!-- 发布了链接分享 -->
+          <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 16">
+            <div class="container-avatarAndTwoLineText">
+              <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                <div class="avatarInner"><img :src="item.user.avatar">
+                  <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="mui-media-body">
+                <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                </div>
+                <div class="lineWrapper-2">{{ item.created_at }}
+                  <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                </div>
+              </div>
+            </div>
+            <!-- 新增链接样式 -->
+            <div class="newLink">
+              <div class="contentWrapper">{{item.feed.title}}</div>
+              <div class="newLinkBox">
+                <div class="container-image lazyImg" v-if="item.feed.img">
+                  <img class="lazyImg" v-lazy="item.feed.img">
+                </div>
+                
+                <div class="linkContent" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
+                <div class="link">{{item.feed.domain}} </div>
+              </div>
+            </div>
+            <!-- <div class="contentWrapper text-line-3">{{ item.feed.article_title }}<span class="url">-{{ item.feed.domain }}</span></div> -->
+            <!-- <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div> -->
+            <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+
+          </div>
+
+          <!-- 发布了原创文章，有title和描述 -->
           <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 5">
             <div class="container-avatarAndTwoLineText">
               <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
@@ -88,7 +129,7 @@
                 </div>
               </div>
             </div>
-            <div class="contentWrapper text-line-3">{{ item.feed.title }}<span class="url">-{{ item.feed.domain }}</span></div>
+            <div class="contentWrapper text-line-3">{{ item.feed.title }}</div>
             <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div>
             <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
           </div>
@@ -198,14 +239,17 @@
           case 1:
           case 2:
           case 3:
+          case 5:
           case 6:
           case 11:
           case 12:
           case 14:
           case 15:
+          case 16:
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
-          case 5:
+          case -1:
+            // 已废弃
             var linkArticle = {
               view_url: item.url,
               id: item.feed.submission_id,
@@ -232,5 +276,30 @@
   .listWrapper {
     top: 1.04rem;
     bottom: 50px; /* px不转换 */
+  }
+  .newLink {
+    margin-top: 0.24rem;
+    // padding: 0 0.426rem;
+    .newLinkBox {
+      margin-top: 0.266rem;
+      padding: 0.293rem 0.4rem 0.293rem;
+      background: #F7F8FA;
+      border-radius: 0.106rem;
+      img {
+        // width: 8.373rem;
+        // height: 2.986rem;
+        border-radius: 0.106rem;
+      }
+      .linkContent {
+        font-size: 0.373rem;
+        color: #808080;
+        line-height: 0.533rem;
+        margin-top: 0.106rem;
+      }
+      .link {
+        font-size: 0.32rem;
+        color: #B4B4B6;
+      }
+    }
   }
 </style>

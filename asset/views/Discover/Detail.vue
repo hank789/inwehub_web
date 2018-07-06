@@ -2,11 +2,16 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!noback"></a>
-      <h1 class="mui-title">分享</h1>
+      <h1 class="mui-title" v-text="title"></h1>
     </header>
 
     <div class="mui-content" v-show="!loading">
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
+
+        <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
+          <img v-lazy="detail.data.img" class="lazyImg">
+        </div>
+
         <div class="mui-table-view detail-discover">
           <UserInfo
             :uuid="detail.owner.uuid"
@@ -23,16 +28,51 @@
             删除
           </div>
 
+          <div class="timeData">
+            <span>
+              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
+            </span>
+          </div>
+
+          <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
+
+          <div class="line-river lineMargin"></div>
+
+          <!-- 来自 -->
+          <div class="from">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-wodequanzi-shouye"></use>
+            </svg>
+            <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
+          </div>
+
           <div class="discoverContentWrapper">
-            <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+            <div class="contentWrapper quillDetailWrapper" id="contentWrapper">
+              <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
 
-              <span v-html="textToLink(detail.title)"></span><span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
+              <div class="richText container-editor container-editor-app" v-show="detail.type === 'article'">
+                <div class="quill-editor">
+                  <div class="ql-container ql-snow">
+                    <div class="ql-editor discoverContent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <quill-editor
+                class="hiddenWrapper"
+                ref="myTextEditorRead"
+                :options="editorOptionRead"
+                @ready="onEditorReadyRead($event)"
+                @change="change"
+              >
+              </quill-editor>
             </div>
-
 
             <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
-              <div class="pdf" v-for="(pdf, index) in detail.data.files" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
+              <div class="pdf" v-for="(pdf, index) in detail.data.files" :key="index" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
             </div>
+
 
             <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
               <template v-for="(image, index) in detail.data.img">
@@ -40,56 +80,106 @@
                      :data-preview-group="1"/>
               </template>
             </div>
-
-            <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
-                 @tap.stop.prevent="goArticle(detail)">
-              <img class="lazyImg" v-lazy="detail.data.img"/>
-            </div>
           </div>
 
           <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
                @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
-        </div>
+          </div>
+
+          <!-- 新增链接样式 -->
+          <div class="link" v-if="detail.type === 'link' && detail.data.url">
+            <div class="linkBox" @tap.stop.prevent="goArticle(detail)">
+              <span class="linkIimg" v-if="!detail.data.img">
+                <svg class="icon" aria-hidden="true" >
+                  <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+                </svg>
+              </span>
+              <img class="lazyImg" v-lazy="detail.data.img" v-else>
+              <div class="linkContent">
+                <div v-if="detail.data.title" class="text-line-2">{{detail.data.title}}</div>
+                <span v-else class="seat"></span>
+                <div class="text-line-1">{{detail.data.url}}</div>
+              </div>
+            </div>
+          </div>
 
           <div class="timeContainer">
             <span>{{detail.views}}浏览</span>
-            <span>
-          <timeago :since="timeago(detail.created_at)" :auto-update="60">
-          </timeago>
-        </span>
+            <!-- <span>
+              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
+            </span> -->
             <span>著作权归作者所有</span>
           </div>
-          <div class="address" v-show="detail.data.current_address_name">
+
+          <!-- 关联问答 -->
+          <div class="answer" v-if="detail.related_question">
+            <div class="answerBox">
+              <div class="answerContent">
+                <span class="price">
+                  <span></span>{{detail.related_question.status_description}}
+                </span>
+               {{detail.related_question.title}}
+              </div>
+              <div class="followAnswer">
+                <span class="follow">{{detail.related_question.follow_number}}人关注 </span>
+                <span class="rightLine"></span>
+                <div class="replay">
+                  <img v-for="(answerUser, index) in detail.related_question.answer_users" :src="answerUser.avatar">
+                  <span>等{{detail.related_question.answer_number}}人回答</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 分享 -->
+          <div class="share">
+            <div class="location" v-show="detail.data.current_address_name">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-dingwei1"></use>
+              </svg>
+              <span>{{detail.data.current_address_name}}</span>
+            </div>
+            <div class="shareGo">
+              <P>分享到</P>
+              <div class="shareList">
+                <ul>
+                  <li @tap.stop.prevent="weChatFriend">
+                    <img src="../../statics/images/wechat_@2x.png" />
+                    <p>微信好友</p>
+                  </li>
+                  <li @tap.stop.prevent="weChatFriendGroup">
+                    <img src="../../statics/images/page_1@2x.png" />
+                    <p>朋友圈</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="address" v-show="detail.data.current_address_name">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dingwei1"></use>
             </svg>
             <span>{{detail.data.current_address_name}}</span>
-          </div>
+          </div> -->
         </div>
 
-        <div class="river"></div>
-        <!--圈子信息-->
-        <div class="groupsList" v-if="detail.group !== null">
-          <groups-list class="small detail"
-                       :list="detail.group"
-                       :type="'small'"
-          ></groups-list>
-        </div>
 
         <div class="river" v-if="detail.supporter_list.length"></div>
+
         <!--点赞-->
         <div class="component-dianzanList" v-if="detail.upvotes">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dianzan1"></use>
           </svg>
-          <span v-for="(item, index) in detail.supporter_list"
+          <span v-for="(item, index) in detail.supporter_list" :key="index"
                 @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
         </div>
 
         <div class="river"></div>
-        <!--评论部分-->
 
         <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
+
         <div class="river" v-if="noback && slug"></div>
 
         <Discuss
@@ -159,7 +249,7 @@
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
-  import {textToLinkHtml, transferTagToLink} from '../../utils/dom'
+  import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   import RecommendList from '../../components/discover/RecommendList.vue'
 
@@ -169,20 +259,32 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
+  import { quillEditor } from '../../components/vue-quill'
 
   export default {
     data () {
       return {
+        editorOptionRead: {
+          placeholder: ' ',
+          modules: {
+            toolbar: []
+          },
+          readOnly: true
+        },
+        editorReadObj: null,
         userId: currentUser.user_id,
         name: currentUser.name,
         uuid: currentUser.uuid,
         slug: '',
         noback: false,
+        title: '分享',
+        oldTitle: '分享',
         detail: {
           group: {
             is_joined: '',
             id: '',
-            public: ''
+            public: '',
+            name: ''
           },
           owner: {
             id: '',
@@ -192,8 +294,10 @@
           },
           id: 0,
           supporter_list: [],
+          title: '',
           data: {
-            img: []
+            img: [],
+            description: ''
           },
           created_at: ''
         },
@@ -262,9 +366,50 @@
       commentTextarea,
       groupsList,
       FooterMenu,
-      RecommendList
+      RecommendList,
+      quillEditor
     },
     methods: {
+      change (editor) {
+        var html = editor.html
+        html = textToLinkHtml(html)
+
+        html = html.replace(/<a href="/g, "<span class='vendorUrl text-content' href=\"")
+        html = html.replace(/<\/a>/g, '</span>')
+
+        var answerContentWrapper = this.$el.querySelector('.discoverContent')
+        html = addPreviewAttrForImg(html)
+        html = html.replace(/(<p><br><\/p>)*$/, '')
+        answerContentWrapper.innerHTML = html
+
+        window.mui.previewImage()
+
+        var that = this
+
+        setTimeout(() => {
+          openVendorUrl(answerContentWrapper)
+          var aList = this.$el.querySelectorAll('a[href^="http"]')
+          for (let i = 0; i < aList.length; i++) {
+            aList[i].addEventListener('click', function (e) {
+              e.preventDefault()
+              that.$router.pushPlus('/webview/vendor/' + encodeURIComponent(this.href))
+            }, false)
+          }
+        }, 100)
+      },
+      onEditorReadyRead (editor) {
+        this.editorReadObj = editor
+        this.getDetail()
+      },
+      toDetail (item) {
+        this.$router.pushPlus('/group/detail/' + item.id)
+      },
+      weChatFriend () {
+        this.$refs.ShareBtn.shareToHaoyou()
+      },
+      weChatFriendGroup () {
+        this.$refs.ShareBtn.shareToPengyouQuan()
+      },
       seePdf (pdf) {
         openFileUrl(pdf.url, pdf.name)
       },
@@ -354,7 +499,7 @@
         goThirdPartyArticle(
           detail.data.url,
           detail.id,
-          detail.title,
+          detail.data.title,
           '/c/' + detail.category_id + '/' + detail.slug,
           detail.data.img
         )
@@ -394,6 +539,14 @@
 
           this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
 
+          if (this.detail.type === 'article') {
+            this.title = this.detail.title
+            var objs = JSON.parse(this.detail.data.description)
+            if (this.editorReadObj) {
+              this.editorReadObj.setContents(objs)
+            }
+          }
+
           this.loading = 0
         })
       },
@@ -413,7 +566,6 @@
         }
 
         var contentWrapper = document.querySelector('.discoverContentWrapper')
-        console.warn('contentWrapperHeight:' + contentWrapper.offsetHeight)
         if (contentWrapper && contentWrapper.offsetHeight > 300) {
           contentWrapper.classList.add('shortContentWrapper')
         }
@@ -556,6 +708,30 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .lineMargin {
+    margin-top: -0.16rem;
+  }
+  .container-image {
+    height: 200px;
+    border-radius: 0;
+    img {
+      border-radius: 0;
+    }
+  }
+  .topImg {
+    margin-top: 0.266rem;
+    img {
+      width: 10rem;
+      height: 5.333rem;
+    }
+  }
+  .detailTitle {
+    font-size: 0.506rem;
+    line-height: 0.8rem;
+    margin-top: -0.16rem;
+    padding: 0rem 0.426rem 0.4rem;
+    font-family:PingFangSC-Medium;
+  }
   .detail-discover {
     padding-bottom: 0.133rem;
     margin-top: 0 !important;
@@ -572,8 +748,9 @@
   .contentWrapper {
     padding: 0 0.4rem;
     white-space: pre-line !important;
-    font-size: 0.4rem;
+    font-size: 0.426rem;
     color: #444;
+    line-height: 0.693rem;
   }
 
   .contentWrapper .tags {
@@ -596,9 +773,10 @@
     color: #B4B4B6;
     padding: 0 0.4rem;
     background: #fff;
+    margin-top: 0.693rem;
   }
 
-  .timeContainer span:nth-of-type(3) {
+  .timeContainer span:nth-of-type(2) {
     float: right;
   }
 
@@ -656,16 +834,216 @@
   /*删除按钮*/
   .discover_datail_dalete {
     width: 1.52rem;
-    height: 0.506rem;
+    height: 0.72rem;
     border: 0.026rem solid #444444;
     text-align: center;
-    line-height: 0.453rem;
+    line-height: 0.72rem;
     font-size: 0.346rem;
     color: #444444;
     border-radius: 1.333rem;
     position: absolute;
     right: 0.426rem;
     top: 0.426rem;
+  }
+  .timeData {
+    position: absolute;
+    top: 0.906rem;
+    left: 1.6rem;
+    font-size: 0.32rem;
+    color: #C8C8C8;
+    margin-top: -0.106rem;
+  }
+  // 来自
+  .from {
+    padding: 0 0.453rem;
+    margin: 0.4rem 0;
+    .icon {
+      width: 0.533rem;
+      height: 0.533rem;
+      // vertical-align: middle;
+    }
+    div {
+      width: 70%;
+      font-size: 0.4rem;
+      color: #B4B4B6;
+      margin: 0rem;
+      vertical-align: top;
+      display: inline-block;
+      font-family: "PingFangSC-Medium";
+    }
+    span {
+      margin-left: 0.08rem;
+      color: #235280;
+    }
+  }
+  .share {
+    padding: 0 0.453rem;
+    .location {
+      margin-left: -0.08rem;
+      .icon {
+        color: #C8C8C8;
+        vertical-align: middle;
+      }
+    }
+    span {
+      margin-left: -0.106rem;
+      font-size: 0.32rem;
+      color: #808080;
+    }
+    .shareGo {
+      margin: 0.693rem auto 0;
+      text-align: center;
+      p {
+        font-size: 0.373rem;
+        color: #808080;
+      }
+      .shareList {
+        margin-top: -0.4rem;
+        text-align: center;
+        ul {
+          width: 100%;
+          padding: 0;
+          display: inline-block;
+          li{
+            margin: 0 0.346rem;
+            display: inline-block;
+            &:nth-of-type(1) {
+              img {
+                width: 0.986rem;
+                height: 0.8rem;
+              }
+            }
+            &:nth-of-type(2) {
+              img {
+                width: 0.8rem;
+                height: 0.8rem;
+              }
+            }
+          }
+          p {
+            font-size: 0.32rem;
+            color: #B4B4B6;
+          }
+        }
+      }
+    }
+  }
+  // 新增链接样式
+  .link {
+    margin-top: 0.266rem;
+    padding: 0 0.506rem 0 0.346rem;
+    .linkBox {
+      padding: 0.266rem;
+      border-radius: 0.106rem;
+      background: #F7F8FA;
+      .linkIimg {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        text-align: center;
+        line-height: 1.333rem;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
+        background: #ECECEE;
+        .icon {
+          color: #C8C8C8;
+          font-size: 0.746rem;
+        }
+      }
+      img {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
+      }
+      .linkContent {
+        font-size: 0.373rem;
+        color: #808080;
+        .seat {
+          width: 0.266rem;
+          height: 0.4rem;
+          display: inline-block;
+        }
+        div {
+          color: #B4B4B6;
+          word-break: break-all;
+        }
+        .text-line-1 {
+          font-size: 0.32rem;
+        }
+      }
+    }
+  }
+  // 关联问答
+  .answer {
+    padding: 0 0.426rem;
+    margin-top: 0.586rem;
+    .answerBox {
+      padding: 0.4rem 0.4rem 0.426rem;
+      border-radius: 0.106rem;
+      border: 0.026rem solid #DCDCDC;
+      .answerContent {
+        font-size: 0.373rem;
+        color: #444;
+        .price {
+          // width: 1.04rem;
+          height: 0.453rem;
+          padding: 0 0.106rem;
+          font-size: 0.293rem;
+          color: #235280;
+          text-align: right;
+          line-height: 0.453rem;
+          border-radius: 0.106rem;
+          background: #A8DFF7;
+          display: inline-block;
+          span {
+            width: 0.08rem;
+            height: 0.08rem;
+            margin-top: -0.08rem;
+            margin-right: 0.08rem;
+            border-radius: 50%;
+            background: #fff;
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+    .followAnswer {
+      margin-top: 0.186rem;
+      .follow {
+        font-size: 0.32rem;
+        color: #808080;
+        line-height: 0.533rem;
+        vertical-align: top;
+        display: inline-block;
+      }
+      .rightLine {
+        width: 0.026rem;
+        height: 0.293rem;
+        margin: -0.266rem 0.426rem 0 0.106rem;
+        vertical-align: middle;
+        display: inline-block;
+        background: #DCDCDC;
+      }
+      .replay {
+        display: inline-block;
+        img {
+          width: 0.533rem;
+          height: 0.533rem;
+          margin-left: -0.32rem;
+          border: 0.053rem solid #fff;
+          border-radius: 50%;
+        }
+        span {
+          font-size: 0.32rem;
+          color: #808080;
+          line-height: 0.533rem;
+          vertical-align: top;
+        }
+      }
+    }
   }
 
   .groups {
@@ -757,6 +1135,14 @@
 
   .container-pdf-list{
     padding:0.266rem 0.4rem;
+  }
+
+  .hiddenWrapper{
+    display: none;
+  }
+
+  .discoverContent{
+    padding:0;
   }
 </style>
 
