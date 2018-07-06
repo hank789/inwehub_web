@@ -88,7 +88,7 @@
 
           <!-- 新增链接样式 -->
           <div class="link" v-if="detail.type === 'link' && detail.data.url">
-            <div class="linkBox">
+            <div class="linkBox" @tap.stop.prevent="linkUrl()">
               <span class="linkIimg" v-if="!detail.data.img">
                 <svg class="icon" aria-hidden="true" >
                   <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
@@ -369,6 +369,10 @@
       quillEditor
     },
     methods: {
+      linkUrl() {
+        console.log("111122233")
+        this.$router.pushPlus(this.detail.data.url)
+      },
       change (editor) {
         var html = editor.html
         html = textToLinkHtml(html)
@@ -929,6 +933,20 @@
       padding: 10px;
       border-radius: 4px;
       background: #F7F8FA;
+      .linkIimg {
+        width: 44px;
+        height: 44px;
+        float: left;
+        text-align: center;
+        line-height: 50px;
+        margin-right: 10px;
+        border-radius: 4px;
+        background: #ECECEE;
+        .icon {
+          color: #C8C8C8;
+          font-size: 28px;
+        }
+      }
       img {
         width: 44px;
         height: 44px;
@@ -941,6 +959,7 @@
         color: #808080;
         div {
           color: #B4B4B6;
+          word-break: break-word;
         }
       }
     }

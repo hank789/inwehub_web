@@ -57,6 +57,8 @@
               </div>
             </div>
             <div class="contentWrapper"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
+            
+
             <div v-if="item.feed.img" class="container-images container-images-discover">
               <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
             </div>
@@ -88,9 +90,18 @@
                 </div>
               </div>
             </div>
-            <div class="contentWrapper text-line-3">{{ item.feed.article_title }}<span class="url">-{{ item.feed.domain }}</span></div>
-            <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div>
+            <!-- 新增链接样式 -->
+            <div class="newLink">
+              <div class="newLinkBox">
+                <img v-if="item.feed.img" :src="item.feed.img" alt="">
+                <div class="linkContent">{{item.feed.article_title}}</div>
+                <div class="link">{{item.feed.domain}} </div>
+              </div>
+            </div>
+            <!-- <div class="contentWrapper text-line-3">{{ item.feed.article_title }}<span class="url">-{{ item.feed.domain }}</span></div> -->
+            <!-- <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div> -->
             <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+
           </div>
 
           <!-- 发布了原创文章，有title和描述 -->
@@ -258,5 +269,27 @@
   .listWrapper {
     top: 1.04rem;
     bottom: 50px; /* px不转换 */
+  }
+  .newLink {
+    margin-top: 9px;
+    // padding: 0 16px;
+    .newLinkBox {
+      padding: 15px 15px 11px;
+      background: #F7F8FA;
+      border-radius: 4px;
+      img {
+        width: 314px;
+        height: 112px;
+        border-radius: 4px;
+      }
+      .linkContent {
+        font-size: 14px;
+        color: #808080;
+        line-height: 20px;
+      }
+      .link {
+        color: #B4B4B6;
+      }
+    }
   }
 </style>
