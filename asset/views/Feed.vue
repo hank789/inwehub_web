@@ -291,7 +291,7 @@
         margin-top: 0.106rem;
       }
       .link {
-        font-size: 12px;
+        font-size: 0.32rem;
         color: #B4B4B6;
       }
     }

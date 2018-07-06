@@ -708,7 +708,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .lineMargin {
-    margin-top: -6px; 
+    margin-top: -0.16rem; 
   }
   .container-image {
     height: 200px;
@@ -969,7 +969,7 @@
           word-break: break-all;
         }
         .text-line-1 {
-          font-size: 12px;
+          font-size: 0.32rem;
         }
       }
     }
