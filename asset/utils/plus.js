@@ -568,6 +568,11 @@ function AppInit (context) {
     if (window.mui.os.plus) {
       var ws = window.plus.webview.currentWebview()
 
+      EventObj.addIntervalOnceEventListener('resume', () => {
+        // 剪贴板
+        checkClipbord()
+      })
+
       // 只在主页面监听一次
       if (ws.id === window.plus.runtime.appid) {
         EventObj.addEventListener('refreshData', (e) => {
@@ -625,8 +630,6 @@ function AppInit (context) {
 
           // 每日签到
           // userAbility.signIGift(context)
-          // 剪贴板
-          checkClipbord()
 
           if (window.mui.os.ios) {
             noticeOpenNotifitionPermission(context)

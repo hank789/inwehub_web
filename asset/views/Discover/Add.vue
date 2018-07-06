@@ -56,7 +56,7 @@
               </svg>
             </span>
             <!-- 有图片的样式 -->
-            <img v-else :src="link.img_url" alt="">
+            <img v-else class="lazyImg" v-lazy="link.img_url" alt="">
             <div class="linkContent">{{link.title}}<div>{{link.url}}</div></div>
           </div>
           <div class="linkClose" @tap.stop.prevent="linkClose">
@@ -245,6 +245,16 @@
       window.mui.previewImage()
     },
     methods: {
+      quickUrl () {
+        if (this.$route.query.url) {
+          var url = this.$route.query.url
+          this.selectedGroup = {
+            id: 39,
+            name: '观点洞见'
+          }
+          this.fetchUrlInfo(url)
+        }
+      },
       linkClose () {
         this.showLink = !this.showLink
         // let parent = document.querySelector('.component-textareaWithImage')
@@ -461,6 +471,7 @@
 
         this.getAddress()
         this.readGroup()
+        this.quickUrl()
       },
       onEditorChange (editor) {
         this.html = editor.html
@@ -516,17 +527,20 @@
         }, 200)
         this.$refs.uploadFile.uploadFile('pdf')
       },
+      fetchUrlInfo (url) {
+        fetchArticle(this, url, (data) => {
+          this.links = [{
+            url: url,
+            title: data.title,
+            img_url: data.img_url
+          }]
+        })
+      },
       promptUrl () {
         window.mui.prompt('插入超链接', '输入链接地址', ' ', ['取消', '确定'], (e) => {
           if (e.index === 1) {
             if (e.value) {
-              fetchArticle(this, e.value, (data) => {
-                this.links.push({
-                  url: e.value,
-                  title: data.title,
-                  img_url: data.img_url
-                })
-              })
+              this.fetchUrlInfo(e.value)
             }
           }
         }, 'div')
