@@ -2667,6 +2667,8 @@ a {
 .container-editor .ql-toolbar.ql-snow {
   border: none;
   border-bottom: 0.026rem solid #E0E8EF; }
+.container-editor .ql-toolbar.ql-snow p {
+  margin-bottom: 0.693rem !important; }
 .container-editor .ql-toolbar.ql-snow .ql-stroke {
   stroke: #7C93B2;
   color: #7C93B2; }
@@ -2680,7 +2682,8 @@ a {
   color: #7C93B2; }
 .container-editor .ql-container {
   border: none !important;
-  margin-top: 0.266rem; }
+  margin-top: 0.266rem;
+  max-height: 13.333rem; }
 .container-editor .ql-editor {
   color: #4A5F7B;
   line-height: 0.693rem;
@@ -2738,6 +2741,8 @@ a {
   color: #444;
   line-height: 0.693rem;
   font-size: 0.426rem; }
+.container-editor-app .ql-editor p {
+  margin-bottom: 0.693rem !important; }
 .container-editor-app .ql-editor h1 {
   color: #444;
   font-size: 0.453rem !important;

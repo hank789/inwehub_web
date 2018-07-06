@@ -868,7 +868,7 @@
   .share {
     padding: 0 0.453rem;
     .location {
-      margin-left: -3px;
+      margin-left: -0.08rem;
       .icon {
         color: #C8C8C8;
         vertical-align: middle;

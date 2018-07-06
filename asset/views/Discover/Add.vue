@@ -8,7 +8,7 @@
     </header>
 
     <div class="mui-content">
-      <div class="component-textareaWithImage">
+      <div class="component-textareaWithImage container-editor container-editor-app">
         <Jeditor
           ref="myAddEditor"
           id="discoverAddJeditor"
