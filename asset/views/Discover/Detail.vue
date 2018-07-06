@@ -249,7 +249,7 @@
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
-  import {textToLinkHtml, transferTagToLink, scrollPage, addPreviewAttrForImg} from '../../utils/dom'
+  import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   import RecommendList from '../../components/discover/RecommendList.vue'
 
@@ -540,6 +540,7 @@
           this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
 
           if (this.detail.type === 'article') {
+            this.title = this.detail.title
             var objs = JSON.parse(this.detail.data.description)
             if (this.editorReadObj) {
               this.editorReadObj.setContents(objs)
@@ -708,7 +709,7 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .lineMargin {
-    margin-top: -0.16rem; 
+    margin-top: -0.16rem;
   }
   .container-image {
     height: 200px;
