@@ -567,6 +567,7 @@
         this.pdfs = []
         this.description = {}
         this.images = []
+        this.links = []
         this.percentCompleted = 0
         this.selectedAddress = '所在位置'
         this.$refs.myAddEditor.resetContent()
@@ -577,7 +578,6 @@
         localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
-        this.links = []
         if (!this.selectedGroup.id) {
           window.mui.toast('别忘了选择圈子后再发布！')
           return
