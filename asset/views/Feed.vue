@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="contentWrapper"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
-            
+
 
             <div v-if="item.feed.img" class="container-images container-images-discover">
               <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
@@ -239,14 +239,17 @@
           case 1:
           case 2:
           case 3:
+          case 5:
           case 6:
           case 11:
           case 12:
           case 14:
           case 15:
+          case 16:
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
-          case 5:
+          case -1:
+            // 已废弃
             var linkArticle = {
               view_url: item.url,
               id: item.feed.submission_id,

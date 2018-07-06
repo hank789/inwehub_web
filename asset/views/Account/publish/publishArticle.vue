@@ -94,21 +94,7 @@
         return newDate
       },
       toDetail (data) {
-        switch (data.type) {
-          case 'text':
-            this.$router.pushPlus(data.comment_url, 'list-detail-page')
-            break
-          case 'link':
-            goThirdPartyArticle(
-              data.submission_url,
-              data.id,
-              data.title,
-              data.comment_url,
-              data.img
-            )
-            break
-          default:
-        }
+        this.$router.pushPlus(data.comment_url, 'list-detail-page')
       }
     },
     mounted () {

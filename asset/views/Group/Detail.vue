@@ -38,7 +38,7 @@
         </div>
           <div  class="groups-list">
             <template v-for="(item, index) in list">
-              <div v-if="item.feed_type === 15">
+              <div v-if="item.feed_type === 15" @tap.stop.prevent="toDetail(item)">
                 <!--x发布了分享-->
                 <DiscoverShare
                   :data="item"
@@ -318,24 +318,7 @@
         )
       },
       toDetail (item) {
-        switch (item.feed_type) {
-          case 5:
-            if (item.feed_type === 5 && item.feed.domain === '') {
-              // ...
-            } else {
-              var linkArticle = {
-                view_url: item.url,
-                id: item.feed.submission_id,
-                title: item.feed.title,
-                comment_url: item.feed.comment_url,
-                img_url: item.feed.img
-              }
-              this.goArticle(linkArticle)
-            }
-            break
-          default:
-            break
-        }
+        this.$router.pushPlus(item.url, 'list-detail-page')
       },
       toDiscoverAdd () {
         localEvent.setLocalItem('selectedGroup' + getLocalUserId(), {
