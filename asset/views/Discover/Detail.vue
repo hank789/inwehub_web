@@ -96,8 +96,8 @@
               </span>
               <img class="lazyImg" v-lazy="detail.data.img" v-else>
               <div class="linkContent">
-                {{detail.data.title}}
-                <div>{{detail.data.url}}</div>
+                <div class="text-line-2">{{detail.data.title}}</div>
+                <div class="text-line-1">{{detail.data.url}}</div>
               </div>
             </div>
           </div>

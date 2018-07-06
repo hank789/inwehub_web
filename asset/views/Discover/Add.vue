@@ -58,9 +58,9 @@
             <!-- 有图片的样式 -->
             <img v-else class="lazyImg" v-lazy="link.img_url" alt="">
             <div class="linkContent">
-              <span v-if="link.title">{{link.title}}</span>
+              <span v-if="link.title" class="text-line-2">{{link.title}}</span>
               <span v-else class="seat"></span>
-              <div>{{link.url}}</div>
+              <div class="text-line-1">{{link.url}}</div>
             </div>
           </div>
           <div class="linkClose" @tap.stop.prevent="linkClose">
