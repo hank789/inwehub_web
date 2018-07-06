@@ -95,7 +95,7 @@
               <div class="contentWrapper">{{item.feed.title}}</div>
               <div class="newLinkBox">
                 <div class="container-image lazyImg" v-if="item.feed.img">
-                  <img class="lazyImg" v-lazy="item.feed.img" :src="item.feed.img" alt="">
+                  <img class="lazyImg" v-lazy="item.feed.img">
                 </div>
                 
                 <div class="linkContent" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
