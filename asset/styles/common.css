@@ -1327,7 +1327,7 @@ a {
 /* quill xiangqingye yangshi */
 .quillDetailWrapper p {
   font-size: 0.4rem;
-  margin-bottom: 0.346rem;
+  margin-bottom: 0.693rem !important;
 }
 .ql-tooltip{
   display:none;
