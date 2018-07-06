@@ -252,9 +252,11 @@
       quickUrl () {
         if (this.$route.query.url) {
           var url = this.$route.query.url
-          this.selectedGroup = {
-            id: 39,
-            name: '观点洞见'
+          if (!this.selectedGroup) {
+            this.selectedGroup = {
+              id: 39,
+              name: '观点洞见'
+            }
           }
           this.fetchUrlInfo(url)
         }
@@ -541,6 +543,9 @@
         })
       },
       promptUrl () {
+        if (!this.isUploadLink) {
+          return
+        }
         window.mui.prompt('插入超链接', '输入链接地址', ' ', ['取消', '确定'], (e) => {
           if (e.index === 1) {
             if (e.value) {
