@@ -47,7 +47,7 @@
           </div>
 
           <div class="discoverContentWrapper">
-            <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
+            <div class="contentWrapper quillDetailWrapper" id="contentWrapper">
               <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
 
               <div class="richText container-editor container-editor-app" v-show="detail.type === 'article'">
@@ -88,7 +88,7 @@
 
           <!-- 新增链接样式 -->
           <div class="link" v-if="detail.type === 'link' && detail.data.url">
-            <div class="linkBox" @tap.stop.prevent="linkUrl()">
+            <div class="linkBox" @tap.stop.prevent="goArticle(detail)">
               <span class="linkIimg" v-if="!detail.data.img">
                 <svg class="icon" aria-hidden="true" >
                   <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
@@ -369,10 +369,6 @@
       quillEditor
     },
     methods: {
-      linkUrl() {
-        console.log("111122233")
-        this.$router.pushPlus(this.detail.data.url)
-      },
       change (editor) {
         var html = editor.html
         html = textToLinkHtml(html)
