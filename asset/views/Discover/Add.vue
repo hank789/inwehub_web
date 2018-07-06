@@ -47,7 +47,7 @@
           </swiper-slide>
         </swiper>
         <!-- 新增链接样式 -->
-        <div class="link" v-if="showLink" v-for="(link, index) in links" :key="index">
+        <div class="link" v-if="links.length" v-for="(link, index) in links" :key="index">
           <div class="linkBox">
             <!-- 没有图片的样式 -->
             <span class="linkIimg" v-if="!link.img_url">
@@ -262,10 +262,7 @@
         }
       },
       linkClose () {
-        this.showLink = !this.showLink
-        // let parent = document.querySelector('.component-textareaWithImage')
-        // parent.removeChild(parent.querySelector('.link'))
-        // console.log("1212112")
+        this.links = []
       },
       readGroup () {
         this.selectedGroup = localEvent.getLocalItem('selectedGroup' + this.id)
