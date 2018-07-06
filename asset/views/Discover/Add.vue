@@ -108,7 +108,7 @@
         </svg> {{selectedGroup.name}}</template>
         <template v-else> <svg class="icon" aria-hidden="true" >
           <use xlink:href="#icon-wodequanzi-shouye"></use>
-        </svg> 选则圈子</template>
+        </svg> 选择圈子</template>
         </div>
         <div class="component-labelWithIcon selectedAddress float-right text-line-1" v-if="address" @tap.stop.prevent="toAddress">
         <svg class="icon" aria-hidden="true">
