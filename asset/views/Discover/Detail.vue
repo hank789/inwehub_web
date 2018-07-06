@@ -156,12 +156,12 @@
             </div>
           </div>
 
-          <div class="address" v-show="detail.data.current_address_name">
+          <!-- <div class="address" v-show="detail.data.current_address_name">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dingwei1"></use>
             </svg>
             <span>{{detail.data.current_address_name}}</span>
-          </div>
+          </div> -->
         </div>
 
 
@@ -868,6 +868,7 @@
   .share {
     padding: 0 0.453rem;
     .location {
+      margin-left: -3px;
       .icon {
         color: #C8C8C8;
         vertical-align: middle;
