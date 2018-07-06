@@ -655,40 +655,40 @@
 <style lang="less" rel="stylesheet/less" scoped>
 // 新增链接样式
   .link {
-    margin-top: 10px;
-    padding: 0 19px 0 13px;
+    margin-top: 0.266rem;
+    padding: 0 0.506rem 0 0.346rem;
     position: relative;
     .linkBox {
-      padding: 10px;
-      border-radius: 4px;
+      padding: 0.266rem;
+      border-radius: 0.106rem;
       background: #fff;
       .linkIimg {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         float: left;
         text-align: center;
-        line-height: 50px;
-        margin-right: 10px;
-        border-radius: 4px;
+        line-height: 1.333rem;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
         background: #ECECEE;
         .icon {
           color: #C8C8C8;
-          font-size: 28px;
+          font-size: 0.746rem;
         }
       }
       img {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         float: left;
-        margin-right: 10px;
-        border-radius: 4px;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
       }
       .linkContent {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #808080;
         .seat {
-          width: 10px;
-          height: 15px;
+          width: 0.266rem;
+          height: 0.4rem;
           display: inline-block;
         }
         div {
@@ -699,11 +699,11 @@
     }
     .linkClose {
       position: absolute;
-      top: -8px;
-      right: 12px;
+      top: -0.213rem;
+      right: 0.32rem;
       .icon {
-        width: 16px;
-        height: 16px;
+        width: 0.426rem;
+        height: 0.426rem;
         color: #808080;
       }
     }
