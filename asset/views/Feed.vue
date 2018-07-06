@@ -94,8 +94,8 @@
             <div class="newLink">
               <div class="contentWrapper">{{item.feed.title}}</div>
               <div class="newLinkBox">
-                <div class="container-image" v-if="item.feed.img">
-                  <img :src="item.feed.img" alt="">
+                <div class="container-image lazyImg" v-if="item.feed.img">
+                  <img class="lazyImg" v-lazy="item.feed.img" :src="item.feed.img" alt="">
                 </div>
                 
                 <div class="linkContent" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
@@ -283,8 +283,8 @@
       background: #F7F8FA;
       border-radius: 0.106rem;
       img {
-        width: 8.373rem;
-        height: 2.986rem;
+        // width: 8.373rem;
+        // height: 2.986rem;
         border-radius: 0.106rem;
       }
       .linkContent {
