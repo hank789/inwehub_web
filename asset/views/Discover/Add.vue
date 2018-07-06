@@ -586,6 +586,11 @@
           group_id: this.selectedGroup.id
         }
 
+        if (this.links.length) {
+          data.url = this.links[0].url
+          data.type = 'link'
+        }
+
         for (var i in this.images) {
           var compressBase64 = this.images[i].base64
           data['photos'].push(compressBase64)  // this.images[i].base64;

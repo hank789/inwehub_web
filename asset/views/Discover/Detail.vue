@@ -6,10 +6,12 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <div class="topImg" v-if="detail.type === 'article'">
-        <img :src="detail.data.img" alt="">
-      </div>
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
+
+        <div class="topImg" v-if="detail.type === 'article'">
+          <img :src="detail.data.img">
+        </div>
+
         <div class="mui-table-view detail-discover">
           <UserInfo
             :uuid="detail.owner.uuid"
@@ -25,13 +27,17 @@
           <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">
             删除
           </div>
+
           <div class="timeData">
             <span>
-              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
+              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
             </span>
           </div>
+
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
+
           <div class="line-river"></div>
+
           <!-- 来自 -->
           <div class="from">
             <svg class="icon" aria-hidden="true">
@@ -39,21 +45,28 @@
             </svg>
             <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
           </div>
+
           <div class="discoverContentWrapper">
-            <!-- 内容 -->
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper" @tap.stop.prevent="goArticle(detail)">
-              <span v-if="!detail.type === 'article'" v-html="textToLink(detail.title)"></span>
-              <quill-editor v-else
+              <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
+
+              <div class="richText" v-else>
+                <div class="quill-editor">
+                  <div class="ql-container ql-snow">
+                    <div class="ql-editor discoverContent">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <quill-editor
                 class="hiddenWrapper"
                 ref="myTextEditorRead"
-                :articleContent="detail.data.description"
                 :options="editorOptionRead"
                 @ready="onEditorReadyRead($event)"
                 @change="change"
               >
               </quill-editor>
-              <span class="color-b4b4b6 font-12" v-if="detail.data.domain"> - {{detail.data.domain}}</span>
-              
             </div>
 
 
@@ -61,29 +74,31 @@
               <div class="pdf" v-for="(pdf, index) in detail.data.files" :key="index" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
             </div>
 
+
             <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
               <template v-for="(image, index) in detail.data.img">
                 <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
                      :data-preview-group="1"/>
               </template>
             </div>
-
-            <div class="linkWrapper container-image" v-if="detail.type === 'link' && detail.data.img"
-                 @tap.stop.prevent="goArticle(detail)">
-              <img class="lazyImg" v-lazy="detail.data.img"/>
-            </div>
           </div>
 
           <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
                @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
-        </div>
-        <!-- 新增链接样式 -->
-          <div class="link">
+          </div>
+
+          <!-- 新增链接样式 -->
+          <div class="link" v-if="detail.type === 'link' && detail.data.url">
             <div class="linkBox">
-              <img src="../../statics/images/linkImg.png" alt="">
+              <span class="linkIimg" v-if="!detail.data.img">
+                <svg class="icon" aria-hidden="true" >
+                  <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+                </svg>
+              </span>
+              <img class="lazyImg" v-lazy="detail.data.img" v-else>
               <div class="linkContent">
-                传统大型企业的IT咨询项目加实施落地，施方法论是否可以敏捷化？大型企业大型… 
-                <div>www.inwehub.com</div>
+                {{detail.data.title}}
+                <div>{{detail.data.url}}</div>
               </div>
             </div>
           </div>
@@ -91,10 +106,11 @@
           <div class="timeContainer">
             <span>{{detail.views}}浏览</span>
             <!-- <span>
-              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
+              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
             </span> -->
             <span>著作权归作者所有</span>
           </div>
+
           <!-- 关联问答 -->
           <div class="answer">
             <div class="answerBox">
@@ -116,6 +132,7 @@
               </div>
             </div>
           </div>
+
           <!-- 分享 -->
           <div class="share">
             <div class="location" v-show="detail.data.current_address_name">
@@ -141,24 +158,17 @@
             </div>
           </div>
 
-          <!-- <div class="address" v-show="detail.data.current_address_name">
+          <div class="address" v-show="detail.data.current_address_name">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-dingwei1"></use>
             </svg>
             <span>{{detail.data.current_address_name}}</span>
-          </div> -->
+          </div>
         </div>
 
-        <!-- <div class="river"></div> -->
-        <!-- 圈子信息 -->
-        <!-- <div class="groupsList" v-if="detail.group !== null">
-          <groups-list class="small detail"
-                       :list="detail.group"
-                       :type="'small'"
-          ></groups-list>
-        </div> -->
 
         <div class="river" v-if="detail.supporter_list.length"></div>
+
         <!--点赞-->
         <div class="component-dianzanList" v-if="detail.upvotes">
           <svg class="icon" aria-hidden="true">
@@ -169,9 +179,9 @@
         </div>
 
         <div class="river"></div>
-        <!--评论部分-->
 
         <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
+
         <div class="river" v-if="noback && slug"></div>
 
         <Discuss
@@ -241,7 +251,7 @@
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
-  import {textToLinkHtml, transferTagToLink, scrollPage} from '../../utils/dom'
+  import {textToLinkHtml, transferTagToLink, scrollPage, addPreviewAttrForImg} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   import RecommendList from '../../components/discover/RecommendList.vue'
 
@@ -263,7 +273,7 @@
           },
           readOnly: true
         },
-        editorReadObj: {},
+        editorReadObj: null,
         userId: currentUser.user_id,
         name: currentUser.name,
         uuid: currentUser.uuid,
@@ -271,7 +281,6 @@
         noback: false,
         title: '分享',
         oldTitle: '分享',
-        // article: detail.data.title,
         detail: {
           group: {
             is_joined: '',
@@ -392,15 +401,11 @@
       },
       onEditorReadyRead (editor) {
         this.editorReadObj = editor
+        this.getDetail()
       },
-      pageScroll() {
-        console.log("2333")
-        scrollPage('.mui-content')
-      },
-      toDetail(item) {
+      toDetail (item) {
         this.$router.pushPlus('/group/detail/' + item.id)
       },
-      // 分享微信好友、朋友圈
       weChatFriend () {
         this.$refs.ShareBtn.shareToHaoyou()
       },
@@ -535,6 +540,13 @@
           this.detail = response.data.data
 
           this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
+
+          if (this.detail.type === 'article') {
+            var objs = JSON.parse(this.detail.data.description)
+            if (this.editorReadObj) {
+              this.editorReadObj.setContents(objs)
+            }
+          }
 
           this.loading = 0
         })
@@ -688,21 +700,15 @@
       this.getDetail()
     },
     mounted () {
-      if (this.answer && this.answer.content) {
-        var content = this.detail.data.description
-        var objs = JSON.parse(content)
-        this.editorReadObj.setContents(objs)
-      }
       pageRefresh(this, () => {
         this.refreshPageData()
       })
       window.mui.previewImage()
       autoTextArea()
-      scrollPage('.mui-content', () => {  //手指上滑触发
+      scrollPage('.mui-content', () => {
         if (this.detail.type === 'article') {
           this.title = this.detail.title
-        }
-      },() => {},() => {},() => {  //上滑到顶部
+        }}, () => {}, () => {}, () => {
         this.title = this.oldTitle
       })
     }
@@ -1007,7 +1013,7 @@
         span {
           font-size: 12px;
           color: #808080;
-          line-height: 20px; 
+          line-height: 20px;
           vertical-align: top;
         }
       }
@@ -1103,6 +1109,14 @@
 
   .container-pdf-list{
     padding:0.266rem 0.4rem;
+  }
+
+  .hiddenWrapper{
+    display: none;
+  }
+
+  .discoverContent{
+    padding:0;
   }
 </style>
 
