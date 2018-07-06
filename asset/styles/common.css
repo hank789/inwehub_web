@@ -1327,7 +1327,7 @@ a {
 /* quill xiangqingye yangshi */
 .quillDetailWrapper p {
   font-size: 0.4rem;
-  margin-bottom: 0.346rem;
+  margin-bottom: 0.693rem !important;
 }
 .ql-tooltip{
   display:none;
@@ -2691,6 +2691,8 @@ a {
   color: #B1BDCC !important;
   font-size: 0.426rem !important;
   font-style: normal !important; }
+.container-editor .ql-editor p {
+  margin-bottom: 0.693rem !important; }
 .container-editor .ql-editor h1 {
   color: #4A5F7B;
   font-size: 0.48rem !important;
@@ -2738,6 +2740,8 @@ a {
   color: #444;
   line-height: 0.693rem;
   font-size: 0.426rem; }
+.container-editor-app .ql-editor p {
+  margin-bottom: 0.693rem !important; }
 .container-editor-app .ql-editor h1 {
   color: #444;
   font-size: 0.453rem !important;
@@ -2754,3 +2758,4 @@ a {
   margin-left: -2.4em; }
 .container-editor-app .ql-editor blockquote {
   border-left: 0.08rem solid #DCDCDC !important; }
+

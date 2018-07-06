@@ -8,7 +8,7 @@
     </header>
 
     <div class="mui-content">
-      <div class="component-textareaWithImage">
+      <div class="component-textareaWithImage container-editor container-editor-app">
         <Jeditor
           ref="myAddEditor"
           id="discoverAddJeditor"
@@ -842,6 +842,7 @@
   #discoverAddJeditor .textarea-wrapper{
     border:none;
     background: #f3f4f6;
+    padding:0 0.266rem;
   }
 
   #discoverAddJeditor .counter{
