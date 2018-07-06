@@ -543,7 +543,7 @@
         if (!this.isUploadLink) {
           return
         }
-        window.mui.prompt('插入超链接', '输入链接地址', ' ', ['取消', '确定'], (e) => {
+        window.mui.prompt('插入链接卡片', '输入链接地址', ' ', ['取消', '确定'], (e) => {
           if (e.index === 1) {
             if (e.value) {
               this.fetchUrlInfo(e.value)
