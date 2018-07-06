@@ -57,7 +57,11 @@
             </span>
             <!-- 有图片的样式 -->
             <img v-else class="lazyImg" v-lazy="link.img_url" alt="">
-            <div class="linkContent">{{link.title}}<div>{{link.url}}</div></div>
+            <div class="linkContent">
+              <span v-if="link.title">{{link.title}}</span>
+              <span v-else class="seat"></span>
+              <div>{{link.url}}</div>
+            </div>
           </div>
           <div class="linkClose" @tap.stop.prevent="linkClose">
             <svg class="icon" aria-hidden="true" >
@@ -682,6 +686,11 @@
       .linkContent {
         font-size: 14px;
         color: #808080;
+        .seat {
+          width: 10px;
+          height: 15px;
+          display: inline-block;
+        }
         div {
           color: #B4B4B6;
           word-wrap: break-word;
