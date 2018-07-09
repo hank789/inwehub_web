@@ -5,6 +5,7 @@
       <h1 class="mui-title">{{'Ta的动态'}}</h1>
     </header>
 
+    <div class="mui-content">
     <RefreshList
       ref="RefreshList"
       v-model="list"
@@ -158,8 +159,7 @@
       </template>
 
     </RefreshList>
-
-
+    </div>
   </div>
 </template>
 <script>
@@ -244,10 +244,6 @@
 <style lang="less" scoped>
   .mui-content{
     background: #fff;
-  }
-  .listWrapper {
-    top: 1.04rem;
-    bottom: 50px; /* px不转换 */
   }
   .newLink {
     margin-top: 0.24rem;
