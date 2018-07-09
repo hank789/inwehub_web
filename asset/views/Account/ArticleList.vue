@@ -22,7 +22,7 @@
             <div class="container-image">
               <img :src="recommend.data ? recommend.data.img:''"  />
             </div>
-            <p class="recommend_content mui-ellipsis-2" >{{recommend.data ? recommend.data.title:''}}</p>
+            <p class="recommend_content mui-ellipsis-2" >{{recommend.title}}</p>
             <div class="recommend_datail">
               <p class="answer-fouce">{{recommend.comments_number}}评论<i></i>{{recommend.upvotes}}赞</p>
             </div>
@@ -61,21 +61,7 @@
     },
     methods: {
       goDetial (hot) {
-        switch (hot.type) {
-          case 'text':
-            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
-            break
-          case 'link':
-            goThirdPartyArticle(
-              hot.data.url,
-              hot.id,
-              hot.title,
-              '/c/' + hot.category_id + '/' + hot.slug,
-              hot.data.img
-            )
-            break
-          default:
-        }
+        this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
       }
     },
     mounted () {

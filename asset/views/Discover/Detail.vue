@@ -112,7 +112,7 @@
           </div>
 
           <!-- 关联问答 -->
-          <div class="answer" v-if="detail.related_question">
+          <div class="answer" v-if="detail.related_question" @tap.stop.prevent="toAnswerDetail(detail.related_question)">
             <div class="answerBox">
               <div class="answerContent">
                 <span class="price">
@@ -370,6 +370,9 @@
       quillEditor
     },
     methods: {
+      toAnswerDetail (item) {
+        this.$router.pushPlus('/ask/offer/answers/' + item.id)
+      },
       change (editor) {
         var html = editor.html
         html = textToLinkHtml(html)

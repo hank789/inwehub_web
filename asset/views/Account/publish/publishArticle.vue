@@ -32,7 +32,7 @@
             <div class="margin-10-0-0" v-if="ask.img && ask.type =='text'">
               <Images :images="ask.img" class="newestList"></Images>
             </div>
-            <div class="container-image margin-10-0-0" v-if="ask.img && ask.type =='link'" >
+            <div class="container-image margin-10-0-0" v-if="ask.img && ask.type !='text'" >
               <img :src="ask.img" />
             </div>
             <p class="mui-ellipsis-2"><span  v-html="textToLink(ask.title)"></span><a v-if="ask.domain">{{ask.domain}}</a> </p>

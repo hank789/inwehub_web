@@ -42,7 +42,7 @@
           <template v-for="(hot, index) in list">
             <li class="Container" v-if="hot.type === 'link'" >
               <div @tap.stop.prevent="goDetial(hot)" >
-                <p><a v-html="getHighlight(hot.data.title)"></a><i>{{hot.data.domain}}</i></p>
+                <p><a v-html="getHighlight(hot.title)"></a><i v-if="hot.data.domain">{{hot.data.domain}}</i></p>
                 <p class="container-image" v-if="hot.data.img">
                   <img :src="hot.data.img">
                 </p>
@@ -179,21 +179,7 @@
         return newstr
       },
       goDetial (hot) {
-        switch (hot.type) {
-          case 'text':
-            this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug, 'list-detail-page')
-            break
-          case 'link':
-            goThirdPartyArticle(
-              hot.data.url,
-              hot.id,
-              hot.title,
-              '/c/' + hot.category_id + '/' + hot.slug,
-              hot.data.img
-            )
-            break
-          default:
-        }
+        this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug, 'list-detail-page')
       },
       hideAllOptions () {
         var list = document.querySelectorAll('.carte')
