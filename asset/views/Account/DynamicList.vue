@@ -245,10 +245,6 @@
   .mui-content{
     background: #fff;
   }
-  .listWrapper {
-    top: 1.04rem;
-    bottom: 50px; /* px不转换 */
-  }
   .newLink {
     margin-top: 0.24rem;
     // padding: 0 0.426rem;
