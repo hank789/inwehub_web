@@ -548,6 +548,8 @@
             if (this.editorReadObj) {
               this.editorReadObj.setContents(objs)
             }
+          } else {
+            this.title = '分享'
           }
 
           this.loading = 0
