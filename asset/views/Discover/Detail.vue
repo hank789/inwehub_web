@@ -966,10 +966,13 @@
           display: inline-block;
         }
         div {
-          color: #B4B4B6;
           word-break: break-all;
         }
+        .text-line-2 {
+          color: #808080;
+        }
         .text-line-1 {
+          color: #B4B4B6;
           font-size: 0.32rem;
         }
       }

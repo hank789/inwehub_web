@@ -161,6 +161,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 订阅您感兴趣的领域
+    path: '/userGuide/interst',
+    name: 'userGuide-interst',
+    meta: {
+      title: '订阅您感兴趣的领域',
+      wechatHideHeader: true
+    },
+    component: componets.NewcomerGuidanceInterest,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 新人引导第一步
     path: '/userGuide/stepone',
     name: 'userGuide-stepone',

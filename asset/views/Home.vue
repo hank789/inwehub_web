@@ -60,13 +60,23 @@
           <p>合作</p>
         </li>
       </ul>
-      <div class="line-river" v-if="new_message.length"></div>
-        <div class="component-noticeBar line-1" v-if="new_message.length"><swiper :options="swiperOption" ref="mySwiper" @tap="swiperClick"><swiper-slide :key="index" v-for="(item, index) in new_message" :link="item.link"><span>{{ item.text }}</span></swiper-slide></swiper></div>
+      <!-- 消息 -->
+      <!-- <div class="line-river" v-if="new_message.length"></div>
+        <div class="component-noticeBar line-1" v-if="new_message.length"><swiper :options="swiperOption" ref="mySwiper" @tap="swiperClick"><swiper-slide :key="index" v-for="(item, index) in new_message" :link="item.link"><span>{{ item.text }}</span></swiper-slide></swiper></div> -->
       <div class="gray"></div>
       <!--精选推荐-->
       <div class="component-title-home">
         <div class="left">精选推荐</div>
-        <div class="right" @tap.stop.prevent="$router.pushPlus('/recommends')">更多</div>
+        <div class="right">
+          <span class="Interest" @tap.stop.prevent="$router.pushPlus('/userGuide/interst')">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-biaoqing"></use>
+            </svg>
+            根据兴趣推荐
+            <i></i>
+          </span>
+          <span @tap.stop.prevent="$router.pushPlus('/recommends')">更多</span>
+        </div>
       </div>
       <div class="line-river"></div>
       <ul class="recommend">
@@ -468,6 +478,22 @@
     line-height:0.373rem;
     margin-top: 0.213rem;
     margin-bottom:0;
+  }
+  .component-title-home {
+    .Interest {
+      .icon {
+        color: #B4B4B6;
+        margin-right: 0;
+      }
+      i {
+        display: inline-block;
+        width: 0.026rem;
+        height: 0.32rem;
+        background: #dbdbdb;
+        margin: 0 0.266rem;
+        margin-bottom: -0.05rem;
+      }
+    }
   }
   /*精选推荐*/
   .recommend{
