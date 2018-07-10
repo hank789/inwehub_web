@@ -259,6 +259,8 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
+  import hljs from 'highlight.js'
+  import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
 
   export default {
@@ -383,7 +385,15 @@
         var answerContentWrapper = this.$el.querySelector('.discoverContent')
         html = addPreviewAttrForImg(html)
         html = html.replace(/(<p><br><\/p>)*$/, '')
+
         answerContentWrapper.innerHTML = html
+
+        var syntaxCodes = answerContentWrapper.querySelectorAll('.discoverContent .ql-syntax')
+        if (syntaxCodes.length) {
+          for (var i = 0; i < syntaxCodes.length; i++) {
+            syntaxCodes[i].innerHTML = hljs.highlightAuto(syntaxCodes[i].innerHTML).value
+          }
+        }
 
         window.mui.previewImage()
 
