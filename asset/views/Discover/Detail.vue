@@ -112,7 +112,7 @@
           </div>
 
           <!-- 关联问答 -->
-          <div class="answer" v-if="detail.related_question">
+          <div class="answer" v-if="detail.related_question" @tap.stop.prevent="toAnswerDetail(detail.related_question)">
             <div class="answerBox">
               <div class="answerContent">
                 <span class="price">
@@ -259,6 +259,8 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
+  import hljs from 'highlight.js'
+  import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
 
   export default {
@@ -370,6 +372,9 @@
       quillEditor
     },
     methods: {
+      toAnswerDetail (item) {
+        this.$router.pushPlus('/ask/offer/answers/' + item.id)
+      },
       change (editor) {
         var html = editor.html
         html = textToLinkHtml(html)
@@ -380,7 +385,15 @@
         var answerContentWrapper = this.$el.querySelector('.discoverContent')
         html = addPreviewAttrForImg(html)
         html = html.replace(/(<p><br><\/p>)*$/, '')
+
         answerContentWrapper.innerHTML = html
+
+        var syntaxCodes = answerContentWrapper.querySelectorAll('.discoverContent .ql-syntax')
+        if (syntaxCodes.length) {
+          for (var i = 0; i < syntaxCodes.length; i++) {
+            syntaxCodes[i].innerHTML = hljs.highlightAuto(syntaxCodes[i].innerHTML).value
+          }
+        }
 
         window.mui.previewImage()
 
@@ -545,6 +558,8 @@
             if (this.editorReadObj) {
               this.editorReadObj.setContents(objs)
             }
+          } else {
+            this.title = '分享'
           }
 
           this.loading = 0
