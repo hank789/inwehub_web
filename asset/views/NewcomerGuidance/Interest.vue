@@ -3,7 +3,7 @@
         <div class="mui-content">
             <div>
                 <div class="invitation-title">
-                    <div class="next-step" @click="nextSubmit" v-if="showSubmit">下一步</div>
+                    <div class="next-step" @click="nextSubmit" v-if="!showSubmit">下一步</div>
                     <div class="next-step" @click="sureSubmit" v-else>确定</div>
                     <div class="invitation-text">
                         <p>订阅您感兴趣的领域</p>
@@ -52,7 +52,7 @@ export default {
         content: '',
         page: 1,
         title: '用户提交新领域',
-        showSubmit: true
+        showSubmit: false
     }),
     computed: {
         selectTags () {
@@ -138,9 +138,10 @@ export default {
     },
     mounted () {
         this.getData()
-        if (this.$route.query.type === "1") {
-            this.showSubmit = !this.showSubmit
-        }
+        this.showSubmit = !!this.$route.query.type
+        // if (this.$route.query.type === "1") {
+        //     this.showSubmit = !this.showSubmit
+        // }
     }
 }
 </script>

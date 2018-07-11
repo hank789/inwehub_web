@@ -282,9 +282,13 @@
     // padding: 0 0.426rem;
     .newLinkBox {
       margin-top: 0.266rem;
-      padding: 0.293rem 0.4rem 0.293rem;
+      padding: 15px 0.4rem 0.293rem;
       background: #F7F8FA;
       border-radius: 0.106rem;
+      .container-image {
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
       img {
         // width: 8.373rem;
         // height: 2.986rem;
@@ -293,8 +297,7 @@
       .linkContent {
         font-size: 0.373rem;
         color: #808080;
-        line-height: 0.533rem;
-        margin-top: 0.106rem;
+        // line-height: 0.533rem;
       }
       .link {
         font-size: 0.32rem;
