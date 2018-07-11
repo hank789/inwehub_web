@@ -98,7 +98,7 @@
               <div class="linkContent">
                 <div v-if="detail.data.title" class="text-line-2">{{detail.data.title}}</div>
                 <span v-else class="seat"></span>
-                <div class="text-line-1">{{detail.data.url}}</div>
+                <div class="text-line-1">{{detail.data.domain}}</div>
               </div>
             </div>
           </div>
