@@ -3,8 +3,8 @@
         <div class="mui-content">
             <div>
                 <div class="invitation-title">
-                    <div class="next-step" @click="nextSubmit">确定</div>
-                    <div class="next-step" @click="nextSubmit">下一步</div>
+                    <div class="next-step" @click="nextSubmit" v-if="showSubmit">下一步</div>
+                    <div class="next-step" @click="sureSubmit" v-else>确定</div>
                     <div class="invitation-text">
                         <p>订阅您感兴趣的领域</p>
                         <p>追踪行业新动态</p>
@@ -17,9 +17,8 @@
                             :key="index" 
                             @click="interestList(item)" 
                             :class="item.checked ? 'active' : '' "
-                        > {{item.text}}
-                    </div>
-            <!-- :class="{active : interestGroupClass[index]}" -->
+                            > {{item.text}}
+                        </div>
                     </div>
                 </div>
                 <div class="right" @tap.stop.prevent="message">都不感兴趣？</div>
@@ -52,7 +51,8 @@ export default {
         loading: 1,
         content: '',
         page: 1,
-        title: '用户提交新领域'
+        title: '用户提交新领域',
+        showSubmit: true
     }),
     computed: {
         selectTags () {
@@ -74,13 +74,35 @@ export default {
         message () {
             this.showPopup = !this.showPopup
         },
-        nextSubmit () {
+        //确定  按钮
+        sureSubmit () {
             postRequest('profile/updateRegionTag', {
                 tags: this.selectTags
             }).then(response => {
                 console.log(this.selectTags)
+                var code = response.data.code
+                if (code !== 1000 ) {
+                    window.mui.toast(response.data.message)
+                    return
+                }
+                this.$router.replace('/home')
             })
         },
+        //下一步  按钮
+        nextSubmit () {
+            postRequest('profile/updateRegionTag', {
+                tags: this.selectTags
+            }).then(response => {
+                // console.log(this.selectTags)
+                var code = response.data.code
+                if (code !== 1000 ) {
+                    window.mui.toast(response.data.message)
+                    return
+                }
+                this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
+            })
+        },
+        // 提交  按钮
         submit() {
             postRequest('system/feedback',{
                 title: this.title,
@@ -90,6 +112,13 @@ export default {
                 if (code !== 1000) {
                     window.mui.toast(response.data.message)
                     return
+                }
+                if (this.$route.query.type === "1") {
+                    window.mui.toast('提交成功')
+                    this.$router.replace('/home')
+                }else {
+                    window.mui.toast('提交成功')
+                    this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
                 }
             })
         },
@@ -109,6 +138,9 @@ export default {
     },
     mounted () {
         this.getData()
+        if (this.$route.query.type === "1") {
+            this.showSubmit = !this.showSubmit
+        }
     }
 }
 </script>
