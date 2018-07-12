@@ -242,6 +242,8 @@ window.mui.back = function () {
       console.log('go(-1)')
       router.go(-1)
     }
+  } else if (window.mui.os.plus && window.mui.os.android) {
+    window.mui.muiOldBack()
   } else {
     router.go(-1)
   }
