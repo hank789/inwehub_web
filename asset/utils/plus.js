@@ -500,7 +500,7 @@ function AppPageInit (context) {
 
     lockOrientation('portrait-primary')
 
-    if (window.mui.os.plus) {
+    if (window.mui.os.plus && window.mui.os.ios) {
       // 预加载页面
       var listPageWebview = window.mui.preload({
         url: process.env.NODE_ENV === 'development' ? 'index.html#/my' : '/public/index.html#/my',
