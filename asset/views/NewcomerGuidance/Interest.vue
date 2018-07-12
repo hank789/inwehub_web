@@ -7,7 +7,7 @@
                     <div class="next-step" @click="sureSubmit" v-else>确定</div>
                     <div class="invitation-text">
                         <p>订阅您感兴趣的领域</p>
-                        <p>追踪行业新动态</p>
+                        <p>追踪行业新动态2</p>
                     </div>
                 </div>
                 <div class="container-list-group">
@@ -16,8 +16,8 @@
                             v-for="(item,index) in list" 
                             :key="index" 
                             @click="interestList(item)" 
-                            :class="item.checked ? 'active' : '' "
-                            > {{item.text}}
+                            :class="{'active': item.checked}"
+                            > {{item.checked}}
                         </div>
                     </div>
                 </div>
@@ -48,6 +48,7 @@ export default {
         showPopup: false,
         // interestGroupClass: [],
         list: [],
+        selectInterest: [],
         loading: 1,
         content: '',
         page: 1,
@@ -67,9 +68,8 @@ export default {
     },
     methods: {
         interestList(item) {
+            console.log('item:' + item.checked)
             Vue.set(item, 'checked', !item.checked)
-            // this.$set(this.interestGroupClass,index,(!this.interestGroupClass[index] ? true : false))
-            // console.log(this.interestGroupClass)
         },
         message () {
             this.showPopup = !this.showPopup
@@ -133,15 +133,29 @@ export default {
                 }
                 this.list = response.data.data.tags
                 this.loading = 0    
+                // console.log(this.list)
+                
             })
+            
         }
     },
     mounted () {
         this.getData()
         this.showSubmit = !!this.$route.query.type
-        // if (this.$route.query.type === "1") {
-        //     this.showSubmit = !this.showSubmit
-        // }
+        
+        postRequest('profile/info',{}).then(response => {
+            this.selectInterest = response.data.data.info.region_tags.map(item => {
+                return item.value
+            })
+        });
+    },
+    watch: {
+        selectInterest(value) {
+            this.list.forEach (item => {
+                item.checked = value.indexOf(item.value) >= 0 ? true : false
+            })
+            console.log(this.list)
+        }
     }
 }
 </script>
