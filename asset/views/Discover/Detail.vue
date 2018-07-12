@@ -245,7 +245,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl} from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl} from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
@@ -509,13 +509,17 @@
           return
         }
 
-        goThirdPartyArticle(
-          detail.data.url,
-          detail.id,
-          detail.data.title,
-          '/c/' + detail.category_id + '/' + detail.slug,
-          detail.data.img
-        )
+        if (detail.data.url.indexOf(process.env.H5_ROOT) === 0) {
+          openAppUrlByUrl(detail.data.url)
+        } else {
+          goThirdPartyArticle(
+            detail.data.url,
+            detail.id,
+            detail.data.title,
+            '/c/' + detail.category_id + '/' + detail.slug,
+            detail.data.img
+          )
+        }
       },
       refreshPageData () {
         this.detail.data.img = []
@@ -727,7 +731,7 @@
     margin-top: -0.16rem;
   }
   .container-image {
-    height: 200px;
+    height: 5.333rem;
     border-radius: 0;
     img {
       border-radius: 0;

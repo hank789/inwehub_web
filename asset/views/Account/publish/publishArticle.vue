@@ -58,7 +58,7 @@
   import RefreshList from '../../../components/refresh/List.vue'
   import { textToLinkHtml, secureHtml } from '../../../utils/dom'
   import Images from '../../../components/image/Images.vue'
-  import { goThirdPartyArticle } from '../../../utils/webview'
+  // import { goThirdPartyArticle } from '../../../utils/webview'
   import localEvent from '../../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
 
