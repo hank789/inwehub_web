@@ -151,9 +151,9 @@ export default {
     background: #FFFFFF;
     .right {
         float: right;
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #03AEF9;
-        padding: 0 16px 30px;
+        padding: 0 0.426rem 0.8rem;
     }
 }
 /*订阅的头部*/
@@ -190,7 +190,7 @@ export default {
 .invitation-title .invitation-text{
     position: absolute;
     top:1.573rem;
-    left: 90px;
+    left: 2.4rem;
     text-align: left;
     display: flex;
     flex-direction: column;
@@ -205,21 +205,21 @@ export default {
 }
 // 列表
 .interestList {
-    padding: 15px 16px 0;
+    padding: 0.4rem 0.426rem 0;
     .interestGroup {
-        width: 166px;
-        padding: 0 10px;
-        height: 63px;
-        font-size: 15px;
+        width: 4.426rem;
+        padding: 0 0.266rem;
+        height: 1.68rem;
+        font-size: 0.4rem;
         color: #444444;
-        line-height: 63px;
+        line-height: 1.68rem;
         text-align: center;
-        border-radius: 4px;
-        margin-bottom: 5px;
+        border-radius: 0.106rem;
+        margin-bottom: 0.133rem;
         display: inline-block;
         background: #F7F8FA;
         &:nth-child(odd) {
-            margin-right: 10px; 
+            margin-right: 0.266rem; 
         }
     }
     .active {
@@ -238,45 +238,45 @@ export default {
     background: rgba(0, 0, 0, 0.3);
     .popupContent {
         width: 100%;
-        padding: 16px 0 30px;
+        padding: 0.426rem 0 0.8rem;
         position: absolute;
         bottom: 0;
         background: #fff;
         .popupTop {
-            padding-left: 11px;
-            line-height: 15px;
-            padding-bottom: 16px;
+            padding-left: 0.293rem;
+            line-height: 0.4rem;
+            padding-bottom: 0.426rem;
             border-bottom: .02667rem solid #DCDCDC;
             div {
                 color: #808080;
-                font-size: 14px;
+                font-size: 0.373rem;
                 text-align: center;
                 &:nth-child(1) {
-                    font-size: 16px;
+                    font-size: 0.426rem;
                     float: left;
                 }
             }
         }
         .input {
-            margin-top: 15px;
-            margin-bottom: 30px;
+            margin-top: 0.4rem;
+            margin-bottom: 0.8rem;
             text-align: center;
             input {
-                width: 343px;
-                border-radius: 5px;
+                width: 9.146rem;
+                border-radius: 0.133rem;
                 border: 0.026rem solid #DCDCDC;
             }
         }
         .submit {
-            width: 343px;
-            height: 44px;
-            line-height: 44px;
+            width: 9.146rem;
+            height: 1.173rem;
+            line-height: 1.173rem;
             text-align: center;
-            font-size: 16px;
+            font-size: 0.426rem;
             color: #ffffff;
             margin: 0 auto;
             background: #03AEF9;
-            border-radius: 50px;
+            border-radius: 1.333rem;
         }
     }
 }

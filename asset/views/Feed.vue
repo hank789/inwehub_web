@@ -282,12 +282,12 @@
     // padding: 0 0.426rem;
     .newLinkBox {
       margin-top: 0.266rem;
-      padding: 15px 0.4rem 0.293rem;
+      padding: 0.4rem 0.4rem 0.293rem;
       background: #F7F8FA;
       border-radius: 0.106rem;
       .container-image {
         margin-top: 0;
-        margin-bottom: 8px;
+        margin-bottom: 0.213rem;
       }
       img {
         // width: 8.373rem;

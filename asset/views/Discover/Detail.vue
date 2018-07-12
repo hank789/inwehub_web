@@ -727,7 +727,7 @@
     margin-top: -0.16rem;
   }
   .container-image {
-    height: 200px;
+    height: 5.333rem;
     border-radius: 0;
     img {
       border-radius: 0;
