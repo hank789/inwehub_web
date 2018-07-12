@@ -75,7 +75,7 @@
   import Share from '../utils/share'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
-  import { getLocalUrl, saveImageByBase64, createImageThumb, setClipboardText, dowloadFile } from '../utils/plus'
+  import { getLocalUrl, saveImageByBase64, createImageThumb, setClipboardText } from '../utils/plus'
   import localEvent from '../stores/localStorage'
 
   export default {

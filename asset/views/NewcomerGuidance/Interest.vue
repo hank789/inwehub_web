@@ -56,7 +56,7 @@ export default {
     }),
     computed: {
         selectTags () {
-            var tags = []
+            var tags = []          
             window.mui.each(this.list, function (index, item) {
                 if (item.checked) {
                     tags.push(item.value)

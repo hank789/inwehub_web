@@ -154,7 +154,7 @@
   </div>
 </template>
 <script>
-  import { goThirdPartyArticle } from '../utils/webview'
+  // import { goThirdPartyArticle } from '../utils/webview'
   import { postRequest } from '../utils/request'
   import userAbility from '../utils/userAbility'
   import { autoTextArea, AppInit, openUrlByUrl } from '../utils/plus'

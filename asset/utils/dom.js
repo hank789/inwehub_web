@@ -257,8 +257,6 @@ var ainimationProgress = (callback, compareCallback) => {
   }
 }
 
-
-
 export {
   queryParent,
   textToLink,
