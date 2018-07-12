@@ -7,15 +7,15 @@
           <div class="next-step" @click="sureSubmit" v-else>确定</div>
           <div class="invitation-text">
             <p>订阅您感兴趣的领域</p>
-            <p>追踪行业新动态2</p>
+            <p>追踪行业新动态</p>
           </div>
         </div>
-        <div class="container-list-group">
+        <div class="container-list-group" v-if="!loading">
           <div class="interestList">
             <div class="interestGroup text-line-1"
                  v-for="(item, index) in list"
                  :key="index"
-                 @click="interestList(item)"
+                 @tap.stop.prevent="interestList(item)"
                  :class="{'active': item.checked}"
             > {{item.text}}
 
@@ -24,18 +24,19 @@
         </div>
         <div class="right" @tap.stop.prevent="message">都不感兴趣？</div>
       </div>
-      <!-- 弹窗 -->
-      <div class="popup" v-if="showPopup">
-        <div class="popupContent">
-          <div class="popupTop">
-            <div @tap.stop.prevent="message">取消</div>
-            <div>留言</div>
-          </div>
-          <div class="input">
-            <input type="text" placeholder="在这里告诉我们您希望看到的领域！" v-model="content">
-          </div>
-          <div class="submit" @tap.stop.prevent="submit()">提交</div>
+    </div>
+    <!-- 弹窗 -->
+    <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
+      <div class="title">
+        <span @tap.stop.prevent="message">取消</span>
+        留言
+      </div>
+      <!--<div class="line-river"></div>-->
+      <div class="wraperBox">
+        <div class="inputWrapper">
+          <input type="text" placeholder="在这里告诉我们您希望看到的领域！" v-model="content">
         </div>
+        <div class="refer" @tap.stop.prevent="submit()">提交</div>
       </div>
     </div>
   </div>
@@ -69,7 +70,8 @@
         Vue.set(item, 'checked', !item.checked)
       },
       message () {
-        this.showPopup = !this.showPopup
+        window.mui('#shareWrapper').popover('toggle')
+        // this.showPopup = !this.showPopup
       },
       // 确定按钮
       sureSubmit () {
@@ -83,7 +85,7 @@
             return
           }
 
-          if (this.$route.query.type) {
+          if (this.$route.query.type === '1') {
             this.$router.replace('/home')
           } else {
             this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
@@ -105,13 +107,8 @@
             window.mui.toast(response.data.message)
             return
           }
-          if (this.$route.query.from === 'home') {
-            window.mui.toast('提交成功')
-            this.$router.replace('/home')
-          } else {
-            window.mui.toast('提交成功')
-            this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
-          }
+          window.mui.toast('提交成功')
+          window.mui('#shareWrapper').popover('toggle')
         })
       },
       getData () {
@@ -123,13 +120,24 @@
             window.mui.toast(response.data.message)
             return
           }
-          this.list = response.data.data.tags
+          var list = response.data.data.tags
 
           postRequest('profile/info', {}).then(response => {
-            // var tags = response.data.data.info.region_tags
-            this.list.map((item) => {
+            var tags = response.data.data.info.region_tags
+            console.log('tags', tags)
+            for (var j in list) {
               // @todo item.checked 赋值
-            })
+              list[j].checked = false
+
+              for (var i in tags) {
+                if (list[j].value === tags[i].value) {
+                  list[j].checked = true
+                  break
+                }
+              }
+            }
+
+            this.list = list
 
             this.loading = 0
           })
@@ -165,46 +173,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .invitation-title svg {
-    color: #b4b4b6;
-    font-size: 0.666rem;
-    position: absolute;
-    left: 0.453rem;
-    top: 0.533rem;
-  }
-
-  .invitation-title .next-step {
-    width: 2rem;
-    height: 0.906rem;
-    line-height: 0.853rem;
-    border: 0.026rem solid #03aef9;
-    border-radius: 1.333rem;
-    font-size: 0.373rem;
-    color: #03aef9;
-    position: absolute;
-    right: 0.453rem;
-    top: 0.426rem;
-  }
-
-  .invitation-title .invitation-text {
-    position: absolute;
-    top: 1.573rem;
-    left: 2.4rem;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .invitation-text p:nth-of-type(1) {
-    font-size: 0.373rem;
-    color: #808080;
-  }
-
-  .invitation-text p:nth-of-type(2) {
-    font-size: 0.533rem;
-    color: #323232;
+    svg {
+      color: #b4b4b6;
+      font-size: 0.666rem;
+      position: absolute;
+      left: 0.453rem;
+      top: 0.533rem;
+    }
+    .next-step {
+      width: 2rem;
+      height: 0.906rem;
+      line-height: 0.853rem;
+      border: 0.026rem solid #03aef9;
+      border-radius: 1.333rem;
+      font-size: 0.373rem;
+      color: #03aef9;
+      position: absolute;
+      right: 0.453rem;
+      top: 0.426rem;
+    }
+    .invitation-text {
+      position: absolute;
+      top: 1.573rem;
+      left: 2.4rem;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+    }
+    p {
+      &:nth-of-type(1) {
+        font-size: 0.373rem;
+        color: #808080;
+      }
+      &:nth-of-type(2) {
+        font-size: 0.533rem;
+        color: #323232;
+      }
+    }
   }
 
   // 列表
@@ -233,46 +238,38 @@
   }
 
   // 弹窗
-  .popup {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    .popupContent {
-      width: 100%;
-      padding: 0.426rem 0 0.8rem;
-      position: absolute;
-      bottom: 0;
+
+  .shareWrapper {
+    text-align: left;
+    .title {
       background: #fff;
-      .popupTop {
-        padding-left: 0.293rem;
-        line-height: 0.4rem;
-        padding-bottom: 0.426rem;
-        border-bottom: .02667rem solid #DCDCDC;
-        div {
-          color: #808080;
-          font-size: 0.373rem;
-          text-align: center;
-          &:nth-child(1) {
-            font-size: 0.426rem;
-            float: left;
-          }
-        }
+      text-align: center;
+      font-size: 0.373rem;
+      padding: 0.32rem 0;
+      position: relative;
+      color: #808080;
+      border-bottom: .02667rem solid #DCDCDC;
+      span {
+        position: absolute;
+        left: 0.586rem;
+        font-size: 0.4rem;
       }
-      .input {
-        margin-top: 0.4rem;
-        margin-bottom: 0.8rem;
+    }
+    .wraperBox {
+      background: #fff;
+      padding-top: 15px;
+      padding-bottom: 30px;
+      .inputWrapper {
         text-align: center;
+        margin-bottom: 30px;
         input {
           width: 9.146rem;
+          margin-bottom: 0;
           border-radius: 0.133rem;
           border: 0.026rem solid #DCDCDC;
         }
       }
-      .submit {
+      .refer {
         width: 9.146rem;
         height: 1.173rem;
         line-height: 1.173rem;
