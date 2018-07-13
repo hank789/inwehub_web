@@ -68,7 +68,7 @@
       <div class="component-title-home">
         <div class="left">精选推荐</div>
         <div class="right">
-          <span class="Interest" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?type=1')">
+          <span class="Interest" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-biaoqing"></use>
             </svg>

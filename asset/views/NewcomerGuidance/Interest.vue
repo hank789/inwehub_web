@@ -1,7 +1,7 @@
 <template>
   <div>
+    <div style="background: #f3f4f6"></div>
     <div class="mui-content">
-      <div>
         <div class="invitation-title">
           <div class="next-step" @click="nextSubmit" v-if="!showSubmit">下一步</div>
           <div class="next-step" @click="sureSubmit" v-else>确定</div>
@@ -12,18 +12,16 @@
         </div>
         <div class="container-list-group" v-if="!loading">
           <div class="interestList">
-            <div class="interestGroup text-line-1"
-                 v-for="(item, index) in list"
-                 :key="index"
-                 @tap.stop.prevent="interestList(item)"
-                 :class="{'active': item.checked}"
-            > {{item.text}}
-
-            </div>
+            <template v-for="(item, index) in list">
+              <span class="interestGroup"
+                :key="index"
+                @tap.stop.prevent="interestList(item)"
+                :class="{'active': item.checked}"
+              >{{item.text}}</span>
+            </template>
           </div>
         </div>
         <div class="right" @tap.stop.prevent="message">都不感兴趣？</div>
-      </div>
     </div>
     <!-- 弹窗 -->
     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
@@ -85,7 +83,7 @@
             return
           }
 
-          if (this.$route.query.type === '1') {
+          if (this.$route.query.from === 'home') {
             this.$router.replace('/home')
           } else {
             this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
@@ -124,7 +122,7 @@
 
           postRequest('profile/info', {}).then(response => {
             var tags = response.data.data.info.region_tags
-            console.log('tags', tags)
+            // console.log('tags', tags)
             for (var j in list) {
               // @todo item.checked 赋值
               list[j].checked = false
@@ -146,7 +144,7 @@
     },
     mounted () {
       this.getData()
-      this.showSubmit = !!this.$route.query.type
+      this.showSubmit = !!this.$route.query.from
     }
   }
 </script>
@@ -224,7 +222,7 @@
       line-height: 1.68rem;
       text-align: center;
       border-radius: 0.106rem;
-      margin-bottom: 0.133rem;
+      margin-bottom: 0.266rem;
       display: inline-block;
       background: #F7F8FA;
       &:nth-child(odd) {
@@ -244,7 +242,7 @@
     .title {
       background: #fff;
       text-align: center;
-      font-size: 0.373rem;
+      font-size: 14px;
       padding: 0.32rem 0;
       position: relative;
       color: #808080;
@@ -252,7 +250,7 @@
       span {
         position: absolute;
         left: 0.586rem;
-        font-size: 0.4rem;
+        font-size: 16px;
       }
     }
     .wraperBox {
@@ -267,6 +265,10 @@
           margin-bottom: 0;
           border-radius: 0.133rem;
           border: 0.026rem solid #DCDCDC;
+          &::placeholder {
+            font-size: 14px;
+            color: #C8C8C8;
+          }
         }
       }
       .refer {
