@@ -82,7 +82,8 @@ const routes = [
     name: 'search-queation',
     meta: {
       title: '搜索问答',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.SearchSearchQuestion,
     beforeEnter: (to, from, next) => {
@@ -94,7 +95,8 @@ const routes = [
     name: 'search-submission',
     meta: {
       title: '搜索分享',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.SearchSearchSubmission,
     beforeEnter: (to, from, next) => {
@@ -106,7 +108,8 @@ const routes = [
     name: 'search-tag',
     meta: {
       title: '搜索标签',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.SearchSearchTag,
     beforeEnter: (to, from, next) => {
@@ -118,7 +121,8 @@ const routes = [
     name: 'search-user',
     meta: {
       title: '搜索用户',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.SearchSearchUser,
     beforeEnter: (to, from, next) => {
@@ -256,7 +260,8 @@ const routes = [
     name: 'ask-offer-list',
     meta: {
       title: '问答社区',
-      wechatHideHeader: false
+      wechatHideHeader: false,
+      keepAlive: true
     },
     component: componets.AskOfferIndex,
     beforeEnter: (to, from, next) => {
@@ -461,7 +466,7 @@ const routes = [
     component: componets.GroupsList,
     meta: {
       title: '圈子',
-      keepAlive: false,
+      keepAlive: true,
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
@@ -487,7 +492,7 @@ const routes = [
     component: componets.GroupsDetail,
     meta: {
       title: '圈子',
-      keepAlive: false,
+      keepAlive: true,
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
@@ -885,7 +890,8 @@ const routes = [
     component: componets.AccountpublishpublishAnswers,
     meta: {
       title: '我的发布',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       to.params.id = to.params.id ? to.params.id : currentUser.uuid
@@ -898,7 +904,8 @@ const routes = [
     component: componets.AccountpublishpublishQuestions,
     meta: {
       title: '我的发布',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       to.params.id = to.params.id ? to.params.id : currentUser.uuid
@@ -911,7 +918,8 @@ const routes = [
     component: componets.AccountpublishpublishArticle,
     meta: {
       title: '我的发布',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       to.params.id = to.params.id ? to.params.id : currentUser.uuid
@@ -924,7 +932,8 @@ const routes = [
     component: componets.AccountpublishpublishComment,
     meta: {
       title: '我的发布',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       to.params.id = to.params.id ? to.params.id : currentUser.uuid
@@ -937,7 +946,8 @@ const routes = [
     component: componets.AccountArticleList,
     meta: {
       title: 'Ta的专栏',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -949,7 +959,8 @@ const routes = [
     component: componets.AccountDynamicList,
     meta: {
       title: 'Ta的动态',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -1698,7 +1709,8 @@ const routes = [
     name: 'nearby-people',
     meta: {
       title: '附近发现',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.NearbynearbyPeople,
     beforeEnter: (to, from, next) => {
@@ -1710,7 +1722,8 @@ const routes = [
     name: 'nearbyCompany',
     meta: {
       title: '附近发现',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.NearbynearbyCompany,
     beforeEnter: (to, from, next) => {
@@ -1767,7 +1780,8 @@ const routes = [
     name: 'recommends',
     meta: {
       title: '精选推荐',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.SelectionRecommend
   },
@@ -1987,8 +2001,8 @@ const routes = [
     name: 'my-collect-user',
     meta: {
       title: '我的关注',
-      wechatHideHeader: true
-      // keepAlive: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.AccountcollectUser,
     beforeEnter: (to, from, next) => {
@@ -2014,7 +2028,7 @@ const routes = [
     meta: {
       title: '我的关注',
       wechatHideHeader: true,
-      keepAlive: false
+      keepAlive: true
     },
     component: componets.AccountcollectQuestion,
     beforeEnter: (to, from, next) => {
