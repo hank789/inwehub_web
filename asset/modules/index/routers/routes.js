@@ -1883,7 +1883,8 @@ const routes = [
     name: 'feedback',
     meta: {
       title: '反馈建议',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.Feedback,
     beforeEnter: (to, from, next) => {
