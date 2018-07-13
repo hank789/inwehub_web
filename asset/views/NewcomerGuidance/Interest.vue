@@ -44,9 +44,7 @@
   import Vue from 'vue'
   export default {
     data: () => ({
-      showPopup: false,
       list: [],
-      selectInterest: [],
       loading: 1,
       content: '',
       title: '用户提交新领域',
@@ -69,14 +67,12 @@
       },
       message () {
         window.mui('#popupWrapper').popover('toggle')
-        // this.showPopup = !this.showPopup
       },
       // 确定按钮
       sureSubmit () {
         postRequest('profile/updateRegionTag', {
           tags: this.selectTags
         }).then(response => {
-          console.log(this.selectTags)
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -107,9 +103,9 @@
             return
           }
           window.mui.toast('提交成功')
+          this.content = ''
           window.mui('#popupWrapper').popover('toggle')
         })
-        this.content = ''
       },
       getData () {
         postRequest('tags/load', {
@@ -124,9 +120,7 @@
 
           postRequest('profile/info', {}).then(response => {
             var tags = response.data.data.info.region_tags
-            // console.log('tags', tags)
             for (var j in list) {
-              // @todo item.checked 赋值
               list[j].checked = false
 
               for (var i in tags) {
