@@ -3,8 +3,8 @@
     <div style="background: #f3f4f6"></div>
     <div class="mui-content">
         <div class="invitation-title">
-          <div class="next-step" @click="nextSubmit" v-if="!showSubmit">下一步</div>
-          <div class="next-step" @click="sureSubmit" v-else>确定</div>
+          <div class="next-step" @tap.stop.prevent="nextSubmit" v-if="!showSubmit">下一步</div>
+          <div class="next-step" @tap.stop.prevent="sureSubmit" v-else>确定</div>
           <div class="invitation-text">
             <p>订阅您感兴趣的领域</p>
             <p>追踪行业新动态</p>
@@ -24,7 +24,7 @@
         <div class="right" @tap.stop.prevent="message">都不感兴趣？</div>
     </div>
     <!-- 弹窗 -->
-    <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
+    <div id="popupWrapper" class="popupWrapper mui-popover mui-popover-action mui-popover-bottom">
       <div class="title">
         <span @tap.stop.prevent="message">取消</span>
         留言
@@ -32,7 +32,7 @@
       <!--<div class="line-river"></div>-->
       <div class="wraperBox">
         <div class="inputWrapper">
-          <input type="text" placeholder="在这里告诉我们您希望看到的领域！" v-model="content">
+          <input type="text" ref="blur" placeholder="在这里告诉我们您希望看到的领域！" v-model="content">
         </div>
         <div class="refer" @tap.stop.prevent="submit()">提交</div>
       </div>
@@ -68,7 +68,7 @@
         Vue.set(item, 'checked', !item.checked)
       },
       message () {
-        window.mui('#shareWrapper').popover('toggle')
+        window.mui('#popupWrapper').popover('toggle')
         // this.showPopup = !this.showPopup
       },
       // 确定按钮
@@ -96,6 +96,7 @@
       },
       // 提交新的标签
       submit () {
+        this.$refs.blur.blur()
         postRequest('system/feedback', {
           title: this.title,
           content: this.content
@@ -106,8 +107,9 @@
             return
           }
           window.mui.toast('提交成功')
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#popupWrapper').popover('toggle')
         })
+        this.content = ''
       },
       getData () {
         postRequest('tags/load', {
@@ -237,7 +239,7 @@
 
   // 弹窗
 
-  .shareWrapper {
+  .popupWrapper {
     text-align: left;
     .title {
       background: #fff;
