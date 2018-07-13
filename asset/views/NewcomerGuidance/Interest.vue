@@ -3,8 +3,8 @@
     <div style="background: #f3f4f6"></div>
     <div class="mui-content">
         <div class="invitation-title">
-          <div class="next-step" @click="nextSubmit" v-if="!showSubmit">下一步</div>
-          <div class="next-step" @click="sureSubmit" v-else>确定</div>
+          <div class="next-step" @tap.stop.prevent="nextSubmit" v-if="!showSubmit">下一步</div>
+          <div class="next-step" @tap.stop.prevent="sureSubmit" v-else>确定</div>
           <div class="invitation-text">
             <p>订阅您感兴趣的领域</p>
             <p>追踪行业新动态</p>
@@ -24,15 +24,15 @@
         <div class="right" @tap.stop.prevent="message">都不感兴趣？</div>
     </div>
     <!-- 弹窗 -->
-    <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
-      <div class="title">
+    <div id="popupWrapper" class="popupWrapper mui-popover mui-popover-action mui-popover-bottom">
+      <div class="title font-family-medium">
         <span @tap.stop.prevent="message">取消</span>
         留言
       </div>
       <!--<div class="line-river"></div>-->
       <div class="wraperBox">
         <div class="inputWrapper">
-          <input type="text" placeholder="在这里告诉我们您希望看到的领域！" v-model="content">
+          <input type="text" ref="blur" placeholder="在这里告诉我们您希望看到的领域！" v-model="content">
         </div>
         <div class="refer" @tap.stop.prevent="submit()">提交</div>
       </div>
@@ -44,9 +44,7 @@
   import Vue from 'vue'
   export default {
     data: () => ({
-      showPopup: false,
       list: [],
-      selectInterest: [],
       loading: 1,
       content: '',
       title: '用户提交新领域',
@@ -68,15 +66,13 @@
         Vue.set(item, 'checked', !item.checked)
       },
       message () {
-        window.mui('#shareWrapper').popover('toggle')
-        // this.showPopup = !this.showPopup
+        window.mui('#popupWrapper').popover('toggle')
       },
       // 确定按钮
       sureSubmit () {
         postRequest('profile/updateRegionTag', {
           tags: this.selectTags
         }).then(response => {
-          console.log(this.selectTags)
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -96,6 +92,7 @@
       },
       // 提交新的标签
       submit () {
+        this.$refs.blur.blur()
         postRequest('system/feedback', {
           title: this.title,
           content: this.content
@@ -106,7 +103,8 @@
             return
           }
           window.mui.toast('提交成功')
-          window.mui('#shareWrapper').popover('toggle')
+          this.content = ''
+          window.mui('#popupWrapper').popover('toggle')
         })
       },
       getData () {
@@ -122,9 +120,7 @@
 
           postRequest('profile/info', {}).then(response => {
             var tags = response.data.data.info.region_tags
-            // console.log('tags', tags)
             for (var j in list) {
-              // @todo item.checked 赋值
               list[j].checked = false
 
               for (var i in tags) {
@@ -237,7 +233,7 @@
 
   // 弹窗
 
-  .shareWrapper {
+  .popupWrapper {
     text-align: left;
     .title {
       background: #fff;
@@ -248,6 +244,7 @@
       color: #808080;
       border-bottom: .02667rem solid #DCDCDC;
       span {
+        font-family:PingFangSC-Regular;
         position: absolute;
         left: 0.586rem;
         font-size: 16px;
