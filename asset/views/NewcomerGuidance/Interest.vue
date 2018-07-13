@@ -255,11 +255,11 @@
     }
     .wraperBox {
       background: #fff;
-      padding-top: 15px;
-      padding-bottom: 30px;
+      padding-top: 0.4rem;
+      padding-bottom: 0.8rem;
       .inputWrapper {
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 0.8rem;
         input {
           width: 9.146rem;
           margin-bottom: 0;
