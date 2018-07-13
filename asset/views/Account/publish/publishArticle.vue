@@ -23,8 +23,8 @@
         :pageMode="true"
         v-model="list"
         :api="'readhub/mySubmission'"
-        :prevOtherData="{type:0,uuid: this.$route.params.id}"
-        :nextOtherData="{type:0,uuid: this.$route.params.id}"
+        :prevOtherData="{type:0,uuid: this.uuid}"
+        :nextOtherData="{type:0,uuid: this.uuid}"
 
         class="listWrapper">
         <ul class="answer">

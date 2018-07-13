@@ -429,7 +429,7 @@ function toSettingSystem (type) {
  * 设置当前webivew最新url到additionalHttpHeaders
  */
 function setWebviewNewUrl () {
-  if (!window.plus) return
+  if (!window.plus || window.mui.os.android) return
   window.mui.plusReady(function () {
     var currentWebview = window.plus.webview.currentWebview()
     var index = window.location.href.indexOf('#')

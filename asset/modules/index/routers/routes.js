@@ -720,7 +720,8 @@ const routes = [
     name: 'my-collected_answers',
     meta: {
       title: '我的收藏',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.AccountCollected,
     beforeEnter: (to, from, next) => {
@@ -732,7 +733,8 @@ const routes = [
     name: 'my-collected_article',
     meta: {
       title: '我的收藏',
-      wechatHideHeader: true
+      wechatHideHeader: true,
+      keepAlive: true
     },
     component: componets.AccountCollectedArticle,
     beforeEnter: (to, from, next) => {
