@@ -35,7 +35,7 @@
 
 <script>
   import { postRequest } from '../../utils/request'
-  import { goThirdPartyArticle } from '../../utils/webview'
+  // import { goThirdPartyArticle } from '../../utils/webview'
 
   const RecommentsList = {
     name: 'RecommentsList',

@@ -23,8 +23,8 @@
         :pageMode="true"
         v-model="list"
         :api="'readhub/mySubmission'"
-        :prevOtherData="{type:0,uuid: this.$route.params.id}"
-        :nextOtherData="{type:0,uuid: this.$route.params.id}"
+        :prevOtherData="{type:0,uuid: this.uuid}"
+        :nextOtherData="{type:0,uuid: this.uuid}"
 
         class="listWrapper">
         <ul class="answer">
@@ -58,7 +58,7 @@
   import RefreshList from '../../../components/refresh/List.vue'
   import { textToLinkHtml, secureHtml } from '../../../utils/dom'
   import Images from '../../../components/image/Images.vue'
-  import { goThirdPartyArticle } from '../../../utils/webview'
+  // import { goThirdPartyArticle } from '../../../utils/webview'
   import localEvent from '../../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
 

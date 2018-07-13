@@ -43,7 +43,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
   var footerTab = ['/discover', '/home', '/inform', '/my']
 
   var nextUrl = ''
-  if (window.mui.os.plus) {
+  if (window.mui.os.plus && window.mui.os.ios) {
     if (process.env.NODE_ENV !== 'development') {
       if (window.mixpanel.track) {
         var matchedRoute = this.resolve(url)

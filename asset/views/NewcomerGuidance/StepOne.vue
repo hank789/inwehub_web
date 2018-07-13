@@ -72,6 +72,7 @@
         postRequest('follow/batchTags', {
           ids: this.selectTags
         }).then(response => {
+          console.log(this.selectTags)
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)

@@ -98,7 +98,7 @@
               <div class="linkContent">
                 <div v-if="detail.data.title" class="text-line-2">{{detail.data.title}}</div>
                 <span v-else class="seat"></span>
-                <div class="text-line-1">{{detail.data.url}}</div>
+                <div class="text-line-1">{{detail.data.domain}}</div>
               </div>
             </div>
           </div>
@@ -245,7 +245,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl} from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl} from '../../utils/plus'
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
@@ -259,6 +259,8 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
+  import hljs from 'highlight.js'
+  import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
 
   export default {
@@ -383,7 +385,15 @@
         var answerContentWrapper = this.$el.querySelector('.discoverContent')
         html = addPreviewAttrForImg(html)
         html = html.replace(/(<p><br><\/p>)*$/, '')
+
         answerContentWrapper.innerHTML = html
+
+        var syntaxCodes = answerContentWrapper.querySelectorAll('.discoverContent .ql-syntax')
+        if (syntaxCodes.length) {
+          for (var i = 0; i < syntaxCodes.length; i++) {
+            syntaxCodes[i].innerHTML = hljs.highlightAuto(syntaxCodes[i].innerHTML).value
+          }
+        }
 
         window.mui.previewImage()
 
@@ -499,13 +509,17 @@
           return
         }
 
-        goThirdPartyArticle(
-          detail.data.url,
-          detail.id,
-          detail.data.title,
-          '/c/' + detail.category_id + '/' + detail.slug,
-          detail.data.img
-        )
+        if (detail.data.url.indexOf(process.env.H5_ROOT) === 0) {
+          openAppUrlByUrl(detail.data.url)
+        } else {
+          goThirdPartyArticle(
+            detail.data.url,
+            detail.id,
+            detail.data.title,
+            '/c/' + detail.category_id + '/' + detail.slug,
+            detail.data.img
+          )
+        }
       },
       refreshPageData () {
         this.detail.data.img = []
@@ -717,7 +731,7 @@
     margin-top: -0.16rem;
   }
   .container-image {
-    height: 200px;
+    height: 5.333rem;
     border-radius: 0;
     img {
       border-radius: 0;
@@ -971,10 +985,13 @@
           display: inline-block;
         }
         div {
-          color: #B4B4B6;
           word-break: break-all;
         }
+        .text-line-2 {
+          color: #808080;
+        }
         .text-line-1 {
+          color: #B4B4B6;
           font-size: 0.32rem;
         }
       }

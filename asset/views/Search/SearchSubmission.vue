@@ -107,7 +107,7 @@
 
 <script type="text/javascript">
   import { searchText } from '../../utils/search'
-  import { goThirdPartyArticle } from '../../utils/webview'
+  // import { goThirdPartyArticle } from '../../utils/webview'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'

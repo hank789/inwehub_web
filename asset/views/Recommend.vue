@@ -67,7 +67,7 @@
 </template>
 <script>
   import RefreshList from '../components/refresh/List.vue'
-  import { goThirdPartyArticle } from '../utils/webview'
+  // import { goThirdPartyArticle } from '../utils/webview'
   import Share from '../components/Share.vue'
   import { getRecommends } from '../utils/shareTemplate'
 

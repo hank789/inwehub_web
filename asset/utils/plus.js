@@ -429,7 +429,7 @@ function toSettingSystem (type) {
  * 设置当前webivew最新url到additionalHttpHeaders
  */
 function setWebviewNewUrl () {
-  if (!window.plus) return
+  if (!window.plus || window.mui.os.android) return
   window.mui.plusReady(function () {
     var currentWebview = window.plus.webview.currentWebview()
     var index = window.location.href.indexOf('#')
@@ -500,7 +500,7 @@ function AppPageInit (context) {
 
     lockOrientation('portrait-primary')
 
-    if (window.mui.os.plus) {
+    if (window.mui.os.plus && window.mui.os.ios) {
       // 预加载页面
       var listPageWebview = window.mui.preload({
         url: process.env.NODE_ENV === 'development' ? 'index.html#/my' : '/public/index.html#/my',

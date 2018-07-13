@@ -23,7 +23,7 @@
 
         <template v-for="(item, index) in list">
 
-          <div class="component-feed-item-guide" v-if="index === 2 && search_type === 6">
+          <div class="component-feed-item-guide" v-if="index === 2 && search_type === 2">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-gongkai"></use>
             </svg>
@@ -33,7 +33,7 @@
             </div>
           </div>
 
-          <div class="line-river-big" v-if="index === 2 && search_type === 6"></div>
+          <div class="line-river-big" v-if="index === 2 && search_type === 2"></div>
 
           <!-- 发布了分享 -->
           <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
@@ -97,7 +97,7 @@
                 <div class="container-image lazyImg" v-if="item.feed.img">
                   <img class="lazyImg" v-lazy="item.feed.img">
                 </div>
-                
+
                 <div class="linkContent" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
                 <div class="link">{{item.feed.domain}} </div>
               </div>
@@ -282,9 +282,13 @@
     // padding: 0 0.426rem;
     .newLinkBox {
       margin-top: 0.266rem;
-      padding: 0.293rem 0.4rem 0.293rem;
+      padding: 0.4rem 0.4rem 0.293rem;
       background: #F7F8FA;
       border-radius: 0.106rem;
+      .container-image {
+        margin-top: 0;
+        margin-bottom: 0.213rem;
+      }
       img {
         // width: 8.373rem;
         // height: 2.986rem;
@@ -293,8 +297,7 @@
       .linkContent {
         font-size: 0.373rem;
         color: #808080;
-        line-height: 0.533rem;
-        margin-top: 0.106rem;
+        // line-height: 0.533rem;
       }
       .link {
         font-size: 0.32rem;

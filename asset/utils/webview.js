@@ -300,7 +300,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
  */
 function showWebview () {
   console.log('准备为新webview绑定侧滑返回事件')
-  if (window.mui.os.plus) {
+  if (window.mui.os.plus && window.mui.os.ios) {
     window.mui.plusReady(() => {
       var self = window.plus.webview.currentWebview()
       if (self.custom_preload === false || self.custom_preload === undefined) {
