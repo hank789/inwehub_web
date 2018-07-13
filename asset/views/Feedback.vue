@@ -32,21 +32,30 @@
           </div>
           <div  class="groups-list">
             <template v-for="(item, index) in list">
-              <div v-if="item.feed_type === 5 && item.feed.domain === ''">
-                <!--x发布了发现-->
+              <div v-if="item.feed_type === 15" @tap.stop.prevent="toDetail(item)">
+                <!--x发布了分享-->
                 <DiscoverShare
                   :data="item"
                   :show='isShowItemOption(item)'
                   ref="discoverShare"
                   @comment="comment"
-                  @showItemOptions="showItemOptions"
+                  @showItemOptions="showItemOptions(item, index)"
                 ></DiscoverShare>
               </div>
-              <div v-else-if="item.feed_type === 5 && item.feed.domain !== ''"  @tap.stop.prevent="toDetail(item)">
+              <div v-else-if="item.feed_type === 16"  @tap.stop.prevent="toDetail(item)">
+                <!--x发布了链接分享-->
                 <SubmitReadhubAriticle :data="item"
                                        :show='isShowItemOption(item)'
                                        @comment="comment"
-                                       @showItemOptions="showItemOptions"
+                                       @showItemOptions="showItemOptions(item, index)"
+                ></SubmitReadhubAriticle>
+              </div>
+              <div v-else-if="item.feed_type === 5"  @tap.stop.prevent="toDetail(item)">
+                <!--x发布了原创文章，有title何描述-->
+                <SubmitReadhubAriticle :data="item"
+                                       :show='isShowItemOption(item)'
+                                       @comment="comment"
+                                       @showItemOptions="showItemOptions(item, index)"
                 ></SubmitReadhubAriticle>
               </div>
             </template>
@@ -176,7 +185,11 @@
     },
     props: {},
     watch: {
-      '$route': 'refreshPageData'
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
     },
     methods: {
       prevSuccessCallback () {},
@@ -240,24 +253,7 @@
         )
       },
       toDetail (item) {
-        switch (item.feed_type) {
-          case 5:
-            if (item.feed_type === 5 && item.feed.domain === '') {
-              // ...
-            } else {
-              var linkArticle = {
-                view_url: item.url,
-                id: item.feed.submission_id,
-                title: item.feed.title,
-                comment_url: item.feed.comment_url,
-                img_url: item.feed.img
-              }
-              this.goArticle(linkArticle)
-            }
-            break
-          default:
-            break
-        }
+        this.$router.pushPlus(item.feed.comment_url, 'list-detail-page')
       },
       toDiscoverAdd () {
         localEvent.setLocalItem('selectedGroup' + getLocalUserId(), {
