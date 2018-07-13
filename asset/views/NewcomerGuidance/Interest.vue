@@ -25,7 +25,7 @@
     </div>
     <!-- 弹窗 -->
     <div id="popupWrapper" class="popupWrapper mui-popover mui-popover-action mui-popover-bottom">
-      <div class="title">
+      <div class="title font-family-medium">
         <span @tap.stop.prevent="message">取消</span>
         留言
       </div>
@@ -250,6 +250,7 @@
       color: #808080;
       border-bottom: .02667rem solid #DCDCDC;
       span {
+        font-family:PingFangSC-Regular;
         position: absolute;
         left: 0.586rem;
         font-size: 16px;
