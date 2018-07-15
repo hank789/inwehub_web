@@ -642,6 +642,11 @@
     mounted () {
       this.getData()
     },
+    activated: function () {
+      if (this.id !== parseInt(this.$route.params.id)) {
+        this.refreshPageData()
+      }
+    },
     updated () {}
   }
 </script>

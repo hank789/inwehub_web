@@ -412,7 +412,6 @@
       },
       onEditorReadyRead (editor) {
         this.editorReadObj = editor
-        this.getDetail()
       },
       toDetail (item) {
         this.$router.pushPlus('/group/detail/' + item.id)
