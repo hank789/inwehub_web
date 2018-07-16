@@ -151,6 +151,10 @@
             document.body.classList.remove('openAppH5')
             break
         }
+      },
+      refreshData () {
+        console.log('openApp refreshData() fired')
+        this.isLogined = isLogined()
       }
     },
     data () {

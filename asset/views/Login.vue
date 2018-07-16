@@ -169,6 +169,8 @@
         window.mui.back()
       },
       loginSuccessCallback () {
+        this.$parent.$refs.OpenAppComponent.refreshData()
+
         // 存储设备信息
         window.mui.plusReady(function () {
           if (window.mui.os.plus) {
