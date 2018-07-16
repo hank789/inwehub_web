@@ -17,7 +17,7 @@
                      @chat="chat"
     ></FooterComponent>
     <div id="toast"></div>
-    <OpenAppComponent></OpenAppComponent>
+    <OpenAppComponent ref="OpenAppComponent"></OpenAppComponent>
     <inwehubDialog ref="inwehubDialog"></inwehubDialog>
     <MessageComponent ref="MessageComponent"></MessageComponent>
   </div>

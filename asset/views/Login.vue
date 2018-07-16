@@ -111,6 +111,14 @@
         if (to.query.redirect) {
           hash = to.query.redirect
         }
+
+        var userAgent = window.navigator.userAgent
+
+        if (userAgent.match(/WindowsWechat/)) {
+          next()
+          return false
+        }
+
         rebootAuth(hash)
         // -----
         return
@@ -161,6 +169,8 @@
         window.mui.back()
       },
       loginSuccessCallback () {
+        this.$parent.$refs.OpenAppComponent.refreshData()
+
         // 存储设备信息
         window.mui.plusReady(function () {
           if (window.mui.os.plus) {
