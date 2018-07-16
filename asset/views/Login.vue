@@ -102,6 +102,7 @@
     },
     beforeRouteEnter (to, from, next) {
       if (window.mui.os.wechat) {
+        alert(window.navigator.userAgent)
         if (process.env.NODE_ENV === 'development') {
           next()
           return
