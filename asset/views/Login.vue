@@ -102,7 +102,6 @@
     },
     beforeRouteEnter (to, from, next) {
       if (window.mui.os.wechat) {
-        alert(window.navigator.userAgent)
         if (process.env.NODE_ENV === 'development') {
           next()
           return
@@ -112,6 +111,14 @@
         if (to.query.redirect) {
           hash = to.query.redirect
         }
+
+        var userAgent = window.navigator.userAgent
+
+        if (userAgent.match(/WindowsWechat/)) {
+          next()
+          return false
+        }
+
         rebootAuth(hash)
         // -----
         return
