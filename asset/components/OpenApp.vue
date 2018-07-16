@@ -33,7 +33,7 @@
           </svg>
           <div class="desc">最具品质的咨询顾问社区</div>
         </div>
-        <div class="right"><a id="btnOpenAppWeixin" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a><i class="line-wall"></i><a v-if="isLogined" @tap.stop.prevent="$router.push('/my')">我的主页</a><a v-else @tap.stop.prevent="$router.push('/login')">登录/注册</a></div>
+        <div class="right"><a id="btnOpenAppWeixin" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a><i class="line-wall"></i><a v-if="isLogined" @tap.stop.prevent="$router.push('/my')">我的主页</a><a href="" target="_self" @tap.stop.prevent="$router.push('/login')" v-else >登录/注册</a></div>
       </div>
     </div>
   </div>
