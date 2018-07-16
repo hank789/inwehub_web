@@ -274,6 +274,7 @@
           readOnly: true
         },
         editorReadObj: null,
+        editorReadContentObj: null,
         userId: currentUser.user_id,
         name: currentUser.name,
         uuid: currentUser.uuid,
@@ -412,6 +413,9 @@
       },
       onEditorReadyRead (editor) {
         this.editorReadObj = editor
+        if (this.editorReadContentObj) {
+          this.editorReadObj.setContents(this.editorReadContentObj)
+        }
       },
       toDetail (item) {
         this.$router.pushPlus('/group/detail/' + item.id)
@@ -558,6 +562,7 @@
           if (this.detail.type === 'article') {
             this.title = this.detail.title
             var objs = JSON.parse(this.detail.data.description)
+            this.editorReadContentObj = objs
             if (this.editorReadObj) {
               this.editorReadObj.setContents(objs)
             }
