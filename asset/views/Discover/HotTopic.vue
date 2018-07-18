@@ -309,7 +309,6 @@
 
   .menu svg {
     float: right;
-    ont-size: 0.48rem;
     color: #03aef9;
     margin-top: 0.346rem;
   }
