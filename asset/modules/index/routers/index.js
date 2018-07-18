@@ -53,6 +53,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
         } else {
           mixpanelEvent += matchedRoute.route.fullPath
         }
+        var currentRoute = this.history.current
         window.mixpanel.track(
           mixpanelEvent,
           {
@@ -60,10 +61,10 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
             'user_device': window.getUserAppDevice(),
             'page': matchedRoute.route.fullPath,
             'page_name': matchedRoute.route.name,
-            'page_title': matchedRoute.route.meta.title
+            'page_title': matchedRoute.route.meta.title,
+            'referrer_page': (currentRoute && currentRoute.name) ? currentRoute.fullPath : '/home'
           }
         )
-        var currentRoute = this.history.current
         if (currentRoute && currentRoute.name) {
           window.mixpanel.track(
             'inwehub:analysis:router:count',
