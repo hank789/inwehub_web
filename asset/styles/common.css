@@ -2759,3 +2759,52 @@ a {
 .container-editor-app .ql-editor blockquote {
   border-left: 0.08rem solid #DCDCDC !important; }
 
+
+
+.component-upAndDown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 29px;
+  text-align: center; }
+.component-upAndDown .upAndDownLeft {
+  margin: 0 15px; }
+.component-upAndDown .upAndDownLeft .icon {
+  color: #C8C8C8;
+  font-size: 22px; }
+.component-upAndDown .upAndDownLeft .icon.active {
+  color: #03AEF9; }
+.component-upAndDown .upAndDownLeft span {
+  display: block;
+  font-size: 12px;
+  margin-top: 2px; }
+.component-upAndDown .upAndDownCenter span {
+  font-size: 14px;
+  color: #B4B4B6; }
+.component-upAndDown .upAndDownCenter .progressWrapper {
+  width: 214px;
+  height: 12px;
+  margin-top: 10px;
+  border-radius: 50px;
+  background: #808080;
+  position: relative; }
+.component-upAndDown .upAndDownCenter .progressWrapper .progress {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20%;
+  height: 12px;
+  background: #03AEF9;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px; }
+.component-upAndDown .upAndDownRight {
+  margin: 0 20px; }
+.component-upAndDown .upAndDownRight .icon {
+  color: #C8C8C8;
+  font-size: 22px; }
+.component-upAndDown .upAndDownRight .icon.active {
+  color: #03AEF9; }
+.component-upAndDown .upAndDownRight span {
+  display: block;
+  font-size: 12px;
+  margin-top: 2px; }
