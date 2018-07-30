@@ -139,6 +139,25 @@
               </svg>
               <span>{{detail.data.current_address_name}}</span>
             </div>
+
+            <div class="component-upAndDown">
+              <div class="upAndDownLeft">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-caishixin"></use>
+                </svg><span>踩</span>
+              </div>
+              <div class="upAndDownCenter"><span>{{detail.support_description}}</span>
+                <div class="progressWrapper">
+                  <div class="progress"></div>
+                </div>
+              </div>
+              <div class="upAndDownRight">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-zanshixin"></use>
+                </svg><span>赞</span>
+              </div>
+            </div>
+
             <div class="shareGo">
               <P>分享到</P>
               <div class="shareList">
@@ -1169,6 +1188,11 @@
 
   .discoverContent{
     padding:0;
+  }
+
+  .component-upAndDown{
+    margin-top: 18px;
+    padding: 0 29px 0 8px;
   }
 </style>
 
