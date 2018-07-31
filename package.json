@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "0.16.2",
     "babel-plugin-component": "0.9.1",
+    "bodymovin": "^4.13.0",
     "dom-to-image": "2.6.0",
     "highlight.js": "^9.12.0",
     "keycode": "2.1.9",

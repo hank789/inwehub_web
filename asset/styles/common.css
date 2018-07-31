@@ -2760,13 +2760,14 @@ a {
   border-left: 0.08rem solid #DCDCDC !important; }
 
 
-
 .component-upAndDown {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 0 29px;
-  text-align: center; }
+  text-align: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }
 .component-upAndDown .upAndDownLeft {
   margin: 0 15px; }
 .component-upAndDown .upAndDownLeft .icon {
@@ -2777,12 +2778,14 @@ a {
 .component-upAndDown .upAndDownLeft span {
   display: block;
   font-size: 12px;
-  margin-top: 2px; }
+  margin-top: 1px;
+  color: #B4B4B6; }
 .component-upAndDown .upAndDownCenter span {
   font-size: 14px;
   color: #B4B4B6; }
 .component-upAndDown .upAndDownCenter .progressWrapper {
   width: 214px;
+  overflow: hidden;
   height: 12px;
   margin-top: 10px;
   border-radius: 50px;
@@ -2798,7 +2801,14 @@ a {
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px; }
 .component-upAndDown .upAndDownRight {
-  margin: 0 20px; }
+  margin: 0 15px; }
+.component-upAndDown .upAndDownRight .upVote {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  top: -3px; }
+.component-upAndDown .upAndDownRight .upVote ~ span {
+  margin-top: -7px !important; }
 .component-upAndDown .upAndDownRight .icon {
   color: #C8C8C8;
   font-size: 22px; }
@@ -2807,4 +2817,5 @@ a {
 .component-upAndDown .upAndDownRight span {
   display: block;
   font-size: 12px;
-  margin-top: 2px; }
+  margin-top: 1px;
+  color: #B4B4B6; }
