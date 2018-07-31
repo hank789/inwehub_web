@@ -2769,26 +2769,26 @@ a {
   -ms-flex-pack: center;
   justify-content: center; }
 .component-upAndDown .upAndDownLeft {
-  margin: 0 15px; }
+  margin: 0 0.4rem; }
 .component-upAndDown .upAndDownLeft .icon {
   color: #C8C8C8;
-  font-size: 22px; }
+  font-size: 0.586rem; }
 .component-upAndDown .upAndDownLeft .icon.active {
   color: #03AEF9; }
 .component-upAndDown .upAndDownLeft span {
   display: block;
-  font-size: 12px;
-  margin-top: 1px;
+  font-size: 0.32rem;
+  margin-top: 0.026rem;
   color: #B4B4B6; }
 .component-upAndDown .upAndDownCenter span {
-  font-size: 14px;
+  font-size: 0.373rem;
   color: #B4B4B6; }
 .component-upAndDown .upAndDownCenter .progressWrapper {
-  width: 214px;
+  width: 5.706rem;
   overflow: hidden;
-  height: 12px;
-  margin-top: 10px;
-  border-radius: 50px;
+  height: 0.32rem;
+  margin-top: 0.266rem;
+  border-radius: 1.333rem;
   background: #808080;
   position: relative; }
 .component-upAndDown .upAndDownCenter .progressWrapper .progress {
@@ -2796,26 +2796,26 @@ a {
   right: 0;
   top: 0;
   width: 20%;
-  height: 12px;
+  height: 0.32rem;
   background: #03AEF9;
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px; }
+  border-top-right-radius: 1.333rem;
+  border-bottom-right-radius: 1.333rem; }
 .component-upAndDown .upAndDownRight {
-  margin: 0 15px; }
+  margin: 0 0.4rem; }
 .component-upAndDown .upAndDownRight .upVote {
   position: relative;
-  width: 32px;
-  height: 32px;
-  top: -3px; }
+  width: 0.853rem;
+  height: 0.853rem;
+  top: -0.08rem; }
 .component-upAndDown .upAndDownRight .upVote ~ span {
-  margin-top: -7px !important; }
+  margin-top: -0.186rem !important; }
 .component-upAndDown .upAndDownRight .icon {
   color: #C8C8C8;
-  font-size: 22px; }
+  font-size: 0.586rem; }
 .component-upAndDown .upAndDownRight .icon.active {
   color: #03AEF9; }
 .component-upAndDown .upAndDownRight span {
   display: block;
-  font-size: 12px;
-  margin-top: 1px;
+  font-size: 0.32rem;
+  margin-top: 0.026rem;
   color: #B4B4B6; }

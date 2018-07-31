@@ -1256,7 +1256,7 @@
   }
 
   .component-upAndDown{
-    margin-top: 18px;
+    margin-top: 0.48rem;
   }
 </style>
 
