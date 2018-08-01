@@ -33,6 +33,25 @@
               @toPay="toPay"
       ></Answer>
 
+      <div class="component-upAndDown" v-if="ask.answer.content">
+        <div class="upAndDownLeft" @tap.stop.prevent="unSupport()">
+          <svg class="icon" aria-hidden="true" :class="{active: ask.answer.is_downvoted}">
+            <use xlink:href="#icon-zanshixin"></use>
+          </svg><span>{{ ask.answer.is_downvoted ? '已踩' : '踩' }}</span>
+        </div>
+        <div class="upAndDownCenter"><span>{{ask.answer.support_description}}</span>
+          <div class="progressWrapper">
+            <div class="progress" :style="'width:' + ask.answer.support_percent + '%'"></div>
+          </div>
+        </div>
+        <div class="upAndDownRight" @tap.stop.prevent="support()">
+          <svg class="icon" aria-hidden="true" :class="{active: ask.answer.is_supported}">
+            <use xlink:href="#icon-zanshixin"></use>
+          </svg>
+          <span>{{ ask.answer.is_supported ? '已赞' : '赞' }}</span>
+        </div>
+      </div>
+
       <div class="see" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 &gt;</div>
 
       <div class="line-river-big"></div>
@@ -132,7 +151,7 @@
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
-  import { collectAnswer, supportAnswer, toAnswer, adoptAnswer, modifySelfAnswer } from '../../utils/ask'
+  import { collectAnswer, supportAnswer, unSupportAnswer, toAnswer, adoptAnswer, modifySelfAnswer } from '../../utils/ask'
   import pay from '../../components/pay/pay.vue'
   import Comment from '../../components/question-detail/CommentNew.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
@@ -540,6 +559,13 @@
         }, () => {
           this.ask.answer.collect_num--
           this.ask.answer.is_collected = 0
+        })
+      },
+      unSupport () {
+        unSupportAnswer(this, this.ask.answer.id, () => {
+          this.ask.answer.is_downvoted = 1
+        }, () => {
+          this.ask.answer.is_downvoted = 0
         })
       },
       support () {
