@@ -6,8 +6,8 @@
           <use xlink:href="#icon-logowenzi"></use>
         </svg><span class="splitCircle"></span>
         <div class="logoAndTabsAndSearchTabs">
-          <div class="tab active">热点</div>
-          <div class="tab" @tap.stop.prevent="toDomain()">领域</div>
+          <div class="tab" @tap.stop.prevent="toHome()">热点</div>
+          <div class="tab active">领域</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
@@ -27,39 +27,6 @@
         :autoShowEmpty="false"
       >
 
-        <div id="slider" class="mui-slider" v-if="data.banners.length">
-          <div class="mui-slider-group  mui-slider-loop">
-            <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-              <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
-            </div>
-            <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-              <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
-            </div>
-            <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
-              <a @tap.stop.prexvent="goLink(data.banners[0].url)">
-                <img class="lazyImg" v-lazy="data.banners[0].img_url" />
-              </a>
-            </div>
-          </div>
-          <div class="home mui-slider-indicator">
-            <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in data.banners"></div>
-          </div>
-        </div>
-
-        <div class="component-title-iconAndText">
-          <div class="iconAndTextLeft">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-huo"></use>
-            </svg>实时热点TOP
-          </div>
-            <div class="iconAndTextRight" @tap.stop.prevent="toDiscoverAdd()">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-tianjia"></use>
-              </svg>爆料
-          </div>
-        </div>
-
-
         <div class="container-list-article">
           <template  v-for="(item, index) in list">
             <div class="line-river-big" v-if="index === 5"></div>
@@ -71,7 +38,7 @@
                 <div class="explain">
                   <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
                 </timeago>
-              </div>
+                </div>
               </div>
               <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
             </div>
@@ -85,19 +52,14 @@
 </template>
 <script>
 
-  import { getHomeData } from '../utils/home'
   import RefreshList from '../components/refresh/List.vue'
-  import { saveLocationInfo } from '../utils/allPlatform'
-  import { AppInit, autoTextArea } from '../utils/plus'
-  import userAbility from '../utils/userAbility'
 
-  const Home = {
+  const Domain = {
     data () {
       return {
         loading: 1,
         list: [],
         data: {
-          banners: []
         }
       }
     },
@@ -117,8 +79,8 @@
       }
     },
     methods: {
-      toDomain () {
-        this.$router.pushPlus('domain')
+      toHome () {
+        this.$router.pushPlus('home')
       },
       timeago (time) {
         let newDate = new Date()
@@ -126,18 +88,6 @@
         return newDate
       },
       refreshPageData () {
-        userAbility.newbieTask(this)
-        autoTextArea()
-
-        getHomeData((data) => {
-          this.data = data
-
-          setTimeout(() => {
-            window.mui('.mui-slider').slider({
-              interval: 5000
-            })
-          }, 100)
-        })
       },
       toDetail (item) {
         switch (item.read_type) {
@@ -161,62 +111,24 @@
             break
           default:
         }
-      },
-      toDiscoverAdd () {
-        this.$router.pushPlus('/discover/add')
       }
     },
     updated () {},
     mounted () {
-      saveLocationInfo()
-      AppInit(this)
     }
   }
-  export default Home
+  export default Domain
 </script>
 
 <style lang="less" scoped>
-  .mui-slider{
-    width:9.146rem;
-    border-radius: 0.133rem;
-    margin-left:0.4rem;
-    overflow: hidden;
-  }
   .mui-content{
     background: #fff;
   }
   .component-title-iconAndText{
     margin-top:0.533rem;
   }
-
   .refreshListWrapper{
     top: 1.173rem;
     bottom:1.333rem;
-  }
-</style>
-
-<style>
-  .home.mui-slider-indicator{
-    text-align: right;
-    padding-right: 4%;
-  }
-  .home.mui-slider-indicator .mui-indicator{
-    width: 0.16rem;
-    height: 0.16rem;
-    margin: 0.026rem 0.133rem;
-    background: rgba(216,216,216,1);
-    -webkit-box-shadow: 0 0 0 0 rgba(1216,216,216, .7);
-    box-shadow: 0 0 0 0 rgba(216,216,216, .7);
-  }
-  .home.mui-slider-indicator .mui-active.mui-indicator{
-    width: 0.32rem;
-    height:0.16rem;
-    background:rgba(3,174,249,1);
-    border-radius: 1.333rem;
-    -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(3,174,249, .7);
-    box-shadow: 0 0 0 0 rgba(3,174,249, .7);
-  }
-  .mui-scrollbar-vertical{
-    display: none !important;
   }
 </style>
