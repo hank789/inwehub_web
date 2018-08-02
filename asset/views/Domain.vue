@@ -14,6 +14,20 @@
         </svg>
       </div>
 
+      <div class="line-river-after"></div>
+
+      <div class="container-tabLabels">
+        <swiper :options="swiperOption" class="container-upload-images">
+            <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
+              <span class="tab active" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+            </swiper-slide>
+        </swiper>
+      </div>
+
+      <svg class="icon selectDomainIcon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
+        <use xlink:href="#icon-xingqubiaoqian"></use>
+      </svg>
+
       <RefreshList
         ref="refreshList"
         class="refreshListWrapper"
@@ -53,6 +67,9 @@
 <script>
 
   import RefreshList from '../components/refresh/List.vue'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { postRequest } from '../utils/request'
+  import { queryParent } from '../utils/dom'
 
   const Domain = {
     data () {
@@ -60,12 +77,26 @@
         loading: 1,
         list: [],
         data: {
-        }
+        },
+        swiperOption: {
+          slidesPerView: 'auto',
+          spaceBetween: 0,
+          freeMode: true
+        },
+        selectTagValue: null,
+        tags: []
       }
     },
-    created () {},
+    created () {
+      postRequest('profile/info', {}).then(response => {
+        var tags = response.data.data.info.region_tags
+        this.tags = tags
+      })
+    },
     components: {
-      RefreshList
+      RefreshList,
+      swiper,
+      swiperSlide
     },
     activated: function () {
       this.refreshPageData()
@@ -74,11 +105,15 @@
       prevOtherData () {
         return {
           orderBy: 1,
-          recommendType: 1
+          recommendType: 1,
+          tagFilter: this.selectTagValue
         }
       }
     },
     methods: {
+      selectTag (tag) {
+        this.selectTagValue = tag.value
+      },
       toHome () {
         this.$router.pushPlus('home')
       },
@@ -128,7 +163,22 @@
     margin-top:0.533rem;
   }
   .refreshListWrapper{
-    top: 1.173rem;
+    top: 2.533rem;
     bottom:1.333rem;
+  }
+  .container-tabLabels{
+    width: 8.533rem;
+    margin-left:0.426rem;
+    margin-top: 0.24rem;
+  }
+  .tagLabel{
+    width:auto !important;
+  }
+  .selectDomainIcon{
+    font-size: 0.506rem;
+    color: #808080;
+    position: absolute;
+    right: 0.4rem;
+    top: 1.6rem;
   }
 </style>

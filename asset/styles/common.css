@@ -2960,3 +2960,17 @@ a {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover; }
+
+
+.container-tabLabels .tab {
+  display: inline-block;
+  color: #808080;
+  font-size: 0.346rem;
+  border: 0.026rem solid #DCDCDC;
+  padding: 0.133rem 0.266rem;
+  border-radius: 0.106rem;
+  margin-right: 0.133rem; }
+.container-tabLabels .tab.active {
+  background: #F3F4F6;
+  color: #444;
+  border: none; }
