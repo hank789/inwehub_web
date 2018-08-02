@@ -80,7 +80,7 @@
           }
 
           if (this.$route.query.from === 'home') {
-            this.$router.replace('/home')
+            this.$router.replace('/domain')
           } else {
             this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
           }
