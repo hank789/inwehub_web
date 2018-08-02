@@ -2819,3 +2819,144 @@ a {
   font-size: 0.32rem;
   margin-top: 0.026rem;
   color: #B4B4B6; }
+
+.component-title-iconAndText {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative; }
+.component-title-iconAndText .iconAndTextLeft {
+  color: #444;
+  font-size: 0.346rem; }
+.component-title-iconAndText .iconAndTextLeft .icon {
+  margin-left: 0.4rem;
+  margin-right: 0.106rem;
+  font-size: 0.426rem;
+  color: #FD80AD; }
+.component-title-iconAndText .iconAndTextRight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding-right: 0.426rem;
+  color: #03AEF9;
+  font-size: 0.373rem; }
+.component-title-iconAndText .iconAndTextRight .icon {
+  font-size: 0.293rem;
+  color: #B4B4B6;
+  position: relative;
+  top: -0.053rem;
+  margin-right: 0.08rem; }
+
+
+.container-control-logoAndTabsAndSearch {
+  height: 1.173rem;
+  line-height: 1.173rem;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative; }
+.container-control-logoAndTabsAndSearch .logoIcon {
+  font-size: 2.16rem;
+  position: relative;
+  top: -0.4rem;
+  left: 0.293rem;
+  color: #3c3e44; }
+.container-control-logoAndTabsAndSearch .splitCircle {
+  display: inline-block;
+  margin-top: 0.56rem;
+  margin-left: 0.72rem;
+  border-radius: 50%;
+  width: 0.106rem;
+  height: 0.106rem;
+  background: #B4B4B6; }
+.container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs {
+  color: #B4B4B6;
+  margin-left: 0.266rem; }
+.container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab {
+  margin: 0 0.266rem;
+  font-size: 0.373rem;
+  display: inline-block; }
+.container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab.active {
+  color: #444444;
+  position: relative;
+  font-family: PingFangSC-Medium; }
+.container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab.active:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  background-color: #03AEF9;
+  height: 0.08rem;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5); }
+.container-control-logoAndTabsAndSearch .searchIcon {
+  font-size: 0.48rem;
+  color: #444;
+  position: absolute;
+  right: 0.453rem;
+  top: 0.373rem; }
+
+
+.component-item-article {
+  position: relative;
+  height: 3.013rem;
+  padding: 0.346rem 0.426rem; }
+.component-item-article .itemArticleLeft {
+  display: inline-block;
+  width: 5.92rem;
+  vertical-align: top;
+  height: 100%;
+  position: relative; }
+.component-item-article .itemArticleLeft .titleWrapper {
+  display: inline-block;
+  width: inherit;
+  color: #444;
+  font-size: 0.426rem;
+  font-family: PingFangSC-Medium;
+  line-height: 0.613rem; }
+.component-item-article .itemArticleLeft .titleWrapper .number {
+  color: #808080;
+  font-size: 0.426rem;
+  margin-right: 0.133rem; }
+.component-item-article .itemArticleLeft .explain {
+  display: inline-block;
+  color: #B4B4B6;
+  font-size: 0.293rem;
+  position: absolute;
+  left: 0;
+  bottom: 0; }
+.component-item-article .itemArticleLeft .explain label {
+  border: 0.026rem solid #03aef9;
+  border-radius: 0.106rem;
+  color: #03AEF9;
+  font-size: 0.266rem;
+  padding: 0 0.133rem;
+  margin-right: 0.266rem; }
+.component-item-article .itemArticleLeft .explain span {
+  color: #03AEF9;
+  font-size: 0.293rem;
+  position: relative;
+  margin: 0 0.4rem 0 0; }
+.component-item-article .itemArticleLeft .explain span:after {
+  position: absolute;
+  content: '';
+  right: -0.24rem;
+  bottom: 0.186rem;
+  width: 0.053rem;
+  height: 0.053rem;
+  background: #b4b4b6;
+  border-radius: 50%; }
+.component-item-article .itemArticleRight {
+  display: inline-block;
+  width: 2.96rem;
+  height: 100%;
+  position: relative;
+  right: -0.133rem; }
+.component-item-article .itemArticleRight img {
+  border-radius: 0.133rem;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover; }
