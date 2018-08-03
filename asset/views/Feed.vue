@@ -1,12 +1,22 @@
 <template>
   <div>
-    <HomeSearch :unread_count="unread_count" :contact_id="contact_id"></HomeSearch>
-
     <div class="mui-content">
-      <div class="container-tabs">
-        <div class="tab" :class="{active: search_type === 2}" @tap.stop.prevent="switchSearchType(2)"><span>全部</span></div>
-        <div class="tab" :class="{active: search_type === 6}" @tap.stop.prevent="switchSearchType(6)"><span>推荐</span></div>
+
+      <div class="container-control-logoAndTabsAndSearch">
+        <svg class="icon logoIcon" aria-hidden="true">
+          <use xlink:href="#icon-logowenzi"></use>
+        </svg><span class="splitCircle"></span>
+        <div class="logoAndTabsAndSearchTabs">
+          <div class="tab active">关注</div>
+          <div class="tab" @tap.stop.prevent="$router.pushPlus('/ask/offers')">问答</div>
+          <div class="tab" @tap.stop.prevent="$router.pushPlus('/groups')">圈子</div>
+        </div>
+        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
+          <use xlink:href="#icon-sousuo"></use>
+        </svg>
       </div>
+
+      <div class="line-river-after"></div>
 
       <RefreshList
         ref="RefreshList"
@@ -274,7 +284,7 @@
     background: #fff;
   }
   .listWrapper {
-    top: 1.04rem;
+    top: 44px;
     bottom: 50px; /* px不转换 */
   }
   .newLink {

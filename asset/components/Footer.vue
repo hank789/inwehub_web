@@ -221,6 +221,8 @@
             this.isMy = true
             break
           case '/discover':
+          case '/ask/offers':
+          case '/groups':
             this.isDiscover = true
             break
           case '/discoverGroup':
