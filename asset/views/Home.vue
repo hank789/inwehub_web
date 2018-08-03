@@ -27,7 +27,7 @@
         :autoShowEmpty="false"
       >
 
-        <div id="slider" class="mui-slider" v-if="data.banners.length">
+        <div id="slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
           <div class="mui-slider-group  mui-slider-loop">
             <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
               <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
@@ -181,6 +181,7 @@
 <style lang="less" scoped>
   .mui-slider{
     width:9.145rem;
+    height:3.626rem;
     border-radius: 0.133rem;
     margin-left:0.4rem;
     overflow: hidden;
@@ -221,5 +222,10 @@
   }
   .mui-scrollbar-vertical{
     display: none !important;
+  }
+
+  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item img{
+    height:3.626rem !important;
+    object-fit: cover;
   }
 </style>
