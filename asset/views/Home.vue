@@ -197,6 +197,9 @@
     top: 1.173rem;
     bottom:50px; /* px不转换 */
   }
+  .component-title-iconAndText .iconAndTextLeft .icon{
+    color:#FA4975 !important;
+  }
 </style>
 
 <style>

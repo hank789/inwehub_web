@@ -36,7 +36,7 @@
       <div class="component-upAndDown" v-if="ask.answer.content">
         <div class="upAndDownLeft" @tap.stop.prevent="unSupport()">
           <svg class="icon" aria-hidden="true" :class="{active: ask.answer.is_downvoted}">
-            <use xlink:href="#icon-zanshixin"></use>
+            <use xlink:href="#icon-caishixin"></use>
           </svg><span>{{ ask.answer.is_downvoted ? '已踩' : '踩' }}</span>
         </div>
         <div class="upAndDownCenter"><span>{{ask.answer.support_description}}</span>

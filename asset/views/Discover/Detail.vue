@@ -144,7 +144,7 @@
           <div class="component-upAndDown">
             <div class="upAndDownLeft" @tap.stop.prevent="detailDownVote()">
               <svg class="icon" aria-hidden="true" :class="{active: detail.is_downvoted}">
-                <use xlink:href="#icon-zanshixin"></use>
+                <use xlink:href="#icon-caishixin"></use>
               </svg><span>{{ detail.is_downvoted ? '已踩' : '踩' }}</span>
             </div>
             <div class="upAndDownCenter"><span>{{detail.support_description}}</span>
