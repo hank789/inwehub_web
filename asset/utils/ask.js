@@ -128,9 +128,9 @@ function supportAnswer (context, answerId, increaseCallback, decreaseCallback) {
     }
 
     if (response.data.data.type === 'unsupport') {
-      decreaseCallback()
+      decreaseCallback(response)
     } else {
-      increaseCallback()
+      increaseCallback(response)
     }
     if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
       // mixpanel
@@ -166,9 +166,9 @@ function unSupportAnswer (context, answerId, increaseCallback, decreaseCallback)
     }
 
     if (response.data.data.type === 'cancel_downvote') {
-      decreaseCallback()
+      decreaseCallback(response)
     } else {
-      increaseCallback()
+      increaseCallback(response)
     }
     if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
       // mixpanel

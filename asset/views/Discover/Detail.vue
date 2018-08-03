@@ -681,6 +681,8 @@
         upvote(this, this.detail.id, (response) => {
           this.detail.upvotes++
           this.detail.is_upvoted = 1
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
           var support = {
             name: this.name,
             uuid: this.uuid
@@ -705,6 +707,8 @@
         }, (response) => {
           this.detail.upvotes--
           this.detail.is_upvoted = 0
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
           for (var i in this.detail.supporter_list) {
             if (this.detail.supporter_list[i].uuid === this.uuid) {
               this.detail.supporter_list.splice(i, 1)
@@ -731,6 +735,8 @@
       detailDownVote () {
         downVote(this, this.detail.id, (response) => {
           this.detail.is_downvoted = 1
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
 
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
@@ -748,6 +754,8 @@
           }
           window.mui.toast(response.data.message)
         }, (response) => {
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
           this.detail.is_downvoted = 0
 
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
