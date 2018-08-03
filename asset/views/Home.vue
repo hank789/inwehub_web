@@ -121,7 +121,7 @@
         openUrlByUrl(url)
       },
       toDomain () {
-        this.$router.pushPlus('domain')
+        this.$router.replace('/domain')
       },
       timeago (time) {
         let newDate = new Date()

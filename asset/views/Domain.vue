@@ -115,7 +115,7 @@
         }
       },
       toHome () {
-        this.$router.pushPlus('home')
+        this.$router.replace('home')
       },
       timeago (time) {
         let newDate = new Date()
