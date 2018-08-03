@@ -108,7 +108,11 @@
     },
     methods: {
       selectTag (tag) {
-        this.selectTagValue = tag.value
+        if (tag.value === this.selectTagValue) {
+          this.selectTagValue = null
+        } else {
+          this.selectTagValue = tag.value
+        }
       },
       toHome () {
         this.$router.pushPlus('home')
