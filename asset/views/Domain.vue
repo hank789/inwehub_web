@@ -178,6 +178,9 @@
     margin-left:0.426rem;
     margin-top: 0.24rem;
   }
+  .swiper-container{
+    height:0.933rem;
+  }
   .tagLabel{
     width:auto !important;
   }
