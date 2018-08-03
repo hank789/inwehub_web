@@ -69,7 +69,6 @@
   import RefreshList from '../components/refresh/List.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../utils/request'
-  import { queryParent } from '../utils/dom'
 
   const Domain = {
     data () {
@@ -102,7 +101,7 @@
       prevOtherData () {
         return {
           orderBy: 1,
-          recommendType: 1,
+          recommendType: 2,
           tagFilter: this.selectTagValue
         }
       }
