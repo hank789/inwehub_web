@@ -88,7 +88,7 @@
   import { getHomeData } from '../utils/home'
   import RefreshList from '../components/refresh/List.vue'
   import { saveLocationInfo } from '../utils/allPlatform'
-  import { AppInit, autoTextArea } from '../utils/plus'
+  import { AppInit, autoTextArea, openUrlByUrl } from '../utils/plus'
   import userAbility from '../utils/userAbility'
 
   const Home = {
@@ -117,6 +117,9 @@
       }
     },
     methods: {
+      goLink: function (url) {
+        openUrlByUrl(url)
+      },
       toDomain () {
         this.$router.pushPlus('domain')
       },
