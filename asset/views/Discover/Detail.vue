@@ -131,14 +131,16 @@
             </div>
           </div>
 
-          <!-- 分享 -->
-          <div class="location" v-show="detail.data.current_address_name">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dingwei1"></use>
-            </svg>
-            <span>{{detail.data.current_address_name}}</span>
+          <div class="share">
+            <div class="location" v-show="detail.data.current_address_name">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-dingwei1"></use>
+              </svg>
+              <span>{{detail.data.current_address_name}}</span>
+            </div>
           </div>
 
+          <!-- 分享 -->
           <div class="component-upAndDown">
             <div class="upAndDownLeft" @tap.stop.prevent="detailDownVote()">
               <svg class="icon" aria-hidden="true" :class="{active: detail.is_downvoted}">
