@@ -19,7 +19,7 @@
       <div class="container-tabLabels">
         <swiper :options="swiperOption" class="container-upload-images">
             <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
-              <span class="tab active" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+              <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
             </swiper-slide>
         </swiper>
       </div>
