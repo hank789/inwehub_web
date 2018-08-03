@@ -129,7 +129,7 @@
     background: #ffffff;
 
     .listWrapper{
-      top:84px;
+      top:2.24rem;
       bottom:50px; /* px不转换 */
     }
 

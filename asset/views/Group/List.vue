@@ -153,7 +153,7 @@
     background-color: rgb(220, 220, 220);
   }
  .new-groups{
-   margin-top:10px;
+   margin-top:0.266rem;
    width:92%;
    margin-left: 4%;
    height:0.906rem;
@@ -181,7 +181,7 @@
    overflow: hidden;
  }
   .listWrapper{
-    top:90px;
+    top:2.4rem;
     bottom:50px; /* px不转换 */
   }
 </style>
