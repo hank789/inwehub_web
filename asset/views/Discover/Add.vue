@@ -99,7 +99,7 @@
         </span>
         <span @tap.stop.prevent="promptUrl" :class="{'disable': !isUploadLink}">
           <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-lianjie1"></use>
+            <use xlink:href="#icon-lianjie2"></use>
           </svg>
         </span>
         <div class="component-labelWithIcon selectGroup float-right text-line-1" v-if="address" @tap.stop.prevent="selectGroup">
