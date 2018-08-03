@@ -180,7 +180,7 @@
 
 <style lang="less" scoped>
   .mui-slider{
-    width:9.146rem;
+    width:9.145rem;
     border-radius: 0.133rem;
     margin-left:0.4rem;
     overflow: hidden;
@@ -194,7 +194,7 @@
 
   .refreshListWrapper{
     top: 1.173rem;
-    bottom:1.333rem;
+    bottom:50px; /* px不转换 */
   }
 </style>
 

@@ -323,7 +323,7 @@
     align-items: center; }
   .container-footer .menu:nth-child(2) .iconWrapper {
     font-size: 24px; /* px不转换 */
-    top: 5px; /* px不转换 */
+    top: 6px; /* px不转换 */
     left: 50%;
     margin-left: -12px; /* px不转换 */}
   .container-footer .menu:nth-child(4) .iconWrapper {

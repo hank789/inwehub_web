@@ -88,10 +88,7 @@
       }
     },
     created () {
-      postRequest('profile/info', {}).then(response => {
-        var tags = response.data.data.info.region_tags
-        this.tags = tags
-      })
+      this.refreshPageData()
     },
     components: {
       RefreshList,
@@ -123,6 +120,10 @@
         return newDate
       },
       refreshPageData () {
+        postRequest('profile/info', {}).then(response => {
+          var tags = response.data.data.info.region_tags
+          this.tags = tags
+        })
       },
       toDetail (item) {
         switch (item.read_type) {
