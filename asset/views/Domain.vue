@@ -41,7 +41,7 @@
         :autoShowEmpty="false"
       >
 
-        <div class="container-list-article">
+        <div id="home-content" class="container-list-article">
           <template  v-for="(item, index) in list">
             <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
               <div class="itemArticleLeft">
@@ -153,6 +153,20 @@
     },
     updated () {},
     mounted () {
+      // 左滑
+      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle >= 160) {
+          this.$router.replace('/home')
+        }
+      })
+      // 右滑
+      document.getElementById('home-content').addEventListener('swiperight', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle <= 20) {
+          this.$router.replace('/home')
+        }
+      })
     }
   }
   export default Domain

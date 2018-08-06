@@ -60,7 +60,7 @@
         </div>
 
 
-        <div class="container-list-article">
+        <div id="home-content" class="container-list-article">
           <template  v-for="(item, index) in list">
             <div class="line-river-big" v-if="index === 5"></div>
             <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
@@ -173,6 +173,20 @@
     mounted () {
       saveLocationInfo()
       AppInit(this)
+      // 左滑
+      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle >= 160) {
+          this.$router.replace('/domain')
+        }
+      })
+      // 右滑
+      document.getElementById('home-content').addEventListener('swiperight', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle <= 20) {
+          this.$router.replace('/domain')
+        }
+      })
     }
   }
   export default Home

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
+    <div id="home-content" class="mui-content">
 
       <div class="container-control-logoAndTabsAndSearch">
         <svg class="icon logoIcon" aria-hidden="true">
@@ -203,7 +203,20 @@
 
     },
     mounted () {
-
+      // 左滑
+      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle >= 160) {
+          this.$router.replace('/ask/offers')
+        }
+      })
+      // 右滑
+      document.getElementById('home-content').addEventListener('swiperight', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle <= 20) {
+          this.$router.replace('/groups')
+        }
+      })
     },
     computed: {
       prevOtherData () {
