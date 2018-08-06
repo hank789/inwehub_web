@@ -36,7 +36,7 @@
       <div class="component-upAndDown" v-if="ask.answer.content">
         <div class="upAndDownLeft" @tap.stop.prevent="unSupport()">
           <svg class="icon" aria-hidden="true" :class="{active: ask.answer.is_downvoted}">
-            <use xlink:href="#icon-zanshixin"></use>
+            <use xlink:href="#icon-caishixin"></use>
           </svg><span>{{ ask.answer.is_downvoted ? '已踩' : '踩' }}</span>
         </div>
         <div class="upAndDownCenter"><span>{{ask.answer.support_description}}</span>
@@ -562,14 +562,18 @@
         })
       },
       unSupport () {
-        unSupportAnswer(this, this.ask.answer.id, () => {
+        unSupportAnswer(this, this.ask.answer.id, (response) => {
           this.ask.answer.is_downvoted = 1
-        }, () => {
+          this.ask.answer.support_description = response.data.data.support_description
+          this.ask.answer.support_percent = response.data.data.support_percent
+        }, (response) => {
           this.ask.answer.is_downvoted = 0
+          this.ask.answer.support_description = response.data.data.support_description
+          this.ask.answer.support_percent = response.data.data.support_percent
         })
       },
       support () {
-        supportAnswer(this, this.ask.answer.id, () => {
+        supportAnswer(this, this.ask.answer.id, (response) => {
           this.ask.answer.support_number++
           this.ask.answer.is_supported = 1
           var support = {
@@ -577,9 +581,13 @@
             uuid: this.uuid
           }
           this.ask.answer.supporter_list = this.ask.answer.supporter_list.concat(support)
-        }, () => {
+          this.ask.answer.support_description = response.data.data.support_description
+          this.ask.answer.support_percent = response.data.data.support_percent
+        }, (response) => {
           this.ask.answer.support_number--
           this.ask.answer.is_supported = 0
+          this.ask.answer.support_description = response.data.data.support_description
+          this.ask.answer.support_percent = response.data.data.support_percent
           for (var i in this.ask.answer.supporter_list) {
             if (this.ask.answer.supporter_list[i].uuid === this.uuid) {
               this.ask.answer.supporter_list.splice(i, 1)

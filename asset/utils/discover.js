@@ -36,9 +36,9 @@ function downVote (context, submissionId, increaseCallback, decreaseCallback) {
 
     window.mui.toast(response.data.data.tip)
     if (isFollowed) {
-      increaseCallback()
+      increaseCallback(response)
     } else {
-      decreaseCallback()
+      decreaseCallback(response)
     }
   })
 }

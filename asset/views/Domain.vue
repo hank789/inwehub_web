@@ -125,6 +125,9 @@
         postRequest('profile/info', {}).then(response => {
           var tags = response.data.data.info.region_tags
           this.tags = tags
+          if (!this.tags.length) {
+            this.$router.pushPlus('/userGuide/interst?from=home')
+          }
         })
       },
       toDetail (item) {
@@ -185,8 +188,12 @@
   }
   .container-tabLabels{
     width: 8.533rem;
+    height:0.906rem;
     margin-left:0.426rem;
     margin-top: 0.24rem;
+  }
+  .swiper-container{
+    height:0.933rem;
   }
   .tagLabel{
     width:auto !important;
