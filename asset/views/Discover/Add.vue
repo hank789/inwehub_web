@@ -99,7 +99,7 @@
         </span>
         <span @tap.stop.prevent="promptUrl" :class="{'disable': !isUploadLink}">
           <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-lianjie1"></use>
+            <use xlink:href="#icon-lianjie2"></use>
           </svg>
         </span>
         <div class="component-labelWithIcon selectGroup float-right text-line-1" v-if="address" @tap.stop.prevent="selectGroup">
@@ -628,6 +628,12 @@
 
         postRequest(`article/store`, data, false, options).then(response => {
           var code = response.data.code
+          if (code === 6101) {
+            // 已存在
+            window.mui.toast(response.data.message)
+            this.$router.replace(response.data.data.exist_url)
+            return
+          }
           if (code !== 1000) {
             window.mui.toast(response.data.message)
             return

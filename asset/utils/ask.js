@@ -123,14 +123,14 @@ function supportAnswer (context, answerId, increaseCallback, decreaseCallback) {
     var code = response.data.code
 
     if (code !== 1000) {
-      window.mui.alert(response.data.message)
+      window.mui.toast(response.data.message)
       return
     }
 
     if (response.data.data.type === 'unsupport') {
-      decreaseCallback()
+      decreaseCallback(response)
     } else {
-      increaseCallback()
+      increaseCallback(response)
     }
     if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
       // mixpanel
@@ -142,6 +142,44 @@ function supportAnswer (context, answerId, increaseCallback, decreaseCallback) {
           'page': answerId,
           'page_name': 'answer',
           'page_title': response.data.data.type !== 'unsupport' ? 'support' : 'cancel',
+          'referrer_page': ''
+        }
+      )
+    }
+    window.mui.toast(response.data.data.tip)
+  })
+}
+
+/**
+ * 踩回答
+ */
+function unSupportAnswer (context, answerId, increaseCallback, decreaseCallback) {
+  var data = {
+    id: answerId
+  }
+  postRequest(`downvote/answer`, data).then(response => {
+    var code = response.data.code
+
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    if (response.data.data.type === 'cancel_downvote') {
+      decreaseCallback(response)
+    } else {
+      increaseCallback(response)
+    }
+    if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+      // mixpanel
+      window.mixpanel.track(
+        'inwehub:support:success',
+        {
+          'app': 'inwehub',
+          'user_device': window.getUserAppDevice(),
+          'page': answerId,
+          'page_name': 'answer',
+          'page_title': response.data.data.type !== 'cancel_downvote' ? 'cancel_downvote' : 'downvote',
           'referrer_page': ''
         }
       )
@@ -179,6 +217,7 @@ export {
   collectAnswer,
   getQuestionStateClass,
   supportAnswer,
+  unSupportAnswer,
   adoptAnswer,
   modifySelfAnswer
 }

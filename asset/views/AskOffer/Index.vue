@@ -1,17 +1,23 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title"></h1>
-      <div class="component-search" @tap.stop.prevent="toSearch">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-sousuo"></use>
-        </svg>搜搜看，再提问
-    </div>
-      <a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" @tap.stop.prevent="addQuestion();">提问题</a>
-    </header>
+    <div id="home-content" class="mui-content">
 
-    <div class="mui-content absolute">
+      <div class="container-control-logoAndTabsAndSearch">
+        <svg class="icon logoIcon" aria-hidden="true">
+          <use xlink:href="#icon-logowenzi"></use>
+        </svg><span class="splitCircle"></span>
+        <div class="logoAndTabsAndSearchTabs">
+          <div class="tab" @tap.stop.prevent="$router.replace('/discover')">关注</div>
+          <div class="tab active" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
+          <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
+        </div>
+        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
+          <use xlink:href="#icon-sousuo"></use>
+        </svg>
+      </div>
+
+      <div class="line-river-after"></div>
+
       <div class="container-tabs">
         <div class="tab" :class="{active: filter === 1}" @tap.stop.prevent="switchFilter(1)"><span>悬赏大厅</span></div>
         <div class="tab" :class="{active: filter === 2}"  @tap.stop.prevent="switchFilter(2)"><span>热门问答</span></div>
@@ -107,6 +113,20 @@
     },
     mounted () {
       userAbility.showFreeAskGuide(this)
+      // 左滑
+      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle >= 160) {
+          this.$router.replace('/groups')
+        }
+      })
+      // 右滑
+      document.getElementById('home-content').addEventListener('swiperight', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle <= 20) {
+          this.$router.replace('/discover')
+        }
+      })
     }
   }
   export default MajorList
@@ -123,8 +143,10 @@
     background: #ffffff;
 
     .listWrapper{
-      top:1.04rem;
+      top:2.24rem;
+      bottom:50px; /* px不转换 */
     }
+
     .switch{
       position: fixed;
       width:1.973rem;

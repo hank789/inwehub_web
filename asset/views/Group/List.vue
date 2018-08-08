@@ -1,11 +1,22 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">圈子</h1>
-    </header>
+    <div id="home-content" class="mui-content">
+      <div class="container-control-logoAndTabsAndSearch">
+        <svg class="icon logoIcon" aria-hidden="true">
+          <use xlink:href="#icon-logowenzi"></use>
+        </svg><span class="splitCircle"></span>
+        <div class="logoAndTabsAndSearchTabs">
+          <div class="tab" @tap.stop.prevent="$router.replace('/discover')">关注</div>
+          <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
+          <div class="tab active" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
+        </div>
+        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
+          <use xlink:href="#icon-sousuo"></use>
+        </svg>
+      </div>
 
-    <div class="mui-content">
+      <div class="line-river-after"></div>
+
       <div class="new-groups" @tap.stop.prevent="$router.pushPlus('/group/add')">
         <p>创建新的圈子</p>
       </div>
@@ -108,6 +119,20 @@
     },
     mounted () {
       this.getGroups()
+      // 左滑
+      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle >= 160) {
+          this.$router.replace('/discover')
+        }
+      })
+      // 右滑
+      document.getElementById('home-content').addEventListener('swiperight', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle <= 20) {
+          this.$router.replace('/ask/offers')
+        }
+      })
     },
     updated () {}
   }
@@ -142,6 +167,7 @@
     background-color: rgb(220, 220, 220);
   }
  .new-groups{
+   margin-top:0.266rem;
    width:92%;
    margin-left: 4%;
    height:0.906rem;
@@ -156,8 +182,6 @@
    align-items: center;
    background: url("../../statics/images/my-groups@3x.png");
    background-size: 100% 100%;
-   position: absolute;
-   top:0;
   }
   .group-title{
     font-size: 0.426rem;
@@ -171,7 +195,8 @@
    overflow: hidden;
  }
   .listWrapper{
-    top:0.933rem;
+    top:2.4rem;
+    bottom:50px; /* px不转换 */
   }
 </style>
 

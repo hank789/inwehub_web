@@ -80,7 +80,7 @@
           }
 
           if (this.$route.query.from === 'home') {
-            this.$router.replace('/home')
+            this.$router.replace('/domain')
           } else {
             this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
           }
@@ -238,7 +238,7 @@
     .title {
       background: #fff;
       text-align: center;
-      font-size: 14px;
+      font-size: 0.373rem;
       padding: 0.32rem 0;
       position: relative;
       color: #808080;
@@ -247,7 +247,7 @@
         font-family:PingFangSC-Regular;
         position: absolute;
         left: 0.586rem;
-        font-size: 16px;
+        font-size: 0.426rem;
       }
     }
     .wraperBox {
@@ -263,7 +263,7 @@
           border-radius: 0.133rem;
           border: 0.026rem solid #DCDCDC;
           &::placeholder {
-            font-size: 14px;
+            font-size: 0.373rem;
             color: #C8C8C8;
           }
         }

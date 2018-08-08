@@ -131,7 +131,6 @@
             </div>
           </div>
 
-          <!-- 分享 -->
           <div class="share">
             <div class="location" v-show="detail.data.current_address_name">
               <svg class="icon" aria-hidden="true">
@@ -139,22 +138,45 @@
               </svg>
               <span>{{detail.data.current_address_name}}</span>
             </div>
-            <div class="shareGo">
-              <P>分享到</P>
-              <div class="shareList">
-                <ul>
-                  <li @tap.stop.prevent="weChatFriend">
-                    <img src="../../statics/images/wechat_@2x.png" />
-                    <p>微信好友</p>
-                  </li>
-                  <li @tap.stop.prevent="weChatFriendGroup">
-                    <img src="../../statics/images/page_1@2x.png" />
-                    <p>朋友圈</p>
-                  </li>
-                </ul>
+          </div>
+
+          <!-- 分享 -->
+          <div class="component-upAndDown">
+            <div class="upAndDownLeft" @tap.stop.prevent="detailDownVote()">
+              <svg class="icon" aria-hidden="true" :class="{active: detail.is_downvoted}">
+                <use xlink:href="#icon-caishixin"></use>
+              </svg><span>{{ detail.is_downvoted ? '已踩' : '踩' }}</span>
+            </div>
+            <div class="upAndDownCenter"><span>{{detail.support_description}}</span>
+              <div class="progressWrapper">
+                <div class="progress" :style="'width:' + detail.support_percent + '%'"></div>
               </div>
             </div>
+            <div class="upAndDownRight" @tap.stop.prevent="upVote()">
+              <svg class="icon" aria-hidden="true" :class="{active: detail.is_upvoted}">
+                <use xlink:href="#icon-zanshixin"></use>
+              </svg>
+              <span>{{ detail.is_upvoted ? '已赞' : '赞' }}</span>
+            </div>
           </div>
+
+          <!--<div class="share">-->
+            <!--<div class="shareGo">-->
+              <!--<P>分享到</P>-->
+              <!--<div class="shareList">-->
+                <!--<ul>-->
+                  <!--<li @tap.stop.prevent="weChatFriend">-->
+                    <!--<img src="../../statics/images/wechat_@2x.png" />-->
+                    <!--<p>微信好友</p>-->
+                  <!--</li>-->
+                  <!--<li @tap.stop.prevent="weChatFriendGroup">-->
+                    <!--<img src="../../statics/images/page_1@2x.png" />-->
+                    <!--<p>朋友圈</p>-->
+                  <!--</li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
           <!-- <div class="address" v-show="detail.data.current_address_name">
             <svg class="icon" aria-hidden="true">
@@ -262,6 +284,10 @@
   import hljs from 'highlight.js'
   import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
+  import { upvote, downVote } from '../../utils/discover'
+
+//  import bodymovin from 'bodymovin'
+//  import upvote from '../../bodymovin/upvote.json'
 
   export default {
     data () {
@@ -605,7 +631,7 @@
             break
           case this.footerMenus[2].icon:
             // 点赞
-            this.support()
+            this.upVote()
             break
           case this.footerMenus[3].icon:
             // 分享
@@ -651,35 +677,42 @@
           window.mui.toast(response.data.message)
         })
       },
-      support () {
-        var data = {
-          submission_id: this.detail.id
-        }
-        postRequest(`article/upvote-submission`, data).then(response => {
-          var code = response.data.code
-          if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
-            return
-          } else if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
+      upVote () {
+        upvote(this, this.detail.id, (response) => {
+          this.detail.upvotes++
+          this.detail.is_upvoted = 1
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+          var support = {
+            name: this.name,
+            uuid: this.uuid
           }
-          if (response.data.data.type === 'cancel_upvote') {
-            this.detail.upvotes--
-            this.detail.is_upvoted = 0
-            for (var i in this.detail.supporter_list) {
-              if (this.detail.supporter_list[i].uuid === this.uuid) {
-                this.detail.supporter_list.splice(i, 1)
+          this.detail.supporter_list = this.detail.supporter_list.concat(support)
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': 'support',
+                'referrer_page': ''
               }
+            )
+          }
+          window.mui.toast(response.data.message)
+        }, (response) => {
+          this.detail.upvotes--
+          this.detail.is_upvoted = 0
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+          for (var i in this.detail.supporter_list) {
+            if (this.detail.supporter_list[i].uuid === this.uuid) {
+              this.detail.supporter_list.splice(i, 1)
             }
-          } else {
-            this.detail.upvotes++
-            this.detail.is_upvoted = 1
-            var support = {
-              name: this.name,
-              uuid: this.uuid
-            }
-            this.detail.supporter_list = this.detail.supporter_list.concat(support)
           }
 
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
@@ -691,7 +724,50 @@
                 'user_device': window.getUserAppDevice(),
                 'page': this.id,
                 'page_name': 'submission',
-                'page_title': response.data.data.type !== 'upvote' ? 'cancel' : 'support',
+                'page_title': 'cancelSupport',
+                'referrer_page': ''
+              }
+            )
+          }
+          window.mui.toast(response.data.message)
+        })
+      },
+      detailDownVote () {
+        downVote(this, this.detail.id, (response) => {
+          this.detail.is_downvoted = 1
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': 'downvote',
+                'referrer_page': ''
+              }
+            )
+          }
+          window.mui.toast(response.data.message)
+        }, (response) => {
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+          this.detail.is_downvoted = 0
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': 'cancelDownvote',
                 'referrer_page': ''
               }
             )
@@ -711,6 +787,24 @@
           }, 200)
           openVendorUrl(this.$el.querySelector('#contentWrapper'))
           openAppUrl(this.$el.querySelector('#contentWrapper'))
+
+//          var upVoteEle = this.$el.querySelector('.upVote')
+//          if (upVoteEle) {
+//            var animation = bodymovin.loadAnimation({
+//              container: upVoteEle,
+//              renderer: 'svg',
+//              loop: false,
+//              autoplay: false,
+//              animationData: upvote
+//            })
+//            animation.addEventListener('complete', function() {
+//              console.log('ok')
+//            })
+//
+//            upVoteEle.onclick = function () {
+//              animation.play()
+//            }
+//          }
         }
       })
     },
@@ -1169,6 +1263,11 @@
 
   .discoverContent{
     padding:0;
+  }
+
+  .component-upAndDown{
+    margin-top: 0.48rem;
+    margin-bottom: 0.48rem;
   }
 </style>
 

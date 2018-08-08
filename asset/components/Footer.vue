@@ -6,35 +6,35 @@
       <div class="menu active" v-if="isHome">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shouye-hover"></use>
+            <use xlink:href="#icon-tuijian-hover"></use>
           </svg>
         </div>
-        <div class="desc">首页</div>
+        <div class="desc">推荐</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.push('/home')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shouye1"></use>
+            <use xlink:href="#icon-tuijian"></use>
           </svg>
         </div>
-        <div class="desc">首页</div>
+        <div class="desc">推荐</div>
       </div>
 
       <div class="menu active" v-if="isDiscover">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-faxian-hover"></use>
+            <use xlink:href="#icon-shequ-hover"></use>
           </svg>
         </div>
-        <div class="desc">关注</div>
+        <div class="desc">社区</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.push('/discover')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-faxian1"></use>
+            <use xlink:href="#icon-shequ"></use>
           </svg>
         </div>
-        <div class="desc">关注</div>
+        <div class="desc">社区</div>
       </div>
 
       <div class="menu" @tap.stop.prevent="show()">
@@ -214,12 +214,15 @@
         switch (fullPath) {
           case '/home':
           case '/home?refresh=1':
+          case '/domain':
             this.isHome = true
             break
           case '/my':
             this.isMy = true
             break
           case '/discover':
+          case '/ask/offers':
+          case '/groups':
             this.isDiscover = true
             break
           case '/discoverGroup':
@@ -321,10 +324,10 @@
     -ms-flex-align: center;
     align-items: center; }
   .container-footer .menu:nth-child(2) .iconWrapper {
-    font-size: 28px; /* px不转换 */
-    top: 5px; /* px不转换 */
+    font-size: 24px; /* px不转换 */
+    top: 6px; /* px不转换 */
     left: 50%;
-    margin-left: -14px; /* px不转换 */}
+    margin-left: -12px; /* px不转换 */}
   .container-footer .menu:nth-child(4) .iconWrapper {
     font-size: 25px; /* px不转换 */
     top: 7px; /* px不转换 */
