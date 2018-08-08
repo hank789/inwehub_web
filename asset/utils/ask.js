@@ -123,7 +123,7 @@ function supportAnswer (context, answerId, increaseCallback, decreaseCallback) {
     var code = response.data.code
 
     if (code !== 1000) {
-      window.mui.alert(response.data.message)
+      window.mui.toast(response.data.message)
       return
     }
 
@@ -161,7 +161,7 @@ function unSupportAnswer (context, answerId, increaseCallback, decreaseCallback)
     var code = response.data.code
 
     if (code !== 1000) {
-      window.mui.alert(response.data.message)
+      window.mui.toast(response.data.message)
       return
     }
 

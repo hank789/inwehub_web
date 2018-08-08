@@ -160,23 +160,23 @@
             </div>
           </div>
 
-          <div class="share">
-            <div class="shareGo">
-              <P>分享到</P>
-              <div class="shareList">
-                <ul>
-                  <li @tap.stop.prevent="weChatFriend">
-                    <img src="../../statics/images/wechat_@2x.png" />
-                    <p>微信好友</p>
-                  </li>
-                  <li @tap.stop.prevent="weChatFriendGroup">
-                    <img src="../../statics/images/page_1@2x.png" />
-                    <p>朋友圈</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <!--<div class="share">-->
+            <!--<div class="shareGo">-->
+              <!--<P>分享到</P>-->
+              <!--<div class="shareList">-->
+                <!--<ul>-->
+                  <!--<li @tap.stop.prevent="weChatFriend">-->
+                    <!--<img src="../../statics/images/wechat_@2x.png" />-->
+                    <!--<p>微信好友</p>-->
+                  <!--</li>-->
+                  <!--<li @tap.stop.prevent="weChatFriendGroup">-->
+                    <!--<img src="../../statics/images/page_1@2x.png" />-->
+                    <!--<p>朋友圈</p>-->
+                  <!--</li>-->
+                <!--</ul>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
           <!-- <div class="address" v-show="detail.data.current_address_name">
             <svg class="icon" aria-hidden="true">
@@ -1267,6 +1267,7 @@
 
   .component-upAndDown{
     margin-top: 0.48rem;
+    margin-bottom: 0.48rem;
   }
 </style>
 

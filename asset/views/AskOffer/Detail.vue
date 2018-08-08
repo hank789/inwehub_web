@@ -625,5 +625,6 @@
     line-height: 1.066rem;
     background: #FFFFFF;
     margin-bottom: 0.266rem;
+    margin-top: 0.266rem;
   }
 </style>
