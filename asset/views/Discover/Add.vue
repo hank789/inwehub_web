@@ -628,6 +628,12 @@
 
         postRequest(`article/store`, data, false, options).then(response => {
           var code = response.data.code
+          if (code === 6101) {
+            // 已存在
+            window.mui.toast(response.data.message)
+            this.$router.replace(response.data.data.exist_url)
+            return
+          }
           if (code !== 1000) {
             window.mui.toast(response.data.message)
             return
