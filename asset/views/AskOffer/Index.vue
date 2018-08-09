@@ -157,7 +157,7 @@
       border-radius:1.333rem;
       font-size:0.4rem;
       color: #FFFFFF;
-      bottom: 0.533rem;
+      bottom: 1.546rem;
       right:0.426rem;
       z-index: 9;
       display: flex;
