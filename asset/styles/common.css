@@ -2974,3 +2974,11 @@ a {
   background: #F3F4F6;
   color: #444;
   border: none; }
+
+.pull-down-header{
+  background-color:#f3f4f6;
+}
+
+.pull-down-content{
+  color:#808080;
+}

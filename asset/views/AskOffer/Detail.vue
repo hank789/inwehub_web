@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-
+      <vue-pull-refresh :on-refresh="refreshPageData">
       <div class="container-label padding-lr-15" v-if="ask.question.tags.length">
         <span v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</span>
       </div>
@@ -85,7 +85,7 @@
         v-if="ask.answer && ask.answer.content"
         @delCommentSuccess="delCommentSuccess"
       ></Discuss>
-
+      </vue-pull-refresh>
     </div>
 
     <Share
@@ -147,7 +147,7 @@
   import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
-  import { pageRefresh, getAnswerCache } from '../../utils/allPlatform'
+  import { getAnswerCache } from '../../utils/allPlatform'
   import FooterMenu from '../../components/FooterMenu.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
@@ -156,6 +156,7 @@
   import Comment from '../../components/question-detail/CommentNew.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
   import Vue from 'vue'
+  import VuePullRefresh from 'vue-pull-refresh'
 
   const AskDetail = {
     data: () => ({
@@ -190,10 +191,6 @@
       cainaText: '采纳'
     }),
     mounted () {
-      pageRefresh(this, () => {
-        this.refreshPageData()
-      })
-
       autoTextArea()
 
       this.getDetail()
@@ -208,7 +205,8 @@
       RecommentList,
       pay,
       Comment,
-      StarRating
+      StarRating,
+      'vue-pull-refresh': VuePullRefresh
     },
     computed: {
       isNeedComment () {

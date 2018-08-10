@@ -6,6 +6,7 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
+      <vue-pull-refresh :on-refresh="refreshPageData">
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
 
         <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
@@ -235,7 +236,9 @@
           ></groups-list>
         </div>
       </div>
+    </vue-pull-refresh>
     </div>
+
 
 
     <Share
@@ -277,7 +280,6 @@
 
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
-  import {pageRefresh} from '../../utils/allPlatform'
   import groupsList from '../../components/groups/GroupsList.vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
@@ -285,6 +287,7 @@
   import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
   import { upvote, downVote } from '../../utils/discover'
+  import VuePullRefresh from 'vue-pull-refresh'
 
 //  import bodymovin from 'bodymovin'
 //  import upvote from '../../bodymovin/upvote.json'
@@ -396,7 +399,8 @@
       groupsList,
       FooterMenu,
       RecommendList,
-      quillEditor
+      quillEditor,
+      'vue-pull-refresh': VuePullRefresh
     },
     methods: {
       toAnswerDetail (item) {
@@ -815,9 +819,6 @@
       this.getDetail()
     },
     mounted () {
-      pageRefresh(this, () => {
-        this.refreshPageData()
-      })
       window.mui.previewImage()
       autoTextArea()
     }
