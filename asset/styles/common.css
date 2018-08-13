@@ -2928,12 +2928,19 @@ a {
   left: 0;
   bottom: 0; }
 .component-item-article .itemArticleLeft .explain label {
+  display: inline-block;
+  height:0.586rem;
+  line-height: 0.533rem;
   border: 0.026rem solid #03aef9;
   border-radius: 0.106rem;
   color: #03AEF9;
   font-size: 0.266rem;
   padding: 0 0.133rem;
   margin-right: 0.266rem; }
+
+.mui-android .component-item-article .itemArticleLeft .explain label {
+  line-height: 0.586rem;
+}
 .component-item-article .itemArticleLeft .explain span {
   color: #03AEF9;
   font-size: 0.293rem;
