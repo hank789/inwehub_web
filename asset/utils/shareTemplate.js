@@ -60,7 +60,7 @@ function getInvitation (username, rcCode) {
   var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
 
   return {
-    title: username + '邀请您加入InweHub' + '-最具品质的咨询顾问社区',
+    title: username + '邀请您加入InweHub' + '-企业级应用&服务广场',
     link: link,
     content: '受邀特权与福利，点击领取 >',
     imageUrl: whiteLogo,
@@ -177,7 +177,7 @@ function getRecommends (count) {
   var link = process.env.H5_ROOT + '/#' + '/recommends'
 
   return {
-    title: 'InweHub精选推荐-最具品质的咨询顾问社区',
+    title: 'InweHub精选推荐-企业级应用&服务广场',
     link: link,
     content: '点击查看',
     imageUrl: whiteLogo,

@@ -11,7 +11,7 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-inwehubzuoyou"></use>
         </svg>
-        <p>最具品质的咨询顾问社区</p>
+        <p>企业级应用&amp;服务广场</p>
         <p>长见识 / 解疑惑／寻合作／树形象／得收益</p>
       </div>
 
