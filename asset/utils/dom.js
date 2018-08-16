@@ -239,6 +239,17 @@ function scrollDetailPage () {
   })
 }
 
+/**
+* 滚动到指定元素
+*/
+function scrollToElement (context, selector, parentSelector) {
+  var scrollTop = context.$el.querySelector(selector).offsetTop
+  console.log('scrollToElement-scrollTop:' + scrollTop)
+  setTimeout(function () {
+    context.$el.querySelector(parentSelector).scrollTop = scrollTop
+  }, 20)
+}
+
 var doSomethingTimer = null
 var doSometing = (callback, timeout = 1000) => {
   if (doSomethingTimer) {
@@ -271,6 +282,7 @@ export {
   scrollPage,
   doSometing,
   ainimationProgress,
-  scrollDetailPage
+  scrollDetailPage,
+  scrollToElement
 }
 

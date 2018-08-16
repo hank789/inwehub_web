@@ -206,6 +206,7 @@
         <div class="river" v-if="noback && slug"></div>
 
         <Discuss
+          id="commentTitle"
           v-if="detail.slug"
           :listApi="'article/comments'"
           :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
@@ -274,7 +275,7 @@
   import Share from '../../components/Share.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
-  import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg} from '../../utils/dom'
+  import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg, scrollToElement} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
   import RecommendList from '../../components/discover/RecommendList.vue'
 
@@ -627,6 +628,7 @@
         switch (item.icon) {
           case this.footerMenus[0].icon:
             // 评论
+            scrollToElement(this, '#commentTitle', '.pull-down-container')
             this.$refs.discuss.rootComment()
             break
           case this.footerMenus[1].icon:
