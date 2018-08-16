@@ -48,7 +48,7 @@
                 v-if="item.children.length"
                 :children="item.children"
                 :parentOwnerName="item.owner.name"
-                :isShow="!!item.moreReply"
+                :isShow="true"
                 @comment="clickComment"
                 @vote="vote"
               ></DiscussReplay>
