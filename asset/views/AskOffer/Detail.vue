@@ -141,7 +141,7 @@
   import { postRequest } from '../../utils/request'
 
   import Question from '../../components/askOffer/Question.vue'
-  import Discuss from '../../components/discover/Discuss.vue'
+  import Discuss from '../../components/askOffer/Discuss.vue'
   import Answer from '../../components/askOffer/Answer.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
