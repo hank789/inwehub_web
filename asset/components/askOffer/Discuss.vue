@@ -84,7 +84,7 @@
   import { getLocalUserInfo } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
   import Vue from 'vue'
-  import DiscussReplay from '../../components/discover/DiscussReply.vue'
+  import DiscussReplay from '../../components/askOffer/DiscussReply.vue'
   import { textToLinkHtml } from '../../utils/dom'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
   import userAbility from '../../utils/userAbility'

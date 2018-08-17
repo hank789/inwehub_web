@@ -73,6 +73,7 @@
       <div class="line-river-big"></div>
 
       <Discuss
+        id="commentTitle"
         :listApi="'answer/commentList'"
         :listParams="{'answer_id': ask.answer ? ask.answer.id:0}"
         :storeApi="'answer/comment'"
@@ -140,7 +141,7 @@
   import { postRequest } from '../../utils/request'
 
   import Question from '../../components/askOffer/Question.vue'
-  import Discuss from '../../components/discover/Discuss.vue'
+  import Discuss from '../../components/askOffer/Discuss.vue'
   import Answer from '../../components/askOffer/Answer.vue'
   import Share from '../../components/Share.vue'
   import { getAskCommunityInteractionDetail } from '../../utils/shareTemplate'
@@ -157,6 +158,7 @@
   import StarRating from '../../components/question-detail/StarRating.vue'
   import Vue from 'vue'
   import VuePullRefresh from 'vue-pull-refresh'
+  import {scrollToElement} from '../../utils/dom'
 
   const AskDetail = {
     data: () => ({
@@ -522,6 +524,7 @@
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '评论':
+            scrollToElement(this, '#commentTitle', '.pull-down-container')
             this.$refs.discuss.rootComment()
             break
           case '收藏':
