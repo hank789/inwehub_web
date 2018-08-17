@@ -687,6 +687,18 @@ const routes = [
     beforeEnter: (to, from, next) => {
       next()
     }
+  },{
+    path: '/comment/:category_id/:slug',
+    name: 'comment_detail',
+    component: componets.ComponentsComment,
+    meta: {
+      title: '评论',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      next()
+    }
   },
   { // 本月获赞榜
     path: '/UpvotesList',

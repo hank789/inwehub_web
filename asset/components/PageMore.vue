@@ -2,7 +2,7 @@
   <div>
     <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-shoucang-xiao"></use>
+        <use xlink:href="#icon-gengduo"></use>
       </svg>
     </a>
 
@@ -37,6 +37,22 @@
              v-if="this.showPreviewApiImage">
           <img src="../statics/images/sharePng@2x.png"/>
           <p>生成图片</p>
+        </div>
+      </div>
+
+      <div v-if="isShowhidden">
+        <div class="twoLevelLine">
+          <div class="twoLevelTopLine"></div>
+        </div>
+        <div class="more twoLevel">
+          <div class="delete single" @tap.stop.prevent="deleted()">
+          <span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shanchu1"></use>
+            </svg>
+          </span>
+            <p>删除</p>
+          </div>
         </div>
       </div>
     </div>
@@ -88,6 +104,10 @@
     },
     components: {},
     props: {
+      isShowhidden: {
+        type: Boolean,
+        default: false
+      },
       title: {
         type: String,
         default: ''
@@ -156,8 +176,10 @@
         this.bindShare()
       }
     },
-
     methods: {
+      deleted () {
+        this.$emit('del')
+      },
       cancelShare () {
         window.mui('#shareWrapper').popover('toggle')
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
@@ -593,12 +615,13 @@
   .shareWrapper {
     text-align: left;
     .title {
-      background: #ececee;
+      background: #FFF;
       text-align: center;
       font-size: 0.373rem;
       padding: 0.32rem 0;
       position: relative;
       color: #808080;
+      border-bottom: 1px solid #DCDCDC;
       span{
         position: absolute;
         left:0.586rem;
@@ -621,6 +644,30 @@
           font-size: 0.32rem;
           color: #b4b4b6;
           text-align: center;
+        }
+      }
+    }
+    .twoLevelLine {
+      padding: 0 16px;
+      background: #fff;
+      .twoLevelTopLine {
+        border-top: 1px solid #DCDCDC;
+      }
+    }
+    .twoLevel {
+      padding: 0.266rem;
+      /*border-top: 1px solid #DCDCDC;*/
+      .delete {
+        span {
+          padding: 13.5px;
+          display: inline-block;
+          border-radius: 8px;
+          border: 1px solid #DCDCDC;
+          margin: 0 0.24rem;
+          .icon {
+            font-size: 20px;
+            color: #C8C8C8;
+          }
         }
       }
     }

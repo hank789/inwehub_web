@@ -192,6 +192,7 @@ const AskOfferIndex = () => import(/* webpackChunkName: "AskOffer" */ '../../../
 const AskOfferList = () => import(/* webpackChunkName: "AskOfferList" */ '../../../views/AskOffer/List.vue')
 const AskOfferDetail = () => import(/* webpackChunkName: "AskOfferDetail" */ '../../../views/AskOffer/Detail.vue')
 const ShareReview = () => import(/* webpackChunkName: "ShareReview" */ '../../../views/Share/review.vue')
+const ComponentsComment = () => import(/* webpackChunkName: "ComponentsComment" */ '../../../views/Comment.vue')
 
 export {
   Login,
@@ -381,5 +382,6 @@ export {
   AskOfferList,
   AskOfferDetail,
   ShareReview,
-  Domain
+  Domain,
+  ComponentsComment
 }

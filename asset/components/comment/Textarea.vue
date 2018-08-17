@@ -1,5 +1,5 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea" @tap.stop.prevent="">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.stop.prevent="">
     <div class="textareaWrapper">
         <Jeditor
           ref="myAddEditor"
@@ -56,7 +56,9 @@
       focusCallback: null,  // 获取焦点时的回调
       allowBr: false
     }),
-    props: {},
+    props: {
+      alwaysshow: false
+    },
     components: {
       Jeditor
     },

@@ -25,9 +25,9 @@
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
 
-          <div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">
-            删除
-          </div>
+          <!--<div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">-->
+            <!--删除-->
+          <!--</div>-->
 
           <div class="timeData">
             <span>
@@ -40,12 +40,12 @@
           <div class="line-river lineMargin"></div>
 
           <!-- 来自 -->
-          <div class="from">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-wodequanzi-shouye"></use>
-            </svg>
-            <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
-          </div>
+          <!--<div class="from">-->
+            <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-wodequanzi-shouye"></use>-->
+            <!--</svg>-->
+            <!--<div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>-->
+          <!--</div>-->
 
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper">
@@ -105,7 +105,14 @@
           </div>
 
           <div class="timeContainer">
-            <span>{{detail.views}}浏览</span>
+            <!-- 来自 -->
+            <div class="from">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-wodequanzi-shouye"></use>
+              </svg>
+              <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
+            </div>
+            <!--<span>{{detail.views}}浏览</span>-->
             <!-- <span>
               <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
             </span> -->
@@ -142,24 +149,24 @@
           </div>
 
           <!-- 分享 -->
-          <div class="component-upAndDown">
-            <div class="upAndDownLeft" @tap.stop.prevent="detailDownVote()">
-              <svg class="icon" aria-hidden="true" :class="{active: detail.is_downvoted}">
-                <use xlink:href="#icon-caishixin"></use>
-              </svg><span>{{ detail.is_downvoted ? '已踩' : '踩' }}</span>
-            </div>
-            <div class="upAndDownCenter"><span>{{detail.support_description}}</span>
-              <div class="progressWrapper">
-                <div class="progress" :style="'width:' + detail.support_percent + '%'"></div>
-              </div>
-            </div>
-            <div class="upAndDownRight" @tap.stop.prevent="upVote()">
-              <svg class="icon" aria-hidden="true" :class="{active: detail.is_upvoted}">
-                <use xlink:href="#icon-zanshixin"></use>
-              </svg>
-              <span>{{ detail.is_upvoted ? '已赞' : '赞' }}</span>
-            </div>
-          </div>
+          <!--<div class="component-upAndDown">-->
+            <!--<div class="upAndDownLeft" @tap.stop.prevent="detailDownVote()">-->
+              <!--<svg class="icon" aria-hidden="true" :class="{active: detail.is_downvoted}">-->
+                <!--<use xlink:href="#icon-caishixin"></use>-->
+              <!--</svg><span>{{ detail.is_downvoted ? '已踩' : '踩' }}</span>-->
+            <!--</div>-->
+            <!--<div class="upAndDownCenter"><span>{{detail.support_description}}</span>-->
+              <!--<div class="progressWrapper">-->
+                <!--<div class="progress" :style="'width:' + detail.support_percent + '%'"></div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="upAndDownRight" @tap.stop.prevent="upVote()">-->
+              <!--<svg class="icon" aria-hidden="true" :class="{active: detail.is_upvoted}">-->
+                <!--<use xlink:href="#icon-zanshixin"></use>-->
+              <!--</svg>-->
+              <!--<span>{{ detail.is_upvoted ? '已赞' : '赞' }}</span>-->
+            <!--</div>-->
+          <!--</div>-->
 
           <!--<div class="share">-->
             <!--<div class="shareGo">-->
@@ -191,15 +198,14 @@
         <div class="river" v-if="detail.supporter_list.length"></div>
 
         <!--点赞-->
-        <div class="component-dianzanList" v-if="detail.upvotes">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-dianzan1"></use>
-          </svg>
-          <span v-for="(item, index) in detail.supporter_list" :key="index"
-                @tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人
-        </div>
-
-        <div class="river"></div>
+        <!--<div class="component-dianzanList" v-if="detail.upvotes">-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-dianzan1"></use>-->
+          <!--</svg>-->
+          <!--<span v-for="(item, index) in detail.supporter_list" :key="index"-->
+                <!--@tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人-->
+        <!--</div>
+        <div class="river"></div>-->
 
         <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
 
@@ -236,12 +242,36 @@
           ></groups-list>
         </div>
       </div>
+
+        <div class="river"></div>
+        <div class="guessLike"style="color: red">
+          <div class="component-block-title">
+            <div class="left">猜您喜欢</div>
+          </div>
+          <div class="line-river-after"></div>
+          <template  v-for="(item, index) in list">
+            <div class="line-river-big" v-if="index === 5"></div>
+            <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
+              <div class="itemArticleLeft">
+                <div class="titleWrapper">
+                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5">{{index+1}}.</span>{{item.data.title}}</div>
+                </div>
+                <div class="explain">
+                  <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
+                </timeago>
+                </div>
+              </div>
+              <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
+            </div>
+            <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
+          </template>
+        </div>
+        <div class="river"></div>
+
     </vue-pull-refresh>
     </div>
 
-
-
-    <Share
+    <pageMore
       ref="ShareBtn"
       :title="shareOption.title"
       :link="shareOption.link"
@@ -251,16 +281,46 @@
       :thumbUrl="shareOption.thumbUrl"
       :targetId="slug"
       :targetType="'submission'"
+      :isShowhidden="userId == detail.owner.id"
       @success="shareSuccess"
       @fail="shareFail"
-    ></Share>
+      @del="deleterow"
+    ></pageMore>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <FooterMenu
-      :options="footerMenus"
-      @clickedItem="footerMenuClickedItem"
-    ></FooterMenu>
+    <!--<FooterMenu-->
+      <!--:options="footerMenus"-->
+      <!--@clickedItem="footerMenuClickedItem"-->
+    <!--&gt;</FooterMenu>-->
+
+    <div class="container-footer">
+      <div class="footerLeft">
+        <div class="footerMenuOne" :class="{activered: isUpvote === 'upvote'}" v-if="detail.is_downvoted || detail.is_upvoted || isUpvote === 'upvote' || isUpvote === 'downvote'">{{detail.support_description}}</div>
+        <div class="footerMenuTwo" v-else>
+          <div class="noBullish containerBtn" @tap.stop.prevent="detailDownVote()">{{detail.downvote_tip}}</div>
+          <div class="bullish containerBtn" @tap.stop.prevent="upVote()">{{detail.support_tip}}</div>
+        </div>
+      </div>
+      <div class="footerRight">
+        <div class="collectionComment" @tap.stop.prevent="collection()">
+          <div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shoucangdilantongyi"></use>
+            </svg>
+          </div>
+          <span>收藏{{detail.bookmarks}}</span>
+        </div>
+        <div class="collectionComment" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug)">
+          <div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-pinglun"></use>
+            </svg>
+          </div>
+          <span>评论{{detail.comments_number}}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -271,7 +331,7 @@
   import Statistics from './../../components/discover/Statistics.vue'
   import Discuss from '../../components/discover/Discuss.vue'
   import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl} from '../../utils/plus'
-  import Share from '../../components/Share.vue'
+  import pageMore from '../../components/pageMore.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
   import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg} from '../../utils/dom'
@@ -310,7 +370,8 @@
         slug: '',
         noback: false,
         title: '分享',
-        oldTitle: '分享',
+        isUpvote: String,
+        list: [],
         detail: {
           group: {
             is_joined: '',
@@ -394,7 +455,7 @@
       Images,
       Statistics,
       Discuss,
-      Share,
+      pageMore,
       commentTextarea,
       groupsList,
       FooterMenu,
@@ -403,6 +464,37 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      collection () {
+        this.collect()
+      },
+      goDetail (item) {
+        switch (item.read_type) {
+          case 1:
+            this.$router.pushPlus('/c/' + item.data.category_id + '/' + item.data.slug)
+            break
+          case 2:
+            this.$router.pushPlus('/askCommunity/major/' + item.source_id)
+            break
+          case 3:
+            this.$router.pushPlus('/ask/offer/answers/' + item.source_id)
+            break
+          case 4:
+            this.$router.pushPlus('/EnrollmentStatus/' + item.source_id)
+            break
+          case 5:
+            this.$router.pushPlus('/EnrollmentStatus/' + item.source_id)
+            break
+          case 6:
+            this.$router.pushPlus('/ask/offer/' + item.source_id)
+            break
+          default:
+        }
+      },
+      recommendRead () {
+        postRequest(`recommendRead`, {source_id: this.slug, perPage: 4, source_type: 1}).then(response => {
+          this.list = response.data.data.data
+        })
+      },
       toAnswerDetail (item) {
         this.$router.pushPlus('/ask/offer/answers/' + item.id)
       },
@@ -495,13 +587,14 @@
         this.$router.pushPlus('/group/detail/' + id)
       },
       // 删除
-      deleterow (id) {
+      deleterow () {
+        window.mui('#shareWrapper').popover('toggle')
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
             // 进行删除
             postRequest(`article/destroy-submission`, {
-              id: id
+              id: this.detail.id
             }).then(response => {
               var code = response.data.code
               // 如果请求不成功提示信息 并且返回上一页；
@@ -687,6 +780,7 @@
           this.detail.is_upvoted = 1
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
+          this.isUpvote = response.data.data.type
           var support = {
             name: this.name,
             uuid: this.uuid
@@ -713,6 +807,7 @@
           this.detail.is_upvoted = 0
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
+          this.isUpvote = response.data.data.type
           for (var i in this.detail.supporter_list) {
             if (this.detail.supporter_list[i].uuid === this.uuid) {
               this.detail.supporter_list.splice(i, 1)
@@ -741,7 +836,7 @@
           this.detail.is_downvoted = 1
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
-
+          this.isUpvote = response.data.data.type
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
             window.mixpanel.track(
@@ -761,6 +856,7 @@
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.detail.is_downvoted = 0
+          this.isUpvote = response.data.data.type
 
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
@@ -821,13 +917,95 @@
     mounted () {
       window.mui.previewImage()
       autoTextArea()
+      this.recommendRead()
     }
   }
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .container-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 49px;
+    overflow: hidden;
+    /*padding: 13.5px 16px;*/
+    background: #FFFFFF;
+    &:before {
+      position: absolute;
+      width: 100%;
+      height: .02667rem;
+      content: '';
+      -webkit-transform: scaleY(.5);
+      transform: scaleY(.5);
+      background-color: #dcdcdc;
+    }
+    .footerLeft {
+      display: flex;
+      font-size: 14px;
+      float: left;
+      padding: 6.5px 0 6.5px 16px;
+      .footerMenuTwo {
+        display: flex;
+        .containerBtn {
+          display: flex;
+          width: 111px;
+          height: 36px;
+          color: #ffffff;
+          margin-right: 5px;
+          line-height: 36px;
+          text-align: center;
+          border-radius: 8px;
+          justify-content: center;
+        }
+        .noBullish {
+          background: #FA4975;
+        }
+        .bullish {
+          background: #03AEF9;
+        }
+      }
+      .footerMenuOne {
+        width: 222.5px;
+        height: 36px;
+        display: flex;
+        color: #03AEF9;
+        line-height: 36px;
+        border-radius: 8px;
+        background: #F3F4F6;
+        text-align: center;
+        justify-content: center;
+        &.activered {
+          color: #FA4975;
+        }
+      }
+    }
+    .footerRight {
+      color: #B4B4B6;
+      font-size: 10px;
+      text-align: center;
+      display: flex;
+      float: right;
+      margin-top: 7px;
+      margin-right: 16px;
+      .collectionComment {
+        width: 50px;
+        height: 49px;
+        flex-grow:1;
+        span {
+          display: block;
+          margin-top: -4px;
+        }
+      }
+      .icon {
+        font-size: 22px;
+        /*margin-top: -4px;*/
+      }
+    }
+  }
   .lineMargin {
     margin-top: -0.16rem;
+    margin-bottom: 13px;
   }
   .container-image {
     height: 5.333rem;
@@ -973,8 +1151,8 @@
   }
   // 来自
   .from {
-    padding: 0 0.453rem;
-    margin: 0.4rem 0;
+    /*padding: 0 0.453rem;*/
+    /*margin: 0.4rem 0;*/
     .icon {
       width: 0.533rem;
       height: 0.533rem;
@@ -996,6 +1174,7 @@
   }
   .share {
     padding: 0 0.453rem;
+    margin-bottom: 22.5px;
     .location {
       margin-left: -0.08rem;
       .icon {
@@ -1005,8 +1184,8 @@
     }
     span {
       margin-left: -0.106rem;
-      font-size: 0.32rem;
-      color: #808080;
+      font-size: 12px;
+      color: #B4B4B6;
     }
     .shareGo {
       margin: 0.693rem auto 0;
