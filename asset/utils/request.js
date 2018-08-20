@@ -92,7 +92,7 @@ export function apiRequest (url, data, showWaiting = true) {
     if (!fail) {
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
-        console.log(errorMsg)
+        console.error(errorMsg)
         if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
           errorMsg = '网络异常'
           router.push('/exception')
@@ -174,7 +174,7 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
     if (!fail) {
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
-        console.log(errorMsg)
+        console.error(errorMsg)
         if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
           errorMsg = '网络异常'
           router.push('/exception')
