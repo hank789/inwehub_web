@@ -41,7 +41,7 @@
                 v-if="item.children.length"
                 :children="item.children"
                 :parentOwnerName="item.owner.name"
-                :isShow="!!item.moreReply"
+                :isShow="true"
                 @comment="clickComment"
                 @vote="vote"
               ></DiscussReplay>
@@ -91,6 +91,7 @@
         mode: '最新',
         order_by: 1,
         slug: '',
+        id: '',
         list: [],
         commentTarget: null,
         delCommentId: 0,
@@ -101,25 +102,24 @@
       DiscussReplay,
       commentTextarea
     },
-    props: {
-      storeApi: {
-        type: String,
-        default: ''
-      }
-    },
     methods: {
       sendMessage (message) {
         console.log(message)
+
+        this.id = this.$route.params.id
         this.commentTarget = message.commentData
         console.log(this.commentTarget)
+
         var parentId = this.commentTarget.parentId
         console.log(parentId)
+
         var params = Object.assign({
           body: message.content,
           content: message.content,
           parent_id: parentId,
-          mentions: message.noticeUsers
-        }, this.storeParams)
+          mentions: message.noticeUsers,
+          submission_id: this.id
+        })
         postRequest(`article/comment-store`, params).then(response => {
           var code = response.data.code
 
@@ -188,8 +188,14 @@
           }
         }
       },
+      resetList () {
+        this.page = 1
+        this.list = []
+        this.getList()
+      },
       getList () {
         this.slug = this.$route.params.slug
+        console.log(this.id)
         postRequest('article/comments', {
           page: this.page,
           order_by: this.order_by,
@@ -208,6 +214,7 @@
           this.order_by = 1
           this.mode = '最新'
         }
+        this.resetList()
       },
       change (editor) {
         var html = editor.html
@@ -252,22 +259,6 @@
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
-      Comment (parentId, commentTargetUsername, list) {
-        var commentTarget = {
-          parentId: parentId || 0,
-          commentTargetUsername: commentTargetUsername || '',
-          list: list
-        }
-
-        var data = {
-          targetUsername: commentTargetUsername || '',
-          commentData: commentTarget
-        }
-
-        console.log('回复 data:' + JSON.stringify(data))
-
-        this.$emit('comment', data)
-      },
       vote (item) {
         postRequest('support/comment', {
           id: item.id
@@ -295,7 +286,7 @@
         if (commentUid === uuid) {
           this.delComment(comment, list)
         } else {
-          this.Comment(comment.id, comment.owner.name, list)
+          this.comment(comment.id, comment.owner.name, list)
         }
       },
       moreReply (item) {
@@ -340,11 +331,27 @@
             window.mui('#sheet_comment_del').popover('toggle')
           }, 100)
         }
+      },
+      comment (parentId, commentTargetUsername, list) {
+        var commentTarget = {
+          parentId: parentId || 0,
+          commentTargetUsername: commentTargetUsername || '',
+          list: list
+        }
+
+        var data = {
+          targetUsername: commentTargetUsername || '',
+          commentData: commentTarget
+        }
+
+        console.log('回复 data:' + JSON.stringify(data))
+
+        this.$refs.ctextarea.comment(data)
       }
     },
     mounted () {
       this.getList()
-      this.$refs.ctextarea.comment('')
+      this.comment(0, '', this.list)
     },
     watch: {}
   }
@@ -355,10 +362,8 @@
   .commentWrapper {
     z-index: 300;
   }
-  .container-list-discuss {
-    padding-bottom: 60px;
-  }
   .mui-content {
+    bottom: 46px;
     background: #fff;
   }
   .right {
