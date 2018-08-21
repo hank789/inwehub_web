@@ -476,12 +476,15 @@
       goDetail (item) {
         switch (item.read_type) {
           case 1:
+            window.trackMixpanelEvent('redirect-to-recommend', '/c/' + item.data.category_id + '/' + item.data.slug, 'discover_detail', '分享', this.$router.fullPath)
             this.$router.pushPlus('/c/' + item.data.category_id + '/' + item.data.slug)
             break
           case 2:
+            window.trackMixpanelEvent('redirect-to-recommend', '/askCommunity/major/' + item.source_id, 'askCommunity-major-detail', '问答社区', this.$router.fullPath)
             this.$router.pushPlus('/askCommunity/major/' + item.source_id)
             break
           case 3:
+            window.trackMixpanelEvent('redirect-to-recommend', '/ask/offer/answers/' + item.source_id, 'ask-offer-answers', '问答社区-悬赏问答-回答列表页', this.$router.fullPath)
             this.$router.pushPlus('/ask/offer/answers/' + item.source_id)
             break
           case 4:
@@ -491,13 +494,14 @@
             this.$router.pushPlus('/EnrollmentStatus/' + item.source_id)
             break
           case 6:
+            window.trackMixpanelEvent('redirect-to-recommend', '/ask/offer/' + item.source_id, 'ask-offer-detail', '问答社区-悬赏问答-详情页', this.$router.fullPath)
             this.$router.pushPlus('/ask/offer/' + item.source_id)
             break
           default:
         }
       },
       recommendRead () {
-        postRequest(`recommendRead`, {source_id: this.slug, perPage: 4, source_type: 1}).then(response => {
+        postRequest(`getRelatedRecommend`, {source_id: this.detail.id, perPage: 4, source_type: 1}).then(response => {
           this.list = response.data.data.data
         })
       },
@@ -700,6 +704,7 @@
           }
 
           this.loading = 0
+          this.recommendRead()
         })
       },
       setFollowStatus (status) {
@@ -847,7 +852,7 @@
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
             window.mixpanel.track(
-              'inwehub:support:success',
+              'inwehub:downvote:success',
               {
                 'app': 'inwehub',
                 'user_device': window.getUserAppDevice(),
@@ -868,7 +873,7 @@
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
             window.mixpanel.track(
-              'inwehub:support:success',
+              'inwehub:downvote:success',
               {
                 'app': 'inwehub',
                 'user_device': window.getUserAppDevice(),
@@ -924,7 +929,6 @@
     mounted () {
       window.mui.previewImage()
       autoTextArea()
-      this.recommendRead()
     }
   }
 </script>
