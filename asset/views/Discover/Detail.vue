@@ -224,7 +224,7 @@
           @delCommentSuccess="delCommentSuccess"
           ref="discuss"
         ></ArticleDiscuss>
-        <div class="seeAll" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">查看全部{{detail.comments_number}}条评论</div>
+        <div class="seeAll" v-if="detail.comments_number > 3" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">查看全部{{detail.comments_number}}条评论</div>
       </div>
 
       <!--私密的样式-->
@@ -274,7 +274,7 @@
     </vue-pull-refresh>
     </div>
 
-    <pageMore
+    <PageMore
       ref="ShareBtn"
       :title="shareOption.title"
       :link="shareOption.link"
@@ -288,7 +288,7 @@
       @success="shareSuccess"
       @fail="shareFail"
       @del="deleterow"
-    ></pageMore>
+    ></PageMore>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
@@ -334,7 +334,7 @@
   import Statistics from './../../components/discover/Statistics.vue'
   import ArticleDiscuss from '../../components/discover/ArticleDiscuss.vue'
   import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl} from '../../utils/plus'
-  import pageMore from '../../components/pageMore.vue'
+  import PageMore from '../../components/PageMore.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
   import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg, scrollToElement} from '../../utils/dom'
@@ -458,7 +458,7 @@
       Images,
       Statistics,
       ArticleDiscuss,
-      pageMore,
+      PageMore,
       commentTextarea,
       groupsList,
       FooterMenu,

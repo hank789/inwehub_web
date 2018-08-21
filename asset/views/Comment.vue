@@ -11,47 +11,60 @@
     </header>
 
     <div class="mui-content">
-      <div class="container-list-discuss container-list-marginTop">
-        <div>
-          <template v-for="(item, index) in list">
-            <div class="list-item-discuss"  @tap.stop.prevent="clickComment(item, list)" :key="index">
-              <div class="lidL" @tap.stop.prevent="toResume(item.owner.uuid)">
-                <img :src="item.owner.avatar"/>
-                <svg class="icon" aria-hidden="true" v-show="item.owner.is_expert">
-                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                </svg>
-              </div>
-              <div class="lidR">
-                <div class="lidR1">{{ item.owner.name }}</div>
-                <div class="lidR2 textToLink" v-html="textToLink(item.content)"></div>
-                <div class="lidR3">
-                  <div class="lidRtime"> <timeago :since="timeago(item.created_at)" :auto-update="0">
-                  </timeago></div>
-                  <div class="lidROption" @tap.stop.prevent="vote(item)" :class="{active:item.is_supported}">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-zan"></use>
-                    </svg><span v-if="item.supports">{{item.supports}}</span>
+      <RefreshList
+        ref="refreshList"
+        class="refreshListWrapper"
+        v-model="list"
+        :api="'recommendRead'"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="prevOtherData"
+        :isShowUpToRefreshDescription="false"
+        :list="list"
+        :pageMode="true"
+        :autoShowEmpty="false"
+      >
+        <div class="container-list-discuss container-list-marginTop">
+          <div class="message">
+            <template v-for="(item, index) in list">
+              <div class="list-item-discuss"  @tap.stop.prevent="clickComment(item, list)" :key="index">
+                <div class="lidL" @tap.stop.prevent="toResume(item.owner.uuid)">
+                  <img :src="item.owner.avatar"/>
+                  <svg class="icon" aria-hidden="true" v-show="item.owner.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                  </svg>
+                </div>
+                <div class="lidR">
+                  <div class="lidR1">{{ item.owner.name }}</div>
+                  <div class="lidR2 textToLink" v-html="textToLink(item.content)"></div>
+                  <div class="lidR3">
+                    <div class="lidRtime"> <timeago :since="timeago(item.created_at)" :auto-update="0">
+                    </timeago></div>
+                    <div class="lidROption" @tap.stop.prevent="vote(item)" :class="{active:item.is_supported}">
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zan"></use>
+                      </svg><span v-if="item.supports">{{item.supports}}</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="list-item-discuss-childrens" v-if="item.children.length">
-              <DiscussReplay
-                v-if="item.children.length"
-                :children="item.children"
-                :parentOwnerName="item.owner.name"
-                :isShow="true"
-                @comment="clickComment"
-                @vote="vote"
-              ></DiscussReplay>
-            </div>
+              <div class="list-item-discuss-childrens" v-if="item.children.length">
+                <DiscussReplay
+                  v-if="item.children.length"
+                  :children="item.children"
+                  :parentOwnerName="item.owner.name"
+                  :isShow="true"
+                  @comment="clickComment"
+                  @vote="vote"
+                ></DiscussReplay>
+              </div>
 
-            <div class="line-river-after" v-if="index !== list.length-1"></div>
+              <div class="line-river-after" v-if="index !== list.length-1"></div>
 
-          </template>
+            </template>
+          </div>
         </div>
-      </div>
+      </RefreshList>
     </div>
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage" :alwaysshow="true"></commentTextarea>
 
@@ -75,12 +88,13 @@
 </template>
 
 <script>
+  import RefreshList from '../components/refresh/List.vue'
   import { postRequest } from '../utils/request'
   import { getLocalUserInfo } from '../utils/user'
   import { getIndexByIdArray } from '../utils/array'
   import commentTextarea from '../components/comment/Textarea.vue'
   import Vue from 'vue'
-  import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg} from '../utils/dom'
+  import {textToLinkHtml, transferTagToLink } from '../utils/dom'
   import DiscussReplay from '../components/discover/DiscussReply.vue'
   import userAbility from '../utils/userAbility'
 
@@ -100,7 +114,16 @@
     },
     components: {
       DiscussReplay,
-      commentTextarea
+      commentTextarea,
+      RefreshList
+    },
+    computed: {
+      prevOtherData () {
+        return {
+          orderBy: 1,
+          recommendType: 1
+        }
+      }
     },
     methods: {
       sendMessage (message) {
@@ -216,41 +239,6 @@
         }
         this.resetList()
       },
-      change (editor) {
-        var html = editor.html
-        html = textToLinkHtml(html)
-
-        html = html.replace(/<a href="/g, "<span class='vendorUrl text-content' href=\"")
-        html = html.replace(/<\/a>/g, '</span>')
-
-        var answerContentWrapper = this.$el.querySelector('.discoverContent')
-        html = addPreviewAttrForImg(html)
-        html = html.replace(/(<p><br><\/p>)*$/, '')
-
-        answerContentWrapper.innerHTML = html
-
-        var syntaxCodes = answerContentWrapper.querySelectorAll('.discoverContent .ql-syntax')
-        if (syntaxCodes.length) {
-          for (var i = 0; i < syntaxCodes.length; i++) {
-            syntaxCodes[i].innerHTML = hljs.highlightAuto(syntaxCodes[i].innerHTML).value
-          }
-        }
-
-        window.mui.previewImage()
-
-        var that = this
-
-        setTimeout(() => {
-          openVendorUrl(answerContentWrapper)
-          var aList = this.$el.querySelectorAll('a[href^="http"]')
-          for (let i = 0; i < aList.length; i++) {
-            aList[i].addEventListener('click', function (e) {
-              e.preventDefault()
-              that.$router.pushPlus('/webview/vendor/' + encodeURIComponent(this.href))
-            }, false)
-          }
-        }, 100)
-      },
       textToLink (text) {
         return transferTagToLink(textToLinkHtml(' ' + text))
       },
@@ -359,11 +347,16 @@
 </script>
 
 <style scoped lang="less">
+  .refreshListWrapper{
+    /*top: 1.173rem;*/
+    bottom:50px; /* px不转换 */
+  }
   .commentWrapper {
     z-index: 300;
   }
   .mui-content {
-    bottom: 46px;
+    top: 0;
+    /*bottom: 46px;*/
     background: #fff;
   }
   .right {
