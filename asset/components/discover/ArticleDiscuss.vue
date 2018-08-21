@@ -375,7 +375,6 @@
             return
           }
           this.total = response.data.data.total
-          console.log(this.total + '／／／／手机发神经开发建设是的风景是的')
           if (response.data.data.data.length > 0) {
             this.list = this.list.concat(response.data.data.data)
           }

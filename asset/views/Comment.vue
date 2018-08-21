@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">全部{{total}}条评论</h1>
+      <h1 class="mui-title">全部{{totalData}}条评论</h1>
       <div class="right" @tap.stop.prevent="switchMode">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-paixu"></use>
@@ -12,23 +12,23 @@
 
     <div class="mui-content">
       <RefreshList
-        ref="refreshList"
+        ref="RefreshList"
         class="refreshListWrapper"
         v-model="list"
-        :api="'recommendRead'"
+        :api="'article/comments'"
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
-        :isShowUpToRefreshDescription="false"
         :list="list"
         :pageMode="true"
         :autoShowEmpty="false"
+        :prevSuccessCallback="prevSuccessCallback"
       >
         <div class="container-list-discuss container-list-marginTop">
           <div class="message">
             <template v-for="(item, index) in list">
               <div class="list-item-discuss"  @tap.stop.prevent="clickComment(item, list)" :key="index">
                 <div class="lidL" @tap.stop.prevent="toResume(item.owner.uuid)">
-                  <img :src="item.owner.avatar"/>
+                  <img v-if="item.owner.avatar" :src="item.owner.avatar"/>
                   <svg class="icon" aria-hidden="true" v-show="item.owner.is_expert">
                     <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
@@ -109,7 +109,8 @@
         list: [],
         commentTarget: null,
         delCommentId: 0,
-        total: ''
+        totalNumber: [],
+        totalData: ''
       }
     },
     components: {
@@ -120,12 +121,26 @@
     computed: {
       prevOtherData () {
         return {
-          orderBy: 1,
-          recommendType: 1
+          page: this.page,
+          order_by: this.order_by,
+          submission_slug: this.slug,
+          sort: 'hot'
         }
       }
     },
     methods: {
+      prevSuccessCallback () {
+        this.totalNumber = this.$refs.RefreshList.getResponse()
+        this.totalData = this.totalNumber.data.total
+        // // console.log(this.totalNumber)
+        // console.log(this.totalData + 'data')
+      },
+      toResume (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()), 'list-detail-page')
+      },
       sendMessage (message) {
         console.log(message)
 
@@ -214,20 +229,6 @@
       resetList () {
         this.page = 1
         this.list = []
-        this.getList()
-      },
-      getList () {
-        this.slug = this.$route.params.slug
-        console.log(this.id)
-        postRequest('article/comments', {
-          page: this.page,
-          order_by: this.order_by,
-          submission_slug: this.slug,
-          sort: 'hot'
-        }).then(response => {
-          this.list = response.data.data.data
-          this.total = response.data.data.total
-        })
       },
       switchMode () {
         if (this.mode === '最新') {
@@ -335,6 +336,9 @@
         console.log('回复 data:' + JSON.stringify(data))
 
         this.$refs.ctextarea.comment(data)
+      },
+      getList () {
+        this.slug = this.$route.params.slug
       }
     },
     mounted () {
