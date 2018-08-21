@@ -253,6 +253,7 @@
           window.mui.toast('请选择标签')
           return
         }
+        window.trackMixpanelEvent('ask-pay', '/ask/pay', 'ask-pay', '问答付款')
 
         this.$refs.pay.showSelectMoney()
       },

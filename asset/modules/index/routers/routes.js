@@ -687,8 +687,9 @@ const routes = [
     beforeEnter: (to, from, next) => {
       next()
     }
-  },{
-    path: '/comment/:category_id/:slug',
+  },
+  {
+    path: '/comment/:category_id/:slug/:id',
     name: 'comment_detail',
     component: componets.ComponentsComment,
     meta: {

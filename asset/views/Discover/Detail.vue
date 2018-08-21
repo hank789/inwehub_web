@@ -211,7 +211,7 @@
 
         <div class="river" v-if="noback && slug"></div>
 
-        <Discuss
+        <ArticleDiscuss
           id="commentTitle"
           v-if="detail.slug"
           :listApi="'article/comments'"
@@ -220,9 +220,11 @@
           :storeParams="{'submission_id': detail.id}"
           @comment="comment"
           @commentFinish="commentFinish"
+          @goComment="goComment"
           @delCommentSuccess="delCommentSuccess"
           ref="discuss"
-        ></Discuss>
+        ></ArticleDiscuss>
+        <div class="seeAll" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">查看全部{{detail.comments_number}}条评论</div>
       </div>
 
       <!--私密的样式-->
@@ -312,7 +314,7 @@
           </div>
           <span>收藏{{detail.bookmarks}}</span>
         </div>
-        <div class="collectionComment" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug)">
+        <div class="collectionComment" @tap.stop.prevent="goComment()">
           <div>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-pinglun"></use>
@@ -330,7 +332,7 @@
   import UserInfo from './../../components/question-detail/UserInfo.vue'
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
-  import Discuss from '../../components/discover/Discuss.vue'
+  import ArticleDiscuss from '../../components/discover/ArticleDiscuss.vue'
   import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl} from '../../utils/plus'
   import pageMore from '../../components/pageMore.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
@@ -455,7 +457,7 @@
       UserInfo,
       Images,
       Statistics,
-      Discuss,
+      ArticleDiscuss,
       pageMore,
       commentTextarea,
       groupsList,
@@ -465,6 +467,9 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      goComment () {
+        this.$refs.discuss.rootComment()
+      },
       collection () {
         this.collect()
       },
@@ -925,6 +930,13 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .seeAll {
+    padding: 12px 0;
+    font-size: 14px;
+    color: #808080;
+    line-height: 20px;
+    text-align: center;
+  }
   .container-footer {
     position: fixed;
     bottom: 0;
