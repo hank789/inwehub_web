@@ -120,6 +120,8 @@
     },
     computed: {
       prevOtherData () {
+        this.slug = this.$route.params.slug
+
         return {
           page: this.page,
           order_by: this.order_by,
@@ -132,8 +134,6 @@
       prevSuccessCallback () {
         this.totalNumber = this.$refs.RefreshList.getResponse()
         this.totalData = this.totalNumber.data.total
-        // // console.log(this.totalNumber)
-        // console.log(this.totalData + 'data')
       },
       toResume (uuid) {
         if (!uuid) {
@@ -142,14 +142,10 @@
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()), 'list-detail-page')
       },
       sendMessage (message) {
-        console.log(message)
-
         this.id = this.$route.params.id
         this.commentTarget = message.commentData
-        console.log(this.commentTarget)
 
         var parentId = this.commentTarget.parentId
-        console.log(parentId)
 
         var params = Object.assign({
           body: message.content,
@@ -184,47 +180,6 @@
 
           this.$emit('commentFinish')
         })
-      },
-      prependItem (id, msg, createdAt, parentId) {
-        var userInfo = getLocalUserInfo()
-        var item = {
-          id,
-          children: [],
-          content: msg,
-          is_supported: 0,
-          supports: 0,
-          owner: {
-            is_expert: userInfo.is_expert,
-            avatar: userInfo.avatar_url,
-            user_id: userInfo.user_id,
-            uuid: userInfo.uuid,
-            name: userInfo.name
-          },
-          created_at: createdAt
-        }
-        console.log('discuss:item:' + JSON.stringify(item))
-
-        console.log('discuss:parentid:' + parentId)
-        if (parentId) {
-          var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
-          console.log('discuss:parentIndex:' + parentIndex)
-          if (parentIndex > 0) {
-            if (this.commentTarget.list[parentIndex].children) {
-              this.commentTarget.list[parentIndex].children.unshift(item)
-            } else {
-              this.commentTarget.list[parentIndex].children = [item]
-            }
-          } else {
-            this.resetList()
-          }
-        } else {
-          console.log('discuss:commentTarget:' + JSON.stringify(this.commentTarget))
-          if (this.commentTarget.list) {
-            this.commentTarget.list.unshift(item)
-          } else {
-            this.resetList()
-          }
-        }
       },
       resetList () {
         this.page = 1
@@ -267,6 +222,47 @@
             item.is_supported = 0
           }
         })
+      },
+      prependItem (id, msg, createdAt, parentId) {
+        var userInfo = getLocalUserInfo()
+        var item = {
+          id,
+          children: [],
+          content: msg,
+          is_supported: 0,
+          supports: 0,
+          owner: {
+            is_expert: userInfo.is_expert,
+            avatar: userInfo.avatar_url,
+            user_id: userInfo.user_id,
+            uuid: userInfo.uuid,
+            name: userInfo.name
+          },
+          created_at: createdAt
+        }
+        console.log('discuss:item:' + JSON.stringify(item))
+
+        console.log('discuss:parentid:' + parentId)
+        if (parentId) {
+          var parentIndex = getIndexByIdArray(this.commentTarget.list, parentId)
+          console.log('discuss:parentIndex:' + parentIndex)
+          if (parentIndex > 0) {
+            if (this.commentTarget.list[parentIndex].children) {
+              this.commentTarget.list[parentIndex].children.unshift(item)
+            } else {
+              this.commentTarget.list[parentIndex].children = [item]
+            }
+          } else {
+            this.resetList()
+          }
+        } else {
+          console.log('discuss:commentTarget:' + JSON.stringify(this.commentTarget))
+          if (this.commentTarget.list) {
+            this.commentTarget.list.unshift(item)
+          } else {
+            this.resetList()
+          }
+        }
       },
       clickComment (comment, list) {
         var commentUid = comment.owner.uuid
@@ -336,13 +332,9 @@
         console.log('回复 data:' + JSON.stringify(data))
 
         this.$refs.ctextarea.comment(data)
-      },
-      getList () {
-        this.slug = this.$route.params.slug
       }
     },
     mounted () {
-      this.getList()
       this.comment(0, '', this.list)
     },
     watch: {}
@@ -353,14 +345,14 @@
 <style scoped lang="less">
   .refreshListWrapper{
     /*top: 1.173rem;*/
-    bottom:50px; /* px不转换 */
+    /*bottom:50px; !* px不转换 *!*/
   }
   .commentWrapper {
     z-index: 300;
   }
   .mui-content {
     top: 0;
-    /*bottom: 46px;*/
+    bottom: 46px;
     background: #fff;
   }
   .right {
