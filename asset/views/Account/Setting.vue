@@ -240,7 +240,7 @@
                         cb(user)
                         window.mixpanelIdentify()
                         clearAllWebViewCache()
-                        this.$router.pushPlus('/my', '', true, 'none', 'none', true, true)
+                        this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
                       }))
                     })
                 }
