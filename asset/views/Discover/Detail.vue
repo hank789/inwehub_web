@@ -671,7 +671,6 @@
               }
             )
           }
-          window.mui.toast(response.data.message)
         }, (response) => {
           this.detail.upvotes--
           this.detail.is_upvoted = 0
@@ -698,7 +697,6 @@
               }
             )
           }
-          window.mui.toast(response.data.message)
         })
       },
       detailDownVote () {
@@ -721,7 +719,6 @@
               }
             )
           }
-          window.mui.toast(response.data.message)
         }, (response) => {
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
@@ -742,7 +739,6 @@
               }
             )
           }
-          window.mui.toast(response.data.message)
         })
       },
       delCommentSuccess () {
