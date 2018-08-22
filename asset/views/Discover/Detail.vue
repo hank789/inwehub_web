@@ -25,10 +25,6 @@
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
 
-          <!--<div class="discover_datail_dalete" @tap.stop.prevent="deleterow(detail.id)" v-if="userId == detail.owner.id">-->
-            <!--删除-->
-          <!--</div>-->
-
           <div class="timeData">
             <span>
               <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
@@ -38,14 +34,6 @@
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
           <div class="line-river lineMargin"></div>
-
-          <!-- 来自 -->
-          <!--<div class="from">-->
-            <!--<svg class="icon" aria-hidden="true">-->
-              <!--<use xlink:href="#icon-wodequanzi-shouye"></use>-->
-            <!--</svg>-->
-            <!--<div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>-->
-          <!--</div>-->
 
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper" id="contentWrapper">
@@ -73,7 +61,6 @@
             <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
               <div class="pdf" v-for="(pdf, index) in detail.data.files" :key="index" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
             </div>
-
 
             <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
               <template v-for="(image, index) in detail.data.img">
@@ -112,10 +99,6 @@
               </svg>
               <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
             </div>
-            <!--<span>{{detail.views}}浏览</span>-->
-            <!-- <span>
-              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
-            </span> -->
             <span>著作权归作者所有</span>
           </div>
 
@@ -147,65 +130,9 @@
               <span>{{detail.data.current_address_name}}</span>
             </div>
           </div>
-
-          <!-- 分享 -->
-          <!--<div class="component-upAndDown">-->
-            <!--<div class="upAndDownLeft" @tap.stop.prevent="detailDownVote()">-->
-              <!--<svg class="icon" aria-hidden="true" :class="{active: detail.is_downvoted}">-->
-                <!--<use xlink:href="#icon-caishixin"></use>-->
-              <!--</svg><span>{{ detail.is_downvoted ? '已踩' : '踩' }}</span>-->
-            <!--</div>-->
-            <!--<div class="upAndDownCenter"><span>{{detail.support_description}}</span>-->
-              <!--<div class="progressWrapper">-->
-                <!--<div class="progress" :style="'width:' + detail.support_percent + '%'"></div>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div class="upAndDownRight" @tap.stop.prevent="upVote()">-->
-              <!--<svg class="icon" aria-hidden="true" :class="{active: detail.is_upvoted}">-->
-                <!--<use xlink:href="#icon-zanshixin"></use>-->
-              <!--</svg>-->
-              <!--<span>{{ detail.is_upvoted ? '已赞' : '赞' }}</span>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!--<div class="share">-->
-            <!--<div class="shareGo">-->
-              <!--<P>分享到</P>-->
-              <!--<div class="shareList">-->
-                <!--<ul>-->
-                  <!--<li @tap.stop.prevent="weChatFriend">-->
-                    <!--<img src="../../statics/images/wechat_@2x.png" />-->
-                    <!--<p>微信好友</p>-->
-                  <!--</li>-->
-                  <!--<li @tap.stop.prevent="weChatFriendGroup">-->
-                    <!--<img src="../../statics/images/page_1@2x.png" />-->
-                    <!--<p>朋友圈</p>-->
-                  <!--</li>-->
-                <!--</ul>-->
-              <!--</div>-->
-            <!--</div>-->
-          <!--</div>-->
-
-          <!-- <div class="address" v-show="detail.data.current_address_name">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-dingwei1"></use>
-            </svg>
-            <span>{{detail.data.current_address_name}}</span>
-          </div> -->
         </div>
 
-
         <!--<div class="river" v-if="detail.supporter_list.length"></div>-->
-
-        <!--点赞-->
-        <!--<div class="component-dianzanList" v-if="detail.upvotes">-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-dianzan1"></use>-->
-          <!--</svg>-->
-          <!--<span v-for="(item, index) in detail.supporter_list" :key="index"-->
-                <!--@tap.stop.prevent="toAvatar(item.uuid)">{{item.name}}</span>等{{detail.upvotes}}人-->
-        <!--</div>
-        <div class="river"></div>-->
 
         <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
 
@@ -292,14 +219,9 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <!--<FooterMenu-->
-      <!--:options="footerMenus"-->
-      <!--@clickedItem="footerMenuClickedItem"-->
-    <!--&gt;</FooterMenu>-->
-
     <div class="container-footer">
       <div class="footerLeft">
-        <div class="footerMenuOne" :class="{activered: isUpvote === 'upvote'}" v-if="detail.is_downvoted || detail.is_upvoted || isUpvote === 'upvote' || isUpvote === 'downvote'">{{detail.support_description}}</div>
+        <div class="footerMenuOne" :class="isUpvote === 'upvote' ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted || isUpvote === 'upvote' || isUpvote === 'downvote'">{{detail.support_description}}</div>
         <div class="footerMenuTwo" v-else>
           <div class="noBullish containerBtn" @tap.stop.prevent="detailDownVote()">{{detail.downvote_tip}}</div>
           <div class="bullish containerBtn" @tap.stop.prevent="upVote()">{{detail.support_tip}}</div>
@@ -344,7 +266,6 @@
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
   import groupsList from '../../components/groups/GroupsList.vue'
-  import FooterMenu from '../../components/FooterMenu.vue'
   import userAbility from '../../utils/userAbility'
   import hljs from 'highlight.js'
   import 'highlight.js/styles/monokai-sublime.css'
@@ -410,42 +331,6 @@
       }
     },
     computed: {
-      footerMenus () {
-        return [
-          {
-            icon: '#icon-pinglun',
-            text: '评论',
-            number: this.detail.comments_number,
-            disable: false,
-            rightLine: true,
-            isLight: false
-          },
-          {
-            icon: '#icon-shoucangdilantongyi',
-            text: '收藏',
-            number: this.detail.bookmarks,
-            disable: this.detail.is_bookmark,
-            rightLine: true,
-            isLight: false
-          },
-          {
-            icon: '#icon-zan',
-            text: '点赞',
-            number: this.detail.upvotes,
-            disable: this.detail.is_upvoted,
-            rightLine: false,
-            isLight: false
-          },
-          {
-            icon: '#icon-shoucang-xiao',
-            text: '分享',
-            number: 0,
-            disable: false,
-            rightLine: false,
-            isLight: true
-          }
-        ]
-      },
       descLength () {
         if (this.description === this.descPlaceholder) {
           return 0
@@ -461,7 +346,6 @@
       PageMore,
       commentTextarea,
       groupsList,
-      FooterMenu,
       RecommendList,
       quillEditor,
       'vue-pull-refresh': VuePullRefresh
@@ -469,6 +353,7 @@
     methods: {
       goComment () {
         this.$refs.discuss.rootComment()
+        scrollToElement(this, '#commentTitle', '.pull-down-container')
       },
       collection () {
         this.collect()
@@ -551,12 +436,6 @@
       },
       toDetail (item) {
         this.$router.pushPlus('/group/detail/' + item.id)
-      },
-      weChatFriend () {
-        this.$refs.ShareBtn.shareToHaoyou()
-      },
-      weChatFriendGroup () {
-        this.$refs.ShareBtn.shareToPengyouQuan()
       },
       seePdf (pdf) {
         openFileUrl(pdf.url, pdf.name)
@@ -727,27 +606,6 @@
           contentWrapper.classList.add('shortContentWrapper')
         }
       },
-      footerMenuClickedItem (item) {
-        switch (item.icon) {
-          case this.footerMenus[0].icon:
-            // 评论
-            scrollToElement(this, '#commentTitle', '.pull-down-container')
-            this.$refs.discuss.rootComment()
-            break
-          case this.footerMenus[1].icon:
-            // 收藏
-            this.collect()
-            break
-          case this.footerMenus[2].icon:
-            // 点赞
-            this.upVote()
-            break
-          case this.footerMenus[3].icon:
-            // 分享
-            this.$refs.ShareBtn.share()
-            break
-        }
-      },
       collect () {
         var data = {
           id: this.detail.id
@@ -899,24 +757,6 @@
           }, 200)
           openVendorUrl(this.$el.querySelector('#contentWrapper'))
           openAppUrl(this.$el.querySelector('#contentWrapper'))
-
-//          var upVoteEle = this.$el.querySelector('.upVote')
-//          if (upVoteEle) {
-//            var animation = bodymovin.loadAnimation({
-//              container: upVoteEle,
-//              renderer: 'svg',
-//              loop: false,
-//              autoplay: false,
-//              animationData: upvote
-//            })
-//            animation.addEventListener('complete', function() {
-//              console.log('ok')
-//            })
-//
-//            upVoteEle.onclick = function () {
-//              animation.play()
-//            }
-//          }
         }
       })
     },
@@ -948,7 +788,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 1.306rem;
+    height: 50px;
     overflow: hidden;
     /*padding: 0.36rem 0.426rem;*/
     background: #FFFFFF;
@@ -996,8 +836,11 @@
         background: #F3F4F6;
         text-align: center;
         justify-content: center;
-        &.activered {
+        &.activeRed {
           color: #FA4975;
+        }
+        &.activeBlue {
+          color: #03AEF9;
         }
       }
     }
@@ -1013,7 +856,9 @@
         width: 1.333rem;
         height: 1.306rem;
         flex-grow:1;
+        color: #808080;
         span {
+          color: #B4B4B6;
           display: block;
           margin-top: -0.106rem;
           i {
