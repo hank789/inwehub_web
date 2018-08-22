@@ -2608,13 +2608,13 @@ a {
   background-color: #F7F8FA;
   margin-left: 1.04rem;
   padding: 0.266rem 0.266rem 0; }
-.container-list-discuss .list-item-discuss.list-item-discuss-children:first-child {
+.list-item-discuss-childrens>div>.list-item-discuss.list-item-discuss-children:first-child {
   border-radius: 0.106rem 0.106rem 0 0; }
-.container-list-discuss .list-item-discuss.list-item-discuss-children:last-child {
+.list-item-discuss-childrens>div>.list-item-discuss.list-item-discuss-children:last-child {
   margin-bottom: 0.266rem;
   padding-bottom: 0.266rem;
   border-radius: 0 0 0.106rem 0.106rem; }
-.container-list-discuss .list-item-discuss.list-item-discuss-children:first-child:last-child {
+.list-item-discuss-childrens>div>.list-item-discuss.list-item-discuss-children:first-child:last-child {
   border-radius: 0.106rem; }
 .container-list-discuss .line-river-after:after {
   left: 1.066rem !important; }
