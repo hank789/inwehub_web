@@ -788,7 +788,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 50px;
+    height: 1.333rem;
     overflow: hidden;
     /*padding: 0.36rem 0.426rem;*/
     background: #FFFFFF;
@@ -806,7 +806,7 @@
       display: flex;
       font-size: 0.373rem;
       float: left;
-      padding: 7px 0 7px 0.426rem;
+      padding: 0.186rem 0 0.186rem 0.426rem;
       .footerMenuTwo {
         display: flex;
         .containerBtn {

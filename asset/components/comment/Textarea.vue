@@ -273,10 +273,10 @@
         this.getHistoryDescription()
 
         console.log('comment-textarea:' + textarea)
-        if (!textarea.trim()) {
-          targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
-          this.$refs.myAddEditor.setPlaceholder(targetUsername)
-        }
+        //if (!textarea.trim()) {
+        targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
+        this.$refs.myAddEditor.setPlaceholder(targetUsername)
+        //}
 
         if (this.showTextarea) {
           console.log('bind comment事件')
