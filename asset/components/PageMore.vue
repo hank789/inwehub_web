@@ -621,7 +621,7 @@
       padding: 0.32rem 0;
       position: relative;
       color: #808080;
-      border-bottom: 1px solid #DCDCDC;
+      border-bottom: 0.026rem solid #DCDCDC;
       span{
         position: absolute;
         left:0.586rem;
@@ -648,24 +648,24 @@
       }
     }
     .twoLevelLine {
-      padding: 0 16px;
+      padding: 0 0.426rem;
       background: #fff;
       .twoLevelTopLine {
-        border-top: 1px solid #DCDCDC;
+        border-top: 0.026rem solid #DCDCDC;
       }
     }
     .twoLevel {
       padding: 0.266rem;
-      /*border-top: 1px solid #DCDCDC;*/
+      /*border-top: 0.026rem solid #DCDCDC;*/
       .delete {
         span {
-          padding: 13.5px;
+          padding: 0.36rem;
           display: inline-block;
-          border-radius: 8px;
-          border: 1px solid #DCDCDC;
+          border-radius: 0.213rem;
+          border: 0.026rem solid #DCDCDC;
           margin: 0 0.24rem;
           .icon {
-            font-size: 20px;
+            font-size: 0.533rem;
             color: #C8C8C8;
           }
         }

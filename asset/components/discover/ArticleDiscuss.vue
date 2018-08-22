@@ -430,15 +430,15 @@
 <style scoped="scoped" lang="less">
   .lidR2 {
     .lidframe {
-      width: 304px;
-      height: 34px;
-      line-height: 34px;
-      padding-left: 10px;
+      width: 8.106rem;
+      height: 0.906rem;
+      line-height: 0.906rem;
+      padding-left: 0.266rem;
       /*text-align: center;*/
-      border-radius: 5px;
-      border: 1px solid #DCDCDC;
+      border-radius: 0.133rem;
+      border: 0.026rem solid #DCDCDC;
       span {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #C8C8C8;
       }
     }

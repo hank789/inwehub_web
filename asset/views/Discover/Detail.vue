@@ -935,19 +935,19 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .seeAll {
-    padding: 12px 0;
-    font-size: 14px;
+    padding: 0.32rem 0;
+    font-size: 0.373rem;
     color: #808080;
-    line-height: 20px;
+    line-height: 0.533rem;
     text-align: center;
   }
   .container-footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 49px;
+    height: 1.306rem;
     overflow: hidden;
-    /*padding: 13.5px 16px;*/
+    /*padding: 0.36rem 0.426rem;*/
     background: #FFFFFF;
     &:before {
       position: absolute;
@@ -960,20 +960,20 @@
     }
     .footerLeft {
       display: flex;
-      font-size: 14px;
+      font-size: 0.373rem;
       float: left;
-      padding: 6.5px 0 6.5px 16px;
+      padding: 0.173rem 0 0.173rem 0.426rem;
       .footerMenuTwo {
         display: flex;
         .containerBtn {
           display: flex;
-          width: 111px;
-          height: 36px;
+          width: 2.96rem;
+          height: 0.96rem;
           color: #ffffff;
-          margin-right: 5px;
-          line-height: 36px;
+          margin-right: 0.133rem;
+          line-height: 0.96rem;
           text-align: center;
-          border-radius: 8px;
+          border-radius: 0.213rem;
           justify-content: center;
         }
         .noBullish {
@@ -984,12 +984,12 @@
         }
       }
       .footerMenuOne {
-        width: 222.5px;
-        height: 36px;
+        width: 5.933rem;
+        height: 0.96rem;
         display: flex;
         color: #03AEF9;
-        line-height: 36px;
-        border-radius: 8px;
+        line-height: 0.96rem;
+        border-radius: 0.213rem;
         background: #F3F4F6;
         text-align: center;
         justify-content: center;
@@ -1000,30 +1000,30 @@
     }
     .footerRight {
       color: #B4B4B6;
-      font-size: 10px;
+      font-size: 0.266rem;
       text-align: center;
       display: flex;
       float: right;
-      margin-top: 7px;
-      margin-right: 16px;
+      margin-top: 0.186rem;
+      margin-right: 0.426rem;
       .collectionComment {
-        width: 50px;
-        height: 49px;
+        width: 1.333rem;
+        height: 1.306rem;
         flex-grow:1;
         span {
           display: block;
-          margin-top: -4px;
+          margin-top: -0.106rem;
         }
       }
       .icon {
-        font-size: 22px;
-        /*margin-top: -4px;*/
+        font-size: 0.586rem;
+        /*margin-top: -0.106rem;*/
       }
     }
   }
   .lineMargin {
     margin-top: -0.16rem;
-    margin-bottom: 13px;
+    margin-bottom: 0.346rem;
   }
   .container-image {
     height: 5.333rem;
@@ -1192,7 +1192,7 @@
   }
   .share {
     padding: 0 0.453rem;
-    margin-bottom: 22.5px;
+    margin-bottom: 0.6rem;
     .location {
       margin-left: -0.08rem;
       .icon {
@@ -1202,7 +1202,7 @@
     }
     span {
       margin-left: -0.106rem;
-      font-size: 12px;
+      font-size: 0.32rem;
       color: #B4B4B6;
     }
     .shareGo {

@@ -352,15 +352,15 @@
   }
   .mui-content {
     top: 0;
-    bottom: 46px;
+    bottom: 1.226rem;
     background: #fff;
   }
   .right {
     color: #808080;
-    font-size: 15px;
+    font-size: 0.4rem;
     position: absolute;
-    right: 16px;
-    top: 11px;
+    right: 0.426rem;
+    top: 0.293rem;
   }
   .empty {
     width: 100%;
