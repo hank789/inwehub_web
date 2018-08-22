@@ -18,12 +18,12 @@
       </div>
     </div>
 
-    <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">{{data.feed.title}}<span class="color-b4b4b6 font-12"
-                                                                                   v-if="data.feed.domain"> - {{data.feed.domain}}</span>
-    </div>
+    <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">{{data.feed.title}}</div>
 
-    <div class="container-image margin-10-0-0" v-if="data.feed.img">
-      <img class="lazyImg" v-lazy="data.feed.img"/>
+    <div class="component-card-link">
+      <div class="imageWrapper"><img class="lazyImg" v-lazy="data.feed.img"></div>
+      <div class="cardLinktitle">{{data.feed.article_title}}</div>
+      <div class="cardLinkUrl">{{data.feed.domain}}</div>
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
@@ -213,5 +213,9 @@
   }
   .padding-space{
     padding: 0.4rem 0.4rem 0.25rem 0.4rem;
+  }
+
+  .component-card-link{
+    margin-top: 0.266rem;
   }
 </style>

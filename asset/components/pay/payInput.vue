@@ -9,7 +9,7 @@
           <div class="component-pay">
             <div class="title">输入悬赏金额/元</div>
             <div class="inputWrapper">
-              <input type="text" pattern="\d*" v-model="money" autocomplete="off" placeholder="5-10000" min="5" max="10000" maxlength="5">
+              <input type="text" pattern="\d*" v-model="money" autocomplete="off" placeholder="5-10000" min="5" max="10000" maxlength="5" id="inputMoney" @focus="focus" ref="inputMoney">
             </div>
             <div class="desc">（若48小时内没人回答该问题，则资金自动退回至钱包）</div>
           </div>
@@ -99,6 +99,9 @@
       }
     },
     methods: {
+      focus () {
+        console.log('payInput focus()')
+      },
       toSeeHelp () {
         this.close()
         this.$router.pushPlus('/help/ask')
@@ -182,7 +185,10 @@
       showSelectMoney () {
         this.getPayConfig(() => {
           this.setPayMethod()
-          window.mui('#sheetInput').popover('toggle')
+          window.mui('#sheetInput').popover('show')
+          setTimeout(() => {
+            this.$refs.inputMoney.focus()
+          }, 200)
         })
       },
       close () {

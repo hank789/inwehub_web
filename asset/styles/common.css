@@ -2608,13 +2608,13 @@ a {
   background-color: #F7F8FA;
   margin-left: 1.04rem;
   padding: 0.266rem 0.266rem 0; }
-.container-list-discuss .list-item-discuss.list-item-discuss-children:first-child {
+.list-item-discuss-childrens>div>.list-item-discuss.list-item-discuss-children:first-child {
   border-radius: 0.106rem 0.106rem 0 0; }
-.container-list-discuss .list-item-discuss.list-item-discuss-children:last-child {
+.list-item-discuss-childrens>div>.list-item-discuss.list-item-discuss-children:last-child {
   margin-bottom: 0.266rem;
   padding-bottom: 0.266rem;
   border-radius: 0 0 0.106rem 0.106rem; }
-.container-list-discuss .list-item-discuss.list-item-discuss-children:first-child:last-child {
+.list-item-discuss-childrens>div>.list-item-discuss.list-item-discuss-children:first-child:last-child {
   border-radius: 0.106rem; }
 .container-list-discuss .line-river-after:after {
   left: 1.066rem !important; }
@@ -2928,12 +2928,19 @@ a {
   left: 0;
   bottom: 0; }
 .component-item-article .itemArticleLeft .explain label {
+  display: inline-block;
+  height:0.586rem;
+  line-height: 0.533rem;
   border: 0.026rem solid #03aef9;
   border-radius: 0.106rem;
   color: #03AEF9;
   font-size: 0.266rem;
   padding: 0 0.133rem;
   margin-right: 0.266rem; }
+
+.mui-android .component-item-article .itemArticleLeft .explain label {
+  line-height: 0.586rem;
+}
 .component-item-article .itemArticleLeft .explain span {
   color: #03AEF9;
   font-size: 0.293rem;
@@ -2974,3 +2981,34 @@ a {
   background: #F3F4F6;
   color: #444;
   border: none; }
+
+.pull-down-header{
+  background-color:#f3f4f6 !important;
+}
+
+.pull-down-content{
+  color:#808080 !important;
+}
+
+
+.component-card-link {
+  padding: 0.4rem 0.4rem 0.293rem;
+  background: #F7F8FA;
+  border-radius: 0.106rem; }
+.component-card-link .imageWrapper {
+  height: 3.28rem;
+  border-radius: 0.133rem;
+  position: relative; }
+.component-card-link .imageWrapper img {
+  border-radius: 0.106rem;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover; }
+.component-card-link .cardLinktitle {
+  margin-top: 0.213rem;
+  font-size: 0.373rem;
+  color: #808080; }
+.component-card-link .cardLinkUrl {
+  font-size: 0.32rem;
+  color: #B4B4B6; }

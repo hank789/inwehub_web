@@ -1,26 +1,47 @@
 <template>
   <div>
     <div class="component-block-title">
-      <div class="left">留言</div>
-      <div class="right" @tap.stop.prevent="switchMode">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-paixu"></use>
-        </svg>{{mode}}
-      </div>
+      <div class="left">评论<span v-if="total">({{total}})</span></div>
+      <!--<div class="right" @tap.stop.prevent="switchMode">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-paixu"></use>-->
+        <!--</svg>{{mode}}-->
+      <!--</div>-->
     </div>
     <div class="line-river-after"></div>
 
     <div class="message">
-      <div class="listWrapper empty" v-show="list.length === 0">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-zanwushuju"></use>
-        </svg>
-        <p>暂无留言</p>
+      <!--<div class="listWrapper empty" v-show="list.length === 0">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-zanwushuju"></use>-->
+        <!--</svg>-->
+        <!--<p>暂无留言</p>-->
+      <!--</div>-->
+
+      <div class="container-list-discuss">
+        <div class="list-item-discuss">
+          <div class="lidL">
+            <img :src="info.avatar_url"/>
+            <svg class="icon" aria-hidden="true" v-if="info.is_expert">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="lidR">
+            <div class="lidR1">{{info.name}}</div>
+            <div class="lidR2">
+              <div class="lidframe" @tap.stop.prevent="goComment()">
+                <span v-if="list.length === 0">有花堪折直须折，快做评论第一人</span>
+                <span v-else-if="list.length > 3">知音千里难寻觅，说点什么不后悔</span>
+                <span v-else>有想法就说，莫负好时光</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="container-list-discuss" v-show="list.length !== 0 && showList">
         <div v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-          <template v-for="(item, index) in list">
+          <template v-for="(item, index) in list" v-if="index < 3">
             <div class="list-item-discuss"  @tap.stop.prevent="clickComment(item, list)" :key="index">
               <div class="lidL" @tap.stop.prevent="toResume(item.owner.uuid)">
                 <img :src="item.owner.avatar"/>
@@ -99,8 +120,10 @@
       delList: null,
       page: 1,
       list: [],
+      total: '',
       mode: '最新',
-      order_by: 1
+      order_by: 1,
+      info: []
     }),
     props: {
       listApi: {
@@ -124,13 +147,14 @@
         }
       }
     },
-    mounted () {
-    },
     components: {
       DiscussReplay
     },
     computed: {},
     methods: {
+      goComment () {
+        this.$emit('goComment')
+      },
       vote (item) {
         postRequest('support/comment', {
           id: item.id
@@ -344,13 +368,18 @@
           return false
         }
         var params = Object.assign({page: this.page, order_by: this.order_by}, this.listParams)
+
+        if (this.page > 1) {
+          return
+        }
+
         postRequest(this.listApi, params).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-
+          this.total = response.data.data.total
           if (response.data.data.data.length > 0) {
             this.list = this.list.concat(response.data.data.data)
           }
@@ -365,7 +394,20 @@
 
           this.loading = 0
         })
+      },
+      getInfo () {
+        postRequest(`profile/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.info = response.data.data.info
+        })
       }
+    },
+    mounted () {
+      this.getInfo()
     },
     watch: {
       'listParams' (newVal, oldVal) {
@@ -390,7 +432,28 @@
   export default Discuss
 </script>
 
-<style scoped="scoped">
+<style scoped="scoped" lang="less">
+  .lidR2 {
+    .lidframe {
+      width: 8.106rem;
+      height: 0.906rem;
+      line-height: 0.906rem;
+      padding-left: 0.266rem;
+      border-radius: 0.133rem;
+      border: 0.026rem solid #DCDCDC;
+      span {
+        font-size: 0.373rem;
+        color: #C8C8C8;
+      }
+    }
+  }
+  .mui-plus {
+    .lidR2 {
+      .lidframe {
+        border: 0.013rem solid #DCDCDC !important;
+      }
+    }
+  }
   .empty {
     width: 100%;
     background: #FFFFFF;

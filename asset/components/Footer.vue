@@ -332,7 +332,7 @@
     font-size: 25px; /* px不转换 */
     top: 7px; /* px不转换 */
     left: 50%;
-    margin-left: -12.5px; /* px不转换 */}
+    margin-left: -12px; /* px不转换 */}
   .container-footer .menu .imgWrapper {
     width: 40.5px; /* px不转换 */
     height: 40.5px; /* px不转换 */

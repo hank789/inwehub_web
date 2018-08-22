@@ -4,35 +4,37 @@
       <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
       <h1 class="mui-title">发布</h1>
       <a @tap.stop.prevent="submit()"
-         class="mui-plus-visible mui-btn appPageSubmit mui-btn-link mui-pull-right">确认分享</a>
+         class="mui-btn appPageSubmit mui-btn-link mui-pull-right">确认分享</a>
     </header>
 
     <div class="mui-content">
-      <div class="component-textareaWithImage container-editor container-editor-app">
-        <Jeditor
-          ref="myAddEditor"
-          id="discoverAddJeditor"
-          v-model.trim="description"
-          :rows="10"
-          :content="description"
-          :descMaxLength="descMaxLength"
-          :placeholder="descPlaceholder"
-          :isMonitorAddressAppear="true"
-          :isMonitorHashSymbol="true"
-          :isMonitorSmallSpan="true"
-          :isShowCounter="false"
-          :allowRichStyle="false"
-          @ready="onEditorReady($event)"
-          @onEditorBlur="onEditorBlur"
-          @onEditorFocus="onEditorFocus"
-          @onEditorChange="onEditorChange"
-          @addressAppearFound="addressAppearFound"
-          @hashSymbolFound="hashSymbolFound"
-          @hashSymbolDelete="hashSymbolDelete"
-          @addressAppearDelete="addressAppearDelete"
-          @smallSpanArrChange="smallSpanArrChange"
-        ></Jeditor>
 
+      <Jeditor
+        ref="myAddEditor"
+        id="discoverAddJeditor"
+        :class="{noBottomFile: images.length === 0 && pdfs.length === 0}"
+        v-model.trim="description"
+        :rows="10"
+        :content="description"
+        :descMaxLength="descMaxLength"
+        :placeholder="descPlaceholder"
+        :isMonitorAddressAppear="true"
+        :isMonitorHashSymbol="true"
+        :isMonitorSmallSpan="true"
+        :isShowCounter="false"
+        :allowRichStyle="false"
+        @ready="onEditorReady($event)"
+        @onEditorBlur="onEditorBlur"
+        @onEditorFocus="onEditorFocus"
+        @onEditorChange="onEditorChange"
+        @addressAppearFound="addressAppearFound"
+        @hashSymbolFound="hashSymbolFound"
+        @hashSymbolDelete="hashSymbolDelete"
+        @addressAppearDelete="addressAppearDelete"
+        @smallSpanArrChange="smallSpanArrChange"
+      ></Jeditor>
+
+      <div class="component-textareaWithImage container-editor container-editor-app">
         <swiper :options="swiperOption" class="container-upload-images" v-show="images.length">
           <swiper-slide class="image" v-for="(image, index) in images" :key="'image_'+index" ><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
             <use xlink:href="#icon-times1"></use>
@@ -70,9 +72,6 @@
           </div>
         </div>
 
-      </div>
-      <div class="component-button-5-03aef9 button-wrapper padding-20-15" id="button-wrapper">
-        <button type="button" class="mui-plus-hidden mui-btn mui-btn-block mui-btn-primary" @tap.stop.prevent="submit()">确认分享</button>
       </div>
     </div>
 
@@ -842,10 +841,30 @@
       color:#DCDCDC;
     }
   }
+
+  .component-textareaWithImage{
+    position: absolute;
+    left:0;
+    right:0;
+    bottom: 1.173rem;
+    margin-bottom:0 !important;
+  }
 </style>
 
 <style>
+  #discoverAddJeditor{
+    position: absolute;
+    left:0;
+    right:0;
+    bottom: 3.36rem;
+    top: 0;
+  }
   #discoverAddJeditor .textarea-wrapper{
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    top: 0;
     border:none;
     background: #f3f4f6;
     padding:0 0.266rem;
@@ -860,11 +879,41 @@
     font-size: 0.373rem;
     color: #9b9b9b;
   }
-  #discoverAddJeditor .textarea-wrapper .quill-editor {
-    height: 4.8rem;
+
+  #discoverAddJeditor .textarea-wrapper .ql-container {
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    top: 0;
   }
+
+  #discoverAddJeditor .textarea-wrapper .quill-editor {
+    position: absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    top: 0;
+    height:auto;
+  }
+
+  #discoverAddJeditor .textarea-wrapper .quill-editor .ql-editor{
+    position: absolute;
+    left:0;
+    right:0;
+    top: 0;
+    bottom:0;
+    height:auto;
+    padding-bottom:0;
+  }
+
+  #discoverAddJeditor.noBottomFile{
+    bottom:1.173rem;
+  }
+
+
   #discoverAddJeditor .quill-editor .ql-container {
-    height: 4.8rem;
+    height: inherit;
     font-size: 0.373rem;
     color: #9b9b9b;
   }
@@ -888,6 +937,4 @@
   .component-labelWithIcon{
     margin: 0.346rem 0.133rem;
   }
-
-
 </style>

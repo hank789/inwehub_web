@@ -23,7 +23,7 @@
         <!-- 第五张 -->
         <div class="mui-slider-item guide guide-4">
           <div class="logo">
-            <div class="title">最具品质的咨询顾问社区</div>
+            <div class="title">企业级应用&amp;服务广场</div>
           </div>
           <div class="animate">
             <div id='close' class="mui-btn mui-btn-warning mui-btn-outlined">开启</div>

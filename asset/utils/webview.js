@@ -157,7 +157,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   setStatusBarBackgroundAndStyle('#3c3e44', 'light')
 
-  var footerPathUrl = pathUrl
+  // var footerPathUrl = pathUrl
 
   var shareUrl = getIndexPath() + '#/webview/share'
 
@@ -199,57 +199,57 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   currentWebview.append(webview)
 
   // 创建底部菜单
-  var Slugindex = pathUrl.lastIndexOf('/')
-  var slug = pathUrl.substring(Slugindex + 1)
-  var toolUrl = getIndexPath() + '#/discover/comment/' + slug
-  console.log('底部url:' + toolUrl)
-
-  var embed = window.mui.openWindow({
-    url: toolUrl,
-    id: 'inwehub_article_footer',
-    preload: false,    // 一定要为false
-    show: {
-      autoShow: false,
-      aniShow: 'pop-in'
-    },
-    styles: {
-      popGesture: 'hide',
-      bottom: '0px',
-      height: '44px',
-      dock: 'bottom',
-      position: 'dock',
-      zindex: 7,
-      backButtonAutoControl: 'hide',
-      bounce: 'none', // 不允许滑动
-      scrollIndicator: 'none' // 不显示滚动条
-    },
-    extras: {},
-    waiting: {
-      autoShow: false
-    }
-  })
-  window.mui.fire(embed, 'go_to_target_page', {url: '/discover/comment/' + slug})
+  // var Slugindex = pathUrl.lastIndexOf('/')
+  // var slug = pathUrl.substring(Slugindex + 1)
+  // var toolUrl = getIndexPath() + '#/discover/comment/' + slug
+  // console.log('底部url:' + toolUrl)
+  //
+  // var embed = window.mui.openWindow({
+  //   url: toolUrl,
+  //   id: 'inwehub_article_footer',
+  //   preload: false,    // 一定要为false
+  //   show: {
+  //     autoShow: false,
+  //     aniShow: 'pop-in'
+  //   },
+  //   styles: {
+  //     popGesture: 'hide',
+  //     bottom: '0px',
+  //     height: '44px',
+  //     dock: 'bottom',
+  //     position: 'dock',
+  //     zindex: 7,
+  //     backButtonAutoControl: 'hide',
+  //     bounce: 'none', // 不允许滑动
+  //     scrollIndicator: 'none' // 不显示滚动条
+  //   },
+  //   extras: {},
+  //   waiting: {
+  //     autoShow: false
+  //   }
+  // })
+  // window.mui.fire(embed, 'go_to_target_page', {url: '/discover/comment/' + slug})
 
   // 创建评论链接
-  var commentUrl = getIndexPath() + '#' + footerPathUrl
-  var view = new window.plus.nativeObj.View('test', {bottom: '0px', left: '0', height: '44px', width: '60%'})
+  // var commentUrl = getIndexPath() + '#' + footerPathUrl
+  // var view = new window.plus.nativeObj.View('test', {bottom: '0px', left: '0', height: '44px', width: '60%'})
+  //
+  // view.draw([
+  //   {
+  //     tag: 'rect',
+  //     id: 'rect',
+  //     rectStyles: {color: 'rgba(0,0,0,0)'},
+  //     position: {bottom: '0px', left: '0px', width: '100%', height: '44px'}
+  //   }
+  // ])
+  // view.addEventListener('click', () => {
+  //   console.log('准备跳转:' + commentUrl)
+  //   openWebviewByUrl('list-detail-page', commentUrl)
+  // }, false)
+  //
+  // embed.append(view)
 
-  view.draw([
-    {
-      tag: 'rect',
-      id: 'rect',
-      rectStyles: {color: 'rgba(0,0,0,0)'},
-      position: {bottom: '0px', left: '0px', width: '100%', height: '44px'}
-    }
-  ])
-  view.addEventListener('click', () => {
-    console.log('准备跳转:' + commentUrl)
-    openWebviewByUrl('list-detail-page', commentUrl)
-  }, false)
-
-  embed.append(view)
-
-  currentWebview.append(embed)
+  // currentWebview.append(embed)
 
   // 标题栏
   var shareViewParams = {

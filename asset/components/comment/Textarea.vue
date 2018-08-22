@@ -1,5 +1,5 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea" @tap.stop.prevent="">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.stop.prevent="">
     <div class="textareaWrapper">
         <Jeditor
           ref="myAddEditor"
@@ -56,7 +56,9 @@
       focusCallback: null,  // 获取焦点时的回调
       allowBr: false
     }),
-    props: {},
+    props: {
+      alwaysshow: false
+    },
     components: {
       Jeditor
     },
@@ -251,7 +253,7 @@
       onEditorReady (editor) {
         this.editorObj = editor
       },
-      comment (data) {
+      comment (data, autoBlur) {
         var targetUsername = data.targetUsername
         console.log('comment targetUsername:' + targetUsername)
         this.commentData = data.commentData
@@ -263,12 +265,13 @@
 
         this.targetUsername = targetUsername
 
-        var textarea = this.textarea
-        textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
-
         this.editorObj.setContents([{insert: ' '}])
 
         this.getHistoryDescription()
+
+        var textarea = this.textarea
+        textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
+        textarea = textarea.replace(/(<p> <\/p>)*$/, '')
 
         console.log('comment-textarea:' + textarea)
         if (!textarea.trim()) {
@@ -282,10 +285,12 @@
             console.log('document tap 事件被触发')
             this.editorObj.blur()
           }, false)
-
-          setTimeout(() => {
-            this.editorObj.focus()
-          }, 500)
+          console.log('autoBlur:' + autoBlur)
+          if (!autoBlur) {
+            setTimeout(() => {
+              this.editorObj.focus()
+            }, 500)
+          }
         } else {
           this.editorObj.blur()
         }

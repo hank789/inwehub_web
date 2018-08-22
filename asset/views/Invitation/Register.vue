@@ -51,8 +51,8 @@
         </div>
       </div>
       <div class="privilege_B">
-        <P>最具品质的咨询顾问社区</P>
-        <P>长见识 / 解疑惑／寻合作／树形象／得收益</P>
+        <P>企业级应用&amp;服务广场</P>
+        <P>长见识／解疑惑／寻合作／树形象／得收益</P>
         <div class="margin-10-0-0">
           <img src="../../statics/images/privilege@3x.png"/>
         </div>

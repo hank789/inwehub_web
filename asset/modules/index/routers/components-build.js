@@ -186,6 +186,7 @@ import AskOfferIndex from '../../../views/AskOffer/Index.vue'
 import AskOfferList from '../../../views/AskOffer/List.vue'
 import AskOfferDetail from '../../../views/AskOffer/Detail.vue'
 import ShareReview from '../../../views/Share/review.vue'
+import ComponentsComment from '../../../views/Comment.vue'
 
 export {
   Login,
@@ -375,5 +376,6 @@ export {
   AskOfferDetail,
   NewcomerGuidanceStepGroup,
   ShareReview,
-  Domain
+  Domain,
+  ComponentsComment
 }

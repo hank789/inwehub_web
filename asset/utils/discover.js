@@ -13,7 +13,7 @@ function upvote (context, submissionId, increaseCallback, decreaseCallback) {
 
     var isFollowed = response.data.data.type === 'upvote' ? 1 : 0
 
-    window.mui.toast(response.data.data.tip)
+    // window.mui.toast(response.data.data.tip)
     if (isFollowed) {
       increaseCallback(response)
     } else {
@@ -34,7 +34,7 @@ function downVote (context, submissionId, increaseCallback, decreaseCallback) {
 
     var isFollowed = response.data.data.type === 'downvote' ? 1 : 0
 
-    window.mui.toast(response.data.data.tip)
+    // window.mui.toast(response.data.data.tip)
     if (isFollowed) {
       increaseCallback(response)
     } else {
