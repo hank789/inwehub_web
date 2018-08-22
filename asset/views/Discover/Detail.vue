@@ -209,7 +209,7 @@
 
         <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
 
-        <div class="river" v-if="noback && slug"></div>
+        <div class="river"></div>
 
         <ArticleDiscuss
           id="commentTitle"
