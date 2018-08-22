@@ -316,7 +316,7 @@
           }, 100)
         }
       },
-      comment (parentId, commentTargetUsername, list) {
+      comment (parentId, commentTargetUsername, list, autoBlur) {
         var commentTarget = {
           parentId: parentId || 0,
           commentTargetUsername: commentTargetUsername || '',
@@ -330,11 +330,11 @@
 
         console.log('回复 data:' + JSON.stringify(data))
 
-        this.$refs.ctextarea.comment(data, true)
+        this.$refs.ctextarea.comment(data, autoBlur)
       }
     },
     mounted () {
-      this.comment(0, '', this.list)
+      this.comment(0, '', this.list, true)
     },
     watch: {}
   }

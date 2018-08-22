@@ -11,7 +11,7 @@
         <span  @tap.stop.prevent="cancelShare()">取消</span>
         分享到
       </div>
-      <div class="line-river-after"></div>
+      <div class="line-river-after line-river-after-height"></div>
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
@@ -592,6 +592,9 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .line-river-after-height {
+    height: 0;
+  }
   .shareBtn {
     position: fixed;
     right: 0.266rem;
