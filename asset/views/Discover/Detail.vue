@@ -195,7 +195,7 @@
         </div>
 
 
-        <div class="river" v-if="detail.supporter_list.length"></div>
+        <!--<div class="river" v-if="detail.supporter_list.length"></div>-->
 
         <!--点赞-->
         <!--<div class="component-dianzanList" v-if="detail.upvotes">-->
