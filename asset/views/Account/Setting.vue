@@ -80,7 +80,7 @@
           <p>{{ appVersion }}</p>
         </div>
 
-        <div class="text">
+        <div class="text" @tap.stop.prevent="getOperators">
           <p>Copyright 2017 InweTech.</p>
           <p>All Rights Reserved</p>
         </div>
@@ -92,9 +92,11 @@
 </template>
 <script>
   import localEvent from '../../stores/localStorage'
-  import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../../stores/types'
+  import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND, USERS_APPEND } from '../../stores/types'
   import oauth from '../../components/oauth/oauth.vue'
   import { postRequest, apiRequest } from '../../utils/request'
+  import { clearAllWebViewCache } from '../../utils/webview'
+  import { getUserInfo } from '../../utils/user'
 
   export default {
     data () {
@@ -210,6 +212,42 @@
             }
           }
         })
+      },
+      getOperators () {
+        if (window.mui.os.plus) {
+          apiRequest(`system/getOperators`, {}, false).then(responseData => {
+            if (responseData.length > 0) {
+              var btnArray = []
+              responseData.forEach(function (i, r) {
+                btnArray.push({title: i.name, id: i.id})
+              })
+              window.plus.nativeUI.actionSheet({
+                title: '切换账户',
+                cancel: '取消',
+                buttons: btnArray
+              }, (e) => {
+                if (e.index > 0) {
+                  apiRequest('auth/operatorLogin', {
+                    user_id: btnArray[e.index - 1].id
+                  })
+                    .then(response => {
+                      if (response === false) {
+                        return
+                      }
+                      localEvent.setLocalItem('UserLoginInfo', response)
+                      // 获取用户信息
+                      this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+                        cb(user)
+                        window.mixpanelIdentify()
+                        clearAllWebViewCache()
+                        this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
+                      }))
+                    })
+                }
+              })
+            }
+          })
+        }
       }
     },
     mounted () {
