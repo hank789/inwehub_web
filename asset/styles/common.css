@@ -2983,11 +2983,11 @@ a {
   border: none; }
 
 .pull-down-header{
-  background-color:#f3f4f6;
+  background-color:#f3f4f6 !important;
 }
 
 .pull-down-content{
-  color:#808080;
+  color:#808080 !important;
 }
 
 
