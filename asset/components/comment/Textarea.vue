@@ -253,7 +253,7 @@
       onEditorReady (editor) {
         this.editorObj = editor
       },
-      comment (data) {
+      comment (data, autoBlur) {
         var targetUsername = data.targetUsername
         console.log('comment targetUsername:' + targetUsername)
         this.commentData = data.commentData
@@ -284,10 +284,12 @@
             console.log('document tap 事件被触发')
             this.editorObj.blur()
           }, false)
-
-          setTimeout(() => {
-            this.editorObj.focus()
-          }, 500)
+          console.log('autoBlur:' + autoBlur)
+          if (!autoBlur) {
+            setTimeout(() => {
+              this.editorObj.focus()
+            }, 500)
+          }
         } else {
           this.editorObj.blur()
         }

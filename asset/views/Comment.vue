@@ -330,7 +330,7 @@
 
         console.log('回复 data:' + JSON.stringify(data))
 
-        this.$refs.ctextarea.comment(data)
+        this.$refs.ctextarea.comment(data, true)
       }
     },
     mounted () {

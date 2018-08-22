@@ -641,7 +641,6 @@
               }
             )
           }
-          window.mui.toast(response.data.message)
         })
       },
       upVote () {
