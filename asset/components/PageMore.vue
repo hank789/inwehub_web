@@ -11,6 +11,7 @@
         <span  @tap.stop.prevent="cancelShare()">取消</span>
         分享到
       </div>
+      <div class="line-river-after"></div>
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
@@ -42,7 +43,7 @@
 
       <div v-if="isShowhidden">
         <div class="twoLevelLine">
-          <div class="twoLevelTopLine"></div>
+          <div class="line-river-after"></div>
         </div>
         <div class="more twoLevel">
           <div class="delete single" @tap.stop.prevent="deleted()">
@@ -621,7 +622,7 @@
       padding: 0.32rem 0;
       position: relative;
       color: #808080;
-      border-bottom: 0.026rem solid #DCDCDC;
+      /*border-bottom: 0.026rem solid #DCDCDC;*/
       span{
         position: absolute;
         left:0.586rem;

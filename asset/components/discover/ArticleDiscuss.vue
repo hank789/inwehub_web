@@ -368,6 +368,11 @@
           return false
         }
         var params = Object.assign({page: this.page, order_by: this.order_by}, this.listParams)
+
+        if (this.page > 1) {
+          return
+        }
+
         postRequest(this.listApi, params).then(response => {
           var code = response.data.code
           if (code !== 1000) {
