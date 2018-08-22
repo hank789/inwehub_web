@@ -308,7 +308,7 @@
       <div class="footerRight">
         <div class="collectionComment" @tap.stop.prevent="collection()">
           <div>
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true" :class="{active: detail.is_bookmark}">
               <use xlink:href="#icon-shoucangdilantongyi"></use>
             </svg>
           </div>
@@ -934,6 +934,9 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .active {
+    color: #d4d4d4;
+  }
   .seeAll {
     padding: 12px 0;
     font-size: 14px;
@@ -942,7 +945,7 @@
     text-align: center;
   }
   .container-footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
     height: 49px;

@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="component-block-title">
-      <div class="left">评论({{total}})</div>
-      <div class="right" @tap.stop.prevent="switchMode">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-paixu"></use>
-        </svg>{{mode}}
-      </div>
+      <div class="left">评论<span v-if="!total == 0">({{total}})</span></div>
+      <!--<div class="right" @tap.stop.prevent="switchMode">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-paixu"></use>-->
+        <!--</svg>{{mode}}-->
+      <!--</div>-->
     </div>
     <div class="line-river-after"></div>
 

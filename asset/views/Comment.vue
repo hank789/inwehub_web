@@ -125,8 +125,7 @@
         return {
           page: this.page,
           order_by: this.order_by,
-          submission_slug: this.slug,
-          sort: 'hot'
+          submission_slug: this.slug
         }
       }
     },
