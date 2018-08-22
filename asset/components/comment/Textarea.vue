@@ -265,18 +265,19 @@
 
         this.targetUsername = targetUsername
 
-        var textarea = this.textarea
-        textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
-
         this.editorObj.setContents([{insert: ' '}])
 
         this.getHistoryDescription()
 
+        var textarea = this.textarea
+        textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
+        textarea = textarea.replace(/(<p> <\/p>)*$/, '')
+
         console.log('comment-textarea:' + textarea)
-        //if (!textarea.trim()) {
-        targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
-        this.$refs.myAddEditor.setPlaceholder(targetUsername)
-        //}
+        if (!textarea.trim()) {
+          targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
+          this.$refs.myAddEditor.setPlaceholder(targetUsername)
+        }
 
         if (this.showTextarea) {
           console.log('bind comment事件')
