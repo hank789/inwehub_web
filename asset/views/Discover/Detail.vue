@@ -794,6 +794,7 @@
     background: #FFFFFF;
     &:before {
       position: absolute;
+      top: 0;
       width: 100%;
       height: .02667rem;
       content: '';
@@ -805,7 +806,7 @@
       display: flex;
       font-size: 0.373rem;
       float: left;
-      padding: 0.173rem 0 0.173rem 0.426rem;
+      padding: 7px 0 7px 0.426rem;
       .footerMenuTwo {
         display: flex;
         .containerBtn {
