@@ -195,7 +195,7 @@
         </div>
 
 
-        <div class="river" v-if="detail.supporter_list.length"></div>
+        <!--<div class="river" v-if="detail.supporter_list.length"></div>-->
 
         <!--点赞-->
         <!--<div class="component-dianzanList" v-if="detail.upvotes">-->
@@ -312,7 +312,7 @@
               <use xlink:href="#icon-shoucangdilantongyi"></use>
             </svg>
           </div>
-          <span>收藏{{detail.bookmarks}}</span>
+          <span>收藏<i v-if="detail.bookmarks">{{detail.bookmarks}}</i></span>
         </div>
         <div class="collectionComment" @tap.stop.prevent="goComment()">
           <div>
@@ -320,7 +320,7 @@
               <use xlink:href="#icon-pinglun"></use>
             </svg>
           </div>
-          <span>评论{{detail.comments_number}}</span>
+          <span>评论<i v-if="detail.comments_number">{{detail.comments_number}}</i></span>
         </div>
       </div>
     </div>
@@ -1016,6 +1016,9 @@
         span {
           display: block;
           margin-top: -0.106rem;
+          i {
+            font-style: normal;
+          }
         }
       }
       .icon {
