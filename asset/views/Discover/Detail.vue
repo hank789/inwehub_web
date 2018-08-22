@@ -221,7 +221,7 @@
 
     <div class="container-footer">
       <div class="footerLeft">
-        <div class="footerMenuOne" :class="isUpvote === 'upvote' ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted || isUpvote === 'upvote' || isUpvote === 'downvote'">{{detail.support_description}}</div>
+        <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
         <div class="footerMenuTwo" v-else>
           <div class="noBullish containerBtn" @tap.stop.prevent="detailDownVote()">{{detail.downvote_tip}}</div>
           <div class="bullish containerBtn" @tap.stop.prevent="upVote()">{{detail.support_tip}}</div>

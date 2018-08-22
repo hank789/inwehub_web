@@ -439,12 +439,18 @@
       height: 0.906rem;
       line-height: 0.906rem;
       padding-left: 0.266rem;
-      /*text-align: center;*/
       border-radius: 0.133rem;
       border: 0.026rem solid #DCDCDC;
       span {
         font-size: 0.373rem;
         color: #C8C8C8;
+      }
+    }
+  }
+  .mui-plus {
+    .lidR2 {
+      .lidframe {
+        border: 0.013rem solid #DCDCDC !important;
       }
     }
   }
