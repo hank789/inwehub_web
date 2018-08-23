@@ -133,9 +133,6 @@
         </div>
 
         <!--<div class="river" v-if="detail.supporter_list.length"></div>-->
-
-        <RecommendList :id="slug" v-if="noback && slug"></RecommendList>
-
         <div class="river"></div>
 
         <ArticleDiscuss
@@ -261,7 +258,6 @@
   import {goThirdPartyArticle} from '../../utils/webview'
   import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg, scrollToElement} from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
-  import RecommendList from '../../components/discover/RecommendList.vue'
 
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
@@ -346,7 +342,6 @@
       PageMore,
       commentTextarea,
       groupsList,
-      RecommendList,
       quillEditor,
       'vue-pull-refresh': VuePullRefresh
     },
@@ -584,6 +579,9 @@
 
           this.loading = 0
           this.recommendRead()
+
+          // 滚动到上面
+          scrollToElement(this, '.detail-discover', '.pull-down-container')
         })
       },
       setFollowStatus (status) {
