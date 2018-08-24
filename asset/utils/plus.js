@@ -900,6 +900,93 @@ function getContacts (successCallback, failCallback) {
   })
 }
 
+/**
+ * 下载图片
+ * @param imgUrl
+ * @param savePath
+ * @param callback
+ */
+function downloadImg (imgUrl, savePath, callback) {
+  window.mui.plusReady(function () {
+    var downloadTask = window.plus.downloader.createDownload(imgUrl, {
+      filename: savePath
+    }, function (download, status) {
+      if (status !== 200) {
+        console.log('下载失败,status' + status)
+        if (savePath !== null) {
+          window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
+            entry.remove(function (entry) {
+              console.log('临时文件删除成功' + savePath)
+              // 重新下载图片
+              downloadImg(imgUrl, savePath, callback)
+            }, function (e) {
+              callback(imgUrl)
+              console.log('临时文件删除失败' + savePath)
+            })
+          })
+        }
+      } else {
+        // 把下载成功的图片显示
+        // 将本地URL路径转换成平台绝对路径
+        console.log('下载成功:' + savePath)
+
+        if (window.mui.os.android) {
+          savePath = window.plus.io.convertLocalFileSystemURL(savePath)
+        }
+
+        window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
+          var newurl = entry.toRemoteURL()
+          console.log('已下载到:' + newurl)
+          callback(newurl)
+        }, function (e) {
+          callback(savePath)
+          console.log('已下载到:' + savePath)
+          console.log('Resolve file URL failed:' + JSON.stringify(e))
+        })
+      }
+    })
+    downloadTask.start()
+  })
+}
+
+/**
+ * 获取缓存在本地的图片
+ * . 仅手机app内有效
+ * . 缓存存在 _download/cache/*
+ * @param imgUrl
+ * @param callback
+ */
+function getCacheImage (imgUrl, callback) {
+  console.log('getCacheImage:url:' + imgUrl)
+  if (!imgUrl) {
+    return
+  }
+
+  if (!window.plus) {
+    return imgUrl
+  }
+  window.mui.plusReady(function () {
+    let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
+    let localImageUrl = '_downloads/cache/image/' + imageCode + '.jpg'
+    let absoluteImagePath = window.plus.io.convertLocalFileSystemURL(localImageUrl)
+    console.log('absoluteImagePath:' + absoluteImagePath)
+
+    // 判断本地是否存在该文件，存在就就直接使用，否则就下载
+    window.plus.io.resolveLocalFileSystemURL(absoluteImagePath, function (entry) {
+      if (entry) {
+        var image = entry.toRemoteURL()
+        console.log('图片已存在:' + image)
+        callback(image)
+      } else {
+        downloadImg(imgUrl, localImageUrl, callback)
+      }
+    }, function (e) {
+      console.log('Resolve file URL failed:')
+      downloadImg(imgUrl, localImageUrl, callback)
+    })
+  })
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -928,5 +1015,7 @@ export {
   setClipboardText,
   lockOrientation,
   openUrlByUrl,
-  getContacts
+  getContacts,
+  downloadImg,
+  getCacheImage
 }
