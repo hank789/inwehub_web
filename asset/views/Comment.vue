@@ -94,7 +94,7 @@
   import { getIndexByIdArray } from '../utils/array'
   import commentTextarea from '../components/comment/Textarea.vue'
   import Vue from 'vue'
-  import {textToLinkHtml, transferTagToLink } from '../utils/dom'
+  import { textToLinkHtml, transferTagToLink } from '../utils/dom'
   import DiscussReplay from '../components/discover/DiscussReply.vue'
   import userAbility from '../utils/userAbility'
 
