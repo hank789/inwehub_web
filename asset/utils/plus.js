@@ -417,6 +417,9 @@ function toSettingSystem (type) {
       case 'NOTIFITION':
         intent = new Intent(Settings.ACTION_APPLICATION_SETTINGS)
         break
+      case 'Contact':
+        intent = new Intent(Settings.ACTION_SETTINGS)
+        break
       default:
         throw new Error('toSettingSystem type 不支持')
     }
@@ -879,8 +882,13 @@ function getContacts (successCallback, failCallback) {
   window.mui.plusReady(function () {
     window.plus.contacts.getAddressBook(window.plus.contacts.ADDRESSBOOK_PHONE, function (addressbook) {
       addressbook.find(null, function (contacts) {
-        console.log('getContacts Success:' + JSON.stringify({contacts: contacts}))
-        successCallback(contacts)
+        if (window.mui.os.android && contacts.length === 0) {
+          console.error('addressbook.find failed: 数据为空')
+          failCallback()
+        } else {
+          console.log('getContacts Success:' + JSON.stringify({contacts: contacts}))
+          successCallback(contacts)
+        }
       }, function (e) {
         failCallback(e)
         console.error('addressbook.find failed:' + e.message)
