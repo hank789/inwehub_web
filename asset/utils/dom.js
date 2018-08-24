@@ -243,6 +243,8 @@ function scrollDetailPage () {
 * 滚动到指定元素
 */
 function scrollToElement (context, selector, parentSelector) {
+  var destEle = context.$el.querySelector(selector)
+  if (!destEle) return
   var scrollTop = context.$el.querySelector(selector).offsetTop
   console.log('scrollToElement-scrollTop:' + scrollTop)
   setTimeout(function () {
