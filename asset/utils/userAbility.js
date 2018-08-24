@@ -15,7 +15,7 @@ import {alertZoom, alertSimple, getDialogObj, alertHtml} from '../utils/dialog'
 import {postRequest} from '../utils/request'
 import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat, alertFreeAskGuide } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
-import { getContacts } from '../utils/plus'
+import { getContacts, toSettingSystem } from '../utils/plus'
 import { isLogined } from '../utils/auth'
 
 var UserAbility = () => {
@@ -452,7 +452,12 @@ var UserAbility = () => {
               context.$router.pushPlus('/addressBooks')
             })
           }, () => {
-            window.mui.toast('获取联系人失败')
+            var btnArray = ['取消', '确定']
+            window.mui.confirm('获取联系人失败, 前往设置权限？', ' ', btnArray, function (e) {
+              if (e.index === 1) {
+                toSettingSystem('Contact')
+              }
+            })
           })
         } else {
           // 不需要重新读取
