@@ -920,8 +920,8 @@ function downloadImg (imgUrl, savePath, callback) {
               // 重新下载图片
               downloadImg(imgUrl, savePath, callback)
             }, function (e) {
-              callback(imgUrl)
               console.log('临时文件删除失败' + savePath)
+              downloadImg(imgUrl, savePath, callback)
             })
           })
         }
@@ -939,9 +939,7 @@ function downloadImg (imgUrl, savePath, callback) {
           console.log('已下载到:' + newurl)
           callback(newurl)
         }, function (e) {
-          callback(savePath)
-          console.log('已下载到:' + savePath)
-          console.log('Resolve file URL failed:' + JSON.stringify(e))
+          console.log('解析已下载的图片失败:' + JSON.stringify(e))
         })
       }
     })
@@ -967,23 +965,42 @@ function getCacheImage (imgUrl, callback) {
   }
   window.mui.plusReady(function () {
     let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
-    let localImageUrl = '_downloads/cache/image/' + imageCode + '.jpg'
-    let absoluteImagePath = window.plus.io.convertLocalFileSystemURL(localImageUrl)
-    console.log('absoluteImagePath:' + absoluteImagePath)
+    let localImageUrl = '_doc/cache/image/' + imageCode + '.jpg'
+
+    if (window.mui.os.android) {
+      localImageUrl = window.plus.io.convertLocalFileSystemURL(localImageUrl)
+    }
 
     // 判断本地是否存在该文件，存在就就直接使用，否则就下载
-    window.plus.io.resolveLocalFileSystemURL(absoluteImagePath, function (entry) {
+    window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
       if (entry) {
         var image = entry.toRemoteURL()
         console.log('图片已存在:' + image)
         callback(image)
       } else {
+        console.log('图片不存在, 去下载...')
         downloadImg(imgUrl, localImageUrl, callback)
       }
     }, function (e) {
-      console.log('Resolve file URL failed:')
+      console.log('图片不存在, 去下载2...')
       downloadImg(imgUrl, localImageUrl, callback)
     })
+  })
+}
+
+/**
+ * 清空图片缓存
+ */
+function clearImageCache () {
+  let localImageUrl = '_doc/cache/image/'
+  window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
+    entry.removeRecursively(function (entry) {
+      window.plus.console.log('图片缓存删除成功:')
+    }, function (e) {
+      window.plus.console.log('图片缓存删除失败:error:' + e.message)
+    })
+  }, function (e) {
+    console.log('目录打开失败:' + localImageUrl + ', error:' + e.message)
   })
 }
 
@@ -1017,5 +1034,6 @@ export {
   openUrlByUrl,
   getContacts,
   downloadImg,
-  getCacheImage
+  getCacheImage,
+  clearImageCache
 }

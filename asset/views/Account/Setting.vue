@@ -97,6 +97,7 @@
   import { postRequest, apiRequest } from '../../utils/request'
   import { clearAllWebViewCache } from '../../utils/webview'
   import { getUserInfo } from '../../utils/user'
+  import { clearImageCache } from '../../utils/plus'
 
   export default {
     data () {
@@ -161,6 +162,7 @@
       },
       // 清除缓存；
       clearCache () {
+        clearImageCache()
         localEvent.setLocalItem('lauchFlag', {showGuide: false})
         // 调用系统toast;
         window.mui.toast('清除成功')
