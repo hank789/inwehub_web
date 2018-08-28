@@ -93,7 +93,7 @@
 				labels: $('[data-id*="title-"]', _picker),
 			};
 			ui.cancel.addEventListener('tap', function() {
-				self.hide();
+				self.dispose();
 			}, false);
 			ui.ok.addEventListener('tap', function() {
 				var rs = self.callback(self.getSelected());
