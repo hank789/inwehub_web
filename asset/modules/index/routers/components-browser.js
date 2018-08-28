@@ -57,6 +57,8 @@ const DiscoverDetail = () => import(/* webpackChunkName: "DiscoverDetail" */ '..
 const ActivityUpvotesList = () => import(/* webpackChunkName: "ActivityUpvotesList" */ '../../../views/Activity/UpvotesLIist.vue')
 const ActivityGrowthList = () => import(/* webpackChunkName: "ActivityGrowthList" */ '../../../views/Activity/GrowthList.vue')
 const Accountmy = () => import(/* webpackChunkName: "Accountmy" */ '../../../views/Account/my.vue')
+const AccountMyCode = () => import(/* webpackChunkName: "AccountMyCode" */ '../../../views/Account/MyCode.vue')
+const AccountChoiceRole = () => import(/* webpackChunkName: "AccountChoiceRole" */ '../../../views/Account/ChoiceRole.vue')
 const AccountCollected = () => import(/* webpackChunkName: "AccountCollected" */ '../../../views/Account/Collected.vue')
 const AccountCollectedArticle = () => import(/* webpackChunkName: "AccountCollectedArticle" */ '../../../views/Account/CollectedArticle.vue')
 const AccountAdvantage = () => import(/* webpackChunkName: "AccountAdvantage" */ '../../../views/Account/Advantage.vue')
@@ -383,5 +385,7 @@ export {
   AskOfferDetail,
   ShareReview,
   Domain,
-  ComponentsComment
+  ComponentsComment,
+  AccountMyCode,
+  AccountChoiceRole
 }

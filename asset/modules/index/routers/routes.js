@@ -741,6 +741,36 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 我的二维码
+    path: '/my/myCode',
+    name: 'MyCode',
+    component: componets.AccountMyCode,
+    meta: {
+      title: '我的二维码',
+      keepAlive: true
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 选择角色ChoiceRole
+    path: '/my/choiceRole',
+    name: 'choiceRole',
+    component: componets.AccountChoiceRole,
+    meta: {
+      title: '选择角色',
+      keepAlive: true
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的收藏——回答
     path: '/my/collectedAnswers',
     name: 'my-collected_answers',

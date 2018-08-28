@@ -139,6 +139,8 @@ import ReadhubReadhub from '../../../views/Readhub/Readhub.vue'
 import DiscoverComment from '../../../views/Discover/Comment.vue'
 import ReadhubDetailH5 from '../../../views/Readhub/DetailH5.vue'
 import AccountSetting from '../../../views/Account/Setting.vue'
+import AccountMyCode from '../../../views/Account/MyCode.vue'
+import AccountChoiceRole from '../../../views/Account/ChoiceRole.vue'
 import Guide from '../../../views/Guide.vue'
 import Feedback from '../../../views/Feedback.vue'
 import About from '../../../views/About.vue'
@@ -377,5 +379,7 @@ export {
   NewcomerGuidanceStepGroup,
   ShareReview,
   Domain,
-  ComponentsComment
+  ComponentsComment,
+  AccountMyCode,
+  AccountChoiceRole
 }
