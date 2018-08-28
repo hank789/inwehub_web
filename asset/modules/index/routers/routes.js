@@ -771,6 +771,21 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 服务 AccountService
+    path: '/my/service',
+    name: 'service',
+    component: componets.AccountService,
+    meta: {
+      title: '甲方需求方',
+      keepAlive: true
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的收藏——回答
     path: '/my/collectedAnswers',
     name: 'my-collected_answers',

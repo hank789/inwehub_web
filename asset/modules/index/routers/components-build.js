@@ -141,6 +141,7 @@ import ReadhubDetailH5 from '../../../views/Readhub/DetailH5.vue'
 import AccountSetting from '../../../views/Account/Setting.vue'
 import AccountMyCode from '../../../views/Account/MyCode.vue'
 import AccountChoiceRole from '../../../views/Account/ChoiceRole.vue'
+import AccountService from '../../../views/Account/Service.vue'
 import Guide from '../../../views/Guide.vue'
 import Feedback from '../../../views/Feedback.vue'
 import About from '../../../views/About.vue'
@@ -381,5 +382,6 @@ export {
   Domain,
   ComponentsComment,
   AccountMyCode,
-  AccountChoiceRole
+  AccountChoiceRole,
+  AccountService
 }
