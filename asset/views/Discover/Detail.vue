@@ -139,9 +139,9 @@
           id="commentTitle"
           v-if="detail.slug"
           :listApi="'article/comments'"
-          :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
+          :listParams="discussListParams"
           :storeApi="'article/comment-store'"
-          :storeParams="{'submission_id': detail.id}"
+          :storeParams="discussStoreParams"
           @comment="comment"
           @commentFinish="commentFinish"
           @goComment="goComment"
@@ -327,6 +327,12 @@
       }
     },
     computed: {
+      discussStoreParams () {
+        return {'submission_id': this.detail.id}
+      },
+      discussListParams () {
+        return {'submission_slug': this.detail.slug, sort: 'hot'}
+      },
       descLength () {
         if (this.description === this.descPlaceholder) {
           return 0
