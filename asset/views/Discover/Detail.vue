@@ -181,7 +181,7 @@
             <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
               <div class="itemArticleLeft">
                 <div class="titleWrapper">
-                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5">{{index+1}}.</span>{{item.data.title}}</div>
+                  <div class="title text-line-2 text-content"><!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}</div>
                 </div>
                 <div class="explain">
                   <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
