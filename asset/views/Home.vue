@@ -220,6 +220,12 @@
     line-height: 0.4rem !important;
     border:0.013rem solid #03aef9 !important;
   }
+
+  .mui-wechat .component-item-article .itemArticleLeft .explain label{
+    height:0.4rem !important;
+    line-height: 0.4rem !important;
+    border:0.013rem solid #03aef9 !important;
+  }
 </style>
 
 <style>
