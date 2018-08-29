@@ -40,6 +40,12 @@ body{
   height:100%;
 }
 
+.gray {
+  width: 100%;
+  height: 0.266rem;
+  background: #F3F4F5;
+}
+
 p{
   color:inherit;
 }

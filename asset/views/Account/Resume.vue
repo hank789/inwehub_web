@@ -104,77 +104,105 @@
               <!--</div>-->
               <!--关注 被赞 综合评分-->
               <div class="counter">
-                <span @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">关注Ta</span> <b @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">{{ resume.info.followers }}</b>
-                <i class="separate"></i>
-                <span>被赞</span>  <b>{{ resume.info.supports }}</b>
-                <!--<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次-->
-                <i class="separate"></i>{{ resume.info.total_score }}
+                <div class="counterList">
+                  <span>20</span>
+                  <span>关注他的人</span>
+                </div>
+
+                <div class="counterList">
+                  <span>20</span>
+                  <span>她关注的人</span>
+                </div>
+
+                <div class="counterList">
+                  <span>20</span>
+                  <span>发布</span>
+                </div>
+
+                <div class="counterList">
+                  <span>20</span>
+                  <span>圈子</span>
+                </div>
+
+                <!--<span @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">关注Ta</span> <b @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">{{ resume.info.followers }}</b>-->
+                <!--<i class="separate"></i>-->
+                <!--<span>被赞</span>  <b>{{ resume.info.supports }}</b>-->
+                <!--&lt;!&ndash;<i class="separate"></i>评价<b>{{ resume.info.feedbacks }}</b>次&ndash;&gt;-->
+                <!--<i class="separate"></i>{{ resume.info.total_score }}-->
               </div>
             </div>
           </div>
         </div>
+        <div class="gray"></div>
         <!--Ta的擅长-->
         <div class="skilled">
-          <p>Ta的擅长</p>
+          <p>擅长领域</p>
           <template v-for="(industry, index) in resume.info.skill_tags">
             <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
           </template>
-          <i class="bot"></i>
+          <!--<i class="bot"></i>-->
         </div>
         <!--发布-->
-        <div class="news">
-          <div>Ta的发布</div>
-          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
-            回答 <span>{{ resume.info.answers }}</span>
-          </p>
-          <a></a>
-          <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishQuestions/'+uuid)">
-            提问 <span>{{ resume.info.questions }}</span>
-          </p>
-          <a></a>
-          <p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">
-            分享 <span>{{ resume.info.submission_count }}</span>
-          </p>
-          <a></a>
-          <p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">
-            评论 <span>{{ resume.info.comment_count }}</span>
-          </p>
-          <i class="bot"></i>
-        </div>
+        <!--<div class="news">-->
+          <!--<div>Ta的发布</div>-->
+          <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">-->
+            <!--回答 <span>{{ resume.info.answers }}</span>-->
+          <!--</p>-->
+          <!--<a></a>-->
+          <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishQuestions/'+uuid)">-->
+            <!--提问 <span>{{ resume.info.questions }}</span>-->
+          <!--</p>-->
+          <!--<a></a>-->
+          <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">-->
+            <!--分享 <span>{{ resume.info.submission_count }}</span>-->
+          <!--</p>-->
+          <!--<a></a>-->
+          <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">-->
+            <!--评论 <span>{{ resume.info.comment_count }}</span>-->
+          <!--</p>-->
+          <!--<i class="bot"></i>-->
+        <!--</div>-->
         <!--个人动态-->
-        <div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
-          <p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
-          <i class="bot"></i>
-        </div>
+        <!--<div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">-->
+          <!--<p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
+          <!--</svg>-->
+          <!--<i class="bot"></i>-->
+        <!--</div>-->
         <!--Ta的专栏-->
+        <div class="gray"></div>
         <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
-          <p>Ta的专栏 </p>
-          <p>文章<span>&nbsp;{{resume.info.article_count }}</span><i></i></p>
-          <p>评论<span>&nbsp;{{resume.info.article_comment_count }}</span><i></i></p>
-          <p>赞<span>&nbsp;{{resume.info.article_upvote_count}}</span></p>
+          <p>专栏</p>
+          <!--<p>文章<span>&nbsp;{{resume.info.article_count }}</span><i></i></p>-->
+          <!--<p>评论<span>&nbsp;{{resume.info.article_comment_count }}</span><i></i></p>-->
+          <!--<p>赞<span>&nbsp;{{resume.info.article_upvote_count}}</span></p>-->
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
-          <i class="bot"></i>
+          <!--<i class="bot"></i>-->
         </div>
         <!--Ta的圈子-->
-        <groups
-          class="resume"
-          :groupsList="resume.groups"
-          :loading="loading"
-          :apper="apper"
-          :title = "'Ta的圈子'"
-        ></groups>
+        <!--<groups-->
+          <!--class="resume"-->
+          <!--:groupsList="resume.groups"-->
+          <!--:loading="loading"-->
+          <!--:apper="apper"-->
+          <!--:title = "'Ta的圈子'"-->
+        <!--&gt;</groups>-->
 
-        <!--grey-->
         <div class="grey"></div>
-        <!--个人简介-->
+        <div class="specialColumn dynamicWrapper">
+          <p>动态</p>
+          <i class="bot"></i>
+        </div>
         <div class="description">
-          <p>个人简介</p>
-          <div class="mui-ellipsis-3">{{ resume.info.description }}</div>
+          <div class="noDynamic">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zanwushuju"></use>
+            </svg>
+            <span>暂无动态</span>
+          </div>
         </div>
 
       </div>
@@ -585,7 +613,7 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     /*background-color: rgb(220, 220, 220);*/
-    border: 0.026rem dashed #dcdcdc;
+    border: 0.026rem solid #dcdcdc;
   }
 
   /***************清除自带样式*****************/
@@ -729,6 +757,9 @@
   }
 
   /*个人简历*/
+  .specialColumn.dynamicWrapper {
+    padding: 8px 0.373rem;
+  }
   .basic {
     background: #fff;
     .description {
@@ -736,11 +767,25 @@
       color: #808080;
       padding: 0.293rem 0.373rem 0.346rem;
       line-height: 0.64rem;
+      p {
+        position: relative;
+      }
       div {
         display: block;
         font-size: 0.346rem;
         color: #444444;
         line-height: 0.666rem;
+      }
+      .noDynamic {
+        text-align: center;
+        font-size: 1.333rem;
+        padding-top: 18px;
+        padding-bottom: 27px;
+      }
+      span {
+        color: #C8C8C8;
+        font-size: 12px;
+        display: block;
       }
     }
   }
@@ -754,7 +799,7 @@
 
   .cardWrapper {
     margin-top: -1.84rem;
-    padding: 0 0.426rem;
+    padding: 0 0.426rem 15px;
     width: 100%;
     .card {
       border-radius: 0.106rem;
@@ -890,11 +935,23 @@
           margin-left: 4.5%;
           padding-top: 0.32rem;
           margin-top: 0.32rem;
-          border-top: 0.026rem dashed #dcdcdc;
+          border-top: 0.026rem solid #dcdcdc;
           font-size: 0.346rem;
           color: #444444;
-          b {
-            color:rgb(250,73,117);
+          overflow: hidden;
+          .counterList {
+            width: 25%;
+            float: left;
+            span {
+              display: block;
+              color: #808080;
+              &:nth-of-type(1) {
+                color: #444444;
+                font-size: 19px;
+                font-weight: 500;
+
+              }
+            }
           }
 
         }
@@ -943,7 +1000,8 @@
             .icon {
               color: #808080;
               font-size: 12px;
-              vertical-align: initial;
+              vertical-align: -1px;
+              margin-left: -3px;
             }
           }
         }
@@ -1260,6 +1318,7 @@
     float: right;
     font-size: 0.4rem;
     color: #808080;
+    margin-top: 4px;
   }
   .specialColumn p:nth-of-type(1){
      font-size:0.373rem;
@@ -1292,6 +1351,8 @@
     font-size: 0.373rem;
     color: #808080;
     margin-bottom: 0.32rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dcdcdc;
   }
   /*向他咨询*/
   .btn{
