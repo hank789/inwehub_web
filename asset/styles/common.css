@@ -2072,6 +2072,8 @@ a {
   font-size: 0.4rem;
   color: #444; }
 .container-list-question .question .component-label {
+  position: relative;
+  top: -0.053rem;
   margin-right: 0.106rem; }
 .container-list-question .statistics {
   font-size: 0.32rem;
@@ -2086,6 +2088,7 @@ a {
 
 .component-label {
   font-size: 0.293rem;
+  line-height:0.453rem;
   border-radius: 0.106rem;
   display: inline-block;
   padding: 0rem 0.133rem; }
