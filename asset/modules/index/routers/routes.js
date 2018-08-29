@@ -772,7 +772,7 @@ const routes = [
     }
   },
   { // 服务 AccountService
-    path: '/my/service',
+    path: '/my/service/:type?',
     name: 'service',
     component: componets.AccountService,
     meta: {

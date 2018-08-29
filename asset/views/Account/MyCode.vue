@@ -7,11 +7,11 @@
 
     <div class="mui-content">
 
-      <div class="logoUpDown">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-tiwen"></use>
-        </svg>
-      </div>
+      <!--<div class="logoUpDown">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-tiwen"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
 
       <div class="headPortraitInfo">
         <div class="headPortraitImg">

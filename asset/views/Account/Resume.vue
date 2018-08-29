@@ -3,6 +3,9 @@
     <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!isShare || (isShare && canBack)"></a>
       <h1 class="mui-title">个人名片</h1>
+      <svg class="icon" aria-hidden="true" @tap.stop.prevent="share">
+        <use xlink:href="#icon-shoucang-xiao"></use>
+      </svg>
     </header>
 
     <div class="mui-content resumeWrapper" v-show="!loading">
@@ -57,29 +60,37 @@
 
             </div>
             <!--名片-->
-            <div class="share" @tap.stop.prevent="share">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-fenxiang"></use>
-              </svg>
-            </div>
+            <!--<div class="share" @tap.stop.prevent="share">-->
+              <!--<svg class="icon" aria-hidden="true">-->
+                <!--<use xlink:href="#icon-fenxiang"></use>-->
+              <!--</svg>-->
+            <!--</div>-->
             <div class="header">
               <div class="avatar">
                 <div class="avatarInner">
                   <img :src="resume.info.avatar_url" class="avatar"/>
                 </div>
               </div>
+              <div class="expert">
+                <svg class="icon" aria-hidden="true" v-show="resume.info.is_expert">
+                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                </svg>
+              </div>
             </div>
             <div class="detail">
               <div class="realname">
                 <span>{{ resume.info.name }}</span>
-                <svg class="icon" aria-hidden="true" v-show="resume.info.is_expert">
-                  <use xlink:href="#icon-zhuanjiabiaoji"></use>
-                </svg>
+                <span>L2</span>
               </div>
               <div class="item">
-                <span>{{ resume.info.company }}</span>
-                <i class="separate"></i>
-                <span>{{ resume.info.title }}</span>
+                <div class="my-detail">
+                  <span>粉丝12</span>
+                  <i></i>
+                  <span>访客人气22</span>
+                </div>
+                <!--<span>{{ resume.info.company }}</span>-->
+                <!--<i class="separate"></i>-->
+                <!--<span>{{ resume.info.title }}</span>-->
               </div>
               <div class="item">
                 <span>{{ resume.info.work_years }}年工作经验</span>
@@ -586,6 +597,15 @@
     list-style: none;
     font-style: normal;
   }
+  .mui-bar {
+    .icon {
+      position: absolute;
+      right: 16px;
+      top: 11px;
+      font-size: 22px;
+      color: #3C3E44;
+    }
+  }
 
   .professor {
     background-color: #ffffff;
@@ -751,8 +771,8 @@
       .collect {
         position: absolute;
         font-size: 0.373rem;
-        right: 1.466rem;
-        top: 0.373rem;
+        right: 15px;
+        top: 15px;
         color: #ffffff;
         background: #03aef9;
         border-radius: 1.333rem;
@@ -784,6 +804,17 @@
       .header {
         height: 2.453rem;
         margin-top: -0.533rem;
+        .expert {
+          position: absolute;
+          top: 90px;
+          left: 187px;
+          z-index: 222;
+          border-radius: 50%;
+          background: #FFF;
+          .icon {
+            font-size: 30px;
+          }
+        }
         .avatar {
           position: absolute;
           left: 50%;
@@ -791,8 +822,8 @@
           z-index: 9;
           color: #ffffff;
           display: inline-block;
-          height: 2.453rem;
-          width: 2.453rem;
+          height: 91px;
+          width: 91px;
           font-size: 0.533rem;
           text-align: center;
           border-radius: 50%;
@@ -827,8 +858,23 @@
         .realname {
           font-weight: bold;
           span {
-            position: relative;
-            right: -0.08rem;
+            &:nth-of-type(1) {
+              position: relative;
+              right: -0.08rem;
+              color: #444444;
+              font-size: 18px;
+            }
+            &:nth-of-type(2) {
+              width: 22px;
+              height: 15px;
+              color: #FFFFFF;
+              font-size: 10px;
+              line-height: 15px;
+              font-weight: normal;
+              border-radius: 100px;
+              display: inline-block;
+              background:linear-gradient(180deg,#07D7FD 0%,#03AEF9 100%);
+            }
           }
           .icon {
             vertical-align: bottom;
@@ -865,6 +911,22 @@
             font-size: 0.32rem;
             padding: 0 0.186rem;
             margin: 0 0.053rem 0.213rem;
+          }
+          .my-detail {
+            width: 100%;
+            height: 0.8rem;
+            span {
+              font-size: 0.346rem;
+              color: #444444;
+            }
+            i {
+              display: inline-block;
+              width: 2px;
+              height: 2px;
+              border-radius: 50%;
+              background: #B4B4B6;
+              margin: 0 0px 3px;
+            }
           }
         }
       }

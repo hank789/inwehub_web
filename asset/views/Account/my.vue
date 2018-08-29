@@ -1,8 +1,24 @@
 <template>
   <div>
+    <header class="mui-bar mui-bar-dark mui-bar-nav">
+      <div class="setUp" @tap.stop.prevent="$router.pushPlus('/setting')">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shezhi"></use>
+        </svg>
+      </div>
+      <div class="code" @tap.stop.prevent="$router.pushPlus('/my/myCode')">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-erweima"></use>
+        </svg>
+      </div>
+    </header>
     <div class="mui-content">
-      <div class="my-top">
-        <div class="account_info" @tap.stop.prevent="$router.pushPlus('/my/resume')">编辑名片 {{account_info_complete_percent}}%</div>
+      <div class="my-top" @tap.stop.prevent="$router.pushPlus('/my/resume')">
+        <div class="account_info">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+        </div>
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
@@ -11,132 +27,101 @@
           <div class="my-personal">
             <div class="my-info">
               <span class="mui-ellipsis">{{name}}</span>
-              <p>{{ user_level }}</p>
+              <p>L{{ user_level }}</p>
               <svg class="icon" aria-hidden="true" v-if="expert_apply_status =='2'">
                 <use xlink:href="#icon-zhuanjiabiaoji"></use>
               </svg>
             </div>
-         <div class="my-detail">
-              <span @tap.stop.prevent="$router.pushPlus('/my/Growth')">等级详情 ></span>
+            <div class="my-detail">
+              <span>粉丝12</span>
               <i></i>
-              <span @tap.stop.prevent="$router.pushPlus('/my/advantage')">我的擅长 ></span>
-
+              <span>访客人气22</span>
             </div>
           </div>
-
         </div>
-
-        <!--邀请活动-->
-        <div class="my-activity">
-          <div v-if="show_my_wallet" class="my-news" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
-            <i>返现</i>
-            <span>邀请我的好友</span>
-            <p><a>5%</a>返现等你拿</p>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-chakangengduojiantou"></use>
-            </svg>
-          </div>
-          <div class="my-signIn"  @tap.stop.prevent="toSignIGift()">
-            <i></i>
-            签到
-          </div>
-        </div>
-
-
       </div>
-      <!--灰色-->
-      <div class="gray"></div>
 
       <!--part2-->
       <ul class="part2">
         <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wodefankuijianyi"></use>
-          </svg>
-          <span>我的发布</span>
+          <span>123</span>
+          <span>发布</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/collectUser')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wodeguanzhu"></use>
-          </svg>
-          <span>我的关注</span>
+          <span>{{attention}}</span>
+          <span>关注</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/my/collectedAnswers')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wodeshoucang"></use>
-          </svg>
-          <span>我的收藏</span>
+          <span>123</span>
+          <span>收藏</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/group/my')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wodequanzi"></use>
-          </svg>
-          <span>我的圈子</span>
-        </li>
-        <i class="bott"></i>
-      </ul>
-      <!--part3认证-->
-      <ul class="part3">
-        <li>
-          <p>平台认证<i></i></p>
-        </li>
-        <li @tap.stop.prevent="toApply(expert_apply_status)">
-          <p v-if="expert_apply_status =='0'">点击前往认证</p>
-          <p v-if="expert_apply_status =='1'">认证处理中</p>
-          <p v-if="expert_apply_status =='2'">身份已认证</p>
-          <p v-if="expert_apply_status =='3'">失败，重新认证</p>
-          <p v-if="expert_apply_status =='2'">平台认证专家</p>
-          <p v-else>申请专家认证</p>
-        </li>
-        <li @tap.stop.prevent="toApprove(expert_apply_status)">
-          <p v-if="company_apply_status =='0'">点击前往申请</p>
-          <p v-if="company_apply_status =='1'">申请审核中</p>
-          <p v-if="company_apply_status =='2'">切换至企业版</p>
-          <p v-if="company_apply_status =='3'">失败，重新认证</p>
-          <p v-if="company_apply_status =='2'">企业账号已认证</p>
-          <p v-else>申请企业账号</p>
+          <span>123</span>
+          <span>圈子</span>
         </li>
       </ul>
-      <!--gray-->
+      <div class="enjoy" @tap.stop.prevent="$router.pushPlus('/my/choiceRole')">
+        <img src="../../statics/images/enjoy2x.png" alt="">
+      </div>
       <div class="gray"></div>
+
       <!--列表内容-->
-      <ul class="my-option">
-        <li @tap.stop.prevent="$router.pushPlus('/my/visitors')">
-          <span>访客人气</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
-          <i class="bot"></i>
-        </li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/Finance')" v-if="show_my_wallet">
+      <div class="component-option">
+        <div class="optionList" @tap.stop.prevent="$router.pushPlus('/my/Finance')">
           <span>我的钱包</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
-          <i class="bot"></i>
-        </li>
-        <li @tap.stop.prevent="$router.pushPlus('/my/Discount')">
-          <span>我的报名</span>
+          <!--<i class="bot"></i>-->
+        </div>
+        <div class="gray"></div>
+        <div class="optionList invite" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
+          <span>邀请好友</span>
+          <span>5%返现</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
-        </li>
-        <li @tap.stop.prevent="$router.pushPlus('/feedback/advise')">
-          <span>反馈建议</span>
+        </div>
+        <div class="optionList signIn" @tap.stop.prevent="toSignIGift()">
+          <span>每日签到</span>
+          <span></span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
           <i class="bot"></i>
-        </li>
-        <li @tap.stop.prevent="$router.pushPlus('/setting')">
-          <span>设置</span>
+        </div>
+        <div class="optionList" @tap.stop.prevent="$router.pushPlus('/feedback/advise')">
+          <span>意见反馈</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
-          <i class="bot"></i>
-        </li>
-      </ul>
+        </div>
+        <div class="gray"></div>
+      </div>
+
+      <div class="guessLike">
+        <div class="component-block-title">
+          <div class="left">猜您喜欢</div>
+        </div>
+        <div class="line-river-after line-river-after-short"></div>
+        <template  v-for="(item, index) in list">
+          <div class="line-river-big" v-if="index === 5"></div>
+          <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
+            <div class="itemArticleLeft">
+              <div class="titleWrapper">
+                <div class="title text-line-2 text-content"><!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}</div>
+              </div>
+              <div class="explain">
+                <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
+              </timeago>
+              </div>
+            </div>
+            <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
+          </div>
+          <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
+        </template>
+      </div>
 
     </div>
 
@@ -145,6 +130,7 @@
   </div>
 </template>
 <script>
+  import {postRequest} from '../../utils/request'
   import localEvent from '../../stores/localStorage'
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
@@ -185,10 +171,48 @@
         expert_level: currentUser.expert_level,
         show_my_wallet: currentUser.show_my_wallet,
         show_resume: true,
-        my: ''
+        my: '',
+        list: []
       }
     },
     methods: {
+      recommendRead () {
+        postRequest(`getRelatedRecommend`, {source_id: this.user_id, perPage: 3, source_type: 1}).then(response => {
+          this.list = response.data.data.data
+        })
+      },
+      goDetail (item) {
+        switch (item.read_type) {
+          case 1:
+            window.trackMixpanelEvent('redirect-to-recommend', '/c/' + item.data.category_id + '/' + item.data.slug, 'discover_detail', '分享', this.$router.fullPath)
+            this.$router.pushPlus('/c/' + item.data.category_id + '/' + item.data.slug)
+            break
+          case 2:
+            window.trackMixpanelEvent('redirect-to-recommend', '/askCommunity/major/' + item.source_id, 'askCommunity-major-detail', '问答社区', this.$router.fullPath)
+            this.$router.pushPlus('/askCommunity/major/' + item.source_id)
+            break
+          case 3:
+            window.trackMixpanelEvent('redirect-to-recommend', '/ask/offer/answers/' + item.source_id, 'ask-offer-answers', '问答社区-悬赏问答-回答列表页', this.$router.fullPath)
+            this.$router.pushPlus('/ask/offer/answers/' + item.source_id)
+            break
+          case 4:
+            this.$router.pushPlus('/EnrollmentStatus/' + item.source_id)
+            break
+          case 5:
+            this.$router.pushPlus('/EnrollmentStatus/' + item.source_id)
+            break
+          case 6:
+            window.trackMixpanelEvent('redirect-to-recommend', '/ask/offer/' + item.source_id, 'ask-offer-detail', '问答社区-悬赏问答-详情页', this.$router.fullPath)
+            this.$router.pushPlus('/ask/offer/' + item.source_id)
+            break
+          default:
+        }
+      },
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       // 签到
       // 每日签到
       toSignIGift () {
@@ -279,15 +303,14 @@
             this.show_my_wallet = true
           }
           userAbility.newbieTask(this)
+          this.recommendRead()
         }))
       }
     },
     activated: function () {
-      console.log('activated')
       this.initData()
     },
-    mounted () {
-    }
+    mounted () {}
   }
 </script>
 
@@ -325,6 +348,24 @@
     background-color: rgb(220, 220, 220);
   }
 
+  .mui-bar {
+    padding-top: 11.5px;
+    display: flex;
+    justify-content: space-between;
+    .icon {
+      font-size: 21px;
+      color: #444444;
+    }
+    .setUp {
+      display: flex;
+      padding-left: 4px;
+    }
+    .code {
+      display: flex;
+      padding-right: 4px;
+    }
+  }
+
   .my-top {
     width: 92%;
     overflow: hidden;
@@ -336,18 +377,18 @@
   .professor {
     width: 100%;
     height: 3.2rem;
-  }
-  .professor .my-img{
-    /*width: 21%;*/
-    height: 100%;
-    float: left;
-  }
-  .professor .avatar {
-    width: 1.84rem;
-    height: 1.826rem;
-    border-radius: 50%;
-    margin-top: 0.666rem;
+    .my-img{
+      /*width: 21%;*/
+      height: 100%;
+      float: left;
+    }
+    .avatar {
+      width: 1.84rem;
+      height: 1.826rem;
+      border-radius: 50%;
+      margin-top: 0.666rem;
 
+    }
   }
 
   .my-personal {
@@ -355,84 +396,83 @@
     height: 1.84rem;
     margin-top: 0.666rem;
     float: left;
-  }
+    .my-info {
+      width: 100%;
+      height: 0.8rem;
+      margin-top: 0.24rem;
+      position: relative;
+      span {
+        &:nth-of-type(1) {
+          display: inline-block;
+          max-width: 2.92rem;
+          font-size: 20px;
+          font-weight: 600;
+          color: #444444;
+          margin-right: 0.04rem;
+          margin-bottom: -0.106rem;
+        }
+      }
+      p {
+        &:nth-of-type(1) {
+          width: 22px;
+          height: 15px;
+          display: inline-block;
+          position: relative;
+          top: -0.08rem;
+          font-style: normal;
+          line-height: 15px;
+          font-size: 10px;
+          color: #FFFFFF;
+          text-align: center;
+          border-radius: 100px;
+          background:linear-gradient(180deg,rgba(7,215,253,1) 0%,rgba(3,174,249,1) 100%);
+        }
 
-  .my-personal .my-info {
-    width: 100%;
-    height: 0.8rem;
-    margin-top: 0.24rem;
-    position: relative;
-  }
-
-  .my-personal .my-info span:nth-of-type(1) {
-    display: inline-block;
-    max-width: 1.92rem;
-    font-size: 0.48rem;
-    font-weight: 600;
-    color: #444444;
-    margin-right: 0.04rem;
-    margin-bottom: -0.106rem;
-  }
-
-  .my-personal .my-info p:nth-of-type(1) {
-    width: 0.506rem;
-    height: 0.48rem;
-    display: inline-block;
-    position: relative;
-    top: -0.08rem;
-    font-style: normal;
-    line-height: 0.4rem;
-    font-size: 0.266rem;
-    color: #FFFFFF;
-    text-align: center;
-    background: url("../../statics/images/rank.png") no-repeat;
-    background-size: 0.506rem 0.48rem;
-    background-position: top;
-  }
-
-  .my-personal .my-info svg:nth-of-type(1) {
-    font-size: 0.693rem;
-    margin-bottom: -0.106rem;
-    margin-left: -0.08rem;
-    color: rgb(3, 174, 249);
-    position: relative;
-  }
-  /**********等级 擅长部分***************/
-
-  .my-personal .my-detail {
-    width: 100%;
-    height: 0.8rem;
-  }
-
-  .my-detail span {
-    font-size: 0.346rem;
-    color: #444444;
-  }
-
-  .my-detail i {
-    display: inline-block;
-    width: 0.026rem;
-    height: 0.32rem;
-    background: #DCDCDC;
-    margin-left: 0.24rem;
-    margin-right: 0.24rem;
-    margin-bottom: -0.053rem;
+      }
+      svg {
+        :nth-of-type(1) {
+          font-size: 0.693rem;
+          margin-bottom: -0.106rem;
+          margin-left: -0.08rem;
+          color: rgb(3, 174, 249);
+          position: relative;
+        }
+      }
+    }
+    .my-detail {
+      width: 100%;
+      height: 0.8rem;
+      span {
+        font-size: 0.346rem;
+        color: #444444;
+      }
+      i {
+        display: inline-block;
+        width: 2px;
+        height: 2px;
+        border-radius: 50%;
+        background: #B4B4B6;
+        margin: 0 0px 3px;
+      }
+    }
   }
   /**********名片***************/
 
   .account_info {
     position: absolute;
     right: 0;
-    top: 4%;
+    top: 7%;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
-    background: #03aef9;
     line-height: 0.773rem;
     color: #FFFFFF;
     font-size: 0.373rem;
     padding-left: 0.346rem;
     padding-right: 0.4rem;
     z-index: 9;
+    .icon {
+      color: #808080;
+    }
   }
   /**********邀请我的好友***************/
    .my-activity{
@@ -451,68 +491,64 @@
     position: relative;
     margin-bottom: 0.533rem;
     float: left;
-  }
-
-  .my-news i {
-    font-style: normal;
-    display: inline-block;
-    width: 0.8rem;
-    height: 0.453rem;
-    background: #E95D8C;
-    font-size: 0.32rem;
-    color: #FFFFFF;
-    text-align: center;
-    line-height: 0.453rem;
-    border-radius: 0.106rem;
-    margin-left: 0.3rem;
-    margin-right: 0.266rem;
-    position: relative;
-    /*渐变*/
-    background: -webkit-gradient(linear, 0 0, 100% 0, from(rgb(250, 73, 117)), to(rgb(253, 128, 173)));
-  }
-
-  .my-news i:after {
-    content: "";
-    display: block;
-    width: 0.16rem;
-    height: 0.16rem;
-    background: rgb(253, 128, 173);
-    position: absolute;
-    -webkit-transform: rotate(135deg);
-    transform: rotate(135deg);
-    right: -0.053rem;
-    top: 0rem;
-    bottom: 0;
-    margin: auto;
-  }
-
-  .my-news span {
-    font-size: 0.373rem;
-    color: #444444;
-    line-height: 1.093rem;
-  }
-  .my-news p{
-    font-size: 0.32rem;
-    color: #444444;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right:0.933rem;
-    line-height:1.093rem;
-  }
-  .my-news p a{
-    color:rgb(250,73,117);
-    letter-spacing:0.053rem;
-  }
-
-  .my-news svg {
-    font-size: 0.373rem;
-    color: #808080;
-    position: absolute;
-    right: 0.4rem;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+    i {
+      font-style: normal;
+      display: inline-block;
+      width: 0.8rem;
+      height: 0.453rem;
+      background: #E95D8C;
+      font-size: 0.32rem;
+      color: #FFFFFF;
+      text-align: center;
+      line-height: 0.453rem;
+      border-radius: 0.106rem;
+      margin-left: 0.3rem;
+      margin-right: 0.266rem;
+      position: relative;
+      /*渐变*/
+      background: -webkit-gradient(linear, 0 0, 100% 0, from(rgb(250, 73, 117)), to(rgb(253, 128, 173)));
+      &:after {
+        content: "";
+        display: block;
+        width: 0.16rem;
+        height: 0.16rem;
+        background: rgb(253, 128, 173);
+        position: absolute;
+        -webkit-transform: rotate(135deg);
+        transform: rotate(135deg);
+        right: -0.053rem;
+        top: 0rem;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+    span {
+      font-size: 0.373rem;
+      color: #444444;
+      line-height: 1.093rem;
+    }
+    p{
+      font-size: 0.32rem;
+      color: #444444;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right:0.933rem;
+      line-height:1.093rem;
+      a{
+        color:rgb(250,73,117);
+        letter-spacing:0.053rem;
+      }
+    }
+    svg {
+      font-size: 0.373rem;
+      color: #808080;
+      position: absolute;
+      right: 0.4rem;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
   }
   .my-signIn{
     margin-left: 2%;
@@ -527,17 +563,16 @@
     border:0.04rem solid #65D2F2;
     position: relative;
     overflow: hidden;
+    i{
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-top: 0.4rem solid #65D2F2;
+      border-right: 0.4rem solid transparent;
+      left:0;
+      top:0;
+    }
   }
-  .my-signIn i{
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-top: 0.4rem solid #65D2F2;
-    border-right: 0.4rem solid transparent;
-    left:0;
-    top:0;
-  }
-
   .gray {
     width: 100%;
     height: 0.266rem;
@@ -548,137 +583,132 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 1.92rem;
+    height: 1.6rem;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
     background: #FFFFFF;
     position: relative;
+    li {
+      float: left;
+      width: 25%;
+      height: 100%;
+      text-align: center;
+      position: relative;
+      svg {
+        font-size: 0.64rem;
+        margin-top: 0.266rem;
+      }
+      span {
+        &:nth-of-type(1) {
+          color: #444444;
+          font-size: 19px;
+          font-weight: 500;
+          line-height: 22px;
+        }
+        &:nth-of-type(2) {
+          font-size: 12px;
+          color: #808080;
+          display: block;
+          /*margin-top: 0.186rem;*/
+        }
+      }
+    }
   }
 
-  .part2 li {
-    float: left;
-    width: 25%;
-    height: 100%;
-    text-align: center;
-    position: relative;
+  .enjoy {
+    width: 343px;
+    margin: 0 auto;
+    padding-bottom: 15px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .component-option{
+    .invite {
+      span {
+        &:nth-of-type(2) {
+          position: absolute;
+          right: 22px;
+          color: #B4B4B6;
+          font-size: 12px;
+        }
+      }
+    }
+    .signIn {
+      span {
+        &:nth-of-type(2) {
+          width: 8px;
+          height: 8px;
+          position: absolute;
+          left: 70px;
+          top: 10px;
+          border-radius: 50%;
+          background: #FA4975;
+          display: inline-block;
+        }
+      }
+    }
+    .optionList {
+      width: 92%;
+      margin: 0 auto;
+      color: #444444;
+      font-size: 16px;
+      padding: 11px 0;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      span {
+        display: flex;
+      }
+      .icon {
+        display: flex;
+        margin-top: 3px;
+      }
+    }
   }
 
-  .part2 li svg {
-    font-size: 0.64rem;
-    margin-top: 0.266rem;
+  .guessLike {
+    .component-block-title {
+      height: 34px;
+      line-height: 34px;
+      .left {
+        font-size: 13px;
+        color: #808080;
+        font-family: PingFangSC-Regular;
+      }
+    }
   }
-
-  .part2 li span {
-    font-size: 0.32rem;
-    color: #808080;
-    display: block;
-    margin-top: 0.186rem;
-  }
-  /*part3认证*/
-
-  .part3 {
-    list-style: none;
-    width: 100%;
-    height: 1.946rem;
-    padding-left: 0.4rem;
-    padding-right: 0.4rem;
-    background: #FFFFFF;
-    position: relative;
-  }
-
-  .part3 li {
-    float: left;
-    width: 33%;
-    height: 100%;
-    text-align: center;
-    position: relative;
-  }
-
-  .part3 li p:nth-of-type(1) {
-    display: inline-block;
-    height: 0.506rem;
-    font-size: 0.346rem;
-    text-align: center;
-    color: #ffffff;
-    line-height: 0.506rem;
-    background: #fcc816;
-    border-radius: 2.666rem;
-    margin-top: 0.32rem;
-    padding: 0 0.133rem 0 0.133rem;
-  }
-
-  .part3 li p:nth-of-type(2) {
-    text-align: center;
-    font-size: 0.346rem;
-    color: #808080;
-    position: absolute;
-    top: 1.066rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-
-  .part3 li:nth-of-type(1) p {
-    background: #FFF;
-    font-size: 0.346rem;
-    color: #808080;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-
-  .part3 li:nth-of-type(1) p i {
-    display: inline-block;
-    width: 0;
-    height: 0;
-    border-top: 0.213rem solid transparent;
-    border-bottom: 0.16rem solid transparent;
-    border-left: 0.16rem solid #dcdcdc;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    margin-left: 0.16rem;
-  }
-  /*底部*/
 
   .my-option {
     width: 100%;
     background: #FFFFFF;
-    padding: 0;
     margin: 0;
     list-style: none;
-    padding-left: 0.426rem;
-    padding-right: 0.426rem;
+    padding: 0 0.426rem;
     margin-bottom: 2.106rem;
+    li {
+      width: 100%;
+      height: 1.173rem;
+      padding-top: 0.32rem;
+      padding-bottom: 0.32rem;
+      position: relative;
+      span {
+        font-size: 0.373rem;
+        color: #444444;
+      }
+      svg {
+        float: right;
+      }
+    }
   }
-
-  .my-option li {
-    width: 100%;
-    height: 1.173rem;
-    padding-top: 0.32rem;
-    padding-bottom: 0.32rem;
-    position: relative;
-  }
-
-  .my-option li span {
-    font-size: 0.373rem;
-    color: #444444;
-  }
-
-  .my-option li svg {
-    float: right;
-  }
-
   .mui-popup-inner {
     padding: 0.613rem 0.4rem 0.026rem 0.4rem;
   }
 
   .mui-content {
     background: #fff;
+    bottom: 1.226rem;
   }
 
   /*container-image */

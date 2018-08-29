@@ -7,17 +7,25 @@
     <div class="mui-content">
       <div class="choiceText">选择您的角色</div>
       <div class="roleList">
-        <div class="role">甲方需求方</div>
-        <div class="role">乙方产品方</div>
-        <div class="role">乙方服务方</div>
-        <div class="role">行业从业者</div>
+        <div class="role"  @tap.stop.prevent="$router.pushPlus('/my/service/' + item.type)" v-for="(item,index) in roleList" :key="index">{{item.text}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
+  export default {
+    data () {
+      return {
+        roleList: [
+          {text: '甲方需求方', type: 1},
+          {text: '乙方产品方', type: 2},
+          {text: '乙方服务方', type: 3},
+          {text: '行业从业者', type: 4}
+        ]
+      }
+    }
+  }
 </script>
 
 <style scoped lang="less">
