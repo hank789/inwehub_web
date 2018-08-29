@@ -1,4 +1,5 @@
 import { postRequest } from './request'
+import localEvent from '../stores/localStorage'
 import router from '../modules/index/routers/index'
 
 var wx = window.wx
@@ -41,6 +42,8 @@ function rebootAuth (hash) {
     }
 
     if (process.env.NODE_ENV === 'development') {
+      localEvent.clearLocalItem('UserLoginInfo')
+      localEvent.clearLocalItem('UserInfo')
       router.push('/login')
       return false
     }
