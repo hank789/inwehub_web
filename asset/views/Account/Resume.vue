@@ -84,21 +84,24 @@
               </div>
               <div class="item">
                 <div class="my-detail">
-                  <span>粉丝12</span>
-                  <i></i>
-                  <span>访客人气22</span>
+                  <span>被赞<i>123</i></span>
+                  <i class="spot"></i>
+                  <span>综合评分<i>123</i></span>
                 </div>
-                <!--<span>{{ resume.info.company }}</span>-->
-                <!--<i class="separate"></i>-->
-                <!--<span>{{ resume.info.title }}</span>-->
+                <div class="detailInfo">
+                  <span>详细资料</span>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-chakangengduojiantou"></use>
+                  </svg>
+                </div>
               </div>
-              <div class="item">
-                <span>{{ resume.info.work_years }}年工作经验</span>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-dingwei"></use>
-                </svg>
-                <span>{{ resume.info.province.name }} {{ resume.info.city.name }}</span>
-              </div>
+              <!--<div class="item">-->
+                <!--<span>{{ resume.info.work_years }}年工作经验</span>-->
+                <!--<svg class="icon" aria-hidden="true">-->
+                  <!--<use xlink:href="#icon-dingwei"></use>-->
+                <!--</svg>-->
+                <!--<span>{{ resume.info.province.name }} {{ resume.info.city.name }}</span>-->
+              <!--</div>-->
               <!--关注 被赞 综合评分-->
               <div class="counter">
                 <span @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">关注Ta</span> <b @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">{{ resume.info.followers }}</b>
@@ -917,15 +920,30 @@
             height: 0.8rem;
             span {
               font-size: 0.346rem;
-              color: #444444;
+              color: #B4B4B6;
+              i {
+                font-style: normal;
+                color: #808080;
+              }
             }
-            i {
+            .spot {
               display: inline-block;
               width: 2px;
               height: 2px;
               border-radius: 50%;
               background: #B4B4B6;
               margin: 0 0px 3px;
+            }
+          }
+          .detailInfo {
+            span {
+              color: #808080;
+              font-size: 14px;
+            }
+            .icon {
+              color: #808080;
+              font-size: 12px;
+              vertical-align: initial;
             }
           }
         }
