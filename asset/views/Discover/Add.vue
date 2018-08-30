@@ -10,6 +10,7 @@
     <div class="mui-content">
 
       <Jeditor
+        class="container-editor container-editor-app"
         ref="myAddEditor"
         id="discoverAddJeditor"
         :class="{noBottomFile: images.length === 0 && pdfs.length === 0}"
