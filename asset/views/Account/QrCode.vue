@@ -1,47 +1,57 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-dark mui-bar-nav">
+    <header v-if="false" class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <!--<h1 class="mui-title">个人名片</h1>-->
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content" v-if="showQrCode">
 
       <!--<div class="logoUpDown">-->
         <!--<svg class="icon" aria-hidden="true">-->
           <!--<use xlink:href="#icon-tiwen"></use>-->
         <!--</svg>-->
       <!--</div>-->
+      <div>
+        <div class="headPortraitInfo">
+          <div class="headPortraitImg">
+            <img src="../../statics/images/uicon.jpg" alt="">
+          </div>
+          扫码关注蓝色小白
+        </div>
 
-      <div class="headPortraitInfo">
-        <div class="headPortraitImg">
+        <div class="myCode">
+          <div class="myCodeWrapper">
+            <qr-code :text="shareUrl" :size="155" error-level="M"></qr-code>
+          </div>
+        </div>
 
+        <div class="preservation">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-baocuntupian"></use>
+          </svg>
+          <span>保存我的卡片</span>
+        </div>
+      </div>
+      <div class="bottomText">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
+    </div>
+
+    <div id="myQrCode" style="text-align: center">
+
+      <div style="font-size: 18px; color: #444444; line-height: 25px; margin-top: 64px; margin-bottom: 15px; ">
+        <div style="width: 34px; height: 34px; margin: 0 auto 10px;">
+          <img style="width: 100%; height: 100%; border-radius: 50%;" src="../../statics/images/uicon.jpg" alt="">
         </div>
         扫码关注蓝色小白
       </div>
 
-      <div class="myCode">
-        <div class="myCodeWrapper">
-          <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
+      <div style="width: 238px; height: 250px; margin: 0 auto; background: url(../../statics/images/group.png) no-repeat 0 32px;">
+        <div style="margin: 0 auto; width: 167px; height: 167px; background: rgba(255, 255, 255, 1); box-shadow: 0px 2px 26px 0px #F0F2F5; border-radius: 4px;">
+          <qr-code style="margin: 6px; padding-top: 6px;" :text="shareUrl" :size="155" error-level="M"></qr-code>
         </div>
       </div>
 
-      <div class="preservation">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-baocuntupian"></use>
-        </svg>
-        <span>保存我的卡片</span>
-      </div>
-
-      <div class="bottomText">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
-
-    </div>
-
-    <div id="myqrcode" style="display:none">
-      <div style="font-size:2324p;">
-
-
-      </div>
+      <div style="width: 100%; font-size: 12px; color: #808080; position: absolute; bottom: 33px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
     </div>
 
   </div>
@@ -54,7 +64,8 @@
 
   export default {
     data: () => ({
-      shareUrl: ''
+      shareUrl: '',
+      showQrCode: false
     }),
     watch: {
       '$route': 'refreshPageData'
@@ -133,6 +144,10 @@
       background: rgba(255, 255, 255, 1);
       box-shadow: 0px 2px 26px 0px #F0F2F5;
       border-radius: 4px;
+      div {
+        margin: 6px;
+        padding-top: 6px;
+      }
     }
   }
 

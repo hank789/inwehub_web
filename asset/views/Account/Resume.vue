@@ -10,257 +10,339 @@
 
     <div class="mui-content resumeWrapper" v-show="!loading">
 
-      <div class="erweimaWrapper" v-show="showQrCode" @tap.stop.prevent="toggleQrCode">
-        <div class="header">
-          <div class="avatar">
-            <div class="avatarInner">
-              <img :src="resume.info.avatar_url" class="avatar"/>
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'feed/list'"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
+        :pageMode = "true"
+        :isShowUpToRefreshDescription="false"
+        :list="list"
+        :emptyDescription="emptyDescription"
+        class="listWrapper"
+      >
+
+        <div class="erweimaWrapper" v-show="showQrCode" @tap.stop.prevent="toggleQrCode">
+          <div class="header">
+            <div class="avatar">
+              <div class="avatarInner">
+                <img :src="resume.info.avatar_url" class="avatar"/>
+              </div>
             </div>
+          </div>
+
+          <div class="realname">
+            <span>{{ resume.info.name }}</span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaoji"></use>
+            </svg>
+          </div>
+
+          <div class="erweimaSplite">
+            <span></span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-logowenzi"></use>
+            </svg>
+            <span></span>
+          </div>
+          <div class="qRCode qRCode-resume">
+            <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
+          </div>
+          <div class="qRhelp">
+            扫一扫试试?
           </div>
         </div>
 
-        <div class="realname">
-          <span>{{ resume.info.name }}</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zhuanjiabiaoji"></use>
-          </svg>
+        <div class="professor">
+
         </div>
 
-        <div class="erweimaSplite">
-          <span></span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-logowenzi"></use>
-          </svg>
-          <span></span>
-        </div>
-        <div class="qRCode qRCode-resume">
-          <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
-        </div>
-        <div class="qRhelp">
-          扫一扫试试?
-        </div>
-      </div>
-
-      <div class="professor">
-
-      </div>
-
-      <div class="basic">
-        <div class="cardWrapper">
-          <div class="card">
-            <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
-              src="../../statics/images/resume_erweima_3x.png"/></div>
-            <!--关注-->
-            <div class="collect" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
-              关注Ta
-            </div>
-            <div class="collect active" @tap.stop.prevent="collectProfessor"
-                 v-show="uuid !== cuuid && resume.is_followed">
-              已关注
-            </div>
-            <div class="header">
-              <div class="avatar">
-                <div class="avatarInner">
-                  <img :src="resume.info.avatar_url" class="avatar"/>
+        <div class="basic">
+          <div class="cardWrapper">
+            <div class="card">
+              <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
+                src="../../statics/images/resume_erweima_3x.png"/></div>
+              <!--关注-->
+              <div class="collect" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
+                关注Ta
+              </div>
+              <div class="collect active" @tap.stop.prevent="collectProfessor"
+                   v-show="uuid !== cuuid && resume.is_followed">
+                已关注
+              </div>
+              <div class="header">
+                <div class="avatar">
+                  <div class="avatarInner">
+                    <img :src="resume.info.avatar_url" class="avatar"/>
+                  </div>
                 </div>
-              </div>
-              <div class="expert">
-                <svg class="icon" aria-hidden="true" v-show="resume.info.is_expert">
-                  <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                </svg>
-              </div>
-            </div>
-            <div class="detail">
-              <div class="realname">
-                <span>{{ resume.info.name }}</span>
-                <span>L2</span>
-              </div>
-              <div class="item">
-                <div class="my-detail">
-                  <span>被赞<i>{{resume.info.supports}}</i></span>
-                  <i class="spot"></i>
-                  <span>{{resume.info.total_score}}<i></i></span>
-                </div>
-                <div class="detailInfo" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">
-                  <span>详细资料</span>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-chakangengduojiantou"></use>
+                <div class="expert">
+                  <svg class="icon" aria-hidden="true" v-show="resume.info.is_expert">
+                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
                   </svg>
                 </div>
               </div>
-              <div class="counter">
-                <div class="counterList">
-                  <span>{{resume.info.followed_number}}</span>
-                  <span>关注他的人</span>
+              <div class="detail">
+                <div class="realname">
+                  <span>{{ resume.info.name }}</span>
+                  <span>L2</span>
                 </div>
-
-                <div class="counterList">
-                  <span>{{resume.info.follow_user_number}}</span>
-                  <span>她关注的人</span>
+                <div class="item">
+                  <div class="my-detail">
+                    <span>被赞<i>{{resume.info.supports}}</i></span>
+                    <i class="spot"></i>
+                    <span>{{resume.info.total_score}}<i></i></span>
+                  </div>
+                  <div class="detailInfo" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">
+                    <span>详细资料</span>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-chakangengduojiantou"></use>
+                    </svg>
+                  </div>
                 </div>
+                <div class="counter">
+                  <div class="counterList">
+                    <span>{{resume.info.followed_number}}</span>
+                    <span>关注他的人</span>
+                  </div>
 
-                <div class="counterList" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
-                  <span>{{resume.info.publishes}}</span>
-                  <span>发布</span>
-                </div>
+                  <div class="counterList">
+                    <span>{{resume.info.follow_user_number}}</span>
+                    <span>她关注的人</span>
+                  </div>
 
-                <div class="counterList">
-                  <span>{{resume.info.group_number}}</span>
-                  <span>圈子</span>
+                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
+                    <span>{{resume.info.publishes}}</span>
+                    <span>发布</span>
+                  </div>
+
+                  <div class="counterList">
+                    <span>{{resume.info.group_number}}</span>
+                    <span>圈子</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="gray"></div>
-        <!--Ta的擅长-->
-        <div class="skilled">
-          <p>擅长领域</p>
-          <template v-for="(industry, index) in resume.info.skill_tags">
-            <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
-          </template>
-          <div class="addTags" v-show="uuid == cuuid" @tap.stop.prevent="$router.pushPlus('/my/advantage')">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-plus--"></use>
-            </svg>添加
+          <div class="gray"></div>
+          <!--Ta的擅长-->
+          <div class="skilled">
+            <p>擅长领域</p>
+            <template v-for="(industry, index) in resume.info.skill_tags">
+              <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
+            </template>
+            <div class="addTags" v-show="uuid == cuuid" @tap.stop.prevent="$router.pushPlus('/my/advantage')">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-plus--"></use>
+              </svg>添加
+            </div>
+            <!--<i class="bot"></i>-->
           </div>
-          <!--<i class="bot"></i>-->
-        </div>
-        <!--发布-->
-        <!--<div class="news">-->
-          <!--<div>Ta的发布</div>-->
-          <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">-->
-            <!--回答 <span>{{ resume.info.answers }}</span>-->
-          <!--</p>-->
-          <!--<a></a>-->
-          <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishQuestions/'+uuid)">-->
-            <!--提问 <span>{{ resume.info.questions }}</span>-->
-          <!--</p>-->
-          <!--<a></a>-->
-          <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">-->
-            <!--分享 <span>{{ resume.info.submission_count }}</span>-->
-          <!--</p>-->
-          <!--<a></a>-->
-          <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">-->
-            <!--评论 <span>{{ resume.info.comment_count }}</span>-->
-          <!--</p>-->
-          <!--<i class="bot"></i>-->
-        <!--</div>-->
-        <!--个人动态-->
-        <!--<div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">-->
-          <!--<p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
-          <!--</svg>-->
-          <!--<i class="bot"></i>-->
-        <!--</div>-->
-        <!--Ta的专栏-->
-        <div class="gray"></div>
-        <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
-          <p>专栏</p>
-          <!--<p>文章<span>&nbsp;{{resume.info.article_count }}</span><i></i></p>-->
-          <!--<p>评论<span>&nbsp;{{resume.info.article_comment_count }}</span><i></i></p>-->
-          <!--<p>赞<span>&nbsp;{{resume.info.article_upvote_count}}</span></p>-->
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
-          <!--<i class="bot"></i>-->
-        </div>
-        <!--Ta的圈子-->
-        <!--<groups-->
-          <!--class="resume"-->
-          <!--:groupsList="resume.groups"-->
-          <!--:loading="loading"-->
-          <!--:apper="apper"-->
-          <!--:title = "'Ta的圈子'"-->
-        <!--&gt;</groups>-->
-
-        <div class="grey"></div>
-        <div class="specialColumn dynamicWrapper">
-          <p>动态</p>
-          <i class="bot"></i>
-        </div>
-        <div class="description">
-          <div class="noDynamic">
+          <!--发布-->
+          <!--<div class="news">-->
+            <!--<div>Ta的发布</div>-->
+            <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">-->
+              <!--回答 <span>{{ resume.info.answers }}</span>-->
+            <!--</p>-->
+            <!--<a></a>-->
+            <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishQuestions/'+uuid)">-->
+              <!--提问 <span>{{ resume.info.questions }}</span>-->
+            <!--</p>-->
+            <!--<a></a>-->
+            <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">-->
+              <!--分享 <span>{{ resume.info.submission_count }}</span>-->
+            <!--</p>-->
+            <!--<a></a>-->
+            <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">-->
+              <!--评论 <span>{{ resume.info.comment_count }}</span>-->
+            <!--</p>-->
+            <!--<i class="bot"></i>-->
+          <!--</div>-->
+          <!--个人动态-->
+          <!--<div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">-->
+            <!--<p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>-->
+            <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
+            <!--</svg>-->
+            <!--<i class="bot"></i>-->
+          <!--</div>-->
+          <!--Ta的专栏-->
+          <div class="gray"></div>
+          <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
+            <p>专栏</p>
+            <!--<p>文章<span>&nbsp;{{resume.info.article_count }}</span><i></i></p>-->
+            <!--<p>评论<span>&nbsp;{{resume.info.article_comment_count }}</span><i></i></p>-->
+            <!--<p>赞<span>&nbsp;{{resume.info.article_upvote_count}}</span></p>-->
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zanwushuju"></use>
+              <use xlink:href="#icon-chakangengduojiantou"></use>
             </svg>
-            <span>暂无动态</span>
+            <!--<i class="bot"></i>-->
           </div>
-        </div>
+          <!--Ta的圈子-->
+          <!--<groups-->
+            <!--class="resume"-->
+            <!--:groupsList="resume.groups"-->
+            <!--:loading="loading"-->
+            <!--:apper="apper"-->
+            <!--:title = "'Ta的圈子'"-->
+          <!--&gt;</groups>-->
 
-      </div>
+          <div class="grey"></div>
+          <div class="specialColumn dynamicWrapper">
+            <p>动态</p>
+            <i class="bot"></i>
+          </div>
+          <div class="description">
 
-      <!--项目经历-->
-      <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
-      <div class="list"
-           v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
-        <div v-for="(project, projectIndex) in resume.projects" class="item" :projectIndex="projectIndex"
-             v-show="!(isShare && projectIndex >= 3 && !isShowProjectMore)">
-          <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
-          <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
-          <div class="others">
-            <div class="other">
-              <div class="title">【行业领域】</div>
-              <div class="content">
-                <template v-for="(industry, index) in project.industry_tags">
-                  {{ industry.text }} ;
-                </template>
+            <div class="noDynamic" v-if="false">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zanwushuju"></use>
+              </svg>
+              <span>暂无动态</span>
+            </div>
+
+            <template v-for="(item, index) in list" v-else>
+              <div class="component-feed-item-guide" v-if="index === 2 && search_type === 6">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-gongkai"></use>
+                </svg>
+                <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
+                <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone')">
+                  <button>去看看</button>
+                </div>
               </div>
-            </div>
-            <div class="other">
-              <div class="title">【产品类型】</div>
-              <div class="content">
-                <template v-for="(productTag, index) in project.product_tags">
-                  {{ productTag.text }} ;
-                </template>
+
+              <div class="line-river-big" v-if="index === 2 && search_type === 6"></div>
+
+              <!-- 发布了分享 -->
+              <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
+                <div class="container-avatarAndTwoLineText">
+                  <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                    <div class="avatarInner"><img :src="item.user.avatar">
+                      <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                        <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="mui-media-body">
+                    <div class="lineWrapper-1">{{ item.title }}
+                      <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                    </div>
+                    <div class="lineWrapper-2">{{ item.created_at }}
+                      <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                        <use xlink:href="#icon-dingwei1"></use>
+                      </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="contentWrapper"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
+
+
+                <div v-if="item.feed.img" class="container-images container-images-discover">
+                  <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
+                </div>
+                <div v-if="item.feed.files" class="container-pdf-list">
+                  <div v-for="file in item.feed.files" class="pdf"><span class="text-line-2">{{file.name}}</span></div>
+                </div>
+                <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+
               </div>
-            </div>
-            <div class="other">
-              <div class="title">【客户名称】</div>
-              <div class="content">{{ project.customer_name }}</div>
-            </div>
+
+              <!-- 发布了链接分享 -->
+              <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 16">
+                <div class="container-avatarAndTwoLineText">
+                  <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                    <div class="avatarInner"><img :src="item.user.avatar">
+                      <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                        <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="mui-media-body">
+                    <div class="lineWrapper-1">{{ item.title }}
+                      <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                    </div>
+                    <div class="lineWrapper-2">{{ item.created_at }}
+                      <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                        <use xlink:href="#icon-dingwei1"></use>
+                      </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                    </div>
+                  </div>
+                </div>
+                <!-- 新增链接样式 -->
+                <div class="newLink">
+                  <div class="contentWrapper">{{item.feed.title}}</div>
+                  <div class="newLinkBox">
+                    <div class="container-image lazyImg" v-if="item.feed.img">
+                      <img class="lazyImg" v-lazy="item.feed.img">
+                    </div>
+
+                    <div class="linkContent" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
+                    <div class="link">{{item.feed.domain}} </div>
+                  </div>
+                </div>
+                <!-- <div class="contentWrapper text-line-3">{{ item.feed.article_title }}<span class="url">-{{ item.feed.domain }}</span></div> -->
+                <!-- <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div> -->
+                <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+
+              </div>
+
+              <!-- 发布了原创文章，有title和描述 -->
+              <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 5">
+                <div class="container-avatarAndTwoLineText">
+                  <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                    <div class="avatarInner"><img :src="item.user.avatar">
+                      <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                        <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="mui-media-body">
+                    <div class="lineWrapper-1">{{ item.title }}
+                      <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                    </div>
+                    <div class="lineWrapper-2">{{ item.created_at }}
+                      <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                        <use xlink:href="#icon-dingwei1"></use>
+                      </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="contentWrapper text-line-3">{{ item.feed.title }}</div>
+                <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div>
+                <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+              </div>
+
+              <!-- 回答 -->
+              <div @tap.stop.prevent="toDetail(item)" class="container-feed-question" v-if="item.feed_type <= 3 || item.feed_type === 6 || item.feed_type === 11 || item.feed_type === 12 || item.feed_type === 14">
+                <div class="container-avatarAndTwoLineText">
+                  <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                    <div class="avatarInner"><img :src="item.user.avatar">
+                      <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                        <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="mui-media-body">
+                    <div class="lineWrapper-1">{{ item.title }}
+                      <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                    </div>
+                    <div class="lineWrapper-2">{{ item.created_at }}</div>
+                  </div>
+                </div>
+                <div class="contentWrapper"><span v-if="!item.feed.answer_id && item.feed.price > 0" class="component-label component-label-warn">{{ item.feed.status_description }}</span><span v-if="!item.feed.answer_id" v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>{{ item.feed.answer_id?item.feed.answer_content:item.feed.question_title }}</div>
+                <div class="container-remarks">{{ item.feed.answer_id ? item.feed.comment_number+'评论' : item.feed.answer_number+'回答' }}<span class="line-wall"></span>{{ item.feed.answer_id ? item.feed.support_number+'点赞' : item.feed.follow_number+'关注' }}<span v-if="item.feed.average_rate" class="line-wall"></span>{{item.feed.average_rate?item.feed.average_rate+'好评':''}}</div>
+                <div v-if="item.feed.answer_id" class="contentWrapper contentWrapper-question"><span v-if="item.feed.price > 0" class="component-label component-label-warn">{{ item.feed.status_description }}</span><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>{{ item.feed.question_title }}</div>
+              </div>
+              <div class="line-river-big"></div>
+            </template>
+
           </div>
-          <div class="description  hide mui-ellipsis-3" v-show="project.description">{{ project.description }}</div>
-          <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="project.description">查看</div>
         </div>
-      </div>
-      <div class="seeMoreWrapper"
-           v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
-        <div class="seeMore" @tap.click.prevent="showProjectMore($event)">查看所有项目经历</div>
-      </div>
-
-      <!--教育经历-->
-      <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
-      <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
-        <div class="item" v-for="(edu, eduIndex) in resume.edus"
-             v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
-          <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
-          <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i
-            class="separate"></i>{{ edu.major }}
-
-          </div>
-          <div class="description  hide mui-ellipsis-3" v-show="edu.description">{{ edu.description }}
-
-          </div>
-          <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="edu.description">查看</div>
-        </div>
-      </div>
-      <div class="seeMoreWrapper"
-           v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
-        <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
-      </div>
-
-      <div class="noPublic"
-           v-show="!loading && isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bugongkai"></use>
-        </svg>
-        <div class="desc">部分信息暂未公开</div>
-      </div>
-      </template>
-      </template>
+      </RefreshList>
     </div>
+
 
     <Share :title="shareOptions.title"
            :shareName="shareOptions.shareName"
@@ -282,9 +364,9 @@
           </svg>
           发私信
         </div>
-          <div class="buttonRight" @tap.stop.prevent="goAsk('/ask/'+uuid)">向他咨询</div>
-        </div>
+        <div class="buttonRight" @tap.stop.prevent="goAsk('/ask/'+uuid)">向他咨询</div>
       </div>
+    </div>
 
 
     </div>
@@ -298,6 +380,8 @@
     import userAbility from '../../utils/userAbility'
     import { getResumeDetail } from '../../utils/shareTemplate'
     import { isLogined } from '../../utils/auth'
+    import RefreshList from '../../components/refresh/List.vue'
+    import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
 
     export default {
       data: () => ({
@@ -353,11 +437,16 @@
           size: 100,
           padding: 0,
           level: 'H'
-        }
+        },
+        list: [],
+        search_type: 5, // 1:关注,2:全部,3:问答,4:分享,5:他的动态,6:推荐,默认2
+        emptyDescription: '暂无内容',
+        user_uuid: ''
       }),
       components: {
         Share,
-        groups
+        groups,
+        RefreshList
       },
       watch: {
         '$route' () {
@@ -375,6 +464,9 @@
         })
       },
       methods: {
+        textToLink (text) {
+          return transferTagToLink(secureHtml(textToLinkHtml(text)))
+        },
         toTagDetail (name) {
           userAbility.jumpToTagDetail(name)
         },
@@ -390,6 +482,10 @@
           this.percent = currentUser.account_info_complete_percent
           if (this.$route.query.goback) {
             this.canBack = true
+          }
+
+          if (this.$route.query.id) {
+            this.user_uuid = this.$route.query.id
           }
 
           this.uuid = currentUser.uuid
@@ -536,7 +632,15 @@
         toggleQrCode () {
           this.showQrCode = !this.showQrCode
         }
-      }
+      },
+      computed: {
+        prevOtherData () {
+          return {search_type: this.search_type, uuid: this.uuid}
+        },
+        nextOtherData () {
+          return {search_type: this.search_type, uuid: this.uuid}
+        }
+      },
     }
   </script>
 
@@ -702,27 +806,18 @@
       .description {
         font-size: 0.373rem;
         color: #808080;
-        padding: 0.293rem 0.373rem 0.346rem;
+        /*padding: 0.293rem 0.373rem 0.346rem;*/
         line-height: 0.64rem;
-        p {
-          position: relative;
-        }
-        div {
-          display: block;
-          font-size: 0.346rem;
-          color: #444444;
-          line-height: 0.666rem;
-        }
         .noDynamic {
           text-align: center;
           font-size: 1.333rem;
-          padding-top: 18px;
-          padding-bottom: 27px;
-        }
-        span {
-          color: #C8C8C8;
-          font-size: 12px;
-          display: block;
+          padding-top: 30px;
+          padding-bottom: 37px;
+          span {
+            color: #C8C8C8;
+            font-size: 12px;
+            display: block;
+          }
         }
       }
     }
@@ -1401,5 +1496,31 @@
       width:100%;
       height:0.266rem;
       background: #F3F4F5;
+    }
+
+    .newLink {
+      margin-top: 0.24rem;
+      // padding: 0 0.426rem;
+      .newLinkBox {
+        margin-top: 0.266rem;
+        padding: 0.293rem 0.4rem 0.293rem;
+        background: #F7F8FA;
+        border-radius: 0.106rem;
+        img {
+          // width: 8.373rem;
+          // height: 2.986rem;
+          border-radius: 0.106rem;
+        }
+        .linkContent {
+          font-size: 0.373rem;
+          color: #808080;
+          line-height: 0.533rem;
+          margin-top: 0.106rem;
+        }
+        .link {
+          font-size: 0.32rem;
+          color: #B4B4B6;
+        }
+      }
     }
   </style>
