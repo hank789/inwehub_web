@@ -288,7 +288,7 @@
         }
 
         postRequest(`profile/resumeInfo`, {
-          uuid: this.uuid
+          uuid: this.$route.params.uuid
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -427,11 +427,12 @@
 <style scoped lang="less">
   .detailInfoWrapper {
     bottom: 1.28rem;
-    background: #FFFFFF;
+    /*background: #FFFFFF;*/
   }
   .cardWrapper {
     padding: 0 0.426rem;
     width: 100%;
+    background-color: #FFFFFF;
     .card {
       border-radius: 0.106rem;
       width: 100%;
@@ -550,6 +551,7 @@
     padding: 0.32rem 0.373rem 0.266rem 0.373rem;
     overflow: hidden;
     position: relative;
+    background-color: #FFFFFF;
     p {
       color: #808080;
       font-size: 0.373rem;

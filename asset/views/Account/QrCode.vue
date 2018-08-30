@@ -15,13 +15,15 @@
 
       <div class="headPortraitInfo">
         <div class="headPortraitImg">
-          <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
+
         </div>
         扫码关注蓝色小白
       </div>
 
       <div class="myCode">
-        <div class="myCodeWrapper"></div>
+        <div class="myCodeWrapper">
+          <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
+        </div>
       </div>
 
       <div class="preservation">
@@ -34,6 +36,14 @@
       <div class="bottomText">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
 
     </div>
+
+    <div id="myqrcode" style="display:none">
+      <div style="font-size:2324p;">
+
+
+      </div>
+    </div>
+
   </div>
 </template>
 
