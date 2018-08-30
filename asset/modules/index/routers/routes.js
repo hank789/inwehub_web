@@ -786,6 +786,21 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 详细资料
+    path: '/my/detailInfo/:uuid?',
+    name: 'detailInfo',
+    component: componets.AccountDetailInfo,
+    meta: {
+      title: '详细资料',
+      keepAlive: true
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的收藏——回答
     path: '/my/collectedAnswers',
     name: 'my-collected_answers',

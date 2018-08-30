@@ -59,6 +59,7 @@ const ActivityGrowthList = () => import(/* webpackChunkName: "ActivityGrowthList
 const Accountmy = () => import(/* webpackChunkName: "Accountmy" */ '../../../views/Account/my.vue')
 const AccountMyCode = () => import(/* webpackChunkName: "AccountMyCode" */ '../../../views/Account/MyCode.vue')
 const AccountService = () => import(/* webpackChunkName: "AccountMyCode" */ '../../../views/Account/Service.vue')
+const AccountDetailInfo = () => import(/* webpackChunkName: "AccountDetailInfo" */ '../../../views/Account/DetailInfo.vue')
 const AccountChoiceRole = () => import(/* webpackChunkName: "AccountChoiceRole" */ '../../../views/Account/ChoiceRole.vue')
 const AccountCollected = () => import(/* webpackChunkName: "AccountCollected" */ '../../../views/Account/Collected.vue')
 const AccountCollectedArticle = () => import(/* webpackChunkName: "AccountCollectedArticle" */ '../../../views/Account/CollectedArticle.vue')
@@ -389,5 +390,6 @@ export {
   ComponentsComment,
   AccountMyCode,
   AccountChoiceRole,
-  AccountService
+  AccountService,
+  AccountDetailInfo
 }

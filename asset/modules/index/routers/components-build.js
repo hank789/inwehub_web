@@ -142,6 +142,7 @@ import AccountSetting from '../../../views/Account/Setting.vue'
 import AccountMyCode from '../../../views/Account/MyCode.vue'
 import AccountChoiceRole from '../../../views/Account/ChoiceRole.vue'
 import AccountService from '../../../views/Account/Service.vue'
+import AccountDetailInfo from '../../../views/Account/DetailInfo.vue'
 import Guide from '../../../views/Guide.vue'
 import Feedback from '../../../views/Feedback.vue'
 import About from '../../../views/About.vue'
@@ -383,5 +384,6 @@ export {
   ComponentsComment,
   AccountMyCode,
   AccountChoiceRole,
-  AccountService
+  AccountService,
+  AccountDetailInfo
 }

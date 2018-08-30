@@ -33,9 +33,9 @@
               </svg>
             </div>
             <div class="my-detail">
-              <span>粉丝12</span>
+              <span>粉丝{{followed_number}}</span>
               <i></i>
-              <span>访客人气22</span>
+              <span>访客人气{{popularity}}</span>
             </div>
           </div>
         </div>
@@ -44,7 +44,7 @@
       <!--part2-->
       <ul class="part2">
         <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
-          <span>123</span>
+          <span>{{publishes}}</span>
           <span>发布</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/collectUser')">
@@ -52,11 +52,11 @@
           <span>关注</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/my/collectedAnswers')">
-          <span>123</span>
+          <span>{{collections}}</span>
           <span>收藏</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/group/my')">
-          <span>123</span>
+          <span>{{groups}}</span>
           <span>圈子</span>
         </li>
       </ul>
@@ -149,6 +149,11 @@
         expert_apply_status: infomation.info.expert_apply_status,
         company_apply_status: infomation.info.company_status,
         im_tokenMsg: '',
+        collections: currentUser.collections,
+        publishes: currentUser.publishes,
+        groups: currentUser.groups,
+        followed_number: currentUser.followed_number,
+        popularity: currentUser.popularity,
         name: currentUser.name,
         phone: currentUser.phone,
         avatar: currentUser.avatar_url,
@@ -177,7 +182,7 @@
     },
     methods: {
       recommendRead () {
-        postRequest(`getRelatedRecommend`, {source_id: this.user_id, perPage: 3, source_type: 1}).then(response => {
+        postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}).then(response => {
           this.list = response.data.data.data
         })
       },
@@ -299,6 +304,11 @@
           this.name = user.info.name
           this.title = user.info.title
           this.show_my_wallet = user.info.show_my_wallet
+          this.publishes = user.info.publishes
+          this.collections = user.info.collections
+          this.groups = user.info.groups
+          this.followed_number = user.info.followed_number
+          this.popularity = user.info.popularity
           if (window.mui.os.plus && window.mui.os.android) {
             this.show_my_wallet = true
           }
