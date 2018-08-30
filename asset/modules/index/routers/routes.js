@@ -747,7 +747,7 @@ const routes = [
     component: componets.AccountMyCode,
     meta: {
       title: '我的二维码',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       window.mui.plusReady(function () {
@@ -762,7 +762,7 @@ const routes = [
     component: componets.AccountChoiceRole,
     meta: {
       title: '选择角色',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       window.mui.plusReady(function () {
@@ -777,7 +777,7 @@ const routes = [
     component: componets.AccountService,
     meta: {
       title: '甲方需求方',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       window.mui.plusReady(function () {
@@ -792,7 +792,7 @@ const routes = [
     component: componets.AccountDetailInfo,
     meta: {
       title: '详细资料',
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       window.mui.plusReady(function () {

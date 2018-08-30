@@ -90,22 +90,22 @@
               </div>
               <div class="counter">
                 <div class="counterList">
-                  <span>20</span>
+                  <span>{{resume.info.followed_number}}</span>
                   <span>关注他的人</span>
                 </div>
 
                 <div class="counterList">
-                  <span>{{resume.info.followers}}</span>
+                  <span>{{resume.info.follow_user_number}}</span>
                   <span>她关注的人</span>
                 </div>
 
-                <div class="counterList">
-                  <span>20</span>
+                <div class="counterList" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
+                  <span>{{resume.info.publishes}}</span>
                   <span>发布</span>
                 </div>
 
                 <div class="counterList">
-                  <span>20</span>
+                  <span>{{resume.info.group_number}}</span>
                   <span>圈子</span>
                 </div>
               </div>
@@ -189,46 +189,6 @@
           </div>
         </div>
 
-      </div>
-
-      <template v-if="!isLogined">
-        <div class="seeMoreWrapper">
-          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有工作经历</div></div>
-        <div class="seeMoreWrapper">
-          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有项目经历</div></div>
-        <div class="seeMoreWrapper">
-          <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有教育经历</div></div>
-      </template>
-      <template v-else>
-      <template v-if="isShare && percent < 90">
-        <h5>工作经历</h5>
-        <div class="component-warning">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zanwushuju"></use>
-          </svg>
-          <div class="title">您的信息不完整还不能查看哦</div>
-          <div class="desc">查看对方经历会留下您的访问记录，完善您的头像、<br>个人资料(90%以上)会让对方更好的认识您！</div>
-          <div class="component-button-empty" @tap.stop.prevent="$router.pushPlus('/my/info')"><span>去完善我的简历</span></div>
-        </div>
-      </template>
-      <template v-else>
-      <!--工作经历-->
-      <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
-      <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
-        <div class="item" v-for="(job, jobIndex) in resume.jobs"
-             v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
-          <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
-          <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
-          <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
-
-
-          </div>
-          <div class="toggle show" @tap.stop.prevent="toggleDeatil" v-show="job.description">查看</div>
-        </div>
-      </div>
-      <div class="seeMoreWrapper"
-           v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
-        <div class="seeMore" @tap.click.prevent="showJobMore($event)">查看所有工作经历</div>
       </div>
 
       <!--项目经历-->

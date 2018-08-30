@@ -164,7 +164,9 @@
     </div>
 
     <div class="buttonWrapper">
+
       <div class="edit" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare || uuid === cuuid" v-show="!loading">继续编辑</div>
+
       <div class="consultWrapper" v-else v-show="!loading">
         <div class="buttonLeft" @tap.stop.prevent="goChat()">
           <svg class="icon" aria-hidden="true">
@@ -174,6 +176,7 @@
         </div>
         <div class="buttonRight" @tap.stop.prevent="goAsk('/ask/'+uuid)">向他咨询</div>
       </div>
+
     </div>
 
   </div>
@@ -278,6 +281,8 @@
 
         this.uuid = currentUser.uuid
         this.cuuid = currentUser.uuid
+
+        console.log(this.uuid + '我是大好人' + this.cuuid)
 
         var from = this.$router.currentRoute.name
         // var fullUrl = process.env.H5_ROOT
@@ -567,6 +572,12 @@
   }
 
   // 个人简历
+  .separate {
+    display: inline-block;
+    height: 0.266rem;
+    margin: 0 0.213rem;
+    border-left: 0.026rem solid #c8c8c8;
+  }
   h5 {
     margin: 0;
     padding: 0.293rem 0;
@@ -584,7 +595,7 @@
     position: relative;
     .seeMore {
       font-size: 0.373rem;
-      color: #3c95f9;
+      color: #03AEF9;
       text-align: center;
       padding: 0.24rem 0 0.213rem;
       background: #fff;
@@ -647,7 +658,7 @@
         position: relative;
         font-size: 0.373rem;
         margin-top: 0.053rem;
-        color: #3c95f9;
+        color: #03AEF9;
       }
       .time:before {
         position: absolute;
@@ -656,7 +667,7 @@
         content: '';
         width: 0.213rem;
         height: 0.213rem;
-        background: #3c95f9;
+        background: #03AEF9;
         border-radius: 0.106rem;
       }
       .company {
@@ -683,7 +694,7 @@
         bottom: 0.266rem;
         font-size: 0.346rem;
         margin-right: 0.133rem;
-        color: #3c95f9;
+        color: #03AEF9;
         &.show:before {
           border: none;
           border-left: 0.16rem solid transparent;
