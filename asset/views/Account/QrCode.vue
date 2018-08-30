@@ -15,7 +15,7 @@
 
       <div class="headPortraitInfo">
         <div class="headPortraitImg">
-          <img src="../../statics/images/uicon.jpg" alt="">
+          <qr-code :text="shareUrl" :size="170" error-level="M"></qr-code>
         </div>
         扫码关注蓝色小白
       </div>
@@ -38,7 +38,48 @@
 </template>
 
 <script>
+  import { getResumeDetail } from '../../utils/shareTemplate'
+  import { getLocalUuid } from '../../utils/user'
+  import { postRequest } from '../../utils/request'
 
+  export default {
+    data: () => ({
+      shareUrl: ''
+    }),
+    watch: {
+      '$route': 'refreshPageData'
+    },
+    created () {
+      this.getData()
+    },
+    methods: {
+      refreshPageData () {
+        this.getData()
+      },
+      getData () {
+        var uuid = getLocalUuid()
+        postRequest(`profile/resumeInfo`, {
+          uuid: uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          var resume = response.data.data
+
+          var shareOptions = getResumeDetail(
+            uuid,
+            resume.info.name,
+            resume.info.company,
+            resume.info.avatar_url
+          )
+          this.shareUrl = shareOptions.link
+        })
+      }
+    }
+  }
 </script>
 
 <style scoped lang="less">
