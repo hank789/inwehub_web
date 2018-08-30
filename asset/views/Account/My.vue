@@ -6,7 +6,7 @@
           <use xlink:href="#icon-shezhi"></use>
         </svg>
       </div>
-      <div class="code" @tap.stop.prevent="$router.pushPlus('/my/myCode')">
+      <div class="code" @tap.stop.prevent="$router.pushPlus('/my/qrcode')">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-erweima"></use>
         </svg>
