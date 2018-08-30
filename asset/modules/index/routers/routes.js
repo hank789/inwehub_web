@@ -742,8 +742,8 @@ const routes = [
     }
   },
   { // 我的二维码
-    path: '/my/myCode',
-    name: 'MyCode',
+    path: '/my/qrcode',
+    name: 'qrcode',
     component: componets.AccountMyCode,
     meta: {
       title: '我的二维码',
