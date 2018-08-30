@@ -98,7 +98,7 @@
 <script>
   import { NOTICE } from '../../../stores/types'
   import localEvent from '../../../stores/localStorage'
-  import industryTagsIndexedList from '../../Tags/industryTagsIndexedlist.vue'
+  import industryTagsIndexedList from '../../Tags/IndustryTagsIndexedlist.vue'
   import ACCOUNT_API from '../../../api/account'
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import MTextarea from '../../../components/MTextarea.vue'

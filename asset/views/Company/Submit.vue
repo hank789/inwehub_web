@@ -189,7 +189,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
-  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
+  import industryTagsIndexedList from '../Tags/IndustryTagsIndexedlist.vue'
   import popPickerComponent from '../../components/picker/poppicker.vue'
 
   export default {

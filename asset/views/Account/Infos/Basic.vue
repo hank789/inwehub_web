@@ -84,7 +84,7 @@
   import cityData from '../../../components/city/city.data'
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import { getUserInfo } from '../../../utils/user'
-  import industryTagsIndexedList from '../../Tags/industryTagsIndexedlist.vue'
+  import industryTagsIndexedList from '../../Tags/IndustryTagsIndexedlist.vue'
   import { selectCityThreeLevel } from '../../../utils/select'
 
   export default {
