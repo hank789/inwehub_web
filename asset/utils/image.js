@@ -20,6 +20,8 @@ function saveHtmlImgToGallery (html, path, successCallback, failCallback) {
   }
   html = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="ie=edge"><title></title><style></style></head><body>' + html + '</body></html>'
 
+  console.log('htmlToImage:' + html)
+
   postRequest('system/htmlToImage', {html: html})
     .then(response => {
       var code = response.data.code
