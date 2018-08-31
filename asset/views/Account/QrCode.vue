@@ -87,7 +87,6 @@
 
           setTimeout(() => {
             var node = document.getElementById('myQrCode')
-            console.log('notehtml:' + node.innerHTML)
             saveHtmlImgToGallery(node.innerHTML, '_documents/qrcode.jpeg', () => {
               window.mui.toast('保存成功')
             }, () => {

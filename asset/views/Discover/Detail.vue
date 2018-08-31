@@ -913,6 +913,7 @@
   .contentWrapper {
     padding: 0 0.4rem;
     white-space: pre-line !important;
+    word-wrap: break-word;
     font-size: 0.426rem;
     color: #444;
     line-height: 0.693rem;
