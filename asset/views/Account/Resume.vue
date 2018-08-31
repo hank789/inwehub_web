@@ -139,54 +139,15 @@
             </div>
             <!--<i class="bot"></i>-->
           </div>
-          <!--发布-->
-          <!--<div class="news">-->
-            <!--<div>Ta的发布</div>-->
-            <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">-->
-              <!--回答 <span>{{ resume.info.answers }}</span>-->
-            <!--</p>-->
-            <!--<a></a>-->
-            <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishQuestions/'+uuid)">-->
-              <!--提问 <span>{{ resume.info.questions }}</span>-->
-            <!--</p>-->
-            <!--<a></a>-->
-            <!--<p class="mui-ellipsis"  @tap.stop.prevent="$router.pushPlus('/my/publishArticle/'+uuid)">-->
-              <!--分享 <span>{{ resume.info.submission_count }}</span>-->
-            <!--</p>-->
-            <!--<a></a>-->
-            <!--<p class="mui-ellipsis" @tap.stop.prevent="$router.pushPlus('/my/publishComment/'+uuid)">-->
-              <!--评论 <span>{{ resume.info.comment_count }}</span>-->
-            <!--</p>-->
-            <!--<i class="bot"></i>-->
-          <!--</div>-->
-          <!--个人动态-->
-          <!--<div class="dynamic" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">-->
-            <!--<p>Ta的动态 <i>{{ resume.info.feed_count }}</i></p>-->
-            <!--<svg class="icon" aria-hidden="true">-->
-              <!--<use xlink:href="#icon-chakangengduojiantou"></use>-->
-            <!--</svg>-->
-            <!--<i class="bot"></i>-->
-          <!--</div>-->
           <!--Ta的专栏-->
           <div class="gray"></div>
           <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
             <p>专栏</p>
-            <!--<p>文章<span>&nbsp;{{resume.info.article_count }}</span><i></i></p>-->
-            <!--<p>评论<span>&nbsp;{{resume.info.article_comment_count }}</span><i></i></p>-->
-            <!--<p>赞<span>&nbsp;{{resume.info.article_upvote_count}}</span></p>-->
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-chakangengduojiantou"></use>
             </svg>
             <!--<i class="bot"></i>-->
           </div>
-          <!--Ta的圈子-->
-          <!--<groups-->
-            <!--class="resume"-->
-            <!--:groupsList="resume.groups"-->
-            <!--:loading="loading"-->
-            <!--:apper="apper"-->
-            <!--:title = "'Ta的圈子'"-->
-          <!--&gt;</groups>-->
 
           <div class="grey"></div>
           <div class="specialColumn dynamicWrapper">
@@ -693,7 +654,7 @@
       margin-top: 0.213rem;
       width: 81%;
       border-radius: 0.106rem;
-      z-index: 77;
+      z-index: 777;
       text-align: center;
       padding-bottom: 0.48rem;
       .header {
