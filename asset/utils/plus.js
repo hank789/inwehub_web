@@ -69,7 +69,7 @@ function getLocalUrl (path, callback) {
   })
 }
 
-function saveImageByBase64 (base64, dest, callback) {
+function saveImageByBase64 (base64, dest, successCallback, faillCallback) {
   window.mui.plusReady(() => {
     var b = new window.plus.nativeObj.Bitmap()
     b.loadBase64Data(base64, function () {
@@ -82,12 +82,13 @@ function saveImageByBase64 (base64, dest, callback) {
       quality: 100
     }, () => {
       console.log('保存成功')
-      if (callback) {
+      if (successCallback) {
         getLocalUrl(dest, (url) => {
-          callback(url)
+          successCallback(url)
         })
       }
     }, () => {
+      faillCallback()
       console.log('保存失败')
     })
   })

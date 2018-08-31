@@ -26,7 +26,7 @@
           </div>
         </div>
 
-        <div class="preservation">
+        <div class="preservation" @tap.stop.prevent="saveToGallery">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-baocuntupian"></use>
           </svg>
@@ -36,7 +36,7 @@
       <div class="bottomText">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
     </div>
 
-    <div id="myQrCode" style="text-align: center">
+    <div id="myQrCode" style="text-align: center;display: none">
 
       <div style="font-size: 18px; color: #444444; line-height: 25px; margin-top: 64px; margin-bottom: 15px; ">
         <div style="width: 34px; height: 34px; margin: 0 auto 10px;">
@@ -61,11 +61,12 @@
   import { getResumeDetail } from '../../utils/shareTemplate'
   import { getLocalUuid } from '../../utils/user'
   import { postRequest } from '../../utils/request'
+  import { saveHtmlImgToGallery } from '../../utils/image'
 
   export default {
     data: () => ({
       shareUrl: '',
-      showQrCode: false
+      showQrCode: true
     }),
     watch: {
       '$route': 'refreshPageData'
@@ -74,6 +75,15 @@
       this.getData()
     },
     methods: {
+      saveToGallery () {
+        var node = document.getElementById('myQrCode')
+        console.log('notehtml:' + node.innerHTML)
+        saveHtmlImgToGallery(node.innerHTML, '_documents/qrcode.jpeg', () => {
+          window.mui.toast('保存成功')
+        }, () => {
+          window.mui.toast('保存失败')
+        })
+      },
       refreshPageData () {
         this.getData()
       },
