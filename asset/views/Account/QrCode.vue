@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header v-if="false" class="mui-bar mui-bar-dark mui-bar-nav">
+    <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <!--<h1 class="mui-title">个人名片</h1>-->
     </header>
@@ -26,7 +26,7 @@
           </div>
         </div>
 
-        <div class="preservation">
+        <div class="preservation" @tap.stop.prevent="saveToGallery">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-baocuntupian"></use>
           </svg>
@@ -36,7 +36,7 @@
       <div class="bottomText">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
     </div>
 
-    <div id="myQrCode" style="text-align: center; position: relative;">
+    <div id="myQrCode" style="text-align: center; position: relative;display: none">
 
       <div style="position: absolute; top: -180px; left: 45px; ">
         <div style="font-size: 188px;">
@@ -56,7 +56,7 @@
 
       <div style="width: 476px; height: 500px; margin: 0 auto; position: relative">
         <div style="position: absolute; z-index: -1; top: 62px;">
-          <img src="../../statics/images/group.png" alt="">
+          <img src="../../statics/images/group.png" alt="" id="myQrCode-group">
         </div>
         <div style="margin: 0 auto; width: 335px; height: 335px; background: rgba(255, 255, 255, 1); box-shadow: 0px 2px 26px 0px #F0F2F5; border-radius: 8px;">
           <qr-code style="margin: 12px; padding-top: 12px;" :text="shareUrl" :size="310" error-level="M"></qr-code>
@@ -73,11 +73,12 @@
   import { getResumeDetail } from '../../utils/shareTemplate'
   import { getLocalUuid } from '../../utils/user'
   import { postRequest } from '../../utils/request'
+  import { saveHtmlImgToGallery, getBase64ByImgUrl } from '../../utils/image'
 
   export default {
     data: () => ({
       shareUrl: '',
-      showQrCode: false
+      showQrCode: true
     }),
     watch: {
       '$route': 'refreshPageData'
@@ -86,6 +87,21 @@
       this.getData()
     },
     methods: {
+      saveToGallery () {
+        getBase64ByImgUrl(document.getElementById('myQrCode-group').src, (base64) => {
+          document.getElementById('myQrCode-group').src = base64
+
+          setTimeout(() => {
+            var node = document.getElementById('myQrCode')
+            console.log('notehtml:' + node.innerHTML)
+            saveHtmlImgToGallery(node.innerHTML, '_documents/qrcode.jpeg', () => {
+              window.mui.toast('保存成功')
+            }, () => {
+              window.mui.toast('保存失败')
+            })
+          }, 200)
+        })
+      },
       refreshPageData () {
         this.getData()
       },
