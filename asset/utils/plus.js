@@ -569,18 +569,57 @@ function AppPageInit (context) {
 function AppInit (context) {
   window.mui.plusReady(function () {
     console.log('AppInit(context) fired')
+
     if (window.mui.os.plus) {
       var ws = window.plus.webview.currentWebview()
 
+      /* 应用从后台切换回前台事件 */
       EventObj.addIntervalOnceEventListener('resume', () => {
         // 剪贴板
         checkClipbord()
+
+        // 存储用户位置信息
+        var currentUser = localEvent.getLocalItem('UserInfo')
+        if (currentUser.user_id) {
+          saveLocationInfo()
+        }
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:app:resume',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': 'resume',
+              'page_name': 'resume',
+              'page_title': 'app唤起',
+              'referrer_page': ''
+            }
+          )
+        }
+
+        // 检查版本更新
+        checkUpdate()
+
+        var routerFullPath = context.$router.currentRoute.fullPath
+        console.log('routerFullPath:' + routerFullPath)
+        if (routerFullPath === '/ad') {
+          return
+        }
+
+        // 每日签到
+        // userAbility.signIGift(context)
+
+        if (window.mui.os.ios) {
+          noticeOpenNotifitionPermission(context)
+        }
       })
 
-      // 只在主页面监听一次
+      /* 只在主页面监听一次 */
       if (ws.id === window.plus.runtime.appid) {
+
+        // 监听执行刷新
         EventObj.addEventListener('refreshData', (e) => {
-          // 执行刷新
           if (context.$parent.$refs.Footer && context.$parent.$refs.Footer.showBottom) {
             if (context.$parent.$refs.routerView.hasOwnProperty('initData')) {
               console.log('refreshDataApp')
@@ -588,6 +627,7 @@ function AppInit (context) {
             }
           }
         })
+
         // 存储设备信息
         let currentUserInfo = localEvent.getLocalItem('UserInfo')
         if (currentUserInfo.user_id) {
@@ -602,43 +642,6 @@ function AppInit (context) {
 
           })
         }
-        // 应用从后台切换回前台事件
-        EventObj.addIntervalOnceEventListener('resume', () => {
-          // 存储用户位置信息
-          var currentUser = localEvent.getLocalItem('UserInfo')
-          if (currentUser.user_id) {
-            saveLocationInfo()
-          }
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-            // mixpanel
-            window.mixpanel.track(
-              'inwehub:app:resume',
-              {
-                'app': 'inwehub',
-                'user_device': window.getUserAppDevice(),
-                'page': 'resume',
-                'page_name': 'resume',
-                'page_title': 'app唤起',
-                'referrer_page': ''
-              }
-            )
-          }
-          // 检查版本更新
-          checkUpdate()
-
-          var routerFullPath = context.$router.currentRoute.fullPath
-          console.log('routerFullPath:' + routerFullPath)
-          if (routerFullPath === '/ad') {
-            return
-          }
-
-          // 每日签到
-          // userAbility.signIGift(context)
-
-          if (window.mui.os.ios) {
-            noticeOpenNotifitionPermission(context)
-          }
-        }, false)
 
         // 监听推送
         var noticeTo = function (payload) {
@@ -824,6 +827,7 @@ function AppInit (context) {
             noticeTo(payload)
           }
         }, false)
+
         // 监听在线消息事件
         window.plus.push.addEventListener('receive', (msg) => {
           if (msg.aps) {  // Apple APNS message

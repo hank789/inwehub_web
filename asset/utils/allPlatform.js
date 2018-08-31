@@ -126,8 +126,6 @@ function noticeOpenNotifitionPermission (context) {
     console.log('prevDay:' + JSON.stringify(prevDay))
     var isStop = 0
     var notice = () => {
-      // var btnArray = ['下次再说', '前往设置']
-      console.log('准备探矿')
       alertNoticeOpenNotifitionPermission(context, (index) => {
         switch (index) {
           case 0:
