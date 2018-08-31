@@ -5,7 +5,7 @@
     <header class="mui-bar mui-bar-nav">
       <a class="mui-btn mui-btn-link mui-btn-nav mui-pull-left mui-action-back"
          @tap.stop.prevent="$router.goBack()">取消</a>
-      <h1 class="mui-title">平台昵称</h1>
+      <h1 class="mui-title">真实姓名</h1>
       <a @tap.stop.prevent="submitInfo()"
          class="mui-btn mui-btn-blue mui-btn-link mui-pull-right">保存</a>
     </header>
@@ -14,8 +14,8 @@
       <ul class="mui-table-view">
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
-            <label class="mui-navigate">平台昵称</label>
-            <input type="text" placeholder="请填写" v-model.trim="name" maxlength="15">
+            <label class="mui-navigate">真实姓名</label>
+            <input type="text" placeholder="请填写" v-model.trim="realname" maxlength="15">
           </div>
         </li>
       </ul>
@@ -31,24 +31,24 @@
 
   export default {
     data: () => ({
-      name: ''
+      realname: ''
     }),
     created () {
       var userInfo = localEvent.getLocalItem('UserInfo')
-      this.name = userInfo.name
+      this.realname = userInfo.realname
     },
     mounted () {
 
     },
     methods: {
       submitInfo: function () {
-        if (!this.name) {
-          window.mui.toast('请填写平台昵称')
+        if (!this.realname) {
+          window.mui.toast('请填写真实姓名')
           return false
         }
 
         var data = {
-          'name': this.name
+          'realname': this.realname
         }
 
         postRequest(`profile/update`, data).then(response => {

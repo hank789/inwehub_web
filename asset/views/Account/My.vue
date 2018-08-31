@@ -22,15 +22,17 @@
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
+            <span v-if="expert_apply_status =='2'">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+              </svg>
+            </span>
           </div>
 
           <div class="my-personal">
             <div class="my-info">
               <span class="mui-ellipsis">{{name}}</span>
               <p>L{{ user_level }}</p>
-              <svg class="icon" aria-hidden="true" v-if="expert_apply_status =='2'">
-                <use xlink:href="#icon-zhuanjiabiaoji"></use>
-              </svg>
             </div>
             <div class="my-detail">
               <span>粉丝{{followed_number}}</span>
@@ -85,7 +87,7 @@
         </div>
         <div class="optionList signIn" @tap.stop.prevent="toSignIGift()">
           <span>每日签到</span>
-          <span></span>
+          <span v-if="!current_day_signed"></span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
@@ -152,6 +154,7 @@
         collections: currentUser.collections,
         publishes: currentUser.publishes,
         groups: currentUser.groups,
+        current_day_signed: currentUser.current_day_signed,
         followed_number: currentUser.followed_number,
         popularity: currentUser.popularity,
         name: currentUser.name,
@@ -309,6 +312,7 @@
           this.groups = user.info.groups
           this.followed_number = user.info.followed_number
           this.popularity = user.info.popularity
+          this.current_day_signed = user.info.current_day_signed
           if (window.mui.os.plus && window.mui.os.android) {
             this.show_my_wallet = true
           }
@@ -391,6 +395,19 @@
       /*width: 21%;*/
       height: 100%;
       float: left;
+      position: relative;
+      span {
+        position: absolute;
+        right: 7px;
+        bottom: 29px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #FFFFFF;
+        .icon {
+          font-size: 30px;
+        }
+      }
     }
     .avatar {
       width: 1.84rem;

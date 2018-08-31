@@ -31,6 +31,14 @@
             <use xlink:href="#icon-bugongkai" v-else></use>
           </svg>
         </li>
+        <li class="mui-table-view-cell">
+          通过手机号查找我
+
+          <svg :class="{icon:true, active:eduSee}" aria-hidden="true" @tap.stop.prevent="toggle('edu')">
+            <use xlink:href="#icon-gongkai" v-if="eduSee"></use>
+            <use xlink:href="#icon-bugongkai" v-else></use>
+          </svg>
+        </li>
 
       </ul>
     </div>

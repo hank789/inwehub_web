@@ -1221,12 +1221,23 @@ const routes = [
           requestAuth(to, from, next)
         }
       },
-      { // 姓名
+      { // 平台昵称
         path: '/my/info/basic/name',
         name: 'my-info-basic-name',
         component: componets.Accountinfosbasicname,
         meta: {
-          title: '用户姓名'
+          title: '平台昵称'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      },
+      { // 真实姓名
+        path: '/my/info/basic/realName',
+        name: 'my-info-basic-realName',
+        component: componets.Accountinfosbasicrealname,
+        meta: {
+          title: '真实姓名'
         },
         beforeEnter: (to, from, next) => {
           requestAuth(to, from, next)
