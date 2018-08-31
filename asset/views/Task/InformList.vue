@@ -23,6 +23,17 @@
             :isShowUpToRefreshDescription="false"
             :autoShowEmpty="false"
             class="listWrapper">
+
+              <div class="noticeWrapper" v-if="isShowNotice">
+                <div class="closeNotice" @tap.stop.prevent="showNotice">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-times"></use>
+                  </svg>
+                </div>
+                <div class="noticeText">打开通知，避免错过订阅的热点新闻，深度文章，招聘动态和招标快讯</div>
+                <div class="unlock" @tap.stop.prevent="goUnlock">开启</div>
+              </div>
+
               <ul>
                 <div class="notice" @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.unread_count">
                   <p>
@@ -115,6 +126,7 @@
   import { postRequest } from '../../utils/request'
   import Options from '../../components/Options.vue'
   import RefreshList from '../../components/refresh/List.vue'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
 
   const TaskMain = {
     data: () => ({
@@ -166,13 +178,26 @@
       },
       loading: true,
       total_count: 0,
-      mobile: 0
+      mobile: 0,
+      isShowNotice: true
     }),
     components: {
       RefreshList,
       Options
     },
     methods: {
+      gocheckPermission () {
+        checkPermission('NOTIFITION', () => {
+          console.log('有通知权限:')
+        })
+      },
+      goUnlock () {
+        toSettingSystem('NOTIFITION', () => {
+        })
+      },
+      showNotice () {
+        this.isShowNotice = !this.isShowNotice
+      },
       toSetting () {
         this.$router.pushPlus('/push/setting')
       },
@@ -248,12 +273,13 @@
       }
     },
     mounted () {
+      this.gocheckPermission()
     }
   }
   export default TaskMain
 </script>
 
-<style scoped="scoped">
+<style scoped="scoped" lang="less">
   .bot {
     position: absolute;
     right: 0.426rem;
@@ -280,6 +306,37 @@
     list-style: none;
     font-style: normal;
   }
+
+  .noticeWrapper {
+    padding: 10px 16px;
+    height: 56px;
+    background: #DCDCDC;
+    display: flex;
+    .closeNotice {
+      font-size: 18px;
+      display: flex;
+      color: #C8C8C8;
+      margin-right: 15px;
+      margin-top: 9px;
+    }
+    .noticeText {
+      width: 65%;
+      color: #03AEF9;
+      font-size: 13px;
+      line-height: 18px;
+    }
+    .unlock {
+      width: 66px;
+      height: 27px;
+      color: #03AEF9;
+      margin: 5px 0 0 15px;
+      line-height: 27px;
+      text-align: center;
+      border-radius: 100px;
+      border: 1px solid #03AEF9;
+    }
+  }
+
   .mui-content {
     background: #FFFFFF;
   }
