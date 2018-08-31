@@ -41,7 +41,37 @@ function saveHtmlImgToGallery (html, path, successCallback, failCallback) {
     })
 }
 
+function getBase64ByImgUrl (url, succssCallback) {
+  let canvas = document.body.querySelector('#imgToBase64')
+  if (canvas === null) {
+    canvas = document.createElement('canvas')
+    canvas.setAttribute('id', 'imgToBase64')
+    canvas.style.display = 'none'
+    document.body.appendChild(canvas)
+  }
+  var image = new Image()
+  image.src = url
+  image.onload = function () {
+    var width = image.width
+    var height = image.height
+    if (width > height) {
+      height = Math.round(500 * width / height)
+      width = 500
+    } else {
+      width = Math.round(500 * width / height)
+      height = 500
+    }
+    var cax = canvas.getContext('2d')
+    canvas.width = width
+    canvas.height = height
+    cax.drawImage(image, 0, 0, width, height)
+    var dataUrl = canvas.toDataURL('image/png')
+    succssCallback(dataUrl)
+  }
+}
+
 export {
   getImageSuffix,
-  saveHtmlImgToGallery
+  saveHtmlImgToGallery,
+  getBase64ByImgUrl
 }
