@@ -36,22 +36,34 @@
       <div class="bottomText">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
     </div>
 
-    <div id="myQrCode" style="text-align: center;display: none">
+    <div id="myQrCode" style="text-align: center; position: relative;display: none">
 
-      <div style="font-size: 18px; color: #444444; line-height: 25px; margin-top: 64px; margin-bottom: 15px; ">
-        <div style="width: 34px; height: 34px; margin: 0 auto 10px;">
+      <div style="position: absolute; top: -180px; left: 45px; ">
+        <div style="font-size: 188px;">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-logozuoyoubiaozhun"></use>
+          </svg>
+        </div>
+        <img style="width: 244px; height: 29px; position: absolute; top: 122px; left: 0px;" src="../../statics/images/logoImgText.png" alt="">
+      </div>
+
+      <div style="font-size: 36px; color: #444444; line-height: 50px; margin-top: 128px; margin-bottom: 30px; ">
+        <div style="width: 68px; height: 68px; margin: 0 auto 20px;">
           <img style="width: 100%; height: 100%; border-radius: 50%;" src="../../statics/images/uicon.jpg" alt="">
         </div>
         扫码关注蓝色小白
       </div>
 
-      <div style="width: 238px; height: 250px; margin: 0 auto; background: url(../../statics/images/group.png) no-repeat 0 32px;">
-        <div style="margin: 0 auto; width: 167px; height: 167px; background: rgba(255, 255, 255, 1); box-shadow: 0px 2px 26px 0px #F0F2F5; border-radius: 4px;">
-          <qr-code style="margin: 6px; padding-top: 6px;" :text="shareUrl" :size="155" error-level="M"></qr-code>
+      <div style="width: 476px; height: 500px; margin: 0 auto; position: relative">
+        <div style="position: absolute; z-index: -1; top: 62px;">
+          <img src="../../statics/images/group.png" alt="">
+        </div>
+        <div style="margin: 0 auto; width: 335px; height: 335px; background: rgba(255, 255, 255, 1); box-shadow: 0px 2px 26px 0px #F0F2F5; border-radius: 8px;">
+          <qr-code style="margin: 12px; padding-top: 12px;" :text="shareUrl" :size="310" error-level="M"></qr-code>
         </div>
       </div>
 
-      <div style="width: 100%; font-size: 12px; color: #808080; position: absolute; bottom: 33px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
+      <div style="width: 100%; font-size: 24px; color: #808080; position: absolute; top: 1275px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
     </div>
 
   </div>
