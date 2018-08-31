@@ -5,8 +5,7 @@
       <h1 class="mui-title">详细资料</h1>
     </header>
 
-    <div class="mui-content detailInfoWrapper">
-
+    <div class="mui-content detailInfoWrapper" v-show="!loading">
       <div class="cardWrapper">
         <div class="card">
           <div class="header">
@@ -24,7 +23,6 @@
           <div class="detail">
             <div class="realname">
               <span>{{ resume.info.name }}</span>
-              <!--<span>L2</span>-->
             </div>
             <div class="item">
               <div class="my-detail">
@@ -60,7 +58,7 @@
           <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有教育经历</div></div>
       </template>
       <template v-else>
-        <template v-if="isShare && percent < 90">
+        <template v-if="percent < 90">
           <h5>工作经历</h5>
           <div class="component-warning">
             <svg class="icon" aria-hidden="true">
@@ -73,10 +71,10 @@
         </template>
         <template v-else>
           <!--工作经历-->
-          <h5 v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">工作经历</h5>
-          <div class="list" v-show="(resume.jobs.length && !isShare) || (isShare && resume.info.is_job_info_public)">
+          <h5 v-show="(resume.jobs.length) || (resume.info.is_job_info_public)">工作经历</h5>
+          <div class="list" v-show="(resume.jobs.length) || (resume.info.is_job_info_public)">
             <div class="item" v-for="(job, jobIndex) in resume.jobs"
-                 v-show="!(isShare && jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
+                 v-show="!(jobIndex >= 3 && !isShowItemJobMore)" :jobIndex="jobIndex">
               <div class="time">{{ job.begin_time }} ~ {{ job.end_time }}</div>
               <div class="company">{{ job.company }}<i class="separate"></i>{{ job.title }}</div>
               <div class="description  hide mui-ellipsis-3" v-show="job.description">{{ job.description }}
@@ -87,16 +85,16 @@
             </div>
           </div>
           <div class="seeMoreWrapper"
-               v-show="(isShare && !resume.info.is_job_info_public && !this.cuuid) || (isShare && resume.jobs.length > 3)">
+               v-show="(!resume.info.is_job_info_public && !this.cuuid) || (resume.jobs.length > 3)">
             <div class="seeMore" @tap.click.prevent="showJobMore($event)">查看所有工作经历</div>
           </div>
 
           <!--项目经历-->
-          <h5 v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">项目经历</h5>
+          <h5 v-show="(resume.projects.length) || (resume.info.is_project_info_public)">项目经历</h5>
           <div class="list"
-               v-show="(resume.projects.length && !isShare) || (isShare && resume.info.is_project_info_public)">
+               v-show="(resume.projects.length) || (resume.info.is_project_info_public)">
             <div v-for="(project, projectIndex) in resume.projects" class="item" :projectIndex="projectIndex"
-                 v-show="!(isShare && projectIndex >= 3 && !isShowProjectMore)">
+                 v-show="!(projectIndex >= 3 && !isShowProjectMore)">
               <div class="time">{{ project.begin_time }} ~ {{ project.end_time }}</div>
               <div class="company">{{ project.project_name }}<i class="separate"></i>{{ project.title }}</div>
               <div class="others">
@@ -126,15 +124,15 @@
             </div>
           </div>
           <div class="seeMoreWrapper"
-               v-show="(isShare && !resume.info.is_project_info_public && !this.cuuid) || (isShare && resume.projects.length > 3)">
+               v-show="(!resume.info.is_project_info_public && !this.cuuid) || (resume.projects.length > 3)">
             <div class="seeMore" @tap.click.prevent="showProjectMore($event)">查看所有项目经历</div>
           </div>
 
           <!--教育经历-->
-          <h5 v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">教育经历</h5>
-          <div class="list" v-show="(resume.edus.length && !isShare) || (isShare && resume.info.is_edu_info_public)">
+          <h5 v-show="(resume.edus.length) || (resume.info.is_edu_info_public)">教育经历</h5>
+          <div class="list" v-show="(resume.edus.length) || (resume.info.is_edu_info_public)">
             <div class="item" v-for="(edu, eduIndex) in resume.edus"
-                 v-show="!(isShare && eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
+                 v-show="!(eduIndex >= 3 && !isShowitemEduMore)" :eduIndex="eduIndex">
               <div class="time">{{ edu.begin_time }} ~ {{ edu.end_time }}</div>
               <div class="company">{{ edu.school }}<i class="separate"></i>{{ edu.degree }}<i
                 class="separate"></i>{{ edu.major }}
@@ -147,12 +145,12 @@
             </div>
           </div>
           <div class="seeMoreWrapper"
-               v-show="(isShare && !resume.info.is_edu_info_public && !this.cuuid) || (isShare && resume.edus.length > 3)">
+               v-show="(!resume.info.is_edu_info_public && !this.cuuid) || (resume.edus.length > 3)">
             <div class="seeMore" @tap.click.prevent="showEduMore($event)">查看所有教育经历</div>
           </div>
 
           <div class="noPublic"
-               v-show="!loading && isShare && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
+               v-show="!loading && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-bugongkai"></use>
             </svg>
@@ -165,7 +163,7 @@
 
     <div class="buttonWrapper">
 
-      <div class="edit" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare || uuid === cuuid" v-show="!loading">继续编辑</div>
+      <div class="edit" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="uuid === cuuid" v-show="!loading">继续编辑</div>
 
       <div class="consultWrapper" v-else v-show="!loading">
         <div class="buttonLeft" @tap.stop.prevent="goChat()">
@@ -176,7 +174,6 @@
         </div>
         <div class="buttonRight" @tap.stop.prevent="goAsk('/ask/'+uuid)">向他咨询</div>
       </div>
-
     </div>
 
   </div>
@@ -186,31 +183,15 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
-  import { getResumeDetail } from '../../utils/shareTemplate'
   import { isLogined } from '../../utils/auth'
 
   export default {
     data: () => ({
       isLogined: isLogined(),
-      apper: 1,
-      shareOptions: {
-        shareName: '',
-        title: '',
-        content: '',
-        imageUrl: '',
-        thumbUrl: ''
-      },
-      im_tokenMsg: '',
       percent: 0,
       uuid: '',
       cuuid: '',
-      showQrCode: false,
-      isShare: false,
-      canBack: false,
       loading: 1,
-      shareUrl: '',
-      wechatConfig: {},
-      downloadHeader: false,
       isShowProjectMore: false,
       isShowItemJobMore: false,
       isShowitemEduMore: false,
@@ -238,11 +219,6 @@
         projects: [],
         jobs: []
 
-      },
-      qRCodeOptions: {
-        size: 100,
-        padding: 0,
-        level: 'H'
       }
     }),
     watch: {
@@ -259,41 +235,20 @@
         console.log('refresh-resume')
         this.getData()
       })
-      console.log(this.$route.params.uuid + '我是好人')
     },
     methods: {
-      toTagDetail (name) {
-        userAbility.jumpToTagDetail(name)
-      },
       goChat () {
         userAbility.jumpToChat(this.resume.info.id, this)
       },
-      share: function () {
-        this.$refs.shareComponent.share()
-      },
       getData: function () {
-        // 获取本地的百分比
         const currentUser = getLocalUserInfo()
-        this.percent = currentUser.account_info_complete_percent
-        if (this.$route.query.goback) {
-          this.canBack = true
-        }
 
-        this.uuid = currentUser.uuid
+        this.uuid = this.$route.params.uuid
         this.cuuid = currentUser.uuid
-
-        console.log(this.uuid + '我是大好人' + this.cuuid)
-
-        var from = this.$router.currentRoute.name
-        // var fullUrl = process.env.H5_ROOT
-
-        if (from === 'share-resume' || from === 'share-resume-old') {
-          this.isShare = true
-          this.uuid = this.$route.query.id || this.$route.params.id
-        }
+        this.percent = currentUser.account_info_complete_percent
 
         postRequest(`profile/resumeInfo`, {
-          uuid: this.$route.params.uuid
+          uuid: this.uuid
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -301,59 +256,8 @@
             return
           }
           this.resume = response.data.data
-          this.apper = this.resume.groups.length
           this.loading = 0
-          this.bindWechatShare()
         })
-      },
-      collectProfessor: function () {
-        if (!this.cuuid) {
-          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
-          return
-        }
-
-        postRequest(`follow/user`, {
-          id: this.uuid
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-          this.resume.is_followed = !this.resume.is_followed
-          window.mui.toast(response.data.data.tip)
-        })
-      },
-      downLoadHeader () {
-        var that = this
-        var dtask = window.plus.downloader.createDownload(this.resume.info.avatar_url, {
-          filename: '_downloads/resume.png'
-        }, function (d, status) {
-          if (status === 200) {
-            // 下载成功
-            console.log('下载成功:' + d.filename)
-            console.debug(d)
-            that.downloadHeader = true
-          } else {
-            console.log('下载失败')
-          }
-        })
-        // 启动下载任务
-        dtask.start()
-      },
-      bindWechatShare () {
-        var shareOptions = getResumeDetail(
-          this.uuid,
-          this.resume.info.name,
-          this.resume.info.company,
-          this.resume.info.avatar_url
-        )
-        this.shareOptions.title = shareOptions.title
-        this.shareOptions.content = shareOptions.content
-        this.shareOptions.imageUrl = shareOptions.imageUrl
-        this.shareOptions.thumbUrl = shareOptions.thumbUrl
-        this.shareOptions.shareName = shareOptions.shareName
-        this.shareUrl = shareOptions.link
       },
       showJobMore (event) {
         if (!this.cuuid) {
@@ -421,9 +325,6 @@
           event.target.className = 'toggle show'
           event.target.innerText = '查看'
         }
-      },
-      toggleQrCode () {
-        this.showQrCode = !this.showQrCode
       }
     }
   }
