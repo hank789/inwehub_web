@@ -93,6 +93,7 @@ const componentsPageTransition = () => import(/* webpackChunkName: "componentsPa
 const Accountinfosbasic = () => import(/* webpackChunkName: "Accountinfosbasic" */ '../../../views/Account/Infos/Basic.vue')
 const Accountinfosbasicdescription = () => import(/* webpackChunkName: "Accountinfosbasic_description" */ '../../../views/Account/Infos/BasicDescription.vue')
 const Accountinfosbasicname = () => import(/* webpackChunkName: "Accountinfosbasic_name" */ '../../../views/Account/Infos/BasicName.vue')
+const Accountinfosbasicrealname = () => import(/* webpackChunkName: "Accountinfosbasicrealname" */ '../../../views/Account/Infos/BasicRealName.vue')
 const Accountinfosbasicaddress = () => import(/* webpackChunkName: "Accountinfosbasic_address" */ '../../../views/Account/Infos/BasicAddress.vue')
 const Accountinfosbasiccompany = () => import(/* webpackChunkName: "Accountinfosbasic_company" */ '../../../views/Account/Infos/BasicCompany.vue')
 const Accountinfosbasicposition = () => import(/* webpackChunkName: "Accountinfosbasic_position" */ '../../../views/Account/Infos/BasicPosition.vue')
@@ -283,6 +284,7 @@ export {
   Accountinfosbasic,
   Accountinfosbasicdescription,
   Accountinfosbasicname,
+  Accountinfosbasicrealname,
   Accountinfosbasicaddress,
   Accountinfosbasiccompany,
   Accountinfosbasicposition,

@@ -86,7 +86,7 @@
               <div class="detail">
                 <div class="realname">
                   <span>{{ resume.info.name }}</span>
-                  <span>L2</span>
+                  <span>L{{resume.info.user_level}}</span>
                 </div>
                 <div class="item">
                   <div class="my-detail">
@@ -112,7 +112,7 @@
                     <span>她关注的人</span>
                   </div>
 
-                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/dynamic/list?id=' + resume.info.uuid )">
+                  <div class="counterList">
                     <span>{{resume.info.publishes}}</span>
                     <span>发布</span>
                   </div>

@@ -6,10 +6,16 @@
     </header>
 
     <div class="mui-content">
-      <ul class="mui-table-view mui-table-view-chevron">
+      <div class="secrecy">(真实姓名/性别/地址/联系方式/生日) 平台将做保密处理。</div>
+      <ul class="muiTableView mui-table-view-chevron">
         <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="$router.push('/my/info/basic/name')" class="mui-navigate-right">用户姓名<span
+          <a @tap.stop.prevent="$router.push('/my/info/basic/name')" class="mui-navigate-right">平台昵称<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.name ? user.info.name : '必填'
+            }}</span></a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="$router.push('/my/info/basic/realName')" class="mui-navigate-right">真实姓名<span
+            class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.realname ? user.info.realname : '必填'
             }}</span></a>
         </li>
         <li class="mui-table-view-cell">
@@ -92,6 +98,7 @@
       user: {
         info: {
           name: '',
+          realname: '',
           gender: '',
           company: '',
           title: '',
@@ -454,7 +461,13 @@
         switch (type) {
           case 'name':
             if (!this.user.info.name) {
-              window.mui.toast('请填写姓名')
+              window.mui.toast('请填写平台昵称')
+              return false
+            }
+            break
+          case 'realname':
+            if (!this.user.info.realname) {
+              window.mui.toast('请填写真实姓名')
               return false
             }
             break
@@ -602,7 +615,23 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="less">
+  .secrecy {
+    height: 34px;
+    line-height: 34px;
+    color: #B4B4B6;
+    font-size: 12px;
+    background: #F3F4F6;
+    padding-left: 16px;
+  }
+  .muiTableView {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    background-color: #fff;
+  }
   .account_item_title {
     padding: 0.133rem;
     color: #a6a6a6;

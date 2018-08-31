@@ -83,6 +83,7 @@ import componentsPageTransition from '../../../components/PageTransition.vue'
 import Accountinfosbasic from '../../../views/Account/Infos/Basic.vue'
 import Accountinfosbasicdescription from '../../../views/Account/Infos/BasicDescription.vue'
 import Accountinfosbasicname from '../../../views/Account/Infos/BasicName.vue'
+import Accountinfosbasicrealname from '../../../views/Account/Infos/BasicRealName.vue'
 import Accountinfosbasicaddress from '../../../views/Account/Infos/BasicAddress.vue'
 import Accountinfosbasiccompany from '../../../views/Account/Infos/BasicCompany.vue'
 import Accountinfosbasicposition from '../../../views/Account/Infos/BasicPosition.vue'
@@ -276,6 +277,7 @@ export {
   Accountinfosbasic,
   Accountinfosbasicdescription,
   Accountinfosbasicname,
+  Accountinfosbasicrealname,
   Accountinfosbasicaddress,
   Accountinfosbasiccompany,
   Accountinfosbasicposition,
