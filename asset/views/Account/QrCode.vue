@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header v-if="false" class="mui-bar mui-bar-dark mui-bar-nav">
+    <header class="mui-bar mui-bar-dark mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
       <!--<h1 class="mui-title">个人名片</h1>-->
     </header>
