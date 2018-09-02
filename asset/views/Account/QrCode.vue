@@ -30,32 +30,28 @@
 
     <div id="myQrCode" style="display: none" v-if="!loading">
       <div style="text-align: center; position: relative;">
-        <div style="position: absolute; top: -180px; left: 45px; ">
-          <div style="font-size: 188px;">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-logozuoyoubiaozhun"></use>
-            </svg>
-          </div>
-          <img style="width: 244px; height: 29px; position: absolute; top: 122px; left: 0px;" src="../../statics/images/logoImgText.png" alt="">
+
+        <div style="position: absolute; top: 58px; left: 45px; width: 374px; height: 114px; ">
+          <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/logoGroup.png" alt="" id="myQrCode-logoGroup">
         </div>
 
-        <div style="font-size: 36px; color: #444444; line-height: 50px; margin-top: 128px; margin-bottom: 30px; ">
+        <div style="font-size: 36px; color: #444444; line-height: 50px; padding-top: 276px; margin-bottom: 30px; ">
           <div style="width: 68px; height: 68px; margin: 0 auto 20px;">
-            <!--<img :src="resume.info.avatar_url" style="width: 100%; height: 100%; border-radius: 50%;" >-->
+            <img :src="resume.info.avatar_url" style="width: 100%; height: 100%; border-radius: 50%;" >
           </div>
           扫码关注{{resume.info.name}}
         </div>
 
         <div style="width: 476px; height: 500px; margin: 0 auto; position: relative">
-          <div style="position: absolute; z-index: -1; top: 62px;">
-            <img src="../../statics/images/group.png" alt="" id="myQrCode-group">
+          <div style="width: 476px; height: 438px; position: absolute; z-index: -1; top: 67px;">
+            <img style="width: 100%; height: 100%" src="../../statics/images/group.png" alt="" id="myQrCode-group">
           </div>
           <div style="margin: 0 auto; width: 335px; height: 335px; background: rgba(255, 255, 255, 1); box-shadow: 0px 2px 26px 0px #F0F2F5; border-radius: 8px;">
             <qr-code style="margin: 12px; padding-top: 12px;" :text="shareUrl" :size="310" error-level="M"></qr-code>
           </div>
         </div>
 
-        <div style="width: 100%; font-size: 24px; color: #808080; position: absolute; top: 1275px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
+        <div style="width: 100%; font-size: 24px; color: #808080; position: absolute; margin-top: 300px">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
       </div>
     </div>
 
@@ -82,6 +78,9 @@
     },
     methods: {
       saveToGallery () {
+        getBase64ByImgUrl(document.getElementById('myQrCode-logoGroup').src, (base64) => {
+          document.getElementById('myQrCode-logoGroup').src = base64
+        })
         getBase64ByImgUrl(document.getElementById('myQrCode-group').src, (base64) => {
           document.getElementById('myQrCode-group').src = base64
 

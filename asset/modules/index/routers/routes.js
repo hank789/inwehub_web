@@ -1233,8 +1233,8 @@ const routes = [
         }
       },
       { // 真实姓名
-        path: '/my/info/basic/realName',
-        name: 'my-info-basic-realName',
+        path: '/my/info/basic/realname',
+        name: 'my-info-basic-realname',
         component: componets.Accountinfosbasicrealname,
         meta: {
           title: '真实姓名'

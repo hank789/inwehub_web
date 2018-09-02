@@ -36,10 +36,9 @@
     created () {
       var userInfo = localEvent.getLocalItem('UserInfo')
       this.name = userInfo.name
+      console.log(localEvent.getLocalItem('UserInfo'))
     },
-    mounted () {
-
-    },
+    mounted () {},
     methods: {
       submitInfo: function () {
         if (!this.name) {

@@ -14,7 +14,7 @@
             }}</span></a>
         </li>
         <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="$router.push('/my/info/basic/realName')" class="mui-navigate-right">真实姓名<span
+          <a @tap.stop.prevent="$router.push('/my/info/basic/realname')" class="mui-navigate-right">真实姓名<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.realname ? user.info.realname : '必填'
             }}</span></a>
         </li>
@@ -330,6 +330,8 @@
       },
       getUserInfo () {
         var userInfo = localEvent.getLocalItem('UserInfoReal')
+
+        console.log(localEvent.getLocalItem('UserInfoReal') + 'userInfo')
         if (userInfo) {
           this.work_city = userInfo.info.province.name + ' ' + userInfo.info.city.name
           this.home_city = userInfo.info.hometown_province.name + ' ' + userInfo.info.hometown_city.name
@@ -465,7 +467,7 @@
               return false
             }
             break
-          case 'realname':
+          case 'readme':
             if (!this.user.info.realname) {
               window.mui.toast('请填写真实姓名')
               return false
@@ -599,7 +601,9 @@
       }
       next()
     },
-    mounted () {},
+    mounted () {
+      console.log(this.user.info.realname + 'realname')
+    },
     beforeRouteLeave (to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker')
       if (popDiv) {

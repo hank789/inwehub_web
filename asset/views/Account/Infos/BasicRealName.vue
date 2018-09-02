@@ -15,7 +15,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">真实姓名</label>
-            <input type="text" placeholder="请填写" v-model.trim="realname" maxlength="15">
+            <input type="text" v-model.trim="real" placeholder="请填写">
           </div>
         </li>
       </ul>
@@ -27,39 +27,35 @@
 <script>
 
   import localEvent from '../../../stores/localStorage'
-  import { postRequest } from '../../../utils/request'
+  import { apiRequest } from '../../../utils/request'
 
   export default {
     data: () => ({
-      realname: ''
+      real: ''
     }),
     created () {
       var userInfo = localEvent.getLocalItem('UserInfo')
-      this.realname = userInfo.realname
+      this.real = userInfo.name
     },
     mounted () {
 
     },
     methods: {
       submitInfo: function () {
-        if (!this.realname) {
+        if (!this.real) {
           window.mui.toast('请填写真实姓名')
           return false
         }
 
         var data = {
-          'realname': this.realname
+          'real': this.real
         }
 
-        postRequest(`profile/update`, data).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
+        apiRequest(`profile/update`, data).then(res => {
+          if (res !== false) {
+            window.mui.toast('保存成功')
+            window.mui.muiOldBack()
           }
-
-          window.mui.toast('保存成功')
-          window.mui.muiOldBack()
         })
       }
     }
