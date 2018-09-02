@@ -10,12 +10,12 @@
     <div class="mui-content">
 
       <div v-if="this.$route.params.type == 1">
-        <div class="service">
+        <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">需求委托发布，梳理精准送达</div>
           <div class="line-river-after"></div>
           <div class="serviceText">过程辅助评审梳理，帮企业将需求精准送达合适的服务商和从业者</div>
         </div>
-        <div class="service">
+        <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">产品协助推广，招募信息发布</div>
           <div class="line-river-after"></div>
           <div class="serviceText">获取平台协助，助力职位机遇的扩散发布与产品服务的协助推广</div>
@@ -23,17 +23,17 @@
       </div>
 
       <div v-if="this.$route.params.type == 2 || this.$route.params.type == 3">
-        <div class="service">
+        <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">企业招标订阅，纵览全国商机</div>
           <div class="line-river-after"></div>
           <div class="serviceText">为您采集整理行业招投标信息，助您把握行业商机和市场变化</div>
         </div>
-        <div class="service">
+        <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">需求委托发布，梳理精准送达</div>
           <div class="line-river-after"></div>
           <div class="serviceText">过程辅助评审梳理，帮企业将需求精准送达合适的服务商和从业者</div>
         </div>
-        <div class="service">
+        <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">产品协助推广，招募信息发布</div>
           <div class="line-river-after"></div>
           <div class="serviceText">获取平台协助，助力职位机遇的扩散发布与产品服务的协助推广</div>
@@ -41,7 +41,7 @@
       </div>
 
       <div v-if="this.$route.params.type == 4">
-        <div class="service">
+        <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">全网机遇聚合，按需订阅推送</div>
           <div class="line-river-after"></div>
           <div class="serviceText">聚合全面新鲜的项目机遇与职位机会，为您精准匹配和推送</div>
@@ -59,6 +59,11 @@
   export default {
     data () {
       return {}
+    },
+    methods: {
+      serviceDetail () {
+        window.mui.toast('通过实名认证，了解服务详情')
+      }
     },
     mounted () {
     }
