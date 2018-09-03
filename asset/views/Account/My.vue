@@ -22,7 +22,7 @@
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
-            <span v-if="expert_apply_status =='2'">
+            <span> <!-- v-if="expert_apply_status =='2'"-->
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
@@ -398,14 +398,14 @@
       position: relative;
       span {
         position: absolute;
-        right: 0.186rem;
-        bottom: 0.773rem;
-        width: 0.8rem;
-        height: 0.8rem;
+        right: 7px;
+        bottom: 26px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         background: #FFFFFF;
         .icon {
-          font-size: 0.8rem;
+          font-size: 24px;
         }
       }
     }
