@@ -366,7 +366,9 @@ function setClipboardText (text) {
  * 检查权限
  */
 function checkPermission (type, successCallback, failCallback) {
-  if (!window.mui.os.plus) return
+  if (!window.mui.os.plus) {
+    failCallback()
+  }
 
   var permissionName = ''
   switch (type) {
