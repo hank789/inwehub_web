@@ -423,6 +423,7 @@
     height: 1.84rem;
     margin-top: 0.666rem;
     float: left;
+    margin-left: 10px;
     .my-info {
       width: 100%;
       height: 0.8rem;
@@ -745,7 +746,7 @@
     width: 26%;
     }
     .my-personal {
-     width: 74%;
+      width: 69%;
     }
 
 }
@@ -754,7 +755,7 @@
     width: 23%;
     }
     .my-personal {
-     width: 77%;
+     width: 69%;
     }
 
 }
@@ -763,7 +764,7 @@
      width: 21%;
     }
     .my-personal {
-     width: 79%;
+     width: 69%;
     }
 }
 

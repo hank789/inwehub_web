@@ -36,7 +36,6 @@
     created () {
       var userInfo = localEvent.getLocalItem('UserInfo')
       this.name = userInfo.name
-      console.log(localEvent.getLocalItem('UserInfo'))
     },
     mounted () {},
     methods: {

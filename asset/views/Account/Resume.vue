@@ -633,6 +633,10 @@
       list-style: none;
       font-style: normal;
     }
+
+    .component-label {
+      padding: 0rem 0.133rem;
+    }
     .mui-bar {
       .icon {
         position: absolute;

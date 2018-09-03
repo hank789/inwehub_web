@@ -98,7 +98,6 @@
       user: {
         info: {
           name: '',
-          realname: '',
           gender: '',
           company: '',
           title: '',
@@ -110,6 +109,7 @@
           email: '',
           birthday: '',
           description: '',
+          realname: '',
           industry_tags: []
         },
         jobs: [],
@@ -467,7 +467,7 @@
               return false
             }
             break
-          case 'readme':
+          case 'realname':
             if (!this.user.info.realname) {
               window.mui.toast('请填写真实姓名')
               return false

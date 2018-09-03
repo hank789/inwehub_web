@@ -15,7 +15,7 @@
         <li class="mui-table-view-cell">
           <div class="mui-input-row">
             <label class="mui-navigate">真实姓名</label>
-            <input type="text" v-model.trim="real" placeholder="请填写">
+            <input type="text" v-model.trim="realname" placeholder="请填写">
           </div>
         </li>
       </ul>
@@ -31,24 +31,24 @@
 
   export default {
     data: () => ({
-      real: ''
+      realname: ''
     }),
     created () {
       var userInfo = localEvent.getLocalItem('UserInfo')
-      this.real = userInfo.realname
+      this.realname = userInfo.realname
     },
     mounted () {
 
     },
     methods: {
       submitInfo: function () {
-        if (!this.real) {
+        if (!this.realname) {
           window.mui.toast('请填写真实姓名')
           return false
         }
 
         var data = {
-          'real': this.real
+          'realname': this.realname
         }
 
         apiRequest(`profile/update`, data).then(res => {
