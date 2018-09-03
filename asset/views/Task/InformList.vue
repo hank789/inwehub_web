@@ -188,7 +188,7 @@
     },
     created () {},
     activated () {
-//      this.checkPermission()
+      this.checkPermission()
     },
     methods: {
       checkPermission () {
@@ -279,10 +279,9 @@
       }
     },
     mounted () {
-      this.checkPermission()
-//      window.addEventListener('resume', () => {
-//        this.checkPermission()
-//      }, true)
+      window.addEventListener('resume', () => {
+        this.checkPermission()
+      }, true)
     }
   }
   export default TaskMain
