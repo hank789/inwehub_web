@@ -187,13 +187,14 @@
       Options
     },
     created () {},
+    activated () {
+      this.checkPermission()
+    },
     methods: {
       checkPermission () {
         checkPermission('NOTIFITION', () => {
-          console.log('成功调用')
           this.isOpenNotification = 0
         }, () => {
-          console.log('nfail')
           this.isOpenNotification = 1
         })
       },
@@ -278,7 +279,9 @@
       }
     },
     mounted () {
-      this.checkPermission()
+      window.addEventListener('resume', () => {
+        this.checkPermission()
+      }, true)
     }
   }
   export default TaskMain
