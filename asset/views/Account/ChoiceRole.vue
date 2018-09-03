@@ -35,23 +35,23 @@
   }
   .choiceText {
     color: #444444;
-    font-size: 20px;
+    font-size: 0.533rem;
     font-weight: 500;
-    margin-top: 72px;
+    margin-top: 1.92rem;
   }
 
   .roleList {
-    margin-top: 20px;
+    margin-top: 0.533rem;
     .role {
-      width: 200px;
-      height: 44px;
-      margin: 10px auto;
+      width: 5.333rem;
+      height: 1.173rem;
+      margin: 0.266rem auto;
       color: #B4B4B6;
-      font-size: 16px;
-      line-height: 44px;
+      font-size: 0.426rem;
+      line-height: 1.173rem;
       text-align: center;
-      border-radius: 100px;
-      border: 1px solid #DCDCDC;
+      border-radius: 2.666rem;
+      border: 0.026rem solid #DCDCDC;
     }
   }
 </style>

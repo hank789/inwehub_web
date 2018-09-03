@@ -313,32 +313,32 @@
   }
 
   .noticeWrapper {
-    padding: 10px 16px;
-    height: 56px;
+    padding: 0.266rem 0.426rem;
+    height: 1.493rem;
     background: #DCDCDC;
     display: flex;
     .closeNotice {
-      font-size: 18px;
+      font-size: 0.48rem;
       display: flex;
       color: #C8C8C8;
-      margin-right: 15px;
-      margin-top: 9px;
+      margin-right: 0.4rem;
+      margin-top: 0.24rem;
     }
     .noticeText {
       width: 65%;
       color: #03AEF9;
-      font-size: 13px;
-      line-height: 18px;
+      font-size: 0.346rem;
+      line-height: 0.48rem;
     }
     .unlock {
-      width: 66px;
-      height: 27px;
+      width: 1.76rem;
+      height: 0.72rem;
       color: #03AEF9;
-      margin: 5px 0 0 15px;
-      line-height: 27px;
+      margin: 0.133rem 0 0 0.4rem;
+      line-height: 0.72rem;
       text-align: center;
-      border-radius: 100px;
-      border: 1px solid #03AEF9;
+      border-radius: 2.666rem;
+      border: 0.026rem solid #03AEF9;
     }
   }
 

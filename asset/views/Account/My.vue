@@ -363,20 +363,20 @@
   }
 
   .mui-bar {
-    padding-top: 11.5px;
+    padding-top: 0.306rem;
     display: flex;
     justify-content: space-between;
     .icon {
-      font-size: 21px;
+      font-size: 0.56rem;
       color: #444444;
     }
     .setUp {
       display: flex;
-      padding-left: 4px;
+      padding-left: 0.106rem;
     }
     .code {
       display: flex;
-      padding-right: 4px;
+      padding-right: 0.106rem;
     }
   }
 
@@ -398,14 +398,14 @@
       position: relative;
       span {
         position: absolute;
-        right: 7px;
-        bottom: 29px;
-        width: 30px;
-        height: 30px;
+        right: 0.186rem;
+        bottom: 0.773rem;
+        width: 0.8rem;
+        height: 0.8rem;
         border-radius: 50%;
         background: #FFFFFF;
         .icon {
-          font-size: 30px;
+          font-size: 0.8rem;
         }
       }
     }
@@ -432,7 +432,7 @@
         &:nth-of-type(1) {
           display: inline-block;
           max-width: 2.92rem;
-          font-size: 20px;
+          font-size: 0.533rem;
           font-weight: 600;
           color: #444444;
           margin-right: 0.04rem;
@@ -441,17 +441,17 @@
       }
       p {
         &:nth-of-type(1) {
-          width: 22px;
-          height: 15px;
+          width: 0.586rem;
+          height: 0.4rem;
           display: inline-block;
           position: relative;
           top: -0.08rem;
           font-style: normal;
-          line-height: 15px;
-          font-size: 10px;
+          line-height: 0.4rem;
+          font-size: 0.266rem;
           color: #FFFFFF;
           text-align: center;
-          border-radius: 100px;
+          border-radius: 2.666rem;
           background:linear-gradient(180deg,rgba(7,215,253,1) 0%,rgba(3,174,249,1) 100%);
         }
 
@@ -475,11 +475,11 @@
       }
       i {
         display: inline-block;
-        width: 2px;
-        height: 2px;
+        width: 0.053rem;
+        height: 0.053rem;
         border-radius: 50%;
         background: #B4B4B6;
-        margin: 0 0px 3px;
+        margin: 0 0rem 0.08rem;
       }
     }
   }
@@ -628,12 +628,12 @@
       span {
         &:nth-of-type(1) {
           color: #444444;
-          font-size: 19px;
+          font-size: 0.506rem;
           font-weight: 500;
-          line-height: 22px;
+          line-height: 0.586rem;
         }
         &:nth-of-type(2) {
-          font-size: 12px;
+          font-size: 0.32rem;
           color: #808080;
           display: block;
           /*margin-top: 0.186rem;*/
@@ -643,9 +643,9 @@
   }
 
   .enjoy {
-    width: 343px;
+    width: 9.146rem;
     margin: 0 auto;
-    padding-bottom: 15px;
+    padding-bottom: 0.4rem;
     img {
       width: 100%;
       height: 100%;
@@ -656,20 +656,20 @@
       span {
         &:nth-of-type(2) {
           position: absolute;
-          right: 22px;
+          right: 0.586rem;
           color: #B4B4B6;
-          font-size: 12px;
+          font-size: 0.32rem;
         }
       }
     }
     .signIn {
       span {
         &:nth-of-type(2) {
-          width: 8px;
-          height: 8px;
+          width: 0.213rem;
+          height: 0.213rem;
           position: absolute;
-          left: 70px;
-          top: 10px;
+          left: 1.866rem;
+          top: 0.266rem;
           border-radius: 50%;
           background: #FA4975;
           display: inline-block;
@@ -680,8 +680,8 @@
       width: 92%;
       margin: 0 auto;
       color: #444444;
-      font-size: 16px;
-      padding: 11px 0;
+      font-size: 0.426rem;
+      padding: 0.293rem 0;
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -690,17 +690,17 @@
       }
       .icon {
         display: flex;
-        margin-top: 3px;
+        margin-top: 0.08rem;
       }
     }
   }
 
   .guessLike {
     .component-block-title {
-      height: 34px;
-      line-height: 34px;
+      height: 0.906rem;
+      line-height: 0.906rem;
       .left {
-        font-size: 13px;
+        font-size: 0.346rem;
         color: #808080;
         font-family: PingFangSC-Regular;
       }

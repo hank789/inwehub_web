@@ -633,9 +633,9 @@
     .mui-bar {
       .icon {
         position: absolute;
-        right: 16px;
-        top: 11px;
-        font-size: 22px;
+        right: 0.426rem;
+        top: 0.293rem;
+        font-size: 0.586rem;
         color: #3C3E44;
       }
     }
@@ -760,7 +760,7 @@
 
     /*个人简历*/
     .specialColumn.dynamicWrapper {
-      padding: 8px 0.373rem;
+      padding: 0.213rem 0.373rem;
     }
     .basic {
       background: #fff;
@@ -772,11 +772,11 @@
         .noDynamic {
           text-align: center;
           font-size: 1.333rem;
-          padding-top: 30px;
-          padding-bottom: 37px;
+          padding-top: 0.8rem;
+          padding-bottom: 0.986rem;
           span {
             color: #C8C8C8;
-            font-size: 12px;
+            font-size: 0.32rem;
             display: block;
           }
         }
@@ -792,7 +792,7 @@
 
     .cardWrapper {
       margin-top: -1.84rem;
-      padding: 0 0.426rem 15px;
+      padding: 0 0.426rem 0.4rem;
       width: 100%;
       .card {
         border-radius: 0.106rem;
@@ -812,8 +812,8 @@
         .collect {
           position: absolute;
           font-size: 0.373rem;
-          right: 15px;
-          top: 15px;
+          right: 0.4rem;
+          top: 0.4rem;
           color: #ffffff;
           background: #03aef9;
           border-radius: 1.333rem;
@@ -847,13 +847,13 @@
           margin-top: -0.533rem;
           .expert {
             position: absolute;
-            top: 90px;
-            left: 187px;
+            top: 2.4rem;
+            left: 4.986rem;
             z-index: 222;
             border-radius: 50%;
             background: #FFF;
             .icon {
-              font-size: 30px;
+              font-size: 0.8rem;
             }
           }
           .avatar {
@@ -863,8 +863,8 @@
             z-index: 9;
             color: #ffffff;
             display: inline-block;
-            height: 91px;
-            width: 91px;
+            height: 2.426rem;
+            width: 2.426rem;
             font-size: 0.533rem;
             text-align: center;
             border-radius: 50%;
@@ -903,16 +903,16 @@
                 position: relative;
                 right: -0.08rem;
                 color: #444444;
-                font-size: 18px;
+                font-size: 0.48rem;
               }
               &:nth-of-type(2) {
-                width: 22px;
-                height: 15px;
+                width: 0.586rem;
+                height: 0.4rem;
                 color: #FFFFFF;
-                font-size: 10px;
-                line-height: 15px;
+                font-size: 0.266rem;
+                line-height: 0.4rem;
                 font-weight: normal;
-                border-radius: 100px;
+                border-radius: 2.666rem;
                 display: inline-block;
                 background:linear-gradient(180deg,#07D7FD 0%,#03AEF9 100%);
               }
@@ -940,7 +940,7 @@
                 color: #808080;
                 &:nth-of-type(1) {
                   color: #444444;
-                  font-size: 19px;
+                  font-size: 0.506rem;
                   font-weight: 500;
 
                 }
@@ -978,23 +978,23 @@
               }
               .spot {
                 display: inline-block;
-                width: 2px;
-                height: 2px;
+                width: 0.053rem;
+                height: 0.053rem;
                 border-radius: 50%;
                 background: #B4B4B6;
-                margin: 0 0px 3px;
+                margin: 0 0rem 0.08rem;
               }
             }
             .detailInfo {
               span {
                 color: #808080;
-                font-size: 14px;
+                font-size: 0.373rem;
               }
               .icon {
                 color: #808080;
-                font-size: 12px;
-                vertical-align: -1px;
-                margin-left: -3px;
+                font-size: 0.32rem;
+                vertical-align: -0.026rem;
+                margin-left: -0.08rem;
               }
             }
           }
@@ -1204,43 +1204,43 @@
         background-color: #dcdcdc;
       }
       .edit {
-        width: 343px;
-        height: 36px;
+        width: 9.146rem;
+        height: 0.96rem;
         color: #ffffff;
-        font-size: 16px;
-        line-height: 36px;
+        font-size: 0.426rem;
+        line-height: 0.96rem;
         text-align: center;
-        border-radius: 8px;
+        border-radius: 0.213rem;
         background: #03AEF9;
-        margin: 6.5px auto 0;
+        margin: 0.173rem auto 0;
       }
       .consultWrapper {
         div {
-          margin-top: 6.5px;
+          margin-top: 0.173rem;
         }
         .buttonLeft {
           float: left;
           width: 25%;
           color: #B4B4B6;
-          font-size: 10px;
+          font-size: 0.266rem;
           text-align: center;
           .icon {
             color: #808080;
-            font-size: 20px;
+            font-size: 0.533rem;
             text-align: center;
             display: block;
-            margin-left: 37px;
+            margin-left: 0.986rem;
           }
         }
         .buttonRight {
           float: right;
-          width: 265px;
-          height: 36px;
+          width: 7.066rem;
+          height: 0.96rem;
           color: #ffffff;
-          margin-right: 16px;
-          line-height: 36px;
+          margin-right: 0.426rem;
+          line-height: 0.96rem;
           text-align: center;
-          border-radius: 8px;
+          border-radius: 0.213rem;
           background: #03AEF9;
         }
       }
@@ -1370,7 +1370,7 @@
       float: right;
       font-size: 0.4rem;
       color: #808080;
-      margin-top: 4px;
+      margin-top: 0.106rem;
     }
     .specialColumn p:nth-of-type(1){
        font-size:0.373rem;
@@ -1386,12 +1386,12 @@
       .tags {
         float: left;
         margin-right: 0.213rem;
-        margin-bottom: 11px;
+        margin-bottom: 0.293rem;
         span {
           float: left;
           background: #ececee;
           border-radius: 1.333rem;
-          padding: 4px 10px;
+          padding: 0.106rem 0.266rem;
           font-size: 0.32rem;
           color: #444444;
         }
@@ -1399,22 +1399,22 @@
       p {
         color: #808080;
         font-size: 0.373rem;
-        padding-bottom: 8px;
+        padding-bottom: 0.213rem;
         margin-bottom: 0.32rem;
-        border-bottom: 1px solid #dcdcdc;
+        border-bottom: 0.026rem solid #dcdcdc;
       }
       .addTags {
         float: left;
         color: #03AEF9;
-        padding: 4px 10px;
+        padding: 0.106rem 0.266rem;
         font-size: 0.32rem;
         vertical-align: sub;
         border-radius: 1.333rem;
-        border: 1px solid #DCDCDC;
+        border: 0.026rem solid #DCDCDC;
         .icon {
-          font-size: 12px;
+          font-size: 0.32rem;
           color: #B4B4B6;
-          margin-right: 3px;
+          margin-right: 0.08rem;
         }
       }
     }
