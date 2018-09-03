@@ -613,7 +613,7 @@ function AppInit (context) {
         // userAbility.signIGift(context)
 
         if (window.mui.os.ios) {
-          noticeOpenNotifitionPermission(context)
+          // noticeOpenNotifitionPermission(context)
         }
       })
 
