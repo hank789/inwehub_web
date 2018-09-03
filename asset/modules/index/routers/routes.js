@@ -776,7 +776,7 @@ const routes = [
     name: 'service',
     component: componets.AccountService,
     meta: {
-      title: '甲方需求方',
+      title: '选择角色',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {

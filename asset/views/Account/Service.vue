@@ -73,7 +73,7 @@
       </div>
 
       <div class="serviceFooter">
-        <div class="realName">开始实名认证，开启合作之旅</div>
+        <div class="realName" @tap.stop.prevent="$router.pushPlus('/chat/31')">开始实名认证，开启合作之旅</div>
       </div>
     </div>
   </div>
