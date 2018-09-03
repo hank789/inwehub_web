@@ -22,7 +22,7 @@
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
-            <span> <!-- v-if="expert_apply_status =='2'"-->
+            <span v-if="expert_apply_status =='2'">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
