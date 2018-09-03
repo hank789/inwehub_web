@@ -32,7 +32,7 @@
       <div style="text-align: center; position: relative;">
 
         <div style="position: absolute; top: 58px; left: 45px; width: 374px; height: 114px; ">
-          <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/logoGroup.png" alt="" id="myQrCode-logoGroup">
+          <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/group_3@3x.png" alt="" id="myQrCode-logoGroup">
         </div>
 
         <div style="font-size: 36px; color: #444444; line-height: 50px; padding-top: 276px; margin-bottom: 30px; ">

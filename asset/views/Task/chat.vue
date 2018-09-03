@@ -123,7 +123,8 @@
         // '关闭消息通知'
       ],
       name: '',
-      source: null
+      source: null,
+      oldUrl: ''
     }),
     created () {
       this.getDetail()
@@ -305,6 +306,7 @@
               console.log(n)
               this.chat(n)
             })
+            this.message()
           })
         } else if (this.$route.params.room_id) {
           postRequest(`im/getRoom`, {
@@ -435,7 +437,28 @@
         }
       })
     },
+    beforeRouteEnter (to, from, next) {
+      next(vm => {
+        // 通过 `vm` 访问组件实例,将值传入oldUrl
+        vm.oldUrl = from.path
+      })
+    },
     mounted () {
+      this.$nextTick(() => {
+        console.log(this.oldUrl)
+        if (this.oldUrl === '/my/service/1') {
+          this.comment = '我是甲方需求方，我需要开启合作之旅，申请实名认证！'
+        }
+        if (this.oldUrl === '/my/service/2') {
+          this.comment = '我是乙方产品方，我需要开启合作之旅，申请实名认证！'
+        }
+        if (this.oldUrl === '/my/service/3') {
+          this.comment = '我是乙方服务方，我需要开启合作之旅，申请实名认证！'
+        }
+        if (this.oldUrl === '/my/service/4') {
+          this.comment = '我是行业从业者，我需要开启合作之旅，申请实名认证！'
+        }
+      })
       // 保存链接
       var a = localEvent.getLocalItem('share')
       if (a && a.length > 0) {
