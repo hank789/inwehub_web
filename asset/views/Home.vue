@@ -111,7 +111,7 @@
     computed: {
       prevOtherData () {
         return {
-          orderBy: 1,
+          orderBy: 3,
           recommendType: 1
         }
       }
