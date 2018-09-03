@@ -368,6 +368,7 @@ function setClipboardText (text) {
 function checkPermission (type, successCallback, failCallback) {
   if (!window.mui.os.plus) {
     failCallback()
+    return
   }
 
   var permissionName = ''
