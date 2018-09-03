@@ -167,8 +167,8 @@
       box-shadow: 0rem 0.053rem 0.693rem 0rem #F0F2F5;
       border-radius: 0.106rem;
       div {
-        margin: 0.16rem;
-        padding-top: 0.16rem;
+        margin: 0.35rem;
+        padding-top: 0.35rem;
       }
     }
   }

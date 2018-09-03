@@ -425,6 +425,9 @@
         })
       },
       methods: {
+        toDetail (item) {
+          this.$router.pushPlus(item.url, 'list-detail-page')
+        },
         textToLink (text) {
           return transferTagToLink(secureHtml(textToLinkHtml(text)))
         },
@@ -601,7 +604,7 @@
         nextOtherData () {
           return {search_type: this.search_type, uuid: this.uuid}
         }
-      },
+      }
     }
   </script>
 
