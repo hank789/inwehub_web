@@ -14,11 +14,19 @@
           <div class="serviceTitle">需求委托发布，梳理精准送达</div>
           <div class="line-river-after"></div>
           <div class="serviceText">过程辅助评审梳理，帮企业将需求精准送达合适的服务商和从业者</div>
+          <div class="beta">
+            <div class="betaBack"></div>
+            <span>Beta</span>
+          </div>
         </div>
         <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">产品协助推广，招募信息发布</div>
           <div class="line-river-after"></div>
           <div class="serviceText">获取平台协助，助力职位机遇的扩散发布与产品服务的协助推广</div>
+          <div class="beta">
+            <div class="betaBack"></div>
+            <span>Beta</span>
+          </div>
         </div>
       </div>
 
@@ -27,16 +35,28 @@
           <div class="serviceTitle">企业招标订阅，纵览全国商机</div>
           <div class="line-river-after"></div>
           <div class="serviceText">为您采集整理行业招投标信息，助您把握行业商机和市场变化</div>
+          <div class="beta">
+            <div class="betaBack"></div>
+            <span>Beta</span>
+          </div>
         </div>
         <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">需求委托发布，梳理精准送达</div>
           <div class="line-river-after"></div>
           <div class="serviceText">过程辅助评审梳理，帮企业将需求精准送达合适的服务商和从业者</div>
+          <div class="beta">
+            <div class="betaBack"></div>
+            <span>Beta</span>
+          </div>
         </div>
         <div class="service" @tap.stop.prevent="serviceDetail">
           <div class="serviceTitle">产品协助推广，招募信息发布</div>
           <div class="line-river-after"></div>
           <div class="serviceText">获取平台协助，助力职位机遇的扩散发布与产品服务的协助推广</div>
+          <div class="beta">
+            <div class="betaBack"></div>
+            <span>Beta</span>
+          </div>
         </div>
       </div>
 
@@ -45,6 +65,10 @@
           <div class="serviceTitle">全网机遇聚合，按需订阅推送</div>
           <div class="line-river-after"></div>
           <div class="serviceText">聚合全面新鲜的项目机遇与职位机会，为您精准匹配和推送</div>
+          <div class="beta">
+            <div class="betaBack"></div>
+            <span>Beta</span>
+          </div>
         </div>
       </div>
 
@@ -77,11 +101,13 @@
 
   .service {
     width: 343px;
+    position: relative;
     margin: 15px auto 0;
     padding: 12px 15px 10px;
     background: #ffffff;
     box-shadow:0px 2px 26px 0px rgba(240,242,245,1);
     border-radius: 8px;
+    overflow: hidden;
     .serviceTitle {
       color: #444444;
       font-size: 16px;
@@ -94,6 +120,25 @@
       font-size: 13px;
       line-height: 21px;
       margin-top: 11px;
+    }
+    .beta {
+      .betaBack {
+        width: 56px;
+        height: 57px;
+        position: absolute;
+        right: -32px;
+        top: -24px;
+        transform: rotate(141deg);
+        background: #F3F4F6;
+      }
+      span {
+        position: absolute;
+        right: -2px;
+        top: 5px;
+        color: #B4B4B6;
+        font-size: 11px;
+        transform: rotate(53deg);
+      }
     }
   }
   .serviceFooter {

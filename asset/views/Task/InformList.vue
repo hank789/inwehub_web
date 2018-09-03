@@ -24,7 +24,7 @@
             :autoShowEmpty="false"
             class="listWrapper">
 
-              <div class="noticeWrapper" v-if="isShowNotice">
+              <div class="noticeWrapper" v-if="isOpenNotification === 1">
                 <div class="closeNotice" @tap.stop.prevent="showNotice">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-times"></use>
@@ -179,24 +179,29 @@
       loading: true,
       total_count: 0,
       mobile: 0,
-      isShowNotice: true
+      isShowNotice: true,
+      isOpenNotification: -1 // -1， 未知, 1 yes 0 no
     }),
     components: {
       RefreshList,
       Options
     },
+    created () {},
     methods: {
-      gocheckPermission () {
+      checkPermission () {
         checkPermission('NOTIFITION', () => {
-          console.log('有通知权限:')
+          console.log('成功调用')
+          this.isOpenNotification = 1
+        }, () => {
+          console.log('nfail')
+          this.isOpenNotification = 0
         })
       },
       goUnlock () {
-        toSettingSystem('NOTIFITION', () => {
-        })
+        toSettingSystem('NOTIFITION')
       },
       showNotice () {
-        this.isShowNotice = !this.isShowNotice
+        this.isOpenNotification = 0
       },
       toSetting () {
         this.$router.pushPlus('/push/setting')
@@ -273,7 +278,7 @@
       }
     },
     mounted () {
-      this.gocheckPermission()
+      this.checkPermission()
     }
   }
   export default TaskMain

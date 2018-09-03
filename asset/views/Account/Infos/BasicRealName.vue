@@ -35,7 +35,7 @@
     }),
     created () {
       var userInfo = localEvent.getLocalItem('UserInfo')
-      this.real = userInfo.name
+      this.real = userInfo.realname
     },
     mounted () {
 
