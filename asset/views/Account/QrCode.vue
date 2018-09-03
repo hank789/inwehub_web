@@ -133,19 +133,19 @@
   .logoUpDown {
     text-align: left;
     .icon {
-      font-size: 120px;
+      font-size: 3.2rem;
     }
   }
   .headPortraitInfo {
-    font-size: 18px;
+    font-size: 0.48rem;
     color: #444444;
-    line-height: 25px;
-    margin-top: 64px;
-    margin-bottom: 15px;
+    line-height: 0.666rem;
+    margin-top: 1.706rem;
+    margin-bottom: 0.4rem;
     .headPortraitImg {
-      width: 34px;
-      height: 34px;
-      margin: 0 auto 10px;
+      width: 0.906rem;
+      height: 0.906rem;
+      margin: 0 auto 0.266rem;
       img {
         width: 100%;
         height: 100%;
@@ -154,42 +154,42 @@
     }
   }
   .myCode {
-    width: 238px;
-    height: 250px;
+    width: 6.346rem;
+    height: 6.666rem;
     margin: 0 auto;
-    background: url("../../statics/images/group.png") no-repeat 0 32px;
+    background: url("../../statics/images/group.png") no-repeat 0 0.853rem;
     background-size: contain;
     .myCodeWrapper {
       margin: 0 auto;
-      width: 167px;
-      height: 167px;
+      width: 4.453rem;
+      height: 4.453rem;
       background: rgba(255, 255, 255, 1);
-      box-shadow: 0px 2px 26px 0px #F0F2F5;
-      border-radius: 4px;
+      box-shadow: 0rem 0.053rem 0.693rem 0rem #F0F2F5;
+      border-radius: 0.106rem;
       div {
-        margin: 6px;
-        padding-top: 6px;
+        margin: 0.16rem;
+        padding-top: 0.16rem;
       }
     }
   }
 
   .preservation {
-    margin-top: 91px;
+    margin-top: 2.426rem;
     .icon {
       color: #B4B4B6;
     }
     span {
       color: #444444;
-      font-size: 14px;
+      font-size: 0.373rem;
       font-weight: 500;
     }
   }
 
   .bottomText {
     width: 100%;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #808080;
     position: absolute;
-    bottom: 33px;
+    bottom: 0.88rem;
   }
 </style>

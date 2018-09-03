@@ -344,7 +344,7 @@
       width: 100%;
       position: relative;
       padding-bottom: 0.4rem;
-      padding-top: 15px;
+      padding-top: 0.4rem;
       .erweima {
         width: 1.466rem;
         height: 1.36rem;
@@ -354,31 +354,31 @@
         }
       }
       .header {
-        height: 63px;
+        height: 1.68rem;
         .expert {
           position: absolute;
-          top: 56px;
-          left: 183px;
+          top: 1.493rem;
+          left: 4.88rem;
           z-index: 222;
           border-radius: 50%;
           background: #FFF;
-          width: 20px;
-          height: 20px;
+          width: 0.533rem;
+          height: 0.533rem;
           .icon {
-            font-size: 21px;
-            margin-left: -1px;
-            margin-top: -1px;
+            font-size: 0.56rem;
+            margin-left: -0.026rem;
+            margin-top: -0.026rem;
           }
         }
         .avatar {
           position: absolute;
           left: 50%;
-          margin-left: -30px;
+          margin-left: -0.8rem;
           z-index: 9;
           color: #ffffff;
           display: inline-block;
-          height: 59px;
-          width: 59px;
+          height: 1.573rem;
+          width: 1.573rem;
           font-size: 0.533rem;
           text-align: center;
           border-radius: 50%;
@@ -417,7 +417,7 @@
               position: relative;
               right: -0.08rem;
               color: #444444;
-              font-size: 18px;
+              font-size: 0.48rem;
             }
           }
           .icon {
@@ -429,7 +429,7 @@
         .item {
           color: #808080;
           font-size: 0.346rem;
-          margin: 13px 0.186rem 0.053rem 0.186rem;
+          margin: 0.346rem 0.186rem 0.053rem 0.186rem;
           .icon {
             color: #b4b4b6;
             font-size: 0.426rem;
@@ -438,14 +438,14 @@
             width: 100%;
             height: 0.8rem;
             span {
-              font-size: 13px;
+              font-size: 0.346rem;
               color: #444444;
               .icon {
                 color: #B4B4B6;
               }
             }
             .line-wall {
-              margin: 0 10px;
+              margin: 0 0.266rem;
               background-color: #C8C8C8;
             }
           }
@@ -461,14 +461,14 @@
     p {
       color: #808080;
       font-size: 0.373rem;
-      padding-bottom: 8px;
+      padding-bottom: 0.213rem;
       margin-bottom: 0.32rem;
-      border-bottom: 1px solid #dcdcdc;
+      border-bottom: 0.026rem solid #dcdcdc;
     }
     .synopsisContent {
       color: #444444;
-      font-size: 13px;
-      line-height: 25px;
+      font-size: 0.346rem;
+      line-height: 0.666rem;
     }
   }
 
@@ -648,43 +648,43 @@
       background-color: #dcdcdc;
     }
     .edit {
-      width: 343px;
-      height: 36px;
+      width: 9.146rem;
+      height: 0.96rem;
       color: #ffffff;
-      font-size: 16px;
-      line-height: 36px;
+      font-size: 0.426rem;
+      line-height: 0.96rem;
       text-align: center;
-      border-radius: 8px;
+      border-radius: 0.213rem;
       background: #03AEF9;
-      margin: 6.5px auto 0;
+      margin: 0.173rem auto 0;
     }
     .consultWrapper {
       div {
-        margin-top: 6.5px;
+        margin-top: 0.173rem;
       }
       .buttonLeft {
         float: left;
         width: 25%;
         color: #B4B4B6;
-        font-size: 10px;
+        font-size: 0.266rem;
         text-align: center;
         .icon {
           color: #808080;
-          font-size: 20px;
+          font-size: 0.533rem;
           text-align: center;
           display: block;
-          margin-left: 37px;
+          margin-left: 0.986rem;
         }
       }
       .buttonRight {
         float: right;
-        width: 265px;
-        height: 36px;
+        width: 7.066rem;
+        height: 0.96rem;
         color: #ffffff;
-        margin-right: 16px;
-        line-height: 36px;
+        margin-right: 0.426rem;
+        line-height: 0.96rem;
         text-align: center;
-        border-radius: 8px;
+        border-radius: 0.213rem;
         background: #03AEF9;
       }
     }

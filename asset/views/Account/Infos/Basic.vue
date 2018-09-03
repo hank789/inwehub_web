@@ -621,12 +621,12 @@
 </script>
 <style scoped lang="less">
   .secrecy {
-    height: 34px;
-    line-height: 34px;
+    height: 0.906rem;
+    line-height: 0.906rem;
     color: #B4B4B6;
-    font-size: 12px;
+    font-size: 0.32rem;
     background: #F3F4F6;
-    padding-left: 16px;
+    padding-left: 0.426rem;
   }
   .muiTableView {
     position: relative;
