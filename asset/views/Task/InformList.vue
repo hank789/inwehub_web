@@ -191,10 +191,10 @@
       checkPermission () {
         checkPermission('NOTIFITION', () => {
           console.log('成功调用')
-          this.isOpenNotification = 1
+          this.isOpenNotification = 0
         }, () => {
           console.log('nfail')
-          this.isOpenNotification = 0
+          this.isOpenNotification = 1
         })
       },
       goUnlock () {
