@@ -31,7 +31,7 @@
     <div id="myQrCode" style="display: none" v-if="!loading">
       <div style="text-align: center; position: relative; width: 1125px;">
 
-        <div style="position: absolute; top: 67.5px; left: 67.5px; width: 474px; height: 114px; ">
+        <div style="position: absolute; top: 67.5px; left: 67.5px; width: 374px; height: 114px; ">
           <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/group_3@3x.png" alt="" id="myQrCode-logoGroup">
         </div>
 
