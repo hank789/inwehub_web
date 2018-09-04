@@ -1,7 +1,7 @@
 import router from '../modules/index/routers/index'
 import { goBack, getPrevWebview } from './webview'
 import { setIncBadgeNumber, noticeHandler } from './notice'
-import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from './allPlatform'
+import { saveLocationInfo, checkClipbord } from './allPlatform'
 import localEvent from '../stores/localStorage'
 import EventObj from './event'
 import { apiRequest } from './request'
@@ -646,6 +646,12 @@ function AppInit (context) {
 
         // 监听点击消息事件
         window.plus.push.addEventListener('click', (msg) => {
+          console.log('监听点击消息事件:' + JSON.stringify(msg))
+
+          if (msg.type !== 'click') {
+            return
+          }
+
           // 判断是从本地创建还是离线推送的消息
           switch (msg.payload) {
             case 'LocalMSG':
