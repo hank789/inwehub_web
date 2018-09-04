@@ -2257,6 +2257,7 @@ a {
   color: #C8C8C8;
   font-size: 0.293rem; }
 .container-feed-discover-add .contentWrapper {
+  word-wrap:break-word;
   margin-top: 0.266rem;
   font-size: 0.426rem;
   line-height: 0.56rem;
