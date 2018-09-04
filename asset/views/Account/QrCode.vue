@@ -35,7 +35,7 @@
           <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/group_3@3x.png" alt="" id="myQrCode-logoGroup">
         </div>
 
-        <div style="font-size: 81px; color: #444444; line-height: 75px; padding-top: 414px; margin-bottom: 45px; font-family:PingFangSC-Regular;">
+        <div style="font-size: 54px; color: #444444; line-height: 75px; padding-top: 414px; margin-bottom: 45px; font-family:PingFangSC-Regular;">
           <div style="width: 102px; height: 102px; margin: 0 auto 30px;">
             <img :src="resume.info.avatar_url" style="width: 100%; height: 100%; border-radius: 50%;" >
           </div>
