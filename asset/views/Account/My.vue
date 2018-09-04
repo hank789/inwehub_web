@@ -16,23 +16,25 @@
       <div class="my-top" @tap.stop.prevent="$router.pushPlus('/my/resume')">
         <div class="account_info">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
-            <span v-if="expert_apply_status =='2'">
+            <div class="expert" v-if="expert_apply_status =='2'">
+              <span></span>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
-            </span>
+            </div>
+             <!-- -->
           </div>
 
           <div class="my-personal">
             <div class="my-info">
               <span class="mui-ellipsis">{{name}}</span>
-              <p>L{{ user_level }}</p>
+              <span>L{{ user_level }}</span>
             </div>
             <div class="my-detail">
               <span>粉丝{{followed_number}}</span>
@@ -72,7 +74,7 @@
         <div class="optionList" @tap.stop.prevent="$router.pushPlus('/my/Finance')">
           <span>我的钱包</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-jinru"></use>
           </svg>
           <!--<i class="bot"></i>-->
         </div>
@@ -81,7 +83,7 @@
           <span>邀请好友</span>
           <span>5%返现</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-jinru"></use>
           </svg>
           <i class="bot"></i>
         </div>
@@ -89,14 +91,14 @@
           <span>每日签到</span>
           <span v-if="!current_day_signed"></span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-jinru"></use>
           </svg>
           <i class="bot"></i>
         </div>
         <div class="optionList" @tap.stop.prevent="$router.pushPlus('/feedback/advise')">
           <span>意见反馈</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
         <div class="gray"></div>
@@ -396,16 +398,22 @@
       height: 100%;
       float: left;
       position: relative;
-      span {
+      .expert {
         position: absolute;
-        right: 0.186rem;
-        bottom: 0.693rem;
-        width: 0.64rem;
-        height: 0.64rem;
-        border-radius: 50%;
-        background: #FFFFFF;
+        bottom: 26px;
+        right: 13px;
+        span {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          background: #FFFFFF;
+          display: inline-block;
+        }
         .icon {
-          font-size: 0.64rem;
+          font-size: 20px;
+          position: absolute;
+          top: -1px;
+          right: -1px;
         }
       }
     }
@@ -423,15 +431,15 @@
     height: 1.84rem;
     margin-top: 0.666rem;
     float: left;
-    margin-left: 0.266rem;
+    /*margin-left: 0.266rem;*/
     .my-info {
       width: 100%;
       height: 0.8rem;
       margin-top: 0.24rem;
       position: relative;
       span {
+        display: inline-block;
         &:nth-of-type(1) {
-          display: inline-block;
           max-width: 2.92rem;
           font-size: 0.533rem;
           font-weight: 600;
@@ -439,12 +447,8 @@
           margin-right: 0.04rem;
           margin-bottom: -0.106rem;
         }
-      }
-      p {
-        &:nth-of-type(1) {
-          width: 0.586rem;
-          height: 0.4rem;
-          display: inline-block;
+        &:nth-of-type(2) {
+          padding: 1px 5px;
           position: relative;
           top: -0.08rem;
           font-style: normal;
@@ -453,9 +457,13 @@
           color: #FFFFFF;
           text-align: center;
           border-radius: 2.666rem;
-          background:linear-gradient(180deg,rgba(7,215,253,1) 0%,rgba(3,174,249,1) 100%);
+          background:linear-gradient(180deg,#07D7FD 0%,#03AEF9 100%);
         }
+      }
+      p {
+        &:nth-of-type(1) {
 
+        }
       }
       svg {
         :nth-of-type(1) {
@@ -692,6 +700,7 @@
       .icon {
         display: flex;
         margin-top: 0.08rem;
+        color: #808080;
       }
     }
   }

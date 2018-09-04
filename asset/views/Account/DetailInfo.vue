@@ -14,7 +14,7 @@
                 <img :src="resume.info.avatar_url" class="avatar"/>
               </div>
             </div>
-            <div class="expert">
+            <div class="expert" v-if="resume.info.expert_apply_status =='2'">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
@@ -45,7 +45,7 @@
       <div class="gray"></div>
 
       <div class="skilled">
-        <p>个人简介</p>
+        <div class="skilledBrief">个人简介 <div class="bot"></div></div>
         <div class="synopsisContent">{{resume.info.description}}</div>
       </div>
 
@@ -331,6 +331,17 @@
 </script>
 
 <style scoped lang="less">
+  .bot {
+    position: absolute;
+    right: 0.373rem;
+    bottom: 0;
+    left: 0.373rem;
+    height: 0.026rem;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+    /*border: 0.026rem solid #dcdcdc;*/
+  }
   .detailInfoWrapper {
     bottom: 1.28rem;
     /*background: #FFFFFF;*/
@@ -408,7 +419,7 @@
         }
       }
       .detail {
-        margin-top: 0.266rem;
+        margin-top: 6.5px;
         text-align: center;
         .realname {
           font-weight: bold;
@@ -458,12 +469,16 @@
     overflow: hidden;
     position: relative;
     background-color: #FFFFFF;
-    p {
+    .skilledBrief {
+      .bot {
+        left: 0;
+        right: 0;
+      }
+      position: relative;
       color: #808080;
       font-size: 0.373rem;
       padding-bottom: 0.213rem;
       margin-bottom: 0.32rem;
-      border-bottom: 0.026rem solid #dcdcdc;
     }
     .synopsisContent {
       color: #444444;

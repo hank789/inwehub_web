@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div style="width: 100%; font-size: 36px; color: #808080; margin-top: 450px; padding-bottom: 99px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
+        <div style="width: 100%; font-size: 36px; color: #808080; margin-top: 450px; padding-bottom: 99px; font-family:PingFangSC-Regular;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
       </div>
     </div>
 

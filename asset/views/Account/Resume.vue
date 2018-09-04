@@ -99,6 +99,7 @@
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-chakangengduojiantou"></use>
                     </svg>
+                    <div class="bot"></div>
                   </div>
                 </div>
                 <div class="counter">
@@ -128,7 +129,7 @@
           <div class="gray"></div>
           <!--Ta的擅长-->
           <div class="skilled">
-            <p>擅长领域</p>
+            <div class="skilledTags">擅长领域<div class="bot"></div></div>
             <template v-for="(industry, index) in resume.info.skill_tags">
               <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
             </template>
@@ -617,8 +618,8 @@
       height: 0.026rem;
       -webkit-transform: scaleY(.5);
       transform: scaleY(.5);
-      /*background-color: rgb(220, 220, 220);*/
-      border: 0.026rem solid #dcdcdc;
+      background-color: rgb(220, 220, 220);
+      /*border: 0.026rem solid #dcdcdc;*/
     }
 
     /***************清除自带样式*****************/
@@ -913,14 +914,15 @@
                 font-size: 0.48rem;
               }
               &:nth-of-type(2) {
-                width: 0.586rem;
-                height: 0.4rem;
-                color: #FFFFFF;
-                font-size: 0.266rem;
+                padding: 1px 5px;
+                position: relative;
+                top: -0.08rem;
+                font-style: normal;
                 line-height: 0.4rem;
-                font-weight: normal;
+                font-size: 0.266rem;
+                color: #FFFFFF;
+                text-align: center;
                 border-radius: 2.666rem;
-                display: inline-block;
                 background:linear-gradient(180deg,#07D7FD 0%,#03AEF9 100%);
               }
             }
@@ -933,9 +935,9 @@
           .counter {
             width: 91%;
             margin-left: 4.5%;
-            padding-top: 0.32rem;
-            margin-top: 0.32rem;
-            border-top: 0.026rem solid #dcdcdc;
+            padding-top: 9px;
+            /*margin-top: 0.32rem;*/
+            /*border-top: 0.026rem solid #dcdcdc;*/
             font-size: 0.346rem;
             color: #444444;
             overflow: hidden;
@@ -993,6 +995,12 @@
               }
             }
             .detailInfo {
+              position: relative;
+              padding-bottom: 12px;
+              .bot {
+                right: 8px;
+                left: 8px;
+              }
               span {
                 color: #808080;
                 font-size: 0.373rem;
@@ -1387,7 +1395,7 @@
 
     /*擅长*/
     .skilled {
-      padding: 0.32rem 0.373rem 0.266rem 0.373rem;
+      padding: 0.32rem 0.373rem 0rem 0.373rem;
       overflow: hidden;
       position: relative;
       .tags {
@@ -1403,12 +1411,16 @@
           color: #444444;
         }
       }
-      p {
+      .skilledTags {
+        .bot {
+          left: 0;
+          right: 0;
+        }
+        position: relative;
         color: #808080;
         font-size: 0.373rem;
         padding-bottom: 0.213rem;
         margin-bottom: 0.32rem;
-        border-bottom: 0.026rem solid #dcdcdc;
       }
       .addTags {
         float: left;
