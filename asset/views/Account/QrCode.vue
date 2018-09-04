@@ -31,7 +31,7 @@
     <div id="myQrCode" style="display: none" v-if="!loading">
       <div style="text-align: center; position: relative; width: 1125px;">
 
-        <div style="position: absolute; top: 87px; left: 67.5px; width: 561px; height: 171px; ">
+        <div style="position: absolute; top: 67.5px; left: 67.5px; width: 561px; height: 171px; ">
           <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/group_3@3x.png" alt="" id="myQrCode-logoGroup">
         </div>
 
@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div style="width: 100%; font-size: 36px; color: #808080; position: absolute; margin-top: 450px; margin-bottom: 60px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
+        <div style="width: 100%; font-size: 36px; color: #808080; position: absolute; margin-top: 450px; padding-bottom: 60px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
       </div>
     </div>
 
@@ -160,15 +160,19 @@
     background: url("../../statics/images/group.png") no-repeat 0 0.853rem;
     background-size: contain;
     .myCodeWrapper {
-      margin: 0 auto;
-      width: 4.453rem;
-      height: 4.453rem;
-      background: rgba(255, 255, 255, 1);
-      box-shadow: 0rem 0.053rem 0.693rem 0rem #F0F2F5;
-      border-radius: 0.106rem;
+      position: relative;
+      text-align: center;
+      height: 167.5px;
       div {
-        margin: 6px;
-        padding-top: 6px;
+        position: absolute;
+        left: 50%;
+        margin-left: -83.75px;
+        width: 167.5px;
+        height: 167.5px;
+        border-radius: 4px;
+        background: #ffffff;
+        padding: 6.5px;
+        box-shadow:0px 2px 26px 0px rgba(240,242,245,1);
       }
     }
   }
@@ -191,5 +195,12 @@
     color: #808080;
     position: absolute;
     bottom: 0.88rem;
+  }
+
+  /*适配*/
+  @media (min-width: 414px) {
+    .myCode {
+      background-position: 0 20px;
+    }
   }
 </style>
