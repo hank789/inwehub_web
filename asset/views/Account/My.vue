@@ -156,7 +156,6 @@
         collections: currentUser.collections,
         publishes: currentUser.publishes,
         groups: currentUser.groups,
-        current_day_signed: currentUser.current_day_signed,
         followed_number: currentUser.followed_number,
         popularity: currentUser.popularity,
         name: currentUser.name,
@@ -182,7 +181,8 @@
         show_my_wallet: currentUser.show_my_wallet,
         show_resume: true,
         my: '',
-        list: []
+        list: [],
+        current_day_signed: ''
       }
     },
     methods: {
