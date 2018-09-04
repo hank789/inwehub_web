@@ -398,14 +398,14 @@
       position: relative;
       span {
         position: absolute;
-        right: 7px;
-        bottom: 26px;
-        width: 24px;
-        height: 24px;
+        right: 0.186rem;
+        bottom: 0.693rem;
+        width: 0.64rem;
+        height: 0.64rem;
         border-radius: 50%;
         background: #FFFFFF;
         .icon {
-          font-size: 24px;
+          font-size: 0.64rem;
         }
       }
     }
@@ -423,7 +423,7 @@
     height: 1.84rem;
     margin-top: 0.666rem;
     float: left;
-    margin-left: 10px;
+    margin-left: 0.266rem;
     .my-info {
       width: 100%;
       height: 0.8rem;

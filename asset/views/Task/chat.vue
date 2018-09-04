@@ -718,6 +718,7 @@
   }
   .chatListWrapper {
     bottom: 1.253rem;
+    padding-bottom:0.266rem;
   }
   /*权限提示样式*/
   .hint{
