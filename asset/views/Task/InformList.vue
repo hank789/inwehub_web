@@ -24,8 +24,8 @@
             :autoShowEmpty="false"
             class="listWrapper">
 
-              <div class="noticeWrapper" v-if="isOpenNotification === 1">
-                <div class="closeNotice" @tap.stop.prevent="showNotice">
+              <div class="noticeWrapper" v-if="isOpenNotification === 1 && closingNotice">
+                <div class="closeNotice" @tap.stop.prevent="closeNotice">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-times"></use>
                   </svg>
@@ -179,14 +179,17 @@
       loading: true,
       total_count: 0,
       mobile: 0,
-      isShowNotice: true,
+      closingNotice: '',
+      Today: '',
+      isShowNotice: -1,
       isOpenNotification: -1 // -1， 未知, 1 yes 0 no
     }),
     components: {
       RefreshList,
       Options
     },
-    created () {},
+    created () {
+    },
     activated () {
       this.checkPermission()
     },
@@ -201,8 +204,10 @@
       goUnlock () {
         toSettingSystem('NOTIFITION')
       },
-      showNotice () {
-        this.isOpenNotification = 0
+      closeNotice () {
+        var data = new Date().toLocaleString().split(' ')[0]
+        localStorage.setItem('closingNotice', data)
+        this.closingNotice = false
       },
       toSetting () {
         this.$router.pushPlus('/push/setting')
@@ -279,6 +284,13 @@
       }
     },
     mounted () {
+      this.closingNotice = localStorage.getItem('closingNotice')
+      var data = new Date().toLocaleString().split(' ')[0]
+      if (data === this.closingNotice) {
+        this.closingNotice = false
+      } else {
+        this.closingNotice = true
+      }
       window.addEventListener('resume', () => {
         this.checkPermission()
       }, true)

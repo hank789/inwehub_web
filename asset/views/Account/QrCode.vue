@@ -29,29 +29,29 @@
     </div>
 
     <div id="myQrCode" style="display: none" v-if="!loading">
-      <div style="text-align: center; position: relative;">
+      <div style="text-align: center; position: relative; width: 1125px;">
 
-        <div style="position: absolute; top: 58px; left: 45px; width: 374px; height: 114px; ">
+        <div style="position: absolute; top: 87px; left: 67.5px; width: 561px; height: 171px; ">
           <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/group_3@3x.png" alt="" id="myQrCode-logoGroup">
         </div>
 
-        <div style="font-size: 36px; color: #444444; line-height: 50px; padding-top: 276px; margin-bottom: 30px; ">
-          <div style="width: 68px; height: 68px; margin: 0 auto 20px;">
+        <div style="font-size: 81px; color: #444444; line-height: 75px; padding-top: 414px; margin-bottom: 45px; ">
+          <div style="width: 102px; height: 102px; margin: 0 auto 30px;">
             <img :src="resume.info.avatar_url" style="width: 100%; height: 100%; border-radius: 50%;" >
           </div>
           扫码关注{{resume.info.name}}
         </div>
 
-        <div style="width: 476px; height: 500px; margin: 0 auto; position: relative">
-          <div style="width: 476px; height: 438px; position: absolute; z-index: -1; top: 67px;">
+        <div style="width: 714px; height: 750px; margin: 0 auto; position: relative">
+          <div style="width: 714px; height: 657px; position: absolute; z-index: -1; top: 100.5px;">
             <img style="width: 100%; height: 100%" src="../../statics/images/group.png" alt="" id="myQrCode-group">
           </div>
-          <div style="margin: 0 auto; width: 335px; height: 335px; background: rgba(255, 255, 255, 1); box-shadow: 0px 2px 26px 0px #F0F2F5; border-radius: 8px;">
-            <qr-code style="margin: 12px; padding-top: 12px;" :text="shareUrl" :size="310" error-level="M"></qr-code>
+          <div style="margin: 0 auto; width: 502.5px; height: 502.5px; background: #FFFFFF; box-shadow: 0px 3px 39px 0px #F0F2F5; border-radius: 12px;">
+            <qr-code style="margin: 18px; padding-top: 18px;" :text="shareUrl" :size="465" error-level="M"></qr-code>
           </div>
         </div>
 
-        <div style="width: 100%; font-size: 24px; color: #808080; position: absolute; margin-top: 300px">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
+        <div style="width: 100%; font-size: 36px; color: #808080; position: absolute; margin-top: 450px; margin-bottom: 60px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
       </div>
     </div>
 
@@ -167,8 +167,8 @@
       box-shadow: 0rem 0.053rem 0.693rem 0rem #F0F2F5;
       border-radius: 0.106rem;
       div {
-        margin: 0.35rem;
-        padding-top: 0.35rem;
+        margin: 6px;
+        padding-top: 6px;
       }
     }
   }
