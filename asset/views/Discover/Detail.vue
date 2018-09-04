@@ -1123,6 +1123,7 @@
         float: left;
         margin-right: 0.266rem;
         border-radius: 0.106rem;
+        object-fit: cover;
       }
       .linkContent {
         font-size: 0.373rem;

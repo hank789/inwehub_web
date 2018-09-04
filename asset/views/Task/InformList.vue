@@ -555,6 +555,9 @@
     .notice p:nth-of-type(1) .notice_l{
       margin-right: 5%;
     }
+    .noticeText {
+      margin-top: 1px;
+    }
   }
   header svg{
     font-size: 0.453rem;

@@ -496,23 +496,6 @@
             window.mui.toast(response.data.data.tip)
           })
         },
-        downLoadHeader () {
-          var that = this
-          var dtask = window.plus.downloader.createDownload(this.resume.info.avatar_url, {
-            filename: '_downloads/resume.png'
-          }, function (d, status) {
-            if (status === 200) {
-              // 下载成功
-              console.log('下载成功:' + d.filename)
-              console.debug(d)
-              that.downloadHeader = true
-            } else {
-              console.log('下载失败')
-            }
-          })
-          // 启动下载任务
-          dtask.start()
-        },
         bindWechatShare () {
           var shareOptions = getResumeDetail(
             this.uuid,
