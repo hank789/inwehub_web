@@ -1194,7 +1194,7 @@
       background: #FFFFFF;
       &:before {
         position: absolute;
-        top: 0;
+        top: 2px;
         width: 100%;
         height: .02667rem;
         content: '';

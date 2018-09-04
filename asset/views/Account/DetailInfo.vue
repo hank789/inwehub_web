@@ -440,7 +440,7 @@
         .item {
           color: #808080;
           font-size: 0.346rem;
-          margin: 0.346rem 0.186rem 0.053rem 0.186rem;
+          margin: 0.346rem 0.186rem 0rem 0.186rem;
           .icon {
             color: #b4b4b6;
             font-size: 0.426rem;
