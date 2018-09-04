@@ -31,11 +31,11 @@
     <div id="myQrCode" style="display: none" v-if="!loading">
       <div style="text-align: center; position: relative; width: 1125px;">
 
-        <div style="position: absolute; top: 67.5px; left: 67.5px; width: 561px; height: 171px; ">
+        <div style="position: absolute; top: 67.5px; left: 67.5px; width: 474px; height: 114px; ">
           <img style="width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;" src="../../statics/images/group_3@3x.png" alt="" id="myQrCode-logoGroup">
         </div>
 
-        <div style="font-size: 81px; color: #444444; line-height: 75px; padding-top: 414px; margin-bottom: 45px; ">
+        <div style="font-size: 81px; color: #444444; line-height: 75px; padding-top: 414px; margin-bottom: 45px; font-family:PingFangSC-Regular;">
           <div style="width: 102px; height: 102px; margin: 0 auto 30px;">
             <img :src="resume.info.avatar_url" style="width: 100%; height: 100%; border-radius: 50%;" >
           </div>
@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div style="width: 100%; font-size: 36px; color: #808080; position: absolute; margin-top: 450px; padding-bottom: 60px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
+        <div style="width: 100%; font-size: 36px; color: #808080; margin-top: 450px; padding-bottom: 99px;">长见识 · 解疑惑 · 寻合作 · 树形象 · 得收益</div>
       </div>
     </div>
 
