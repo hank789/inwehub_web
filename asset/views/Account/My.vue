@@ -386,13 +386,14 @@
     width: 92%;
     overflow: hidden;
     margin-left: 4%;
+    margin-bottom: 19px;
     background-color: #ffffff;
 
   }
 
   .professor {
     width: 100%;
-    height: 3.2rem;
+    /*height: 3.2rem;*/
     .my-img{
       /*width: 21%;*/
       height: 100%;
@@ -400,8 +401,8 @@
       position: relative;
       .expert {
         position: absolute;
-        bottom: 26px;
-        right: 13px;
+        bottom: 6px;
+        right: 0px;
         span {
           width: 18px;
           height: 18px;
@@ -421,17 +422,17 @@
       width: 1.84rem;
       height: 1.826rem;
       border-radius: 50%;
-      margin-top: 0.666rem;
+      margin-top: 15px;
 
     }
   }
 
   .my-personal {
-    /*width: 79%;*/
+    width: 70%;
     height: 1.84rem;
-    margin-top: 0.666rem;
+    margin-top: 15px;
     float: left;
-    /*margin-left: 0.266rem;*/
+    margin-left: 10px;
     .my-info {
       width: 100%;
       height: 0.8rem;
@@ -497,7 +498,7 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 7%;
+    top: 39px;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;
@@ -654,7 +655,7 @@
   .enjoy {
     width: 9.146rem;
     margin: 0 auto;
-    padding-bottom: 0.4rem;
+    padding-bottom: 0.25rem;
     img {
       width: 100%;
       height: 100%;
@@ -750,31 +751,31 @@
 
   /*container-image */
    /* 适配*/
-@media (min-width: 320px) {
-  .professor .my-img{
-    width: 26%;
-    }
-    .my-personal {
-      width: 69%;
-    }
+/*@media (min-width: 320px) {*/
+  /*.professor .my-img{*/
+    /*width: 26%;*/
+    /*}*/
+    /*.my-personal {*/
+      /*width: 69%;*/
+    /*}*/
 
-}
-@media (min-width: 375px) {
-   .professor .my-img{
-    width: 23%;
-    }
-    .my-personal {
-     width: 69%;
-    }
+/*}*/
+/*@media (min-width: 375px) {*/
+   /*.professor .my-img{*/
+    /*width: 23%;*/
+    /*}*/
+    /*.my-personal {*/
+     /*width: 69%;*/
+    /*}*/
 
-}
-@media (min-width: 414px) {
-    .professor .my-img{
-     width: 21%;
-    }
-    .my-personal {
-     width: 69%;
-    }
-}
+/*}*/
+/*@media (min-width: 414px) {*/
+    /*.professor .my-img{*/
+     /*width: 21%;*/
+    /*}*/
+    /*.my-personal {*/
+     /*width: 69%;*/
+    /*}*/
+/*}*/
 
 </style>
