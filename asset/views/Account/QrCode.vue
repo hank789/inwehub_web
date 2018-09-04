@@ -68,6 +68,7 @@
     data: () => ({
       shareUrl: '',
       loading: 1,
+      generateImgIng: 0,
       resume: {}
     }),
     watch: {
@@ -78,20 +79,27 @@
     },
     methods: {
       saveToGallery () {
+        if (this.generateImgIng) return
+
+        this.generateImgIng = 1
+
         getBase64ByImgUrl(document.getElementById('myQrCode-logoGroup').src, (base64) => {
           document.getElementById('myQrCode-logoGroup').src = base64
-        })
-        getBase64ByImgUrl(document.getElementById('myQrCode-group').src, (base64) => {
-          document.getElementById('myQrCode-group').src = base64
 
-          setTimeout(() => {
-            var node = document.getElementById('myQrCode')
-            saveHtmlImgToGallery(node.innerHTML, '_documents/qrcode.jpeg', () => {
-              window.mui.toast('已保存至相册')
-            }, () => {
-              window.mui.toast('保存失败')
-            })
-          }, 200)
+          getBase64ByImgUrl(document.getElementById('myQrCode-group').src, (base64) => {
+            document.getElementById('myQrCode-group').src = base64
+
+            setTimeout(() => {
+              var node = document.getElementById('myQrCode')
+              saveHtmlImgToGallery(node.innerHTML, '_documents/qrcode.jpeg', () => {
+                window.mui.toast('已保存至相册')
+                this.generateImgIng = 0
+              }, () => {
+                window.mui.toast('保存失败')
+                this.generateImgIng = 0
+              })
+            }, 200)
+          })
         })
       },
       refreshPageData () {
