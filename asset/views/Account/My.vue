@@ -35,7 +35,7 @@
           <div class="my-personal">
             <div class="my-info">
               <span class="mui-ellipsis font-family-medium">{{name}}</span>
-              <span>L{{ user_level }}</span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/Growth')">L{{ user_level }}</span>
             </div>
             <div class="my-detail">
               <span @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">关注我的人{{followed_number}}</span>
@@ -458,6 +458,8 @@
           margin-bottom: -0.106rem;
         }
         &:nth-of-type(2) {
+          position: relative;
+          z-index: 100;
           padding: 0.026rem 0.133rem;
           position: relative;
           top: -0.08rem;

@@ -320,7 +320,9 @@
            ref="shareComponent"></Share>
 
     <div class="buttonWrapper">
-      <div class="edit" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare || uuid === cuuid" v-show="!loading">继续编辑</div>
+      <div class="edit" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="!isShare || uuid === cuuid" v-show="!loading">
+        <div>继续编辑</div>
+      </div>
       <div class="consultWrapper" v-else v-show="!loading">
         <div class="buttonLeft" @tap.stop.prevent="goChat()">
           <svg class="icon" aria-hidden="true">
@@ -1202,9 +1204,9 @@
       }
     }
 
-    .vueWrapper {
-      padding-bottom: 1.28rem;
-    }
+    /*.vueWrapper {*/
+      /*padding-bottom: 1.28rem;*/
+    /*}*/
 
     .buttonWrapper {
       position: absolute;
@@ -1215,7 +1217,7 @@
       background: #FFFFFF;
       &:before {
         position: absolute;
-        top: 0.053rem;
+        top: 0rem;
         width: 100%;
         height: .02667rem;
         content: '';
@@ -1223,15 +1225,17 @@
         background-color: #dcdcdc;
       }
       .edit {
-        width: 9.146rem;
-        height: 0.96rem;
-        color: #ffffff;
-        font-size: 0.426rem;
-        line-height: 0.96rem;
-        text-align: center;
-        border-radius: 0.213rem;
-        background: #03AEF9;
-        margin: 0.213rem auto 0;
+        padding: 0.186rem 0 0.186rem 0.426rem;
+        div {
+          width: 9.146rem;
+          height: 0.96rem;
+          color: #ffffff;
+          font-size: 0.426rem;
+          line-height: 0.96rem;
+          text-align: center;
+          border-radius: 0.213rem;
+          background: #03AEF9;
+        }
       }
       .consultWrapper {
         div {

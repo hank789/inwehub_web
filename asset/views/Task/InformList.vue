@@ -340,10 +340,11 @@
       margin-top: 0.24rem;
     }
     .noticeText {
-      width: 65%;
+      width: 71%;
       color: #03AEF9;
-      font-size: 0.346rem;
-      line-height: 0.48rem;
+      font-size: 14px;
+      line-height: 20px;
+      margin-top: -1px;
     }
     .unlock {
       width: 1.76rem;
@@ -556,7 +557,7 @@
       margin-right: 5%;
     }
     .noticeText {
-      margin-top: 0.026rem;
+      /*margin-top: 0.026rem;*/
     }
   }
   header svg{
