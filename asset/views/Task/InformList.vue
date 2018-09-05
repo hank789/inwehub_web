@@ -342,9 +342,9 @@
     .noticeText {
       width: 71%;
       color: #03AEF9;
-      font-size: 14px;
-      line-height: 20px;
-      margin-top: -1px;
+      font-size: 0.373rem;
+      line-height: 0.533rem;
+      margin-top: -0.026rem;
     }
     .unlock {
       width: 1.76rem;
