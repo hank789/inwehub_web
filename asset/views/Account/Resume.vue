@@ -59,7 +59,7 @@
         </div>
 
         <div class="basic">
-          <div class="cardWrapper">
+          <div class="cardWrapper" id="cardWrapper">
             <div class="card">
               <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
                 src="../../statics/images/resume_erweima_3x.png"/></div>
@@ -347,7 +347,7 @@
     import { getResumeDetail } from '../../utils/shareTemplate'
     import { isLogined } from '../../utils/auth'
     import RefreshList from '../../components/refresh/List.vue'
-    import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
+    import { textToLinkHtml, secureHtml, transferTagToLink, scrollToElement } from '../../utils/dom'
 
     export default {
       data: () => ({
@@ -415,8 +415,10 @@
         RefreshList
       },
       watch: {
-        '$route' () {
-          this.getData()
+        '$route' (to, from) {
+          if (to.name === from.name) {
+            this.getData()
+          }
         }
       },
       created () {
@@ -468,6 +470,8 @@
             this.uuid = this.$route.query.id || this.$route.params.id
           }
 
+          if (!this.uuid) return
+
           postRequest(`profile/resumeInfo`, {
             uuid: this.uuid
           }).then(response => {
@@ -480,6 +484,10 @@
             this.apper = this.resume.groups.length
             this.loading = 0
             this.bindWechatShare()
+
+            setTimeout(() => {
+              this.$refs.RefreshList.scrollToTop()
+            }, 100)
           })
         },
         collectProfessor: function () {
