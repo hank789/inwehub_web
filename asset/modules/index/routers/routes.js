@@ -1041,13 +1041,13 @@ const routes = [
     }
   },
   { // Ta的专栏；
-    path: '/article/list',
+    path: '/article/list/:uuid',
     name: 'article_list',
     component: componets.AccountArticleList,
     meta: {
       title: 'Ta的专栏',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)

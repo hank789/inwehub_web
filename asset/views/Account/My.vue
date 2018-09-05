@@ -440,7 +440,7 @@
     height: 1.84rem;
     margin-top: 0.4rem;
     float: left;
-    margin-left: 10px;
+    margin-left: 0.266rem;
     position: relative;
     z-index: 1000;
     .my-info {
@@ -507,7 +507,7 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 32px;
+    top: 0.853rem;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;
@@ -674,7 +674,7 @@
       span {
         &:nth-of-type(2) {
           position: absolute;
-          right: 41px;
+          right: 1.093rem;
           color: #B4B4B6;
           font-size: 0.32rem;
         }
@@ -712,8 +712,8 @@
         color: #808080;
       }
       .bot {
-        right: 21px;
-        left: 16px;
+        right: 0.56rem;
+        left: 0.426rem;
       }
     }
   }

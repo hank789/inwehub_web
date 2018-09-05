@@ -144,7 +144,7 @@
           </div>
           <!--Ta的专栏-->
           <div class="gray"></div>
-          <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
+          <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list/' + resume.info.uuid )">
             <p>专栏</p>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -1402,7 +1402,7 @@
           background: #ececee;
           border-radius: 1.333rem;
           padding: 0rem 0.266rem;
-          line-height: 24px;
+          line-height: 0.64rem;
           font-size: 0.32rem;
           color: #444444;
         }
@@ -1422,7 +1422,7 @@
         float: left;
         color: #03AEF9;
         padding: 0rem 0.266rem;
-        line-height: 24px;
+        line-height: 0.64rem;
         font-size: 0.32rem;
         vertical-align: sub;
         border-radius: 1.333rem;
