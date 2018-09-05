@@ -103,7 +103,7 @@
                   </div>
                 </div>
                 <div class="counter">
-                  <div class="counterList">
+                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">
                     <span>{{resume.info.followed_number}}</span>
                     <span>关注他的人</span>
                   </div>
@@ -113,12 +113,12 @@
                     <span>她关注的人</span>
                   </div>
 
-                  <div class="counterList">
+                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
                     <span>{{resume.info.publishes}}</span>
                     <span>发布</span>
                   </div>
 
-                  <div class="counterList">
+                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/group/my')">
                     <span>{{resume.info.group_number}}</span>
                     <span>圈子</span>
                   </div>

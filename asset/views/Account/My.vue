@@ -502,7 +502,7 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 1.04rem;
+    top: 32px;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;
