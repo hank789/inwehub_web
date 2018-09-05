@@ -15,7 +15,7 @@
 
         <div class="myCode">
           <div class="myCodeWrapper">
-            <qr-code :text="shareUrl" :size="155" error-level="M"></qr-code>
+            <qr-code class="myCodeWrapperImg" :text="shareUrl" :size="155" error-level="M"></qr-code>
           </div>
         </div>
 
@@ -180,7 +180,7 @@
         border-radius: 0.106rem;
         background: #ffffff;
         padding: 0.173rem;
-        box-shadow:0rem 0.053rem 0.693rem 0rem rgba(240,242,245,1);
+        box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
       }
     }
   }
@@ -210,5 +210,15 @@
     .myCode {
       background-position: 0 0.533rem;
     }
+  }
+</style>
+
+<style>
+  .myCodeWrapperImg img{
+    position: absolute;
+    top: 50%;
+    margin-top: -77px;
+    left: 50%;
+    margin-left: -77px;
   }
 </style>
