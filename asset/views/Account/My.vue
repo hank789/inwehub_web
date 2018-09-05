@@ -388,7 +388,7 @@
     width: 92%;
     overflow: hidden;
     margin-left: 4%;
-    margin-bottom: 19px;
+    margin-bottom: 0.506rem;
     background-color: #ffffff;
 
   }
@@ -403,20 +403,20 @@
       position: relative;
       .expert {
         position: absolute;
-        bottom: 6px;
-        right: 0px;
+        bottom: 0.16rem;
+        right: 0rem;
         span {
-          width: 18px;
-          height: 18px;
+          width: 0.48rem;
+          height: 0.48rem;
           border-radius: 50%;
           background: #FFFFFF;
           display: inline-block;
         }
         .icon {
-          font-size: 20px;
+          font-size: 0.533rem;
           position: absolute;
-          top: -1px;
-          right: -1px;
+          top: -0.026rem;
+          right: -0.026rem;
         }
       }
     }
@@ -424,7 +424,7 @@
       width: 1.84rem;
       height: 1.826rem;
       border-radius: 50%;
-      margin-top: 15px;
+      margin-top: 0.4rem;
 
     }
   }
@@ -432,7 +432,7 @@
   .my-personal {
     width: 70%;
     height: 1.84rem;
-    margin-top: 15px;
+    margin-top: 0.4rem;
     float: left;
     margin-left: 10px;
     position: relative;
@@ -453,7 +453,7 @@
           margin-bottom: -0.106rem;
         }
         &:nth-of-type(2) {
-          padding: 1px 5px;
+          padding: 0.026rem 0.133rem;
           position: relative;
           top: -0.08rem;
           font-style: normal;
@@ -502,7 +502,7 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 39px;
+    top: 1.04rem;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;

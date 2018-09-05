@@ -170,17 +170,17 @@
     .myCodeWrapper {
       position: relative;
       text-align: center;
-      height: 167.5px;
+      height: 4.466rem;
       div {
         position: absolute;
         left: 50%;
-        margin-left: -83.75px;
-        width: 167.5px;
-        height: 167.5px;
-        border-radius: 4px;
+        margin-left: -2.233rem;
+        width: 4.466rem;
+        height: 4.466rem;
+        border-radius: 0.106rem;
         background: #ffffff;
-        padding: 6.5px;
-        box-shadow:0px 2px 26px 0px rgba(240,242,245,1);
+        padding: 0.173rem;
+        box-shadow:0rem 0.053rem 0.693rem 0rem rgba(240,242,245,1);
       }
     }
   }
@@ -208,7 +208,7 @@
   /*适配*/
   @media (min-width: 414px) {
     .myCode {
-      background-position: 0 20px;
+      background-position: 0 0.533rem;
     }
   }
 </style>
