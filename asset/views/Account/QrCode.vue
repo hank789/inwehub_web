@@ -108,7 +108,7 @@
       getData () {
         var uuid = getLocalUuid()
 
-        if (!this.uuid) return
+        if (uuid) return
 
         postRequest(`profile/resumeInfo`, {
           uuid: uuid
