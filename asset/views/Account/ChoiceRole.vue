@@ -7,7 +7,7 @@
     <div class="mui-content">
       <div class="choiceText">选择您的角色</div>
       <div class="roleList">
-        <div class="role"  @tap.stop.prevent="$router.pushPlus('/my/service/' + item.type)" v-for="(item,index) in roleList" :key="index">{{item.text}}</div>
+        <div class="role" @tap.stop.prevent="$router.pushPlus('/my/service/' + item.type)" v-for="(item,index) in roleList" :key="index">{{item.text}}</div>
       </div>
     </div>
   </div>
@@ -24,6 +24,8 @@
           {text: '行业从业者', type: 4}
         ]
       }
+    },
+    methods: {
     }
   }
 </script>
@@ -36,8 +38,8 @@
   .choiceText {
     color: #444444;
     font-size: 0.533rem;
-    font-weight: 500;
     margin-top: 1.92rem;
+    font-family:PingFangSC-Medium;
   }
 
   .roleList {
@@ -52,6 +54,10 @@
       text-align: center;
       border-radius: 2.666rem;
       border: 0.026rem solid #DCDCDC;
+      &:active {
+        border-color: #03AEF9;
+        color: #03AEF9;
+      }
     }
   }
 </style>

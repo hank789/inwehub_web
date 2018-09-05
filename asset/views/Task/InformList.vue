@@ -330,7 +330,7 @@
   .noticeWrapper {
     padding: 0.266rem 0.426rem;
     height: 1.493rem;
-    background: #DCDCDC;
+    background: #F3F4F6;
     display: flex;
     .closeNotice {
       font-size: 0.48rem;
@@ -342,8 +342,8 @@
     .noticeText {
       width: 65%;
       color: #03AEF9;
-      font-size: 0.346rem;
-      line-height: 0.48rem;
+      font-size: 13px;
+      line-height: 18px;
     }
     .unlock {
       width: 1.76rem;

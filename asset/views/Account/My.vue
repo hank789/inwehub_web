@@ -39,7 +39,7 @@
             <div class="my-detail">
               <span>粉丝{{followed_number}}</span>
               <i></i>
-              <span>访客人气{{popularity}}</span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/visitors')">访客人气{{popularity}}</span>
             </div>
           </div>
         </div>
@@ -226,7 +226,9 @@
       // 签到
       // 每日签到
       toSignIGift () {
-        userAbility.signIGift(this)
+        userAbility.signIGift(this, () => {
+          this.current_day_signed = 1
+        })
       },
       // 警告框
       wran () {
@@ -433,6 +435,8 @@
     margin-top: 15px;
     float: left;
     margin-left: 10px;
+    position: relative;
+    z-index: 1000;
     .my-info {
       width: 100%;
       height: 0.8rem;
@@ -503,7 +507,7 @@
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;
     color: #FFFFFF;
-    font-size: 0.373rem;
+    /*font-size: 0.373rem;*/
     padding-left: 0.346rem;
     padding-right: 0.4rem;
     z-index: 9;

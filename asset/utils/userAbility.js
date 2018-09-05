@@ -260,7 +260,7 @@ var UserAbility = () => {
   }
 
   // 签到列表
-  var signIGift = (context) => {
+  var signIGift = (context, callback) => {
     var userInfo = getLocalUserInfo()
     var mobile = userInfo.phone
     if (mobile) {
@@ -287,6 +287,9 @@ var UserAbility = () => {
                   window.mui.back()
                   return
                 }
+
+                callback()
+
                 // 签到请求成功
                 localEvent.setLocalItem('sign_day_' + mobile, {value: isTody})
                 if (response.data.data.coupon_type === 0) {
