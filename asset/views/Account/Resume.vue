@@ -1388,7 +1388,7 @@
           background: #ececee;
           border-radius: 1.333rem;
           padding: 0rem 0.266rem;
-          line-height: 24px;
+          line-height: 0.64rem;
           font-size: 0.32rem;
           color: #444444;
         }
@@ -1408,7 +1408,7 @@
         float: left;
         color: #03AEF9;
         padding: 0rem 0.266rem;
-        line-height: 24px;
+        line-height: 0.64rem;
         font-size: 0.32rem;
         vertical-align: sub;
         border-radius: 1.333rem;
