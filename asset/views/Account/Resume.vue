@@ -468,6 +468,8 @@
             this.uuid = this.$route.query.id || this.$route.params.id
           }
 
+          if (!this.uuid) return
+
           postRequest(`profile/resumeInfo`, {
             uuid: this.uuid
           }).then(response => {

@@ -259,6 +259,8 @@
         this.cuuid = currentUser.uuid
         this.percent = currentUser.account_info_complete_percent
 
+        if (!this.uuid) return
+
         postRequest(`profile/resumeInfo`, {
           uuid: this.uuid
         }).then(response => {
