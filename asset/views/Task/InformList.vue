@@ -556,7 +556,7 @@
       margin-right: 5%;
     }
     .noticeText {
-      margin-top: 1px;
+      margin-top: 0.026rem;
     }
   }
   header svg{

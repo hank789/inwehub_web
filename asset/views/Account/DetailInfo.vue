@@ -427,7 +427,7 @@
         }
       }
       .detail {
-        margin-top: 6.5px;
+        margin-top: 0.173rem;
         text-align: center;
         .realname {
           font-weight: bold;

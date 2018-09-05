@@ -897,7 +897,7 @@
                 font-size: 0.48rem;
               }
               &:nth-of-type(2) {
-                padding: 1px 5px;
+                padding: 0.026rem 0.133rem;
                 position: relative;
                 top: -0.08rem;
                 font-style: normal;
@@ -918,7 +918,7 @@
           .counter {
             width: 91%;
             margin-left: 4.5%;
-            padding-top: 9px;
+            padding-top: 0.24rem;
             /*margin-top: 0.32rem;*/
             /*border-top: 0.026rem solid #dcdcdc;*/
             font-size: 0.346rem;
@@ -979,10 +979,10 @@
             }
             .detailInfo {
               position: relative;
-              padding-bottom: 12px;
+              padding-bottom: 0.32rem;
               .bot {
-                right: 8px;
-                left: 8px;
+                right: 0.213rem;
+                left: 0.213rem;
               }
               span {
                 color: #808080;
@@ -1194,7 +1194,7 @@
       background: #FFFFFF;
       &:before {
         position: absolute;
-        top: 2px;
+        top: 0.053rem;
         width: 100%;
         height: .02667rem;
         content: '';
