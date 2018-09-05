@@ -1914,7 +1914,7 @@ const routes = [
     name: 'discover_add',
     meta: {
       title: '发布',
-      wechatHideHeader: true,
+      wechatHideHeader: false,
       keepAlive: true
     },
     component: componets.DiscoverAdd,
