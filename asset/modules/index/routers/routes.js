@@ -551,7 +551,7 @@ const routes = [
     }
   },
   { // 我的圈子
-    path: '/group/my/:uuid',
+    path: '/group/my/:uuid?',
     name: 'group-my',
     component: componets.GroupsMy,
     meta: {
@@ -1914,7 +1914,7 @@ const routes = [
     name: 'discover_add',
     meta: {
       title: '发布',
-      wechatHideHeader: true,
+      wechatHideHeader: false,
       keepAlive: true
     },
     component: componets.DiscoverAdd,
