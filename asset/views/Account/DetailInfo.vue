@@ -378,24 +378,24 @@
         height: 1.68rem;
         .expert {
           position: absolute;
-          right: -5px;
-          bottom: -4px;
+          right: -0.133rem;
+          bottom: -0.106rem;
           z-index: 10;
           span {
-            width: 24px;
-            height: 24px;
+            width: 0.64rem;
+            height: 0.64rem;
             border-radius: 50%;
             background: #ffffff;
             text-align: center;
-            border: 2px solid #FFF;
+            border: 0.053rem solid #FFF;
             display: inline-block;
           }
           .icon {
-            font-size: 28px;
+            font-size: 0.746rem;
             color: #FCC816;
             position: absolute;
-            top: -2px;
-            right: -2px;
+            top: -0.053rem;
+            right: -0.053rem;
           }
         }
         .avatar {
@@ -688,7 +688,7 @@
       text-align: center;
       border-radius: 0.213rem;
       background: #03AEF9;
-      margin: 8px auto 0;
+      margin: 0.213rem auto 0;
     }
     .consultWrapper {
       div {

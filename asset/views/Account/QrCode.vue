@@ -217,8 +217,8 @@
   .myCodeWrapperImg img{
     position: absolute;
     top: 50%;
-    margin-top: -77px;
+    margin-top: -2.053rem;
     left: 50%;
-    margin-left: -77px;
+    margin-left: -2.053rem;
   }
 </style>

@@ -406,23 +406,23 @@
       position: relative;
       .expert {
         position: absolute;
-        bottom: -0.84px;
-        right: 2px;
+        bottom: -0.022rem;
+        right: 0.053rem;
         span {
-          width: 24px;
-          height: 24px;
+          width: 0.64rem;
+          height: 0.64rem;
           border-radius: 50%;
           background: #ffffff;
           text-align: center;
-          border: 2px solid #FFF;
+          border: 0.053rem solid #FFF;
           display: inline-block;
         }
         .icon {
-          font-size: 28px;
+          font-size: 0.746rem;
           color: #FCC816;
           position: absolute;
-          top: -2px;
-          right: -2px;
+          top: -0.053rem;
+          right: -0.053rem;
         }
       }
     }
