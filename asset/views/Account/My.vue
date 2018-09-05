@@ -750,7 +750,7 @@
 
   .mui-content {
     background: #fff;
-    bottom: 1.226rem;
+    bottom: 50px; /* px不转换 */
   }
 
   /*container-image */
