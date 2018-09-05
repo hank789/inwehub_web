@@ -972,6 +972,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // Ta的关注
+    path: '/befollowed/:uuid',
+    name: 'befollowed',
+    component: componets.BeFollowed,
+    meta: {
+      title: 'Ta的关注',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的发布_回答；
     path: '/my/publishAnswers/:id?',
     name: 'my-publish_answers',
