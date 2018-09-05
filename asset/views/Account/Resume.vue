@@ -107,12 +107,12 @@
                 <div class="counter">
                   <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">
                     <span class="font-family-medium">{{resume.info.followed_number}}</span>
-                    <span>关注他的人</span>
+                    <span>关注Ta的人</span>
                   </div>
 
                   <div class="counterList" @tap.stop.prevent="$router.pushPlus('/followed/'+uuid)">
                     <span class="font-family-medium">{{resume.info.follow_user_number}}</span>
-                    <span>她关注的人</span>
+                    <span>Ta关注的人</span>
                   </div>
 
                   <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
@@ -1222,7 +1222,7 @@
         text-align: center;
         border-radius: 0.213rem;
         background: #03AEF9;
-        margin: 0.173rem auto 0;
+        margin: 8px auto 0;
       }
       .consultWrapper {
         div {

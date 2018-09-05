@@ -38,7 +38,7 @@
               <span>L{{ user_level }}</span>
             </div>
             <div class="my-detail">
-              <span @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">粉丝{{followed_number}}</span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">关注我的人{{followed_number}}</span>
               <i></i>
               <span @tap.stop.prevent="$router.pushPlus('/my/visitors')">访客人气{{popularity}}</span>
             </div>
