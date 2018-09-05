@@ -160,7 +160,7 @@
           </div>
           <div class="description">
 
-            <div class="noDynamic" v-if="false">
+            <div class="noDynamic" v-if="list.length === 0">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zanwushuju"></use>
               </svg>
