@@ -10,7 +10,7 @@
         ref="RefreshList"
         v-model="list"
         :api="'group/mine'"
-        :prevOtherData="{}"
+        :prevOtherData="{uuid: this.$route.params.uuid}"
         :nextOtherData="{}"
         :pageMode = true
         class="listWrapper"

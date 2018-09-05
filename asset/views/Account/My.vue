@@ -33,7 +33,7 @@
 
           <div class="my-personal">
             <div class="my-info">
-              <span class="mui-ellipsis">{{name}}</span>
+              <span class="mui-ellipsis font-family-medium">{{name}}</span>
               <span>L{{ user_level }}</span>
             </div>
             <div class="my-detail">
@@ -48,19 +48,19 @@
       <!--part2-->
       <ul class="part2">
         <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
-          <span>{{publishes}}</span>
+          <span class="font-family-medium">{{publishes}}</span>
           <span>发布</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/collectUser')">
-          <span>{{attention}}</span>
+          <span class="font-family-medium">{{attention}}</span>
           <span>关注</span>
         </li>
         <li @tap.stop.prevent="$router.pushPlus('/my/collectedAnswers')">
-          <span>{{collections}}</span>
+          <span class="font-family-medium">{{collections}}</span>
           <span>收藏</span>
         </li>
-        <li @tap.stop.prevent="$router.pushPlus('/group/my')">
-          <span>{{groups}}</span>
+        <li @tap.stop.prevent="$router.pushPlus('/group/my/'+uuid)">
+          <span class="font-family-medium">{{groups}}</span>
           <span>圈子</span>
         </li>
       </ul>
@@ -172,6 +172,7 @@
         user_submission_karma: currentUser.submission_karma,
         user_comment_karma: currentUser.comment_karma,
         user_id: currentUser.id,
+        uuid: currentUser.uuids,
         questions: currentUser.questions,
         answers: currentUser.answers,
         enroll: currentUser.my_activity_enroll,
@@ -298,6 +299,7 @@
           this.user_submission_karma = user.info.submission_karma
           this.user_comment_karma = user.info.comment_karma
           this.user_id = user.info.id
+          this.uuid = user.info.uuid
           this.questions = user.info.questions
           this.enroll = user.info.my_activity_enroll
           this.answers = user.info.answers
@@ -447,7 +449,6 @@
         &:nth-of-type(1) {
           max-width: 2.92rem;
           font-size: 0.533rem;
-          font-weight: 600;
           color: #444444;
           margin-right: 0.04rem;
           margin-bottom: -0.106rem;
@@ -643,7 +644,6 @@
         &:nth-of-type(1) {
           color: #444444;
           font-size: 0.506rem;
-          font-weight: 500;
           line-height: 0.586rem;
         }
         &:nth-of-type(2) {
@@ -670,7 +670,7 @@
       span {
         &:nth-of-type(2) {
           position: absolute;
-          right: 0.586rem;
+          right: 41px;
           color: #B4B4B6;
           font-size: 0.32rem;
         }
@@ -691,11 +691,11 @@
       }
     }
     .optionList {
-      width: 92%;
+      /*width: 92%;*/
       margin: 0 auto;
       color: #444444;
       font-size: 0.426rem;
-      padding: 0.293rem 0;
+      padding: 0.293rem 0.4rem;
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -706,6 +706,10 @@
         display: flex;
         margin-top: 0.08rem;
         color: #808080;
+      }
+      .bot {
+        right: 21px;
+        left: 16px;
       }
     }
   }

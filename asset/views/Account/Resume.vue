@@ -33,7 +33,7 @@
           </div>
 
           <div class="realname">
-            <span>{{ resume.info.name }}</span>
+            <span class="font-family-medium">{{ resume.info.name }}</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zhuanjiabiaoji"></use>
             </svg>
@@ -104,22 +104,22 @@
                 </div>
                 <div class="counter">
                   <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">
-                    <span>{{resume.info.followed_number}}</span>
+                    <span class="font-family-medium">{{resume.info.followed_number}}</span>
                     <span>关注他的人</span>
                   </div>
 
-                  <div class="counterList">
-                    <span>{{resume.info.follow_user_number}}</span>
+                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/befollowed/'+uuid)">
+                    <span class="font-family-medium">{{resume.info.follow_user_number}}</span>
                     <span>她关注的人</span>
                   </div>
 
                   <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
-                    <span>{{resume.info.publishes}}</span>
+                    <span class="font-family-medium">{{resume.info.publishes}}</span>
                     <span>发布</span>
                   </div>
 
-                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/group/my')">
-                    <span>{{resume.info.group_number}}</span>
+                  <div class="counterList" @tap.stop.prevent="$router.pushPlus('/group/my/'+uuid)">
+                    <span class="font-family-medium">{{resume.info.group_number}}</span>
                     <span>圈子</span>
                   </div>
                 </div>
@@ -693,7 +693,7 @@
         margin-top: 0.533rem;
         color: #fff;
         font-size: 0.373rem;
-        font-weight: bold;
+        /*font-weight: bold;*/
         span {
           position: relative;
           right: -0.08rem;
@@ -933,8 +933,6 @@
                 &:nth-of-type(1) {
                   color: #444444;
                   font-size: 0.506rem;
-                  font-weight: 500;
-
                 }
               }
             }
@@ -1389,7 +1387,8 @@
           float: left;
           background: #ececee;
           border-radius: 1.333rem;
-          padding: 0.106rem 0.266rem;
+          padding: 0rem 0.266rem;
+          line-height: 24px;
           font-size: 0.32rem;
           color: #444444;
         }
@@ -1408,7 +1407,8 @@
       .addTags {
         float: left;
         color: #03AEF9;
-        padding: 0.106rem 0.266rem;
+        padding: 0rem 0.266rem;
+        line-height: 24px;
         font-size: 0.32rem;
         vertical-align: sub;
         border-radius: 1.333rem;

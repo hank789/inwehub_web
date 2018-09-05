@@ -551,7 +551,7 @@ const routes = [
     }
   },
   { // 我的圈子
-    path: '/group/my',
+    path: '/group/my/:uuid',
     name: 'group-my',
     component: componets.GroupsMy,
     meta: {
