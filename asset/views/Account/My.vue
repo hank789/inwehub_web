@@ -77,7 +77,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
-          <!--<i class="bot"></i>-->
+          <!--<i class="bot"></i>   -->
         </div>
         <div class="gray"></div>
         <div class="optionList invite" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
@@ -688,7 +688,7 @@
           width: 0.213rem;
           height: 0.213rem;
           position: absolute;
-          left: 1.866rem;
+          left: 2.3rem;
           top: 0.266rem;
           border-radius: 50%;
           background: #FA4975;
