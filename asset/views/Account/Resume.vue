@@ -59,7 +59,7 @@
         </div>
 
         <div class="basic">
-          <div class="cardWrapper">
+          <div class="cardWrapper" id="cardWrapper">
             <div class="card">
               <div class="erweima" @tap.stop.prevent="toggleQrCode"><img
                 src="../../statics/images/resume_erweima_3x.png"/></div>
@@ -345,7 +345,7 @@
     import { getResumeDetail } from '../../utils/shareTemplate'
     import { isLogined } from '../../utils/auth'
     import RefreshList from '../../components/refresh/List.vue'
-    import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
+    import { textToLinkHtml, secureHtml, transferTagToLink, scrollToElement } from '../../utils/dom'
 
     export default {
       data: () => ({
@@ -482,6 +482,10 @@
             this.apper = this.resume.groups.length
             this.loading = 0
             this.bindWechatShare()
+
+            setTimeout(() => {
+              this.$refs.RefreshList.scrollToTop()
+            }, 100)
           })
         },
         collectProfessor: function () {
