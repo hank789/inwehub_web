@@ -14,7 +14,7 @@
                 <img :src="resume.info.avatar_url" class="avatar"/>
               </div>
             </div>
-            <div class="expert" v-if="resume.info.expert_apply_status =='2'">
+            <div class="expert" v-if="resume.info.expert_apply_status === '2'">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
               </svg>
@@ -150,7 +150,7 @@
           </div>
 
           <div class="noPublic"
-               v-show="!loading && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && this.cuuid">
+               v-show="!loading && (!resume.info.is_edu_info_public || !resume.info.is_job_info_public ||  !resume.info.is_project_info_public) && !isSelf">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-bugongkai"></use>
             </svg>
@@ -181,7 +181,7 @@
 
 <script>
   import { postRequest } from '../../utils/request'
-  import { getLocalUserInfo } from '../../utils/user'
+  import { getLocalUserInfo, getLocalUuid } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
   import { isLogined } from '../../utils/auth'
 
@@ -235,6 +235,14 @@
         console.log('refresh-resume')
         this.getData()
       })
+    },
+    computed: {
+      isSelf () {
+        if (getLocalUuid() === this.$route.params.uuid) {
+          return true
+        }
+        return false
+      }
     },
     methods: {
       goChat () {
