@@ -225,9 +225,7 @@
     }),
     watch: {
       '$route' (to, from) {
-        if (to.name === from.name) {
-          this.getData()
-        }
+        this.getData()
       }
     },
     created () {
