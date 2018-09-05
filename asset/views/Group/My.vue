@@ -2,7 +2,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">我的圈子</h1>
+      <h1 class="mui-title" v-if="uuid === this.$route.params.uuid">我的圈子</h1>
+      <h1 class="mui-title" v-else>Ta的圈子</h1>
     </header>
     <div class="mui-content">
 
@@ -11,7 +12,7 @@
         v-model="list"
         :api="'group/mine'"
         :prevOtherData="{uuid: this.$route.params.uuid}"
-        :nextOtherData="{}"
+        :nextOtherData="{uuid: this.$route.params.uuid}"
         :pageMode = true
         class="listWrapper"
       >
@@ -36,7 +37,7 @@
   import groupsList from '../../components/groups/GroupsList.vue'
   import RefreshList from '../../components/refresh/List.vue'
   import localEvent from '../../stores/localStorage'
-  import { getLocalUserInfo } from '../../utils/user'
+  import { getLocalUserInfo, getLocalUuid } from '../../utils/user'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -44,7 +45,8 @@
       return {
         id: currentUser.user_id,
         from: null,
-        list: []
+        list: [],
+        uuid: getLocalUuid()
       }
     },
     components: {
@@ -74,6 +76,7 @@
       },
       refreshPageData () {
         this.from = this.$route.query.from
+        this.uuid = getLocalUuid()
       }
     },
     created () {

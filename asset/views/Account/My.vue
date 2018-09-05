@@ -23,12 +23,13 @@
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
             <div class="expert" v-if="expert_apply_status =='2'">
-              <span></span>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-              </svg>
+              <span>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-zhuanjiabiaoji"></use>
+                </svg>
+              </span>
             </div>
-             <!-- -->
+             <!--  -->
           </div>
 
           <div class="my-personal">
@@ -37,7 +38,7 @@
               <span>L{{ user_level }}</span>
             </div>
             <div class="my-detail">
-              <span>粉丝{{followed_number}}</span>
+              <span @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">粉丝{{followed_number}}</span>
               <i></i>
               <span @tap.stop.prevent="$router.pushPlus('/my/visitors')">访客人气{{popularity}}</span>
             </div>
@@ -405,20 +406,23 @@
       position: relative;
       .expert {
         position: absolute;
-        bottom: 0.16rem;
-        right: 0rem;
+        bottom: -0.84px;
+        right: 2px;
         span {
-          width: 0.48rem;
-          height: 0.48rem;
+          width: 24px;
+          height: 24px;
           border-radius: 50%;
-          background: #FFFFFF;
+          background: #ffffff;
+          text-align: center;
+          border: 2px solid #FFF;
           display: inline-block;
         }
         .icon {
-          font-size: 0.533rem;
+          font-size: 28px;
+          color: #FCC816;
           position: absolute;
-          top: -0.026rem;
-          right: -0.026rem;
+          top: -2px;
+          right: -2px;
         }
       }
     }
