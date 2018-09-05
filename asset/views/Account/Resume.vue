@@ -142,7 +142,7 @@
           </div>
           <!--Ta的专栏-->
           <div class="gray"></div>
-          <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list?id=' + resume.info.uuid )">
+          <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list/' + resume.info.uuid )">
             <p>专栏</p>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-chakangengduojiantou"></use>
