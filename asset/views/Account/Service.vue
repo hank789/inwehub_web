@@ -41,9 +41,9 @@
           </div>
         </div>
         <div class="service" @tap.stop.prevent="serviceDetail">
-          <div class="serviceTitle">需求委托发布，梳理精准送达</div>
+          <div class="serviceTitle">全网机遇聚合，按需订阅推送</div>
           <div class="line-river-after"></div>
-          <div class="serviceText">过程辅助评审梳理，帮企业将需求精准送达合适的服务商和从业者</div>
+          <div class="serviceText">聚合全面新鲜的项目机遇与职位机会，为您精准匹配和推送</div>
           <div class="beta">
             <div class="betaBack"></div>
             <span>Beta</span>
