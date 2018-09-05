@@ -198,7 +198,7 @@ const AskOfferList = () => import(/* webpackChunkName: "AskOfferList" */ '../../
 const AskOfferDetail = () => import(/* webpackChunkName: "AskOfferDetail" */ '../../../views/AskOffer/Detail.vue')
 const ShareReview = () => import(/* webpackChunkName: "ShareReview" */ '../../../views/Share/Review.vue')
 const ComponentsComment = () => import(/* webpackChunkName: "ComponentsComment" */ '../../../views/Comment.vue')
-const BeFollowed = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Account/BeFollowed.vue')
+const Followed = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Account/Followed.vue')
 
 export {
   Login,
@@ -395,5 +395,5 @@ export {
   AccountChoiceRole,
   AccountService,
   AccountDetailInfo,
-  BeFollowed
+  Followed
 }

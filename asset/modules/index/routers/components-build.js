@@ -192,7 +192,7 @@ import AskOfferList from '../../../views/AskOffer/List.vue'
 import AskOfferDetail from '../../../views/AskOffer/Detail.vue'
 import ShareReview from '../../../views/Share/Review.vue'
 import ComponentsComment from '../../../views/Comment.vue'
-import BeFollowed from '../../../views/Account/BeFollowed.vue'
+import Followed from '../../../views/Account/Followed.vue'
 
 export {
   Login,
@@ -389,5 +389,5 @@ export {
   AccountChoiceRole,
   AccountService,
   AccountDetailInfo,
-  BeFollowed
+  Followed
 }

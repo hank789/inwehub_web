@@ -973,9 +973,9 @@ const routes = [
     }
   },
   { // Ta的关注
-    path: '/befollowed/:uuid',
-    name: 'befollowed',
-    component: componets.BeFollowed,
+    path: '/followed/:uuid',
+    name: 'followed',
+    component: componets.Followed,
     meta: {
       title: 'Ta的关注',
       wechatHideHeader: true

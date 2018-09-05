@@ -2,7 +2,8 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">Ta的关注</h1>
+      <h1 class="mui-title" v-if="uuid === this.$route.params.uuid">我的关注</h1>
+      <h1 class="mui-title" v-else>Ta的关注</h1>
     </header>
     <div class="mui-content absolute">
       <RefreshList
@@ -25,7 +26,7 @@
                 </p>
                 <p class="mui-ellipsis">{{item.description}}</p>
               </div>
-              <p class="follows" @tap.stop.prevent="collectProfessor(item)" v-if="!item.is_following">
+              <p class="follows" @tap.stop.prevent="collectProfessor(item)" v-if="!item.is_followed">
                 关注Ta</p>
               <p class="follows bgblue" @tap.stop.prevent="collectProfessor(item)" v-else>已关注</p>
               <i class="bot"></i>
@@ -38,8 +39,7 @@
 <script>
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
-  import localEvent from '../../stores/localStorage'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUuid } from '../../utils/user'
 
   export default {
     data () {
@@ -47,42 +47,31 @@
         list: [],
         loading: 1,
         tip: '',
-        uuid: currentUser.uuid
+        uuid: getLocalUuid()
       }
     },
     components: {
       RefreshList
     },
     methods: {
+      refreshPageData () {
+        this.uuid = getLocalUuid()
+      },
       collectProfessor (item) {
         postRequest(`follow/user`, {
-          id: item.id
+          id: item.uuid
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-          item.is_following = !item.is_following
+          item.is_followed = !item.is_followed
           window.mui.toast(response.data.data.tip)
         })
       }
     },
-    computed: {
-      nothing () {
-        if (this.tip === '关注成功') {
-          return 1
-        }
-        return 0
-      },
-      bottomId () {
-        var length = this.list.length
-        if (length) {
-          return this.list[length - 1].id
-        }
-        return 0
-      }
-    },
+    computed: {},
     created () {},
     mounted () {}
   }
