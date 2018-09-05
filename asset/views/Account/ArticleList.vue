@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title">{{user_uuid == uuid ? '我的专栏' : 'Ta的专栏'}}</h1>
+      <h1 class="mui-title">{{isSelf ? '我的专栏' : 'Ta的专栏'}}</h1>
     </header>
 
     <div class="mui-content">
@@ -35,37 +35,37 @@
 </template>
 <script>
   import RefreshList from '../../components/refresh/List.vue'
-  // import { goThirdPartyArticle } from '../../utils/webview'
-  import { getLocalUserInfo } from '../../utils/user'
-  const currentUser = getLocalUserInfo()
+  import { getLocalUuid } from '../../utils/user'
 
   export default {
     data () {
       return {
         list: [],
-        uuid: currentUser.uuid,
-        user_uuid: '',
-        dataList: {}
+        uuid: getLocalUuid()
       }
     },
-    created () {
-      if (this.$route.query.id) {
-        this.dataList = {
-          uuid: this.$route.query.id
-        }
-        this.user_uuid = this.$route.query.id
+    created () {},
+    computed: {
+      dataList () {
+        return {uuid: this.$route.params.uuid}
+      },
+      isSelf () {
+        if (this.uuid === this.$route.params.uuid) return true
+        return false
       }
     },
     components: {
       RefreshList
     },
     methods: {
+      refreshPageData () {
+        this.uuid = getLocalUuid()
+      },
       goDetial (hot) {
         this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug)
       }
     },
-    mounted () {
-    },
+    mounted () {},
     updated () {}
   }
 </script>

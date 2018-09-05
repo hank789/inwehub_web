@@ -31,6 +31,14 @@
             <use xlink:href="#icon-bugongkai" v-else></use>
           </svg>
         </li>
+        <li class="mui-table-view-cell">
+          通过手机号查找我
+
+          <svg :class="{icon:true, active:phoneSee}" aria-hidden="true" @tap.stop.prevent="toggle('phone')">
+            <use xlink:href="#icon-gongkai" v-if="phoneSee"></use>
+            <use xlink:href="#icon-bugongkai" v-else></use>
+          </svg>
+        </li>
 
       </ul>
     </div>
@@ -47,6 +55,7 @@
         jobSee: 0,
         projectSee: 0,
         eduSee: 0,
+        phoneSee: 0,
         loading: true
       }
     },
@@ -110,6 +119,13 @@
 //              if (!this.eduSee) {
 //                mui.toast('教育经历仅自己可见');
 //              }
+            break
+          case 'phone':
+            this.phoneSee = !this.phoneSee
+            data = {
+              is_phone_public: this.eduSee ? 1 : 0
+            }
+            this.submit(data)
             break
         }
       }

@@ -68,7 +68,8 @@ function updateUserInfoCache (user) {
     user_coins: 0,
     is_company: 0,
     show_my_wallet: false,
-    show_ios_resume: false
+    show_ios_resume: false,
+    realname: ''
   }
   userLocal.user_id = user.id
   userLocal.name = user.name
@@ -108,6 +109,7 @@ function updateUserInfoCache (user) {
   userLocal.my_activity_enroll = user.my_activity_enroll
   userLocal.rc_code = user.rc_code
   userLocal.skill_tags = user.skill_tags
+  userLocal.realname = user.realname
 
   /*
    user.counts.map(function (count, index) {

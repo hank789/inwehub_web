@@ -10,6 +10,7 @@
     <div class="mui-content">
 
       <Jeditor
+        class="container-editor container-editor-app"
         ref="myAddEditor"
         id="discoverAddJeditor"
         :class="{noBottomFile: images.length === 0 && pdfs.length === 0}"
@@ -169,7 +170,7 @@
         editorObj: null,
         text: '',
         html: '',
-        descPlaceholder: '分享顾问新鲜事' + '\n' + '让咨询界听到你的声音…',
+        descPlaceholder: '在这里输入您的分享内容' + '\n' + '底部的按钮可以添加：标签、链接、附件',
         selectedGroup: null,
         links: [],
         showLink: true

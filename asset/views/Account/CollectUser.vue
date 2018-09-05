@@ -168,6 +168,7 @@
     watch: {},
     mounted () {
       this.getList()
+      // uuid: this.$route.params.id
     },
     created () {
       this.type = this.$route.query.from

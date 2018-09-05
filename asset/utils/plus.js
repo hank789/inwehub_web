@@ -1,8 +1,7 @@
 import router from '../modules/index/routers/index'
-import { goBack, goThirdPartyArticle, getPrevWebview } from './webview'
-import { setIncBadgeNumber } from './notice'
-import userAbility from './userAbility'
-import { saveLocationInfo, checkClipbord, noticeOpenNotifitionPermission } from './allPlatform'
+import { goBack, getPrevWebview } from './webview'
+import { setIncBadgeNumber, noticeHandler } from './notice'
+import { saveLocationInfo, checkClipbord } from './allPlatform'
 import localEvent from '../stores/localStorage'
 import EventObj from './event'
 import { apiRequest } from './request'
@@ -69,7 +68,7 @@ function getLocalUrl (path, callback) {
   })
 }
 
-function saveImageByBase64 (base64, dest, callback) {
+function saveImageByBase64 (base64, dest, successCallback, faillCallback) {
   window.mui.plusReady(() => {
     var b = new window.plus.nativeObj.Bitmap()
     b.loadBase64Data(base64, function () {
@@ -82,12 +81,13 @@ function saveImageByBase64 (base64, dest, callback) {
       quality: 100
     }, () => {
       console.log('保存成功')
-      if (callback) {
+      if (successCallback) {
         getLocalUrl(dest, (url) => {
-          callback(url)
+          successCallback(url)
         })
       }
     }, () => {
+      faillCallback()
       console.log('保存失败')
     })
   })
@@ -363,10 +363,13 @@ function setClipboardText (text) {
 }
 
 /**
- * 检查定位权限
+ * 检查权限
  */
 function checkPermission (type, successCallback, failCallback) {
-  if (!window.mui.os.plus) return
+  if (!window.mui.os.plus) {
+    failCallback()
+    return
+  }
 
   var permissionName = ''
   switch (type) {
@@ -568,18 +571,56 @@ function AppPageInit (context) {
 function AppInit (context) {
   window.mui.plusReady(function () {
     console.log('AppInit(context) fired')
+
     if (window.mui.os.plus) {
       var ws = window.plus.webview.currentWebview()
 
+      /* 应用从后台切换回前台事件 */
       EventObj.addIntervalOnceEventListener('resume', () => {
         // 剪贴板
         checkClipbord()
+
+        // 存储用户位置信息
+        var currentUser = localEvent.getLocalItem('UserInfo')
+        if (currentUser.user_id) {
+          saveLocationInfo()
+        }
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:app:resume',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': 'resume',
+              'page_name': 'resume',
+              'page_title': 'app唤起',
+              'referrer_page': ''
+            }
+          )
+        }
+
+        // 检查版本更新
+        checkUpdate()
+
+        var routerFullPath = context.$router.currentRoute.fullPath
+        console.log('routerFullPath:' + routerFullPath)
+        if (routerFullPath === '/ad') {
+          return
+        }
+
+        // 每日签到
+        // userAbility.signIGift(context)
+
+        if (window.mui.os.ios) {
+          // noticeOpenNotifitionPermission(context)
+        }
       })
 
-      // 只在主页面监听一次
+      /* 只在主页面监听一次 */
       if (ws.id === window.plus.runtime.appid) {
+        // 监听执行刷新
         EventObj.addEventListener('refreshData', (e) => {
-          // 执行刷新
           if (context.$parent.$refs.Footer && context.$parent.$refs.Footer.showBottom) {
             if (context.$parent.$refs.routerView.hasOwnProperty('initData')) {
               console.log('refreshDataApp')
@@ -587,6 +628,7 @@ function AppInit (context) {
             }
           }
         })
+
         // 存储设备信息
         let currentUserInfo = localEvent.getLocalItem('UserInfo')
         if (currentUserInfo.user_id) {
@@ -601,205 +643,15 @@ function AppInit (context) {
 
           })
         }
-        // 应用从后台切换回前台事件
-        EventObj.addIntervalOnceEventListener('resume', () => {
-          // 存储用户位置信息
-          var currentUser = localEvent.getLocalItem('UserInfo')
-          if (currentUser.user_id) {
-            saveLocationInfo()
-          }
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-            // mixpanel
-            window.mixpanel.track(
-              'inwehub:app:resume',
-              {
-                'app': 'inwehub',
-                'user_device': window.getUserAppDevice(),
-                'page': 'resume',
-                'page_name': 'resume',
-                'page_title': 'app唤起',
-                'referrer_page': ''
-              }
-            )
-          }
-          // 检查版本更新
-          checkUpdate()
-
-          var routerFullPath = context.$router.currentRoute.fullPath
-          console.log('routerFullPath:' + routerFullPath)
-          if (routerFullPath === '/ad') {
-            return
-          }
-
-          // 每日签到
-          // userAbility.signIGift(context)
-
-          if (window.mui.os.ios) {
-            noticeOpenNotifitionPermission(context)
-          }
-        }, false)
-
-        // 监听推送
-        var noticeTo = function (payload) {
-          if (!payload) return
-          if (window.mixpanel.track) {
-            window.mixpanel.track(
-              'inwehub:push:click',
-              {'app': 'inwehub', 'user_device': window.getUserAppDevice(), 'page': payload.object_id, 'page_name': payload.object_type, 'page_title': '打开推送'}
-            )
-          }
-          switch (payload.object_type) {
-            case 'question':
-            case 'pay_question_answered':
-            case 'question_answer_confirmed':
-              // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
-              // router.go(-1);
-              router.pushPlus('/ask/detail/' + payload.object_id + '?time=' + Date.parse(new Date()))
-              break
-            case 'pay_question_answered_askCommunity':
-              router.pushPlus('/askCommunity/major/' + payload.object_id)
-              break
-            case 'free_question_answered':
-              router.pushPlus('/ask/offer/' + payload.object_id)
-              break
-            case 'pay_answer_awake':
-            case 'pay_answer':
-            case 'answer':
-              // router.go(-1);
-              // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
-              router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
-              break
-            case 'free_answer_awake':
-            case 'free_answer':
-              router.pushPlus('/ask/offer/answers/' + payload.object_id)
-              break
-            case 'authentication_success':
-              // 专家认证成功
-              router.pushPlus('/my?needalert=1')
-              break
-            case 'authentication_fail':
-              // 专家认证失败
-              router.pushPlus('/my/pilot')
-              break
-            case 'company_auth_success':
-              // 企业认证成功
-              router.pushPlus('/company/my')
-              break
-            case 'company_auth_fail':
-              // 企业认证失败
-              router.pushPlus('/company/my')
-              break
-            case 'notification_money':
-              // 资金变动通知
-              router.pushPlus('/my/Finance')
-              break
-            case 'user_following':
-              // 用户关注通知
-              router.pushPlus('/share/resume/' + payload.object_id + '?goback=1')
-              break
-            case 'readhub_submission_upvoted':
-            case 'readhub_new_submission':
-            case 'readhub_comment_replied':
-              // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-              router.pushReadHubPage(payload.object_id)
-              break
-            case 'readhub_submission_replied':
-              // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-              router.pushReadHubPage(payload.object_id)
-              break
-            case 'readhub_username_mentioned':
-              // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-              router.pushReadHubPage(payload.object_id)
-              break
-            case 'push_notice_readhub':
-              // 推送阅读发现的文章
-              if (payload.object) {
-                goThirdPartyArticle(
-                  payload.object.view_url,
-                  payload.object.id,
-                  payload.object.title,
-                  payload.object.comment_url,
-                  payload.object.img_url
-                )
-              }
-              break
-            case 'push_notice_app_self':
-              // 推送app内页
-              router.push(payload.object_id)
-              break
-            case 'push_notice_article':
-              // 推送公告文章
-              window.mui.openWindow({
-                url: '/public/index.html#/webview/notice',
-                id: payload.object_id,
-                preload: false, // 一定要为false
-                createNew: false,
-                show: {
-                  autoShow: true,
-                  aniShow: 'pop-in'
-                },
-                styles: {
-                  popGesture: 'close'
-                },
-                waiting: {
-                  autoShow: false
-                }
-              })
-              break
-            case 'notification_level_up':
-              // 用户积分等级提升;
-              userAbility.upgradeLevel(context)
-              break
-            case 'activity_enroll_fail':
-            case 'activity_enroll_success':
-              // 活动报名事件
-              router.pushPlus('/EnrollmentStatus/' + payload.object_id)
-              break
-            case 'pay_answer_new_comment':
-              // 专业回答新的回复
-              router.pushPlus('/askCommunity/major/' + payload.object_id)
-              break
-            case 'free_answer_new_comment':
-              // 互动问答新的回复
-              router.pushPlus('/ask/offer/' + payload.object_id)
-              break
-            case 'pay_answer_new_support':
-              // 专业回答赞
-              router.pushPlus('/askCommunity/major/' + payload.object_id)
-              break
-            case 'free_answer_new_support':
-              // 专业回答赞
-              router.pushPlus('/ask/offer/' + payload.object_id)
-              break
-            case 'im_message':
-              // 聊天信息
-              router.pushPlus('/chat/' + payload.object_id)
-              break
-            case 'im_group_message':
-              // 群聊信息
-              router.pushPlus('/group/chat/' + payload.object_id)
-              break
-            case 'invite_user_register':
-              // 邀请用户注册成功
-              router.pushPlus('/invitation/friends')
-              break
-            case 'group_member_apply':
-              // 申请加入圈子通知
-              router.pushPlus('/group/setting/' + payload.object_id)
-              break
-            case 'group_member_join':
-              // 成功加入圈子
-              router.pushPlus('/group/detail/' + payload.object_id)
-              break
-            case 'group_audit_result':
-              // 圈子审核结果
-              router.pushPlus('/group/detail/' + payload.object_id)
-              break
-          }
-        }
 
         // 监听点击消息事件
         window.plus.push.addEventListener('click', (msg) => {
+          console.log('监听点击消息事件:' + JSON.stringify(msg))
+
+          if (msg.type !== 'click') {
+            return
+          }
+
           // 判断是从本地创建还是离线推送的消息
           switch (msg.payload) {
             case 'LocalMSG':
@@ -820,9 +672,10 @@ function AppInit (context) {
               payload = JSON.parse(msg.payload)
             }
 
-            noticeTo(payload)
+            noticeHandler(context, payload)
           }
         }, false)
+
         // 监听在线消息事件
         window.plus.push.addEventListener('receive', (msg) => {
           if (msg.aps) {  // Apple APNS message
@@ -848,7 +701,7 @@ function AppInit (context) {
                 return
             }
             context.$parent.$refs.MessageComponent.show(payload.title, () => {
-              noticeTo(payload)
+              noticeHandler(context, payload)
             })
           }
         }, false)
@@ -920,8 +773,8 @@ function downloadImg (imgUrl, savePath, callback) {
               // 重新下载图片
               downloadImg(imgUrl, savePath, callback)
             }, function (e) {
-              callback(imgUrl)
               console.log('临时文件删除失败' + savePath)
+              downloadImg(imgUrl, savePath, callback)
             })
           })
         }
@@ -939,9 +792,7 @@ function downloadImg (imgUrl, savePath, callback) {
           console.log('已下载到:' + newurl)
           callback(newurl)
         }, function (e) {
-          callback(savePath)
-          console.log('已下载到:' + savePath)
-          console.log('Resolve file URL failed:' + JSON.stringify(e))
+          console.log('解析已下载的图片失败:' + JSON.stringify(e))
         })
       }
     })
@@ -967,23 +818,42 @@ function getCacheImage (imgUrl, callback) {
   }
   window.mui.plusReady(function () {
     let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
-    let localImageUrl = '_downloads/cache/image/' + imageCode + '.jpg'
-    let absoluteImagePath = window.plus.io.convertLocalFileSystemURL(localImageUrl)
-    console.log('absoluteImagePath:' + absoluteImagePath)
+    let localImageUrl = '_doc/cache/image/' + imageCode + '.jpg'
+
+    if (window.mui.os.android) {
+      localImageUrl = window.plus.io.convertLocalFileSystemURL(localImageUrl)
+    }
 
     // 判断本地是否存在该文件，存在就就直接使用，否则就下载
-    window.plus.io.resolveLocalFileSystemURL(absoluteImagePath, function (entry) {
+    window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
       if (entry) {
         var image = entry.toRemoteURL()
         console.log('图片已存在:' + image)
         callback(image)
       } else {
+        console.log('图片不存在, 去下载...')
         downloadImg(imgUrl, localImageUrl, callback)
       }
     }, function (e) {
-      console.log('Resolve file URL failed:')
+      console.log('图片不存在, 去下载2...')
       downloadImg(imgUrl, localImageUrl, callback)
     })
+  })
+}
+
+/**
+ * 清空图片缓存
+ */
+function clearImageCache () {
+  let localImageUrl = '_doc/cache/image/'
+  window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
+    entry.removeRecursively(function (entry) {
+      window.plus.console.log('图片缓存删除成功:')
+    }, function (e) {
+      window.plus.console.log('图片缓存删除失败:error:' + e.message)
+    })
+  }, function (e) {
+    console.log('目录打开失败:' + localImageUrl + ', error:' + e.message)
   })
 }
 
@@ -1017,5 +887,6 @@ export {
   openUrlByUrl,
   getContacts,
   downloadImg,
-  getCacheImage
+  getCacheImage,
+  clearImageCache
 }

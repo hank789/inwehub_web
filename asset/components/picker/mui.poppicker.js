@@ -59,7 +59,7 @@
 			self.cancel.innerText = self.options.buttons[0];
 			self.ok.innerText = self.options.buttons[1];
 			self.cancel.addEventListener('tap', function(event) {
-				self.hide();
+				self.dispose();
 			}, false);
 			self.ok.addEventListener('tap', function(event) {
 				if (self.callback) {

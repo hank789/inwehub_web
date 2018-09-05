@@ -40,6 +40,12 @@ body{
   height:100%;
 }
 
+.gray {
+  width: 100%;
+  height: 0.266rem;
+  background: #F3F4F5;
+}
+
 p{
   color:inherit;
 }
@@ -2072,6 +2078,8 @@ a {
   font-size: 0.4rem;
   color: #444; }
 .container-list-question .question .component-label {
+  position: relative;
+  top: -0.053rem;
   margin-right: 0.106rem; }
 .container-list-question .statistics {
   font-size: 0.32rem;
@@ -2086,6 +2094,7 @@ a {
 
 .component-label {
   font-size: 0.293rem;
+  line-height:0.453rem;
   border-radius: 0.106rem;
   display: inline-block;
   padding: 0rem 0.133rem; }
@@ -2248,6 +2257,7 @@ a {
   color: #C8C8C8;
   font-size: 0.293rem; }
 .container-feed-discover-add .contentWrapper {
+  word-wrap:break-word;
   margin-top: 0.266rem;
   font-size: 0.426rem;
   line-height: 0.56rem;
@@ -3012,3 +3022,16 @@ a {
 .component-card-link .cardLinkUrl {
   font-size: 0.32rem;
   color: #B4B4B6; }
+
+
+.mui-plus .component-item-article .itemArticleLeft .explain label{
+  height:0.4rem !important;
+  line-height: 0.4rem !important;
+  border:0.013rem solid #03aef9 !important;
+}
+
+.mui-wechat .component-item-article .itemArticleLeft .explain label{
+  height:0.4rem !important;
+  line-height: 0.4rem !important;
+  border:0.013rem solid #03aef9 !important;
+}

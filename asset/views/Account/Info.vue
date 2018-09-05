@@ -198,7 +198,7 @@
           for (var trainIndex in user.trains) {
             var trainInfo = user.trains[trainIndex]
             var trainId = trainInfo.id
-            newTrains[trainId] = info
+            newTrains[trainId] = trainInfo
           }
           localEvent.setLocalItem('trains', newTrains)
 

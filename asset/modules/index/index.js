@@ -70,10 +70,21 @@ import './../../js/iconfont.js'
 
 Vue.use(VueWechatTitle)
 
+import { getCacheImage } from '../../utils/plus'
+
 Vue.use(VueLazyload, {
-  preLoad: 1.3,
+  preLoad: 1.3, // 预加载的高度比例
   loading: '',
-  attempt: 30
+  attempt: 30, // 尝试次数
+  filter: {
+    progressive (listener, options) {
+      getCacheImage(listener.src, (imgUrl) => {
+        if (listener.src !== imgUrl) {
+          listener.src = imgUrl
+        }
+      })
+    }
+  }
 })
 
 import { bindWaitting } from '../../utils/waiting'

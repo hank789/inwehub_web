@@ -551,7 +551,7 @@ const routes = [
     }
   },
   { // 我的圈子
-    path: '/group/my',
+    path: '/group/my/:uuid',
     name: 'group-my',
     component: componets.GroupsMy,
     meta: {
@@ -741,6 +741,66 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 我的二维码
+    path: '/my/qrcode',
+    name: 'qrcode',
+    component: componets.AccountMyCode,
+    meta: {
+      title: '我的二维码',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 选择角色ChoiceRole
+    path: '/my/choiceRole',
+    name: 'choiceRole',
+    component: componets.AccountChoiceRole,
+    meta: {
+      title: '选择角色',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 服务 AccountService
+    path: '/my/service/:type?',
+    name: 'service',
+    component: componets.AccountService,
+    meta: {
+      title: '选择角色',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
+  { // 详细资料
+    path: '/my/detailInfo/:uuid?',
+    name: 'detailInfo',
+    component: componets.AccountDetailInfo,
+    meta: {
+      title: '详细资料',
+      keepAlive: false
+    },
+    beforeEnter: (to, from, next) => {
+      window.mui.plusReady(function () {
+        checkUpdate()
+      })
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的收藏——回答
     path: '/my/collectedAnswers',
     name: 'my-collected_answers',
@@ -912,6 +972,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // Ta的关注
+    path: '/followed/:uuid',
+    name: 'followed',
+    component: componets.Followed,
+    meta: {
+      title: 'Ta的关注',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 我的发布_回答；
     path: '/my/publishAnswers/:id?',
     name: 'my-publish_answers',
@@ -969,13 +1041,13 @@ const routes = [
     }
   },
   { // Ta的专栏；
-    path: '/article/list',
+    path: '/article/list/:uuid',
     name: 'article_list',
     component: componets.AccountArticleList,
     meta: {
       title: 'Ta的专栏',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -1161,12 +1233,23 @@ const routes = [
           requestAuth(to, from, next)
         }
       },
-      { // 姓名
+      { // 平台昵称
         path: '/my/info/basic/name',
         name: 'my-info-basic-name',
         component: componets.Accountinfosbasicname,
         meta: {
-          title: '用户姓名'
+          title: '平台昵称'
+        },
+        beforeEnter: (to, from, next) => {
+          requestAuth(to, from, next)
+        }
+      },
+      { // 真实姓名
+        path: '/my/info/basic/realname',
+        name: 'my-info-basic-realname',
+        component: componets.Accountinfosbasicrealname,
+        meta: {
+          title: '真实姓名'
         },
         beforeEnter: (to, from, next) => {
           requestAuth(to, from, next)

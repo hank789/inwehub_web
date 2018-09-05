@@ -175,7 +175,7 @@
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
   import MTextarea from '../../components/MTextarea.vue'
-  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
+  import industryTagsIndexedList from '../Tags/IndustryTagsIndexedlist.vue'
   import { setCacheInfo, getCacheInfo } from '../../utils/project'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()

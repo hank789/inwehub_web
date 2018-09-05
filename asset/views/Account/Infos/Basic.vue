@@ -6,10 +6,16 @@
     </header>
 
     <div class="mui-content">
-      <ul class="mui-table-view mui-table-view-chevron">
+      <div class="secrecy">(真实姓名/性别/地址/联系方式/生日) 平台将做保密处理。</div>
+      <ul class="muiTableView mui-table-view-chevron">
         <li class="mui-table-view-cell">
-          <a @tap.stop.prevent="$router.push('/my/info/basic/name')" class="mui-navigate-right">用户姓名<span
+          <a @tap.stop.prevent="$router.push('/my/info/basic/name')" class="mui-navigate-right">平台昵称<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.name ? user.info.name : '必填'
+            }}</span></a>
+        </li>
+        <li class="mui-table-view-cell">
+          <a @tap.stop.prevent="$router.push('/my/info/basic/realname')" class="mui-navigate-right">真实姓名<span
+            class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.realname ? user.info.realname : '必填'
             }}</span></a>
         </li>
         <li class="mui-table-view-cell">
@@ -84,7 +90,7 @@
   import cityData from '../../../components/city/city.data'
   import dPickerComponent from '../../../components/picker/date-picker.vue'
   import { getUserInfo } from '../../../utils/user'
-  import industryTagsIndexedList from '../../Tags/industryTagsIndexedlist.vue'
+  import industryTagsIndexedList from '../../Tags/IndustryTagsIndexedlist.vue'
   import { selectCityThreeLevel } from '../../../utils/select'
 
   export default {
@@ -103,6 +109,7 @@
           email: '',
           birthday: '',
           description: '',
+          realname: '',
           industry_tags: []
         },
         jobs: [],
@@ -323,6 +330,8 @@
       },
       getUserInfo () {
         var userInfo = localEvent.getLocalItem('UserInfoReal')
+
+        console.log(localEvent.getLocalItem('UserInfoReal') + 'userInfo')
         if (userInfo) {
           this.work_city = userInfo.info.province.name + ' ' + userInfo.info.city.name
           this.home_city = userInfo.info.hometown_province.name + ' ' + userInfo.info.hometown_city.name
@@ -454,7 +463,13 @@
         switch (type) {
           case 'name':
             if (!this.user.info.name) {
-              window.mui.toast('请填写姓名')
+              window.mui.toast('请填写平台昵称')
+              return false
+            }
+            break
+          case 'realname':
+            if (!this.user.info.realname) {
+              window.mui.toast('请填写真实姓名')
               return false
             }
             break
@@ -586,7 +601,9 @@
       }
       next()
     },
-    mounted () {},
+    mounted () {
+      console.log(this.user.info.realname + 'realname')
+    },
     beforeRouteLeave (to, from, next) {
       var popDiv = document.querySelector('.mui-dtpicker')
       if (popDiv) {
@@ -602,7 +619,23 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="less">
+  .secrecy {
+    height: 0.906rem;
+    line-height: 0.906rem;
+    color: #B4B4B6;
+    font-size: 0.32rem;
+    background: #F3F4F6;
+    padding-left: 0.426rem;
+  }
+  .muiTableView {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style: none;
+    background-color: #fff;
+  }
   .account_item_title {
     padding: 0.133rem;
     color: #a6a6a6;

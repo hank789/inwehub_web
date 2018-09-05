@@ -21,7 +21,8 @@
       </div>
 
       <div class="detail" v-if="time">
-        <span class="position">{{ time }}</span>
+        <span class="position" v-if="isTime(time)"><timeago :since="timeago(time)" :auto-update="60"></timeago> </span>
+        <span class="position" v-else>{{time}}</span>
       </div>
 
       <div class="followWrapper" v-if="isFollow && realname !== '匿名' && uuid !== localUuid">
@@ -30,7 +31,7 @@
       </div>
       <!-- <div class="timeData">
         <span>
-          <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago> 
+          <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
         </span>
       </div> -->
     </div>
@@ -93,6 +94,10 @@
       time: {
         type: String,
         default: ''
+      },
+      timeDesc: {
+        type: String,
+        default: ''
       }
     },
     created () {
@@ -100,6 +105,9 @@
       this.localUuid = user.uuid
     },
     methods: {
+      isTime (time) {
+        return /^[0-9\\-\\:\s]+$/.test(time)
+      },
       toResume () {
         var uuid = this.uuid
         if (!uuid) {
@@ -143,7 +151,7 @@
 </script>
 
 <style scoped="scoped">
-  
+
   .avatar {
     z-index: 0;
     color: #ffffff;

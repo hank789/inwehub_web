@@ -139,9 +139,9 @@
           id="commentTitle"
           v-if="detail.slug"
           :listApi="'article/comments'"
-          :listParams="{'submission_slug': detail.slug, sort: 'hot'}"
+          :listParams="discussListParams"
           :storeApi="'article/comment-store'"
-          :storeParams="{'submission_id': detail.id}"
+          :storeParams="discussStoreParams"
           @comment="comment"
           @commentFinish="commentFinish"
           @goComment="goComment"
@@ -181,7 +181,7 @@
             <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
               <div class="itemArticleLeft">
                 <div class="titleWrapper">
-                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5">{{index+1}}.</span>{{item.data.title}}</div>
+                  <div class="title text-line-2 text-content"><!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}</div>
                 </div>
                 <div class="explain">
                   <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
@@ -327,6 +327,12 @@
       }
     },
     computed: {
+      discussStoreParams () {
+        return {'submission_id': this.detail.id}
+      },
+      discussListParams () {
+        return {'submission_slug': this.detail.slug, sort: 'hot'}
+      },
       descLength () {
         if (this.description === this.descPlaceholder) {
           return 0
@@ -907,6 +913,7 @@
   .contentWrapper {
     padding: 0 0.4rem;
     white-space: pre-line !important;
+    word-wrap: break-word;
     font-size: 0.426rem;
     color: #444;
     line-height: 0.693rem;
@@ -1116,6 +1123,7 @@
         float: left;
         margin-right: 0.266rem;
         border-radius: 0.106rem;
+        object-fit: cover;
       }
       .linkContent {
         font-size: 0.373rem;

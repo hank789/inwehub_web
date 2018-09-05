@@ -92,7 +92,7 @@
 <script>
   import {createAPI, postRequest} from '../../utils/request'
   import localEvent from '../../stores/localStorage'
-  import industryTagsIndexedList from '../Tags/industryTagsIndexedlist.vue'
+  import industryTagsIndexedList from '../Tags/IndustryTagsIndexedlist.vue'
   import MTextarea from '../../components/MTextarea.vue'
   import popPickerComponent from '../../components/picker/poppicker.vue'
 

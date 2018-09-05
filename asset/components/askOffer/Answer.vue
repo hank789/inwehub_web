@@ -20,6 +20,7 @@
       :isFollowed="answer.is_followed?true:false"
       :isExpert="answer.is_expert ? answer.is_expert : 0"
       :isShowPositionAndCompany="isShowPositionAndCompany"
+      :time="answer.created_at"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
@@ -43,7 +44,7 @@
         </quill-editor>
         <div class="time">
           <p class="average_rate" v-if="answer.average_rate">{{answer.average_rate}}好评</p>
-          <p class="created_at">{{answer.created_at}} 著作权归作者所有 </p>
+          <p class="created_at"> 著作权归作者所有 </p>
         </div>
       </div>
 

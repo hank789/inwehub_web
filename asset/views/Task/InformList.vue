@@ -23,6 +23,17 @@
             :isShowUpToRefreshDescription="false"
             :autoShowEmpty="false"
             class="listWrapper">
+
+              <div class="noticeWrapper" v-if="isOpenNotification === 1 && closingNotice">
+                <div class="closeNotice" @tap.stop.prevent="closeNotice">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-times"></use>
+                  </svg>
+                </div>
+                <div class="noticeText">打开通知，避免错过订阅的热点新闻，深度文章，招聘动态和招标快讯</div>
+                <div class="unlock" @tap.stop.prevent="goUnlock">开启</div>
+              </div>
+
               <ul>
                 <div class="notice" @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.unread_count">
                   <p>
@@ -115,6 +126,7 @@
   import { postRequest } from '../../utils/request'
   import Options from '../../components/Options.vue'
   import RefreshList from '../../components/refresh/List.vue'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
 
   const TaskMain = {
     data: () => ({
@@ -166,13 +178,37 @@
       },
       loading: true,
       total_count: 0,
-      mobile: 0
+      mobile: 0,
+      closingNotice: '',
+      Today: '',
+      isShowNotice: -1,
+      isOpenNotification: -1 // -1， 未知, 1 yes 0 no
     }),
     components: {
       RefreshList,
       Options
     },
+    created () {
+    },
+    activated () {
+      this.checkPermission()
+    },
     methods: {
+      checkPermission () {
+        checkPermission('NOTIFITION', () => {
+          this.isOpenNotification = 0
+        }, () => {
+          this.isOpenNotification = 1
+        })
+      },
+      goUnlock () {
+        toSettingSystem('NOTIFITION')
+      },
+      closeNotice () {
+        var data = new Date().toLocaleString().split(' ')[0]
+        localStorage.setItem('closingNotice', data)
+        this.closingNotice = false
+      },
       toSetting () {
         this.$router.pushPlus('/push/setting')
       },
@@ -248,12 +284,22 @@
       }
     },
     mounted () {
+      this.closingNotice = localStorage.getItem('closingNotice')
+      var data = new Date().toLocaleString().split(' ')[0]
+      if (data === this.closingNotice) {
+        this.closingNotice = false
+      } else {
+        this.closingNotice = true
+      }
+      window.addEventListener('resume', () => {
+        this.checkPermission()
+      }, true)
     }
   }
   export default TaskMain
 </script>
 
-<style scoped="scoped">
+<style scoped="scoped" lang="less">
   .bot {
     position: absolute;
     right: 0.426rem;
@@ -280,6 +326,38 @@
     list-style: none;
     font-style: normal;
   }
+
+  .noticeWrapper {
+    padding: 0.266rem 0.426rem;
+    height: 1.493rem;
+    background: #F3F4F6;
+    display: flex;
+    .closeNotice {
+      font-size: 0.48rem;
+      display: flex;
+      color: #C8C8C8;
+      margin-right: 0.4rem;
+      margin-top: 0.24rem;
+    }
+    .noticeText {
+      width: 71%;
+      color: #03AEF9;
+      font-size: 0.373rem;
+      line-height: 0.533rem;
+      margin-top: -0.026rem;
+    }
+    .unlock {
+      width: 1.76rem;
+      height: 0.72rem;
+      color: #03AEF9;
+      margin: 0.133rem 0 0 0.4rem;
+      line-height: 0.72rem;
+      text-align: center;
+      border-radius: 2.666rem;
+      border: 0.026rem solid #03AEF9;
+    }
+  }
+
   .mui-content {
     background: #FFFFFF;
   }
@@ -477,6 +555,9 @@
   @media (min-width: 414px) {
     .notice p:nth-of-type(1) .notice_l{
       margin-right: 5%;
+    }
+    .noticeText {
+      /*margin-top: 0.026rem;*/
     }
   }
   header svg{
