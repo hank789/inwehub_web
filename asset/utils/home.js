@@ -1,7 +1,7 @@
 import { postRequest } from './request'
 
 function getHomeData (successCallback) {
-  postRequest(`home`, {}).then(response => {
+  postRequest(`home`, {}, false).then(response => {
     var code = response.data.code
     if (code !== 1000) {
       window.mui.toast(response.data.message)
