@@ -13,12 +13,11 @@
               <div class="avatarInner">
                 <img :src="resume.info.avatar_url" class="avatar"/>
                 <div class="expert" v-if="resume.info.expert_apply_status =='2'">
-                  <span>
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-zhuanjiabiaoji"></use>
-                    </svg>
-                  </span>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
+                  </svg>
                 </div>
+                <!--  -->
               </div>
             </div>
           </div>
@@ -26,7 +25,7 @@
             <div class="realname">
               <span>{{ resume.info.name }}</span>
             </div>
-            <div class="item">
+            <div class="item" v-if="resume.info.province.name !== '请选择省份'">
               <div class="my-detail">
                 <span>
                   <svg class="icon" aria-hidden="true">
@@ -34,19 +33,19 @@
                   </svg>{{ resume.info.province.name }} {{ resume.info.city.name }}
                 </span>
               </div>
-              <div class="my-detail">
+              <div class="my-detail" v-if="resume.info.work_years">
                 <span>{{resume.info.work_years}}年工作经验</span>
               </div>
-              <div class="my-detail">
+              <div class="my-detail" v-if="resume.info.company && resume.info.title">
                 <span>{{resume.info.company}}</span><i class="line-wall"></i><span>{{resume.info.title}}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="gray"></div>
+      <div class="gray" v-if="resume.info.description"></div>
 
-      <div class="skilled">
+      <div class="skilled" v-if="resume.info.description">
         <div class="skilledBrief">个人简介 <div class="bot"></div></div>
         <div class="synopsisContent">{{resume.info.description}}</div>
       </div>
@@ -380,24 +379,15 @@
         height: 1.68rem;
         .expert {
           position: absolute;
-          right: -0.133rem;
-          bottom: -0.106rem;
+          right: 0;
+          bottom: 0;
           z-index: 10;
-          span {
-            width: 0.64rem;
-            height: 0.64rem;
-            border-radius: 50%;
-            background: #ffffff;
-            text-align: center;
-            border: 0.053rem solid #FFF;
-            display: inline-block;
-          }
           .icon {
-            font-size: 0.746rem;
+            font-size: 0.64rem;
             color: #FCC816;
-            position: absolute;
-            top: -0.053rem;
-            right: -0.053rem;
+            border: 0.053rem solid #FFF;
+            border-radius: 50%;
+            background: #FFF;
           }
         }
         .avatar {
@@ -421,6 +411,7 @@
           display: flex;
           width: 100%;
           height: 100%;
+          position: relative;
           -webkit-box-align: center;
           -webkit-align-items: center;
           -ms-flex-align: center;
@@ -722,5 +713,9 @@
         background: #03AEF9;
       }
     }
+  }
+
+  .mui-android .list .item .others .other .title{
+    margin-left:-0.1rem;
   }
 </style>

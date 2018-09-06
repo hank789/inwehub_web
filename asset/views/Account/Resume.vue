@@ -77,11 +77,9 @@
                   <div class="avatarInner">
                     <img :src="resume.info.avatar_url" class="avatar"/>
                     <div class="expert" v-if="resume.info.expert_apply_status =='2'">
-                      <span> <!--  -->
-                        <svg class="icon" aria-hidden="true">
-                          <use xlink:href="#icon-zhuanjiabiaoji"></use>
-                        </svg>
-                      </span>
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
+                      </svg>
                     </div>
                   </div>
                 </div>
@@ -131,7 +129,7 @@
           </div>
           <div class="gray"></div>
           <!--Ta的擅长-->
-          <div class="skilled">
+          <div class="skilled" v-if="resume.info.skill_tags.length > 0 || uuid === cuuid">
             <div class="skilledTags">擅长领域<div class="bot"></div></div>
             <template v-for="(industry, index) in resume.info.skill_tags">
               <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
@@ -141,10 +139,9 @@
                 <use xlink:href="#icon-plus--"></use>
               </svg>添加
             </div>
-            <!--<i class="bot"></i>-->
           </div>
           <!--Ta的专栏-->
-          <div class="gray"></div>
+          <div class="gray" v-if="resume.info.skill_tags.length > 0 || uuid === cuuid"></div>
           <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list/' + resume.info.uuid )">
             <p>专栏</p>
             <svg class="icon" aria-hidden="true">
@@ -348,7 +345,7 @@
     import { getResumeDetail } from '../../utils/shareTemplate'
     import { isLogined } from '../../utils/auth'
     import RefreshList from '../../components/refresh/List.vue'
-    import { textToLinkHtml, secureHtml, transferTagToLink, scrollToElement } from '../../utils/dom'
+    import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
 
     export default {
       data: () => ({
@@ -386,6 +383,7 @@
             article_comment_count: '',
             article_upvote_count: '',
             industry_tags: [],
+            skill_tags: [],
             province: {
               key: '',
               name: ''
@@ -417,7 +415,7 @@
       },
       watch: {
         '$route' (to, from) {
-            this.getData()
+          this.getData()
         }
       },
       created () {
@@ -853,22 +851,11 @@
             right: 0.16rem;
             bottom: 0rem;
             z-index: 10;
-            span {
-              width: 0.64rem;
-              height: 0.64rem;
-              border-radius: 50%;
-              background: #ffffff;
-              text-align: center;
+            .icon {
+              font-size: 0.746rem;
               border: 0.053rem solid #FFF;
-              display: inline-block;
-              position: relative;
-              .icon {
-                font-size: 0.746rem;
-                color: #FCC816;
-                position: absolute;
-                top: -0.106rem;
-                right: -0.106rem;
-              }
+              border-radius: 50%;
+              background: #FFF;
             }
           }
           .avatar {
@@ -1022,129 +1009,6 @@
       }
     }
 
-    h5 {
-      margin: 0;
-      padding: 0.293rem 0;
-      background: #f3f4f6;
-      width: 100%;
-      font-size: 0.373rem;
-      color: #313131;
-      text-align: center;
-    }
-
-    .list {
-      background: #fff;
-      padding: 0 0.266rem 0 0.8rem;
-      position: relative;
-      &:before {
-        position: absolute;
-        top: 0.533rem;
-        left: 0.533rem;
-        content: '';
-        width: 0.026rem;
-        bottom: 0.32rem;
-        background-color: #ececee;
-      }
-      .itemJobMore,
-      .itemProjectMore,
-      .itemEduMore {
-        display: none;
-      }
-      .item {
-        position: relative;
-        padding: 0.266rem 0 0.266rem 0.133rem;
-        &:after {
-          position: absolute;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          height: 0.026rem;
-          content: '';
-          -webkit-transform: scaleY(.5);
-          transform: scaleY(.5);
-          background-color: #dcdcdc;
-        }
-        &:last-child:after {
-          display: none;
-        }
-        .others {
-          color: #b4b4b6;
-          font-size: 0.346rem;
-          .other {
-            display: -webkit-box;
-            overflow: hidden;
-            .title {
-              margin-left: -0.213rem;
-              width: 2.133rem;
-            }
-            .content {
-              padding-right: 1.866rem;
-            }
-          }
-        }
-        .time {
-          position: relative;
-          font-size: 0.373rem;
-          margin-top: 0.053rem;
-          color: #3c95f9;
-        }
-        .time:before {
-          position: absolute;
-          left: -0.48rem;
-          top: 0.133rem;
-          content: '';
-          width: 0.213rem;
-          height: 0.213rem;
-          background: #3c95f9;
-          border-radius: 0.106rem;
-        }
-        .company {
-          font-size: 0.373rem;
-          color: #444;
-          margin: 0.133rem 0;
-        }
-        .description {
-          color: #808080;
-          font-size: 0.346rem;
-          margin-top: 0.16rem;
-          line-height: 0.64rem;
-          -webkit-transition: all 3s;
-          margin-bottom: 0.8rem;
-          height: auto;
-          white-space: pre-wrap;
-          &.hide {
-            height: 1.84rem;
-          }
-        }
-        .toggle {
-          position: absolute;
-          right: 0;
-          bottom: 0.266rem;
-          font-size: 0.346rem;
-          margin-right: 0.133rem;
-          color: #3c95f9;
-          &.show:before {
-            border: none;
-            border-left: 0.16rem solid transparent;
-            border-right: 0.16rem solid transparent;
-            border-top: 0.266rem solid #d8d8d8;
-          }
-          &:before {
-            position: absolute;
-            left: -0.506rem;
-            top: 0.133rem;
-            width: 0;
-            height: 0;
-            content: '';
-            border: none;
-            border-left: 0.16rem solid transparent;
-            border-right: 0.16rem solid transparent;
-            border-bottom: 0.266rem solid #d8d8d8;
-          }
-        }
-      }
-    }
-
     button {
       border-radius: 0;
       padding: 0.32rem 0;
@@ -1176,20 +1040,6 @@
       }
     }
 
-    .noPublic {
-      margin: 0.533rem 0 0;
-      background: #fff;
-      text-align: center;
-      font-size: 0.346rem;
-      color: #b4b4b6;
-      padding-bottom: 0.8rem;
-      padding-top: 0.533rem;
-      .icon {
-        font-size: 1.333rem;
-        color: #f3f4f6;
-      }
-    }
-
     #shareShowWrapper {
       position: absolute;
       right: 0;
@@ -1213,15 +1063,15 @@
       width: 100%;
       height: 1.333rem;
       overflow: hidden;
-      background: #FFFFFF;
+      background: #ffffff;
       &:before {
         position: absolute;
-        top: 0rem;
+        top: 0.053rem;
         width: 100%;
         height: .02667rem;
         content: '';
         transform: scaleY(0.5);
-        background-color: #dcdcdc;
+        background-color: #DCDCDC;
       }
       .edit {
         padding: 0.186rem 0 0.186rem 0.426rem;
@@ -1238,7 +1088,7 @@
       }
       .consultWrapper {
         div {
-          margin-top: 0.173rem;
+          margin-top: 0.213rem;
         }
         .buttonLeft {
           float: left;
@@ -1437,6 +1287,7 @@
         line-height: 0.64rem;
         font-size: 0.32rem;
         vertical-align: sub;
+        margin-bottom: 0.24rem;
         border-radius: 1.333rem;
         border: 0.026rem solid #DCDCDC;
         .icon {

@@ -11,7 +11,7 @@
           <!--{{selectNum}}-->
           <p>关注您感兴趣的标签</p>
           <p>我们会推荐您相关的内容</p>
-          <button @tap.stop.prevent="keepTags()" v-if="skill_tags.length">确认保存</button>
+          <button @tap.stop.prevent="keepTags()">确认保存</button>
         </div>
         <li v-for="(item, index) in skill_tags" v-if="skill_tags.length" @tap.stop.prevent="toTagDetail(item.text)">
           {{item.text}}

@@ -23,11 +23,9 @@
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
             <img :src="avatar" class="avatar" />
             <div class="expert" v-if="expert_apply_status =='2'">
-              <span>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-zhuanjiabiaoji"></use>
-                </svg>
-              </span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
+              </svg>
             </div>
              <!--  -->
           </div>
@@ -77,7 +75,6 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
-          <!--<i class="bot"></i>-->
         </div>
         <div class="gray"></div>
         <div class="optionList invite" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
@@ -400,29 +397,19 @@
     width: 100%;
     /*height: 3.2rem;*/
     .my-img{
-      /*width: 21%;*/
       height: 100%;
       float: left;
       position: relative;
       .expert {
         position: absolute;
-        bottom: -0.022rem;
-        right: 0.053rem;
-        span {
-          width: 0.64rem;
-          height: 0.64rem;
-          border-radius: 50%;
-          background: #ffffff;
-          text-align: center;
-          border: 0.053rem solid #FFF;
-          display: inline-block;
-        }
+        bottom: 0.186rem;
+        right: -0.026rem;
         .icon {
-          font-size: 0.746rem;
+          font-size: 0.64rem;
           color: #FCC816;
-          position: absolute;
-          top: -0.053rem;
-          right: -0.053rem;
+          border: 0.053rem solid #FFF;
+          border-radius: 50%;
+          background: #FFF;
         }
       }
     }
@@ -688,7 +675,7 @@
           width: 0.213rem;
           height: 0.213rem;
           position: absolute;
-          left: 1.866rem;
+          left: 2.3rem;
           top: 0.266rem;
           border-radius: 50%;
           background: #FA4975;
@@ -762,34 +749,5 @@
     background: #fff;
     bottom: 50px; /* px不转换 */
   }
-
-  /*container-image */
-   /* 适配*/
-/*@media (min-width: 320px) {*/
-  /*.professor .my-img{*/
-    /*width: 26%;*/
-    /*}*/
-    /*.my-personal {*/
-      /*width: 69%;*/
-    /*}*/
-
-/*}*/
-/*@media (min-width: 375px) {*/
-   /*.professor .my-img{*/
-    /*width: 23%;*/
-    /*}*/
-    /*.my-personal {*/
-     /*width: 69%;*/
-    /*}*/
-
-/*}*/
-/*@media (min-width: 414px) {*/
-    /*.professor .my-img{*/
-     /*width: 21%;*/
-    /*}*/
-    /*.my-personal {*/
-     /*width: 69%;*/
-    /*}*/
-/*}*/
 
 </style>
