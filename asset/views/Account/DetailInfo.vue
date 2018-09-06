@@ -383,9 +383,9 @@
           bottom: 0;
           z-index: 10;
           .icon {
-            font-size: 24px;
+            font-size: 0.64rem;
             color: #FCC816;
-            border: 2px solid #FFF;
+            border: 0.053rem solid #FFF;
             border-radius: 50%;
             background: #FFF;
           }

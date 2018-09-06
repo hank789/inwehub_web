@@ -402,12 +402,12 @@
       position: relative;
       .expert {
         position: absolute;
-        bottom: 7px;
-        right: -1px;
+        bottom: 0.186rem;
+        right: -0.026rem;
         .icon {
-          font-size: 24px;
+          font-size: 0.64rem;
           color: #FCC816;
-          border: 2px solid #FFF;
+          border: 0.053rem solid #FFF;
           border-radius: 50%;
           background: #FFF;
         }

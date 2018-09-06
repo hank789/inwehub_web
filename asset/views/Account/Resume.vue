@@ -852,7 +852,7 @@
             z-index: 10;
             .icon {
               font-size: 0.746rem;
-              border: 2px solid #FFF;
+              border: 0.053rem solid #FFF;
               border-radius: 50%;
               background: #FFF;
             }
@@ -1202,7 +1202,7 @@
       background: #ffffff;
       &:before {
         position: absolute;
-        top: 2px;
+        top: 0.053rem;
         width: 100%;
         height: .02667rem;
         content: '';
@@ -1224,7 +1224,7 @@
       }
       .consultWrapper {
         div {
-          margin-top: 8px;
+          margin-top: 0.213rem;
         }
         .buttonLeft {
           float: left;
