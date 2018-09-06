@@ -714,4 +714,8 @@
       }
     }
   }
+
+  .mui-android .list .item .others .other .title{
+    margin-left:-0.1rem;
+  }
 </style>
