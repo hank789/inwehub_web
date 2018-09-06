@@ -13,12 +13,11 @@
               <div class="avatarInner">
                 <img :src="resume.info.avatar_url" class="avatar"/>
                 <div class="expert" v-if="resume.info.expert_apply_status =='2'">
-                  <span>
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-zhuanjiabiaoji"></use>
-                    </svg>
-                  </span>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
+                  </svg>
                 </div>
+                <!--  -->
               </div>
             </div>
           </div>
@@ -380,24 +379,15 @@
         height: 1.68rem;
         .expert {
           position: absolute;
-          right: -0.133rem;
-          bottom: -0.106rem;
+          right: 0;
+          bottom: 0;
           z-index: 10;
-          span {
-            width: 0.64rem;
-            height: 0.64rem;
-            border-radius: 50%;
-            background: #ffffff;
-            text-align: center;
-            border: 0.053rem solid #FFF;
-            display: inline-block;
-          }
           .icon {
-            font-size: 0.746rem;
+            font-size: 24px;
             color: #FCC816;
-            position: absolute;
-            top: -0.053rem;
-            right: -0.053rem;
+            border: 2px solid #FFF;
+            border-radius: 50%;
+            background: #FFF;
           }
         }
         .avatar {
@@ -421,6 +411,7 @@
           display: flex;
           width: 100%;
           height: 100%;
+          position: relative;
           -webkit-box-align: center;
           -webkit-align-items: center;
           -ms-flex-align: center;
