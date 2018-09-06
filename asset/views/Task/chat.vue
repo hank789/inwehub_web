@@ -340,11 +340,11 @@
             setTimeout(() => {
               this.$refs.RefreshList.scrollToBottom()
               var comment = localEvent.getLocalItem('information')
+              localEvent.clearLocalItem('information')
               if (comment.length) {
                 this.comment = comment
               }
               this.message()
-              localEvent.clearLocalItem('information')
             }, 500)
           }
         }
