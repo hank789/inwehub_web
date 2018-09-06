@@ -91,15 +91,19 @@
       },
       goCustomer () {
         if (this.$route.params.type === '1') {
+          localEvent.setLocalItem('needRefresh', {value: true})
           localEvent.setLocalItem('information', '我是甲方需求方，我需要开启合作之旅，申请实名认证！')
         }
         if (this.$route.params.type === '2') {
+          localEvent.setLocalItem('needRefresh', {value: true})
           localEvent.setLocalItem('information', '我是乙方产品方，我需要开启合作之旅，申请实名认证！')
         }
         if (this.$route.params.type === '3') {
+          localEvent.setLocalItem('needRefresh', {value: true})
           localEvent.setLocalItem('information', '我是乙方服务方，我需要开启合作之旅，申请实名认证！')
         }
         if (this.$route.params.type === '4') {
+          localEvent.setLocalItem('needRefresh', {value: true})
           localEvent.setLocalItem('information', '我是行业从业者，我需要开启合作之旅，申请实名认证！')
         }
         this.$router.pushPlus('/chat/79')

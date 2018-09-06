@@ -119,6 +119,7 @@
         return this.response
       },
       refreshPageData (prevOtherData) {
+        console.log('refreshList-refreshPageData fired')
         if (this.isLoadingByRefresh) {
           this.loading = 1
         }

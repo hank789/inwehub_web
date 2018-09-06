@@ -285,6 +285,10 @@
           window.Echo.leave('room.' + this.chatRoomId + '.user.' + this.currentUser.user_id)
         }
         this.getDetail()
+
+        if (this.chatUserId === this.$route.params.id) {
+          this.prevSuccessCallback()
+        }
       },
       getDetail () {
         console.log('getDetail:...')
