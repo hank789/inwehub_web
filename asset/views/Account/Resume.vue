@@ -131,7 +131,7 @@
           </div>
           <div class="gray"></div>
           <!--Ta的擅长-->
-          <div class="skilled">
+          <div class="skilled" v-if="resume.info.skill_tags.length > 0">
             <div class="skilledTags">擅长领域<div class="bot"></div></div>
             <template v-for="(industry, index) in resume.info.skill_tags">
               <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
@@ -141,10 +141,9 @@
                 <use xlink:href="#icon-plus--"></use>
               </svg>添加
             </div>
-            <!--<i class="bot"></i>-->
           </div>
           <!--Ta的专栏-->
-          <div class="gray"></div>
+          <div class="gray" v-if="resume.info.skill_tags.length > 0"></div>
           <div class="specialColumn" @tap.stop.prevent="$router.pushPlus('/article/list/' + resume.info.uuid )">
             <p>专栏</p>
             <svg class="icon" aria-hidden="true">
@@ -1437,6 +1436,7 @@
         line-height: 0.64rem;
         font-size: 0.32rem;
         vertical-align: sub;
+        margin-bottom: 0.24rem;
         border-radius: 1.333rem;
         border: 0.026rem solid #DCDCDC;
         .icon {
