@@ -287,6 +287,7 @@
         this.getDetail()
       },
       getDetail () {
+        console.log('getDetail:...')
         this.source = null
         if (this.$route.params.id) {
           this.chatUserId = this.$route.params.id
@@ -306,7 +307,6 @@
               console.log(n)
               this.chat(n)
             })
-            this.comment = localEvent.getLocalItem('information')
             this.message()
           })
         } else if (this.$route.params.room_id) {
@@ -335,6 +335,8 @@
           if (this.$refs.RefreshList) {
             setTimeout(() => {
               this.$refs.RefreshList.scrollToBottom()
+              this.comment = localEvent.getLocalItem('information')
+              this.message()
             }, 500)
           }
         }
