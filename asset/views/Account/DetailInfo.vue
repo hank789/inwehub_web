@@ -43,9 +43,9 @@
           </div>
         </div>
       </div>
-      <div class="gray"></div>
+      <div class="gray" v-if="resume.info.description"></div>
 
-      <div class="skilled">
+      <div class="skilled" v-if="resume.info.description">
         <div class="skilledBrief">个人简介 <div class="bot"></div></div>
         <div class="synopsisContent">{{resume.info.description}}</div>
       </div>
