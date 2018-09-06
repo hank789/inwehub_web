@@ -348,7 +348,7 @@
     import { getResumeDetail } from '../../utils/shareTemplate'
     import { isLogined } from '../../utils/auth'
     import RefreshList from '../../components/refresh/List.vue'
-    import { textToLinkHtml, secureHtml, transferTagToLink, scrollToElement } from '../../utils/dom'
+    import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
 
     export default {
       data: () => ({
@@ -417,7 +417,7 @@
       },
       watch: {
         '$route' (to, from) {
-            this.getData()
+          this.getData()
         }
       },
       created () {
