@@ -306,7 +306,7 @@
               console.log(n)
               this.chat(n)
             })
-            this.comment = localStorage.getItem('information')
+            this.comment = localEvent.getLocalItem('information')
             this.message()
           })
         } else if (this.$route.params.room_id) {
