@@ -891,8 +891,8 @@
 
   #discoverAddJeditor .textarea-wrapper .quill-editor {
     position: absolute;
-    left:0;
-    right:0;
+    left:0.266rem;
+    right:0.266rem;
     bottom:0;
     top: 0;
     height:auto;
