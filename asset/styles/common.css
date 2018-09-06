@@ -2241,6 +2241,14 @@ a {
     width: 0.013rem; } }
 
 
+.mui-android .line-wall {
+  width:0.026rem !important;
+}
+
+.mui-android .container-remarks .line-wall{
+  top: 0.04rem;
+}
+
 
 @media (-webkit-device-pixel-ratio: 3) {
   .container-menuFooter .line-vertical {
