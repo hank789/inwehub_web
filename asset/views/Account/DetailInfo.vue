@@ -25,7 +25,7 @@
             <div class="realname">
               <span>{{ resume.info.name }}</span>
             </div>
-            <div class="item">
+            <div class="item" v-if="resume.info.province.name !== '请选择省份'">
               <div class="my-detail">
                 <span>
                   <svg class="icon" aria-hidden="true">
@@ -33,10 +33,10 @@
                   </svg>{{ resume.info.province.name }} {{ resume.info.city.name }}
                 </span>
               </div>
-              <div class="my-detail">
+              <div class="my-detail" v-if="resume.info.work_years">
                 <span>{{resume.info.work_years}}年工作经验</span>
               </div>
-              <div class="my-detail">
+              <div class="my-detail" v-if="resume.info.company && resume.info.title">
                 <span>{{resume.info.company}}</span><i class="line-wall"></i><span>{{resume.info.title}}</span>
               </div>
             </div>
