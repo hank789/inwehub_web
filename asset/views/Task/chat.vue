@@ -344,6 +344,7 @@
                 this.comment = comment
               }
               this.message()
+              localEvent.clearLocalItem('information')
             }, 500)
           }
         }
