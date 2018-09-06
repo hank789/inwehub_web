@@ -383,7 +383,7 @@
             article_comment_count: '',
             article_upvote_count: '',
             industry_tags: [],
-            skill_tags: {},
+            skill_tags: [],
             province: {
               key: '',
               name: ''
