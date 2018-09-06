@@ -1212,15 +1212,15 @@
       width: 100%;
       height: 1.333rem;
       overflow: hidden;
-      background: #FFFFFF;
+      background: #ffffff;
       &:before {
         position: absolute;
-        top: 0rem;
+        top: 2px;
         width: 100%;
         height: .02667rem;
         content: '';
         transform: scaleY(0.5);
-        background-color: #dcdcdc;
+        background-color: #DCDCDC;
       }
       .edit {
         padding: 0.186rem 0 0.186rem 0.426rem;
@@ -1237,7 +1237,7 @@
       }
       .consultWrapper {
         div {
-          margin-top: 0.173rem;
+          margin-top: 8px;
         }
         .buttonLeft {
           float: left;
