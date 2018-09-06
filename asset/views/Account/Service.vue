@@ -72,8 +72,8 @@
         </div>
       </div>
 
-      <div class="serviceFooter">
-        <div class="realName" @tap.stop.prevent="$router.pushPlus('/chat/79')">开始实名认证，开启合作之旅</div>
+      <div class="serviceFooter"> <!--/chat/79-->
+        <div class="realName" @tap.stop.prevent="goCustomer">开始实名认证，开启合作之旅</div>
       </div>
     </div>
   </div>
@@ -87,6 +87,21 @@
     methods: {
       serviceDetail () {
         window.mui.toast('通过实名认证，了解服务详情')
+      },
+      goCustomer () {
+        if (this.$route.params.type === '1') {
+          localStorage.setItem('information', '我是甲方需求方，我需要开启合作之旅，申请实名认证！')
+        }
+        if (this.$route.params.type === '2') {
+          localStorage.setItem('information', '我是乙方产品方，我需要开启合作之旅，申请实名认证！')
+        }
+        if (this.$route.params.type === '3') {
+          localStorage.setItem('information', '我是乙方服务方，我需要开启合作之旅，申请实名认证！')
+        }
+        if (this.$route.params.type === '4') {
+          localStorage.setItem('information', '我是行业从业者，我需要开启合作之旅，申请实名认证！')
+        }
+        this.$router.pushPlus('/chat/79')
       }
     },
     mounted () {
