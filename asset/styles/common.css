@@ -3043,3 +3043,58 @@ a {
   line-height: 0.4rem !important;
   border:0.013rem solid #03aef9 !important;
 }
+
+.component-group {
+  padding: 13px 16px 3px;
+  position: relative;}
+.component-group .bot {
+  right: 16px;
+  left: 16px;}
+.component-group .groupLogo {
+  width: 44px;
+  height: 44px;
+  vertical-align: top;
+  display: inline-block;}
+.component-group .groupLogo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;}
+.component-group .groupContent {
+  width: 280px;
+  margin-top: -2px;
+  margin-left: 5px;
+  display: inline-block;}
+.component-group .groupContent .groupName span:nth-of-type(1) {
+  width: 200px;
+  color: #444444;
+  font-size: 16px;
+  line-height: 22px;
+  display: inline-block;}
+.component-group .groupContent .groupName span:nth-of-type(2) {
+  color: #03AEF9;
+  padding: 0 3px;
+  font-size: 10px;
+  height: 17px;
+  margin-top: 3px;
+  margin-left: 5px;
+  line-height: 15px;
+  border-radius: 4px;
+  display: inline-block;
+  border: 1px solid #03AEF9;}
+.component-group .groupContent .groupDescribe {
+  width: inherit;
+  display: block;
+  color: #808080;
+  margin-top: 3px;
+  font-size: 13px;
+  line-height: 16px;}
+.component-group .groupContent .groupText {
+  color: #B4B4B6;
+  font-size: 11px;
+  line-height: 30px;
+  margin-right: 5px;}
+.component-group .groupContent .groupText svg {
+  margin-right: -3px;}
+
+
