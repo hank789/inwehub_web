@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title" v-if="isUuid === this.$route.params.id">我的发布</h1>
+      <h1 class="mui-title" v-if="isSelf">我的发布</h1>
       <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
@@ -29,10 +29,10 @@
         class="listWrapper">
         <ul class="answer">
           <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
-            <div class="margin-10-0-0" v-if="ask.img && ask.type =='text'">
+            <div class="margin-10-0-0" v-if="ask.img && ask.type === 'text'">
               <Images :images="ask.img" class="newestList"></Images>
             </div>
-            <div class="container-image margin-10-0-0" v-if="ask.img && ask.type !='text'" >
+            <div class="container-image margin-10-0-0" v-if="ask.img && ask.type !== 'text'" >
               <img :src="ask.img" />
             </div>
             <p class="mui-ellipsis-2"><span  v-html="textToLink(ask.title)"></span><a v-if="ask.domain">{{ask.domain}}</a> </p>
@@ -58,32 +58,41 @@
   import RefreshList from '../../../components/refresh/List.vue'
   import { textToLinkHtml, secureHtml } from '../../../utils/dom'
   import Images from '../../../components/image/Images.vue'
-  // import { goThirdPartyArticle } from '../../../utils/webview'
-  import localEvent from '../../../stores/localStorage'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUuid } from '../../../utils/user'
 
   const PublishAnswers = {
     data: () => ({
       list: [],
-      uuid: currentUser.uuid,
-      isUuid: currentUser.uuid
+      uuid: getLocalUuid()
     }),
-    created () {
-      const currentUser = localEvent.getLocalItem('UserInfo')
-      this.uuid = currentUser.uuid
-      this.isUuid = currentUser.uuid
-      if (this.$route.params.id) {
-        this.uuid = this.$route.params.id
+    watch: {
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
       }
     },
+    activated: function () {
+      this.refreshPageData()
+    },
     computed: {
-
+      isSelf () {
+        if (getLocalUuid() === this.$route.params.uuid) {
+          return true
+        }
+        return false
+      }
     },
     components: {
       RefreshList,
       Images
     },
     methods: {
+      refreshPageData () {
+        if (this.$route.params.uuid) {
+          this.uuid = this.$route.params.uuid
+        }
+      },
       textToLink (text) {
         return secureHtml(textToLinkHtml(text))
       },

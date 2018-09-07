@@ -985,7 +985,7 @@ const routes = [
     }
   },
   { // 我的发布_回答；
-    path: '/my/publishAnswers/:id?',
+    path: '/my/publishAnswers/:uuid?',
     name: 'my-publish_answers',
     component: componets.AccountpublishpublishAnswers,
     meta: {
@@ -999,7 +999,7 @@ const routes = [
     }
   },
   { // 我的发布_提问；
-    path: '/my/publishQuestions/:id?',
+    path: '/my/publishQuestions/:uuid?',
     name: 'my-publish_questions',
     component: componets.AccountpublishpublishQuestions,
     meta: {
@@ -1013,7 +1013,7 @@ const routes = [
     }
   },
   { // 我的发布_文章；
-    path: '/my/publishArticle/:id?',
+    path: '/my/publishArticle/:uuid?',
     name: 'my-publish_article',
     component: componets.AccountpublishpublishArticle,
     meta: {
@@ -1027,7 +1027,7 @@ const routes = [
     }
   },
   { // 我的发布_评论；
-    path: '/my/publishComment/:id?',
+    path: '/my/publishComment/:uuid?',
     name: 'my-publish_comment',
     component: componets.AccountpublishpublishComment,
     meta: {
