@@ -114,7 +114,7 @@
       return {
         loading: 1,
         list: [],
-        heatList: {},
+        heatList: [],
         data: {
           banners: []
         }
