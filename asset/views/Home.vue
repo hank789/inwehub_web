@@ -61,8 +61,8 @@
 
 
         <div id="home-content" class="container-list-article">
-          <template  v-for="(item, index) in list">
-            <div class="line-river-big" v-if="index === 5"></div>
+
+          <template v-for="(item, index) in heatList">
             <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
               <div class="itemArticleLeft">
                 <div class="titleWrapper">
@@ -71,7 +71,24 @@
                 <div class="explain">
                   <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
                 </timeago>
+                </div>
               </div>
+              <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
+            </div>
+            <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== heatList.length-1"></div>
+          </template>
+          <div class="line-river-big"></div>
+
+          <template v-for="(item, index) in list">
+            <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
+              <div class="itemArticleLeft">
+                <div class="titleWrapper">
+                  <div class="title text-line-2 text-content">{{item.data.title}}</div>
+                </div>
+                <div class="explain">
+                  <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
+                </timeago>
+                </div>
               </div>
               <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
             </div>
@@ -90,12 +107,14 @@
   import { saveLocationInfo } from '../utils/allPlatform'
   import { AppInit, autoTextArea, openUrlByUrl } from '../utils/plus'
   import userAbility from '../utils/userAbility'
+  import { postRequest } from '../utils/request'
 
   const Home = {
     data () {
       return {
         loading: 1,
         list: [],
+        heatList: [],
         data: {
           banners: []
         }
@@ -140,6 +159,18 @@
               interval: 5000
             })
           }, 100)
+        })
+        postRequest(`recommendRead`, {
+          orderBy: 1,
+          recommendType: 1,
+          perPage: 5
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.heatList = response.data.data.data
         })
       },
       toDetail (item) {

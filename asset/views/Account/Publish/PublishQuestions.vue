@@ -2,11 +2,9 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <h1 class="mui-title" v-if="isUuid === this.$route.params.id">我的发布</h1>
+      <h1 class="mui-title" v-if="isSelf">我的发布</h1>
       <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
-
-
 
     <!--组件-->
     <div class="mui-content">
@@ -22,8 +20,8 @@
         ref="RefreshList"
         v-model="list"
         :api="'question/myList'"
-        :prevOtherData="{type:0,uuid: this.uuid}"
-        :nextOtherData="{type:0,uuid: this.uuid}"
+        :prevOtherData="{type:0, uuid: this.uuid}"
+        :nextOtherData="{type:0, uuid: this.uuid}"
         :list="list"
         class="listWrapper">
         <ul class="answer">
@@ -48,30 +46,41 @@
 
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
-  import localEvent from '../../../stores/localStorage'
   import { textToLinkHtml, secureHtml } from '../../../utils/dom'
-  const currentUser = localEvent.getLocalItem('UserInfo')
+  import { getLocalUuid } from '../../../utils/user'
 
   const PublishAnswers = {
     data: () => ({
       list: [],
-      uuid: currentUser.uuid,
-      isUuid: currentUser.uuid
+      uuid: getLocalUuid()
     }),
-    created () {
-      const currentUser = localEvent.getLocalItem('UserInfo')
-      this.uuid = currentUser.uuid
-      this.isUuid = currentUser.uuid
-      if (this.$route.params.id) {
-        this.uuid = this.$route.params.id
+    activated: function () {
+      this.refreshPageData()
+    },
+    watch: {
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
       }
     },
     computed: {
+      isSelf () {
+        if (getLocalUuid() === this.$route.params.uuid) {
+          return true
+        }
+        return false
+      }
     },
     components: {
       RefreshList
     },
     methods: {
+      refreshPageData () {
+        if (this.$route.params.uuid) {
+          this.uuid = this.$route.params.uuid
+        }
+      },
       textToLink (text) {
         return secureHtml(textToLinkHtml(text))
       },
