@@ -163,7 +163,7 @@
         postRequest(`recommendRead`, {
           orderBy: 1,
           recommendType: 1,
-          perPage: 4
+          perPage: 5
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
