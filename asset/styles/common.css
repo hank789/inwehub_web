@@ -3097,4 +3097,22 @@ a {
 .component-group .groupContent .groupText svg {
   margin-right: -3px;}
 
+.groupSearchWrapper {
+  padding: 0 16px;}
+.groupSearchWrapper .groupSearch {
+  width: 343px;
+  height: 34px;
+  margin: 0 auto;
+  color: #C8C8C8;
+  padding-left: 11px;
+  line-height: 32px;
+  background: #F3F4F6;
+  border-radius: 100px;
+  border: 1px solid #DCDCDC;}
+.groupSearchWrapper .groupSearch span {
+  font-size: 14px;
+  margin-left: 2px;
+}
+.groupSearchWrapper .groupSearch svg {
+}
 

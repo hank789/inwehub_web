@@ -27,6 +27,15 @@
         :pageMode = true
         class="listWrapper"
       >
+        <div class="groupSearchWrapper" @tap.stop.prevent="$router.pushPlus('/group/search','list-detail-page-three')">
+          <div class="groupSearch">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-sousuo"></use>
+            </svg>
+            <span>搜索您感兴趣的其他圈子</span>
+          </div>
+        </div>
+
         <div class="component-group" v-for="(item, index) in list" :key="index">
           <div class="groupLogo">
             <img class="lazyImg" v-lazy="item.logo" />
@@ -149,7 +158,7 @@
    background-size: 100% 100%;
   }
   .listWrapper{
-    top: 2.4rem;
+    top: 60px;
     bottom: 50px; /* px不转换 */
   }
   .foundGroup {
