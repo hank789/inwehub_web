@@ -3066,7 +3066,7 @@ a {
   margin-left: 5px;
   display: inline-block;}
 .component-group .groupContent .groupName span:nth-of-type(1) {
-  width: 200px;
+  max-width: 180px;
   color: #444444;
   font-size: 16px;
   line-height: 22px;
@@ -3076,10 +3076,9 @@ a {
   padding: 0 3px;
   font-size: 10px;
   height: 17px;
-  margin-top: 3px;
-  margin-left: 5px;
   line-height: 15px;
   border-radius: 4px;
+  vertical-align: super;
   display: inline-block;
   border: 1px solid #03AEF9;}
 .component-group .groupContent .groupDescribe {

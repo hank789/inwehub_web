@@ -16,18 +16,28 @@
         :pageMode = true
         class="listWrapper"
       >
-        <template v-for="(item, index) in list" v-if="list.length">
-          <div class="group-container" @tap.stop.prevent="selectItem(item)" v-if="isShowItem(item)">
-            <groupsList class="big" :list="item" :tapNothing="true">
-              <i class="bot"></i>
-            </groupsList>
-          </div>
-        </template>
-        <div class="more" @tap.stop.prevent="$router.push('/groups')">加入更多圈子</div>
 
-      <div slot="emptyBottom">
-        <div class="question_ask" @tap.stop.prevent="$router.pushPlus('/groups')">加入圈子</div>
-      </div>
+        <div class="component-group" v-for="(item, index) in list" :key="index">
+          <div class="groupLogo">
+            <img class="lazyImg" v-lazy="item.logo" />
+          </div>
+          <div class="groupContent">
+            <div class="groupName">
+              <span class="font-family-medium text-line-1">{{item.name}}</span>
+              <span v-if="item.is_joined === 3">圈主</span>
+            </div>
+            <span class="groupDescribe text-line-1">{{item.description}}</span>
+            <span class="groupText">{{item.subscribers}}人气</span>
+            <span class="groupText">{{item.articles}}分享</span>
+            <span class="groupText" v-if="!item.public">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-simi"></use>
+              </svg>
+              私密
+            </span>
+          </div>
+          <i class="bot"></i>
+        </div>
 
       </RefreshList>
   </div>
@@ -93,19 +103,6 @@
 <style scoped>
   /*清掉自带样式*/
 
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
   .mui-content{
     background: #ffffff;
   }
