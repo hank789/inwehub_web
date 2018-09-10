@@ -14,25 +14,14 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu">
+      <div class="menu" v-if="isHiddenMenu && list.length > 0">
         <span @tap.stop.prevent="">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
         <i class="bot"></i>
       </div>
 
-      <div class="searchList" v-if="false">
-        <div v-for="(item, index) in searchAdviceList" :key="index" v-if="searchAdviceList.length !== 1 && searchText !== ''">
-          {{item}}
-          <i class="bot"></i>
-        </div>
-        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== ''">
-          查看“{{searchText}}”的搜索结果
-          <i class="bot"></i>
-        </div>
-      </div>
-
-      <div class="hotSearch" v-if="false">
+      <div class="hotSearch" v-else-if="searchText == ''">
         <div class="hotSearchText">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-huo"></use>
@@ -40,23 +29,36 @@
           <span class="font-family-medium">热搜</span>
         </div>
         <div class="hotSearchList">
-          <span v-for="(item, index) in hotSearchHistory.top" :key="index">{{item}}</span>
+          <span v-for="(item, index) in hotSearchHistory.top" :key="index" @tap.stop.prevent="searchTerms(item)">{{item}}</span>
         </div>
         <div class="hotSearchText history">
           <span class="font-family-medium">历史</span>
         </div>
         <div class="hotSearchList">
-          <span v-for="(item, index) in hotSearchHistory.history" :key="index">{{item}}</span>
+          <span v-for="(item, index) in hotSearchHistory.history" :key="index" @tap.stop.prevent="searchTerms(item)">{{item}}</span>
         </div>
       </div>
 
+      <div class="searchList" v-else>
+        <div v-for="(item, index) in searchAdviceList" :key="index" v-if="searchAdviceList.length !== 1 && searchText !== '' && list.length == 0" @tap.stop.prevent="searchTerms(item)">
+          {{item}}
+          <i class="bot"></i>
+        </div>
+        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== '' && list.length == 0">
+          查看“{{searchText}}”的搜索结果
+          <i class="bot"></i>
+        </div>
+      </div>
+
+
       <RefreshList
-        v-if="dataList != null"
+        v-if="dataList != null && searchText !== ''"
         v-model="list"
         :api="'search/submission'"
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
+        :autoShowEmpty="false"
         class="listWrapper">
         <div>
           <template v-for="(item, index) in list">
@@ -133,14 +135,14 @@
             <div class="line-river-big"></div>
           </template>
 
-          <div class="noResult">
+          <div class="noResult" v-if="list.length > 0">
             <svg class="icon addressIcon" aria-hidden="true">
               <use xlink:href="#icon-zanwushuju"></use>
             </svg>
             <div class="noResultText">无更多结果，快来发布相关分享~</div>
             <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
           </div>
-          <div class="line-river-big"></div>
+          <div class="line-river-big" v-if="list.length > 0"></div>
         </div>
       </RefreshList>
     </div>
@@ -149,12 +151,10 @@
 
 <script type="text/javascript">
   import { searchText } from '../../utils/search'
-  // import { goThirdPartyArticle } from '../../utils/webview'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
-//  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
@@ -167,6 +167,7 @@
         user_level: currentUser.user_level,
         searchText: '',
         isShow: false,
+        isHiddenMenu: false,
         dataList: null,
         list: [],
         searchAdviceList: [],
@@ -196,9 +197,11 @@
             }
           })
           this.isShow = true
+          this.isHiddenMenu = true
           this.searchAdvice()
         } else {
           this.isShow = false
+          this.isHiddenMenu = false
         }
 //        } else {
 //          userAbility.jumpJudgeGrade(this)
@@ -218,6 +221,10 @@
       })
     },
     methods: {
+      searchTerms (item) {
+        this.searchText = item
+        console.log(item + '词语')
+      },
       searchAdvice () {
         postRequest(`search/suggest`, {
           search_word: this.searchText
@@ -243,6 +250,12 @@
       },
       textToLink (text) {
         return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
+      toResume (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       back () {
         window.mui.back()
@@ -579,6 +592,8 @@
   /*搜索建议*/
   .searchList {
     padding: 0 16px;
+    position: relative;
+    z-index: 1000;
     div {
       color: #808080;
       font-size: 15px;
