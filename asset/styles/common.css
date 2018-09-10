@@ -3044,6 +3044,24 @@ a {
   border:0.013rem solid #03aef9 !important;
 }
 
+
+
+.border-football {
+  position: relative; }
+.border-football:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+  border: 0.026rem solid #B4B4B6;
+  border-radius: 1.133rem;
+  width: 200%;
+  height: 200%;
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0; }
+
 .component-group {
   padding: 13px 16px 3px;
   position: relative;}
@@ -3130,4 +3148,3 @@ a {
   line-height: 34px;
   background: #03AEF9;
   border-radius: 100px;}
-
