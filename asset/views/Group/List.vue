@@ -36,7 +36,7 @@
           </div>
         </div>
 
-        <div class="component-group" v-for="(item, index) in list" :key="index">
+        <div class="component-group" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
           <div class="groupLogo">
             <img class="lazyImg" v-lazy="item.logo" />
           </div>
@@ -71,8 +71,6 @@
 <script>
 
   import RefreshList from '../../components/refresh/List.vue'
-  import groups from '../../components/groups/RecommendGroups.vue'
-  import groupsList from '../../components/groups/GroupsList.vue'
   import { postRequest } from '../../utils/request'
 
   export default {
@@ -85,9 +83,7 @@
       }
     },
     components: {
-      RefreshList,
-      groups,
-      groupsList
+      RefreshList
     },
     props: {},
     watch: {},
@@ -139,23 +135,6 @@
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
-  }
- .new-groups{
-   margin-top:0.266rem;
-   width:92%;
-   margin-left: 4%;
-   height:0.906rem;
-   background:#cccccc;
-   font-size: 0.373rem;
-   color:rgba(68,68,68,1);
-   line-height:0.906rem;
-   padding: 0 0.4rem;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   background: url("../../statics/images/my-groups@3x.png");
-   background-size: 100% 100%;
   }
   .listWrapper{
     top: 60px;
