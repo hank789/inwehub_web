@@ -1324,7 +1324,7 @@ a {
 }
 
 .vendorUrl{
-  color: #235280;
+  color: #03AEF9;
 }
 
 .mui-modal.mui-active{
@@ -1332,8 +1332,7 @@ a {
 }
 /* quill xiangqingye yangshi */
 .quillDetailWrapper p {
-  font-size: 0.4rem;
-  margin-bottom: 0.693rem !important;
+  font-size: 16px;
 }
 .ql-tooltip{
   display:none;
@@ -2710,7 +2709,7 @@ a {
   font-size: 0.426rem !important;
   font-style: normal !important; }
 .container-editor .ql-editor p {
-  margin-bottom: 0.693rem !important; }
+  text-align: justify; }
 .container-editor .ql-editor h1 {
   color: #4A5F7B;
   font-size: 0.48rem !important;
@@ -2759,7 +2758,7 @@ a {
   line-height: 0.693rem;
   font-size: 0.426rem; }
 .container-editor-app .ql-editor p {
-  margin-bottom: 0.693rem !important; }
+  text-align: justify; }
 .container-editor-app .ql-editor h1 {
   color: #444;
   font-size: 0.453rem !important;
