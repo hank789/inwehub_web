@@ -3127,7 +3127,23 @@ a {
   border: 1px solid #DCDCDC;}
 .groupSearchWrapper .groupSearch span {
   font-size: 14px;
-  margin-left: 2px;
-}
-.groupSearchWrapper .groupSearch svg {
-}
+  margin-left: 2px;}
+
+.noResult {
+  text-align: center;
+  font-size: 1.333rem;
+  padding: 20px 0 30px;}
+.noResult .noResultText {
+  color: #C8C8C8;
+  font-size: 12px;
+  line-height: 16px;
+  padding: 7px 0 18px;}
+.noResult .goRelease {
+  width: 93px;
+  height: 34px;
+  color: #ffffff;
+  margin: 0 auto;
+  font-size: 14px;
+  line-height: 34px;
+  background: #03AEF9;
+  border-radius: 100px;}

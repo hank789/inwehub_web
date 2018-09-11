@@ -20,16 +20,6 @@
         <span >圈子<i></i></span>
         <i class="bot"></i>
       </div>
-      <ul class="pilot">
-        <li @tap.stop.prevent="$router.pushPlus('/group/add')">
-          <span>我想创建相关圈子</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
-          </svg>
-          <span>建圈子</span>
-        </li>
-        <p></p>
-      </ul>
       <RefreshList
         v-if="dataList != null"
         v-model="list"
@@ -39,15 +29,38 @@
         :nextOtherData="dataList"
         class="listWrapper">
           <div class="group-container" v-for="(item, index) in list" v-if="list.length">
-            <groupsList  class="big"
-                         :list="item"
-                         :searchText="searchText"
-                         :search = 'true'
-            ></groupsList>
+            <div class="component-group" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
+              <div class="groupLogo">
+                <img class="lazyImg" v-lazy="item.logo" />
+              </div>
+              <div class="groupContent">
+                <div class="groupName">
+                  <span class="font-family-medium text-line-1">{{item.name}}</span>
+                  <span v-if="item.is_joined === 3">圈主</span>
+                </div>
+                <span class="groupDescribe text-line-1">{{item.description}}</span>
+                <span class="groupText">{{item.subscribers}}人气</span>
+                <span class="groupText">{{item.articles}}分享</span>
+                <span class="groupText" v-if="!item.public">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-simi"></use>
+              </svg>
+              私密
+            </span>
+              </div>
+              <i class="bot" v-if="index !== list.length-1"></i>
+            </div>
           </div>
-        <!--&lt;!&ndash;<div slot="emptyBottom">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="question_ask" @tap.stop.prevent="$router.pushPlus('/discover/add')">提问</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+        <div class="line-river-big"></div>
+        <div class="noResult">
+          <svg class="icon addressIcon" aria-hidden="true">
+            <use xlink:href="#icon-zanwushuju"></use>
+          </svg>
+          <div class="noResultText">无更多结果，快来发布相关分享~</div>
+          <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
+        </div>
+        <div class="line-river-big"></div>
       </RefreshList>
     </div>
   </div>
@@ -118,22 +131,6 @@
 </script>
 
 <style lang="less" scoped>
-  /*清掉自带样式*/
-
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
-
   .bot {
     position: absolute;
     right: 0;
@@ -147,14 +144,15 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 3.630rem;
+      top: 97px;
     }
     .search{
       width:100%;
-      height:1.173rem;
-      background: #ffffff;
       padding: 0 4%;
       display: flex;
+      height:1.173rem;
+      margin-top: 5px;
+      background: #ffffff;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
@@ -236,48 +234,14 @@
         }
       }
     }
-    /*引导*/
-    .pilot{
-      width: 100%;
-      overflow: hidden;
-      li{
-        width:100%;
-        padding: 0 4%;
-        height:1.173rem;
-        position: relative;
-        line-height: 1.173rem;
-        background: #fff;
-        span{
-          font-size:0.346rem;
-          color: #808080;
-          &:nth-of-type(2){
-            font-size:0.4rem;
-            font-weight: 500;
-            color: #235280;
-            float: right;
-            margin-right: 0.373rem;
-          }
-        }
-        svg{
-          float: right;
-          margin-top: 0.373rem;
-        }
-      }
-      p{
-        width:100%;
-        height:0.266rem;
-        background: #f3f4f6;
-      }
-    }
-    /**/
+
   }
 
-.group-container{
-  width:92%;
-  margin-left: 4%;
-  overflow: hidden;
-}
-
+/*.group-container{*/
+  /*width:92%;*/
+  /*margin-left: 4%;*/
+  /*overflow: hidden;*/
+/*}*/
 
 
 </style>

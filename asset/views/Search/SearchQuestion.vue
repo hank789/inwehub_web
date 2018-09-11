@@ -20,16 +20,7 @@
       <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
       <i class="bot"></i>
     </div>
-    <ul class="pilot">
-      <li @tap.stop.prevent="$router.pushPlus('/ask')">
-        <span>搜不到结果？</span>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-chakangengduojiantou"></use>
-        </svg>
-        <span class="go">去提问</span>
-      </li>
-      <p></p>
-    </ul>
+
     <!--搜索列表-->
     <RefreshList
       v-if="dataList != null"
@@ -46,9 +37,14 @@
       </AskCommunityListItem>
 
 
-      <!--<div slot="emptyBottom">-->
-        <!--<div class="question_ask" @tap.stop.prevent="$router.pushPlus('/ask')">提问</div>-->
-      <!--</div>-->
+      <div class="noResult">
+        <svg class="icon addressIcon" aria-hidden="true">
+          <use xlink:href="#icon-zanwushuju"></use>
+        </svg>
+        <div class="noResultText">无更多结果，快来发布相关分享~</div>
+        <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
+      </div>
+      <div class="line-river-big"></div>
 
     </RefreshList>
 
@@ -124,21 +120,6 @@
 </script>
 
 <style lang="less" scoped>
-  /*清掉自带样式*/
-
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
 
   .bot {
     position: absolute;
@@ -153,14 +134,15 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 3.630rem;
+      top: 97px;
     }
     .search{
       width:100%;
-      height:1.173rem;
-      background: #ffffff;
       padding: 0 4%;
       display: flex;
+      height:1.173rem;
+      margin-top: 5px;
+      background: #ffffff;
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
@@ -228,54 +210,20 @@
           position:relative;
           color: #444444;
           font-weight: 500;
-        i{
-          position:absolute;
-          width:0.72rem;
-          height:0.053rem;
-          border-radius: 1.333rem;
-          background:#03aef9;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          margin: auto;
-        }
-      }
-    }
-    }
-    /*引导*/
-    .pilot{
-      width: 100%;
-      overflow: hidden;
-      li{
-        width:100%;
-        padding: 0 4%;
-        height:1.173rem;
-        position: relative;
-        line-height: 1.173rem;
-        background: #fff;
-        span{
-          font-size:0.346rem;
-          color: #808080;
-          &.go{
-            font-size:0.4rem;
-            font-weight: 500;
-            color: #235280;
-            float: right;
-            margin-right: 0.373rem;
+          i{
+            position:absolute;
+            width:0.72rem;
+            height:0.053rem;
+            border-radius: 1.333rem;
+            background:#03aef9;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
           }
         }
-        svg{
-          float: right;
-          margin-top: 0.373rem;
-        }
-      }
-      p{
-        width:100%;
-        height:0.266rem;
-        background: #f3f4f6;
       }
     }
-    /**/
   }
 
 </style>

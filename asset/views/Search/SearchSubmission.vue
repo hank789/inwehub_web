@@ -14,92 +14,136 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu">
+      <div class="menu" v-if="isHiddenMenu && list.length > 0">
         <span @tap.stop.prevent="">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
         <i class="bot"></i>
       </div>
-      <ul class="pilot">
-        <li @tap.stop.prevent="$router.pushPlus('/discover/add')">
-          <span>我有相关分享</span>
+
+      <div class="hotSearch" v-else-if="searchText == ''">
+        <div class="hotSearchText">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-huo"></use>
           </svg>
-          <span>发分享</span>
-        </li>
-        <p></p>
-      </ul>
+          <span class="font-family-medium">热搜</span>
+        </div>
+        <div class="hotSearchList">
+          <span v-for="(item, index) in hotSearchHistory.top" :key="index" @tap.stop.prevent="searchTerms(item)">{{item}}</span>
+        </div>
+        <div class="hotSearchText history">
+          <span class="font-family-medium">历史</span>
+        </div>
+        <div class="hotSearchList">
+          <span v-for="(item, index) in hotSearchHistory.history" :key="index" @tap.stop.prevent="searchTerms(item)">{{item}}</span>
+        </div>
+      </div>
+
+      <div class="searchList" v-else>
+        <div v-for="(item, index) in searchAdviceList" :key="index" v-if="searchAdviceList.length !== 1 && searchText !== '' && list.length == 0" @tap.stop.prevent="searchTerms(item)">
+          {{item}}
+          <i class="bot"></i>
+        </div>
+        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== '' && list.length == 0">
+          查看“{{searchText}}”的搜索结果
+          <i class="bot"></i>
+        </div>
+      </div>
+
+
       <RefreshList
-        v-if="dataList != null"
+        v-if="dataList != null && searchText !== ''"
         v-model="list"
         :api="'search/submission'"
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
+        :autoShowEmpty="false"
         class="listWrapper">
-        <ul>
-          <template v-for="(hot, index) in list">
-            <li class="Container" v-if="hot.type === 'link'" >
-              <div @tap.stop.prevent="goDetial(hot)" >
-                <p><a v-html="getHighlight(hot.title)"></a><i v-if="hot.data.domain">{{hot.data.domain}}</i></p>
-                <p class="container-image" v-if="hot.data.img">
-                  <img :src="hot.data.img">
-                </p>
-                <p class="timer">
-                  <timeago :since="timeago(hot.created_at)" :auto-update="60">
-                  </timeago>
-                  <a>#{{hot.category_name}}</a>
-                  <i class="bot"></i>
-                </p>
+        <div>
+          <template v-for="(item, index) in list">
+
+            <!-- 发布了分享 -->
+            <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
+              <div class="container-avatarAndTwoLineText">
+                <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                  <div class="avatarInner"><img :src="item.user.avatar">
+                    <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mui-media-body">
+                  <div class="lineWrapper-1">{{ item.title }}
+                    <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                  </div>
+                  <div class="lineWrapper-2">{{ item.created_at }}
+                    <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                      <use xlink:href="#icon-dingwei1"></use>
+                    </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                  </div>
+                </div>
               </div>
-              <div class="information">
-                <p>
-                  <svg class="icon" aria-hidden="true" @tap.stop.prevent="toggleOptions">
-                    <use xlink:href="#icon-gengduo"></use>
-                  </svg>
-                  <span class="carte" style="display: none;">
-                    <a @tap.stop.prevent="report(hot.user_id)" v-if="userId != hot.owner.id">举报</a>
-                    <a @tap.stop.prevent="deleterow(hot.id,index)" v-else>删除</a>
-                  </span>
-                </p>
-                <p @tap.stop.prevent="bookmarkuBmission(hot)" :class="hot.is_bookmark ? 'blue':''">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucangxingxing"></use>
-                  </svg>
-                </p>
-                <p  @tap.stop.prevent="$router.pushPlus('/c/'+ hot.category_id+'/'+ hot.slug, 'list-detail-page')">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-pinglun1"></use>
-                  </svg>
-                  {{hot.comments_number}}
+              <div class="contentWrapper text-line-3"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
 
-                </p>
-                <p @tap.stop.prevent="downvoteComment(hot)" :class="hot.is_upvoted ? 'blue':''">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-dianzan1"></use>
-                  </svg>
-                  {{hot.upvotes}}
 
-                </p>
+              <div v-if="item.feed.img" class="container-images container-images-discover">
+                <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
               </div>
-            </li>
-            <!--带图片的样式-->
-            <li class="imgContainer" v-else-if="hot.type === 'text'">
-              <TextDetail :data="hot"
-                          @downvoteComment="downvoteComment"
-                          :searchText="searchText"
-                          @bookmarkuBmission="bookmarkuBmission"
-                          @report="report"
-                          @deleterow="deleterow(hot.id, index)"
-              ></TextDetail>
+              <div v-if="item.feed.files" class="container-pdf-list">
+                <div v-for="file in item.feed.files" class="pdf"><span class="text-line-2">{{file.name}}</span></div>
+              </div>
+              <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
 
-            </li>
+            </div>
+
+            <!-- 发布了链接分享 -->
+            <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 16">
+              <div class="container-avatarAndTwoLineText">
+                <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                  <div class="avatarInner"><img :src="item.user.avatar">
+                    <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mui-media-body">
+                  <div class="lineWrapper-1">{{ item.title }}
+                    <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                  </div>
+                  <div class="lineWrapper-2">{{ item.created_at }}
+                    <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                      <use xlink:href="#icon-dingwei1"></use>
+                    </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                  </div>
+                </div>
+              </div>
+              <!-- 新增链接样式 -->
+              <div class="newLink">
+                <div class="contentWrapper text-line-3">{{item.feed.title}}</div>
+                <div class="newLinkBox">
+                  <div class="container-image lazyImg" v-if="item.feed.img">
+                    <img class="lazyImg" v-lazy="item.feed.img">
+                  </div>
+
+                  <div class="linkContent text-line-2" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
+                  <div class="link">{{item.feed.domain}} </div>
+                </div>
+              </div>
+              <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+            </div>
+            <div class="line-river-big"></div>
           </template>
-        </ul>
-        <!--<div slot="emptyBottom">-->
-          <!--<div class="question_ask" @tap.stop.prevent="$router.pushPlus('/discover/add')">提问</div>-->
-        <!--</div>-->
+
+          <div class="noResult" v-if="list.length > 0">
+            <svg class="icon addressIcon" aria-hidden="true">
+              <use xlink:href="#icon-zanwushuju"></use>
+            </svg>
+            <div class="noResultText">无更多结果，快来发布相关分享~</div>
+            <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
+          </div>
+          <div class="line-river-big" v-if="list.length > 0"></div>
+        </div>
       </RefreshList>
     </div>
   </div>
@@ -107,14 +151,13 @@
 
 <script type="text/javascript">
   import { searchText } from '../../utils/search'
-  // import { goThirdPartyArticle } from '../../utils/webview'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
-//  import userAbility from '../../utils/userAbility'
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
+  import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   const currentUser = getLocalUserInfo()
 
   export default {
@@ -124,8 +167,14 @@
         user_level: currentUser.user_level,
         searchText: '',
         isShow: false,
+        isHiddenMenu: false,
         dataList: null,
-        list: []
+        list: [],
+        searchAdviceList: [],
+        hotSearchHistory: {
+          history: [],
+          top: []
+        }
       }
     },
     components: {
@@ -148,8 +197,11 @@
             }
           })
           this.isShow = true
+          this.isHiddenMenu = true
+          this.searchAdvice()
         } else {
           this.isShow = false
+          this.isHiddenMenu = false
         }
 //        } else {
 //          userAbility.jumpJudgeGrade(this)
@@ -157,6 +209,7 @@
       }
     },
     mounted () {
+      this.hotSearch()
     },
     updated () {
       this.$nextTick(() => {
@@ -168,6 +221,42 @@
       })
     },
     methods: {
+      searchTerms (item) {
+        this.searchText = item
+        console.log(item + '词语')
+      },
+      searchAdvice () {
+        postRequest(`search/suggest`, {
+          search_word: this.searchText
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.searchAdviceList = response.data.data.suggest
+          console.log(this.searchAdviceList.length + 'searchAdviceList')
+        })
+      },
+      hotSearch () {
+        postRequest(`search/topInfo`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.hotSearchHistory = response.data.data
+        })
+      },
+      textToLink (text) {
+        return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
+      toResume (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       back () {
         window.mui.back()
         return
@@ -180,6 +269,36 @@
       },
       goDetial (hot) {
         this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug, 'list-detail-page')
+      },
+      toDetail (item) {
+        switch (item.feed_type) {
+          case 1:
+          case 2:
+          case 3:
+          case 5:
+          case 6:
+          case 11:
+          case 12:
+          case 14:
+          case 15:
+          case 16:
+            this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+          case -1:
+            // 已废弃
+            var linkArticle = {
+              view_url: item.url,
+              id: item.feed.submission_id,
+              title: item.feed.title,
+              comment_url: item.feed.comment_url,
+              img_url: item.feed.img
+            }
+            this.goArticle(linkArticle)
+            break
+          default:
+            this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+        }
       },
       hideAllOptions () {
         var list = document.querySelectorAll('.carte')
@@ -311,21 +430,6 @@
 </script>
 
 <style lang="less" scoped>
-  /*清掉自带样式*/
-
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
 
   .bot {
     position: absolute;
@@ -340,16 +444,17 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 3.630rem;
+      top: 97px;
     }
     .search{
       width:100%;
-      height:1.173rem;
-      background: #ffffff;
       padding: 0 4%;
       display: flex;
+      height:1.173rem;
+      margin-top: 5px;
       flex-direction: row;
       align-items: center;
+      background: #ffffff;
       justify-content: space-between;
       p{
         &:nth-of-type(1){
@@ -429,311 +534,77 @@
         }
       }
     }
-    /*引导*/
-    .pilot{
-      width: 100%;
-      overflow: hidden;
-      li{
-        width:100%;
-        padding: 0 4%;
-        height:1.173rem;
-        position: relative;
-        line-height: 1.173rem;
-        background: #fff;
-        span{
-          font-size:0.346rem;
-          color: #808080;
-          &:nth-of-type(2){
-            font-size:0.4rem;
-            font-weight: 500;
-            color: #235280;
-            float: right;
-            margin-right: 0.373rem;
-          }
-        }
-        svg{
-          float: right;
-          margin-top: 0.373rem;
-        }
+  }
+
+  .newLink {
+    margin-top: 0.24rem;
+    .newLinkBox {
+      margin-top: 0.266rem;
+      padding: 0.4rem 0.4rem 0.293rem;
+      background: #F7F8FA;
+      border-radius: 0.106rem;
+      .container-image {
+        margin-top: 0;
+        margin-bottom: 0.213rem;
       }
-      p{
-        width:100%;
-        height:0.266rem;
-        background: #f3f4f6;
+      img {
+        border-radius: 0.106rem;
+      }
+      .linkContent {
+        font-size: 0.373rem;
+        color: #808080;
+      }
+      .link {
+        font-size: 0.32rem;
+        color: #B4B4B6;
       }
     }
-    /**/
   }
-
-
-
-  /*滚动区域*/
-  ul {
-    width: 100%;
-    overflow: hidden;
-    background: #F3F4F5;
-  }
-
-  ul .Container {
-    width: 100%;
-    /*overflow: hidden;*/
-    background: #FFFFFF;
-    padding: 0.32rem 0.426rem 0 0.426rem;
-    margin-bottom: 0.266rem;
-
-  }
-
-  ul .Container p:nth-of-type(1) {
-    font-size: 0.4rem;
-    color: #444444;
-    line-height: 0.533rem;
-  }
-
-  ul .Container p:nth-of-type(1) i {
-    font-size: 0.32rem;
-    color: rgb(180, 180, 182);
-  }
-
-  ul .Container .container-image {
-    height: 3.306rem;
-    margin-top: 0.346rem;
-  }
-
-  ul .Container p.timer {
-    width: 100%;
-    height: 1.173rem;
-    font-size: 0.32rem;
-    color: #b4b4b6;
-    line-height: 1.173rem;
-    position: relative;
-  }
-
-  ul .Container p.timer a {
-    font-size: 0.32rem;
-    color: rgb(128, 128, 128);
-  }
-
-  .information {
-    width: 100%;
-    height: 1.066rem;
-    padding: 0 0.453rem;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-  }
-
-  ul .Container .information p {
-    color: #808080;
-    position: relative;
-    height:1.066rem;
-    display: flex;
-    align-items: center;
-    padding:0 0.133rem;
-  }
-
-  /*举报和删除*/
-  .information p:nth-of-type(1) span {
-    display: block;
-    width: 1.333rem;
-    background: #575857;
-    position: absolute;
-    top: 0.746rem;
-    left: -0.346rem;
-    border-radius: 0.106rem;
-    z-index: 99;
-  }
-
-  .information p:nth-of-type(1) span:after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
-    border: 0.133rem solid transparent;
-    border-top: 0.133rem solid #575857;
-    border-left: 0.133rem solid #575857;
-    transform: rotate(45deg);
-    position: absolute;
-    top: -0.053rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-
-  }
-
-  .information p:nth-of-type(1) span a {
-    display: block;
-    text-align: center;
-    font-size: 0.346rem;
-    color: #FFFFFF;
-    padding: 0.08rem 0;
-  }
-
-  .information p svg {
-    font-size: 0.453rem;
-  }
-
-  .information p:nth-of-type(2) svg {
-    font-size: 0.48rem;
-  }
-
-  .information p:nth-of-type(3) svg {
-    font-size: 0.453rem;
-    margin-right: 0.08rem;
-
-  }
-
-  .information p:nth-of-type(4) svg {
-    font-size: 0.453rem;
-    margin-right: 0.08rem;
-  }
-
-  /*带定位和图片的样式*/
-  .imgContainer {
-    width: 100%;
-    /*overflow: hidden;*/
-    background: #FFFFFF;
-    padding: 0.32rem 0.4rem 0 0.4rem;
-    margin-bottom: 0.266rem;
-  }
-
-  .imgContainer:after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    content: '';
-    height: 0.266rem;
-    background-color: #f3f4f6;
-    width: 100%;
-  }
-
-  .imgContainer .avatar {
-    width: 100%;
-    height: 0.906rem;
-  }
-
-  .avatar p:nth-of-type(1) {
-    width: 0.906rem;
-    height: 0.906rem;
-    border-radius: 50%;
-    float: left;
-    position: relative;
-  }
-
-  .avatar p:nth-of-type(1) svg {
-    position: absolute;
-    font-size: 0.453rem;
-    bottom: 0;
-    right: -0.16rem;
-  }
-
-  .avatar p:nth-of-type(1) img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-
-  .avatar p:nth-of-type(2) {
-    font-size: 0.346rem;
-    color: #808080;
-    line-height: 0.906rem;
-    margin-left: 0.213rem;
-    float: left;
-  }
-
-  .textContainer {
-    width: 100%;
-    font-size: 0.4rem;
-    color: #444444;
-    line-height: 0.533rem;
-    margin-top: 0.16rem;
-  }
-
-  .timeContainer {
-    width: 100%;
-    height: 1.12rem;
-    font-size: 0.32rem;
-    line-height: 1.12rem;
-
-  }
-
-  .timeContainer svg {
-    font-size: 0.373rem;
-    color: #b4b4b6;
-  }
-
-  .timeContainer span:nth-of-type(1) {
-    color: #b4b4b6;
-  }
-
-  .timeContainer span:nth-of-type(2) {
-    color: #808080;
-  }
-
-  /*图片*/
-  .PublishContainer {
-    width: 100%;
-    overflow: hidden;
-    margin-top: 0.346rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    /*border:0.026rem solid #000000;*/
-  }
-
-  .PublishContainer .container-image {
-    width: 2.88rem;
-    /*border:0.026rem solid #000000;*/
-
-  }
-
-  .PublishContainer .container-image img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .PublishContainer p:nth-of-type(2), .PublishContainer p:nth-of-type(3) {
-    margin-left: 2%;
-  }
-
-  #container-image {
-    width: 4rem;
-    height: 6.026rem;
-  }
-
-  /*适配*/
-  @media (min-width: 320px) {
-    .PublishContainer .container-image {
-      height: 2.453rem;
+  .hotSearch {
+    padding: 12px 16px;
+    .history {
+      margin-top: 6px;
     }
-
-  }
-
-  @media (min-width: 375px) {
-    .PublishContainer .container-image {
-      height: 2.88rem;
+    .hotSearchText {
+      padding-bottom: 12px;
+      span {
+        color: #444444;
+        font-size: 16px;
+        line-height: 22px;
+      }
+      .icon {
+        color: #FA4975;
+      }
     }
-
-  }
-
-  @media (min-width: 414px) {
-    .PublishContainer .container-image {
-      height: 2.88rem;
+    .hotSearchList {
+      span {
+        color: #444444;
+        font-size: 12px;
+        padding: 5px 10px;
+        background: #F3F4F6;
+        border-radius: 100px;
+        margin: 0 5px 10px 0;
+        display: inline-block;
+      }
     }
-
   }
 
-  ul .Container .information p.blue {
-    color: #03aef9;
+  /*搜索建议*/
+  .searchList {
+    padding: 0 16px;
+    position: relative;
+    z-index: 1000;
+    div {
+      color: #808080;
+      font-size: 15px;
+      padding: 12px 0;
+      line-height: 22px;
+      position: relative;
+    }
+    .listOne {
+      color: #03AEF9;
+    }
   }
+
 </style>
 
-<style>
-  .searchSubmission .small.-group{
-    padding-bottom:0.266rem;
-  }
-</style>
