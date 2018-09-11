@@ -27,6 +27,8 @@
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
+        :autoShowEmpty="false"
+        :isShowUpToRefreshDescription="false"
         class="listWrapper">
           <div class="group-container" v-for="(item, index) in list" v-if="list.length">
             <div class="component-group" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
@@ -35,7 +37,7 @@
               </div>
               <div class="groupContent">
                 <div class="groupName">
-                  <span class="font-family-medium text-line-1">{{item.name}}</span>
+                  <span class="font-family-medium text-line-1" v-html="getHighlight(item.name)"></span>
                   <span v-if="item.is_joined === 3">圈主</span>
                 </div>
                 <span class="groupDescribe text-line-1">{{item.description}}</span>
@@ -52,15 +54,16 @@
             </div>
           </div>
 
-        <div class="line-river-big"></div>
-        <div class="noResult">
+        <div class="line-river-big" v-if="list.length"></div>
+        <div class="noResult" :class="!list.length ? 'increase' : ''">
           <svg class="icon addressIcon" aria-hidden="true">
             <use xlink:href="#icon-zanwushuju"></use>
           </svg>
-          <div class="noResultText">无更多结果，快来发布相关分享~</div>
+          <div class="noResultText" v-if="list.length">无更多结果，快来创建新的圈子~</div>
+          <div class="noResultText" v-else>暂无结果，快来创建新的圈子~</div>
           <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
         </div>
-        <div class="line-river-big"></div>
+        <div class="line-river-big" v-if="list.length"></div>
       </RefreshList>
     </div>
   </div>
@@ -118,6 +121,12 @@
     updated () {
     },
     methods: {
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
       back () {
         window.mui.back()
         return
@@ -234,14 +243,12 @@
         }
       }
     }
-
   }
 
-/*.group-container{*/
-  /*width:92%;*/
-  /*margin-left: 4%;*/
-  /*overflow: hidden;*/
-/*}*/
-
+  .increase {
+    position: relative;
+    z-index: 1000;
+    top: 119px;
+  }
 
 </style>

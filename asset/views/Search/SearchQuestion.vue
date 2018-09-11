@@ -29,6 +29,8 @@
       :pageMode="true"
       :prevOtherData="dataList"
       :nextOtherData="dataList"
+      :autoShowEmpty="false"
+      :isShowUpToRefreshDescription="false"
       class="listWrapper">
       <AskCommunityListItem
         :list= "list"
@@ -37,14 +39,15 @@
       </AskCommunityListItem>
 
 
-      <div class="noResult">
+      <div class="noResult" :class="!list.length ? 'increase' : ''">
         <svg class="icon addressIcon" aria-hidden="true">
           <use xlink:href="#icon-zanwushuju"></use>
         </svg>
-        <div class="noResultText">无更多结果，快来发布相关分享~</div>
+        <div class="noResultText" v-if="list.length">无更多结果，快来发布相关分享~</div>
+        <div class="noResultText" v-else>无更多结果，快来发布相关分享~</div>
         <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
       </div>
-      <div class="line-river-big"></div>
+      <div class="line-river-big" v-if="list.length"></div>
 
     </RefreshList>
 
@@ -224,6 +227,12 @@
         }
       }
     }
+  }
+
+  .increase {
+    position: relative;
+    z-index: 1000;
+    top: 119px;
   }
 
 </style>

@@ -14,7 +14,7 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu" v-if="isHiddenMenu && list.length > 0">
+      <div class="menu" v-if="list.length > 0">
         <span @tap.stop.prevent="">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
@@ -44,7 +44,7 @@
           {{item}}
           <i class="bot"></i>
         </div>
-        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== '' && list.length == 0">
+        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== '' && list.length == 0 && showList" @tap.stop.prevent="showListHidden">
           查看“{{searchText}}”的搜索结果
           <i class="bot"></i>
         </div>
@@ -59,6 +59,7 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :autoShowEmpty="false"
+        :isShowUpToRefreshDescription="false"
         class="listWrapper">
         <div>
           <template v-for="(item, index) in list">
@@ -77,15 +78,18 @@
                   <div class="lineWrapper-1">{{ item.title }}
                     <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
                   </div>
-                  <div class="lineWrapper-2">{{ item.created_at }}
+                  <div class="lineWrapper-2"><timeago :since="timeago(item.created_at)" :auto-update="60">
+                  </timeago>
                     <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
                       <use xlink:href="#icon-dingwei1"></use>
                     </svg><span class="address">{{ item.feed.current_address_name }}</span>
                   </div>
                 </div>
               </div>
-              <div class="contentWrapper text-line-3"><span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span><span v-html="textToLink(item.feed.title)"></span></div>
-
+              <div class="contentWrapper text-line-3">
+                <span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>
+                <span v-html="getHighlight(item.feed.title)"></span>
+              </div>
 
               <div v-if="item.feed.img" class="container-images container-images-discover">
                 <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
@@ -111,7 +115,8 @@
                   <div class="lineWrapper-1">{{ item.title }}
                     <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
                   </div>
-                  <div class="lineWrapper-2">{{ item.created_at }}
+                  <div class="lineWrapper-2"><timeago :since="timeago(item.created_at)" :auto-update="60">
+                  </timeago>
                     <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
                       <use xlink:href="#icon-dingwei1"></use>
                     </svg><span class="address">{{ item.feed.current_address_name }}</span>
@@ -120,7 +125,7 @@
               </div>
               <!-- 新增链接样式 -->
               <div class="newLink">
-                <div class="contentWrapper text-line-3">{{item.feed.title}}</div>
+                <div class="contentWrapper text-line-3" v-html="getHighlight(item.feed.title)"></div>
                 <div class="newLinkBox">
                   <div class="container-image lazyImg" v-if="item.feed.img">
                     <img class="lazyImg" v-lazy="item.feed.img">
@@ -134,18 +139,20 @@
             </div>
             <div class="line-river-big"></div>
           </template>
-
-          <div class="noResult" v-if="list.length > 0">
-            <svg class="icon addressIcon" aria-hidden="true">
-              <use xlink:href="#icon-zanwushuju"></use>
-            </svg>
-            <div class="noResultText">无更多结果，快来发布相关分享~</div>
-            <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
-          </div>
-          <div class="line-river-big" v-if="list.length > 0"></div>
         </div>
+
+        <div class="noResult" :class="!list.length ? 'increase' : ''">
+          <svg class="icon addressIcon" aria-hidden="true">
+            <use xlink:href="#icon-zanwushuju"></use>
+          </svg>
+          <div class="noResultText" v-if="list.length">无更多结果，快来发布相关分享~</div>
+          <div class="noResultText" v-else>暂无结果，快来发布相关分享~</div>
+          <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
+        </div>
+        <div class="line-river-big" v-if="list.length"></div>
       </RefreshList>
     </div>
+
   </div>
 </template>
 
@@ -168,6 +175,7 @@
         searchText: '',
         isShow: false,
         isHiddenMenu: false,
+        showList: true,
         dataList: null,
         list: [],
         searchAdviceList: [],
@@ -197,11 +205,9 @@
             }
           })
           this.isShow = true
-          this.isHiddenMenu = true
           this.searchAdvice()
         } else {
           this.isShow = false
-          this.isHiddenMenu = false
         }
 //        } else {
 //          userAbility.jumpJudgeGrade(this)
@@ -212,18 +218,20 @@
       this.hotSearch()
     },
     updated () {
-      this.$nextTick(() => {
-        var eles = this.$el.querySelectorAll('.textContainer')
-        for (var i in eles) {
-          openVendorUrl(eles[i])
-          openAppUrl(eles[i])
-        }
-      })
+      // this.$nextTick(() => {
+      //   var eles = this.$el.querySelectorAll('.textContainer')
+      //   for (var i in eles) {
+      //     openVendorUrl(eles[i])
+      //     openAppUrl(eles[i])
+      //   }
+      // })
     },
     methods: {
+      showListHidden () {
+        this.showList = false
+      },
       searchTerms (item) {
         this.searchText = item
-        console.log(item + '词语')
       },
       searchAdvice () {
         postRequest(`search/suggest`, {
@@ -235,7 +243,6 @@
             return
           }
           this.searchAdviceList = response.data.data.suggest
-          console.log(this.searchAdviceList.length + 'searchAdviceList')
         })
       },
       hotSearch () {
@@ -266,9 +273,6 @@
         var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
         var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
         return newstr
-      },
-      goDetial (hot) {
-        this.$router.pushPlus('/c/' + hot.category_id + '/' + hot.slug, 'list-detail-page')
       },
       toDetail (item) {
         switch (item.feed_type) {
@@ -606,5 +610,10 @@
     }
   }
 
+  .increase {
+    position: relative;
+    z-index: 1000;
+    top: 119px;
+  }
 </style>
 
