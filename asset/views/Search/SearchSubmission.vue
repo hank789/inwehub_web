@@ -14,7 +14,7 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu" v-if="list.length > 0">
+      <div class="menu" v-if="!showList">
         <span @tap.stop.prevent="">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
@@ -158,7 +158,6 @@
 
 <script type="text/javascript">
   import { searchText } from '../../utils/search'
-  import { openVendorUrl, openAppUrl } from '../../utils/plus'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
