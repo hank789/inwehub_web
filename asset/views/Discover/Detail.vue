@@ -92,17 +92,10 @@
           </div>
 
           <div class="timeContainer">
-
             <div class="makingCopy">著作权归作者所有</div>
             <div class="fromGroup text-line-1">
               <span>来自圈子 <i class="font-family-medium">{{ detail.group.name }}</i></span>
             </div>
-
-            <!-- 来自  -->
-            <!--<div class="from">-->
-              <!--<div class="text-line-1">来自圈子<span class="text-line-1" @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>-->
-            <!--</div>-->
-            <!--<span>著作权归作者所有</span>-->
           </div>
 
           <!-- 关联问答 -->
@@ -1031,26 +1024,6 @@
     font-size: 0.32rem;
     color: #C8C8C8;
     margin-top: -0.106rem;
-  }
-  // 来自
-  .from {
-    width: 119px;
-    height: 21px;
-    line-height: 21px;
-    padding: 0 10px;
-    background: #F7F8FA;
-    border-radius: 100px;
-    div {
-      width: inherit;
-      font-size: 12px;
-      color: #B4B4B6;
-      display: inline-block;
-    }
-    span {
-      margin-left: 0.08rem;
-      color: #808080;
-      font-family: "PingFangSC-Medium";
-    }
   }
   .share {
     padding: 0 0.453rem;
