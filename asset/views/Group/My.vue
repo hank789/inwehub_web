@@ -17,7 +17,7 @@
         class="listWrapper"
       >
 
-        <div class="component-group" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
+        <div class="component-group" v-for="(item, index) in list" :key="index" @tap.stop.prevent="selectItem(item)">
           <div class="groupLogo">
             <img class="lazyImg" v-lazy="item.logo" />
           </div>

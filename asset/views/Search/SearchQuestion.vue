@@ -229,7 +229,7 @@
   .increase {
     position: relative;
     z-index: 1000;
-    top: 119px;
+    top: 3.173rem;
   }
 
 </style>

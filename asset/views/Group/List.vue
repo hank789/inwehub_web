@@ -137,19 +137,19 @@
     background-color: rgb(220, 220, 220);
   }
   .listWrapper{
-    top: 60px;
+    top: 1.6rem;
     bottom: 50px; /* px不转换 */
   }
   .foundGroup {
     text-align: center;
-    margin-top: 12px;
+    margin-top: 0.32rem;
     span {
       color: #808080;
-      font-size: 14px;
+      font-size: 0.373rem;
     }
     svg {
       color: #B4B4B6;
-      font-size: 11px;
+      font-size: 0.293rem;
       vertical-align: inherit;
     }
   }

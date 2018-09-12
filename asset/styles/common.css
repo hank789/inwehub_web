@@ -1332,7 +1332,7 @@ a {
 }
 /* quill xiangqingye yangshi */
 .quillDetailWrapper p {
-  font-size: 16px;
+  font-size: 0.426rem;
 }
 .ql-tooltip{
   display:none;
@@ -3062,88 +3062,88 @@ a {
   transform-origin: 0 0; }
 
 .component-group {
-  padding: 13px 16px 3px;
+  padding: 0.346rem 0.426rem 0.08rem;
   position: relative;}
 .component-group .bot {
-  right: 16px;
-  left: 16px;}
+  right: 0.426rem;
+  left: 0.426rem;}
 .component-group .groupLogo {
-  width: 44px;
-  height: 44px;
+  width: 1.173rem;
+  height: 1.173rem;
   vertical-align: top;
   display: inline-block;}
 .component-group .groupLogo img {
   width: 100%;
   height: 100%;
-  border-radius: 4px;
+  border-radius: 0.106rem;
   object-fit: cover;}
 .component-group .groupContent {
-  width: 280px;
-  margin-top: -2px;
-  margin-left: 5px;
+  width: 7.466rem;
+  margin-top: -0.053rem;
+  margin-left: 0.133rem;
   display: inline-block;}
 .component-group .groupContent .groupName span:nth-of-type(1) {
-  max-width: 180px;
+  max-width: 4.8rem;
   color: #444444;
-  font-size: 16px;
-  line-height: 22px;
+  font-size: 0.426rem;
+  line-height: 0.586rem;
   display: inline-block;}
 .component-group .groupContent .groupName span:nth-of-type(2) {
   color: #03AEF9;
-  padding: 0 3px;
-  font-size: 10px;
-  height: 17px;
-  line-height: 15px;
-  border-radius: 4px;
+  padding: 0 0.08rem;
+  font-size: 0.266rem;
+  height: 0.453rem;
+  line-height: 0.4rem;
+  border-radius: 0.106rem;
   vertical-align: super;
   display: inline-block;
-  border: 1px solid #03AEF9;}
+  border: 0.026rem solid #03AEF9;}
 .component-group .groupContent .groupDescribe {
   width: inherit;
   display: block;
   color: #808080;
-  margin-top: 3px;
-  font-size: 13px;
-  line-height: 16px;}
+  margin-top: 0.08rem;
+  font-size: 0.346rem;
+  line-height: 0.426rem;}
 .component-group .groupContent .groupText {
   color: #B4B4B6;
-  font-size: 11px;
-  line-height: 30px;
-  margin-right: 5px;}
+  font-size: 0.293rem;
+  line-height: 0.8rem;
+  margin-right: 0.133rem;}
 .component-group .groupContent .groupText svg {
-  margin-right: -3px;}
+  margin-right: -0.08rem;}
 
 .groupSearchWrapper {
-  padding: 0 16px;}
+  padding: 0 0.426rem;}
 .groupSearchWrapper .groupSearch {
-  width: 343px;
-  height: 34px;
+  width: 9.146rem;
+  height: 0.906rem;
   margin: 0 auto;
   color: #C8C8C8;
-  padding-left: 11px;
-  line-height: 32px;
+  padding-left: 0.293rem;
+  line-height: 0.853rem;
   background: #F3F4F6;
-  border-radius: 100px;
-  border: 1px solid #DCDCDC;}
+  border-radius: 2.666rem;
+  border: 0.026rem solid #DCDCDC;}
 .groupSearchWrapper .groupSearch span {
-  font-size: 14px;
-  margin-left: 2px;}
+  font-size: 0.373rem;
+  margin-left: 0.053rem;}
 
 .noResult {
   text-align: center;
   font-size: 1.333rem;
-  padding: 20px 0 30px;}
+  padding: 0.533rem 0 0.8rem;}
 .noResult .noResultText {
   color: #C8C8C8;
-  font-size: 12px;
-  line-height: 16px;
-  padding: 7px 0 18px;}
+  font-size: 0.32rem;
+  line-height: 0.426rem;
+  padding: 0.186rem 0 0.48rem;}
 .noResult .goRelease {
-  width: 93px;
-  height: 34px;
+  width: 2.48rem;
+  height: 0.906rem;
   color: #ffffff;
   margin: 0 auto;
-  font-size: 14px;
-  line-height: 34px;
+  font-size: 0.373rem;
+  line-height: 0.906rem;
   background: #03AEF9;
-  border-radius: 100px;}
+  border-radius: 2.666rem;}
