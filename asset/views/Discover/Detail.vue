@@ -920,6 +920,7 @@
     font-size: 0.426rem;
     color: #444;
     line-height: 0.693rem;
+    margin-bottom: 26px;
   }
 
   .contentWrapper .tags {
