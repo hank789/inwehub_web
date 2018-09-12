@@ -36,7 +36,7 @@
           <div class="line-river lineMargin"></div>
 
           <div class="discoverContentWrapper">
-            <div class="contentWrapper quillDetailWrapper" id="contentWrapper">
+            <div class="contentWrapper quillDetailWrapper container-editor container-editor-app" id="contentWrapper">
               <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
 
               <div class="richText container-editor container-editor-app" v-show="detail.type === 'article'">
@@ -92,14 +92,17 @@
           </div>
 
           <div class="timeContainer">
-            <!-- 来自 -->
-            <div class="from">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-wodequanzi-shouye"></use>
-              </svg>
-              <div class="text-line-1">来自<span @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>
+
+            <div class="makingCopy">著作权归作者所有</div>
+            <div class="fromGroup text-line-1">
+              <span>来自圈子 <i class="font-family-medium">{{ detail.group.name }}</i></span>
             </div>
-            <span>著作权归作者所有</span>
+
+            <!-- 来自  -->
+            <!--<div class="from">-->
+              <!--<div class="text-line-1">来自圈子<span class="text-line-1" @tap="toDetail(detail.group)">{{detail.group.name}}</span></div>-->
+            <!--</div>-->
+            <!--<span>著作权归作者所有</span>-->
           </div>
 
           <!-- 关联问答 -->
@@ -873,8 +876,8 @@
     }
   }
   .lineMargin {
-    margin-top: -0.16rem;
-    margin-bottom: 0.346rem;
+    margin-top: -11px;
+    margin-bottom: 14px;
   }
   .container-image {
     height: 5.333rem;
@@ -893,9 +896,9 @@
   .detailTitle {
     font-size: 0.506rem;
     line-height: 0.8rem;
-    margin-top: -0.16rem;
-    padding: 0rem 0.426rem 0.4rem;
-    font-family:PingFangSC-Medium;
+    margin-top: -11px;
+    padding: 0rem 16px 22px;
+    font-family: PingFangSC-Medium;
   }
   .detail-discover {
     padding-bottom: 0.133rem;
@@ -930,20 +933,32 @@
   }
 
   .linkWrapper {
-    padding: 0.266rem 0.4rem;
+    padding: 0 16px;
   }
 
   .timeContainer {
-    width: 100%;
-    font-size: 0.32rem;
+    display: flex;
     color: #B4B4B6;
-    padding: 0 0.4rem;
-    background: #fff;
-    margin-top: 0.693rem;
-  }
-
-  .timeContainer span:nth-of-type(2) {
-    float: right;
+    padding: 0 16px;
+    justify-content: space-between;
+    .makingCopy {
+      font-size: 12px;
+    }
+    .fromGroup {
+      width: 119px;
+      height: 21px;
+      padding: 0 8px;
+      font-size: 12px;
+      line-height: 21px;
+      text-align: center;
+      background: #F7F8FA;
+      border-radius: 100px;
+      .font-family-medium {
+        color: #808080;
+        font-style: normal;
+        display: inline-block;
+      }
+    }
   }
 
   .address {
@@ -990,11 +1005,8 @@
   .Column .discover_img {
     width: 100%;
     border-radius: 0.106rem;
-    margin-bottom: 0.133rem;
-  }
-
-  .Column img:nth-last-child(1) {
-    margin-bottom: 0;
+    margin-bottom: 26px;
+    vertical-align: top;
   }
 
   /*删除按钮*/
@@ -1021,30 +1033,27 @@
   }
   // 来自
   .from {
-    /*padding: 0 0.453rem;*/
-    /*margin: 0.4rem 0;*/
-    .icon {
-      width: 0.533rem;
-      height: 0.533rem;
-      // vertical-align: middle;
-    }
+    width: 119px;
+    height: 21px;
+    line-height: 21px;
+    padding: 0 10px;
+    background: #F7F8FA;
+    border-radius: 100px;
     div {
-      width: 70%;
-      font-size: 0.4rem;
+      width: inherit;
+      font-size: 12px;
       color: #B4B4B6;
-      margin: 0rem;
-      vertical-align: top;
       display: inline-block;
-      font-family: "PingFangSC-Medium";
     }
     span {
       margin-left: 0.08rem;
-      color: #235280;
+      color: #808080;
+      font-family: "PingFangSC-Medium";
     }
   }
   .share {
     padding: 0 0.453rem;
-    margin-bottom: 0.6rem;
+    margin: 5px 0 27px 0;
     .location {
       margin-left: -0.08rem;
       .icon {
@@ -1097,8 +1106,8 @@
   }
   // 新增链接样式
   .link {
-    margin-top: 0.266rem;
-    padding: 0 0.506rem 0 0.346rem;
+    padding: 0 16px;
+    margin-bottom: 26px;
     .linkBox {
       padding: 0.266rem;
       border-radius: 0.106rem;
