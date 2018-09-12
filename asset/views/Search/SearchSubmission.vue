@@ -14,7 +14,7 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu" v-if="!showList">
+      <div class="menu" v-if="!showList || list.length">
         <span @tap.stop.prevent="">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
