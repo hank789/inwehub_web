@@ -447,14 +447,14 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 97px;
+      top: 2.586rem;
     }
     .search{
       width:100%;
       padding: 0 4%;
       display: flex;
       height:1.173rem;
-      margin-top: 5px;
+      margin-top: 0.133rem;
       flex-direction: row;
       align-items: center;
       background: #ffffff;
@@ -564,16 +564,16 @@
     }
   }
   .hotSearch {
-    padding: 12px 16px;
+    padding: 0.32rem 0.426rem;
     .history {
-      margin-top: 6px;
+      margin-top: 0.16rem;
     }
     .hotSearchText {
-      padding-bottom: 12px;
+      padding-bottom: 0.32rem;
       span {
         color: #444444;
-        font-size: 16px;
-        line-height: 22px;
+        font-size: 0.426rem;
+        line-height: 0.586rem;
       }
       .icon {
         color: #FA4975;
@@ -582,11 +582,11 @@
     .hotSearchList {
       span {
         color: #444444;
-        font-size: 12px;
-        padding: 5px 10px;
+        font-size: 0.32rem;
+        padding: 0.133rem 0.266rem;
         background: #F3F4F6;
-        border-radius: 100px;
-        margin: 0 5px 10px 0;
+        border-radius: 2.666rem;
+        margin: 0 0.133rem 0.266rem 0;
         display: inline-block;
       }
     }
@@ -594,14 +594,14 @@
 
   /*搜索建议*/
   .searchList {
-    padding: 0 16px;
+    padding: 0 0.426rem;
     position: relative;
     z-index: 1000;
     div {
       color: #808080;
-      font-size: 15px;
-      padding: 12px 0;
-      line-height: 22px;
+      font-size: 0.4rem;
+      padding: 0.32rem 0;
+      line-height: 0.586rem;
       position: relative;
     }
     .listOne {
@@ -612,7 +612,7 @@
   .increase {
     position: relative;
     z-index: 1000;
-    top: 119px;
+    top: 3.173rem;
   }
 </style>
 

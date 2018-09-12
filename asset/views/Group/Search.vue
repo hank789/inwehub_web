@@ -153,14 +153,14 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 97px;
+      top: 2.586rem;
     }
     .search{
       width:100%;
       padding: 0 4%;
       display: flex;
       height:1.173rem;
-      margin-top: 5px;
+      margin-top: 0.133rem;
       background: #ffffff;
       flex-direction: row;
       align-items: center;
@@ -248,7 +248,7 @@
   .increase {
     position: relative;
     z-index: 1000;
-    top: 119px;
+    top: 3.173rem;
   }
 
 </style>
