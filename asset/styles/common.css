@@ -2680,7 +2680,7 @@ a {
 
 
 .container-editor {
-  margin-bottom: 0.8rem; }
+ }
 .container-editor .ql-toolbar.ql-snow {
   border: none;
   border-bottom: 0.026rem solid #E0E8EF; }
@@ -2697,14 +2697,13 @@ a {
   color: #7C93B2; }
 .container-editor .ql-container {
   border: none !important;
-  margin-top: 0.266rem; }
+  }
 .container-editor .ql-editor {
   color: #4A5F7B;
   line-height: 0.693rem;
   font-size: 0.426rem;
-  padding: 0; }
+  }
 .container-editor .ql-editor.ql-blank::before {
-  left: 0 !important;
   color: #B1BDCC !important;
   font-size: 0.426rem !important;
   font-style: normal !important; }
@@ -2729,7 +2728,7 @@ a {
 .container-editor.container-editor-add {
   width: 100%;
   background: #fff;
-  padding: 0.533rem 0.8rem; }
+ }
 .container-editor.container-editor-add textarea {
   margin-top: 0.533rem;
   width: 100%;

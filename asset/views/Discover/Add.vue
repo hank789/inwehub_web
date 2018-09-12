@@ -10,7 +10,7 @@
     <div class="mui-content">
 
       <Jeditor
-        class="container-editor container-editor-app"
+        class="container-editor container-editor-app container-editor-add"
         ref="myAddEditor"
         id="discoverAddJeditor"
         :class="{noBottomFile: images.length === 0 && pdfs.length === 0}"
@@ -868,7 +868,8 @@
     top: 0;
     border:none;
     background: #f3f4f6;
-    padding:0 0.266rem;
+    padding:0;
+    margin:0;
   }
 
   #discoverAddJeditor .counter{
@@ -891,8 +892,8 @@
 
   #discoverAddJeditor .textarea-wrapper .quill-editor {
     position: absolute;
-    left:0.266rem;
-    right:0.266rem;
+    left:0;
+    right:0;
     bottom:0;
     top: 0;
     height:auto;
