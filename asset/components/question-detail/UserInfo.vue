@@ -26,8 +26,8 @@
       </div>
 
       <div class="followWrapper" v-if="isFollow && realname !== '匿名' && uuid !== localUuid">
-        <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
-        <span class="followButton" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
+        <span class="followButton active border-football" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
+        <span class="followButton border-football" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
       </div>
       <!-- <div class="timeData">
         <span>
@@ -215,18 +215,20 @@
   }
 
   .followButton {
-    display: inline-block;
-    border: 0.026rem solid #DCDCDC;
-    line-height: 0.72rem;
-    border-radius: 1.333rem;
-    font-size: 0.346rem;
+    width: 62px;
+    height: 27px;
     color: #03aef9;
-    padding: 0.026rem 0.4rem;
+    line-height: 29px;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    border-radius: 1.333rem;
+    /*border: 0.026rem solid #DCDCDC;*/
   }
 
   .followButton.active {
-    background-color: #03aef9;
-    color: #fff;
+    color: #B4B4B6;
+    /*border: 0.026rem solid #C8C8C8;*/
   }
 
   .mui-media-body {
@@ -239,7 +241,7 @@
   .mui-media-body .followWrapper {
     position: absolute;
     top: 0.106rem;
-    right: 0;
+    right: 1px;
   }
 
   .avatarInner {
