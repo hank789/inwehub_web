@@ -6,7 +6,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder=""   v-model.trim="searchText" />
+          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @input="newValue($event)"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
             <use xlink:href="#icon-times1"></use>
           </svg>
@@ -225,6 +225,20 @@
     },
     updated () {},
     methods: {
+      newValue: function (event) {
+        console.log('我正在输入新的东西')
+        if (this.searchText !== '') {
+          this.searchAdvice()
+        }
+        this.isShowList = false
+      },
+      enterKeyCode: function (ev) {
+        if (ev.keyCode === 13) {
+          console.log('我按了回车键我按了回车键')
+          this.isShowList = true
+          this.showList = false
+        }
+      },
       showListHidden () {
         this.showList = false
         this.isShowList = true
