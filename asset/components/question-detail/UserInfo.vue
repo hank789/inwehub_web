@@ -218,7 +218,7 @@
     width: 62px;
     height: 27px;
     color: #03aef9;
-    line-height: 29px;
+    line-height: 27px;
     text-align: center;
     font-size: 14px;
     display: inline-block;
