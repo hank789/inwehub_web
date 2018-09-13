@@ -11,7 +11,7 @@
     </div>
 
 
-    <div class="mui-media-body">
+    <div class="mui-media-body realnameMtop">
       {{ realname }}
 
       <div class="detail" v-if="isShowPositionAndCompany">

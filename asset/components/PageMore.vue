@@ -601,6 +601,7 @@
     top: 0.266rem;
     z-index: 11;
     color: #3c3e44;
+    font-size: 21px;
   }
 
   .resumeWrapper .shareBtn {
