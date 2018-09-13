@@ -44,7 +44,7 @@
           {{item}}
           <i class="bot"></i>
         </div>
-        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== '' && list.length == 0 && showList" @tap.stop.prevent="showListHidden">
+        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== '' && !list.length && showList" @tap.stop.prevent="showListHidden">
           查看“{{searchText}}”的搜索结果
           <i class="bot"></i>
         </div>
@@ -52,7 +52,7 @@
 
 
       <RefreshList
-        v-if="dataList != null && searchText !== ''"
+        v-if="dataList != null && isShowList"
         v-model="list"
         :api="'search/submission'"
         :pageMode="true"
@@ -162,7 +162,6 @@
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
   import { getLocalUserInfo } from '../../utils/user'
-  import userAbility from '../../utils/userAbility'
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   const currentUser = getLocalUserInfo()
 
@@ -175,6 +174,7 @@
         isShow: false,
         isHiddenMenu: false,
         showList: true,
+        isShowList: false,
         dataList: null,
         list: [],
         searchAdviceList: [],
@@ -216,21 +216,14 @@
     mounted () {
       this.hotSearch()
     },
-    updated () {
-      // this.$nextTick(() => {
-      //   var eles = this.$el.querySelectorAll('.textContainer')
-      //   for (var i in eles) {
-      //     openVendorUrl(eles[i])
-      //     openAppUrl(eles[i])
-      //   }
-      // })
-    },
+    updated () {},
     methods: {
       showListHidden () {
         this.showList = false
       },
       searchTerms (item) {
         this.searchText = item
+        this.isShowList = !this.isShowList
       },
       searchAdvice () {
         postRequest(`search/suggest`, {
@@ -244,6 +237,7 @@
           this.searchAdviceList = response.data.data.suggest
         })
       },
+      // 热搜
       hotSearch () {
         postRequest(`search/topInfo`, {}).then(response => {
           var code = response.data.code
@@ -303,126 +297,11 @@
             break
         }
       },
-      hideAllOptions () {
-        var list = document.querySelectorAll('.carte')
-        for (var i in list) {
-          if (!list[i].style) continue
-          list[i].style.display = 'none'
-        }
-      },
-      toggleOptions (event) {
-        if (event.target.nodeName !== 'svg') return
-        var target = event.target.nextElementSibling
-        target.style.display = target.style.display === 'none' ? 'block' : 'none'
-      },
-      report (id) {
-        var that = this
-        var btnArray = ['取消', '确定']
-        window.mui.confirm('确定举报吗？', ' ', btnArray, function (e) {
-          if (e.index === 1) {
-            that.hideAllOptions()
-            window.mui.toast('举报成功')
-          }
-        })
-      },
-      deleterow (id, index) {
-        var btnArray = ['取消', '确定']
-        var list = this.list
-        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
-          if (e.index === 1) {
-            // 进行删除
-            postRequest(`article/destroy-submission`, {
-              id: id
-            }).then(response => {
-              var code = response.data.code
-              // 如果请求不成功提示信息 并且返回上一页；
-              if (code !== 1000) {
-                window.mui.alert(response.data.message)
-                window.mui.back()
-                return
-              }
-              if (response.data.data) {
-                list.splice(index, 1)
-                this.hideAllOptions()
-                window.mui.toast('删除成功')
-              }
-            })
-          }
-        })
-      },
       // 时间处理；
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
-      },
-      // 赞文章
-      downvoteComment (hot) {
-        postRequest(`article/upvote-submission`, {
-          submission_id: hot.id
-        }).then(response => {
-          var code = response.data.code
-
-          if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
-            return
-          }
-
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data) {
-            if (response.data.data.type === 'upvote') {
-              hot.upvotes += 1
-              hot.is_upvoted = 1
-            } else {
-              hot.is_upvoted = 0
-              hot.upvotes -= 1
-            }
-            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-              // mixpanel
-              window.mixpanel.track(
-                'inwehub:support:success',
-                {
-                  'app': 'inwehub',
-                  'user_device': window.getUserAppDevice(),
-                  'page': this.id,
-                  'page_name': 'submission',
-                  'page_title': hot.is_upvoted ? 'support' : 'cancel',
-                  'referrer_page': ''
-                }
-              )
-            }
-          }
-        })
-      },
-      // 赞文章
-      bookmarkuBmission (hot) {
-        postRequest(`article/bookmark-submission`, {
-          id: hot.id
-        }).then(response => {
-          var code = response.data.code
-
-          if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
-            return
-          }
-
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data) {
-            if (response.data.data.type === 'bookmarked') {
-              hot.is_bookmark = 1
-            } else {
-              hot.is_bookmark = 0
-            }
-          }
-        })
       },
       //  点击清空输入框
       empty () {

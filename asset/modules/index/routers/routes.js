@@ -96,7 +96,7 @@ const routes = [
     meta: {
       title: '搜索问答',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     component: componets.SearchSearchQuestion,
     beforeEnter: (to, from, next) => {
@@ -109,7 +109,7 @@ const routes = [
     meta: {
       title: '搜索分享',
       wechatHideHeader: true,
-      keepAlive: true
+      keepAlive: false
     },
     component: componets.SearchSearchSubmission,
     beforeEnter: (to, from, next) => {
@@ -563,12 +563,12 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子搜索
+  { // 搜索圈子
     path: '/group/search',
     name: 'group-search',
     component: componets.GroupsSearch,
     meta: {
-      title: '圈子搜索',
+      title: '搜索圈子',
       keepAlive: false
     },
     beforeEnter: (to, from, next) => {
