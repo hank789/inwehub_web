@@ -190,7 +190,7 @@
   }
 
   .mui-media-body {
-    padding-left: 6px;
+    padding-left: 0.16rem;
     min-height: 1.2rem;
   }
 
@@ -215,12 +215,12 @@
   }
 
   .followButton {
-    width: 62px;
-    height: 27px;
+    width: 1.653rem;
+    height: 0.72rem;
     color: #03aef9;
-    line-height: 27px;
+    line-height: 0.72rem;
     text-align: center;
-    font-size: 14px;
+    font-size: 0.373rem;
     display: inline-block;
     border-radius: 1.333rem;
     /*border: 0.026rem solid #DCDCDC;*/
@@ -241,7 +241,7 @@
   .mui-media-body .followWrapper {
     position: absolute;
     top: 0.106rem;
-    right: 1px;
+    right: 0.026rem;
   }
 
   .avatarInner {

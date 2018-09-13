@@ -869,8 +869,8 @@
     }
   }
   .lineMargin {
-    margin-top: -11px;
-    margin-bottom: 14px;
+    margin-top: -0.293rem;
+    margin-bottom: 0.373rem;
   }
   .container-image {
     height: 5.333rem;
@@ -889,8 +889,8 @@
   .detailTitle {
     font-size: 0.506rem;
     line-height: 0.8rem;
-    margin-top: -11px;
-    padding: 0rem 16px 22px;
+    margin-top: -0.293rem;
+    padding: 0rem 0.426rem 0.586rem;
     font-family: PingFangSC-Medium;
   }
   .detail-discover {
@@ -913,7 +913,7 @@
     font-size: 0.426rem;
     color: #444;
     line-height: 0.693rem;
-    margin-bottom: 26px;
+    margin-bottom: 0.693rem;
   }
 
   .contentWrapper .tags {
@@ -927,26 +927,26 @@
   }
 
   .linkWrapper {
-    padding: 0 16px;
+    padding: 0 0.426rem;
   }
 
   .timeContainer {
     display: flex;
     color: #B4B4B6;
-    padding: 0 16px;
+    padding: 0 0.426rem;
     justify-content: space-between;
     .makingCopy {
-      font-size: 12px;
+      font-size: 0.32rem;
     }
     .fromGroup {
-      width: 119px;
-      height: 21px;
-      padding: 0 8px;
-      font-size: 12px;
-      line-height: 21px;
+      width: 3.173rem;
+      height: 0.56rem;
+      padding: 0 0.213rem;
+      font-size: 0.32rem;
+      line-height: 0.56rem;
       text-align: center;
       background: #F7F8FA;
-      border-radius: 100px;
+      border-radius: 2.666rem;
       span {
         color: #808080;
         font-family:PingFangSC-Medium;
@@ -954,7 +954,7 @@
       i {
         color: #B4B4B6;
         font-style: normal;
-        margin-right: 3px;
+        margin-right: 0.08rem;
       }
     }
   }
@@ -1003,7 +1003,7 @@
   .Column .discover_img {
     width: 100%;
     border-radius: 0.106rem;
-    margin-bottom: 26px;
+    margin-bottom: 0.693rem;
     vertical-align: top;
   }
 
@@ -1024,14 +1024,14 @@
   .timeData {
     position: absolute;
     top: 0.906rem;
-    left: 56px;
+    left: 1.493rem;
     font-size: 0.32rem;
     color: #C8C8C8;
     margin-top: -0.106rem;
   }
   .share {
     padding: 0 0.453rem;
-    margin: 5px 0 27px 0;
+    margin: 0.133rem 0 0.72rem 0;
     .location {
       margin-left: -0.08rem;
       .icon {
@@ -1084,8 +1084,8 @@
   }
   // 新增链接样式
   .link {
-    padding: 0 16px;
-    margin-bottom: 26px;
+    padding: 0 0.426rem;
+    margin-bottom: 0.693rem;
     .linkBox {
       padding: 0.266rem;
       border-radius: 0.106rem;
