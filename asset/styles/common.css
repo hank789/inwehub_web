@@ -385,6 +385,10 @@ a.mailLink{
   font-size:0.48rem;
 }
 
+.mui-bar-nav .mui-title{
+  font-family:PingFangSC-Medium;
+}
+
 .mui-bar-dark .mui-icon, .mui-bar-nav .mui-icon{
   color:#fff;
 }
