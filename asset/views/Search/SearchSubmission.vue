@@ -141,19 +141,18 @@
           </template>
         </div>
 
-        <div class="noResult" :class="!list.length ? 'increase' : ''">
+        <div class="noResult" :class="!list.length ? 'increase' : ''" v-if="list.length">
           <svg class="icon addressIcon" aria-hidden="true">
             <use xlink:href="#icon-zanwushuju"></use>
           </svg>
           <div class="noResultText" v-if="list.length">无更多结果，快来发布相关分享~</div>
-          <div class="noResultText" v-else>暂无结果，快来发布相关分享~</div>
           <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
         </div>
         <div class="line-river-big" v-if="list.length"></div>
       </RefreshList>
     </div>
 
-    <div class="noResult" :class="!list.length ? 'increase' : ''"  v-if="!list.length && isShowList">
+    <div class="noResult increase" v-if="!list.length && isShowList">
       <svg class="icon addressIcon" aria-hidden="true">
         <use xlink:href="#icon-zanwushuju"></use>
       </svg>
@@ -228,10 +227,10 @@
     methods: {
       showListHidden () {
         this.showList = false
+        this.isShowList = true
       },
       searchTerms (item) {
         this.searchText = item
-        this.isShowList = !this.isShowList
       },
       searchAdvice () {
         postRequest(`search/suggest`, {
@@ -495,7 +494,7 @@
   .increase {
     position: relative;
     z-index: 1000;
-    top: 3.173rem;
+    top: 224px;
   }
 </style>
 
