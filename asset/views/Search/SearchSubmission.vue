@@ -15,7 +15,7 @@
       </div>
       <!--导航栏-->
       <div class="menu" v-if="!showList || list.length">
-        <span @tap.stop.prevent="">分享<i></i></span>
+        <span @tap.stop.prevent="" class="font-family-medium">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
         <i class="bot"></i>
@@ -151,6 +151,14 @@
         </div>
         <div class="line-river-big" v-if="list.length"></div>
       </RefreshList>
+    </div>
+
+    <div class="noResult" :class="!list.length ? 'increase' : ''"  v-if="!list.length && isShowList">
+      <svg class="icon addressIcon" aria-hidden="true">
+        <use xlink:href="#icon-zanwushuju"></use>
+      </svg>
+      <div class="noResultText">暂无结果，快来发布相关分享~</div>
+      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
     </div>
 
   </div>
@@ -398,7 +406,6 @@
           font-size: 0.373rem;
           position:relative;
           color: #444444;
-          font-weight: 500;
           i{
             position:absolute;
             width:0.72rem;

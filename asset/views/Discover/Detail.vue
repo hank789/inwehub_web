@@ -1024,7 +1024,7 @@
   .timeData {
     position: absolute;
     top: 0.906rem;
-    left: 1.6rem;
+    left: 56px;
     font-size: 0.32rem;
     color: #C8C8C8;
     margin-top: -0.106rem;

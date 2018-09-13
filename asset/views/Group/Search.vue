@@ -15,9 +15,9 @@
       </div>
       <!--导航栏-->
       <div class="menu">
-        <span  @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
+        <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
-        <span >圈子<i></i></span>
+        <span class="font-family-medium">圈子<i></i></span>
         <i class="bot"></i>
       </div>
       <RefreshList

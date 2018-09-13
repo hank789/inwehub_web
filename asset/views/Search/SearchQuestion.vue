@@ -16,7 +16,7 @@
     <!--导航栏-->
     <div class="menu">
       <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
-      <span @tap.stop.prevent="">问答<i></i></span>
+      <span @tap.stop.prevent="" class="font-family-medium">问答<i></i></span>
       <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
       <i class="bot"></i>
     </div>

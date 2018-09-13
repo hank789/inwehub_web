@@ -190,7 +190,7 @@
   }
 
   .mui-media-body {
-    padding-left: 0.266rem;
+    padding-left: 6px;
     min-height: 1.2rem;
   }
 
