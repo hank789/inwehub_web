@@ -1336,7 +1336,13 @@ a {
 }
 /* quill xiangqingye yangshi */
 .quillDetailWrapper p {
+  text-align: justify;
+  color: #444;
+  line-height: 0.693rem;
   font-size: 0.426rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-bottom:0;
 }
 .ql-tooltip{
   display:none;
