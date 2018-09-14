@@ -297,6 +297,8 @@
             &:nth-of-type(2){
               margin-left: 0.266rem;
               font-size: 0.533rem;
+              position: relative;
+              z-index: 10000;
             }
           }
           input{
