@@ -6,7 +6,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
+          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @focus="focus"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
@@ -201,9 +201,7 @@
         searchTextFilter(newValue, (text) => {
           if (newValue) {
             this.isShowCancelButton = true
-            if (oldValue !== '') {
-              this.searchAdvice(newValue)
-            }
+            this.searchAdvice(newValue)
 
             if (newValue !== this.confirmSearchText) {
               this.list = []
@@ -230,6 +228,13 @@
       }
     },
     methods: {
+      focus: function () {
+        this.confirmSearchText = ''
+        this.list = []
+        if (this.searchText) {
+          this.searchAdvice(this.searchText)
+        }
+      },
       prevSuccessCallback: function () {
         this.resultLoading = 0
       },
