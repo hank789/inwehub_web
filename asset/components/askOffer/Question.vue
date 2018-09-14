@@ -21,7 +21,7 @@
     </Images>
 
     <div v-if="ask.price > 0" class="footer">
-      <div class="component-card-money">
+      <div class="component-card-money border-football">
         <div class="left">
           <div class="money">{{ask.price}}<span>元</span></div>
           <label>{{ask.status_short_tip}}</label>
@@ -84,6 +84,12 @@
 </script>
 
 <style scoped="scoped">
+  .text-content{
+    line-height: 0.693rem;
+    font-size: 0.426rem;
+    color:#444;
+    text-align: justify;
+  }
   .mui-table-view:after{
     display: none;
   }
@@ -118,8 +124,6 @@
   }
 
   .content {
-    font-size: 0.426rem;
-    color: #444444;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
   }
@@ -139,5 +143,12 @@
   }
   .container-editor{
     margin-bottom:0 !important;
+  }
+
+  .component-card-money{
+    border:none !important;
+  }
+  .component-card-money:after{
+    border-radius: 0.106rem;
   }
 </style>

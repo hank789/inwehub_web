@@ -21,7 +21,7 @@
 
 
     <div class="footer">
-      <div class="component-card-money">
+      <div class="component-card-money border-football">
         <div class="left">
           <div class="money">{{ask.price}}<span>元</span></div>
           <label>{{getStateDesc(ask.state)}}</label>

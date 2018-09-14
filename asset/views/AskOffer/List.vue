@@ -22,7 +22,7 @@
       >
 
         <div class="container-label" v-if="ask.question.tags.length">
-          <span v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
+          <span class="border-football" v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
         </div>
 
 
@@ -424,7 +424,9 @@
     background: #fff;
   }
 
-
+  .border-football{
+    border:none;
+  }
 </style>
 
 <style>
