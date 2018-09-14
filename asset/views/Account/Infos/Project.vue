@@ -2,7 +2,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
+      <Back :tapCallback="empty"></Back>
       <h1 class="mui-title">项目经历</h1>
 
     </header>

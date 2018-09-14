@@ -2,7 +2,7 @@
 
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <h1 class="mui-title">{{name}}</h1>
       <a v-if="source" @tap.stop.prevent="showOptions"
          class="mui-btn appPageSubmit mui-btn-link mui-pull-right">圈子</a>

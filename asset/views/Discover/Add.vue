@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
+      <Back :tapCallback="empty"></Back>
       <h1 class="mui-title">发布</h1>
       <a @tap.stop.prevent="submit()"
          class="mui-btn appPageSubmit mui-btn-link mui-pull-right">确认分享</a>

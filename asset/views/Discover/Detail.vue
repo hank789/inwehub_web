@@ -1,10 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <!--<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!noback"></a>-->
-      <svg class="icon" aria-hidden="true" v-if="!noback" @tap="$router.back()">
-        <use xlink:href="#icon-fanhui"></use>
-      </svg>
+      <Back v-if="!noback"></Back>
       <h1 class="mui-title" v-text="title"></h1>
     </header>
 
@@ -772,15 +769,6 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .mui-bar-nav {
-    /*background: #d9dadc;*/
-    .icon {
-      color: #3C3E44;
-      font-size: 0.613rem;
-      margin-top: 0.293rem;
-    }
-  }
-
   .active {
     color: #d4d4d4;
   }

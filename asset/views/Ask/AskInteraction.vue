@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
+      <Back :tapCallback="cancelAsk"></Back>
       <h1 class="mui-title">提问</h1>
     </header>
 

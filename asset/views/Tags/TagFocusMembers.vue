@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <h1 class="mui-title">{{tagName ? '关注成员' : '圈子成员'}}</h1>
     </header>
     <div class="mui-content absolute">

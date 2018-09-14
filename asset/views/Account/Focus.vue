@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <h1 class="mui-title" v-if="uuid == this.$route.params.id">关注我的</h1>
       <h1 class="mui-title" v-else>关注Ta的</h1>
     </header>

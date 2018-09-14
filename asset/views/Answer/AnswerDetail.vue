@@ -2,7 +2,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav mui-bar-top">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <h1 class="mui-title">专业问答</h1>
     </header>
 

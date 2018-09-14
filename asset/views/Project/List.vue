@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-dark mui-bar-nav goheader">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="goBack()"></a>
+      <Back :tapCallback="goBack"></Back>
       <h1 class="mui-title">需求管理</h1>
     </header>
 

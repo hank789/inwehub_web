@@ -1,7 +1,7 @@
 <template>
   <div class="vueWrapper">
     <header class="mui-bar mui-bar-dark mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" v-show="!isShare || (isShare && canBack)"></a>
+      <Back v-show="!isShare || (isShare && canBack)"></Back>
       <h1 class="mui-title">个人名片</h1>
       <svg class="icon" aria-hidden="true" @tap.stop.prevent="share">
         <use xlink:href="#icon-shoucang-xiao"></use>

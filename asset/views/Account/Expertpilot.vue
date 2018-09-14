@@ -3,7 +3,7 @@
     <div class="bmpreplace"></div>
   <div class="mui-content absolute">
     <div class="header">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <ul class="expertExplanation">
         <p  class="expertSign">
           <svg class="icon" aria-hidden="true">

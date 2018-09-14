@@ -2,7 +2,7 @@
   <div>
     <div class="mui-content" v-if="!loading">
       <div class="projectPreviewCard">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <Back></Back>
         <div class="header">
           <div class="avatar">
             <div class="avatarInner"><img class="avatar" :src="avatar_url">

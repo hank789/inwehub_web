@@ -3,7 +3,7 @@
   <div class="mui-content">
 
     <div class="basic">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <div class="info">
         <h5>开通企业版</h5>
         发布项目

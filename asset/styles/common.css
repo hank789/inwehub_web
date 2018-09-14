@@ -3159,3 +3159,8 @@ a {
   line-height: 0.906rem;
   background: #03AEF9;
   border-radius: 2.666rem;}
+
+
+.mui-icon-back:before, .mui-icon-left-nav:before{
+  font-size:27px;
+}
