@@ -51,6 +51,10 @@ import loadingGif from './../../statics/images/loading.gif'
 import StarRating from './../../components/star-rating/star-rating'
 
 Vue.component('star-rating', StarRating)
+
+import Back from './../../components/back.vue'
+Vue.component('Back', Back)
+
 window.loading_gif = loadingGif
 
 // mui的插件；
