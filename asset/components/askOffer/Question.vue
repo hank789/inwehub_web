@@ -21,7 +21,7 @@
     </Images>
 
     <div v-if="ask.price > 0" class="footer">
-      <div class="component-card-money">
+      <div class="component-card-money border-football">
         <div class="left">
           <div class="money">{{ask.price}}<span>元</span></div>
           <label>{{ask.status_short_tip}}</label>
@@ -143,5 +143,12 @@
   }
   .container-editor{
     margin-bottom:0 !important;
+  }
+
+  .component-card-money{
+    border:none !important;
+  }
+  .component-card-money:after{
+    border-radius: 0.106rem;
   }
 </style>
