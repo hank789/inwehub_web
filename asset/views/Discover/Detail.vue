@@ -1294,8 +1294,11 @@
     }
   }
 
-  .container-pdf-list{
+  .container-pdf-list {
     padding: 0rem 0.4rem;
+    .pdf {
+      margin-bottom: 26px;
+    }
   }
 
   .hiddenWrapper{
