@@ -84,6 +84,12 @@
 </script>
 
 <style scoped="scoped">
+  .text-content{
+    line-height: 0.693rem;
+    font-size: 0.426rem;
+    color:#444;
+    text-align: justify;
+  }
   .mui-table-view:after{
     display: none;
   }
@@ -118,8 +124,6 @@
   }
 
   .content {
-    font-size: 0.426rem;
-    color: #444444;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
   }

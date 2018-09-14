@@ -468,6 +468,9 @@
     background: #f3f4f6;
     border:none;
     padding:0;
+    line-height: 0.693rem;
+    font-size: 0.426rem;
+    color:#444;
   }
 
   .container-upload-images{
