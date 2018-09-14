@@ -20,7 +20,7 @@
         <i class="bot"></i>
       </div>
 
-      <div class="hotSearch" v-if="searchText === ''">
+      <div class="hotSearch" v-if="getCurrentMode === 'history'">
         <div class="hotSearchText">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-huo"></use>
@@ -38,14 +38,14 @@
         </div>
       </div>
 
-      <div class="searchList" v-if="searchAdviceList.length">
+      <div class="searchList" v-if="getCurrentMode === 'match'">
         <div v-for="(item, index) in searchAdviceList" :key="index" v-if="searchAdviceList.length !== 1" @tap.stop.prevent="selectConfirmSearchText(item)">
           {{item}}
           <i class="bot"></i>
         </div>
       </div>
 
-      <div class="searchList" v-if="!searchAdviceList.length && searchText && !this.list.length && confirmSearchText !== searchText">
+      <div class="searchList" v-if="getCurrentMode === 'match' && !searchAdviceList.length">
         <div class="listOne" @tap.stop.prevent="selectConfirmSearchText(searchText)">
           查看“{{searchText}}”的搜索结果
             <i class="bot"></i>
@@ -53,7 +53,7 @@
       </div>
 
       <RefreshList
-        v-if="confirmSearchText"
+        v-if="getCurrentMode === 'result'"
         v-model="list"
         :api="'search/submission'"
         :pageMode="true"
@@ -61,6 +61,7 @@
         :nextOtherData="dataList"
         :autoShowEmpty="false"
         :isShowUpToRefreshDescription="false"
+        :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
         <div>
           <template v-for="(item, index) in list">
@@ -153,7 +154,7 @@
       </RefreshList>
     </div>
 
-    <div class="noResult increase" v-if="!list.length && this.searchText !== ''">
+    <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
       <svg class="icon addressIcon" aria-hidden="true">
         <use xlink:href="#icon-zanwushuju"></use>
       </svg>
@@ -178,6 +179,7 @@
         isShowCancelButton: false,
         list: [],
         searchAdviceList: [],
+        resultLoading: 1,
         hotSearchHistory: {
           history: [],
           top: []
@@ -200,7 +202,11 @@
           if (newValue) {
             this.isShowCancelButton = true
             if (oldValue !== '') {
-              this.searchAdvice()
+              this.searchAdvice(newValue)
+            }
+
+            if (newValue !== this.confirmSearchText) {
+              this.list = []
             }
           }
         })
@@ -210,9 +216,23 @@
     computed: {
       dataList () {
         return {search_word: this.confirmSearchText}
+      },
+      getCurrentMode () {
+        if (this.searchText === '') {
+          return 'history'
+        }
+
+        if (this.searchText !== this.confirmSearchText) {
+          return 'match'
+        }
+
+        return 'result'
       }
     },
     methods: {
+      prevSuccessCallback: function () {
+        this.resultLoading = 0
+      },
       refreshPageData: function () {
         var text = this.$route.query.text
         if (text) {
@@ -228,13 +248,14 @@
       selectConfirmSearchText (text) {
         this.searchText = text
         if (text) {
+          this.resultLoading = 1
           this.confirmSearchText = text
         }
         this.searchAdviceList = []
       },
-      searchAdvice () {
+      searchAdvice (searchText) {
         postRequest(`search/suggest`, {
-          search_word: this.searchText
+          search_word: searchText
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
