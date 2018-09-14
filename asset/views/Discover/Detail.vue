@@ -776,8 +776,8 @@
     /*background: #d9dadc;*/
     .icon {
       color: #3C3E44;
-      font-size: 25px;
-      margin-top: 10px;
+      font-size: 23px;
+      margin-top: 11px;
     }
   }
 
@@ -881,7 +881,7 @@
     }
   }
   .lineMargin {
-    margin-top: -0.293rem;
+    margin-top: -16px;
     margin-bottom: 0.373rem;
   }
   .container-image {
