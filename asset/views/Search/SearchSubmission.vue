@@ -6,22 +6,21 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @input="newValue($event)"/>
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
+          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
         </p>
         <p class="font-family-medium" @tap.stop.prevent="back()">取消</p>
       </div>
-      <!--导航栏-->
-      <div class="menu" v-if="!showList || list.length">
+      <div class="menu" v-if="list.length">
         <span @tap.stop.prevent="" class="font-family-medium">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
         <i class="bot"></i>
       </div>
 
-      <div class="hotSearch" v-else-if="searchText == ''">
+      <div class="hotSearch" v-if="searchText === ''">
         <div class="hotSearchText">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-huo"></use>
@@ -29,30 +28,32 @@
           <span class="font-family-medium">热搜</span>
         </div>
         <div class="hotSearchList">
-          <span v-for="(item, index) in hotSearchHistory.top" :key="index" @tap.stop.prevent="searchTerms(item)">{{item}}</span>
+          <span v-for="(item, index) in hotSearchHistory.top" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">{{item}}</span>
         </div>
         <div class="hotSearchText history">
           <span class="font-family-medium">历史</span>
         </div>
         <div class="hotSearchList">
-          <span v-for="(item, index) in hotSearchHistory.history" :key="index" @tap.stop.prevent="searchTerms(item)">{{item}}</span>
+          <span v-for="(item, index) in hotSearchHistory.history" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">{{item}}</span>
         </div>
       </div>
 
-      <div class="searchList" v-else>
-        <div v-for="(item, index) in searchAdviceList" :key="index" v-if="searchAdviceList.length !== 1 && searchText !== '' && list.length == 0" @tap.stop.prevent="searchTerms(item)">
+      <div class="searchList" v-if="searchAdviceList.length">
+        <div v-for="(item, index) in searchAdviceList" :key="index" v-if="searchAdviceList.length !== 1" @tap.stop.prevent="selectConfirmSearchText(item)">
           {{item}}
           <i class="bot"></i>
         </div>
-        <div class="listOne" v-if="searchAdviceList.length == 1 && searchText !== '' && !list.length && showList" @tap.stop.prevent="showListHidden">
+      </div>
+
+      <div class="searchList" v-if="!searchAdviceList.length && searchText && !this.list.length && confirmSearchText !== searchText">
+        <div class="listOne" @tap.stop.prevent="selectConfirmSearchText(searchText)">
           查看“{{searchText}}”的搜索结果
-          <i class="bot"></i>
+            <i class="bot"></i>
         </div>
       </div>
 
-
       <RefreshList
-        v-if="dataList != null && isShowList"
+        v-if="confirmSearchText"
         v-model="list"
         :api="'search/submission'"
         :pageMode="true"
@@ -152,7 +153,7 @@
       </RefreshList>
     </div>
 
-    <div class="noResult increase" v-if="!list.length && isShowList">
+    <div class="noResult increase" v-if="!list.length && this.searchText !== ''">
       <svg class="icon addressIcon" aria-hidden="true">
         <use xlink:href="#icon-zanwushuju"></use>
       </svg>
@@ -164,25 +165,17 @@
 </template>
 
 <script type="text/javascript">
-  import { searchText } from '../../utils/search'
+  import { searchText as searchTextFilter } from '../../utils/search'
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
-  import { getLocalUserInfo } from '../../utils/user'
-  import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
-  const currentUser = getLocalUserInfo()
 
   export default {
     data () {
       return {
-        userId: currentUser.user_id,
-        user_level: currentUser.user_level,
         searchText: '',
-        isShow: false,
-        isHiddenMenu: false,
-        showList: true,
-        isShowList: false,
-        dataList: null,
+        confirmSearchText: '',
+        isShowCancelButton: false,
         list: [],
         searchAdviceList: [],
         hotSearchHistory: {
@@ -196,55 +189,45 @@
       TextDetail
     },
     created () {
-      var text = this.$route.query.text
-      if (text) {
-        this.searchText = text
-      }
+      this.refreshPageData()
     },
     watch: {
-      searchText: function (newValue) {
-//        if (this.user_level >= 3) {
-        if (newValue) {
-          searchText(newValue, (text) => {
-            this.dataList = {
-              search_word: newValue
+      searchText: function (newValue, oldValue) {
+        searchTextFilter(newValue, (text) => {
+          if (newValue) {
+            this.isShowCancelButton = true
+            if (oldValue !== '') {
+              this.searchAdvice()
             }
-          })
-          this.isShow = true
-          this.searchAdvice()
-        } else {
-          this.isShow = false
-        }
-//        } else {
-//          userAbility.jumpJudgeGrade(this)
-//        }
+          }
+        })
       }
     },
-    mounted () {
-      this.hotSearch()
+    mounted () {},
+    computed: {
+      dataList () {
+        return {search_word: this.confirmSearchText}
+      }
     },
-    updated () {},
     methods: {
-      newValue: function (event) {
-        console.log('我正在输入新的东西')
-        if (this.searchText !== '') {
-          this.searchAdvice()
+      refreshPageData: function () {
+        var text = this.$route.query.text
+        if (text) {
+          this.searchText = text
         }
-        this.isShowList = false
+        this.hotSearch()
       },
       enterKeyCode: function (ev) {
         if (ev.keyCode === 13) {
-          console.log('我按了回车键我按了回车键')
-          this.isShowList = true
-          this.showList = false
+          this.selectConfirmSearchText(this.searchText)
         }
       },
-      showListHidden () {
-        this.showList = false
-        this.isShowList = true
-      },
-      searchTerms (item) {
-        this.searchText = item
+      selectConfirmSearchText (text) {
+        this.searchText = text
+        if (text) {
+          this.confirmSearchText = text
+        }
+        this.searchAdviceList = []
       },
       searchAdvice () {
         postRequest(`search/suggest`, {
@@ -258,7 +241,6 @@
           this.searchAdviceList = response.data.data.suggest
         })
       },
-      // 热搜
       hotSearch () {
         postRequest(`search/topInfo`, {}).then(response => {
           var code = response.data.code
@@ -268,9 +250,6 @@
           }
           this.hotSearchHistory = response.data.data
         })
-      },
-      textToLink (text) {
-        return transferTagToLink(secureHtml(textToLinkHtml(text)))
       },
       toResume (uuid) {
         if (!uuid) {
