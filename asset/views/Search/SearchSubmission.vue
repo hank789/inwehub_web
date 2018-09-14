@@ -191,6 +191,9 @@
     created () {
       this.refreshPageData()
     },
+    activated () {
+      this.refreshPageData()
+    },
     watch: {
       searchText: function (newValue, oldValue) {
         searchTextFilter(newValue, (text) => {
