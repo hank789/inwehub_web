@@ -14,7 +14,7 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu" v-if="list.length">
+      <div class="menu" v-if="list.length || getCurrentMode === 'result'">
         <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span class="font-family-medium">圈子<i></i></span>
@@ -89,7 +89,7 @@
           </div>
 
         <div class="line-river-big" v-if="list.length"></div>
-        <div class="noResult" :class="!list.length ? 'increase' : ''" v-if="list.length">
+        <div class="noResult" v-if="list.length">
           <svg class="icon addressIcon" aria-hidden="true">
             <use xlink:href="#icon-zanwushuju"></use>
           </svg>
@@ -147,9 +147,7 @@
         searchTextFilter(newValue, (text) => {
           if (newValue) {
             this.isShowCancelButton = true
-            if (oldValue !== '') {
-              this.searchAdvice(newValue)
-            }
+            this.searchAdvice(newValue)
 
             if (newValue !== this.confirmSearchText) {
               this.list = []
@@ -176,6 +174,13 @@
       }
     },
     methods: {
+      focus: function () {
+        this.confirmSearchText = ''
+        this.list = []
+        if (this.searchText) {
+          this.searchAdvice(this.searchText)
+        }
+      },
       prevSuccessCallback: function () {
         this.resultLoading = 0
       },
@@ -236,36 +241,6 @@
         var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
         var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
         return newstr
-      },
-      toDetail (item) {
-        switch (item.feed_type) {
-          case 1:
-          case 2:
-          case 3:
-          case 5:
-          case 6:
-          case 11:
-          case 12:
-          case 14:
-          case 15:
-          case 16:
-            this.$router.pushPlus(item.url, 'list-detail-page')
-            break
-          case -1:
-            // 已废弃
-            var linkArticle = {
-              view_url: item.url,
-              id: item.feed.submission_id,
-              title: item.feed.title,
-              comment_url: item.feed.comment_url,
-              img_url: item.feed.img
-            }
-            this.goArticle(linkArticle)
-            break
-          default:
-            this.$router.pushPlus(item.url, 'list-detail-page')
-            break
-        }
       },
       // 时间处理；
       timeago (time) {
@@ -433,7 +408,7 @@
   .increase {
     position: relative;
     z-index: 1000;
-    top: 3.173rem;
+    top: 5.973rem;
   }
 
 </style>

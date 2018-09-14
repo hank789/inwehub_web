@@ -9,7 +9,7 @@
           <div class="tab active">热点</div>
           <div class="tab" @tap.stop.prevent="toDomain()">领域</div>
         </div>
-        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
+        <svg class="icon searchIcon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>
