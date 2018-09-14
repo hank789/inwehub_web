@@ -910,7 +910,7 @@
     margin-top: 0 !important;
   }
   .mui-table-view-cell {
-    padding-top: 5px;
+    padding-top: 0.133rem;
   }
 
   .detail-discover:before {
@@ -1038,7 +1038,7 @@
   }
   .timeData {
     position: absolute;
-    top: 27px;
+    top: 0.72rem;
     left: 1.493rem;
     font-size: 0.32rem;
     color: #C8C8C8;
@@ -1326,7 +1326,7 @@
 
 <style type="text/css">
   .realnameMtop {
-    margin-top: 0px !important;
+    margin-top: 0rem !important;
   }
 </style>
 
