@@ -40,7 +40,7 @@
       </div>
 
       <div class="searchList" v-if="getCurrentMode === 'match'">
-        <div v-for="(item, index) in searchAdviceList" :key="index" v-if="searchAdviceList.length !== 1" @tap.stop.prevent="selectConfirmSearchText(item)">
+        <div v-for="(item, index) in searchAdviceList" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">
           {{item}}
           <i class="bot"></i>
         </div>
@@ -55,6 +55,7 @@
 
       <RefreshList
         v-if="getCurrentMode === 'result'"
+        ref="refreshlist"
         v-model="list"
         :api="'search/group'"
         :pageMode="true"
@@ -188,6 +189,10 @@
         var text = this.$route.query.text
         if (text) {
           this.searchText = text
+          this.selectConfirmSearchText(text)
+          setTimeout(() => {
+            this.$refs.refreshlist.refreshPageData(this.dataList)
+          }, 200)
         }
         this.hotSearch()
       },
@@ -257,6 +262,9 @@
 </script>
 
 <style lang="less" scoped>
+  .mui-android .mui-content .menu .bot {
+    height: 1px;
+  }
   .bot {
     position: absolute;
     right: 0;
