@@ -3142,11 +3142,12 @@ a {
   height: 0.906rem;
   margin: 0 auto;
   color: #C8C8C8;
+  padding-top: 2px;
   padding-left: 0.293rem;
   line-height: 0.853rem;
   background: #F3F4F6;
   border-radius: 2.666rem;
-  border: 0.026rem solid #DCDCDC;}
+  /*border: 0.026rem solid #DCDCDC;*/}
 .groupSearchWrapper .groupSearch span {
   font-size: 0.373rem;
   margin-left: 0.053rem;}

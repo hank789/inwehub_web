@@ -28,7 +28,7 @@
         class="listWrapper"
       >
         <div class="groupSearchWrapper" @tap.stop.prevent="$router.pushPlus('/group/search','list-detail-page-three')">
-          <div class="groupSearch">
+          <div class="groupSearch border-football">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-sousuo"></use>
             </svg>
