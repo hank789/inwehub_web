@@ -196,6 +196,12 @@
       TextDetail
     },
     created () {
+      // var text = this.$route.query.text
+      // if (text) {
+      //   this.searchText = text
+      // }
+    },
+    activated () {
       var text = this.$route.query.text
       if (text) {
         this.searchText = text
