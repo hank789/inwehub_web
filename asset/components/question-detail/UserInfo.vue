@@ -216,16 +216,16 @@
 
   .followButton {
     width: 1.653rem;
-    height: 27px;
+    height: 0.72rem;
     color: #03aef9;
-    line-height: 29px;
+    line-height: 0.773rem;
     text-align: center;
     font-size: 0.373rem;
     display: inline-block;
     border-radius: 1.333rem;
   }
   .mui-android .followButton {
-    line-height: 29px;
+    line-height: 0.773rem;
   }
 
   .followButton.active {

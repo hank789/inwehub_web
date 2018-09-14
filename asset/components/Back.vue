@@ -35,7 +35,7 @@
 <style scoped="scoped" lang="less" rel="stylesheet/less">
   .backWrapper{
     display: inline-block;
-    padding-right:10px;
+    padding-right:0.266rem;
   }
 .mui-bar-nav {
   /*background: #d9dadc;*/

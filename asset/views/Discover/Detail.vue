@@ -1297,7 +1297,7 @@
   .container-pdf-list {
     padding: 0rem 0.4rem;
     .pdf {
-      margin-bottom: 26px;
+      margin-bottom: 0.693rem;
     }
   }
 

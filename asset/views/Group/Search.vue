@@ -263,7 +263,7 @@
 
 <style lang="less" scoped>
   .mui-android .mui-content .menu .bot {
-    height: 1px;
+    height: 0.026rem;
   }
   .bot {
     position: absolute;
@@ -314,14 +314,14 @@
             }
           }
           input{
-            width: 226px !important;
+            width: 6.026rem !important;
             height:0.853rem;
             border: none;
             background: #f3f4f6;
             font-size: 0.373rem;
             color: #444444;
             position: absolute;
-            left: 32px;
+            left: 0.853rem;
           }
         }
         &:nth-of-type(2){

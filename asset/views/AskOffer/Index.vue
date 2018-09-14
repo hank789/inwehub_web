@@ -140,7 +140,7 @@
     border: none;
   }
   .line-river-top:after {
-    top: -1px;
+    top: -0.026rem;
   }
   .component-search{
     position: absolute;
