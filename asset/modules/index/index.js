@@ -52,7 +52,7 @@ import StarRating from './../../components/star-rating/star-rating'
 
 Vue.component('star-rating', StarRating)
 
-import Back from './../../components/back.vue'
+import Back from './../../components/Back.vue'
 Vue.component('Back', Back)
 
 window.loading_gif = loadingGif
