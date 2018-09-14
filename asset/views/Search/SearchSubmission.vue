@@ -2,7 +2,7 @@
   <div>
     <div class="mui-content searchSubmission">
       <div class="search">
-        <p>
+        <p class="border-football">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
@@ -366,6 +366,7 @@
       top: 2.346rem;
     }
     .search{
+      position: relative;
       width:100%;
       padding: 0 0.426rem;
       display: flex;
@@ -381,7 +382,7 @@
           height:0.906rem;
           border-radius: 1.333rem;
           background: #f3f4f6;
-          border:0.026rem solid #dcdcdc;
+          /*border:0.026rem solid #dcdcdc;*/
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -398,12 +399,14 @@
             }
           }
           input{
-            margin-top: 0.4rem;
+            width: 226px !important;
             height:0.853rem;
             border: none;
             background: #f3f4f6;
             font-size: 0.373rem;
             color: #444444;
+            position: absolute;
+            left: 32px;
           }
         }
         &:nth-of-type(2){

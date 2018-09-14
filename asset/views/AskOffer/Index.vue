@@ -22,6 +22,7 @@
         <div class="tab" :class="{active: filter === 1}" @tap.stop.prevent="switchFilter(1)"><span>悬赏大厅</span></div>
         <div class="tab" :class="{active: filter === 2}"  @tap.stop.prevent="switchFilter(2)"><span>热门问答</span></div>
       </div>
+      <div class="line-river-after line-river-top"></div>
       <!--推荐问答 -->
       <RefreshList
         ref="RefreshList"
@@ -34,7 +35,7 @@
       >
         <template v-for="(item, index) in list">
           <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
-            <div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
+            <!--<div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>-->
             <div class="question text-line-3">
               <label v-if="item.price>0" class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
             </div>
@@ -134,6 +135,13 @@
 
 <style lang="less" scoped>
   /*滚动区域*/
+
+  .container-tabs {
+    border: none;
+  }
+  .line-river-top:after {
+    top: -1px;
+  }
   .component-search{
     position: absolute;
     top: 0.133rem;
@@ -169,5 +177,8 @@
         margin-right: 0.08rem;
       }
     }
+  }
+  .container-list-question .question {
+    margin-top: 0 !important;
   }
 </style>
