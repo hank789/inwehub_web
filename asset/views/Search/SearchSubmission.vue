@@ -407,6 +407,7 @@
             color: #444444;
             position: absolute;
             left: 0.853rem;
+            z-index: 100000;
           }
         }
         &:nth-of-type(2){
