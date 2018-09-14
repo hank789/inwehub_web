@@ -2,7 +2,7 @@
   <div>
     <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn">
       <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-gengduo"></use>
+        <use xlink:href="#icon-gengduo1"></use>
       </svg>
     </a>
 
@@ -601,6 +601,7 @@
     top: 0.266rem;
     z-index: 11;
     color: #3c3e44;
+    font-size: 0.56rem;
   }
 
   .resumeWrapper .shareBtn {

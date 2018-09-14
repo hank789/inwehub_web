@@ -11,7 +11,7 @@
           <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
           <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
         </div>
-        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
+        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>

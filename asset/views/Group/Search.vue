@@ -2,112 +2,256 @@
   <div>
     <div class="mui-content">
       <div class="search">
-        <p>
+        <p class="border-football">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder=""   v-model.trim="searchText" />
-          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShow">
+          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
         </p>
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu">
-        <span  @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
+      <div class="menu" v-if="list.length || getCurrentMode === 'result'">
+        <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
-        <span >圈子<i></i></span>
+        <span class="font-family-medium">圈子<i></i></span>
         <i class="bot"></i>
       </div>
-      <ul class="pilot">
-        <li @tap.stop.prevent="$router.pushPlus('/group/add')">
-          <span>我想创建相关圈子</span>
+
+      <div class="hotSearch" v-if="getCurrentMode === 'history'">
+        <div class="hotSearchText">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-chakangengduojiantou"></use>
+            <use xlink:href="#icon-huo"></use>
           </svg>
-          <span>建圈子</span>
-        </li>
-        <p></p>
-      </ul>
+          <span class="font-family-medium">热搜</span>
+        </div>
+        <div class="hotSearchList">
+          <span v-for="(item, index) in hotSearchHistory.top" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">{{item}}</span>
+        </div>
+        <div class="hotSearchText history">
+          <span class="font-family-medium">历史</span>
+        </div>
+        <div class="hotSearchList">
+          <span v-for="(item, index) in hotSearchHistory.history" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">{{item}}</span>
+        </div>
+      </div>
+
+      <div class="searchList" v-if="getCurrentMode === 'match'">
+        <div v-for="(item, index) in searchAdviceList" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">
+          {{item}}
+          <i class="bot"></i>
+        </div>
+      </div>
+
+      <div class="searchList" v-if="getCurrentMode === 'match' && !searchAdviceList.length">
+        <div class="listOne" @tap.stop.prevent="selectConfirmSearchText(searchText)">
+          查看“{{searchText}}”的搜索结果
+          <i class="bot"></i>
+        </div>
+      </div>
+
       <RefreshList
-        v-if="dataList != null"
+        v-if="getCurrentMode === 'result'"
+        ref="refreshlist"
         v-model="list"
         :api="'search/group'"
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
+        :autoShowEmpty="false"
+        :isShowUpToRefreshDescription="false"
+        :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
           <div class="group-container" v-for="(item, index) in list" v-if="list.length">
-            <groupsList  class="big"
-                         :list="item"
-                         :searchText="searchText"
-                         :search = 'true'
-            ></groupsList>
+            <div class="component-group" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
+              <div class="groupLogo">
+                <img class="lazyImg" v-lazy="item.logo" />
+              </div>
+              <div class="groupContent">
+                <div class="groupName">
+                  <span class="font-family-medium text-line-1" v-html="getHighlight(item.name)"></span>
+                  <span v-if="item.is_joined === 3">圈主</span>
+                </div>
+                <span class="groupDescribe text-line-1">{{item.description}}</span>
+                <span class="groupText">{{item.subscribers}}人气</span>
+                <span class="groupText">{{item.articles}}分享</span>
+                <span class="groupText" v-if="!item.public">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-simi"></use>
+              </svg>
+              私密
+            </span>
+              </div>
+              <i class="bot" v-if="index !== list.length-1"></i>
+            </div>
           </div>
-        <!--&lt;!&ndash;<div slot="emptyBottom">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="question_ask" @tap.stop.prevent="$router.pushPlus('/discover/add')">提问</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+        <div class="line-river-big" v-if="list.length"></div>
+        <div class="noResult" v-if="list.length">
+          <svg class="icon addressIcon" aria-hidden="true">
+            <use xlink:href="#icon-zanwushuju"></use>
+          </svg>
+          <div class="noResultText" v-if="list.length">无更多结果，快来创建新的圈子~</div>
+          <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">建圈子</div>
+        </div>
+        <div class="line-river-big" v-if="list.length"></div>
       </RefreshList>
     </div>
+
+    <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
+      <svg class="icon addressIcon" aria-hidden="true">
+        <use xlink:href="#icon-zanwushuju"></use>
+      </svg>
+      <div class="noResultText">暂无结果，快来创建新的圈子~</div>
+      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">建圈子</div>
+    </div>
+
   </div>
 </template>
 
 <script type="text/javascript">
-  import { searchText } from '../../utils/search'
+  import { searchText as searchTextFilter } from '../../utils/search'
+  import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
-  //  import userAbility from '../../utils/userAbility'
-  import { getLocalUserInfo } from '../../utils/user'
-  import groupsList from '../../components/groups/GroupsList.vue'
-  const currentUser = getLocalUserInfo()
+  import TextDetail from '../../components/discover/TextDetail'
 
   export default {
     data () {
       return {
-        userId: currentUser.user_id,
-        user_level: currentUser.user_level,
         searchText: '',
-        isShow: false,
-        dataList: null,
-        list: []
+        confirmSearchText: '',
+        isShowCancelButton: false,
+        list: [],
+        searchAdviceList: [],
+        resultLoading: 1,
+        hotSearchHistory: {
+          history: [],
+          top: []
+        }
       }
     },
     components: {
       RefreshList,
-      groupsList
+      TextDetail
     },
     created () {
-      var text = this.$route.query.text
-      if (text) {
-        this.searchText = text
-      }
+      this.refreshPageData()
+    },
+    activated () {
+      this.refreshPageData()
     },
     watch: {
-      searchText: function (newValue) {
-//        if (this.user_level >= 3) {
-        if (newValue) {
-          searchText(newValue, (text) => {
-            this.dataList = {
-              search_word: newValue
+      searchText: function (newValue, oldValue) {
+        searchTextFilter(newValue, (text) => {
+          if (newValue) {
+            this.isShowCancelButton = true
+            this.searchAdvice(newValue)
+
+            if (newValue !== this.confirmSearchText) {
+              this.list = []
             }
-          })
-          this.isShow = true
-        } else {
-          this.isShow = false
-        }
-//        } else {
-//          userAbility.jumpJudgeGrade(this)
-//        }
+          }
+        })
       }
     },
-    mounted () {
-    },
-    updated () {
+    mounted () {},
+    computed: {
+      dataList () {
+        return {search_word: this.confirmSearchText}
+      },
+      getCurrentMode () {
+        if (this.searchText === '') {
+          return 'history'
+        }
+
+        if (this.searchText !== this.confirmSearchText) {
+          return 'match'
+        }
+
+        return 'result'
+      }
     },
     methods: {
+      focus: function () {
+        this.confirmSearchText = ''
+        this.list = []
+        if (this.searchText) {
+          this.searchAdvice(this.searchText)
+        }
+      },
+      prevSuccessCallback: function () {
+        this.resultLoading = 0
+      },
+      refreshPageData: function () {
+        var text = this.$route.query.text
+        if (text) {
+          this.searchText = text
+          this.selectConfirmSearchText(text)
+          setTimeout(() => {
+            this.$refs.refreshlist.refreshPageData(this.dataList)
+          }, 200)
+        }
+        this.hotSearch()
+      },
+      enterKeyCode: function (ev) {
+        if (ev.keyCode === 13) {
+          this.selectConfirmSearchText(this.searchText)
+        }
+      },
+      selectConfirmSearchText (text) {
+        this.searchText = text
+        if (text) {
+          this.resultLoading = 1
+          this.confirmSearchText = text
+        }
+        this.searchAdviceList = []
+      },
+      searchAdvice (searchText) {
+        postRequest(`search/suggest`, {
+          search_word: searchText
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.searchAdviceList = response.data.data.suggest
+        })
+      },
+      hotSearch () {
+        postRequest(`search/topInfo`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.hotSearchHistory = response.data.data
+        })
+      },
+      toResume (uuid) {
+        if (!uuid) {
+          return false
+        }
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       back () {
         window.mui.back()
         return
+      },
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
+      },
+      // 时间处理；
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
       },
       //  点击清空输入框
       empty () {
@@ -118,22 +262,9 @@
 </script>
 
 <style lang="less" scoped>
-  /*清掉自带样式*/
-
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
+  .mui-android .mui-content .menu .bot {
+    height: 0.026rem;
   }
-
   .bot {
     position: absolute;
     right: 0;
@@ -147,24 +278,26 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 3.630rem;
+      top: 2.346rem;
     }
     .search{
+      position: relative;
       width:100%;
-      height:1.173rem;
-      background: #ffffff;
-      padding: 0 4%;
+      padding: 0 0.426rem;
       display: flex;
+      height:1.173rem;
+      margin-top: 0.133rem;
       flex-direction: row;
       align-items: center;
+      background: #ffffff;
       justify-content: space-between;
       p{
         &:nth-of-type(1){
-          width:75%;
+          width: 7.813rem;
           height:0.906rem;
           border-radius: 1.333rem;
           background: #f3f4f6;
-          border:0.026rem solid #dcdcdc;
+          /*border:0.026rem solid #dcdcdc;*/
           display: flex;
           flex-direction: row;
           align-items: center;
@@ -178,26 +311,28 @@
             &:nth-of-type(2){
               margin-left: 0.266rem;
               font-size: 0.533rem;
+              position: relative;
+              z-index: 10000;
             }
           }
           input{
-            margin-top: 0.4rem;
+            width: 6.026rem !important;
             height:0.853rem;
             border: none;
             background: #f3f4f6;
             font-size: 0.373rem;
             color: #444444;
+            position: absolute;
+            left: 0.853rem;
+            z-index: 100000;
           }
         }
         &:nth-of-type(2){
-          width:1.76rem;
-          height:0.906rem;
-          background: #03aef9;
-          border-radius: 1.333rem;
-          font-size: 0.373rem;
-          color: #ffffff;
-          text-align: center;
-          line-height: 0.906rem;
+          width: 1.066rem;
+          font-size: 0.4rem;
+          color: #03aef9;
+          text-align: right;
+          line-height: 0.56rem;
         }
       }
     }
@@ -236,48 +371,58 @@
         }
       }
     }
-    /*引导*/
-    .pilot{
-      width: 100%;
-      overflow: hidden;
-      li{
-        width:100%;
-        padding: 0 4%;
-        height:1.173rem;
-        position: relative;
-        line-height: 1.173rem;
-        background: #fff;
-        span{
-          font-size:0.346rem;
-          color: #808080;
-          &:nth-of-type(2){
-            font-size:0.4rem;
-            font-weight: 500;
-            color: #235280;
-            float: right;
-            margin-right: 0.373rem;
-          }
-        }
-        svg{
-          float: right;
-          margin-top: 0.373rem;
-        }
-      }
-      p{
-        width:100%;
-        height:0.266rem;
-        background: #f3f4f6;
-      }
-    }
-    /**/
   }
 
-.group-container{
-  width:92%;
-  margin-left: 4%;
-  overflow: hidden;
-}
+  .hotSearch {
+    padding: 0.32rem 0.426rem;
+    .history {
+      margin-top: 0.16rem;
+    }
+    .hotSearchText {
+      padding-bottom: 0.32rem;
+      span {
+        color: #444444;
+        font-size: 0.426rem;
+        line-height: 0.586rem;
+      }
+      .icon {
+        color: #FA4975;
+      }
+    }
+    .hotSearchList {
+      span {
+        color: #444444;
+        font-size: 0.32rem;
+        padding: 0.133rem 0.266rem;
+        background: #F3F4F6;
+        border-radius: 2.666rem;
+        margin: 0 0.133rem 0.266rem 0;
+        display: inline-block;
+      }
+    }
+  }
 
+  /*搜索建议*/
+  .searchList {
+    padding: 0 0.426rem;
+    position: relative;
+    z-index: 1000;
+    div {
+      color: #808080;
+      font-size: 0.4rem;
+      padding: 0.32rem 0;
+      line-height: 0.586rem;
+      position: relative;
+    }
+    .listOne {
+      color: #03AEF9;
+    }
+  }
 
+  .increase {
+    position: relative;
+    z-index: 1000;
+    top: 5.973rem;
+  }
 
 </style>

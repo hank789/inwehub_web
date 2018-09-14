@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <h1 class="mui-title">问答</h1>
     </header>
 
@@ -22,7 +22,7 @@
       >
 
         <div class="container-label" v-if="ask.question.tags.length">
-          <span v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
+          <span class="border-football" v-for="(item, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span>
         </div>
 
 
@@ -424,7 +424,9 @@
     background: #fff;
   }
 
-
+  .border-football{
+    border:none;
+  }
 </style>
 
 <style>

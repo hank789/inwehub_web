@@ -11,7 +11,7 @@
     </div>
 
 
-    <div class="mui-media-body">
+    <div class="mui-media-body realnameMtop">
       {{ realname }}
 
       <div class="detail" v-if="isShowPositionAndCompany">
@@ -26,8 +26,8 @@
       </div>
 
       <div class="followWrapper" v-if="isFollow && realname !== '匿名' && uuid !== localUuid">
-        <span class="followButton active" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
-        <span class="followButton" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
+        <span class="followButton active border-football" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
+        <span class="followButton border-football" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
       </div>
       <!-- <div class="timeData">
         <span>
@@ -190,7 +190,7 @@
   }
 
   .mui-media-body {
-    padding-left: 0.266rem;
+    padding-left: 0.16rem;
     min-height: 1.2rem;
   }
 
@@ -215,18 +215,21 @@
   }
 
   .followButton {
-    display: inline-block;
-    border: 0.026rem solid #DCDCDC;
-    line-height: 0.72rem;
-    border-radius: 1.333rem;
-    font-size: 0.346rem;
+    width: 1.653rem;
+    height: 0.72rem;
     color: #03aef9;
-    padding: 0.026rem 0.4rem;
+    line-height: 0.773rem;
+    text-align: center;
+    font-size: 0.373rem;
+    display: inline-block;
+    border-radius: 1.333rem;
+  }
+  .mui-android .followButton {
+    line-height: 0.773rem;
   }
 
   .followButton.active {
-    background-color: #03aef9;
-    color: #fff;
+    color: #B4B4B6;
   }
 
   .mui-media-body {
@@ -239,7 +242,7 @@
   .mui-media-body .followWrapper {
     position: absolute;
     top: 0.106rem;
-    right: 0;
+    right: 0.026rem;
   }
 
   .avatarInner {

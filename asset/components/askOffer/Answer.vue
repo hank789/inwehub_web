@@ -27,7 +27,7 @@
 
     <div class="mui-table-view-cell">
 
-      <div class="richText" v-show="answer.content != ''">
+      <div class="richText container-editor container-editor-app" v-show="answer.content != ''">
         <div class="quill-editor">
           <div class="ql-container ql-snow">
             <div class="ql-editor answerContent">
@@ -232,6 +232,9 @@
 </script>
 
 <style scoped="scoped">
+  .container-editor .ql-container{
+    margin-top:0;
+  }
   .detail-answer {
     margin-bottom: 0.266rem;
     padding-bottom:0.333rem;

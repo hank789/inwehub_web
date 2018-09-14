@@ -3,7 +3,7 @@
     <div class="page-container">
 
       <header class="mui-bar mui-bar-nav">
-        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <Back></Back>
         <h1 class="mui-title">选择问题分类</h1>
       </header>
 

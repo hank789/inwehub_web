@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="cancelAsk"></a>
+      <Back :tapCallback="cancelAsk"></Back>
       <h1 class="mui-title">{{ pageTitle }}</h1>
       <a class="mui-btn mui-btn-blue mui-btn-link mui-pull-right" @tap.stop.prevent="showMoney();">发布</a>
     </header>
@@ -468,6 +468,9 @@
     background: #f3f4f6;
     border:none;
     padding:0;
+    line-height: 0.693rem;
+    font-size: 0.426rem;
+    color:#444;
   }
 
   .container-upload-images{

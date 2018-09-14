@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left"  @tap.stop.prevent="empty()"></a>
+      <Back :tapCallback="empty"></Back>
       <h1 class="mui-title">发布</h1>
       <a @tap.stop.prevent="submit()"
          class="mui-btn appPageSubmit mui-btn-link mui-pull-right">确认分享</a>
@@ -10,7 +10,7 @@
     <div class="mui-content">
 
       <Jeditor
-        class="container-editor container-editor-app"
+        class="container-editor container-editor-app container-editor-add"
         ref="myAddEditor"
         id="discoverAddJeditor"
         :class="{noBottomFile: images.length === 0 && pdfs.length === 0}"
@@ -868,7 +868,8 @@
     top: 0;
     border:none;
     background: #f3f4f6;
-    padding:0 0.266rem;
+    padding:0;
+    margin:0;
   }
 
   #discoverAddJeditor .counter{
@@ -878,7 +879,7 @@
   #discoverAddJeditor .ql-editor.ql-blank::before{
     font-style:normal;
     font-size: 0.373rem;
-    color: #9b9b9b;
+    color: #9B9B9B;
   }
 
   #discoverAddJeditor .textarea-wrapper .ql-container {
@@ -891,8 +892,8 @@
 
   #discoverAddJeditor .textarea-wrapper .quill-editor {
     position: absolute;
-    left:0.266rem;
-    right:0.266rem;
+    left:0;
+    right:0;
     bottom:0;
     top: 0;
     height:auto;

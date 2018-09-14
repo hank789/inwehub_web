@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+      <Back></Back>
       <h1 class="mui-title">邀请注册</h1>
     </header>
     <div class="mui-content">
@@ -21,18 +21,18 @@
         </li>
       </div>
       <!--呼朋唤友-->
-      <div class="contactFriends">
+      <div class="contactFriends border-football">
         <div class="contactBtn">
           <p @tap.stop.prevent="share()">呼朋唤友</p>
           <img src="../../statics/images/money@3x.png"/>
         </div>
-        <span>1即可获得好友平台支付或收益5%分红</span>
+        <span>即可获得好友平台支付或收益5%分红</span>
         <span @tap.stop.prevent="warn()">了解平台上可获取的收益 ></span>
-        <span>2.2018.2.1-2018.2.28期间累计邀请8人及以上，</span>
-        <span>即可获得抽奖资格，月底抽取iphoneX。</span>
-        <span>已邀请<i>{{invitedUsersCount}}</i>人</span>
-        <p class="luckDraw" v-if="invitedUsersCount < 8"  >抽奖</p>
-        <p class="luckDraw red" @tap.stop.prevent="luckDraw()" v-else>抽奖</p>
+        <!--<span>2.2018.2.1-2018.2.28期间累计邀请8人及以上，</span>-->
+        <!--<span>即可获得抽奖资格，月底抽取iphoneX。</span>-->
+        <!--<span>已邀请<i>{{invitedUsersCount}}</i>人</span>-->
+        <!--<p class="luckDraw" v-if="invitedUsersCount < 8"  >抽奖</p>-->
+        <!--<p class="luckDraw red" @tap.stop.prevent="luckDraw()" v-else>抽奖</p>-->
       </div>
       <!--邀请说明-->
       <div class="invitationNote">
@@ -295,12 +295,13 @@
 
   .contactFriends {
     width: 95%;
-    height: 5.973rem;
-    border: 0.026rem solid #b4b4b6;
-    border-radius: 0.106rem;
+    height: 2.266rem;
     margin-left: 2.5%;
     margin-top: 1.066rem;
     position: relative;
+  }
+  .contactFriends:after{
+    border-radius:2.266rem;
   }
 
   .contactFriends span {
@@ -312,8 +313,7 @@
 
   .contactFriends span:nth-of-type(1) {
     color: #444444;
-    margin-top: 0.933rem;
-
+    padding-top: 0.76rem;
   }
 
   .contactFriends span:nth-of-type(2) {
@@ -495,7 +495,7 @@
   /*邀请说明*/
   .invitationNote {
     margin-top: 0.546rem;
-    margin-bottom: 2.133rem;
+    margin-bottom: 0.773rem;
     text-align: center;
     overflow: hidden;
   }

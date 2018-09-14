@@ -15,13 +15,13 @@
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
-    <div class="content text-content textToLink"  v-html="textToLink(ask.description)"></div>
+    <div class="content text-content textToLink container-editor container-editor-app"  v-html="textToLink(ask.description)"></div>
     <!--添加图片-->
     <Images class="container-images-discover img-style margin-10-0-0" :images="ask.data.img" :group="ask.id" v-if="ask.data ? ask.data.img.length > 0 : ''">
     </Images>
 
     <div v-if="ask.price > 0" class="footer">
-      <div class="component-card-money">
+      <div class="component-card-money border-football">
         <div class="left">
           <div class="money">{{ask.price}}<span>元</span></div>
           <label>{{ask.status_short_tip}}</label>
@@ -84,6 +84,12 @@
 </script>
 
 <style scoped="scoped">
+  .text-content{
+    line-height: 0.693rem;
+    font-size: 0.426rem;
+    color:#444;
+    text-align: justify;
+  }
   .mui-table-view:after{
     display: none;
   }
@@ -118,8 +124,6 @@
   }
 
   .content {
-    font-size: 0.426rem;
-    color: #444444;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
   }
@@ -136,5 +140,15 @@
   .footer .timeAgo {
     float: right;
     color: #b4b4b6;
+  }
+  .container-editor{
+    margin-bottom:0 !important;
+  }
+
+  .component-card-money{
+    border:none !important;
+  }
+  .component-card-money:after{
+    border-radius: 0.106rem;
   }
 </style>

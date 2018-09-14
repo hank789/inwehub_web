@@ -563,13 +563,13 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子搜索
+  { // 搜索圈子
     path: '/group/search',
     name: 'group-search',
     component: componets.GroupsSearch,
     meta: {
-      title: '圈子搜索',
-      keepAlive: false
+      title: '搜索圈子',
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)

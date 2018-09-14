@@ -3,7 +3,7 @@
   <div>
 
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="back()"></a>
+      <Back :tapCallback="back"></Back>
       <h1 class="mui-title">通讯录好友</h1>
     </header>
 

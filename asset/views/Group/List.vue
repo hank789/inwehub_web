@@ -10,48 +10,60 @@
           <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
           <div class="tab active" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
         </div>
-        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchQuestion','list-detail-page-three')">
+        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>
 
       <div class="line-river-after"></div>
 
-      <div class="new-groups" @tap.stop.prevent="$router.pushPlus('/group/add')">
-        <p>创建新的圈子</p>
-      </div>
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'group/recommend'"
-        :prevOtherData="{}"
-        :nextOtherData="{}"
+        :list="list"
+        :api="'group/mine'"
+        :prevOtherData="{page: 1}"
+        :nextOtherData="{page: 1}"
         :pageMode = true
         class="listWrapper"
       >
-        <!--我的圈子-->
-        <!--swiper滑动-->
-        <groups
-          :groupsList="groupsList"
-          :loading="loading"
-          :apper="apper"
-          :title = "'我的'"
-        ></groups>
-        <!--全部圈子 .groupsList-->
-        <div class="group-title font-family-medium">全部</div>
-
-
-        <template v-for="(item, index) in list">
-          <div class="group-container" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
-            <groupsList class="big"
-                        :list="item"
-                        @goJoin="goJoin"
-                        :description = "'已加入'">
-              <i class="bot"></i>
-            </groupsList>
+        <div class="groupSearchWrapper" @tap.stop.prevent="$router.pushPlus('/group/search','list-detail-page-three')">
+          <div class="groupSearch border-football">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-sousuo"></use>
+            </svg>
+            <span>搜索您感兴趣的其他圈子</span>
           </div>
+        </div>
 
-        </template>
+        <div class="component-group" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
+          <div class="groupLogo">
+            <img class="lazyImg" v-lazy="item.logo" />
+          </div>
+          <div class="groupContent">
+            <div class="groupName">
+              <div class="font-family-medium text-line-1 groupOwnerWrapper">
+                {{item.name}}<span class="border-football" v-if="item.is_joined === 3">圈主</span>
+              </div>
+            </div>
+            <span class="groupDescribe text-line-1">{{item.description}}</span>
+            <span class="groupText">{{item.subscribers}}人气</span>
+            <span class="groupText">{{item.articles}}分享</span>
+            <span class="groupText" v-if="!item.public">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-simi"></use>
+              </svg>
+              私密
+            </span>
+          </div>
+          <i class="bot"></i>
+        </div>
+        <div class="foundGroup" @tap.stop.prevent="$router.pushPlus('/group/add')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-tianjia"></use>
+          </svg>
+          <span class="font-family-medium">创建我的圈子</span>
+        </div>
       </RefreshList>
 
     </div>
@@ -60,8 +72,6 @@
 <script>
 
   import RefreshList from '../../components/refresh/List.vue'
-  import groups from '../../components/groups/RecommendGroups.vue'
-  import groupsList from '../../components/groups/GroupsList.vue'
   import { postRequest } from '../../utils/request'
 
   export default {
@@ -74,36 +84,12 @@
       }
     },
     components: {
-      RefreshList,
-      groups,
-      groupsList
+      RefreshList
     },
     props: {},
     watch: {},
     methods: {
-      refreshPageData () {
-        this.getGroups()
-      },
-      getGroups () {
-        postRequest(`group/mine`, {
-          page: 1
-        }).then(response => {
-          var code = response.data.code
-          // 如果请求不成功提示信息 并且返回上一页；
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            window.mui.back()
-            return
-          }
-          if (response.data.data.data) {
-            this.groupsList = response.data.data.data
-            this.apper = this.groupsList.length
-            setTimeout(() => {
-              this.loading = 0
-            }, 300)
-          }
-        })
-      },
+      refreshPageData () {},
       goJoin (id) {
         postRequest(`group/join`, {id: id}).then(response => {
           var code = response.data.code
@@ -118,7 +104,6 @@
       }
     },
     mounted () {
-      this.getGroups()
       // 左滑
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
@@ -137,22 +122,8 @@
     updated () {}
   }
 </script>
-<style scoped="scoped">
-  /*清掉自带样式*/
+<style scoped="scoped" lang="less">
 
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
   .mui-content{
     background: #ffffff;
   }
@@ -166,37 +137,22 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
- .new-groups{
-   margin-top:0.266rem;
-   width:92%;
-   margin-left: 4%;
-   height:0.906rem;
-   background:#cccccc;
-   font-size: 0.373rem;
-   color:rgba(68,68,68,1);
-   line-height:0.906rem;
-   padding: 0 0.4rem;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-   background: url("../../statics/images/my-groups@3x.png");
-   background-size: 100% 100%;
-  }
-  .group-title{
-    font-size: 0.426rem;
-    color: #444444;
-    padding-top: 0.32rem;
-    padding-left:4%;
-  }
- .group-container{
-   width:92%;
-   margin-left: 4%;
-   overflow: hidden;
- }
   .listWrapper{
-    top:2.4rem;
-    bottom:50px; /* px不转换 */
+    top: 1.6rem;
+    bottom: 50px; /* px不转换 */
+  }
+  .foundGroup {
+    text-align: center;
+    margin-top: 0.32rem;
+    span {
+      color: #808080;
+      font-size: 0.373rem;
+    }
+    svg {
+      color: #B4B4B6;
+      font-size: 0.293rem;
+      vertical-align: inherit;
+    }
   }
 </style>
 

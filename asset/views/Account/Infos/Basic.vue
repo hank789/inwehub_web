@@ -1,7 +1,7 @@
 <template>
   <div>
     <header class="mui-bar mui-bar-nav">
-      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" @tap.stop.prevent="muiViewBack2"></a>
+      <Back :tapCallback="muiViewBack2"></Back>
       <h1 class="mui-title">基本资料</h1>
     </header>
 
@@ -398,6 +398,7 @@
         this.newItem.product_tags = tags
       },
       muiViewBack2: function () {
+        alert('ok')
         window.mui.back()
       },
       muiViewBack: function () {

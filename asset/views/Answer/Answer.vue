@@ -10,7 +10,7 @@
 
     <div class="mui-content answerRichText blur">
       <div class="form form-realAnswer" v-show="!loading">
-        <Meditor ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000"
+        <Meditor class="container-editor container-editor-app" ref="myTextEditor" v-model.trim="description" :content="description" :rows="5" :descMaxLength="50000"
                  :placeholder="placeholder" :id="meditorId" @ready="onEditorReady($event)" @onEditorBlur="onEditorBlur"
                  @onEditorFocus="onEditorFocus"></Meditor>
 
