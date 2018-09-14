@@ -140,6 +140,34 @@
               </div>
               <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
             </div>
+
+
+            <!-- 发布了原创文章，有title和描述 -->
+            <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 5">
+              <div class="container-avatarAndTwoLineText">
+                <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
+                  <div class="avatarInner"><img :src="item.user.avatar">
+                    <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
+                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+                    </svg>
+                  </div>
+                </div>
+                <div class="mui-media-body">
+                  <div class="lineWrapper-1">{{ item.title }}
+                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
+                  </div>
+                  <div class="lineWrapper-2">{{ item.created_at }}
+                  <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg><span class="address">{{ item.feed.current_address_name }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="contentWrapper text-line-3">{{ item.feed.title }}</div>
+              <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div>
+              <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
+            </div>
+
             <div class="line-river-big"></div>
           </template>
         </div>

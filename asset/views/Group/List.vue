@@ -23,7 +23,7 @@
         :list="list"
         :api="'group/mine'"
         :prevOtherData="{page: 1}"
-        :nextOtherData="{page: 1}"
+        :nextOtherData="{}"
         :pageMode = true
         class="listWrapper"
       >
