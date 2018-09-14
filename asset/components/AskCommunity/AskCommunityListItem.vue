@@ -90,7 +90,6 @@
 
   div,
   p,
-  span,
   i,
   img,
   ul,
