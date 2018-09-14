@@ -201,9 +201,7 @@
         searchTextFilter(newValue, (text) => {
           if (newValue) {
             this.isShowCancelButton = true
-            if (oldValue !== '') {
-              this.searchAdvice(newValue)
-            }
+            this.searchAdvice(newValue)
 
             if (newValue !== this.confirmSearchText) {
               this.list = []
