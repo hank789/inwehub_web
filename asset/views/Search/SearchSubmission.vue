@@ -13,7 +13,7 @@
         </p>
         <p class="font-family-medium" @tap.stop.prevent="back()">取消</p>
       </div>
-      <div class="menu" v-if="list.length">
+      <div class="menu" v-if="list.length || getCurrentMode === 'result'">
         <span @tap.stop.prevent="" class="font-family-medium">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
@@ -143,7 +143,7 @@
           </template>
         </div>
 
-        <div class="noResult" :class="!list.length ? 'increase' : ''" v-if="list.length">
+        <div class="noResult" v-if="list.length">
           <svg class="icon addressIcon" aria-hidden="true">
             <use xlink:href="#icon-zanwushuju"></use>
           </svg>
