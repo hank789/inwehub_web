@@ -2714,7 +2714,7 @@ a {
   font-size: 0.426rem;
   }
 .container-editor .ql-editor.ql-blank::before {
-  color: #B1BDCC !important;
+  color: #9B9B9B !important;
   font-size: 0.426rem !important;
   font-style: normal !important; }
 .container-editor .ql-editor p {
@@ -2784,6 +2784,9 @@ a {
   margin-left: -2.4em; }
 .container-editor-app .ql-editor blockquote {
   border-left: 0.08rem solid #DCDCDC !important; }
+.container-editor.container-editor-add p{
+  text-align: left;
+}
 
 
 .component-upAndDown {

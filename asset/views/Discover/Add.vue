@@ -879,7 +879,7 @@
   #discoverAddJeditor .ql-editor.ql-blank::before{
     font-style:normal;
     font-size: 0.373rem;
-    color: #9b9b9b;
+    color: #9B9B9B;
   }
 
   #discoverAddJeditor .textarea-wrapper .ql-container {
