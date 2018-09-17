@@ -3096,8 +3096,7 @@ a {
   margin-left: 0.133rem;
   display: inline-block;}
 .component-group .groupContent .groupName {
-  position: relative;
-}
+  position: relative;}
 .component-group .groupContent .groupName .groupOwnerWrapper {
   max-width: 4.8rem;
   color: #444444;
@@ -3114,12 +3113,14 @@ a {
   font-size: 0.266rem;
   line-height: 0.4rem;
   margin-left: 0.133rem;
-  border-radius: 0.106rem;
   display: inline-block;}
 .component-group .groupContent .groupName .groupOwnerWrapper .border-football:after {
   border-radius: 0.213rem !important;
-  border-color: #03AEF9 !important;
-}
+  border-color: #03AEF9 !important;}
+.mui-android .component-group .groupContent .groupName .groupOwnerWrapper span {
+  line-height: 0.45rem;}
+
+
 .component-group .groupContent .groupDescribe {
   width: inherit;
   display: block;
