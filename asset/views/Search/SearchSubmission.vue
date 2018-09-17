@@ -431,7 +431,7 @@
           }
           input{
             width: 6.026rem !important;
-            height:0.853rem;
+            height:0.9rem;
             border: none;
             background: #f3f4f6;
             font-size: 0.373rem;
@@ -439,6 +439,8 @@
             position: absolute;
             left: 0.853rem;
             z-index: 100000;
+            margin-top: 0.5px;
+            padding: 0 10px;
           }
         }
         &:nth-of-type(2){
