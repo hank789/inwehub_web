@@ -2236,6 +2236,8 @@ a {
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5); }
 
+.line-river-after-top {
+  top: -1px; /* px不转换 */}
 .line-river-after-short:after {
   left: 0.4rem;
   right: 0.4rem; }
@@ -3143,16 +3145,16 @@ a {
   height: 0.906rem;
   margin: 0 auto;
   color: #C8C8C8;
-  padding-top: 0.053rem;
   padding-left: 0.293rem;
-  line-height: 0.853rem;
+  line-height: 0.906rem;
   background: #F3F4F6;
-  border-radius: 2.666rem;
-  /*border: 0.026rem solid #DCDCDC;*/}
+  border-radius: 2.666rem;}
 .groupSearchWrapper .groupSearch span {
   font-size: 0.373rem;
   margin-left: 0.053rem;}
-
+.groupSearchWrapper .border-football:after {
+  border-color: #DCDCDC !important;
+}
 .noResult {
   text-align: center;
   font-size: 1.333rem;
@@ -3174,5 +3176,6 @@ a {
 
 
 .mui-icon-back:before, .mui-icon-left-nav:before{
-  font-size:0.72rem;
-}
+  font-size:0.72rem;}
+
+

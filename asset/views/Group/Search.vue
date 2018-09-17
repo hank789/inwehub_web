@@ -278,7 +278,7 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 2.346rem;
+      top: 84px;
     }
     .search{
       position: relative;
@@ -307,6 +307,7 @@
             color: #c8c8c8;
             &:nth-of-type(1){
               font-size: 0.48rem;
+              margin-top: 2px;
             }
             &:nth-of-type(2){
               margin-left: 0.266rem;
@@ -346,6 +347,7 @@
       display: flex;
       flex-direction: row;
       position: relative;
+      margin-top: -4px;
       span{
         display: flex;
         width:33%;

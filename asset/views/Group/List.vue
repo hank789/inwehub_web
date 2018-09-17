@@ -15,7 +15,7 @@
         </svg>
       </div>
 
-      <div class="line-river-after"></div>
+      <div class="line-river-after line-river-after-top"></div>
 
       <RefreshList
         ref="RefreshList"
@@ -138,7 +138,7 @@
     background-color: rgb(220, 220, 220);
   }
   .listWrapper{
-    top: 1.6rem;
+    top: 55px;
     bottom: 50px; /* px不转换 */
   }
   .foundGroup {
