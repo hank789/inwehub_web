@@ -427,6 +427,10 @@
   .border-football{
     border:none;
   }
+
+  .mui-android .container-label .border-football {
+    padding-top: 3px;
+  }
 </style>
 
 <style>
