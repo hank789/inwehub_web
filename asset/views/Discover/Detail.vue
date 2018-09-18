@@ -881,7 +881,7 @@
     }
   }
   .topImg {
-    margin-top: 0.266rem;
+    margin-bottom: 0.32rem;
     img {
       width: 10rem;
       height: 5.333rem;
