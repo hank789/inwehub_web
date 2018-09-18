@@ -133,3 +133,8 @@ mui: http://www.dcloud.io/mui.html
 1. 不要记请求到的数据(记了没有什么意义)
 2. 不要直接记 数值型，布尔型, 对象(如果需要的话，前面加上描述信息)
 3. 不要用console.error记录调试信息
+
+
+##纯文本内容
+line-height: 16px;
+font-size: 16px;
