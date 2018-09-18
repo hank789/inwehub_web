@@ -78,4 +78,7 @@
   .container-label .border-football:after {
     border-color: #DCDCDC;
   }
+  .mui-android .container-label .border-football {
+    padding-top: 3px;
+  }
 </style>
