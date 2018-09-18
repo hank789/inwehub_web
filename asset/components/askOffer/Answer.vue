@@ -24,7 +24,7 @@
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
 
-    <div class="line-river-after line-river-after-rightLeft"></div>
+    <div class="line-river-after line-river-after-rightLeft" v-show="!answer.content == ''"></div>
 
     <div class="mui-table-view-cell">
 
