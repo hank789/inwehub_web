@@ -391,7 +391,7 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 2.346rem;
+      top: 84px;
     }
     .search{
       position: relative;
@@ -420,6 +420,7 @@
             color: #c8c8c8;
             &:nth-of-type(1){
               font-size: 0.48rem;
+              margin-top: 2px;
             }
             &:nth-of-type(2){
               margin-left: 0.266rem;
@@ -430,7 +431,7 @@
           }
           input{
             width: 6.026rem !important;
-            height:0.853rem;
+            height:0.9rem;
             border: none;
             background: #f3f4f6;
             font-size: 0.373rem;
@@ -438,6 +439,8 @@
             position: absolute;
             left: 0.853rem;
             z-index: 100000;
+            margin-top: 0.5px;
+            padding: 0 10px;
           }
         }
         &:nth-of-type(2){
@@ -459,6 +462,7 @@
       display: flex;
       flex-direction: row;
       position: relative;
+      margin-top: -4px;
       span{
         display: flex;
         width:33%;

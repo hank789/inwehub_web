@@ -16,7 +16,7 @@
         </svg>
       </div>
 
-      <div class="line-river-after"></div>
+      <div class="line-river-after line-river-after-top"></div>
 
       <RefreshList
         ref="RefreshList"

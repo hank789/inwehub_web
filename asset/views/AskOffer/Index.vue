@@ -16,7 +16,7 @@
         </svg>
       </div>
 
-      <div class="line-river-after"></div>
+      <div class="line-river-after line-river-after-top"></div>
 
       <div class="container-tabs">
         <div class="tab" :class="{active: filter === 1}" @tap.stop.prevent="switchFilter(1)"><span>悬赏大厅</span></div>

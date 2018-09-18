@@ -385,27 +385,24 @@
   }
 
   .my-top {
-    width: 92%;
     overflow: hidden;
-    margin-left: 4%;
-    margin-bottom: 0.506rem;
     background-color: #ffffff;
-
+    padding: 0 16px;
   }
 
   .professor {
-    width: 100%;
-    /*height: 3.2rem;*/
+    margin-top: 15px;
+    display: flex;
     .my-img{
-      height: 100%;
-      float: left;
+      width: 59px;
+      height: 59px;
       position: relative;
       .expert {
         position: absolute;
-        bottom: 0.186rem;
-        right: -0.026rem;
+        bottom: -1px;
+        right: -3px;
         .icon {
-          font-size: 0.64rem;
+          font-size: 22px;
           color: #FCC816;
           border: 0.053rem solid #FFF;
           border-radius: 50%;
@@ -414,26 +411,18 @@
       }
     }
     .avatar {
-      width: 1.84rem;
-      height: 1.826rem;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      margin-top: 0.4rem;
-
     }
   }
 
   .my-personal {
-    width: 70%;
-    height: 1.84rem;
-    margin-top: 0.4rem;
-    float: left;
+    margin-top: 4px;
     margin-left: 0.266rem;
     position: relative;
     z-index: 1000;
     .my-info {
-      width: 100%;
-      height: 0.8rem;
-      margin-top: 0.24rem;
       position: relative;
       span {
         display: inline-block;
@@ -475,8 +464,7 @@
       }
     }
     .my-detail {
-      width: 100%;
-      height: 0.8rem;
+      margin-top: 4px;
       span {
         font-size: 0.346rem;
         color: #444444;
@@ -496,12 +484,12 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 0.853rem;
+    top: 22px;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;
     color: #FFFFFF;
-    /*font-size: 0.373rem;*/
+    font-size: 13px;
     padding-left: 0.346rem;
     padding-right: 0.4rem;
     z-index: 9;
@@ -618,7 +606,8 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 1.6rem;
+    height: 38px;
+    margin-top: 19px;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
     background: #FFFFFF;
@@ -651,7 +640,7 @@
 
   .enjoy {
     width: 9.146rem;
-    margin: 0 auto;
+    margin: 17px auto 0;
     padding-bottom: 0.25rem;
     img {
       width: 100%;
@@ -696,12 +685,13 @@
         display: flex;
       }
       .icon {
+        font-size: 13px;
         display: flex;
         margin-top: 0.08rem;
         color: #808080;
       }
       .bot {
-        right: 0.56rem;
+        right: 0.48rem;
         left: 0.426rem;
       }
     }
