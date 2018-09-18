@@ -22,14 +22,15 @@
             :isFollowed="detail.is_followed_author?true:false"
             :isShowPositionAndCompany="false"
             :isExpert="detail.owner.is_expert?1:0"
+            :time="detail.created_at"
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
 
-          <div class="timeData">
-            <span>
-              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
-            </span>
-          </div>
+          <!--<div class="timeData">-->
+            <!--<span>-->
+              <!--<timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>-->
+            <!--</span>-->
+          <!--</div>-->
 
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
@@ -1316,8 +1317,6 @@
 </style>
 
 <style type="text/css">
-  .realnameMtop {
-    margin-top: 0rem !important;
-  }
+
 </style>
 
