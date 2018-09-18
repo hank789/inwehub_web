@@ -6,7 +6,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @focus="focus"/>
+          <input type="text" placeholder="搜内容、问答、圈子" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @focus="focus"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
@@ -404,6 +404,11 @@
       align-items: center;
       background: #ffffff;
       justify-content: space-between;
+      .border-football {
+        &:after {
+          height: 1.77rem;
+        }
+      }
       p{
         &:nth-of-type(1){
           width: 7.813rem;
@@ -431,7 +436,7 @@
           }
           input{
             width: 6.026rem !important;
-            height:0.9rem;
+            height:0.853rem;
             border: none;
             background: #f3f4f6;
             font-size: 0.373rem;
@@ -439,7 +444,6 @@
             position: absolute;
             left: 0.853rem;
             z-index: 100000;
-            margin-top: 0.5px;
             padding: 0 10px;
           }
         }
@@ -531,9 +535,11 @@
     }
     .hotSearchList {
       span {
+        height: 27px;
+        line-height: 27px;
         color: #444444;
         font-size: 0.32rem;
-        padding: 0.133rem 0.266rem;
+        padding: 0px 10px;
         background: #F3F4F6;
         border-radius: 2.666rem;
         margin: 0 0.133rem 0.266rem 0;
