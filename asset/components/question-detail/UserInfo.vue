@@ -199,9 +199,9 @@
   }
 
   .detail {
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #C8C8C8;
-    margin-top: -3px;
+    margin-top: -0.08rem;
   }
 
   .split {
@@ -234,7 +234,7 @@
   }
 
   .mui-media-body {
-    font-size: 13px;
+    font-size: 0.346rem;
     color: #808080;
     position: relative;
     margin-top: -0.05rem;

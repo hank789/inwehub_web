@@ -123,7 +123,7 @@
         overflow: hidden;
         background: #ffffff;
         margin-bottom: 0.266rem;
-        padding: 0.32rem 16px 0.346rem;
+        padding: 0.32rem 0.426rem 0.346rem;
         .ask-tags{
           width:100%;
           overflow: hidden;
