@@ -79,6 +79,6 @@
     border-color: #DCDCDC;
   }
   .mui-android .container-label .border-football {
-    padding-top: 3px;
+    padding-top: 0.08rem;
   }
 </style>

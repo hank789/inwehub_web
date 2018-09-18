@@ -351,22 +351,22 @@
   .my-top {
     overflow: hidden;
     background-color: #ffffff;
-    padding: 0 16px;
+    padding: 0 0.426rem;
   }
 
   .professor {
-    margin-top: 15px;
+    margin-top: 0.4rem;
     display: flex;
     .my-img{
-      width: 59px;
-      height: 59px;
+      width: 1.573rem;
+      height: 1.573rem;
       position: relative;
       .expert {
         position: absolute;
-        bottom: -1px;
-        right: -3px;
+        bottom: -0.026rem;
+        right: -0.08rem;
         .icon {
-          font-size: 22px;
+          font-size: 0.586rem;
           color: #FCC816;
           border: 0.053rem solid #FFF;
           border-radius: 50%;
@@ -382,7 +382,7 @@
   }
 
   .my-personal {
-    margin-top: 4px;
+    margin-top: 0.106rem;
     margin-left: 0.266rem;
     position: relative;
     z-index: 1000;
@@ -428,7 +428,7 @@
       }
     }
     .my-detail {
-      margin-top: 4px;
+      margin-top: 0.106rem;
       span {
         font-size: 0.346rem;
         color: #444444;
@@ -448,12 +448,12 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 22px;
+    top: 0.586rem;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;
     color: #FFFFFF;
-    font-size: 13px;
+    font-size: 0.346rem;
     padding-left: 0.346rem;
     padding-right: 0.4rem;
     z-index: 9;
@@ -570,8 +570,8 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 38px;
-    margin-top: 19px;
+    height: 1.013rem;
+    margin-top: 0.506rem;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
     background: #FFFFFF;
@@ -604,7 +604,7 @@
 
   .enjoy {
     width: 9.146rem;
-    margin: 17px auto 0;
+    margin: 0.453rem auto 0;
     padding-bottom: 0.25rem;
     img {
       width: 100%;
@@ -649,7 +649,7 @@
         display: flex;
       }
       .icon {
-        font-size: 13px;
+        font-size: 0.346rem;
         display: flex;
         margin-top: 0.08rem;
         color: #808080;

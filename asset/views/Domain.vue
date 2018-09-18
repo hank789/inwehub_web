@@ -183,7 +183,7 @@
     margin-top:0.533rem;
   }
   .refreshListWrapper{
-    top: 90px;
+    top: 2.4rem;
     bottom:1.333rem;
   }
   .container-tabLabels{

@@ -153,8 +153,8 @@
     border-radius: 0.106rem;
   }
   .line-river-after-rightLeft:after {
-    top: -13px;
-    right: 16px;
-    left: 16px;
+    top: -0.346rem;
+    right: 0.426rem;
+    left: 0.426rem;
   }
 </style>

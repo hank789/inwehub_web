@@ -87,7 +87,7 @@
   .answersWrapper {
     .content {
       padding: 0 0.4rem;
-      line-height: 26px;
+      line-height: 0.693rem;
     }
 
     .item {
@@ -117,11 +117,11 @@
   }
 
   .line-river-after-rightLeft:after {
-    top: -13px;
-    right: 16px;
-    left: 16px;
+    top: -0.346rem;
+    right: 0.426rem;
+    left: 0.426rem;
   }
   .userInfoWrapper {
-    padding-bottom: 6px !important;
+    padding-bottom: 0.16rem !important;
   }
 </style>

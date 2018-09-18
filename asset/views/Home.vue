@@ -235,7 +235,7 @@
     background: #fff;
   }
   .component-title-iconAndText{
-    margin-top: 16px;
+    margin-top: 0.426rem;
   }
 
   .refreshListWrapper{

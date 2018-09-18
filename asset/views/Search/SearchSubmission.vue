@@ -391,7 +391,7 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 84px;
+      top: 2.24rem;
     }
     .search{
       position: relative;
@@ -425,7 +425,7 @@
             color: #c8c8c8;
             &:nth-of-type(1){
               font-size: 0.48rem;
-              margin-top: 2px;
+              margin-top: 0.053rem;
             }
             &:nth-of-type(2){
               margin-left: 0.266rem;
@@ -444,7 +444,7 @@
             position: absolute;
             left: 0.853rem;
             z-index: 100000;
-            padding: 0 10px;
+            padding: 0 0.266rem;
           }
         }
         &:nth-of-type(2){
@@ -466,7 +466,7 @@
       display: flex;
       flex-direction: row;
       position: relative;
-      margin-top: -4px;
+      margin-top: -0.106rem;
       span{
         display: flex;
         width:33%;
@@ -535,11 +535,11 @@
     }
     .hotSearchList {
       span {
-        height: 27px;
-        line-height: 27px;
+        height: 0.72rem;
+        line-height: 0.72rem;
         color: #444444;
         font-size: 0.32rem;
-        padding: 0px 10px;
+        padding: 0rem 0.266rem;
         background: #F3F4F6;
         border-radius: 2.666rem;
         margin: 0 0.133rem 0.266rem 0;

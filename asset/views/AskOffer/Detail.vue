@@ -638,14 +638,14 @@
     text-align: center;
     line-height: 1.066rem;
     background: #FFFFFF;
-    margin-bottom: -2px;
-    margin-top: 30px;
+    margin-bottom: -0.053rem;
+    margin-top: 0.8rem;
   }
 
   .line-river-after-rightLeft:after {
-    top: 30px;
+    top: 0.8rem;
   }
   .mui-android .container-label .border-football {
-    padding-top: 3px;
+    padding-top: 0.08rem;
   }
 </style>

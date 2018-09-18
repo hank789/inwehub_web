@@ -331,7 +331,7 @@
 
   .mui-icon {
     .icon {
-      font-size: 15px;
+      font-size: 0.4rem;
     }
   }
 
@@ -347,7 +347,7 @@
       margin-right: 0.4rem;
       margin-top: 0.24rem;
       .icon {
-        font-size: 18px;
+        font-size: 0.48rem;
       }
     }
     .noticeText {
@@ -361,7 +361,7 @@
       width: 1.76rem;
       height: 0.72rem;
       color: #03AEF9;
-      font-size: 14px;
+      font-size: 0.373rem;
       margin: 0.133rem 0 0 0.4rem;
       line-height: 0.72rem;
       text-align: center;
