@@ -138,7 +138,7 @@
     background-color: rgb(220, 220, 220);
   }
   .listWrapper{
-    top: 1.466rem;
+    top: 1.173rem;
     bottom: 50px; /* px不转换 */
   }
   .foundGroup {

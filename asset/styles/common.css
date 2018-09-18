@@ -3139,7 +3139,8 @@ a {
   margin-right: -0.08rem;}
 
 .groupSearchWrapper {
-  padding: 0 0.426rem;}
+  padding: 0 0.426rem;
+  margin-top: 10px;}
 .groupSearchWrapper .groupSearch {
   width: 9.146rem;
   height: 0.906rem;
@@ -3154,6 +3155,7 @@ a {
   margin-left: 0.053rem;}
 .groupSearchWrapper .border-football:after {
   border-color: #DCDCDC !important;
+  height: 1.77rem !important;
 }
 .noResult {
   text-align: center;
