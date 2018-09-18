@@ -7,8 +7,9 @@
 
     <div class="mui-content" v-show="!loading">
       <vue-pull-refresh :on-refresh="refreshPageData">
+
       <div class="container-label padding-lr-15" v-if="ask.question.tags.length">
-        <span v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</span>
+        <span class="border-football" v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</span>
       </div>
 
       <Question
@@ -643,5 +644,8 @@
 
   .line-river-after-rightLeft:after {
     top: 30px;
+  }
+  .mui-android .container-label .border-football {
+    padding-top: 3px;
   }
 </style>
