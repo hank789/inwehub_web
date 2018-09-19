@@ -102,7 +102,9 @@
             </div>
             <!-- 新增链接样式 -->
             <div class="newLink">
-              <div class="contentWrapper">{{item.feed.title}}</div>
+              <div class="contentWrapper">
+                <span v-for="item in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tags">#{{item.name}}#</span>
+                {{item.feed.title}}</div>
               <div class="newLinkBox">
                 <div class="container-image lazyImg" v-if="item.feed.img">
                   <img class="lazyImg" v-lazy="item.feed.img">
