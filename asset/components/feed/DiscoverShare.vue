@@ -53,20 +53,20 @@
         {{data.feed.comment_number}}
       </div>
     </div>
-    <div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">
+    <!--<div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">-->
 
-      <!-- 点赞和评论列表start -->
-      <SuppertAndComment
-        :supportNumber="data.feed.support_number"
-        :supportList="data.feed.supporter_list"
-        :commentNumber="data.feed.comment_number"
-        :commentList="data.feed.comments"
-        :detailUrl="data.feed.comment_url"
-        @commentIt="commentIt"
-      ></SuppertAndComment>
+      <!--&lt;!&ndash; 点赞和评论列表start &ndash;&gt;-->
+      <!--&lt;!&ndash;<SuppertAndComment&ndash;&gt;-->
+        <!--&lt;!&ndash;:supportNumber="data.feed.support_number"&ndash;&gt;-->
+        <!--&lt;!&ndash;:supportList="data.feed.supporter_list"&ndash;&gt;-->
+        <!--&lt;!&ndash;:commentNumber="data.feed.comment_number"&ndash;&gt;-->
+        <!--&lt;!&ndash;:commentList="data.feed.comments"&ndash;&gt;-->
+        <!--&lt;!&ndash;:detailUrl="data.feed.comment_url"&ndash;&gt;-->
+        <!--&lt;!&ndash;@commentIt="commentIt"&ndash;&gt;-->
+      <!--&lt;!&ndash;&gt;</SuppertAndComment>&ndash;&gt;-->
 
-      <!-- 点赞和评论列表end -->
-    </div>
+      <!--&lt;!&ndash; 点赞和评论列表end &ndash;&gt;-->
+    <!--</div>-->
     <div class="component-address margin-5-0-0" v-show="data.feed.current_address_name" @tap.stop.prevent="toDetail(data.url)">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-dingwei1"></use>

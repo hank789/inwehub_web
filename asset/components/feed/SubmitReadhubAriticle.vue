@@ -45,18 +45,18 @@
         {{data.feed.comment_number}}
       </div>
     </div>
-    <div class="container-answer margin-top-10 padding-space" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">
-      <!-- 点赞和评论列表start -->
-      <SuppertAndComment
-        :supportNumber="data.feed.support_number"
-        :supportList="data.feed.supporter_list"
-        :commentNumber="data.feed.comment_number"
-        :commentList="data.feed.comments"
-        :detailUrl="data.feed.comment_url"
-        @commentIt="commentIt"
-      ></SuppertAndComment>
-      <!-- 点赞和评论列表end -->
-    </div>
+    <!--<div class="container-answer margin-top-10 padding-space" @tap.stop.prevent="toDetail(data.feed.comment_url)" v-if="data.feed.support_number || data.feed.comment_number">-->
+      <!--&lt;!&ndash; 点赞和评论列表start &ndash;&gt;-->
+      <!--<SuppertAndComment-->
+        <!--:supportNumber="data.feed.support_number"-->
+        <!--:supportList="data.feed.supporter_list"-->
+        <!--:commentNumber="data.feed.comment_number"-->
+        <!--:commentList="data.feed.comments"-->
+        <!--:detailUrl="data.feed.comment_url"-->
+        <!--@commentIt="commentIt"-->
+      <!--&gt;</SuppertAndComment>-->
+      <!--&lt;!&ndash; 点赞和评论列表end &ndash;&gt;-->
+    <!--</div>-->
   </div>
 </template>
 
