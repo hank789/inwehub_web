@@ -42,8 +42,8 @@
           </div>
           <div class="groupContent">
             <div class="groupName">
-              <div class="font-family-medium text-line-1 groupOwnerWrapper">
-                {{item.name}}<span class="border-football" v-if="item.is_joined === 3">圈主</span>
+              <div class="font-family-medium groupOwnerWrapper">
+                <span class="text-line-1">{{item.name}}</span><span class="border-football" v-if="item.is_joined === 3">圈主</span>
               </div>
             </div>
             <span class="groupDescribe text-line-1">{{item.description}}</span>

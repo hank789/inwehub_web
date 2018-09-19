@@ -3099,13 +3099,13 @@ a {
   display: inline-block;}
 .component-group .groupContent .groupName {
   position: relative;}
-.component-group .groupContent .groupName .groupOwnerWrapper {
-  max-width: 4.8rem;
+.component-group .groupContent .groupName .groupOwnerWrapper span:nth-of-type(1) {
+  max-width: 250px;
   color: #444444;
   font-size: 0.426rem;
   line-height: 0.586rem;
   display: inline-block;}
-.component-group .groupContent .groupName .groupOwnerWrapper span {
+.component-group .groupContent .groupName .groupOwnerWrapper .border-football {
   width: 0.8rem;
   height: 0.4rem;
   color: #03AEF9;
@@ -3119,15 +3119,13 @@ a {
 .component-group .groupContent .groupName .groupOwnerWrapper .border-football:after {
   border-radius: 0.213rem !important;
   border-color: #03AEF9 !important;}
-.mui-android .component-group .groupContent .groupName .groupOwnerWrapper span {
+.mui-android .component-group .groupContent .groupName .groupOwnerWrapper .border-football {
   line-height: 0.45rem;}
-
-
 .component-group .groupContent .groupDescribe {
   width: inherit;
   display: block;
   color: #808080;
-  margin-top: 0.08rem;
+  /*margin-top: 0.08rem;*/
   font-size: 0.346rem;
   line-height: 0.426rem;}
 .component-group .groupContent .groupText {
