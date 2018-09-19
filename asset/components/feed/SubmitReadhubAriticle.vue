@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="text-16-444 mui-ellipsis-2 margin-10-0-0">{{data.feed.title}}</div>
+    <div class="text-16-444 margin-10-0-0">{{data.feed.title}}</div>
 
     <div class="component-card-link">
       <div class="imageWrapper"><img class="lazyImg" v-lazy="data.feed.img"></div>
