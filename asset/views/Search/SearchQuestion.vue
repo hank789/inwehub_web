@@ -77,7 +77,7 @@
           <use xlink:href="#icon-zanwushuju"></use>
         </svg>
         <div class="noResultText" v-if="list.length">无更多结果，提问快速获取回答~</div>
-        <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">去提问</div>
+        <div class="goRelease"  @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
       </div>
       <div class="line-river-big" v-if="list.length"></div>
 
@@ -88,7 +88,7 @@
         <use xlink:href="#icon-zanwushuju"></use>
       </svg>
       <div class="noResultText">暂无结果，提问快速获取回答~</div>
-      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">去提问</div>
+      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
     </div>
 
   </div>
