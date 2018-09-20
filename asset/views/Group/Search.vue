@@ -72,8 +72,9 @@
               </div>
               <div class="groupContent">
                 <div class="groupName">
-                  <span class="font-family-medium text-line-1" v-html="getHighlight(item.name)"></span>
-                  <span v-if="item.is_joined === 3">圈主</span>
+                  <div class="font-family-medium groupOwnerWrapper">
+                    <span class="font-family-medium text-line-1" v-html="getHighlight(item.name)"></span><span class="border-football" v-if="item.is_joined === 3">圈主</span>
+                  </div>
                 </div>
                 <span class="groupDescribe text-line-1">{{item.description}}</span>
                 <span class="groupText">{{item.subscribers}}人气</span>
