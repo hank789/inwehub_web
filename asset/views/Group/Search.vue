@@ -95,7 +95,7 @@
             <use xlink:href="#icon-zanwushuju"></use>
           </svg>
           <div class="noResultText" v-if="list.length">无更多结果，快来创建新的圈子~</div>
-          <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">建圈子</div>
+          <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
         </div>
         <div class="line-river-big" v-if="list.length"></div>
       </RefreshList>
@@ -106,7 +106,7 @@
         <use xlink:href="#icon-zanwushuju"></use>
       </svg>
       <div class="noResultText">暂无结果，快来创建新的圈子~</div>
-      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">建圈子</div>
+      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
     </div>
 
   </div>
