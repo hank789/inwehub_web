@@ -72,8 +72,9 @@
               </div>
               <div class="groupContent">
                 <div class="groupName">
-                  <span class="font-family-medium text-line-1" v-html="getHighlight(item.name)"></span>
-                  <span v-if="item.is_joined === 3">圈主</span>
+                  <div class="font-family-medium groupOwnerWrapper">
+                    <span class="font-family-medium text-line-1" v-html="getHighlight(item.name)"></span><span class="border-football" v-if="item.is_joined === 3">圈主</span>
+                  </div>
                 </div>
                 <span class="groupDescribe text-line-1">{{item.description}}</span>
                 <span class="groupText">{{item.subscribers}}人气</span>
@@ -95,7 +96,7 @@
             <use xlink:href="#icon-zanwushuju"></use>
           </svg>
           <div class="noResultText" v-if="list.length">无更多结果，快来创建新的圈子~</div>
-          <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">建圈子</div>
+          <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
         </div>
         <div class="line-river-big" v-if="list.length"></div>
       </RefreshList>
@@ -106,7 +107,7 @@
         <use xlink:href="#icon-zanwushuju"></use>
       </svg>
       <div class="noResultText">暂无结果，快来创建新的圈子~</div>
-      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">建圈子</div>
+      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
     </div>
 
   </div>

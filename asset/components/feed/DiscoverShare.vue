@@ -18,8 +18,8 @@
         </div>
       </div>
     </div>
-    <div class="text-16-444 preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
-      <!--<span v-for="item in data.feed.tags" class="tags">#{{item.name}}</span>-->
+    <div class="preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
+      <span v-for="item in data.feed.tags" class="tags">#{{item.name}}#</span>
       <span v-html="textToLink(data.feed.title)"></span></div>
 
     <Images

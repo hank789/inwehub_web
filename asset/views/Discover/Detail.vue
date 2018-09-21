@@ -94,8 +94,8 @@
 
           <div class="timeContainer">
             <div class="makingCopy">著作权归作者所有</div>
-            <div class="fromGroup text-line-1">
-              <span class="text-line-1" @tap="toDetail(detail.group)"><i>来自圈子</i>{{ detail.group.name }}</span>
+            <div class="fromGroup">
+              <span @tap="toDetail(detail.group)"><i>来自圈子</i>{{ detail.group.name }}</span>
             </div>
           </div>
 
@@ -943,7 +943,7 @@
       font-size: 0.32rem;
     }
     .fromGroup {
-      width: 3.173rem;
+      /*width: 3.173rem;*/
       height: 0.56rem;
       padding: 0 0.213rem;
       font-size: 0.32rem;
