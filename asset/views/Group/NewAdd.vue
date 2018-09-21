@@ -71,6 +71,7 @@
     data () {
       return {
         images: [],
+        imagesPicture: [],
         name: '',
         maxImageCount: 1,
         description: '',
@@ -92,6 +93,8 @@
           this.description = this.description.slice(0, this.descMaxLength)
         }
       }
+    },
+    mounted () {
     },
     methods: {
       submit () {
@@ -119,6 +122,7 @@
           name: this.name,
           description: this.description,
           logo: this.images[0].base64,
+          background: this.imagesPicture[0],
           public: this.type === 1 ? 1 : 0
         }
 
@@ -136,6 +140,8 @@
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
         }
+
+        console.log(this.images + '图片图片')
       },
       uploadImage: function () {
         this.$refs.uploadImage.uploadImage()
@@ -226,6 +232,9 @@
     input[type='text'] {
       margin-bottom: 0;
       border: none;
+      color: #444444;
+      font-size: 20px;
+      font-family: PingFangSC-Medium;
       &::-webkit-input-placeholder {
         color: #C8C8C8;
         font-size: 20px;

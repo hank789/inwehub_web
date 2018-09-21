@@ -36,6 +36,7 @@ const InvitationImage = () => import(/* webpackChunkName: "InvitationImage" */ '
 const GroupsList = () => import(/* webpackChunkName: "GroupsList" */ '../../../views/Group/List.vue')
 const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Group/Detail.vue')
 const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../views/Group/Add.vue')
+const GroupsNewAdd = () => import(/* webpackChunkName: "GroupsNewAdd" */ '../../../views/Group/NewAdd.vue')
 
 const GroupsSetting = () => import(/* webpackChunkName: "GroupsSetting" */ '../../../views/Group/Setting.vue')
 
@@ -236,6 +237,7 @@ export {
   GroupsList,
   GroupsDetail,
   GroupsAdd,
+  GroupsNewAdd,
   GroupsSetting,
   GroupsUser,
   GroupsMy,
