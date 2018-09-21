@@ -13,7 +13,7 @@
         </p>
         <p class="font-family-medium" @tap.stop.prevent="back()">取消</p>
       </div>
-      <div class="menu" v-if="list.length || getCurrentMode === 'result'">
+      <div class="menu" v-if="list.length || getCurrentMode === 'result' && searchText !== ''">
         <span @tap.stop.prevent="" class="font-family-medium">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
