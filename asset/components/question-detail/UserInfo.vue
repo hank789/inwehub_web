@@ -29,11 +29,11 @@
         <span class="followButton active border-football" @tap.stop.prevent="collectProfessor()" v-if="isFollowed">已关注</span>
         <span class="followButton border-football" v-show="uuid" @tap.stop.prevent="collectProfessor()" v-else>关注</span>
       </div>
-      <!-- <div class="timeData">
-        <span>
-          <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
-        </span>
-      </div> -->
+      <!--<div class="timeData">-->
+        <!--<span>-->
+          <!--<timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>-->
+        <!--</span>-->
+      <!--</div>-->
     </div>
   </div>
 </template>
@@ -106,7 +106,7 @@
     },
     methods: {
       isTime (time) {
-        return /^[0-9\\-\\:\s]+$/.test(time)
+        return /^[0-9\-\\:\s]+$/.test(time)
       },
       toResume () {
         var uuid = this.uuid
@@ -199,8 +199,9 @@
   }
 
   .detail {
-    font-size: 0.346rem;
-    color: #808080;
+    font-size: 0.32rem;
+    color: #C8C8C8;
+    margin-top: -0.08rem;
   }
 
   .split {
@@ -236,7 +237,7 @@
     font-size: 0.346rem;
     color: #808080;
     position: relative;
-    margin-top: -0.133rem;
+    margin-top: -0.05rem;
   }
 
   .mui-media-body .followWrapper {

@@ -14,7 +14,7 @@
         </svg>
       </div>
 
-      <div class="line-river-after"></div>
+      <div class="line-river-after line-river-after-top"></div>
 
       <div class="container-tabLabels">
         <swiper :options="swiperOption" class="container-upload-images">
@@ -183,7 +183,7 @@
     margin-top:0.533rem;
   }
   .refreshListWrapper{
-    top: 2.533rem;
+    top: 2.4rem;
     bottom:1.333rem;
   }
   .container-tabLabels{

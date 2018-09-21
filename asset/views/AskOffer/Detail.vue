@@ -7,6 +7,7 @@
 
     <div class="mui-content" v-show="!loading">
       <vue-pull-refresh :on-refresh="refreshPageData">
+
       <div class="container-label padding-lr-15" v-if="ask.question.tags.length">
         <span class="border-football" v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</span>
       </div>
@@ -51,8 +52,8 @@
           <span>{{ ask.answer.is_supported ? '已赞' : '赞' }}</span>
         </div>
       </div>
-
-      <div class="see" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 &gt;</div>
+      <div class="line-river-after line-river-after-rightLeft"></div>
+      <div class="seeAnswers" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + answer.uuid)"> 查看Ta的全部回答 &gt;</div>
 
       <div class="line-river-big"></div>
 
@@ -627,5 +628,24 @@
     background: #FFFFFF;
     margin-bottom: 0.266rem;
     margin-top: 0.266rem;
+  }
+  .seeAnswers {
+    width: 100%;
+    height: 1.066rem;
+    padding: 0 0.4rem;
+    font-size: 0.373rem;
+    color: #03aef9;
+    text-align: center;
+    line-height: 1.066rem;
+    background: #FFFFFF;
+    margin-bottom: -0.053rem;
+    margin-top: 0.8rem;
+  }
+
+  .line-river-after-rightLeft:after {
+    top: 0.8rem;
+  }
+  .mui-android .container-label .border-football {
+    padding-top: 0.08rem;
   }
 </style>

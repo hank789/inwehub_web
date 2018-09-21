@@ -6,14 +6,14 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @focus="focus"/>
+          <input type="text" placeholder="搜内容、问答、圈子" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @focus="focus"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
         </p>
         <p class="font-family-medium" @tap.stop.prevent="back()">取消</p>
       </div>
-      <div class="menu" v-if="list.length || getCurrentMode === 'result'">
+      <div class="menu" v-if="list.length || getCurrentMode === 'result' && searchText !== ''">
         <span @tap.stop.prevent="" class="font-family-medium">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
@@ -391,7 +391,7 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 2.346rem;
+      top: 2.24rem;
     }
     .search{
       position: relative;
@@ -404,6 +404,11 @@
       align-items: center;
       background: #ffffff;
       justify-content: space-between;
+      .border-football {
+        &:after {
+          height: 1.77rem;
+        }
+      }
       p{
         &:nth-of-type(1){
           width: 7.813rem;
@@ -420,6 +425,7 @@
             color: #c8c8c8;
             &:nth-of-type(1){
               font-size: 0.48rem;
+              margin-top: 0.053rem;
             }
             &:nth-of-type(2){
               margin-left: 0.266rem;
@@ -438,6 +444,7 @@
             position: absolute;
             left: 0.853rem;
             z-index: 100000;
+            padding: 0 0.266rem;
           }
         }
         &:nth-of-type(2){
@@ -459,6 +466,7 @@
       display: flex;
       flex-direction: row;
       position: relative;
+      margin-top: -0.106rem;
       span{
         display: flex;
         width:33%;
@@ -527,9 +535,11 @@
     }
     .hotSearchList {
       span {
+        height: 0.72rem;
+        line-height: 0.72rem;
         color: #444444;
         font-size: 0.32rem;
-        padding: 0.133rem 0.266rem;
+        padding: 0rem 0.266rem;
         background: #F3F4F6;
         border-radius: 2.666rem;
         margin: 0 0.133rem 0.266rem 0;

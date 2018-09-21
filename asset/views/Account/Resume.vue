@@ -967,8 +967,8 @@
               margin: 0 0.053rem 0.213rem;
             }
             .my-detail {
-              width: 100%;
-              height: 0.8rem;
+              line-height: 0.426rem;
+              margin-bottom: 0.24rem;
               span {
                 font-size: 0.346rem;
                 color: #B4B4B6;

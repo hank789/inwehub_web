@@ -21,7 +21,7 @@
         :time="item.created_at"
         @setFollowStatus="setFollowStatus"
       ></UserInfo>
-
+      <!--<div class="line-river-after line-river-after-rightLeft"></div>-->
       <div class="content mui-ellipsis-3 textToLink" v-html="item.content ? textToLink(item.content) : (item.is_best_answer ? '[查看最佳回答]' : '[图片]')"></div>
 
       <div class="itemFooter">
@@ -87,6 +87,7 @@
   .answersWrapper {
     .content {
       padding: 0 0.4rem;
+      line-height: 0.693rem;
     }
 
     .item {
@@ -113,5 +114,14 @@
 
   .component-bestAnswerLabel{
     top:-0.186rem;
+  }
+
+  .line-river-after-rightLeft:after {
+    top: -0.346rem;
+    right: 0.426rem;
+    left: 0.426rem;
+  }
+  .userInfoWrapper {
+    padding-bottom: 0.16rem !important;
   }
 </style>

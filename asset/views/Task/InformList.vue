@@ -24,6 +24,7 @@
             :autoShowEmpty="false"
             class="listWrapper">
 
+              <div class="line-river-after"></div>
               <div class="noticeWrapper" v-if="isOpenNotification === 1 && closingNotice">
                 <div class="closeNotice" @tap.stop.prevent="closeNotice">
                   <svg class="icon" aria-hidden="true">
@@ -31,8 +32,9 @@
                   </svg>
                 </div>
                 <div class="noticeText">打开通知，避免错过订阅的热点新闻，深度文章，招聘动态和招标快讯</div>
-                <div class="unlock" @tap.stop.prevent="goUnlock">开启</div>
+                <div class="unlock border-football" @tap.stop.prevent="goUnlock">开启</div>
               </div>
+              <div class="line-river-after"></div>
 
               <ul>
                 <div class="notice" @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.unread_count">
@@ -327,6 +329,12 @@
     font-style: normal;
   }
 
+  .mui-icon {
+    .icon {
+      font-size: 0.4rem;
+    }
+  }
+
   .noticeWrapper {
     padding: 0.266rem 0.426rem;
     height: 1.493rem;
@@ -338,6 +346,9 @@
       color: #C8C8C8;
       margin-right: 0.4rem;
       margin-top: 0.24rem;
+      .icon {
+        font-size: 0.48rem;
+      }
     }
     .noticeText {
       width: 71%;
@@ -350,11 +361,17 @@
       width: 1.76rem;
       height: 0.72rem;
       color: #03AEF9;
+      font-size: 0.373rem;
       margin: 0.133rem 0 0 0.4rem;
       line-height: 0.72rem;
       text-align: center;
       border-radius: 2.666rem;
-      border: 0.026rem solid #03AEF9;
+      /*border: 0.026rem solid #03AEF9;*/
+    }
+    .border-football {
+      &:after {
+        border-color: #03AEF9;
+      }
     }
   }
 

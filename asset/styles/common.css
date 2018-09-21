@@ -2236,6 +2236,8 @@ a {
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5); }
 
+.line-river-after-top {
+  top: -1px; /* px不转换 */}
 .line-river-after-short:after {
   left: 0.4rem;
   right: 0.4rem; }
@@ -3096,15 +3098,14 @@ a {
   margin-left: 0.133rem;
   display: inline-block;}
 .component-group .groupContent .groupName {
-  position: relative;
-}
-.component-group .groupContent .groupName .groupOwnerWrapper {
-  max-width: 4.8rem;
+  position: relative;}
+.component-group .groupContent .groupName .groupOwnerWrapper span:nth-of-type(1) {
+  max-width: 250px;
   color: #444444;
   font-size: 0.426rem;
   line-height: 0.586rem;
   display: inline-block;}
-.component-group .groupContent .groupName .groupOwnerWrapper span {
+.component-group .groupContent .groupName .groupOwnerWrapper .border-football {
   width: 0.8rem;
   height: 0.4rem;
   color: #03AEF9;
@@ -3114,17 +3115,17 @@ a {
   font-size: 0.266rem;
   line-height: 0.4rem;
   margin-left: 0.133rem;
-  border-radius: 0.106rem;
   display: inline-block;}
 .component-group .groupContent .groupName .groupOwnerWrapper .border-football:after {
   border-radius: 0.213rem !important;
-  border-color: #03AEF9 !important;
-}
+  border-color: #03AEF9 !important;}
+.mui-android .component-group .groupContent .groupName .groupOwnerWrapper .border-football {
+  line-height: 0.45rem;}
 .component-group .groupContent .groupDescribe {
   width: inherit;
   display: block;
   color: #808080;
-  margin-top: 0.08rem;
+  /*margin-top: 0.08rem;*/
   font-size: 0.346rem;
   line-height: 0.426rem;}
 .component-group .groupContent .groupText {
@@ -3136,22 +3137,24 @@ a {
   margin-right: -0.08rem;}
 
 .groupSearchWrapper {
-  padding: 0 0.426rem;}
+  padding: 0 0.426rem;
+  margin-top: 0.266rem;}
 .groupSearchWrapper .groupSearch {
   width: 9.146rem;
   height: 0.906rem;
   margin: 0 auto;
   color: #C8C8C8;
-  padding-top: 0.053rem;
   padding-left: 0.293rem;
-  line-height: 0.853rem;
+  line-height: 0.906rem;
   background: #F3F4F6;
-  border-radius: 2.666rem;
-  /*border: 0.026rem solid #DCDCDC;*/}
+  border-radius: 2.666rem;}
 .groupSearchWrapper .groupSearch span {
   font-size: 0.373rem;
   margin-left: 0.053rem;}
-
+.groupSearchWrapper .border-football:after {
+  border-color: #DCDCDC !important;
+  height: 1.77rem !important;
+}
 .noResult {
   text-align: center;
   font-size: 1.333rem;
@@ -3173,5 +3176,6 @@ a {
 
 
 .mui-icon-back:before, .mui-icon-left-nav:before{
-  font-size:0.72rem;
-}
+  font-size:0.72rem;}
+
+

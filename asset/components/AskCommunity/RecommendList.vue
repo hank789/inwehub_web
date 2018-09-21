@@ -5,7 +5,7 @@
 
     <template v-for="(item, index) in list">
       <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
-        <div class="container-label" v-if="item.tags.length"><span v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
+        <div class="container-label" v-if="item.tags.length"><span class="border-football" v-for="(item, index) in item.tags" @tap.stop.prevent="toTagDetail(item.name)">{{item.name}}</span></div>
         <div class="question text-line-3">
           <label v-if="item.price > 0" class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
         </div>
@@ -75,4 +75,10 @@
 .recommentListWrapper{
   background:#fff;
 }
+  .container-label .border-football:after {
+    border-color: #DCDCDC;
+  }
+  .mui-android .container-label .border-football {
+    padding-top: 0.08rem;
+  }
 </style>

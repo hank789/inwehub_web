@@ -145,40 +145,20 @@
 
       return {
         attention: infomation.info.followers,
-        advisory: infomation.info.questions,
-        grade: infomation.info.feedbacks,
-        total_score: infomation.info.total_score,
         expert_apply_status: infomation.info.expert_apply_status,
-        company_apply_status: infomation.info.company_status,
-        im_tokenMsg: '',
         collections: currentUser.collections,
         publishes: currentUser.publishes,
         groups: currentUser.groups,
         followed_number: currentUser.followed_number,
         popularity: currentUser.popularity,
         name: currentUser.name,
-        phone: currentUser.phone,
         avatar: currentUser.avatar_url,
         title: currentUser.title,
-        company: currentUser.company,
-        account_info_complete_percent: currentUser.account_info_complete_percent,
-        isExpert: currentUser.is_expert,
-        total_money: currentUser.total_money,
         user_level: currentUser.user_level,
-        user_credits: currentUser.user_credits,
-        user_coins: currentUser.user_coins,
-        user_submission_karma: currentUser.submission_karma,
-        user_comment_karma: currentUser.comment_karma,
         user_id: currentUser.id,
         uuid: currentUser.uuids,
-        questions: currentUser.questions,
         answers: currentUser.answers,
-        enroll: currentUser.my_activity_enroll,
-        tasks: currentUser.tasks,
-        projects: currentUser.projects,
-        expert_level: currentUser.expert_level,
         show_my_wallet: currentUser.show_my_wallet,
-        show_resume: true,
         my: '',
         list: [],
         current_day_signed: ''
@@ -253,10 +233,6 @@
             window.mui.toast('您还不是企业版账号，请点击申请企业账号前往认证')
         }
       },
-      // 认证专家跳转判断；
-      toApprove () {
-        this.$router.pushPlus('/company/my?back=/my')
-      },
       // 认证专家；
       toApply () {
         userAbility.jumpToApplyProfessor(this)
@@ -289,34 +265,22 @@
         console.log('refresh-my')
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
-          this.account_info_complete_percent = user.info.account_info_complete_percent
-          this.isExpert = user.info.is_expert
           this.user_level = user.info.user_level
-          this.user_credits = user.info.user_credits
-          this.user_coins = user.info.user_coins
-          this.user_submission_karma = user.info.submission_karma
-          this.user_comment_karma = user.info.comment_karma
           this.user_id = user.info.id
           this.uuid = user.info.uuid
-          this.questions = user.info.questions
-          this.enroll = user.info.my_activity_enroll
           this.answers = user.info.answers
-          this.tasks = user.info.tasks
-          this.projects = user.info.projects
-          this.expert_level = user.info.expert_level
           this.show_my_wallet = user.info.show_my_wallet
           this.expert_apply_status = user.info.expert_apply_status
-          this.company_apply_status = user.info.company_status
           this.avatar = user.info.avatar_url
           this.name = user.info.name
           this.title = user.info.title
-          this.show_my_wallet = user.info.show_my_wallet
           this.publishes = user.info.publishes
           this.collections = user.info.collections
           this.groups = user.info.groups
           this.followed_number = user.info.followed_number
           this.popularity = user.info.popularity
           this.current_day_signed = user.info.current_day_signed
+          this.attention = user.info.followers
           if (window.mui.os.plus && window.mui.os.android) {
             this.show_my_wallet = true
           }
@@ -385,27 +349,24 @@
   }
 
   .my-top {
-    width: 92%;
     overflow: hidden;
-    margin-left: 4%;
-    margin-bottom: 0.506rem;
     background-color: #ffffff;
-
+    padding: 0 0.426rem;
   }
 
   .professor {
-    width: 100%;
-    /*height: 3.2rem;*/
+    margin-top: 0.4rem;
+    display: flex;
     .my-img{
-      height: 100%;
-      float: left;
+      width: 1.573rem;
+      height: 1.573rem;
       position: relative;
       .expert {
         position: absolute;
-        bottom: 0.186rem;
-        right: -0.026rem;
+        bottom: -0.026rem;
+        right: -0.08rem;
         .icon {
-          font-size: 0.64rem;
+          font-size: 0.586rem;
           color: #FCC816;
           border: 0.053rem solid #FFF;
           border-radius: 50%;
@@ -414,26 +375,18 @@
       }
     }
     .avatar {
-      width: 1.84rem;
-      height: 1.826rem;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
-      margin-top: 0.4rem;
-
     }
   }
 
   .my-personal {
-    width: 70%;
-    height: 1.84rem;
-    margin-top: 0.4rem;
-    float: left;
+    margin-top: 0.106rem;
     margin-left: 0.266rem;
     position: relative;
     z-index: 1000;
     .my-info {
-      width: 100%;
-      height: 0.8rem;
-      margin-top: 0.24rem;
       position: relative;
       span {
         display: inline-block;
@@ -475,8 +428,7 @@
       }
     }
     .my-detail {
-      width: 100%;
-      height: 0.8rem;
+      margin-top: 0.106rem;
       span {
         font-size: 0.346rem;
         color: #444444;
@@ -496,12 +448,12 @@
   .account_info {
     position: absolute;
     right: 0;
-    top: 0.853rem;
+    top: 0.586rem;
     height: 0.773rem;
     border-radius: 2.666rem 0 0 2.666rem;
     line-height: 0.773rem;
     color: #FFFFFF;
-    /*font-size: 0.373rem;*/
+    font-size: 0.346rem;
     padding-left: 0.346rem;
     padding-right: 0.4rem;
     z-index: 9;
@@ -618,7 +570,8 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 1.6rem;
+    height: 1.013rem;
+    margin-top: 0.506rem;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
     background: #FFFFFF;
@@ -651,7 +604,7 @@
 
   .enjoy {
     width: 9.146rem;
-    margin: 0 auto;
+    margin: 0.453rem auto 0;
     padding-bottom: 0.25rem;
     img {
       width: 100%;
@@ -696,12 +649,13 @@
         display: flex;
       }
       .icon {
+        font-size: 0.346rem;
         display: flex;
         margin-top: 0.08rem;
         color: #808080;
       }
       .bot {
-        right: 0.56rem;
+        right: 0.48rem;
         left: 0.426rem;
       }
     }

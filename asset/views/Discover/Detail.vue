@@ -22,14 +22,15 @@
             :isFollowed="detail.is_followed_author?true:false"
             :isShowPositionAndCompany="false"
             :isExpert="detail.owner.is_expert?1:0"
+            :time="detail.created_at"
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
 
-          <div class="timeData">
-            <span>
-              <timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>
-            </span>
-          </div>
+          <!--<div class="timeData">-->
+            <!--<span>-->
+              <!--<timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>-->
+            <!--</span>-->
+          <!--</div>-->
 
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
@@ -93,8 +94,8 @@
 
           <div class="timeContainer">
             <div class="makingCopy">著作权归作者所有</div>
-            <div class="fromGroup text-line-1">
-              <span class="text-line-1" @tap="toDetail(detail.group)"><i>来自圈子</i>{{ detail.group.name }}</span>
+            <div class="fromGroup">
+              <span @tap="toDetail(detail.group)"><i>来自圈子</i>{{ detail.group.name }}</span>
             </div>
           </div>
 
@@ -880,7 +881,7 @@
     }
   }
   .topImg {
-    margin-top: 0.266rem;
+    margin-bottom: 0.32rem;
     img {
       width: 10rem;
       height: 5.333rem;
@@ -942,7 +943,7 @@
       font-size: 0.32rem;
     }
     .fromGroup {
-      width: 3.173rem;
+      /*width: 3.173rem;*/
       height: 0.56rem;
       padding: 0 0.213rem;
       font-size: 0.32rem;
@@ -1316,8 +1317,6 @@
 </style>
 
 <style type="text/css">
-  .realnameMtop {
-    margin-top: 0rem !important;
-  }
+
 </style>
 

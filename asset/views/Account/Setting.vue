@@ -170,6 +170,7 @@
       clearUserCache () {
         localEvent.clearLocalItem('UserLoginInfo')
         localEvent.clearLocalItem('UserInfo')
+        localEvent.clearLocalItem('UserInfoReal')
         this.$store.dispatch(ASKS_LIST_APPEND, {})
         this.$store.dispatch(ANSWERS_LIST_APPEND, {})
         this.$store.dispatch(TASK_LIST_APPEND, {})

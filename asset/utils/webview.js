@@ -192,7 +192,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   })
 
   console.log('bodyWebviewUrl:' + webview.getURL())
-  if (webview.getURL() !== url && webview.getURL()) {
+  if (webview.getURL() !== url) {
     webview.clear()
     webview.loadURL(url)
   }

@@ -500,6 +500,19 @@ const routes = [
     }
   },
   {
+    path: '/group/newadd',
+    name: 'group-add',
+    component: componets.GroupsNewAdd,
+    meta: {
+      title: '新创建圈子',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
     path: '/group/detail/:id',
     name: 'group-detail',
     component: componets.GroupsDetail,

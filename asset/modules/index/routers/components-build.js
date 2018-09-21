@@ -34,6 +34,7 @@ import InvitationImage from '../../../views/Invitation/Image.vue'
 import GroupsList from '../../../views/Group/List.vue'
 import GroupsDetail from '../../../views/Group/Detail.vue'
 import GroupsAdd from '../../../views/Group/Add.vue'
+import GroupsNewAdd from '../../../views/Group/NewAdd.vue'
 import GroupsSetting from '../../../views/Group/Setting.vue'
 import GroupsMy from '../../../views/Group/My.vue'
 import GroupsUser from '../../../views/Group/User.vue'
@@ -229,6 +230,7 @@ export {
   GroupsList,
   GroupsDetail,
   GroupsAdd,
+  GroupsNewAdd,
   GroupsSetting,
   GroupsMy,
   GroupsSearch,

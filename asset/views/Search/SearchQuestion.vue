@@ -6,7 +6,7 @@
          <svg class="icon" aria-hidden="true">
            <use xlink:href="#icon-sousuo"></use>
          </svg>
-         <input type="text" placeholder="" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
+         <input type="text" placeholder="搜内容、问答、圈子" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
          <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
            <use xlink:href="#icon-times1"></use>
          </svg>
@@ -14,7 +14,7 @@
        <p @tap.stop.prevent="back()">取消</p>
      </div>
     <!--导航栏-->
-    <div class="menu" v-if="list.length || getCurrentMode === 'result'">
+    <div class="menu" v-if="list.length || getCurrentMode === 'result' && searchText !== ''">
       <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
       <span @tap.stop.prevent="" class="font-family-medium">问答<i></i></span>
       <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
@@ -77,7 +77,7 @@
           <use xlink:href="#icon-zanwushuju"></use>
         </svg>
         <div class="noResultText" v-if="list.length">无更多结果，提问快速获取回答~</div>
-        <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">去提问</div>
+        <div class="goRelease"  @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
       </div>
       <div class="line-river-big" v-if="list.length"></div>
 
@@ -88,7 +88,7 @@
         <use xlink:href="#icon-zanwushuju"></use>
       </svg>
       <div class="noResultText">暂无结果，提问快速获取回答~</div>
-      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">去提问</div>
+      <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
     </div>
 
   </div>
@@ -264,7 +264,7 @@
   .mui-content{
     background: #ffffff;
     .listWrapper{
-      top: 2.346rem;
+      top: 2.24rem;
     }
     .search{
       width:100%;
@@ -277,6 +277,11 @@
       align-items: center;
       background: #ffffff;
       justify-content: space-between;
+      .border-football {
+        &:after {
+          height: 1.77rem;
+        }
+      }
       p{
         &:nth-of-type(1){
           width: 7.813rem;
@@ -293,6 +298,7 @@
             color: #c8c8c8;
             &:nth-of-type(1){
               font-size: 0.48rem;
+              margin-top: 0.053rem;
             }
             &:nth-of-type(2){
               margin-left: 0.266rem;
@@ -311,6 +317,7 @@
             position: absolute;
             left: 0.853rem;
             z-index: 100000;
+            padding: 0 0.266rem;
           }
         }
         &:nth-of-type(2){
@@ -332,6 +339,7 @@
       display: flex;
       flex-direction: row;
       position: relative;
+      margin-top: -0.106rem;
       span{
         display: flex;
         width:33%;
@@ -384,9 +392,11 @@
     }
     .hotSearchList {
       span {
+        height: 0.72rem;
+        line-height: 0.72rem;
         color: #444444;
         font-size: 0.32rem;
-        padding: 0.133rem 0.266rem;
+        padding: 0rem 0.266rem;
         background: #F3F4F6;
         border-radius: 2.666rem;
         margin: 0 0.133rem 0.266rem 0;

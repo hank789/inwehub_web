@@ -14,6 +14,7 @@
       :isNiming="!!ask.hide"
       @setFollowStatus="setFollowStatus"
     ></UserInfo>
+    <div class="line-river-after line-river-after-rightLeft"></div>
 
     <div class="content text-content textToLink container-editor container-editor-app"  v-html="textToLink(ask.description)"></div>
     <!--添加图片-->
@@ -150,5 +151,10 @@
   }
   .component-card-money:after{
     border-radius: 0.106rem;
+  }
+  .line-river-after-rightLeft:after {
+    top: -0.346rem;
+    right: 0.426rem;
+    left: 0.426rem;
   }
 </style>
