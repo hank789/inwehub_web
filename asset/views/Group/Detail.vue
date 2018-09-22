@@ -1,12 +1,47 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav">
-      <Back></Back>
-      <h1 class="mui-title">圈子</h1>
-    </header>
+    <!--<header class="mui-bar mui-bar-nav">-->
+      <!--<Back></Back>-->
+      <!--<h1 class="mui-title">圈子</h1>-->
+    <!--</header>-->
+
+
     <div class="mui-content" v-if="!loading">
       <!--圈子详情-->
       <!--可以浏览-->
+      <div class="header">
+        <img src="../../statics/images/topImg.png" alt="">
+        <div class="headerBack">
+          <div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-fanhui"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="headPhotowrapper">
+          <div class="headImages">
+            <img src="../../statics/images/uicon.jpg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="groupWrapper">
+        <div class="groupNAmeWrapper">
+          <span class="font-family-medium">{{detail.name}}</span>
+        </div>
+        <div class="groupDescribeWrapper">
+          <span>688人气 · </span><span>688人气 · </span>
+          <span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-simi"></use>
+            </svg>私密
+          </span>
+        </div>
+        <div class="goMoreoPerations">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+      </div>
       <div v-if="isInGroup">
         <RefreshList
           ref="RefreshList"
@@ -81,15 +116,18 @@
 
       <!--不可以浏览-->
       <div v-else>
-        <GroupsInfo
-          :detail="detail"
-          @allOptions="allOptions"
-        ></GroupsInfo>
+        <!--<GroupsInfo-->
+          <!--:detail="detail"-->
+          <!--@allOptions="allOptions"-->
+        <!--&gt;</GroupsInfo>-->
         <div class="gray"></div>
 
         <div class="group-text">
-          <p class="font-family-medium">圈子介绍<i class="bot"></i></p>
-          <p class="text-content">{{ detail.description }}</p>
+          <span class="font-family-medium">圈子介绍</span>
+          <i class="bot"></i>
+        </div>
+        <div class="groupIntroduce">
+          <span class="text-content">{{ detail.description }}</span>
         </div>
         <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
 
@@ -652,24 +690,10 @@
 </script>
 
 <style scoped="scoped">
-  /*清掉自带样式*/
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
-
   .mui-content {
     background: #ffffff;
+    top: 0px;
   }
-
   .bot {
     position: absolute;
     right: 0;
@@ -761,28 +785,6 @@
     color: rgba(255, 255, 255, 1);
     background: rgba(3, 174, 249, 1);
   }
-
-  .group-text{
-    width:92%;
-    margin-left: 4%;
-    overflow: hidden;
-  }
-  .group-text p:nth-of-type(1){
-    width:100%;
-    height:1.146rem;
-    position: relative;
-    font-size: 0.426rem;
-    color:rgba(68,68,68,1);
-    line-height: 1.146rem;
-  }
-  .group-text p:nth-of-type(2){
-    width:100%;
-    margin-top: 0.373rem;
-    position: relative;
-    font-size: 0.426rem;
-    color:rgba(68,68,68,1);
-    line-height: 0.533rem;
-  }
   .join{
     width:92%;
     height:1.173rem;
@@ -824,4 +826,100 @@
   .listWrapper{
     bottom: 1.333rem;
   }
+</style>
+
+
+<style lang="less" scoped>
+  .header {
+    background: #1C3F6D;
+    position: relative;
+    height: 149px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+    .headerBack {
+      width: 100%;
+      height: 44px;
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      padding-left: 12px;
+      .icon {
+        margin-top: 10px;
+        font-size: 23px;
+        color: #FFFFFF;
+      }
+    }
+    .headPhotowrapper {
+      position: absolute;
+      bottom: -24px;
+      left: 17px;
+      z-index: 100;
+      .headImages {
+        width: 56px;
+        height: 56px;
+        text-align: center;
+        background: #E3E3E3;
+        border-radius: 4px;
+        border: 1px solid #ffffff;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 3px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  .groupWrapper {
+    margin-top: 40px;
+    padding: 0 16px 13px;
+    position: relative;
+    .groupNAmeWrapper {
+      color: #444444;
+      font-size: 20px;
+      .font-family-medium {
+        line-height: 28px;
+      }
+    }
+    .groupDescribeWrapper {
+      margin-top: 3px;
+      color: #B4B4B6;
+      font-size: 12px;
+      line-height: 16px;
+    }
+    .goMoreoPerations {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      .icon {
+        font-size: 13px;
+      }
+    }
+  }
+
+  .group-text {
+    position: relative;
+    padding: 11px 16px;
+    span {
+      color: #444444;
+      font-size: 16px;
+    }
+  }
+  .groupIntroduce {
+    padding: 10px 16px;
+    span {
+      color: #808080;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+
 </style>
