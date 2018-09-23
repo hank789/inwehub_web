@@ -513,6 +513,19 @@ const routes = [
     }
   },
   {
+    path: '/group/moreSetup/:id',
+    name: 'group-more',
+    component: componets.GroupsMore,
+    meta: {
+      title: '更多操作',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
     path: '/group/detail/:id',
     name: 'group-detail',
     component: componets.GroupsDetail,

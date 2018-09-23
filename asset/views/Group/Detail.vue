@@ -9,39 +9,7 @@
     <div class="mui-content" v-if="!loading">
       <!--圈子详情-->
       <!--可以浏览-->
-      <div class="header">
-        <img src="../../statics/images/topImg.png" alt="">
-        <div class="headerBack">
-          <div>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-fanhui"></use>
-            </svg>
-          </div>
-        </div>
-        <div class="headPhotowrapper">
-          <div class="headImages">
-            <img src="../../statics/images/uicon.jpg" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="groupWrapper">
-        <div class="groupNAmeWrapper">
-          <span class="font-family-medium">{{detail.name}}</span>
-        </div>
-        <div class="groupDescribeWrapper">
-          <span>688人气 · </span><span>688人气 · </span>
-          <span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-simi"></use>
-            </svg>私密
-          </span>
-        </div>
-        <div class="goMoreoPerations">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-        </div>
-      </div>
+
       <div v-if="isInGroup">
         <RefreshList
           ref="RefreshList"
@@ -57,17 +25,55 @@
           :list="list"
           class="listWrapper"
         >
-        <GroupsInfo
-          :detail="detail"
-          @allOptions="allOptions()"
-        ></GroupsInfo>
+          <div class="header">
+            <img src="../../statics/images/topImg.png" alt="">
+            <div class="headerBack">
+              <div @tap.stop.prevent="$router.goBack()">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-fanhui"></use>
+                </svg>
+              </div>
+              <div class="openNotice">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tongzhi"></use>
+                </svg>
+              </div>
+            </div>
+            <div class="headPhotowrapper">
+              <div class="headImages">
+                <img src="../../statics/images/uicon.jpg" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
+            <div class="groupNAmeWrapper">
+              <span class="font-family-medium">{{detail.name}}</span>
+            </div>
+            <div class="groupDescribeWrapper">
+              <span>688人气 · </span><span>688人气 · </span>
+              <span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-simi"></use>
+            </svg>私密
+          </span>
+            </div>
+            <div class="goMoreoPerations">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-jinru"></use>
+              </svg>
+            </div>
+          </div>
+        <!--<GroupsInfo-->
+          <!--:detail="detail"-->
+          <!--@allOptions="allOptions()"-->
+        <!--&gt;</GroupsInfo>-->
         <div class="gray"></div>
         <div class="menu">
           <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
             v-if="search_type === 1"></i></span>
-          <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i
-            v-if="search_type === 2"></i></span>
-          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华({{detail.recommend_submission_numbers}})<i
+          <!--<span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i-->
+            <!--v-if="search_type === 2"></i></span>-->
+          <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">精华<i
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
@@ -694,6 +700,9 @@
     background: #ffffff;
     top: 0px;
   }
+  .mui-scroll-wrapper {
+    /*top: 247px;*/
+  }
   .bot {
     position: absolute;
     right: 0;
@@ -723,7 +732,7 @@
     justify-content: space-around;
     line-height: 1.04rem;
     position: absolute;
-    top: 4.746rem;
+    top: 259px;
   }
   .menu span {
     position: relative;
@@ -844,7 +853,8 @@
       border-bottom-right-radius: 20px;
     }
     .headerBack {
-      width: 100%;
+      /*width: 100%;*/
+      display: flex;
       height: 44px;
       position: absolute;
       top: 0;
@@ -855,6 +865,11 @@
         font-size: 23px;
         color: #FFFFFF;
       }
+    }
+    .openNotice {
+      position: absolute;
+      top: 0;
+      left: 297px;
     }
     .headPhotowrapper {
       position: absolute;

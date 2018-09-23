@@ -194,6 +194,7 @@ import AskOfferDetail from '../../../views/AskOffer/Detail.vue'
 import ShareReview from '../../../views/Share/Review.vue'
 import ComponentsComment from '../../../views/Comment.vue'
 import Followed from '../../../views/Account/Followed.vue'
+import GroupsMore from '../../../views/Group/Setup.vue'
 
 export {
   Login,
@@ -391,5 +392,6 @@ export {
   AccountChoiceRole,
   AccountService,
   AccountDetailInfo,
-  Followed
+  Followed,
+  GroupsMore
 }
