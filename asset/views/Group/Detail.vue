@@ -2,15 +2,13 @@
   <div>
     <!--<header class="mui-bar mui-bar-nav">-->
       <!--<Back></Back>-->
-      <!--<h1 class="mui-title">圈子</h1>-->
+      <!--<h1 class="mui-title">{{detail.name}}</h1>-->
     <!--</header>-->
 
 
     <div class="mui-content" v-if="!loading">
-      <!--圈子详情-->
-      <!--可以浏览-->
 
-      <div v-if="isInGroup">
+      <div>
         <RefreshList
           ref="RefreshList"
           v-model="list"
@@ -25,8 +23,13 @@
           :list="list"
           class="listWrapper"
         >
+        <!--<GroupsInfo-->
+          <!--:detail="detail"-->
+          <!--@allOptions="allOptions()"-->
+        <!--&gt;</GroupsInfo>-->
+
           <div class="header">
-            <img src="../../statics/images/topImg.png" alt="">
+            <img :src="detail.logo" alt="">
             <div class="headerBack">
               <div @tap.stop.prevent="$router.goBack()">
                 <svg class="icon" aria-hidden="true">
@@ -41,7 +44,7 @@
             </div>
             <div class="headPhotowrapper">
               <div class="headImages">
-                <img src="../../statics/images/uicon.jpg" alt="">
+                <img :src="detail.logo" alt="">
               </div>
             </div>
           </div>
@@ -50,12 +53,12 @@
               <span class="font-family-medium">{{detail.name}}</span>
             </div>
             <div class="groupDescribeWrapper">
-              <span>688人气 · </span><span>688人气 · </span>
-              <span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-simi"></use>
-            </svg>私密
-          </span>
+              <span>{{detail.subscribers}}人气 · </span><span>688分享</span>
+              <span v-if="!detail.public">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-simi"></use>
+                </svg> · 私密
+              </span>
             </div>
             <div class="goMoreoPerations">
               <svg class="icon" aria-hidden="true">
@@ -63,87 +66,82 @@
               </svg>
             </div>
           </div>
-        <!--<GroupsInfo-->
-          <!--:detail="detail"-->
-          <!--@allOptions="allOptions()"-->
-        <!--&gt;</GroupsInfo>-->
-        <div class="gray"></div>
-        <div class="menu">
-          <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
-            v-if="search_type === 1"></i></span>
-          <!--<span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i-->
-            <!--v-if="search_type === 2"></i></span>-->
-          <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">精华<i
-            v-if="search_type === 3"></i></span>
-          <i class="bot"></i>
-        </div>
-          <div  class="groups-list">
-            <template v-for="(item, index) in list">
-              <div v-if="item.feed_type === 15" @tap.stop.prevent="toDetail(item)">
-                <!--x发布了分享-->
-                <DiscoverShare
-                  :data="item"
-                  :show='isShowItemOption(item)'
-                  ref="discoverShare"
-                  @comment="comment"
-                  @showItemOptions="showItemOptions(item, index)"
-                ></DiscoverShare>
-              </div>
-              <div v-else-if="item.feed_type === 16"  @tap.stop.prevent="toDetail(item)">
-                <!--x发布了链接分享-->
-                <SubmitReadhubAriticle :data="item"
-                                       :show='isShowItemOption(item)'
-                                       @comment="comment"
-                                       @showItemOptions="showItemOptions(item, index)"
-                ></SubmitReadhubAriticle>
-              </div>
-              <div v-else-if="item.feed_type === 5"  @tap.stop.prevent="toDetail(item)">
-                <!--x发布了原创文章，有title何描述-->
-                <SubmitReadhubAriticle :data="item"
-                                       :show='isShowItemOption(item)'
-                                       @comment="comment"
-                                       @showItemOptions="showItemOptions(item, index)"
-                ></SubmitReadhubAriticle>
-              </div>
-            </template>
-          </div>
-          <!--为空的提示-->
-          <div class="Nothing" v-if="!list.length">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zanwushuju"></use>
-            </svg>
-            <p>暂无数据</p>
+
+          <div v-if="isInGroup">
+            <div class="gray"></div>
+            <div class="menu">
+              <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
+                v-if="search_type === 1"></i></span>
+              <!--<span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i-->
+                <!--v-if="search_type === 2"></i></span>-->
+              <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">精华<i
+                v-if="search_type === 3"></i></span>
+              <i class="bot"></i>
+            </div>
+            <div  class="groups-list">
+              <template v-for="(item, index) in list">
+                <div v-if="item.feed_type === 15" @tap.stop.prevent="toDetail(item)">
+                  <!--x发布了分享-->
+                  <DiscoverShare
+                    :data="item"
+                    :show='isShowItemOption(item)'
+                    ref="discoverShare"
+                    @comment="comment"
+                    @showItemOptions="showItemOptions(item, index)"
+                  ></DiscoverShare>
+                </div>
+                <div v-else-if="item.feed_type === 16"  @tap.stop.prevent="toDetail(item)">
+                  <!--x发布了链接分享-->
+                  <SubmitReadhubAriticle :data="item"
+                                         :show='isShowItemOption(item)'
+                                         @comment="comment"
+                                         @showItemOptions="showItemOptions(item, index)"
+                  ></SubmitReadhubAriticle>
+                </div>
+                <div v-else-if="item.feed_type === 5"  @tap.stop.prevent="toDetail(item)">
+                  <!--x发布了原创文章，有title何描述-->
+                  <SubmitReadhubAriticle :data="item"
+                                         :show='isShowItemOption(item)'
+                                         @comment="comment"
+                                         @showItemOptions="showItemOptions(item, index)"
+                  ></SubmitReadhubAriticle>
+                </div>
+              </template>
+            </div>
+            <!--为空的提示-->
+            <div class="Nothing" v-if="!list.length">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zanwushuju"></use>
+              </svg>
+              <p>暂无数据</p>
+            </div>
           </div>
 
-          <!---->
+          <div v-else>
+            <div class="gray"></div>
+
+            <div class="group-text">
+              <span class="font-family-medium">圈子介绍</span>
+              <i class="bot"></i>
+            </div>
+            <div class="groupIntroduce">
+              <span class="text-content">{{ detail.description }}</span>
+            </div>
+            <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
+
+            <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
+            <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
+            <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
+            <!--审核不通过-->
+            <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
+          </div>
         </RefreshList>
       </div>
 
 
       <!--不可以浏览-->
-      <div v-else>
-        <!--<GroupsInfo-->
-          <!--:detail="detail"-->
-          <!--@allOptions="allOptions"-->
-        <!--&gt;</GroupsInfo>-->
-        <div class="gray"></div>
-
-        <div class="group-text">
-          <span class="font-family-medium">圈子介绍</span>
-          <i class="bot"></i>
-        </div>
-        <div class="groupIntroduce">
-          <span class="text-content">{{ detail.description }}</span>
-        </div>
-        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
-
-        <div class="join wait" v-if="detail.audit_status === 0">圈子审核中</div>
-        <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
-        <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
-        <!--审核不通过-->
-        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
-      </div>
     </div>
+    <!---->
 
     <Options
       ref="allOptions"
@@ -399,6 +397,7 @@
           } else {
             this.detail.is_joined = 0
           }
+          window.mui.toast('圈子动态更新将第一时间通知您')
         })
       },
       joinShare () {
@@ -687,9 +686,10 @@
       this.getData()
     },
     activated: function () {
-      if (this.id !== parseInt(this.$route.params.id)) {
-        this.refreshPageData()
-      }
+      // if (this.id !== parseInt(this.$route.params.id)) {
+      //   this.refreshPageData()
+      // }
+      this.refreshPageData()
     },
     updated () {}
   }
@@ -732,7 +732,7 @@
     justify-content: space-around;
     line-height: 1.04rem;
     position: absolute;
-    top: 259px;
+    /*top: 259px;*/
   }
   .menu span {
     position: relative;
