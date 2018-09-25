@@ -14,10 +14,18 @@
            :pageMode = true
            class="listWrapper"
          >
-           <div class="apply">
-             入圈申请
-             <i class="bot"></i>
+           <div class="setUpList">
+             <span>邀请加入</span>
+             <svg class="icon" aria-hidden="true">
+               <use xlink:href="#icon-jinru"></use>
+             </svg>
            </div>
+           <div class="line-river-after line-river-after-short"></div>
+           <div class="setUpList openChat" @tap.stop.prevent="goOpenChat">
+             <span>圈子聊天</span>
+             <Switches class="switchestop" v-model="openChat" type-bold="true" theme="custom" color="blue"></Switches>
+           </div>
+           <div class="gray"></div>
            <ul class="cions-list">
              <template v-for="(item, index) in list">
                <li v-if="item.user_id !== localUserId">
@@ -48,17 +56,20 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
+  import Switches from 'vue-switches'
 
   export default {
     data () {
       return {
         id: null,
         localUserId: getLocalUserId(),
-        list: []
+        list: [],
+        openChat: 0
       }
     },
     components: {
-      RefreshList
+      RefreshList,
+      Switches
     },
     props: {},
     methods: {
@@ -115,6 +126,25 @@
 
                 this.list.splice(index, 1)
               })
+          }
+        })
+      },
+      goOpenChat () {
+        this.id = parseInt(this.$route.params.id)
+        var btnArray = ['取消', '确定']
+        var that = this
+        window.mui.confirm('确定开放圈子群聊吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            postRequest(`group/openIm`, {id: that.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                that.$router.replace('/groups')
+                return
+              }
+              that.openChat = response.data.data.room_id
+              window.mui.toast('群聊已开启')
+            })
           }
         })
       },
@@ -249,5 +279,32 @@
   }
   .space{
     margin-right: 0.266rem;
+  }
+  .vue-switcher--bold div {
+    width: 51px;
+    height: 31px;
+  }
+</style>
+
+<style lang="less" scoped>
+  .setUpList {
+    padding: 11px 16px;
+    background: #ffffff;
+    display: flex;
+    color: #444444;
+    font-size: 16px;
+    position: relative;
+    justify-content: space-between;
+    &.openChat {
+      padding-bottom: 0;
+    }
+    .icon {
+      color: #808080;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .switchestop {
+      margin-top: 7px;
+    }
   }
 </style>

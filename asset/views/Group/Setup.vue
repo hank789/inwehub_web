@@ -13,7 +13,7 @@
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
-        <div class="setUpList" v-else :class="setUpListGray ? 'ListGray' : ''">
+        <div class="setUpList" v-else :class="setUpListGray ? 'ListGray' : ''" @tap.stop.prevent="$router.pushPlus('/group/setting/' + detail.id)">
           <span>圈主设置</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
@@ -49,7 +49,7 @@
         <div class="groupIntroduceText">{{detail.description}}</div>
       </div>
 
-      <div class="signOut font-family-medium" @tap.stop.prevent="getQuit">退出圈子</div>
+      <div class="signOut font-family-medium" v-if="groupUuid !== detail.owner.uuid" @tap.stop.prevent="getQuit">退出圈子</div>
     </div>
 
   </div>
@@ -58,6 +58,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getLocalUuid } from '../../utils/user'
+  // const currentUser = getLocalUserInfo()
 
   export default {
     data () {
@@ -66,7 +67,8 @@
         detail: null,
         loading: 1,
         setUpListGray: Boolean,
-        uuid: ''
+        uuid: '',
+        groupUuid: getLocalUuid()
       }
     },
     methods: {
