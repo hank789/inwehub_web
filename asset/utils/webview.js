@@ -188,13 +188,32 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       backButtonAutoControl: 'hide',
       statusbar: {background: '#3c3e44'},
       bounce: 'vertical'
+    },
+    waiting: {
+      autoShow: true,
+      title: '',
+      options: {
+        modal: false,
+        padlock: true,
+        back: 'close'
+      }
     }
+  })
+
+  webview.addEventListener('loaded', () => {
+    window.plus.nativeUI.closeWaiting()
   })
 
   console.log('bodyWebviewUrl:' + webview.getURL())
   if (webview.getURL() !== url) {
     webview.clear()
     webview.loadURL(url)
+
+    window.plus.nativeUI.showWaiting('', {
+      modal: false,
+      padlock: true,
+      back: 'close'
+    })
   }
   currentWebview.append(webview)
 
