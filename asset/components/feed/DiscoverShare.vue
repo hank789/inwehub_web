@@ -1,7 +1,7 @@
 <template>
   <div class='container-item'  @tap.stop.prevent="toDetail(data.url)">
   <div :class="{noMoreComment: data.feed.comment_number <= 8}" >
-    <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
+    <div class="container-avatarAndText groupMore" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
           <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
@@ -16,6 +16,11 @@
           <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
+      </div>
+      <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
       </div>
     </div>
     <div class="preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
@@ -35,11 +40,6 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
-      <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
-      </div>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -243,9 +243,14 @@
   }
   .more{
     color: #808080;
-    margin-left: 0.053rem;
-    float: left;
-    padding-right: 0.4rem;
+    font-size: 18px;
+    /*margin-left: 0.053rem;*/
+    /*float: left;*/
+    /*padding-right: 0.4rem;*/
+  }
+  .groupMore {
+    display: flex;
+    justify-content: space-between;
   }
 </style>
 <style>

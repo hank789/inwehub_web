@@ -2,7 +2,7 @@
    <div>
        <header class="mui-bar mui-bar-nav">
          <Back></Back>
-         <h1 class="mui-title">圈子设置</h1>
+         <h1 class="mui-title">圈主设置</h1>
        </header>
        <div class="mui-content absolute">
          <RefreshList
