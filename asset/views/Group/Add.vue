@@ -7,9 +7,9 @@
 
     <div class="mui-content">
       <div class="foundGroupWrapper">
-        <div class="foundGroupImages" @tap.stop.prevent="uploadImage()">
-          <img v-if="images.length" :id="'image_0'" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
-          <div class="foundGroupIcon" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount">
+        <div class="foundGroupImages" @tap.stop.prevent="uploadBackground()">
+          <img v-if="background_img.length" :id="'image_0'" :src="background_img[0].base64" :data-preview-src="background_img[0].base64" :data-preview-group="1"/>
+          <div class="foundGroupIcon" @tap.stop.prevent="uploadBackground()" v-if="background_img.length < maxImageCount">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangji1"></use>
             </svg>
@@ -55,8 +55,14 @@
       <div class="goFoundGroup font-family-medium" @tap.stop.prevent="submit()">开始创建</div>
     </div>
 
+    <uploadImage ref="uploadBackground"
+                 :isMultiple="false"
+                 @success="uploadBackgroundSuccess"
+                 :ImageMaximum="maxImageCount - this.background_img.length"
+    ></uploadImage>
+
     <uploadImage ref="uploadImage"
-                 :isMultiple="true"
+                 :isMultiple="false"
                  @success="uploadImageSuccess"
                  :ImageMaximum="maxImageCount - this.images.length"
     ></uploadImage>
@@ -71,7 +77,7 @@
     data () {
       return {
         images: [],
-        imagesPicture: [],
+        background_img: [],
         name: '',
         maxImageCount: 1,
         description: '',
@@ -122,7 +128,7 @@
           name: this.name,
           description: this.description,
           logo: this.images[0].base64,
-          background: this.imagesPicture[0],
+          background_img: this.background_img[0].base64,
           public: this.type === 1 ? 1 : 0
         }
 
@@ -137,14 +143,16 @@
         })
       },
       uploadImageSuccess (images) {
-        for (var i = 0; i < images.length; i++) {
-          this.images.push(images[i])
-        }
-
-        console.log(this.images + '图片图片')
+        this.images = images
       },
       uploadImage: function () {
         this.$refs.uploadImage.uploadImage()
+      },
+      uploadBackgroundSuccess (images) {
+        this.background_img = images
+      },
+      uploadBackground: function () {
+        this.$refs.uploadBackground.uploadImage()
       },
       selectType (type) {
         this.type = type
