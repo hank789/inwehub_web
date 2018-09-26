@@ -10,7 +10,7 @@
 
       <div v-if="!isInGroup">
         <div class="header">
-          <img :src="detail.logo" alt="">
+          <img :src="detail.background_img" alt="">
           <div class="backMask"></div>
           <div class="headerBack">
             <div @tap.stop.prevent="$router.goBack()">
@@ -67,7 +67,7 @@
         >
           <div>
             <div class="header">
-              <img :src="detail.logo" alt="">
+              <img :src="detail.background_img" alt="">
               <div class="backMask"></div>
               <div class="headerBack">
                 <div @tap.stop.prevent="$router.goBack()">
@@ -757,7 +757,6 @@
       }
     },
     mounted () {
-      this.getData()
       this.checkPermission()
     },
     activated: function () {
