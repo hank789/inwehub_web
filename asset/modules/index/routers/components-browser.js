@@ -201,6 +201,7 @@ const ShareReview = () => import(/* webpackChunkName: "ShareReview" */ '../../..
 const ComponentsComment = () => import(/* webpackChunkName: "ComponentsComment" */ '../../../views/Comment.vue')
 const Followed = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Account/Followed.vue')
 const GroupsMore = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Group/Setup.vue')
+const BindPhone = () => import(/* webpackChunkName: "BindPhone" */ '../../../views/Wechat/BindPhone.vue')
 
 export {
   Login,
@@ -399,5 +400,6 @@ export {
   AccountService,
   AccountDetailInfo,
   Followed,
-  GroupsMore
+  GroupsMore,
+  BindPhone
 }
