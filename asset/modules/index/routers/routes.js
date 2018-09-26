@@ -501,7 +501,7 @@ const routes = [
   },
   {
     path: '/group/newadd',
-    name: 'group-add',
+    name: 'group-adds',
     component: componets.GroupsNewAdd,
     meta: {
       title: '新创建圈子',
@@ -518,8 +518,7 @@ const routes = [
     component: componets.GroupsMore,
     meta: {
       title: '更多操作',
-      keepAlive: false,
-      wechatHideHeader: true
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)

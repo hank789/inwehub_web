@@ -7,13 +7,13 @@
 
     <div class="mui-content">
       <div class="setUpWrapper">
-        <div class="setUpList" v-if="!setUpListGray" @tap.stop.prevent="$router.pushPlus('/group/setting/' + detail.id)">
+        <div class="setUpList" v-if="uuid === groupUuid" @tap.stop.prevent="$router.pushPlus('/group/setting/' + detail.id)">
           <span>圈主设置</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
-        <div class="setUpList" v-else :class="setUpListGray ? 'ListGray' : ''" @tap.stop.prevent="$router.pushPlus('/group/setting/' + detail.id)">
+        <div class="setUpList ListGray"  v-if="uuid !== groupUuid">
           <span>圈主设置</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
@@ -66,7 +66,6 @@
         id: null,
         detail: null,
         loading: 1,
-        setUpListGray: Boolean,
         uuid: '',
         groupUuid: getLocalUuid()
       }
@@ -89,11 +88,6 @@
           this.detail = response.data.data
           this.uuid = response.data.data.owner.uuid
         })
-        if (getLocalUuid() !== this.uuid) {
-          this.setUpListGray = true
-        } else {
-          this.setUpListGray = false
-        }
       },
       getQuit () {
         postRequest(`group/quit`, {id: this.id}).then(response => {
@@ -107,10 +101,14 @@
       },
       toGroupChat () {
         this.$router.pushPlus('/group/chat/' + this.detail.room_id)
+      },
+      refreshPageData () {
+        this.getData()
       }
     },
-    mounted () {
-      this.getData()
+    mounted () {},
+    activated () {
+      this.refreshPageData()
     }
   }
 </script>

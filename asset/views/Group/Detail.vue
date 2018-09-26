@@ -11,15 +11,16 @@
       <div v-if="!isInGroup">
         <div class="header">
           <img :src="detail.logo" alt="">
+          <div class="backMask"></div>
           <div class="headerBack">
             <div @tap.stop.prevent="$router.goBack()">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-fanhui"></use>
               </svg>
             </div>
-            <div class="openNotice">
+            <div class="openNotice share" @tap.stop.prevent="joinShare">
               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-tongzhi"></use>
+                <use xlink:href="#icon-shoucang-xiao"></use>
               </svg>
             </div>
           </div>
@@ -34,7 +35,7 @@
             <span class="font-family-medium">{{detail.name}}</span>
           </div>
           <div class="groupDescribeWrapper">
-            <span>{{detail.subscribers}}人气 · </span><span>688分享</span>
+            <span>{{detail.subscribers}}人气 · </span><span>{{detail.articles}}分享</span>
             <span v-if="!detail.public">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-simi"></use>
@@ -67,15 +68,26 @@
           <div>
             <div class="header">
               <img :src="detail.logo" alt="">
+              <div class="backMask"></div>
               <div class="headerBack">
                 <div @tap.stop.prevent="$router.goBack()">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fanhui"></use>
                   </svg>
                 </div>
-                <div class="openNotice">
+                <div class="openNotice" v-if="isOpenNotification === 1" @tap.stop.prevent="goUnlock">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-tongzhi"></use>
+                  </svg>
+                </div>
+                <div class="openNotice" v-if="isOpenNotification === 0" @tap.stop.prevent="goUnlock">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-tongzhiguanbi"></use>
+                  </svg>
+                </div>
+                <div class="openNotice share" @tap.stop.prevent="joinShare">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shoucang-xiao"></use>
                   </svg>
                 </div>
               </div>
@@ -90,7 +102,7 @@
                 <span class="font-family-medium">{{detail.name}}</span>
               </div>
               <div class="groupDescribeWrapper">
-                <span>{{detail.subscribers}}人气 · </span><span>688分享</span>
+                <span>{{detail.subscribers}}人气 · </span><span>{{detail.articles}}分享</span>
                 <span v-if="!detail.public">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-simi"></use>
@@ -197,7 +209,7 @@
       @selectedItem="selectedItem"
     ></Options>
 
-    <Share
+    <GroupsShare
       ref="share"
       v-if="!loading"
       :title="shareOption.title"
@@ -210,16 +222,16 @@
       :targetType="'group'"
       @success="shareSuccess"
       @fail="shareFail"
-    ></Share>
+    ></GroupsShare>
     <commentTextarea ref="ctextarea"
                      @sendMessage="sendMessage"
     ></commentTextarea>
 
-    <FooterMenu
-      :options="footerMenus"
-      @clickedItem="footerMenuClickedItem"
-      v-if="isInGroup"
-    ></FooterMenu>
+    <!--<FooterMenu-->
+      <!--:options="footerMenus"-->
+      <!--@clickedItem="footerMenuClickedItem"-->
+      <!--v-if="isInGroup"-->
+    <!--&gt;</FooterMenu>-->
 
   </div>
 </template>
@@ -233,13 +245,14 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
-  import Share from '../../components/Share.vue'
+  import GroupsShare from '../../components/GroupsShare.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
   import userAbility from '../../utils/userAbility'
   import FooterMenu from '../../components/FooterMenu.vue'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
 
   export default {
     data () {
@@ -261,7 +274,8 @@
           thumbUrl: '',
           shareName: ''
         },
-        isInGroup: false
+        isInGroup: false,
+        isOpenNotification: -1 // -1， 未知, 1 yes 0 no
       }
     },
     created () {
@@ -329,7 +343,7 @@
       GroupsInfo,
       SubmitReadhubAriticle,
       Options,
-      Share,
+      GroupsShare,
       DiscoverShare,
       commentTextarea,
       FooterMenu
@@ -343,6 +357,26 @@
       }
     },
     methods: {
+      checkPermission () {
+        checkPermission('NOTIFITION', () => {
+          console.log('有通知权限')
+          this.isOpenNotification = 1
+        }, () => {
+          console.log('没有通知权限')
+          this.isOpenNotification = 0
+        })
+      },
+      goUnlock () {
+        var btnArray = ['取消', '去设置']
+        window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
+          if (e.index === 1) {
+            toSettingSystem('NOTIFITION')
+          }
+        })
+      },
+      goMore () {
+        this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
+      },
       prevSuccessCallback () {},
       footerMenuClickedItem (item) {
         switch (item.text) {
@@ -494,9 +528,9 @@
             this.quit()
             break
           case '删除':
-            this.del(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
+            // this.del(this.itemOptionsObj, () => {
+            //   this.$refs.itemOptions.toggle()
+            // })
             break
           case '加精':
             this.addGood(this.itemOptionsObj, () => {
@@ -724,6 +758,7 @@
     },
     mounted () {
       this.getData()
+      this.checkPermission()
     },
     activated: function () {
       // if (this.id !== parseInt(this.$route.params.id)) {
@@ -738,7 +773,7 @@
 <style scoped="scoped">
   .mui-content {
     background: #ffffff;
-    top: 0px;
+    /*top: 0px;*/
   }
   .mui-scroll-wrapper {
     /*top: 247px;*/
@@ -873,7 +908,7 @@
     margin-bottom: 0.133rem;
   }
   .listWrapper{
-    bottom: 1.333rem;
+    /*bottom: 1.333rem;*/
   }
 </style>
 
@@ -892,6 +927,15 @@
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
     }
+    .backMask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      background:linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.1) 100%);
+    }
     .headerBack {
       /*width: 100%;*/
       display: flex;
@@ -909,7 +953,13 @@
     .openNotice {
       position: absolute;
       top: 0;
-      left: 297px;
+      left: 298px;
+      &.share {
+        left: 340px;
+        .icon {
+          font-size: 24px;
+        }
+      }
     }
     .headPhotowrapper {
       position: absolute;
