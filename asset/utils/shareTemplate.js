@@ -143,9 +143,9 @@ function getResumeDetail (uuid, realname, companyName, avatarUrl) {
   var link = process.env.H5_ROOT + '/#/share/resume/' + uuid + '?time=' + (new Date().getTime())
 
   return {
-    title: 'InweHub名片 | ' + realname + '：' + companyName + '|' + '咨询顾问的专属身份认证@InweHub',
+    title: 'InweHub名片 | ' + realname + '@' + companyName,
     link: link,
-    content: '咨询顾问的专属身份认证@InweHub\n' + companyName,
+    content: 'Powered by InweHub',
     imageUrl: avatarUrl,
     thumbUrl: avatarUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '名片分享'
