@@ -357,6 +357,15 @@
       }
     },
     methods: {
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+        })
+      },
       checkPermission () {
         checkPermission('NOTIFITION', () => {
           console.log('有通知权限')
@@ -364,15 +373,22 @@
         }, () => {
           console.log('没有通知权限')
           this.isOpenNotification = 0
+          this.getNotification()
         })
       },
       goUnlock () {
-        var btnArray = ['取消', '去设置']
-        window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
-          if (e.index === 1) {
-            toSettingSystem('NOTIFITION')
-          }
-        })
+        console.log(this.isOpenNotification + 'this.isOpenNotification等于多少')
+        if (this.isOpenNotification === 0) {
+          var btnArray = ['取消', '去设置']
+          window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
+            if (e.index === 1) {
+              toSettingSystem('NOTIFITION')
+            }
+          })
+          this.isOpenNotification = 1
+        } else {
+
+        }
       },
       goMore () {
         this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
@@ -456,6 +472,7 @@
         }
 
         this.loading = 1
+        this.checkPermission()
         this.getData()
       },
       joinIn () {
@@ -757,7 +774,6 @@
       }
     },
     mounted () {
-      this.checkPermission()
     },
     activated: function () {
       // if (this.id !== parseInt(this.$route.params.id)) {
