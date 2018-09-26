@@ -2348,6 +2348,18 @@ const routes = [
     }
   },
   {
+    path: '/wechat/bindPhone',
+    name: 'wechat-phone',
+    component: componets.BindPhone,
+    meta: {
+      title: '绑定注册'
+    },
+    beforeEnter: (to, from, next) => {
+      // CanNotGetInWhenLogged(to, from, next)
+      next()
+    }
+  },
+  {
     path: '/wechat/info',
     name: 'wechat-register-info',
     component: componets.WechatInfo,

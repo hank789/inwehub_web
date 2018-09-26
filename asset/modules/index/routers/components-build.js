@@ -195,6 +195,7 @@ import ShareReview from '../../../views/Share/Review.vue'
 import ComponentsComment from '../../../views/Comment.vue'
 import Followed from '../../../views/Account/Followed.vue'
 import GroupsMore from '../../../views/Group/Setup.vue'
+import BindPhone from '../../../views/Wechat/BindPhone.vue'
 
 export {
   Login,
@@ -393,5 +394,6 @@ export {
   AccountService,
   AccountDetailInfo,
   Followed,
-  GroupsMore
+  GroupsMore,
+  BindPhone
 }
