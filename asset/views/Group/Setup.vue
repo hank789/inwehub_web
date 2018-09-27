@@ -26,18 +26,18 @@
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
-        <div class="line-river-after line-river-after-short"></div>
-        <div class="setUpList" @tap.stop.prevent="toGroupChat">
+        <div class="line-river-after line-river-after-short" v-if="this.detail.room_id > 0"></div>
+        <div class="setUpList" @tap.stop.prevent="toGroupChat" v-if="this.detail.room_id > 0">
           <span>聊天消息</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
-          <div class="chatInformation">
-            <span>3</span>
+          <div class="chatInformation" v-if="detail.unread_group_im_messages">
+            <span>{{detail.unread_group_im_messages}}</span>
           </div>
         </div>
         <div class="line-river-after line-river-after-short"></div>
-        <div class="setUpList">
+        <div class="setUpList" @tap.stop.prevent="joinShare">
           <span>邀请加入</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
@@ -53,6 +53,21 @@
       </div>
 
       <div class="signOut font-family-medium" v-if="groupUuid !== detail.owner.uuid" @tap.stop.prevent="getQuit">退出圈子</div>
+
+      <GroupsShare
+        ref="share"
+        :title="shareOption.title"
+        :shareName="shareOption.shareName"
+        :link="shareOption.link"
+        :content="shareOption.content"
+        :imageUrl="shareOption.imageUrl"
+        :thumbUrl="shareOption.thumbUrl"
+        :targetId="id"
+        :targetType="'group'"
+        @success="shareSuccess"
+        @fail="shareFail"
+      ></GroupsShare>
+
     </div>
 
   </div>
@@ -61,6 +76,8 @@
 <script>
   import { postRequest } from '../../utils/request'
   import { getLocalUuid } from '../../utils/user'
+  import { getGroupDetail } from '../../utils/shareTemplate'
+  import GroupsShare from '../../components/GroupsShare.vue'
   // const currentUser = getLocalUserInfo()
 
   export default {
@@ -70,10 +87,30 @@
         detail: null,
         loading: 1,
         uuid: '',
-        groupUuid: getLocalUuid()
+        groupUuid: getLocalUuid(),
+        shareOption: {
+          title: '',
+          link: '',
+          content: '',
+          imageUrl: '',
+          thumbUrl: '',
+          shareName: ''
+        }
       }
     },
+    components: {
+      GroupsShare
+    },
     methods: {
+      joinShare () {
+        this.$refs.share.share()
+      },
+      shareSuccess () {
+
+      },
+      shareFail () {
+
+      },
       getData () {
         this.id = parseInt(this.$route.params.id)
         if (!this.id) {
@@ -90,6 +127,14 @@
 
           this.detail = response.data.data
           this.uuid = response.data.data.owner.uuid
+
+          this.shareOption = getGroupDetail(
+            this.id,
+            this.detail.name,
+            this.detail.owner.name,
+            this.detail.subscribers,
+            this.detail.logo
+          )
         })
       },
       getQuit () {
