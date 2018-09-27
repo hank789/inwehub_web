@@ -3,6 +3,16 @@
     <!--<header class="mui-bar mui-bar-nav">-->
       <!--<Back></Back>-->
       <!--<h1 class="mui-title">{{detail.name}}</h1>-->
+      <!--<div class="headerShare" @tap.stop.prevent="joinShare">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+      <!--<div class="headerShare headerNotice">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-tongzhi"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
     <!--</header>-->
 
 
@@ -18,11 +28,11 @@
                 <use xlink:href="#icon-fanhui"></use>
               </svg>
             </div>
-            <div class="openNotice share" @tap.stop.prevent="joinShare">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucang-xiao"></use>
-              </svg>
-            </div>
+          </div>
+          <div class="openNotice share" @tap.stop.prevent="joinShare">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shoucang-xiao"></use>
+            </svg>
           </div>
           <div class="headPhotowrapper">
             <div class="headImages">
@@ -75,21 +85,22 @@
                     <use xlink:href="#icon-fanhui"></use>
                   </svg>
                 </div>
-                <div class="openNotice" v-if="isOpenNotification === 1" @tap.stop.prevent="goUnlock">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-tongzhi"></use>
-                  </svg>
-                </div>
-                <div class="openNotice" v-if="isOpenNotification === 0" @tap.stop.prevent="goUnlock">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-tongzhiguanbi"></use>
-                  </svg>
-                </div>
-                <div class="openNotice share" @tap.stop.prevent="joinShare">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucang-xiao"></use>
-                  </svg>
-                </div>
+              </div>
+              <div class="openNotice" v-if="isOpenNotification === 1" @tap.stop.prevent="goUnlock">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tongzhi"></use>
+                </svg>
+              </div>
+
+              <div class="openNotice" v-if="isOpenNotification === 0" @tap.stop.prevent="goUnlock">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tongzhiguanbi"></use>
+                </svg>
+              </div>
+              <div class="openNotice share" @tap.stop.prevent="joinShare">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-shoucang-xiao"></use>
+                </svg>
               </div>
               <div class="headPhotowrapper">
                 <div class="headImages">
@@ -97,17 +108,17 @@
                 </div>
               </div>
             </div>
-            <div class="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
+            <div class="groupWrapper" id="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
               <div class="groupNAmeWrapper">
                 <span class="font-family-medium">{{detail.name}}</span>
               </div>
               <div class="groupDescribeWrapper">
                 <span>{{detail.subscribers}}人气 · </span><span>{{detail.articles}}分享</span>
                 <span v-if="!detail.public">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-simi"></use>
-                </svg> · 私密
-              </span>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-simi"></use>
+                  </svg> · 私密
+                </span>
               </div>
               <div class="goMoreoPerations">
                 <svg class="icon" aria-hidden="true">
@@ -192,6 +203,15 @@
         <!--审核不通过-->
         <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
       </div>
+
+      <div class="goHairShareWrapper" v-if="isInGroup" @tap.stop.prevent="toDiscoverAdd">
+        <div class="goHairShareBack">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fabu"></use>
+          </svg>
+        </div>
+      </div>
+
     </div>
     <!---->
 
@@ -357,6 +377,15 @@
       }
     },
     methods: {
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+        })
+      },
       checkPermission () {
         checkPermission('NOTIFITION', () => {
           console.log('有通知权限')
@@ -364,15 +393,22 @@
         }, () => {
           console.log('没有通知权限')
           this.isOpenNotification = 0
+          this.getNotification()
         })
       },
       goUnlock () {
-        var btnArray = ['取消', '去设置']
-        window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
-          if (e.index === 1) {
-            toSettingSystem('NOTIFITION')
-          }
-        })
+        console.log(this.isOpenNotification + 'this.isOpenNotification等于多少')
+        if (this.isOpenNotification === 0) {
+          var btnArray = ['取消', '去设置']
+          window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
+            if (e.index === 1) {
+              toSettingSystem('NOTIFITION')
+            }
+          })
+          this.isOpenNotification = 1
+        } else {
+
+        }
       },
       goMore () {
         this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
@@ -456,6 +492,7 @@
         }
 
         this.loading = 1
+        this.checkPermission()
         this.getData()
       },
       joinIn () {
@@ -756,9 +793,7 @@
         this.$refs.ctextarea.comment(data)
       }
     },
-    mounted () {
-      this.checkPermission()
-    },
+    mounted () {},
     activated: function () {
       // if (this.id !== parseInt(this.$route.params.id)) {
       //   this.refreshPageData()
@@ -898,7 +933,7 @@
     color: rgba(200,200,200,1);
     left: 0;
     right: 0;
-    top: 8rem;
+    top: 9rem;
     text-align: center;
     margin: auto;
   }
@@ -913,6 +948,18 @@
 
 
 <style lang="less" scoped>
+  .headerShare {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    .icon {
+      color: #3C3E44;
+      font-size: 24px;
+    }
+  }
+  .headerNotice {
+    right: 60px;
+  }
   .header {
     background: #1C3F6D;
     position: relative;
@@ -951,13 +998,14 @@
     }
     .openNotice {
       position: absolute;
-      top: 0;
-      left: 298px;
+      top: 11px;
+      right: 60px;
+      .icon {
+        font-size: 24px;
+        color: #ffffff;
+      }
       &.share {
-        left: 340px;
-        .icon {
-          font-size: 24px;
-        }
+        right: 16px;
       }
     }
     .headPhotowrapper {
@@ -1023,6 +1071,25 @@
       color: #808080;
       font-size: 14px;
       line-height: 22px;
+    }
+  }
+  .goHairShareWrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 16px;
+    z-index: 9;
+    .goHairShareBack {
+      width: 44px;
+      height: 44px;
+      text-align: center;
+      line-height: 44px;
+      background: #03AEF9;
+      border-radius: 50%;
+      box-shadow:0px 1px 10px 0px rgba(205,215,220,1);
+      .icon {
+        font-size: 22px;
+        color: #ffffff;
+      }
     }
   }
 
