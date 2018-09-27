@@ -32,6 +32,9 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
+          <div class="chatInformation">
+            <span>3</span>
+          </div>
         </div>
         <div class="line-river-after line-river-after-short"></div>
         <div class="setUpList">
@@ -134,6 +137,22 @@
         color: #808080;
         font-size: 13px;
         margin-top: 4px;
+      }
+      .chatInformation {
+        position: absolute;
+        right: 32px;
+        top: 9px;
+        span {
+          width: 18px;
+          height: 18px;
+          color: #FFFFFF;
+          font-size: 11px;
+          line-height: 18px;
+          border-radius: 50%;
+          text-align: center;
+          background: #F03C69;
+          display: inline-block;
+        }
       }
     }
   }

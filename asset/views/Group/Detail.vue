@@ -1,22 +1,22 @@
 <template>
   <div>
-    <!--<header class="mui-bar mui-bar-nav">-->
-      <!--<Back></Back>-->
-      <!--<h1 class="mui-title">{{detail.name}}</h1>-->
-      <!--<div class="headerShare" @tap.stop.prevent="joinShare">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
-        <!--</svg>-->
-      <!--</div>-->
-      <!--<div class="headerShare headerNotice">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-tongzhi"></use>-->
-        <!--</svg>-->
-      <!--</div>-->
-    <!--</header>-->
+    <header class="mui-bar mui-bar-nav" v-if="hederF">
+      <Back></Back>
+      <h1 class="mui-title">{{detail.name}}</h1>
+      <div class="headerShare" @tap.stop.prevent="joinShare">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-shoucang-xiao"></use>
+        </svg>
+      </div>
+      <div class="headerShare headerNotice">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-tongzhi"></use>
+        </svg>
+      </div>
+    </header>
 
 
-    <div class="mui-content" v-if="!loading">
+    <div class="mui-content" v-if="!loading" id="home-content">
 
       <div v-if="!isInGroup">
         <div class="header">
@@ -77,7 +77,7 @@
         >
           <div>
             <div class="header">
-              <img :src="detail.background_img" alt="">
+              <img id="imgHeight" :src="detail.background_img" alt="">
               <div class="backMask"></div>
               <div class="headerBack">
                 <div @tap.stop.prevent="$router.goBack()">
@@ -86,13 +86,13 @@
                   </svg>
                 </div>
               </div>
-              <div class="openNotice" v-if="isOpenNotification === 1" @tap.stop.prevent="goUnlock">
+              <div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="goUnlock">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tongzhi"></use>
                 </svg>
               </div>
 
-              <div class="openNotice" v-if="isOpenNotification === 0" @tap.stop.prevent="goUnlock">
+              <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="goUnlock">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tongzhiguanbi"></use>
                 </svg>
@@ -128,10 +128,6 @@
             </div>
           </div>
 
-        <!--<GroupsInfo-->
-          <!--:detail="detail"-->
-          <!--@allOptions="allOptions()"-->
-        <!--&gt;</GroupsInfo>-->
         <div class="gray"></div>
         <div class="menu">
           <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
@@ -142,7 +138,7 @@
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
-          <div  class="groups-list">
+          <div class="groups-list">
             <template v-for="(item, index) in list">
               <div v-if="item.feed_type === 15" @tap.stop.prevent="toDetail(item)">
                 <!--x发布了分享-->
@@ -182,7 +178,6 @@
 
         </RefreshList>
       </div>
-
 
       <!--不可以浏览-->
       <div v-else>
@@ -273,6 +268,7 @@
   import userAbility from '../../utils/userAbility'
   import FooterMenu from '../../components/FooterMenu.vue'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import { scrollPage } from '../../utils/dom'
 
   export default {
     data () {
@@ -295,6 +291,7 @@
           shareName: ''
         },
         isInGroup: false,
+        hederF: false,
         isOpenNotification: -1 // -1， 未知, 1 yes 0 no
       }
     },
@@ -378,7 +375,11 @@
     },
     methods: {
       getNotification () {
-        postRequest(`notification/push/info`, {}).then(response => {
+        this.id = parseInt(this.$route.params.id)
+        postRequest(`group/setNotify`, {
+          id: this.id,
+          is_notify: this.isOpenNotification
+        }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -393,27 +394,31 @@
         }, () => {
           console.log('没有通知权限')
           this.isOpenNotification = 0
-          this.getNotification()
         })
       },
       goUnlock () {
-        console.log(this.isOpenNotification + 'this.isOpenNotification等于多少')
-        if (this.isOpenNotification === 0) {
+        if (this.detail.current_user_notify === 0) {
           var btnArray = ['取消', '去设置']
           window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
             if (e.index === 1) {
               toSettingSystem('NOTIFITION')
             }
           })
-          this.isOpenNotification = 1
         } else {
-
+          this.isOpenNotification = 0
+          this.detail.current_user_notify = 0
+          window.mui.toast('动态通知已关闭')
+          this.getNotification()
         }
       },
       goMore () {
         this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
       },
-      prevSuccessCallback () {},
+      prevSuccessCallback () {
+        scrollPage('.listWrapper', () => {
+        }, () => {}, () => {}, () => {
+        })
+      },
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '发分享':
@@ -793,7 +798,11 @@
         this.$refs.ctextarea.comment(data)
       }
     },
-    mounted () {},
+    mounted () {
+      window.addEventListener('resume', () => {
+        this.checkPermission()
+      }, true)
+    },
     activated: function () {
       // if (this.id !== parseInt(this.$route.params.id)) {
       //   this.refreshPageData()
