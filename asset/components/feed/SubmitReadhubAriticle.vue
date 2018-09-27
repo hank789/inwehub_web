@@ -1,6 +1,6 @@
 <template>
   <div class="container-item">
-    <div class="container-avatarAndText">
+    <div class="container-avatarAndText groupMore">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
           <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
@@ -15,6 +15,11 @@
           <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
+      </div>
+      <div class="more" v-if="show" @tap.stop.prevent="showItemOptions">
+        <svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-gengduo"></use>
+        </svg>
       </div>
     </div>
 
@@ -31,11 +36,6 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
-      <div class="more" v-if="show" @tap.stop.prevent="showItemOptions">
-        <svg class="icon" aria-hidden="true" >
-          <use xlink:href="#icon-gengduo"></use>
-        </svg>
-      </div>
       <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-zan"></use>
@@ -205,12 +205,13 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="less">
   .more{
     color: #808080;
-    margin-left: 0.053rem;
-    float: left;
-    padding-right: 0.4rem;
+    font-size: 18px;
+    /*margin-left: 0.053rem;*/
+    /*float: left;*/
+    /*padding-right: 0.4rem;*/
   }
   .groups{
     margin-top: 0.4rem;
@@ -221,5 +222,9 @@
 
   .component-card-link{
     margin-top: 0.266rem;
+  }
+  .groupMore {
+    display: flex;
+    justify-content: space-between;
   }
 </style>

@@ -2,13 +2,63 @@
   <div>
     <!--<header class="mui-bar mui-bar-nav">-->
       <!--<Back></Back>-->
-      <!--<h1 class="mui-title">圈子</h1>-->
+      <!--<h1 class="mui-title">{{detail.name}}</h1>-->
+      <!--<div class="headerShare" @tap.stop.prevent="joinShare">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+      <!--<div class="headerShare headerNotice">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-tongzhi"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
     <!--</header>-->
 
 
     <div class="mui-content" v-if="!loading">
-      <!--圈子详情-->
-      <!--可以浏览-->
+
+      <div v-if="!isInGroup">
+        <div class="header">
+          <img :src="detail.background_img" alt="">
+          <div class="backMask"></div>
+          <div class="headerBack">
+            <div @tap.stop.prevent="$router.goBack()">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-fanhui"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="openNotice share" @tap.stop.prevent="joinShare">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shoucang-xiao"></use>
+            </svg>
+          </div>
+          <div class="headPhotowrapper">
+            <div class="headImages">
+              <img :src="detail.logo" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
+          <div class="groupNAmeWrapper">
+            <span class="font-family-medium">{{detail.name}}</span>
+          </div>
+          <div class="groupDescribeWrapper">
+            <span>{{detail.subscribers}}人气 · </span><span>{{detail.articles}}分享</span>
+            <span v-if="!detail.public">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-simi"></use>
+                </svg> · 私密
+              </span>
+          </div>
+          <div class="goMoreoPerations">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-jinru"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
 
       <div v-if="isInGroup">
         <RefreshList
@@ -25,44 +75,59 @@
           :list="list"
           class="listWrapper"
         >
-          <div class="header">
-            <img src="../../statics/images/topImg.png" alt="">
-            <div class="headerBack">
-              <div @tap.stop.prevent="$router.goBack()">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-fanhui"></use>
-                </svg>
+          <div>
+            <div class="header">
+              <img :src="detail.background_img" alt="">
+              <div class="backMask"></div>
+              <div class="headerBack">
+                <div @tap.stop.prevent="$router.goBack()">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-fanhui"></use>
+                  </svg>
+                </div>
               </div>
-              <div class="openNotice">
+              <div class="openNotice" v-if="isOpenNotification === 1" @tap.stop.prevent="goUnlock">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tongzhi"></use>
                 </svg>
               </div>
+
+              <div class="openNotice" v-if="isOpenNotification === 0" @tap.stop.prevent="goUnlock">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tongzhiguanbi"></use>
+                </svg>
+              </div>
+              <div class="openNotice share" @tap.stop.prevent="joinShare">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-shoucang-xiao"></use>
+                </svg>
+              </div>
+              <div class="headPhotowrapper">
+                <div class="headImages">
+                  <img :src="detail.logo" alt="">
+                </div>
+              </div>
             </div>
-            <div class="headPhotowrapper">
-              <div class="headImages">
-                <img src="../../statics/images/uicon.jpg" alt="">
+            <div class="groupWrapper" id="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
+              <div class="groupNAmeWrapper">
+                <span class="font-family-medium">{{detail.name}}</span>
+              </div>
+              <div class="groupDescribeWrapper">
+                <span>{{detail.subscribers}}人气 · </span><span>{{detail.articles}}分享</span>
+                <span v-if="!detail.public">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-simi"></use>
+                  </svg> · 私密
+                </span>
+              </div>
+              <div class="goMoreoPerations">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-jinru"></use>
+                </svg>
               </div>
             </div>
           </div>
-          <div class="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
-            <div class="groupNAmeWrapper">
-              <span class="font-family-medium">{{detail.name}}</span>
-            </div>
-            <div class="groupDescribeWrapper">
-              <span>688人气 · </span><span>688人气 · </span>
-              <span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-simi"></use>
-            </svg>私密
-          </span>
-            </div>
-            <div class="goMoreoPerations">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-jinru"></use>
-              </svg>
-            </div>
-          </div>
+
         <!--<GroupsInfo-->
           <!--:detail="detail"-->
           <!--@allOptions="allOptions()"-->
@@ -73,7 +138,7 @@
             v-if="search_type === 1"></i></span>
           <!--<span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i-->
             <!--v-if="search_type === 2"></i></span>-->
-          <span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">精华<i
+          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
         </div>
@@ -115,17 +180,12 @@
             <p>暂无数据</p>
           </div>
 
-          <!---->
         </RefreshList>
       </div>
 
 
       <!--不可以浏览-->
       <div v-else>
-        <!--<GroupsInfo-->
-          <!--:detail="detail"-->
-          <!--@allOptions="allOptions"-->
-        <!--&gt;</GroupsInfo>-->
         <div class="gray"></div>
 
         <div class="group-text">
@@ -137,14 +197,24 @@
         </div>
         <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
 
-        <div class="join wait" v-if="detail.audit_status === 0">圈子审核中</div>
+        <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
         <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
         <div class="join wait" v-if="detail.audit_status === 4">圈子已关闭</div>
         <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
         <!--审核不通过-->
         <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
       </div>
+
+      <div class="goHairShareWrapper" v-if="isInGroup" @tap.stop.prevent="toDiscoverAdd">
+        <div class="goHairShareBack">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fabu"></use>
+          </svg>
+        </div>
+      </div>
+
     </div>
+    <!---->
 
     <Options
       ref="allOptions"
@@ -160,7 +230,7 @@
       @selectedItem="selectedItem"
     ></Options>
 
-    <Share
+    <GroupsShare
       ref="share"
       v-if="!loading"
       :title="shareOption.title"
@@ -173,16 +243,16 @@
       :targetType="'group'"
       @success="shareSuccess"
       @fail="shareFail"
-    ></Share>
+    ></GroupsShare>
     <commentTextarea ref="ctextarea"
                      @sendMessage="sendMessage"
     ></commentTextarea>
 
-    <FooterMenu
-      :options="footerMenus"
-      @clickedItem="footerMenuClickedItem"
-      v-if="isInGroup"
-    ></FooterMenu>
+    <!--<FooterMenu-->
+      <!--:options="footerMenus"-->
+      <!--@clickedItem="footerMenuClickedItem"-->
+      <!--v-if="isInGroup"-->
+    <!--&gt;</FooterMenu>-->
 
   </div>
 </template>
@@ -196,13 +266,14 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
-  import Share from '../../components/Share.vue'
+  import GroupsShare from '../../components/GroupsShare.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
   import userAbility from '../../utils/userAbility'
   import FooterMenu from '../../components/FooterMenu.vue'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
 
   export default {
     data () {
@@ -224,7 +295,8 @@
           thumbUrl: '',
           shareName: ''
         },
-        isInGroup: false
+        isInGroup: false,
+        isOpenNotification: -1 // -1， 未知, 1 yes 0 no
       }
     },
     created () {
@@ -292,7 +364,7 @@
       GroupsInfo,
       SubmitReadhubAriticle,
       Options,
-      Share,
+      GroupsShare,
       DiscoverShare,
       commentTextarea,
       FooterMenu
@@ -306,6 +378,42 @@
       }
     },
     methods: {
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+        })
+      },
+      checkPermission () {
+        checkPermission('NOTIFITION', () => {
+          console.log('有通知权限')
+          this.isOpenNotification = 1
+        }, () => {
+          console.log('没有通知权限')
+          this.isOpenNotification = 0
+          this.getNotification()
+        })
+      },
+      goUnlock () {
+        console.log(this.isOpenNotification + 'this.isOpenNotification等于多少')
+        if (this.isOpenNotification === 0) {
+          var btnArray = ['取消', '去设置']
+          window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
+            if (e.index === 1) {
+              toSettingSystem('NOTIFITION')
+            }
+          })
+          this.isOpenNotification = 1
+        } else {
+
+        }
+      },
+      goMore () {
+        this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
+      },
       prevSuccessCallback () {},
       footerMenuClickedItem (item) {
         switch (item.text) {
@@ -385,6 +493,7 @@
         }
 
         this.loading = 1
+        this.checkPermission()
         this.getData()
       },
       joinIn () {
@@ -400,6 +509,7 @@
           } else {
             this.detail.is_joined = 0
           }
+          window.mui.toast('圈子动态更新将第一时间通知您')
         })
       },
       joinShare () {
@@ -456,9 +566,9 @@
             this.quit()
             break
           case '删除':
-            this.del(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
+            // this.del(this.itemOptionsObj, () => {
+            //   this.$refs.itemOptions.toggle()
+            // })
             break
           case '加精':
             this.addGood(this.itemOptionsObj, () => {
@@ -684,13 +794,12 @@
         this.$refs.ctextarea.comment(data)
       }
     },
-    mounted () {
-      this.getData()
-    },
+    mounted () {},
     activated: function () {
-      if (this.id !== parseInt(this.$route.params.id)) {
-        this.refreshPageData()
-      }
+      // if (this.id !== parseInt(this.$route.params.id)) {
+      //   this.refreshPageData()
+      // }
+      this.refreshPageData()
     },
     updated () {}
   }
@@ -699,7 +808,7 @@
 <style scoped="scoped">
   .mui-content {
     background: #ffffff;
-    top: 0px;
+    /*top: 0px;*/
   }
   .mui-scroll-wrapper {
     /*top: 247px;*/
@@ -733,7 +842,7 @@
     justify-content: space-around;
     line-height: 1.04rem;
     position: absolute;
-    top: 259px;
+    /*top: 259px;*/
   }
   .menu span {
     position: relative;
@@ -825,7 +934,7 @@
     color: rgba(200,200,200,1);
     left: 0;
     right: 0;
-    top: 8rem;
+    top: 9rem;
     text-align: center;
     margin: auto;
   }
@@ -834,12 +943,24 @@
     margin-bottom: 0.133rem;
   }
   .listWrapper{
-    bottom: 1.333rem;
+    /*bottom: 1.333rem;*/
   }
 </style>
 
 
 <style lang="less" scoped>
+  .headerShare {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    .icon {
+      color: #3C3E44;
+      font-size: 24px;
+    }
+  }
+  .headerNotice {
+    right: 60px;
+  }
   .header {
     background: #1C3F6D;
     position: relative;
@@ -852,6 +973,15 @@
       object-fit: cover;
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 20px;
+    }
+    .backMask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      background:linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.1) 100%);
     }
     .headerBack {
       /*width: 100%;*/
@@ -869,8 +999,15 @@
     }
     .openNotice {
       position: absolute;
-      top: 0;
-      left: 297px;
+      top: 11px;
+      right: 60px;
+      .icon {
+        font-size: 24px;
+        color: #ffffff;
+      }
+      &.share {
+        right: 16px;
+      }
     }
     .headPhotowrapper {
       position: absolute;
@@ -935,6 +1072,25 @@
       color: #808080;
       font-size: 14px;
       line-height: 22px;
+    }
+  }
+  .goHairShareWrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 16px;
+    z-index: 9;
+    .goHairShareBack {
+      width: 44px;
+      height: 44px;
+      text-align: center;
+      line-height: 44px;
+      background: #03AEF9;
+      border-radius: 50%;
+      box-shadow:0px 1px 10px 0px rgba(205,215,220,1);
+      .icon {
+        font-size: 22px;
+        color: #ffffff;
+      }
     }
   }
 

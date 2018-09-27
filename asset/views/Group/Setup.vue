@@ -2,26 +2,32 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">更多设置</h1>
+      <h1 class="mui-title">{{detail.name}}</h1>
     </header>
 
     <div class="mui-content">
       <div class="setUpWrapper">
-        <div class="setUpList">
+        <div class="setUpList" v-if="uuid === groupUuid" @tap.stop.prevent="$router.pushPlus('/group/setting/' + detail.id)">
+          <span>圈主设置</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+        <div class="setUpList ListGray"  v-if="uuid !== groupUuid">
           <span>圈主设置</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
         <div class="gray"></div>
-        <div class="setUpList">
+        <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/group/users/' + detail.id)">
           <span>圈子成员</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
         <div class="line-river-after line-river-after-short"></div>
-        <div class="setUpList">
+        <div class="setUpList" @tap.stop.prevent="toGroupChat">
           <span>聊天消息</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
@@ -40,19 +46,69 @@
         <span class="font-family-medium">圈子介绍</span>
         <div class="line-river-after"></div>
 
-        <div class="groupIntroduceText">供应链的概念是从扩大的生产()概念发展而来，对供应链的定义为“供应链是围绕核心企业，从配套零件开始到制成中间产品及最终产品、最后由销售网络把产品送到消费者手中的一个由供应商、制造商、分销商直到最终用户所连成的整体功能网链结构”。</div>
+        <div class="groupIntroduceText">{{detail.description}}</div>
       </div>
 
-      <div class="signOut font-family-medium">退出圈子</div>
+      <div class="signOut font-family-medium" v-if="groupUuid !== detail.owner.uuid" @tap.stop.prevent="getQuit">退出圈子</div>
     </div>
 
   </div>
 </template>
 
 <script>
+  import { postRequest } from '../../utils/request'
+  import { getLocalUuid } from '../../utils/user'
+  // const currentUser = getLocalUserInfo()
+
   export default {
     data () {
-      return {}
+      return {
+        id: null,
+        detail: null,
+        loading: 1,
+        uuid: '',
+        groupUuid: getLocalUuid()
+      }
+    },
+    methods: {
+      getData () {
+        this.id = parseInt(this.$route.params.id)
+        if (!this.id) {
+          window.mui.back()
+          return
+        }
+        postRequest(`group/detail`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            this.$router.replace('/groups')
+            return
+          }
+
+          this.detail = response.data.data
+          this.uuid = response.data.data.owner.uuid
+        })
+      },
+      getQuit () {
+        postRequest(`group/quit`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.$router.goBack()
+        })
+      },
+      toGroupChat () {
+        this.$router.pushPlus('/group/chat/' + this.detail.room_id)
+      },
+      refreshPageData () {
+        this.getData()
+      }
+    },
+    mounted () {},
+    activated () {
+      this.refreshPageData()
     }
   }
 </script>
@@ -71,6 +127,9 @@
       font-size: 16px;
       position: relative;
       justify-content: space-between;
+      &.ListGray {
+        background: #ececec;
+      }
       .icon {
         color: #808080;
         font-size: 13px;

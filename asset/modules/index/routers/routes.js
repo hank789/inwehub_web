@@ -501,7 +501,7 @@ const routes = [
   },
   {
     path: '/group/newadd',
-    name: 'group-add',
+    name: 'group-adds',
     component: componets.GroupsNewAdd,
     meta: {
       title: '新创建圈子',
@@ -518,8 +518,7 @@ const routes = [
     component: componets.GroupsMore,
     meta: {
       title: '更多操作',
-      keepAlive: false,
-      wechatHideHeader: true
+      keepAlive: true
     },
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
@@ -551,12 +550,12 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 圈子设置
+  { // 圈主设置
     path: '/group/setting/:id',
     name: 'group-setting',
     component: componets.GroupsSetting,
     meta: {
-      title: '圈子设置',
+      title: '圈主设置',
       keepAlive: false,
       wechatHideHeader: true
     },
@@ -2339,6 +2338,18 @@ const routes = [
     path: '/wechat/register',
     name: 'wechat-register',
     component: componets.WechatRegister,
+    meta: {
+      title: '绑定注册'
+    },
+    beforeEnter: (to, from, next) => {
+      // CanNotGetInWhenLogged(to, from, next)
+      next()
+    }
+  },
+  {
+    path: '/wechat/bindPhone',
+    name: 'wechat-phone',
+    component: componets.BindPhone,
     meta: {
       title: '绑定注册'
     },
