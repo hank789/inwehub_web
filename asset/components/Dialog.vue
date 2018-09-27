@@ -482,6 +482,20 @@
         </div>
       </div>
     </div>
+
+    <div id="phoneBindWarning">
+      <div class="component-phoneBindWarning">
+        <div class="pbwTitle">{{phoneBindWaring.title}}</div>
+        <div class="pbwIphone">{{phoneBindWaring.phone}}</div>
+        <div class="pwbAvatar"><img :src="phoneBindWaring.avatar">
+          <svg class="icon" aria-hidden="true" v-show="phoneBindWaring.isVip">
+            <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
+          </svg>
+        </div>
+        <div class="pwbName">{{phoneBindWaring.name}}</div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -538,6 +552,13 @@
             user_is_expert: '',
             user_avatar: '',
             current_month_invited_users: ''
+          },
+          phoneBindWaring: {
+            title: '',
+            phone: '',
+            avatar: '',
+            name: '',
+            isVip: false
           }
         }
       }
@@ -1758,5 +1779,42 @@
     border-top:0.026rem solid #dcdcdc;
   }
 
+
+  .component-phoneBindWarning {
+    text-align: center; }
+  .component-phoneBindWarning .pbwTitle {
+    font-size: 19px;
+    font-family: PingFangSC-Medium;
+    color: #03aef9;
+    line-height: 26.5px; }
+  .component-phoneBindWarning .pbwIphone {
+    font-size: 14px;
+    font-weight: 400;
+    color: gray;
+    line-height: 24px; }
+  .component-phoneBindWarning .pwbAvatar {
+    margin-top: 24px;
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%; }
+  .component-phoneBindWarning .pwbAvatar img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%; }
+  .component-phoneBindWarning .pwbAvatar svg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: 5px; }
+  .component-phoneBindWarning .pwbName {
+    font-size: 14px;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: #444444;
+    line-height: 15px; }
 
 </style>
