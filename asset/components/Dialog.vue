@@ -485,14 +485,14 @@
 
     <div id="phoneBindWarning">
       <div class="component-phoneBindWarning">
-        <div class="pbwTitle">{{phoneBindWaring.title}}</div>
-        <div class="pbwIphone">{{phoneBindWaring.phone}}</div>
-        <div class="pwbAvatar"><img :src="phoneBindWaring.avatar">
-          <svg class="icon" aria-hidden="true" v-show="phoneBindWaring.isVip">
+        <div class="pbwTitle">{{options.phoneBindWaring.title}}</div>
+        <div class="pbwIphone">{{options.phoneBindWaring.phone}}</div>
+        <div class="pwbAvatar"><img :src="options.phoneBindWaring.avatar">
+          <svg class="icon" aria-hidden="true" v-show="options.phoneBindWaring.isVip">
             <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
           </svg>
         </div>
-        <div class="pwbName">{{phoneBindWaring.name}}</div>
+        <div class="pwbName">{{options.phoneBindWaring.name}}</div>
       </div>
     </div>
 

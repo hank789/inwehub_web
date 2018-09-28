@@ -50,6 +50,7 @@
   import VTooltip from 'v-tooltip'
   import { getUserInfo } from '../../utils/user'
   import { alertPhoneBindWarning } from '../../utils/dialogList'
+  import localEvent from '../../stores/localStorage'
 
   Vue.use(VTooltip)
 
@@ -107,7 +108,7 @@
       },
       getCode () {
         let mobile = this.phone
-        let type = 'wx_gzh_register'
+        let type = 'change_phone'
 
         if (!this.isCanGetCode) {
           return
@@ -234,19 +235,24 @@
                   return
                 default:
                   window.mui.toast(response.data.message)
-                  break
+                  return
               }
             }
 
-            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
+            var data = {
+              token: response.data.data.token
+            }
+            localEvent.setLocalItem('UserLoginInfo', data)
+
+            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
               cb(user)
               window.mixpanelIdentify()
               window.mui.back()
             }))
           })
-      },
-      mounted () {}
-    }
+      }
+    },
+    mounted () {}
   }
 </script>
 

@@ -144,11 +144,8 @@ function getUserInfo (userId, cb) {
       var code = response.data.code
       if (code !== 1000) {
         let message = errorCodes[code]
-        return {
-          status: false,
-          user: null,
-          message: message
-        }
+        window.mui.toast(message)
+        return
       }
 
       let user = response.data.data.info
