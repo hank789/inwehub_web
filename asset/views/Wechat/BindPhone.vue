@@ -234,7 +234,7 @@
                   return
                 default:
                   window.mui.toast(response.data.message)
-                  break
+                  return
               }
             }
 
