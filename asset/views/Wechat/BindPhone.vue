@@ -244,9 +244,9 @@
               window.mui.back()
             }))
           })
-      },
-      mounted () {}
-    }
+      }
+    },
+    mounted () {}
   }
 </script>
 
