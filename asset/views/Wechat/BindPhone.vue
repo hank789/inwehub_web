@@ -50,6 +50,7 @@
   import VTooltip from 'v-tooltip'
   import { getUserInfo } from '../../utils/user'
   import { alertPhoneBindWarning } from '../../utils/dialogList'
+  import localEvent from '../../stores/localStorage'
 
   Vue.use(VTooltip)
 
@@ -238,7 +239,12 @@
               }
             }
 
-            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
+            var data = {
+              token: response.data.data.token
+            }
+            localEvent.setLocalItem('UserLoginInfo', data)
+
+            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
               cb(user)
               window.mixpanelIdentify()
               window.mui.back()
