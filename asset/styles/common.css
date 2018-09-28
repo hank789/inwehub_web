@@ -1557,6 +1557,8 @@ a {
 
 .mui-popover.mui-popover-action .mui-table-view{
   color:#03AEF9;
+  border-radius: 16px;
+  background: #FFFFFF;
 }
 
 .message .textToLink p{
@@ -2187,7 +2189,6 @@ a {
   top:0;
   width:1.306rem;
   text-align: center;
-
   height: 1.173rem;
   display: flex;
   align-items: center;

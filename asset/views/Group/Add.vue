@@ -9,7 +9,7 @@
       <div class="foundGroupWrapper">
         <div class="foundGroupImages" @tap.stop.prevent="uploadBackground()">
           <img v-if="background_img.length" :id="'image_0'" :src="background_img[0].base64" :data-preview-src="background_img[0].base64" :data-preview-group="1"/>
-          <div class="foundGroupIcon" @tap.stop.prevent="uploadBackground()" v-if="background_img.length < maxImageCount">
+          <div class="foundGroupIcon" @tap.stop.prevent="uploadBackground()" v-if="background_img.length < maxImageCount || id">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangji1"></use>
             </svg>
@@ -21,7 +21,7 @@
               <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
             </svg>
             <img v-if="images.length" :id="'image_0'" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
-            <div class="headPhotograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount">
+            <div class="headPhotograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount || id">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiangji1"></use>
               </svg>
@@ -52,7 +52,8 @@
                                                                       :class="{'active':!type}"></label>秘密<i>（仅入圈成员可看，创建后不可改)</i></span>
       </div>
 
-      <div class="goFoundGroup font-family-medium" @tap.stop.prevent="submit()">开始创建</div>
+      <div class="goFoundGroup font-family-medium" v-if="!id" @tap.stop.prevent="submit()">开始创建</div>
+      <div class="goFoundGroup font-family-medium" v-else @tap.stop.prevent="reviseGroup()">保存修改</div>
     </div>
 
     <uploadImage ref="uploadBackground"
@@ -76,6 +77,7 @@
   export default {
     data () {
       return {
+        id: null,
         images: [],
         background_img: [],
         name: '',
@@ -101,9 +103,45 @@
       }
     },
     mounted () {
+      this.id = this.$route.params.id
+      if (this.id) {
+        this.getData()
+      }
     },
     methods: {
+      getData () {
+        postRequest(`group/detail`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            this.$router.replace('/groups')
+            return
+          }
+
+          this.detail = response.data.data
+          this.images[0] = this.detail.logo
+          this.background_img[0] = this.detail.background_img
+          this.name = this.detail.name
+          this.description = this.detail.description
+        })
+      },
+      reviseGroup () {
+        postRequest(`group/update`, {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.$router.replace('/group/detail/' + response.data.data.id)
+        })
+      },
       submit () {
+        if (!this.background_img.length) {
+          window.mui.toast('请选择背景图片')
+          return
+        }
+
         if (!this.images.length) {
           window.mui.toast('请选择图片')
           return

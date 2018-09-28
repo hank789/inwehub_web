@@ -78,6 +78,7 @@
   import { getLocalUuid } from '../../utils/user'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import GroupsShare from '../../components/GroupsShare.vue'
+  import localEvent from '../../stores/localStorage'
   // const currentUser = getLocalUserInfo()
 
   export default {
@@ -127,6 +128,8 @@
 
           this.detail = response.data.data
           this.uuid = response.data.data.owner.uuid
+
+          localEvent.setLocalItem('roomId', this.detail.room_id.toString())
 
           this.shareOption = getGroupDetail(
             this.id,

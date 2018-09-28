@@ -487,7 +487,7 @@ const routes = [
     }
   },
   {
-    path: '/group/add',
+    path: '/group/add/:id?',
     name: 'group-add',
     component: componets.GroupsAdd,
     meta: {

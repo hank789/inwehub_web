@@ -14,7 +14,7 @@
            :pageMode = true
            class="listWrapper"
          >
-           <div class="setUpList">
+           <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/group/add/' + id)">
              <span>编辑圈子</span>
              <svg class="icon" aria-hidden="true">
                <use xlink:href="#icon-jinru"></use>
@@ -43,7 +43,7 @@
                  </div>
                  <div class="fouce" v-if="item.audit_status === 0" @tap.stop.prevent="pass(item)">通过</div>
                  <div class="fouce space" v-if="item.audit_status === 0" @tap.stop.prevent="noPass(item)">拒绝</div>
-                 <div class="fouce" v-if="item.audit_status === 1 && item.user_id !== localUserId" @tap.stop.prevent="moveOut(item, index)">移除</div>
+                 <div class="fouce" v-if="item.audit_status === 1 && item.user_id !== localUserId" @tap.stop.prevent="showItemOptions(item, index)">移除</div>
                  <div class="fouce grey" v-if="item.audit_status === 2">已拒绝</div>
                  <i class="bot"></i>
                </div>
@@ -51,6 +51,14 @@
            </div>
          </RefreshList>
        </div>
+
+     <Options
+       ref="itemOptions"
+       :id="'itemOptions'"
+       :options="itemOptions"
+       @selectedItem="selectedItem"
+     ></Options>
+
    </div>
 </template>
 
@@ -59,22 +67,45 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import Switches from 'vue-switches'
-
+  import localEvent from '../../stores/localStorage'
+  import Options from '../../components/Options.vue'
   export default {
     data () {
       return {
         id: null,
         localUserId: getLocalUserId(),
         list: [],
-        openChat: 0
+        itemOptions: [],
+        itemOptionsObj: null,
+        itemOptionsIndex: 0,
+        openChat: parseInt(localEvent.getLocalItem('roomId'))
       }
     },
     components: {
       RefreshList,
-      Switches
+      Switches,
+      Options
     },
     props: {},
     methods: {
+      showItemOptions (item, index) {
+        this.itemOptions = []
+        this.itemOptionsObj = item
+        this.itemOptionsIndex = index
+
+        this.itemOptions.push('移除')
+
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (item) {
+        switch (item) {
+          case '移除':
+            this.moveOut(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+        }
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
@@ -116,24 +147,17 @@
           })
       },
       moveOut (item, index) {
-        var btnArray = ['取消', '确定']
-        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
-          if (e.index === 1) {
-            postRequest('group/removeMember', {
-              id: this.id,
-              user_id: item.user_id
-            })
-              .then(response => {
-                var code = response.data.code
-
-                if (code !== 1000) {
-                  window.mui.toast(response.data.message)
-                  return
-                }
-
-                this.list.splice(index, 1)
-              })
+        postRequest('group/removeMember', {
+          id: this.id,
+          user_id: item.user_id
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
           }
+          this.$refs.itemOptions.toggle()
+          this.list.splice(index, 1)
         })
       },
       goOpenChat () {
@@ -149,7 +173,7 @@
                 that.$router.replace('/groups')
                 return
               }
-              that.openChat = response.data.data.room_id
+              that.openChat = !!response.data.data.room_id
               window.mui.toast('群聊已开启')
             })
           }
@@ -168,7 +192,7 @@
                 that2.$router.replace('/groups')
                 return
               }
-              that2.openChat = response.data.data.room_id
+              that2.openChat = false
               window.mui.toast('群聊已关闭')
             })
           }
@@ -193,10 +217,8 @@
       openChat (val) {
         if (val === true) {
           this.goOpenChat()
-          console.log('true的时候调用')
         } else {
           this.goCloseChat()
-          console.log('false的时候调用')
         }
       }
     },

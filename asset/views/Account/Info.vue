@@ -49,7 +49,44 @@
         <!--<span @tap.stop.prevent="$router.pushPlus('/my/info')">编辑名片</span>-->
       </p>
       <div class="part3">
-        <ul class="mui-table-view mui-table-view-chevron firstItem">
+
+        <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/my/info/basic')">
+          <span>基本资料</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+        <div class="line-river-after line-river-after-short"></div>
+        <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/my/info/jobs')">
+          <span>工作经历</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+        <div class="line-river-after line-river-after-short"></div>
+        <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/my/info/edus')">
+          <span>项目经历</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+        <div class="line-river-after line-river-after-short"></div>
+        <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/my/info/trains')">
+          <span>培训认证</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+        <div class="line-river-after line-river-after-short"></div>
+        <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/my/info/privacy')">
+          <span>隐私设置</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+        <div class="line-river-after line-river-after-short"></div>
+
+       <!-- <ul class="mui-table-view mui-table-view-chevron firstItem">
           <li class="mui-table-view-cell">
             <a class="mui-navigate-right" @tap.stop.prevent="$router.pushPlus('/my/info/basic')">基本资料
 							<span class="desc important">{{ user.infos }}</span>
@@ -82,7 +119,7 @@
 
 						</a>
           </li>
-        </ul>
+        </ul>-->
       </div>
 
       <div class="paizhao">
@@ -474,6 +511,29 @@
   @media (min-device-width: 375px) and (max-device-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
     .part2 .progressBar {
       width: 4.266rem !important;
+    }
+  }
+</style>
+
+<style lang="less" scoped>
+  .setUpList {
+    padding: 11px 16px;
+    background: #ffffff;
+    display: flex;
+    color: #444444;
+    font-size: 16px;
+    position: relative;
+    justify-content: space-between;
+    &.openChat {
+      padding-bottom: 0;
+    }
+    .icon {
+      color: #808080;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .switchestop {
+      margin-top: 7px;
     }
   }
 </style>
