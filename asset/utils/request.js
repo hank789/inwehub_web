@@ -1,7 +1,7 @@
 import axios from 'axios'
 import localEvent from '../stores/localStorage'
 import { logout } from '../utils/auth'
-import { rebootAuth } from '../utils/wechat'
+import { rebootAuth, bindPhone } from '../utils/wechat'
 import router from '../modules/index/routers/index'
 import Raven from 'raven-js'
 
@@ -90,6 +90,11 @@ export function apiRequest (url, data, showWaiting = true) {
         return Promise.reject(s)
       }
 
+      if (code === 1129) {
+        bindPhone()
+        return Promise.reject(response.data.message)
+      }
+
       if (!window.mui.os.wechat) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           window.mui.toast(response.data.message)
@@ -171,6 +176,12 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
       }
 
       var code = response.data.code
+
+      if (code === 1129) {
+        bindPhone()
+        return Promise.reject(response.data.message)
+      }
+
       if (!window.mui.os.wechat) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           window.mui.toast(response.data.message)

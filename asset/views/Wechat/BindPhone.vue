@@ -5,17 +5,7 @@
       <h1 class="mui-title">输入手机号</h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
-        <div class="inputWrapper" v-if="isNeedRegistrationCode">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-yaoqingma"></use>
-          </svg>
-          <input class="text" ref="registrationCode" type="text" @focus="focus" @blur="blur"
-                 placeholder="请输入邀请码 已注册用户可忽略"
-                 name="registrationCode" v-model.trim.num="registrationCode" autocomplete="off"
-                 v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
-        </div>
-
+    <div class="mui-content">
         <div class="inputWrapper">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shoujihao"></use>
@@ -43,13 +33,7 @@
         <div class="buttonWrapper">
           <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :disabled="disableRegister"
                   @click.prevent="register">确认
-
           </button>
-        </div>
-
-
-        <div class="help" @tap.stop.prevent="jumpToForm" v-if="isNeedRegistrationCode">
-          我没有邀请码？
         </div>
     </div>
   </div>
@@ -59,21 +43,18 @@
 <script>
 
   import { postRequest } from '../../utils/request'
-  import localEvent from '../../stores/localStorage'
   import errorCodes from '../../stores/errorCodes'
 
   import Vue from 'vue'
-  import { NOTICE, USERS_APPEND } from '../../stores/types'
+  import { USERS_APPEND } from '../../stores/types'
   import VTooltip from 'v-tooltip'
   import { getUserInfo } from '../../utils/user'
-  import { saveLocationInfo } from '../../utils/allPlatform'
+  import { alertPhoneBindWarning } from '../../utils/dialogList'
 
   Vue.use(VTooltip)
 
   export default {
     data: () => ({
-      isNeedRegistrationCode: false,
-      registrationCode: '', // 邀请码
       phone: '', // 手机号码
       isCanGetCode: false,
       time: 0, // 时间倒计时
@@ -83,6 +64,7 @@
       disableSendCode: true,
       errorMsg: '',
       redirect: '',
+      type: 1, // 1不合并账户 2合并微信账户, 默认1
       loading: true
     }),
     computed: {
@@ -90,19 +72,8 @@
         return this.time === 0 ? '发送验证' : this.time + '秒后重发'
       }
     },
-    created () {
-      var isContinue = this.checkRcCode()
-      console.log('isContinue:' + isContinue)
-      if (isContinue) {
-        this.checkToken()
-        this.getOpenId()
-        this.checkCache()
-      }
-    },
+    created () {},
     watch: {
-      registrationCode: function (newValue, oldValue) {
-        this.checkValid()
-      },
       phone: function (newValue, oldValue) {
         this.checkSendCodeValid()
         this.checkValid()
@@ -112,73 +83,8 @@
       }
     },
     methods: {
-      checkRcCode () {
-        this.redirect = this.$route.query.redirect || '/my'
-        if (/invitation/.test(this.redirect)) {
-          var token = this.$route.query.token || ''
-          var openid = this.$route.query.openid || ''
-          this.$router.replace({path: this.redirect + '&token=' + token + '&openid=' + openid})
-          return false
-        }
-        return true
-      },
-      checkCache () {
-        var cache = localEvent.getLocalItem('wechatInfo')
-        if (cache.openid) {
-          var openid = cache.openid
-          if (openid === this.openid) {
-            this.phone = cache.mobile
-            this.code = cache.code
-            this.registrationCode = cache.registration_code
-          }
-        }
-      },
       jumpToForm () {
         window.location.href = 'https://jinshuju.net/f/bWXY8y'
-      },
-      checkToken () {
-        let token = this.$route.query.token
-        console.log('token:' + token)
-        this.redirect = this.$route.query.redirect ? this.$route.query.redirect : '/my'
-        if (token) {
-          window.mui.waiting()
-          var data = {
-            token: token
-          }
-          localEvent.setLocalItem('UserLoginInfo', data)
-
-          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
-            cb(user)
-            window.mui.closeWaiting()
-            window.mixpanelIdentify()
-            // 存储用户位置信息
-            saveLocationInfo()
-            if (window.mui.os.plus) {
-              this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
-            } else {
-              this.$router.replace({path: this.redirect})
-            }
-          }))
-        } else {
-          this.loading = false
-        }
-      },
-      getOpenId () {
-        let openid = this.$route.query.openid
-        let redirect = this.$route.query.redirect ? this.$route.query.redirect : '/my'
-        this.redirect = redirect
-        if (!openid) {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: '发生一些错误',
-              time: 1500,
-              status: false
-            })
-          })
-          window.mui.toast('出错了：未找到openid')
-          return
-        }
-        this.openid = openid
       },
       // 提示
       showTip (obj, msg) {
@@ -218,7 +124,7 @@
           mobile,
           type,
           openid: this.openid,
-          'registration_code': this.registrationCode
+          'registration_code': ''
         })
           .then(response => {
             var code = response.data.code
@@ -288,43 +194,58 @@
         var data = {
           mobile: this.phone,
           code: this.code,
-          registration_code: this.registrationCode,
-          openid: this.openid
+          type: this.type
         }
 
-        postRequest('auth/wxgzh/check_rg', data)
+        postRequest('auth/changePhone', data)
           .then(response => {
             var code = response.data.code
 
             if (code !== 1000) {
-              if (code === 1115) {
-                // 去填写注册信息
-                data.redirect = this.redirect
-                localEvent.setLocalItem('wechatInfo', data)
-                this.$router.push({path: '/wechat/info'})
-                return
-              } else {
-                window.mui.toast(response.data.message)
-                return
+              switch (code) {
+                case 1127:
+                  alertPhoneBindWarning(
+                    this,
+                    '此手机号已注册',
+                    response.data.data.mobile,
+                    response.data.data.avatar,
+                    response.data.data.is_expert,
+                    response.data.data.name,
+                    '合并账号并绑定',
+                    () => {
+                      this.type = 2
+                      this.register()
+                    }
+                  )
+                  return
+                case 1128:
+                  alertPhoneBindWarning(
+                    this,
+                    '此手机号已绑定其他微信',
+                    response.data.data.mobile,
+                    response.data.data.avatar,
+                    response.data.data.is_expert,
+                    response.data.data.name,
+                    '联系管理员',
+                    () => {
+                      this.$router.pushPlus('/chat/79')
+                    }
+                  )
+                  return
+                default:
+                  window.mui.toast(response.data.message)
+                  break
               }
             }
-
-            localEvent.setLocalItem('UserLoginInfo', response.data.data)
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
               window.mixpanelIdentify()
-              if (window.mui.os.plus) {
-                this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
-              } else {
-                this.$router.replace({path: this.redirect})
-              }
+              window.mui.back()
             }))
           })
       },
-      mounted () {
-
-      }
+      mounted () {}
     }
   }
 </script>
