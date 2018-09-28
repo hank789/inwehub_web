@@ -107,7 +107,7 @@
       },
       getCode () {
         let mobile = this.phone
-        let type = 'wx_gzh_register'
+        let type = 'change_phone'
 
         if (!this.isCanGetCode) {
           return
