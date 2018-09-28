@@ -23,9 +23,7 @@
         </svg>
       </div>
     </div>
-    <div class="preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
-      <span v-for="item in data.feed.tags" class="tags">#{{item.name}}#</span>
-      <span v-html="textToLink(data.feed.title)"></span></div>
+    <div class="preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)"><span v-for="item in data.feed.tags" class="tags">#{{item.name}}#</span><span v-html="textToLink(data.feed.title)"></span></div>
 
     <Images
       class="container-images-discover padding-0 margin-10-0-0"
@@ -226,6 +224,7 @@
   }
   .preWrapper{
     white-space: pre-wrap !important;
+    text-align: justify;
   }
 
   .comment .from{
