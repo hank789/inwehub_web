@@ -21,8 +21,8 @@
              </svg>
            </div>
            <div class="line-river-after line-river-after-short"></div>
-           <div class="setUpList openChat" @tap.stop.prevent="goOpenChat">
-             <span>圈子聊天</span>
+           <div class="setUpList openChat"> <!-- @tap.stop.prevent="goOpenChat"-->
+             <span>圈子聊天12</span>
              <Switches class="switchestop" v-model="openChat" type-bold="true" theme="custom" color="blue"></Switches>
            </div>
            <div class="gray"></div>
@@ -73,6 +73,9 @@
     },
     props: {},
     methods: {
+      trigger () {
+        console.log(this.openChat + '开关状态')
+      },
       toResume (item) {
         this.$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
@@ -148,6 +151,25 @@
           }
         })
       },
+      goCloseChat () {
+        this.id = parseInt(this.$route.params.id)
+        var btnArray2 = ['取消', '确定']
+        var that2 = this
+        window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray2, function (e) {
+          if (e.index === 1) {
+            postRequest(`group/closeIm`, {id: that2.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                that2.$router.replace('/groups')
+                return
+              }
+              that2.openChat = response.data.data.room_id
+              window.mui.toast('群聊已关闭')
+            })
+          }
+        })
+      },
       refreshPageData () {
         this.getData()
       },
@@ -163,7 +185,16 @@
     },
     updated () {},
     watch: {
-      '$route': 'refreshPageData'
+      '$route': 'refreshPageData',
+      openChat (val) {
+        if (val === true) {
+          this.goOpenChat()
+          console.log('true的时候调用')
+        } else {
+          this.goCloseChat()
+          console.log('false的时候调用')
+        }
+      }
     },
     created () {
       this.getData()
