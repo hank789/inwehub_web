@@ -15,20 +15,22 @@
            class="listWrapper"
          >
            <div class="setUpList">
-             <span>邀请加入</span>
+             <span>编辑圈子</span>
              <svg class="icon" aria-hidden="true">
                <use xlink:href="#icon-jinru"></use>
              </svg>
            </div>
            <div class="line-river-after line-river-after-short"></div>
-           <div class="setUpList openChat"> <!-- @tap.stop.prevent="goOpenChat"-->
-             <span>圈子聊天12</span>
+           <div class="setUpList openChat"> <!-- @tap.stop.prevent="goOpenChat" -->
+             <span>圈子聊天</span>
              <Switches class="switchestop" v-model="openChat" type-bold="true" theme="custom" color="blue"></Switches>
            </div>
            <div class="gray"></div>
-           <ul class="cions-list">
+           <div class="cions-list">
+             <div class="memberTitle">成员管理</div>
+             <div class="line-river-after"></div>
              <template v-for="(item, index) in list">
-               <li v-if="item.user_id !== localUserId">
+               <div class="memberList" v-if="item.user_id !== localUserId">
                  <div class="cions-avatar" @tap.stop.prevent="toResume(item)">
                    <img :src="item.user_avatar_url"/>
                    <svg class="icon" aria-hidden="true" v-if="item.is_expert">
@@ -36,17 +38,17 @@
                    </svg>
                  </div>
                  <div class="detail">
-                   <p>{{item.user_name}}</p>
-                   <p>{{item.created_at}}</p>
+                   <span>{{item.user_name}}</span>
+                   <span><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></span>
                  </div>
                  <div class="fouce" v-if="item.audit_status === 0" @tap.stop.prevent="pass(item)">通过</div>
                  <div class="fouce space" v-if="item.audit_status === 0" @tap.stop.prevent="noPass(item)">拒绝</div>
                  <div class="fouce" v-if="item.audit_status === 1 && item.user_id !== localUserId" @tap.stop.prevent="moveOut(item, index)">移除</div>
                  <div class="fouce grey" v-if="item.audit_status === 2">已拒绝</div>
                  <i class="bot"></i>
-               </li>
+               </div>
              </template>
-           </ul>
+           </div>
          </RefreshList>
        </div>
    </div>
@@ -73,8 +75,10 @@
     },
     props: {},
     methods: {
-      trigger () {
-        console.log(this.openChat + '开关状态')
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
       },
       toResume (item) {
         this.$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1' + '&time=' + (new Date().getTime()))
@@ -202,22 +206,7 @@
   }
 
 </script>
-<style scoped>
-  /*清掉自带样式*/
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
-
+<style scoped lang="less">
   .bot {
     position: absolute;
     right: 0;
@@ -243,70 +232,75 @@
   }
   /*列表区域*/
   .cions-list{
-    width:100%;
     overflow: hidden;
-    padding: 0 4%;
-  }
-  .cions-list li{
-    position: relative;
-    height:1.706rem;
-  }
-  .cions-list li div{
-    float: left;
-  }
-  .cions-list li .cions-avatar{
-    position: relative;
-    width:1.173rem;
-    height:1.173rem;
-    border-radius:50%;
-    background: #cccccc;
-    margin-top: 0.266rem;
-  }
-  .cions-list li .cions-avatar img{
-    width:1.173rem;
-    height:1.173rem;
-    border-radius:50%;
-  }
-  .cions-list li .cions-avatar svg{
-    position: absolute;
-    font-size: 0.533rem;
-    right: -0.133rem;
-    bottom: -0.053rem;
-  }
-  .cions-list li .detail{
-    width: 30%;
-    margin-top: 0.373rem;
-    font-size:0.373rem;
-    color: #444444;
-    margin-left: 0.213rem;
-  }
-  .cions-list li .detail p:nth-of-type(1){
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .cions-list li .detail p:nth-of-type(2){
-    width:5.333rem;
-    font-size:0.32rem;
-    color: #b4b4b6;
-    margin-top: -0.053rem;
-  }
-  .cions-list li .fouce{
-    width:1.626rem;
-    height:0.72rem;
-    background:#03aef9;
-    border-radius: 1.333rem;
-    text-align: center;
-    line-height: 0.72rem;
-    font-size:0.373rem;
-    color: #ffffff;
-    margin-top: 0.493rem;
-    float: right;
-
-  }
-  .cions-list li .grey{
-    color: #b4b4b6;
-    background: #dbdcdb;
+    padding: 0 16px;
+    .memberTitle {
+      color: #808080;
+      font-size: 13px;
+      line-height: 34px;
+    }
+    .memberList {
+      position: relative;
+      height:1.706rem;
+      div {
+        float: left;
+      }
+      .cions-avatar {
+        position: relative;
+        width:1.173rem;
+        height:1.173rem;
+        border-radius:50%;
+        background: #cccccc;
+        margin-top: 0.266rem;
+        img {
+          width:1.173rem;
+          height:1.173rem;
+          border-radius:50%;
+        }
+        svg {
+          position: absolute;
+          font-size: 0.533rem;
+          right: -0.133rem;
+          bottom: -0.053rem;
+        }
+      }
+      .detail{
+        /*width: 30%;*/
+        margin-top: 0.373rem;
+        font-size:0.373rem;
+        color: #565656;
+        margin-left: 0.213rem;
+        span {
+          &:nth-of-type(1) {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          &:nth-of-type(2) {
+            width:5.333rem;
+            font-size:0.32rem;
+            color: #b4b4b6;
+            margin-top: -0.053rem;
+          }
+        }
+      }
+      .fouce {
+        width:1.626rem;
+        height:0.72rem;
+        background:#03aef9;
+        border-radius: 1.333rem;
+        text-align: center;
+        line-height: 0.72rem;
+        font-size:0.373rem;
+        color: #ffffff;
+        margin-top: 0.493rem;
+        float: right;
+      }
+      .grey {
+        color: #b4b4b6;
+        background: #dbdcdb;
+      }
+    }
   }
   .space{
     margin-right: 0.266rem;
@@ -315,9 +309,6 @@
     width: 51px;
     height: 31px;
   }
-</style>
-
-<style lang="less" scoped>
   .setUpList {
     padding: 11px 16px;
     background: #ffffff;
