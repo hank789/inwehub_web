@@ -9,7 +9,7 @@
       <div class="foundGroupWrapper">
         <div class="foundGroupImages" @tap.stop.prevent="uploadImage('big')">
           <img v-if="backgroundImg.length" :id="'image_0'" :src="backgroundImg[0].base64" :data-preview-src="backgroundImg[0].base64" :data-preview-group="1"/>
-          <div class="foundGroupIcon" @tap.stop.prevent="uploadImage('big')" v-if="backgroundImg.length < maxImageCount || id">
+          <div class="foundGroupIcon" @tap.stop.prevent="uploadImage('big')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangji1"></use>
             </svg>
@@ -21,7 +21,7 @@
               <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
             </svg>
             <img v-if="images.length" :id="'image_0'" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
-            <div class="headPhotograph" @tap.stop.prevent="uploadImage('small')" v-if="images.length < maxImageCount || id">
+            <div class="headPhotograph" @tap.stop.prevent="uploadImage('small')">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiangji1"></use>
               </svg>
@@ -219,6 +219,7 @@
 <style lang="less" scoped>
   .mui-content {
     background: #ffffff;
+    padding-bottom: 15px;
   }
   .foundGroupWrapper {
     position: relative;
@@ -302,6 +303,7 @@
       border: none;
       color: #444444;
       font-size: 0.533rem;
+      margin-top: -10px;
       font-family: PingFangSC-Medium;
       &::-webkit-input-placeholder {
         color: #C8C8C8;
@@ -426,9 +428,6 @@
     background: #03AEF9;
     line-height: 1.173rem;
     border-radius: 1.333rem;
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 50px auto 0;
   }
 </style>

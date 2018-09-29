@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">{{detail.name}}</h1>
+      <h1 class="mui-title">&nbsp;{{detail.name}}&nbsp;</h1>
     </header>
 
     <div class="mui-content">
@@ -20,8 +20,8 @@
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
-        <div class="line-river-after line-river-after-short" v-if="this.detail.room_id > 0"></div>
-        <div class="setUpList" @tap.stop.prevent="toGroupChat" v-if="this.detail.room_id > 0">
+        <div class="line-river-after line-river-after-short" v-if="detail.room_id > 0"></div>
+        <div class="setUpList" @tap.stop.prevent="toGroupChat" v-if="detail.room_id > 0">
           <span>聊天消息</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
@@ -78,7 +78,15 @@
     data () {
       return {
         id: null,
-        detail: null,
+        detail: {
+          name: '',
+          room_id: '',
+          id: '',
+          unread_group_im_messages: '',
+          owner: {
+            uuid: ''
+          }
+        },
         loading: 1,
         uuid: '',
         groupUuid: getLocalUuid(),
@@ -151,6 +159,9 @@
       }
     },
     mounted () {},
+    watch: {
+      '$route': 'refreshPageData'
+    },
     activated () {
       this.refreshPageData()
     }
@@ -168,7 +179,7 @@
       background: #ffffff;
       display: flex;
       color: #444444;
-      font-size: 0.426rem;
+      font-size: 15px;
       position: relative;
       justify-content: space-between;
       &.ListGray {
@@ -209,8 +220,8 @@
     .groupIntroduceText {
       padding: 0.293rem 0.426rem;
       color: #808080;
-      font-size: 0.426rem;
-      line-height: 0.586rem;
+      font-size: 14px;
+      line-height: 22px;
     }
   }
 

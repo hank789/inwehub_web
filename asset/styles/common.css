@@ -3129,6 +3129,9 @@ a {
   /*margin-top: 0.08rem;*/
   font-size: 0.346rem;
   line-height: 0.426rem;}
+.mui-ios .component-group .groupContent .groupDescribe {
+  margin-top: 3px;
+}
 .component-group .groupContent .groupText {
   color: #B4B4B6;
   font-size: 0.293rem;
