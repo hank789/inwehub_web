@@ -77,7 +77,7 @@
         >
           <div>
             <div class="header">
-              <img id="imgHeight" :src="detail.background_img" alt="">
+              <img class="lazyImg" v-lazy="detail.background_img" alt="">
               <div class="backMask"></div>
               <div class="headerBack">
                 <div @tap.stop.prevent="goBack">
@@ -104,7 +104,7 @@
               </div>
               <div class="headPhotowrapper">
                 <div class="headImages">
-                  <img :src="detail.logo" alt="">
+                  <img class="lazyImg" v-lazy="detail.logo" alt="">
                 </div>
               </div>
             </div>
