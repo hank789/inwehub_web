@@ -430,7 +430,10 @@
     text-align: center;
     background: #03AEF9;
     line-height: 1.173rem;
-    margin: 2.133rem auto 0;
     border-radius: 1.333rem;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>
