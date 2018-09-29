@@ -183,7 +183,7 @@
       background: #ffffff;
       display: flex;
       color: #444444;
-      font-size: 15px;
+      font-size: 0.4rem;
       position: relative;
       justify-content: space-between;
       &.ListGray {
@@ -224,8 +224,8 @@
     .groupIntroduceText {
       padding: 0.293rem 0.426rem;
       color: #808080;
-      font-size: 14px;
-      line-height: 22px;
+      font-size: 0.373rem;
+      line-height: 0.586rem;
     }
   }
 

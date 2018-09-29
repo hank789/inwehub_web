@@ -343,7 +343,7 @@
     background: #ffffff;
     display: flex;
     color: #444444;
-    font-size: 15px;
+    font-size: 0.4rem;
     position: relative;
     justify-content: space-between;
     &.openChat {
