@@ -219,7 +219,7 @@
 <style lang="less" scoped>
   .mui-content {
     background: #ffffff;
-    padding-bottom: 15px;
+    padding-bottom: 0.4rem;
   }
   .foundGroupWrapper {
     position: relative;
@@ -303,7 +303,7 @@
       border: none;
       color: #444444;
       font-size: 0.533rem;
-      margin-top: -10px;
+      margin-top: -0.266rem;
       font-family: PingFangSC-Medium;
       &::-webkit-input-placeholder {
         color: #C8C8C8;
@@ -428,6 +428,6 @@
     background: #03AEF9;
     line-height: 1.173rem;
     border-radius: 1.333rem;
-    margin: 50px auto 0;
+    margin: 1.333rem auto 0;
   }
 </style>
