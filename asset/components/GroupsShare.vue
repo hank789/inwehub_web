@@ -649,16 +649,16 @@
         }
       }
       .groupMore {
-        width: 47px;
-        height: 46px;
+        width: 1.253rem;
+        height: 1.226rem;
         background: #DCDCDC;
-        border-radius: 8px;
+        border-radius: 0.213rem;
         margin: 0 0.24rem;
         display: inline-block;
         .icon {
-          font-size: 24px;
+          font-size: 0.64rem;
           color: #808080;
-          margin: 12px;
+          margin: 0.32rem;
         }
       }
     }

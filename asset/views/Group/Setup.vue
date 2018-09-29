@@ -171,11 +171,11 @@
 
   .setUpWrapper {
     .setUpList {
-      padding: 11px 16px;
+      padding: 0.293rem 0.426rem;
       background: #ffffff;
       display: flex;
       color: #444444;
-      font-size: 16px;
+      font-size: 0.426rem;
       position: relative;
       justify-content: space-between;
       &.ListGray {
@@ -183,19 +183,19 @@
       }
       .icon {
         color: #808080;
-        font-size: 13px;
-        margin-top: 4px;
+        font-size: 0.346rem;
+        margin-top: 0.106rem;
       }
       .chatInformation {
         position: absolute;
-        right: 32px;
-        top: 9px;
+        right: 0.853rem;
+        top: 0.24rem;
         span {
-          width: 18px;
-          height: 18px;
+          width: 0.48rem;
+          height: 0.48rem;
           color: #FFFFFF;
-          font-size: 11px;
-          line-height: 18px;
+          font-size: 0.293rem;
+          line-height: 0.48rem;
           border-radius: 50%;
           text-align: center;
           background: #F03C69;
@@ -208,28 +208,28 @@
   .groupIntroduce {
     background: #ffffff;
     .font-family-medium {
-      padding: 11px 16px;
+      padding: 0.293rem 0.426rem;
       color: #444444;
-      font-size: 16px;
+      font-size: 0.426rem;
       display: inline-block;
     }
     .groupIntroduceText {
-      padding: 11px 16px;
+      padding: 0.293rem 0.426rem;
       color: #808080;
-      font-size: 16px;
-      line-height: 22px;
+      font-size: 0.426rem;
+      line-height: 0.586rem;
     }
   }
 
   .signOut {
-    width: 343px;
-    height: 44px;
-    margin: 15px auto 0;
-    font-size: 16px;
+    width: 9.146rem;
+    height: 1.173rem;
+    margin: 0.4rem auto 0;
+    font-size: 0.426rem;
     color: #ffffff;
     text-align: center;
-    line-height: 44px;
+    line-height: 1.173rem;
     background: #03AEF9;
-    border-radius: 4px;
+    border-radius: 0.106rem;
   }
 </style>

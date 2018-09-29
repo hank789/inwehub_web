@@ -1783,21 +1783,21 @@
   .component-phoneBindWarning {
     text-align: center; }
   .component-phoneBindWarning .pbwTitle {
-    font-size: 19px;
+    font-size: 0.506rem;
     font-family: PingFangSC-Medium;
     color: #03aef9;
-    line-height: 26.5px; }
+    line-height: 0.706rem; }
   .component-phoneBindWarning .pbwIphone {
-    font-size: 14px;
+    font-size: 0.373rem;
     font-weight: 400;
     color: gray;
-    line-height: 24px; }
+    line-height: 0.64rem; }
   .component-phoneBindWarning .pwbAvatar {
-    margin-top: 24px;
+    margin-top: 0.64rem;
     position: relative;
     display: inline-block;
-    width: 44px;
-    height: 44px;
+    width: 1.173rem;
+    height: 1.173rem;
     border-radius: 50%; }
   .component-phoneBindWarning .pwbAvatar img {
     width: 100%;
@@ -1809,12 +1809,12 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    margin-left: 5px; }
+    margin-left: 0.133rem; }
   .component-phoneBindWarning .pwbName {
-    font-size: 14px;
+    font-size: 0.373rem;
     font-family: PingFangSC-Medium;
     font-weight: 500;
     color: #444444;
-    line-height: 15px; }
+    line-height: 0.4rem; }
 
 </style>

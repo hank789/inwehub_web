@@ -216,7 +216,7 @@
 <style scoped lang="less">
   .more{
     color: #808080;
-    font-size: 18px;
+    font-size: 0.48rem;
     /*margin-left: 0.053rem;*/
     /*float: left;*/
     /*padding-right: 0.4rem;*/
@@ -244,7 +244,7 @@
     color: #b4b4b6;
     font-size: .32rem;
     position: absolute;
-    left: 114px;
+    left: 3.04rem;
     top: 0.506rem;
   }
 </style>

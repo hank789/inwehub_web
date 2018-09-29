@@ -262,11 +262,11 @@
   /*列表区域*/
   .cions-list{
     overflow: hidden;
-    padding: 0 16px;
+    padding: 0 0.426rem;
     .memberTitle {
       color: #808080;
-      font-size: 13px;
-      line-height: 34px;
+      font-size: 0.346rem;
+      line-height: 0.906rem;
     }
     .memberList {
       position: relative;
@@ -335,15 +335,15 @@
     margin-right: 0.266rem;
   }
   .vue-switcher--bold div {
-    width: 51px;
-    height: 31px;
+    width: 1.36rem;
+    height: 0.826rem;
   }
   .setUpList {
-    padding: 11px 16px;
+    padding: 0.293rem 0.426rem;
     background: #ffffff;
     display: flex;
     color: #444444;
-    font-size: 16px;
+    font-size: 0.426rem;
     position: relative;
     justify-content: space-between;
     &.openChat {
@@ -351,11 +351,11 @@
     }
     .icon {
       color: #808080;
-      font-size: 13px;
-      margin-top: 4px;
+      font-size: 0.346rem;
+      margin-top: 0.106rem;
     }
     .switchestop {
-      margin-top: 7px;
+      margin-top: 0.186rem;
     }
   }
 </style>
