@@ -20,7 +20,7 @@
 
       <div v-if="!isInGroup">
         <div class="header">
-          <img :src="detail.background_img" alt="">
+          <img v-lazy="detail.background_img" class="lazyImg">
           <div class="backMask"></div>
           <div class="headerBack">
             <div @tap.stop.prevent="goBack">
@@ -36,7 +36,7 @@
           </div>
           <div class="headPhotowrapper">
             <div class="headImages">
-              <img :src="detail.logo" alt="">
+              <img v-lazy="detail.logo" class="lazyImg">
             </div>
           </div>
         </div>
