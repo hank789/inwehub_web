@@ -224,6 +224,7 @@
 <style lang="less" scoped>
   .mui-content {
     background: #ffffff;
+    padding-bottom: 15px;
   }
   .foundGroupWrapper {
     position: relative;
@@ -431,9 +432,6 @@
     background: #03AEF9;
     line-height: 1.173rem;
     border-radius: 1.333rem;
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin: 50px auto 0;
   }
 </style>
