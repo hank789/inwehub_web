@@ -7,9 +7,9 @@
 
     <div class="mui-content">
       <div class="foundGroupWrapper">
-        <div class="foundGroupImages" @tap.stop.prevent="uploadBackground()">
+        <div class="foundGroupImages" @tap.stop.prevent="uploadImage('big')">
           <img v-if="backgroundImg.length" :id="'image_0'" :src="backgroundImg[0].base64" :data-preview-src="backgroundImg[0].base64" :data-preview-group="1"/>
-          <div class="foundGroupIcon" @tap.stop.prevent="uploadBackground()" v-if="backgroundImg.length < maxImageCount || id">
+          <div class="foundGroupIcon" @tap.stop.prevent="uploadImage('big')" v-if="backgroundImg.length < maxImageCount || id">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangji1"></use>
             </svg>
@@ -21,7 +21,7 @@
               <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
             </svg>
             <img v-if="images.length" :id="'image_0'" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
-            <div class="headPhotograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount || id">
+            <div class="headPhotograph" @tap.stop.prevent="uploadImage('small')" v-if="images.length < maxImageCount || id">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiangji1"></use>
               </svg>
@@ -57,12 +57,6 @@
       <div class="goFoundGroup font-family-medium" v-else @tap.stop.prevent="reviseGroup()">保存修改</div>
     </div>
 
-    <uploadImage ref="uploadBackground"
-                 :isMultiple="false"
-                 @success="uploadBackgroundSuccess"
-                 :ImageMaximum="maxImageCount - this.backgroundImg.length"
-    ></uploadImage>
-
     <uploadImage ref="uploadImage"
                  :isMultiple="false"
                  @success="uploadImageSuccess"
@@ -85,6 +79,7 @@
         maxImageCount: 1,
         description: '',
         descMaxLength: 1000,
+        uploadImageType: null,
         type: 1  // 1 public  0 私密
       }
     },
@@ -199,16 +194,16 @@
         })
       },
       uploadImageSuccess (images) {
-        this.images = images
+        if (this.uploadImageType === 'big') {
+          this.backgroundImg = images
+        }
+        if (this.uploadImageType === 'small') {
+          this.images = images
+        }
       },
-      uploadImage: function () {
+      uploadImage: function (type) {
+        this.uploadImageType = type
         this.$refs.uploadImage.uploadImage()
-      },
-      uploadBackgroundSuccess (images) {
-        this.backgroundImg = images
-      },
-      uploadBackground: function () {
-        this.$refs.uploadBackground.uploadImage()
       },
       selectType (type) {
         if (!this.id) {
