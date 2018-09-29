@@ -1,19 +1,19 @@
 <template>
   <div>
-    <header class="mui-bar mui-bar-nav" v-if="hederF">
-      <Back></Back>
-      <h1 class="mui-title">{{detail.name}}</h1>
-      <div class="headerShare" @tap.stop.prevent="joinShare">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoucang-xiao"></use>
-        </svg>
-      </div>
-      <div class="headerShare headerNotice">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-tongzhi"></use>
-        </svg>
-      </div>
-    </header>
+    <!--<header class="mui-bar mui-bar-nav">-->
+      <!--<Back></Back>-->
+      <!--<h1 class="mui-title">{{detail.name}}</h1>-->
+      <!--<div class="headerShare" @tap.stop.prevent="joinShare">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+      <!--<div class="headerShare headerNotice">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-tongzhi"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
+    <!--</header>-->
 
 
     <div class="mui-content" v-if="!loading" id="home-content">
@@ -86,13 +86,13 @@
                   </svg>
                 </div>
               </div>
-              <div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="goUnlock">
+              <div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="closeNotice">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tongzhi"></use>
                 </svg>
               </div>
 
-              <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="goCloseUnlock">
+              <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="openNotice">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tongzhiguanbi"></use>
                 </svg>
@@ -291,12 +291,10 @@
           shareName: ''
         },
         isInGroup: false,
-        hederF: false,
-        isOpenNotification: -1 // -1， 未知, 1 yes 0 no
+        readyOpenNotice: false
       }
     },
-    created () {
-    },
+    created () {},
     computed: {
       prevOtherData () {
         return {id: this.id, type: this.search_type}
@@ -374,46 +372,43 @@
       }
     },
     methods: {
-      getNotification () {
-        this.id = parseInt(this.$route.params.id)
+      setNotificationStatus (status) {
         postRequest(`group/setNotify`, {
           id: this.id,
-          is_notify: this.isOpenNotification
+          is_notify: status
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
-            window.mui.alert(response.data.message)
+            window.mui.toast(response.data.message)
             return
+          }
+          if (status) {
+            this.readyOpenNotice = 0
+            window.mui.toast('动态通知已开启')
+          } else {
+            window.mui.toast('动态通知已关闭')
           }
         })
       },
-      checkPermission () {
-        checkPermission('NOTIFITION', () => {
-          this.isOpenNotification = 1
-        }, () => {
-          this.isOpenNotification = 0
-        })
-      },
-      goUnlock () {
-        this.isOpenNotification = 0
+      closeNotice () {
         this.detail.current_user_notify = 0
-        window.mui.toast('动态通知已关闭')
-        this.getNotification()
+        this.setNotificationStatus(0)
       },
-      goCloseUnlock () {
-        if (this.isOpenNotification === 0) {
+      openNotice () {
+        checkPermission('NOTIFITION', () => {
+          this.detail.current_user_notify = 1
+          this.setNotificationStatus(1)
+        }, () => {
           var btnArray = ['取消', '去设置']
           window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
             if (e.index === 1) {
+              this.readyOpenNotice = 1
               toSettingSystem('NOTIFITION')
+            } else {
+              this.readyOpenNotice = 0
             }
           })
-        } else {
-          this.isOpenNotification = 1
-          this.detail.current_user_notify = 1
-          window.mui.toast('动态通知已开启')
-          this.getNotification()
-        }
+        })
       },
       goMore () {
         this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
@@ -501,7 +496,6 @@
         }
 
         this.loading = 1
-        this.checkPermission()
         this.getData()
       },
       joinIn () {
@@ -804,13 +798,12 @@
     },
     mounted () {
       window.addEventListener('resume', () => {
-        this.checkPermission()
+        if (this.readyOpenNotice === 1) {
+          this.openNotice()
+        }
       }, true)
     },
     activated: function () {
-      // if (this.id !== parseInt(this.$route.params.id)) {
-      //   this.refreshPageData()
-      // }
       this.refreshPageData()
     },
     updated () {}
