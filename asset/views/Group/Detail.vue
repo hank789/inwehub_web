@@ -23,7 +23,7 @@
           <img :src="detail.background_img" alt="">
           <div class="backMask"></div>
           <div class="headerBack">
-            <div @tap.stop.prevent="$router.goBack()">
+            <div @tap.stop.prevent="goBack">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-fanhui"></use>
               </svg>
@@ -80,7 +80,7 @@
               <img id="imgHeight" :src="detail.background_img" alt="">
               <div class="backMask"></div>
               <div class="headerBack">
-                <div @tap.stop.prevent="$router.goBack()">
+                <div @tap.stop.prevent="goBack">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-fanhui"></use>
                   </svg>
@@ -372,6 +372,9 @@
       }
     },
     methods: {
+      goBack () {
+        window.mui.back()
+      },
       setNotificationStatus (status) {
         postRequest(`group/setNotify`, {
           id: this.id,
@@ -1092,11 +1095,16 @@
       width: 1.173rem;
       height: 1.173rem;
       text-align: center;
-      line-height: 1.173rem;
+      /*line-height: 1.28rem;*/
       background: #03AEF9;
       border-radius: 50%;
+      position: relative;
       box-shadow:0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
       .icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
         font-size: 0.586rem;
         color: #ffffff;
       }
