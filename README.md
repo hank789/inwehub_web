@@ -117,7 +117,11 @@ mui: http://www.dcloud.io/mui.html
 
 2. 并且添加
       watch: {
-        '$route': 'refreshPageData'
+        '$route' (to, from) {
+          if (to.name === from.name) {
+            this.refreshPageData()
+          }
+        }
       },
 
 
