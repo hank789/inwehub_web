@@ -13,13 +13,7 @@
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
-        <div class="setUpList ListGray"  v-if="uuid !== groupUuid">
-          <span>圈主设置</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-        </div>
-        <div class="gray"></div>
+        <div class="gray" v-if="uuid === groupUuid"></div>
         <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/group/users/' + detail.id)">
           <span>圈子成员</span>
           <svg class="icon" aria-hidden="true">
