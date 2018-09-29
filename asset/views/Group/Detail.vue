@@ -108,7 +108,7 @@
                 </div>
               </div>
             </div>
-            <div class="groupWrapper" id="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
+            <div class="groupWrapper" id="groupWrapper" @tap.stop.prevent="goMoreSetup">
               <div class="groupNAmeWrapper">
                 <span class="font-family-medium">{{detail.name}}</span>
               </div>

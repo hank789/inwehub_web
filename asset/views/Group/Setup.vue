@@ -160,7 +160,11 @@
     },
     mounted () {},
     watch: {
-      '$route': 'refreshPageData'
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
     },
     activated () {
       this.refreshPageData()
