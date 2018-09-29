@@ -818,7 +818,6 @@
 <style scoped="scoped">
   .mui-content {
     background: #ffffff;
-    top: 0 !important;
   }
   .mui-scroll-wrapper {
     /*top: 6.586rem;*/
