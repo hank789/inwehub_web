@@ -40,7 +40,7 @@
             </div>
           </div>
         </div>
-        <div class="groupWrapper" @tap.stop.prevent="$router.pushPlus('/group/moreSetup/' + detail.id)">
+        <div class="groupWrapper" @tap.stop.prevent="goMoreSetup">
           <div class="groupNAmeWrapper">
             <span class="font-family-medium">{{detail.name}}</span>
           </div>
@@ -52,7 +52,7 @@
                 </svg> · 私密
               </span>
           </div>
-          <div class="goMoreoPerations">
+          <div class="goMoreoPerations" v-if="detail.audit_status === 1">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-jinru"></use>
             </svg>
@@ -120,7 +120,7 @@
                   </svg> · 私密
                 </span>
               </div>
-              <div class="goMoreoPerations">
+              <div class="goMoreoPerations" v-if="detail.audit_status === 1">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-jinru"></use>
                 </svg>
@@ -372,6 +372,11 @@
       }
     },
     methods: {
+      goMoreSetup () {
+        if (this.detail.audit_status === 1) {
+          this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
+        }
+      },
       goBack () {
         window.mui.back()
       },
