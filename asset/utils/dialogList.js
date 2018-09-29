@@ -364,6 +364,25 @@ function alertFreeAskGuide (context) {
   }
 }
 
+function alertPhoneBindWarning (context, title, phone, avatar, isVip, name, buttonText, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('phoneBindWarning', {phoneBindWaring: {
+      title,
+      phone,
+      avatar,
+      name,
+      isVip
+    }}, (html) => {
+      alertSimple(html, buttonText, (num) => {
+        if (num.index === 0) {
+          callback()
+        }
+      }, true)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -385,5 +404,6 @@ export {
   alertGetCredits,
   alertGetCoupon,
   alertNoticeOpenNotifitionPermission,
-  alertFreeAskGuide
+  alertFreeAskGuide,
+  alertPhoneBindWarning
 }

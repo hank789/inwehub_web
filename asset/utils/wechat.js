@@ -57,6 +57,11 @@ function rebootAuth (hash) {
   }
 }
 
+/* 绑定手机号 */
+function bindPhone () {
+  router.push('/wechat/bindPhone')
+}
+
 function callWechat (call) {
   var fullUrl = window.location.href
   var currentUrl = fullUrl.split('#')[0]
@@ -125,5 +130,6 @@ export {
   rebootAuth,
   callWechat,
   getGeoPositionByWechat,
-  setClipboardText
+  setClipboardText,
+  bindPhone
 }

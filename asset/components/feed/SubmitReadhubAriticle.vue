@@ -1,6 +1,6 @@
 <template>
   <div class="container-item">
-    <div class="container-avatarAndText">
+    <div class="container-avatarAndText groupMore">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
           <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
@@ -16,6 +16,11 @@
           </timeago>
         </div>
       </div>
+      <!--<div class="more" v-if="show" @tap.stop.prevent="showItemOptions">-->
+        <!--<svg class="icon" aria-hidden="true" >-->
+          <!--<use xlink:href="#icon-gengduo"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
     </div>
 
 
@@ -31,8 +36,11 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.feed.comment_url)">
-      <div class="more" v-if="show" @tap.stop.prevent="showItemOptions">
-        <svg class="icon" aria-hidden="true" >
+      <!--<div class="feedComment">-->
+        <!--<span>{{data.feed.comment_number}}评论 <span class="line-wall"></span> {{data.feed.support_number}}点赞</span>-->
+      <!--</div>-->
+      <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
+        <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gengduo"></use>
         </svg>
       </div>
@@ -205,9 +213,10 @@
     }
   }
 </script>
-<style scoped>
+<style scoped lang="less">
   .more{
     color: #808080;
+    font-size: 0.48rem;
     margin-left: 0.053rem;
     float: left;
     padding-right: 0.4rem;
@@ -221,5 +230,21 @@
 
   .component-card-link{
     margin-top: 0.266rem;
+  }
+  .groupMore {
+    display: flex;
+    justify-content: space-between;
+  }
+  .freeQuestion-container .feedComment {
+    color: #B4B4B6;
+    font-size: 0.32rem;
+  }
+  .feedAddress {
+    display: inline-block;
+    color: #b4b4b6;
+    font-size: .32rem;
+    position: absolute;
+    left: 3.04rem;
+    top: 0.506rem;
   }
 </style>

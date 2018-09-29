@@ -1,7 +1,7 @@
 <template>
   <div class='container-item'  @tap.stop.prevent="toDetail(data.url)">
   <div :class="{noMoreComment: data.feed.comment_number <= 8}" >
-    <div class="container-avatarAndText" @tap.stop.prevent="toDetail(data.url)">
+    <div class="container-avatarAndText groupMore" @tap.stop.prevent="toDetail(data.url)">
       <div class="author">
         <div class="avatar" @tap.stop.prevent="toResume(data.user.uuid)">
           <div class="avatarInner"><Avatar :avatar="data.user.avatar"></Avatar>
@@ -16,11 +16,19 @@
           <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
+        <!--<div class="feedAddress" v-show="data.feed.current_address_name">-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-dingwei1"></use>-->
+          <!--</svg>{{data.feed.current_address_name}}-->
+        <!--</div>-->
       </div>
+      <!--<div class="more" @tap.stop.prevent="showItemOptions" v-if="show">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-gengduo"></use>-->
+        <!--</svg>-->
+      <!--</div>-->
     </div>
-    <div class="preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)">
-      <span v-for="item in data.feed.tags" class="tags">#{{item.name}}#</span>
-      <span v-html="textToLink(data.feed.title)"></span></div>
+    <div class="preWrapper textToLink margin-t" id="Outermost" @tap.stop.prevent="toDetail(data.url)"><span v-for="item in data.feed.tags" class="tags">#{{item.name}}#</span><span v-html="textToLink(data.feed.title)"></span></div>
 
     <Images
       class="container-images-discover padding-0 margin-10-0-0"
@@ -35,6 +43,9 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
+      <!--<div class="feedComment">-->
+        <!--<span>{{data.feed.comment_number}}评论 <span class="line-wall"></span> {{data.feed.support_number}}点赞</span>-->
+      <!--</div>-->
       <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gengduo"></use>
@@ -226,6 +237,7 @@
   }
   .preWrapper{
     white-space: pre-wrap !important;
+    text-align: justify;
   }
 
   .comment .from{
@@ -243,9 +255,26 @@
   }
   .more{
     color: #808080;
+    font-size: 0.48rem;
     margin-left: 0.053rem;
     float: left;
     padding-right: 0.4rem;
+  }
+  .groupMore {
+    display: flex;
+    justify-content: space-between;
+  }
+  .feedAddress {
+    display: inline-block;
+    color: #b4b4b6;
+    font-size: .32rem;
+    position: absolute;
+    left: 3.04rem;
+    top: 0.506rem;
+  }
+  .freeQuestion-container .feedComment {
+    color: #B4B4B6;
+    font-size: 0.32rem;
   }
 </style>
 <style>

@@ -2,7 +2,7 @@
    <div>
        <header class="mui-bar mui-bar-nav">
          <Back></Back>
-         <h1 class="mui-title">圈子设置</h1>
+         <h1 class="mui-title">圈主设置</h1>
        </header>
        <div class="mui-content absolute">
          <RefreshList
@@ -14,13 +14,23 @@
            :pageMode = true
            class="listWrapper"
          >
-           <div class="apply">
-             入圈申请
-             <i class="bot"></i>
+           <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/group/edit/' + id)">
+             <span>编辑圈子</span>
+             <svg class="icon" aria-hidden="true">
+               <use xlink:href="#icon-jinru"></use>
+             </svg>
            </div>
-           <ul class="cions-list">
+           <div class="line-river-after line-river-after-short"></div>
+           <div class="setUpList openChat"> <!-- @tap.stop.prevent="goOpenChat" -->
+             <span>圈子聊天</span>
+             <Switches class="switchestop" v-model="openChat" type-bold="true" theme="custom" color="blue"></Switches>
+           </div>
+           <div class="gray"></div>
+           <div class="cions-list">
+             <div class="memberTitle">成员管理</div>
+             <div class="line-river-after"></div>
              <template v-for="(item, index) in list">
-               <li v-if="item.user_id !== localUserId">
+               <div class="memberList" v-if="item.user_id !== localUserId">
                  <div class="cions-avatar" @tap.stop.prevent="toResume(item)">
                    <img :src="item.user_avatar_url"/>
                    <svg class="icon" aria-hidden="true" v-if="item.is_expert">
@@ -28,19 +38,27 @@
                    </svg>
                  </div>
                  <div class="detail">
-                   <p>{{item.user_name}}</p>
-                   <p>{{item.created_at}}</p>
+                   <span>{{item.user_name}}</span>
+                   <span><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></span>
                  </div>
                  <div class="fouce" v-if="item.audit_status === 0" @tap.stop.prevent="pass(item)">通过</div>
                  <div class="fouce space" v-if="item.audit_status === 0" @tap.stop.prevent="noPass(item)">拒绝</div>
-                 <div class="fouce" v-if="item.audit_status === 1 && item.user_id !== localUserId" @tap.stop.prevent="moveOut(item, index)">移除</div>
+                 <div class="fouce" v-if="item.audit_status === 1 && item.user_id !== localUserId" @tap.stop.prevent="showItemOptions(item, index)">移除</div>
                  <div class="fouce grey" v-if="item.audit_status === 2">已拒绝</div>
                  <i class="bot"></i>
-               </li>
+               </div>
              </template>
-           </ul>
+           </div>
          </RefreshList>
        </div>
+
+     <Options
+       ref="itemOptions"
+       :id="'itemOptions'"
+       :options="itemOptions"
+       @selectedItem="selectedItem"
+     ></Options>
+
    </div>
 </template>
 
@@ -48,20 +66,51 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
-
+  import Switches from 'vue-switches'
+  import localEvent from '../../stores/localStorage'
+  import Options from '../../components/Options.vue'
   export default {
     data () {
       return {
         id: null,
         localUserId: getLocalUserId(),
-        list: []
+        list: [],
+        itemOptions: [],
+        itemOptionsObj: null,
+        itemOptionsIndex: 0,
+        openChat: parseInt(localEvent.getLocalItem('roomId'))
       }
     },
     components: {
-      RefreshList
+      RefreshList,
+      Switches,
+      Options
     },
     props: {},
     methods: {
+      showItemOptions (item, index) {
+        this.itemOptions = []
+        this.itemOptionsObj = item
+        this.itemOptionsIndex = index
+
+        this.itemOptions.push('移除')
+
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (item) {
+        switch (item) {
+          case '移除':
+            this.moveOut(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
+            break
+        }
+      },
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       toResume (item) {
         this.$router.pushPlus('/share/resume?id=' + item.uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
@@ -98,23 +147,58 @@
           })
       },
       moveOut (item, index) {
+        postRequest('group/removeMember', {
+          id: this.id,
+          user_id: item.user_id
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.$refs.itemOptions.toggle()
+          this.list.splice(index, 1)
+        })
+      },
+      goOpenChat () {
+        this.id = parseInt(this.$route.params.id)
         var btnArray = ['取消', '确定']
-        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
+        var that = this
+        window.mui.confirm('确定开放圈子群聊吗？', ' ', btnArray, function (e) {
           if (e.index === 1) {
-            postRequest('group/removeMember', {
-              id: this.id,
-              user_id: item.user_id
+            postRequest(`group/openIm`, {id: that.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                that.$router.replace('/groups')
+                return
+              }
+              that.openChat = !!response.data.data.room_id
+              window.mui.toast('群聊已开启')
             })
-              .then(response => {
-                var code = response.data.code
-
-                if (code !== 1000) {
-                  window.mui.toast(response.data.message)
-                  return
-                }
-
-                this.list.splice(index, 1)
-              })
+          } else {
+            that.openChat = 0
+          }
+        })
+      },
+      goCloseChat () {
+        this.id = parseInt(this.$route.params.id)
+        var btnArray = ['取消', '确定']
+        var that = this
+        window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            postRequest(`group/closeIm`, {id: that.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                that.$router.replace('/groups')
+                return
+              }
+              that.openChat = false
+              window.mui.toast('群聊已关闭')
+            })
+          } else {
+            that.openChat = 1
           }
         })
       },
@@ -133,7 +217,17 @@
     },
     updated () {},
     watch: {
-      '$route': 'refreshPageData'
+      '$route': 'refreshPageData',
+      openChat (val) {
+        switch (val) {
+          case true:
+            this.goOpenChat()
+            break
+          case false:
+            this.goCloseChat()
+            break
+        }
+      }
     },
     created () {
       this.getData()
@@ -141,22 +235,7 @@
   }
 
 </script>
-<style scoped>
-  /*清掉自带样式*/
-  div,
-  p,
-  span,
-  i,
-  img,
-  ul,
-  li,
-  a {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    font-style: normal;
-  }
-
+<style scoped lang="less">
   .bot {
     position: absolute;
     right: 0;
@@ -182,72 +261,101 @@
   }
   /*列表区域*/
   .cions-list{
-    width:100%;
     overflow: hidden;
-    padding: 0 4%;
-  }
-  .cions-list li{
-    position: relative;
-    height:1.706rem;
-  }
-  .cions-list li div{
-    float: left;
-  }
-  .cions-list li .cions-avatar{
-    position: relative;
-    width:1.173rem;
-    height:1.173rem;
-    border-radius:50%;
-    background: #cccccc;
-    margin-top: 0.266rem;
-  }
-  .cions-list li .cions-avatar img{
-    width:1.173rem;
-    height:1.173rem;
-    border-radius:50%;
-  }
-  .cions-list li .cions-avatar svg{
-    position: absolute;
-    font-size: 0.533rem;
-    right: -0.133rem;
-    bottom: -0.053rem;
-  }
-  .cions-list li .detail{
-    width: 30%;
-    margin-top: 0.373rem;
-    font-size:0.373rem;
-    color: #444444;
-    margin-left: 0.213rem;
-  }
-  .cions-list li .detail p:nth-of-type(1){
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .cions-list li .detail p:nth-of-type(2){
-    width:5.333rem;
-    font-size:0.32rem;
-    color: #b4b4b6;
-    margin-top: -0.053rem;
-  }
-  .cions-list li .fouce{
-    width:1.626rem;
-    height:0.72rem;
-    background:#03aef9;
-    border-radius: 1.333rem;
-    text-align: center;
-    line-height: 0.72rem;
-    font-size:0.373rem;
-    color: #ffffff;
-    margin-top: 0.493rem;
-    float: right;
-
-  }
-  .cions-list li .grey{
-    color: #b4b4b6;
-    background: #dbdcdb;
+    padding: 0 0.426rem;
+    .memberTitle {
+      color: #808080;
+      font-size: 0.346rem;
+      line-height: 0.906rem;
+    }
+    .memberList {
+      position: relative;
+      height:1.706rem;
+      div {
+        float: left;
+      }
+      .cions-avatar {
+        position: relative;
+        width:1.173rem;
+        height:1.173rem;
+        border-radius:50%;
+        background: #cccccc;
+        margin-top: 0.266rem;
+        img {
+          width:1.173rem;
+          height:1.173rem;
+          border-radius:50%;
+        }
+        svg {
+          position: absolute;
+          font-size: 0.533rem;
+          right: -0.133rem;
+          bottom: -0.053rem;
+        }
+      }
+      .detail{
+        /*width: 30%;*/
+        margin-top: 0.373rem;
+        font-size:0.373rem;
+        color: #565656;
+        margin-left: 0.213rem;
+        span {
+          &:nth-of-type(1) {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+          }
+          &:nth-of-type(2) {
+            width:5.333rem;
+            font-size:0.32rem;
+            color: #b4b4b6;
+            margin-top: -0.053rem;
+          }
+        }
+      }
+      .fouce {
+        width:1.626rem;
+        height:0.72rem;
+        background:#03aef9;
+        border-radius: 1.333rem;
+        text-align: center;
+        line-height: 0.72rem;
+        font-size:0.373rem;
+        color: #ffffff;
+        margin-top: 0.493rem;
+        float: right;
+      }
+      .grey {
+        color: #b4b4b6;
+        background: #dbdcdb;
+      }
+    }
   }
   .space{
     margin-right: 0.266rem;
+  }
+  .vue-switcher--bold div {
+    width: 1.36rem;
+    height: 0.826rem;
+  }
+  .setUpList {
+    padding: 0.293rem 0.426rem;
+    background: #ffffff;
+    display: flex;
+    color: #444444;
+    font-size: 0.4rem;
+    position: relative;
+    justify-content: space-between;
+    &.openChat {
+      padding-bottom: 0;
+    }
+    .icon {
+      color: #808080;
+      font-size: 0.346rem;
+      margin-top: 0.106rem;
+    }
+    .switchestop {
+      margin-top: 0.186rem;
+    }
   }
 </style>

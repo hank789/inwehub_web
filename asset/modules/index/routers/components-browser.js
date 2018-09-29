@@ -36,7 +36,7 @@ const InvitationImage = () => import(/* webpackChunkName: "InvitationImage" */ '
 const GroupsList = () => import(/* webpackChunkName: "GroupsList" */ '../../../views/Group/List.vue')
 const GroupsDetail = () => import(/* webpackChunkName: "GroupsDetail" */ '../../../views/Group/Detail.vue')
 const GroupsAdd = () => import(/* webpackChunkName: "GroupsAdd" */ '../../../views/Group/Add.vue')
-const GroupsNewAdd = () => import(/* webpackChunkName: "GroupsNewAdd" */ '../../../views/Group/NewAdd.vue')
+const GroupsNewAdd = () => import(/* webpackChunkName: "GroupsNewAdd " */ '../../../views/Group/NewAdd.vue')
 
 const GroupsSetting = () => import(/* webpackChunkName: "GroupsSetting" */ '../../../views/Group/Setting.vue')
 
@@ -200,6 +200,8 @@ const AskOfferDetail = () => import(/* webpackChunkName: "AskOfferDetail" */ '..
 const ShareReview = () => import(/* webpackChunkName: "ShareReview" */ '../../../views/Share/Review.vue')
 const ComponentsComment = () => import(/* webpackChunkName: "ComponentsComment" */ '../../../views/Comment.vue')
 const Followed = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Account/Followed.vue')
+const GroupsMore = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Group/Setup.vue')
+const BindPhone = () => import(/* webpackChunkName: "BindPhone" */ '../../../views/Wechat/BindPhone.vue')
 
 export {
   Login,
@@ -397,5 +399,7 @@ export {
   AccountChoiceRole,
   AccountService,
   AccountDetailInfo,
-  Followed
+  Followed,
+  GroupsMore,
+  BindPhone
 }

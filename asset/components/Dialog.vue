@@ -482,6 +482,20 @@
         </div>
       </div>
     </div>
+
+    <div id="phoneBindWarning">
+      <div class="component-phoneBindWarning">
+        <div class="pbwTitle">{{options.phoneBindWaring.title}}</div>
+        <div class="pbwIphone">{{options.phoneBindWaring.phone}}</div>
+        <div class="pwbAvatar"><img :src="options.phoneBindWaring.avatar">
+          <svg class="icon" aria-hidden="true" v-show="options.phoneBindWaring.isVip">
+            <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
+          </svg>
+        </div>
+        <div class="pwbName">{{options.phoneBindWaring.name}}</div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -538,6 +552,13 @@
             user_is_expert: '',
             user_avatar: '',
             current_month_invited_users: ''
+          },
+          phoneBindWaring: {
+            title: '',
+            phone: '',
+            avatar: '',
+            name: '',
+            isVip: false
           }
         }
       }
@@ -1758,5 +1779,42 @@
     border-top:0.026rem solid #dcdcdc;
   }
 
+
+  .component-phoneBindWarning {
+    text-align: center; }
+  .component-phoneBindWarning .pbwTitle {
+    font-size: 0.506rem;
+    font-family: PingFangSC-Medium;
+    color: #03aef9;
+    line-height: 0.706rem; }
+  .component-phoneBindWarning .pbwIphone {
+    font-size: 0.373rem;
+    font-weight: 400;
+    color: gray;
+    line-height: 0.64rem; }
+  .component-phoneBindWarning .pwbAvatar {
+    margin-top: 0.64rem;
+    position: relative;
+    display: inline-block;
+    width: 1.173rem;
+    height: 1.173rem;
+    border-radius: 50%; }
+  .component-phoneBindWarning .pwbAvatar img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    border-radius: 50%; }
+  .component-phoneBindWarning .pwbAvatar svg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: 0.133rem; }
+  .component-phoneBindWarning .pwbName {
+    font-size: 0.373rem;
+    font-family: PingFangSC-Medium;
+    font-weight: 500;
+    color: #444444;
+    line-height: 0.4rem; }
 
 </style>
