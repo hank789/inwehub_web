@@ -53,22 +53,21 @@
       </div>
 
       <div class="signOut font-family-medium" v-if="groupUuid !== detail.owner.uuid" @tap.stop.prevent="getQuit">退出圈子</div>
-
-      <GroupsShare
-        ref="share"
-        :title="shareOption.title"
-        :shareName="shareOption.shareName"
-        :link="shareOption.link"
-        :content="shareOption.content"
-        :imageUrl="shareOption.imageUrl"
-        :thumbUrl="shareOption.thumbUrl"
-        :targetId="id"
-        :targetType="'group'"
-        @success="shareSuccess"
-        @fail="shareFail"
-      ></GroupsShare>
-
     </div>
+
+    <GroupsShare
+      ref="share"
+      :title="shareOption.title"
+      :shareName="shareOption.shareName"
+      :link="shareOption.link"
+      :content="shareOption.content"
+      :imageUrl="shareOption.imageUrl"
+      :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :targetType="'group'"
+      @success="shareSuccess"
+      @fail="shareFail"
+    ></GroupsShare>
 
   </div>
 </template>
