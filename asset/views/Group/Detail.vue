@@ -92,7 +92,7 @@
                 </svg>
               </div>
 
-              <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="goUnlock">
+              <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="goCloseUnlock">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-tongzhiguanbi"></use>
                 </svg>
@@ -389,15 +389,19 @@
       },
       checkPermission () {
         checkPermission('NOTIFITION', () => {
-          console.log('有通知权限')
           this.isOpenNotification = 1
         }, () => {
-          console.log('没有通知权限')
           this.isOpenNotification = 0
         })
       },
       goUnlock () {
-        if (this.detail.current_user_notify === 0) {
+        this.isOpenNotification = 0
+        this.detail.current_user_notify = 0
+        window.mui.toast('动态通知已关闭')
+        this.getNotification()
+      },
+      goCloseUnlock () {
+        if (this.isOpenNotification === 0) {
           var btnArray = ['取消', '去设置']
           window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
             if (e.index === 1) {
@@ -405,9 +409,9 @@
             }
           })
         } else {
-          this.isOpenNotification = 0
-          this.detail.current_user_notify = 0
-          window.mui.toast('动态通知已关闭')
+          this.isOpenNotification = 1
+          this.detail.current_user_notify = 1
+          window.mui.toast('动态通知已开启')
           this.getNotification()
         }
       },
@@ -542,11 +546,11 @@
         this.itemOptions = []
         this.itemOptionsObj = item
         this.itemOptionsIndex = index
-        // if (getLocalUserId() === item.user.id) {
-        //   this.itemOptions = [
-        //     '删除'
-        //   ]
-        // }
+        if (getLocalUserId() === item.user.id) {
+          this.itemOptions = [
+            '删除'
+          ]
+        }
 
         if (this.detail.is_joined === 3) {
           if (item.feed.is_recommend) {
@@ -570,9 +574,9 @@
             this.quit()
             break
           case '删除':
-            // this.del(this.itemOptionsObj, () => {
-            //   this.$refs.itemOptions.toggle()
-            // })
+            this.del(this.itemOptionsObj, () => {
+              this.$refs.itemOptions.toggle()
+            })
             break
           case '加精':
             this.addGood(this.itemOptionsObj, () => {

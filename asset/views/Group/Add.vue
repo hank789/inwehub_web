@@ -2,14 +2,14 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">创建圈子</h1>
+      <h1 class="mui-title">{{id ? '修改圈子' : '创建圈子'}}</h1>
     </header>
 
     <div class="mui-content">
       <div class="foundGroupWrapper">
         <div class="foundGroupImages" @tap.stop.prevent="uploadBackground()">
-          <img v-if="background_img.length" :id="'image_0'" :src="background_img[0].base64" :data-preview-src="background_img[0].base64" :data-preview-group="1"/>
-          <div class="foundGroupIcon" @tap.stop.prevent="uploadBackground()" v-if="background_img.length < maxImageCount || id">
+          <img v-if="backgroundImg.length" :id="'image_0'" :src="backgroundImg[0].base64" :data-preview-src="backgroundImg[0].base64" :data-preview-group="1"/>
+          <div class="foundGroupIcon" @tap.stop.prevent="uploadBackground()" v-if="backgroundImg.length < maxImageCount || id">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangji1"></use>
             </svg>
@@ -31,7 +31,8 @@
       </div>
 
       <div class="groupNAme">
-        <input type="text" placeholder="圈子名称" v-model.trim="name" maxlength="9">
+        <input v-if="!id" type="text" placeholder="圈子名称" v-model.trim="name" maxlength="9">
+        <div class="editName font-family-medium" v-if="id">{{name}}</div>
       </div>
       <div class="line-river-big"></div>
 
@@ -49,7 +50,7 @@
           <span class="niming" @tap.stop.prevent="selectType(1)"><label class="nimingCheckbox"
                                                                         :class="{'active':type}"></label>公开</span>
         <span class="niming" @tap.stop.prevent="selectType(0)"><label class="nimingCheckbox"
-                                                                      :class="{'active':!type}"></label>秘密<i>（仅入圈成员可看，创建后不可改)</i></span>
+                                                                      :class="{'active':!type}"></label>秘密<i>{{id ? '（内容仅入圈成员可看）' : '（仅入圈成员可看，创建后不可改)'}}</i></span>
       </div>
 
       <div class="goFoundGroup font-family-medium" v-if="!id" @tap.stop.prevent="submit()">开始创建</div>
@@ -59,7 +60,7 @@
     <uploadImage ref="uploadBackground"
                  :isMultiple="false"
                  @success="uploadBackgroundSuccess"
-                 :ImageMaximum="maxImageCount - this.background_img.length"
+                 :ImageMaximum="maxImageCount - this.backgroundImg.length"
     ></uploadImage>
 
     <uploadImage ref="uploadImage"
@@ -79,7 +80,7 @@
       return {
         id: null,
         images: [],
-        background_img: [],
+        backgroundImg: [],
         name: '',
         maxImageCount: 1,
         description: '',
@@ -96,6 +97,7 @@
       uploadImage
     },
     watch: {
+      '$route': 'refreshPageData',
       description: function (newDescription) {
         if (newDescription.length > this.descMaxLength) {
           this.description = this.description.slice(0, this.descMaxLength)
@@ -103,12 +105,15 @@
       }
     },
     mounted () {
-      this.id = this.$route.params.id
-      if (this.id) {
-        this.getData()
-      }
+      this.refreshPageData()
     },
     methods: {
+      refreshPageData () {
+        this.id = this.$route.params.id
+        if (this.id) {
+          this.getData()
+        }
+      },
       getData () {
         postRequest(`group/detail`, {id: this.id}).then(response => {
           var code = response.data.code
@@ -118,15 +123,28 @@
             return
           }
 
-          this.detail = response.data.data
-          this.images[0] = this.detail.logo
-          this.background_img[0] = this.detail.background_img
-          this.name = this.detail.name
-          this.description = this.detail.description
+          var detail = response.data.data
+          this.images[0] = {
+            base64: detail.logo
+          }
+          this.backgroundImg[0] = {
+            base64: detail.background_img
+          }
+          this.name = detail.name
+          this.type = detail.public
+          this.description = detail.description
         })
       },
       reviseGroup () {
-        postRequest(`group/update`, {id: this.id}).then(response => {
+        var data = {
+          id: this.id,
+          name: this.name,
+          logo: this.images[0].base64,
+          public: this.type,
+          description: this.description,
+          background_img: this.backgroundImg[0].base64
+        }
+        postRequest(`group/update`, data).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -137,7 +155,7 @@
         })
       },
       submit () {
-        if (!this.background_img.length) {
+        if (!this.backgroundImg.length) {
           window.mui.toast('请选择背景图片')
           return
         }
@@ -166,7 +184,7 @@
           name: this.name,
           description: this.description,
           logo: this.images[0].base64,
-          background_img: this.background_img[0].base64,
+          background_img: this.backgroundImg[0].base64,
           public: this.type === 1 ? 1 : 0
         }
 
@@ -187,13 +205,17 @@
         this.$refs.uploadImage.uploadImage()
       },
       uploadBackgroundSuccess (images) {
-        this.background_img = images
+        this.backgroundImg = images
       },
       uploadBackground: function () {
         this.$refs.uploadBackground.uploadImage()
       },
       selectType (type) {
-        this.type = type
+        if (!this.id) {
+          this.type = type
+        } else {
+          window.mui.toast('公开／私密不可修改')
+        }
       }
     }
   }
@@ -275,6 +297,11 @@
   .groupNAme {
     margin-top: 40px;
     /*background: #DCDCDC;*/
+    .editName {
+      padding: 0 16px 11px;
+      color: #444444;
+      font-size: 20px;
+    }
     input[type='text'] {
       margin-bottom: 0;
       border: none;
@@ -342,6 +369,9 @@
     background: #ffff;
     padding: 1px 12px;
     /*margin-top: 0.133rem;*/
+    .edit {
+
+    }
     .niming {
       color: #444444;
       position: relative;

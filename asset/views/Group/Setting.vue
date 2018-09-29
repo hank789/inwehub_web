@@ -14,7 +14,7 @@
            :pageMode = true
            class="listWrapper"
          >
-           <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/group/add/' + id)">
+           <div class="setUpList" @tap.stop.prevent="$router.pushPlus('/group/edit/' + id)">
              <span>编辑圈子</span>
              <svg class="icon" aria-hidden="true">
                <use xlink:href="#icon-jinru"></use>
@@ -176,25 +176,29 @@
               that.openChat = !!response.data.data.room_id
               window.mui.toast('群聊已开启')
             })
+          } else {
+            that.openChat = 0
           }
         })
       },
       goCloseChat () {
         this.id = parseInt(this.$route.params.id)
-        var btnArray2 = ['取消', '确定']
-        var that2 = this
-        window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray2, function (e) {
+        var btnArray = ['取消', '确定']
+        var that = this
+        window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray, function (e) {
           if (e.index === 1) {
-            postRequest(`group/closeIm`, {id: that2.id}).then(response => {
+            postRequest(`group/closeIm`, {id: that.id}).then(response => {
               var code = response.data.code
               if (code !== 1000) {
                 window.mui.toast(response.data.message)
-                that2.$router.replace('/groups')
+                that.$router.replace('/groups')
                 return
               }
-              that2.openChat = false
+              that.openChat = false
               window.mui.toast('群聊已关闭')
             })
+          } else {
+            that.openChat = 1
           }
         })
       },
@@ -215,10 +219,13 @@
     watch: {
       '$route': 'refreshPageData',
       openChat (val) {
-        if (val === true) {
-          this.goOpenChat()
-        } else {
-          this.goCloseChat()
+        switch (val) {
+          case true:
+            this.goOpenChat()
+            break
+          case false:
+            this.goCloseChat()
+            break
         }
       }
     },

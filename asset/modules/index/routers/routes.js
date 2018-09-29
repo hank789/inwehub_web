@@ -487,11 +487,24 @@ const routes = [
     }
   },
   {
-    path: '/group/add/:id?',
+    path: '/group/add',
     name: 'group-add',
     component: componets.GroupsAdd,
     meta: {
       title: '创建圈子',
+      keepAlive: false,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/group/edit/:id',
+    name: 'group-edit',
+    component: componets.GroupsAdd,
+    meta: {
+      title: '修改圈子',
       keepAlive: false,
       wechatHideHeader: true
     },

@@ -16,6 +16,11 @@
           <timeago :since="timeago(data.created_at)" :auto-update="60">
           </timeago>
         </div>
+        <div class="feedAddress" v-show="data.feed.current_address_name">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dingwei1"></use>
+          </svg>{{data.feed.current_address_name}}
+        </div>
       </div>
       <div class="more" @tap.stop.prevent="showItemOptions" v-if="show">
         <svg class="icon" aria-hidden="true">
@@ -38,18 +43,21 @@
     </div>
 
     <div class="freeQuestion-container" @tap.stop.prevent="toDetail(data.url)">
-      <div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-zan"></use>
-        </svg>
-        {{data.feed.support_number}}
+      <div class="feedComment">
+        <span>{{data.feed.comment_number}}评论 <span class="line-wall"></span> {{data.feed.support_number}}点赞</span>
       </div>
-      <div class="freeQuestion-comment" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun"></use>
-        </svg>
-        {{data.feed.comment_number}}
-      </div>
+      <!--<div class="freeQuestion-upvote" :class="{'active': data.feed.is_upvoted}" @tap.stop.prevent="support">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-zan"></use>-->
+        <!--</svg>-->
+        <!--{{data.feed.support_number}}-->
+      <!--</div>-->
+      <!--<div class="freeQuestion-comment" @tap.stop.prevent="commentIt(0, '', data.feed.comments)">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-pinglun"></use>-->
+        <!--</svg>-->
+        <!--{{data.feed.comment_number}}-->
+      <!--</div>-->
     </div>
     <!--<div class="container-answer margin-top-10" @tap.stop.prevent="toDetail(data.url)" v-if="data.feed.support_number || data.feed.comment_number">-->
 
@@ -65,11 +73,11 @@
 
       <!--&lt;!&ndash; 点赞和评论列表end &ndash;&gt;-->
     <!--</div>-->
-    <div class="component-address margin-5-0-0" v-show="data.feed.current_address_name" @tap.stop.prevent="toDetail(data.url)">
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#icon-dingwei1"></use>
-      </svg>{{data.feed.current_address_name}}
-    </div>
+    <!--<div class="component-address margin-5-0-0" v-show="data.feed.current_address_name" @tap.stop.prevent="toDetail(data.url)">-->
+      <!--<svg class="icon" aria-hidden="true">-->
+        <!--<use xlink:href="#icon-dingwei1"></use>-->
+      <!--</svg>{{data.feed.current_address_name}}-->
+    <!--</div>-->
   </div>
   </div>
 </template>
@@ -250,6 +258,18 @@
   .groupMore {
     display: flex;
     justify-content: space-between;
+  }
+  .feedAddress {
+    display: inline-block;
+    color: #b4b4b6;
+    font-size: .32rem;
+    position: absolute;
+    left: 114px;
+    top: 0.506rem;
+  }
+  .freeQuestion-container .feedComment {
+    color: #B4B4B6;
+    font-size: 0.32rem;
   }
 </style>
 <style>
