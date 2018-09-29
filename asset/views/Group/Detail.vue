@@ -399,15 +399,20 @@
           this.detail.current_user_notify = 1
           this.setNotificationStatus(1)
         }, () => {
-          var btnArray = ['取消', '去设置']
-          window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
-            if (e.index === 1) {
-              this.readyOpenNotice = 1
-              toSettingSystem('NOTIFITION')
-            } else {
-              this.readyOpenNotice = 0
-            }
-          })
+          if (window.mui.os.plus) {
+            var btnArray = ['取消', '去设置']
+            window.mui.confirm('开启平台通知，才能即刻收到圈子的动态通知哦~', '开启通知', btnArray, (e) => {
+              if (e.index === 1) {
+                this.readyOpenNotice = 1
+                toSettingSystem('NOTIFITION')
+              } else {
+                this.readyOpenNotice = 0
+              }
+            })
+          } else {
+            this.detail.current_user_notify = 1
+            this.setNotificationStatus(1)
+          }
         })
       },
       goMore () {
