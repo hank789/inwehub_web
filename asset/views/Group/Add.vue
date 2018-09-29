@@ -228,20 +228,20 @@
   .foundGroupWrapper {
     position: relative;
     .foundGroupImages {
-      height: 149px;
+      height: 3.973rem;
       position: relative;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 0.533rem;
+      border-bottom-right-radius: 0.533rem;
       background:linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.1) 100%);
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 0.533rem;
+        border-bottom-right-radius: 0.533rem;
       }
       .foundGroupIcon {
-        font-size: 30px;
+        font-size: 0.8rem;
         color: #ffffff;
         text-align: center;
         position: absolute;
@@ -255,77 +255,77 @@
     }
     .headPhotowrapper {
       position: absolute;
-      bottom: -24px;
-      left: 17px;
+      bottom: -0.64rem;
+      left: 0.453rem;
       z-index: 100;
       .headImages {
-        width: 56px;
-        height: 56px;
+        width: 1.493rem;
+        height: 1.493rem;
         text-align: center;
         background: #E3E3E3;
-        border-radius: 4px;
-        border: 1px solid #ffffff;
+        border-radius: 0.106rem;
+        border: 0.026rem solid #ffffff;
         img {
           width: 100%;
           height: 100%;
-          border-radius: 3px;
+          border-radius: 0.08rem;
           object-fit: cover;
         }
         .logoImg {
           color: #8B8B8B;
-          font-size: 30px;
-          margin-top: 11px;
+          font-size: 0.8rem;
+          margin-top: 0.293rem;
         }
         .headPhotograph {
-          width: 54px;
-          height: 54px;
+          width: 1.44rem;
+          height: 1.44rem;
           position: absolute;
-          top: 1px;
-          left: 1px;
+          top: 0.026rem;
+          left: 0.026rem;
           text-align: center;
-          border-radius: 4px;
+          border-radius: 0.106rem;
           background:rgba(0,0,0,0.3);
           .icon {
-            font-size: 18px;
+            font-size: 0.48rem;
             color: #ffffff;
-            margin-top: 19px;
+            margin-top: 0.506rem;
           }
         }
       }
     }
   }
   .groupNAme {
-    margin-top: 40px;
+    margin-top: 1.066rem;
     /*background: #DCDCDC;*/
     .editName {
-      padding: 0 16px 11px;
+      padding: 0 0.426rem 0.293rem;
       color: #444444;
-      font-size: 20px;
+      font-size: 0.533rem;
     }
     input[type='text'] {
       margin-bottom: 0;
       border: none;
       color: #444444;
-      font-size: 20px;
+      font-size: 0.533rem;
       font-family: PingFangSC-Medium;
       &::-webkit-input-placeholder {
         color: #C8C8C8;
-        font-size: 20px;
+        font-size: 0.533rem;
         font-family: PingFangSC-Medium;
       }
       &:-ms-input-placeholder {
         color: #C8C8C8;
-        font-size: 20px;
+        font-size: 0.533rem;
         font-family: PingFangSC-Medium;
       }
       &::-ms-input-placeholder {
         color: #C8C8C8;
-        font-size: 20px;
+        font-size: 0.533rem;
         font-family: PingFangSC-Medium;
       }
       &::placeholder {
         color: #C8C8C8;
-        font-size: 20px;
+        font-size: 0.533rem;
         font-family: PingFangSC-Medium;
       }
     }
@@ -333,41 +333,41 @@
 
   .groupDescribe {
     position: relative;
-    padding: 11px 16px;
+    padding: 0.293rem 0.426rem;
     .groupDescribeText {
       color: #808080;
-      font-size: 14px;
+      font-size: 0.373rem;
     }
     .form-ask {
       .textarea-wrapper {
-        height: 164px;
+        height: 4.373rem;
         background: #ffffff;
-        margin-top: 13px;
+        margin-top: 0.346rem;
         border: 0.026rem solid #DCDCDC;
         border-radius: 0.133rem;
         textarea {
           background: #ffffff;
           font-size: 0.373rem;
           color: #444444;
-          height: 131px;
+          height: 3.493rem;
           border: none;
         }
       }
     }
     .counter {
-      font-size: 14px;
+      font-size: 0.373rem;
       color: #C8C8C8;
-      line-height: 20px;
+      line-height: 0.533rem;
       position: absolute;
-      bottom: 17px;
-      right: 28px;
+      bottom: 0.453rem;
+      right: 0.746rem;
     }
   }
 
   .fixedContainer {
     position: relative;
     background: #ffff;
-    padding: 1px 12px;
+    padding: 0.026rem 0.32rem;
     /*margin-top: 0.133rem;*/
     .edit {
 
@@ -422,15 +422,15 @@
   }
 
   .goFoundGroup {
-    width: 343px;
-    height: 44px;
+    width: 9.146rem;
+    height: 1.173rem;
     border:none;
     color: #FFFFFF;
-    font-size: 16px;
+    font-size: 0.426rem;
     text-align: center;
     background: #03AEF9;
-    line-height: 44px;
-    margin: 80px auto 0;
+    line-height: 1.173rem;
+    margin: 2.133rem auto 0;
     border-radius: 1.333rem;
   }
 </style>

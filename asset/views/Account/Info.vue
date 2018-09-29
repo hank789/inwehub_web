@@ -517,11 +517,11 @@
 
 <style lang="less" scoped>
   .setUpList {
-    padding: 11px 16px;
+    padding: 0.293rem 0.426rem;
     background: #ffffff;
     display: flex;
     color: #444444;
-    font-size: 16px;
+    font-size: 0.426rem;
     position: relative;
     justify-content: space-between;
     &.openChat {
@@ -529,11 +529,11 @@
     }
     .icon {
       color: #808080;
-      font-size: 13px;
-      margin-top: 4px;
+      font-size: 0.346rem;
+      margin-top: 0.106rem;
     }
     .switchestop {
-      margin-top: 7px;
+      margin-top: 0.186rem;
     }
   }
 </style>

@@ -820,10 +820,10 @@
 <style scoped="scoped">
   .mui-content {
     background: #ffffff;
-    /*top: 0px;*/
+    /*top: 0rem;*/
   }
   .mui-scroll-wrapper {
-    /*top: 247px;*/
+    /*top: 6.586rem;*/
   }
   .bot {
     position: absolute;
@@ -854,7 +854,7 @@
     justify-content: space-around;
     line-height: 1.04rem;
     position: absolute;
-    /*top: 259px;*/
+    /*top: 6.906rem;*/
   }
   .menu span {
     position: relative;
@@ -963,80 +963,80 @@
 <style lang="less" scoped>
   .headerShare {
     position: absolute;
-    right: 16px;
-    top: 10px;
+    right: 0.426rem;
+    top: 0.266rem;
     .icon {
       color: #3C3E44;
-      font-size: 24px;
+      font-size: 0.64rem;
     }
   }
   .headerNotice {
-    right: 60px;
+    right: 1.6rem;
   }
   .header {
     background: #1C3F6D;
     position: relative;
-    height: 149px;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    height: 3.973rem;
+    border-bottom-left-radius: 0.533rem;
+    border-bottom-right-radius: 0.533rem;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 0.533rem;
+      border-bottom-right-radius: 0.533rem;
     }
     .backMask {
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
-      border-bottom-left-radius: 20px;
-      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 0.533rem;
+      border-bottom-right-radius: 0.533rem;
       background:linear-gradient(180deg,rgba(0,0,0,0.3) 0%,rgba(0,0,0,0.1) 100%);
     }
     .headerBack {
       /*width: 100%;*/
       display: flex;
-      height: 44px;
+      height: 1.173rem;
       position: absolute;
       top: 0;
       z-index: 10;
-      padding-left: 12px;
+      padding-left: 0.32rem;
       .icon {
-        margin-top: 10px;
-        font-size: 23px;
+        margin-top: 0.266rem;
+        font-size: 0.613rem;
         color: #FFFFFF;
       }
     }
     .openNotice {
       position: absolute;
-      top: 11px;
-      right: 60px;
+      top: 0.293rem;
+      right: 1.6rem;
       .icon {
-        font-size: 24px;
+        font-size: 0.64rem;
         color: #ffffff;
       }
       &.share {
-        right: 16px;
+        right: 0.426rem;
       }
     }
     .headPhotowrapper {
       position: absolute;
-      bottom: -24px;
-      left: 17px;
+      bottom: -0.64rem;
+      left: 0.453rem;
       z-index: 100;
       .headImages {
-        width: 56px;
-        height: 56px;
+        width: 1.493rem;
+        height: 1.493rem;
         text-align: center;
         background: #E3E3E3;
-        border-radius: 4px;
-        border: 1px solid #ffffff;
+        border-radius: 0.106rem;
+        border: 0.026rem solid #ffffff;
         img {
           width: 100%;
           height: 100%;
-          border-radius: 3px;
+          border-radius: 0.08rem;
           object-fit: cover;
         }
       }
@@ -1044,63 +1044,63 @@
   }
 
   .groupWrapper {
-    margin-top: 40px;
-    padding: 0 16px 13px;
+    margin-top: 1.066rem;
+    padding: 0 0.426rem 0.346rem;
     position: relative;
     .groupNAmeWrapper {
       color: #444444;
-      font-size: 20px;
+      font-size: 0.533rem;
       .font-family-medium {
-        line-height: 28px;
+        line-height: 0.746rem;
       }
     }
     .groupDescribeWrapper {
-      margin-top: 3px;
+      margin-top: 0.08rem;
       color: #B4B4B6;
-      font-size: 12px;
-      line-height: 16px;
+      font-size: 0.32rem;
+      line-height: 0.426rem;
     }
     .goMoreoPerations {
       position: absolute;
-      top: 12px;
-      right: 16px;
+      top: 0.32rem;
+      right: 0.426rem;
       .icon {
-        font-size: 13px;
+        font-size: 0.346rem;
       }
     }
   }
 
   .group-text {
     position: relative;
-    padding: 11px 16px;
+    padding: 0.293rem 0.426rem;
     span {
       color: #444444;
-      font-size: 16px;
+      font-size: 0.426rem;
     }
   }
   .groupIntroduce {
-    padding: 10px 16px;
+    padding: 0.266rem 0.426rem;
     span {
       color: #808080;
-      font-size: 14px;
-      line-height: 22px;
+      font-size: 0.373rem;
+      line-height: 0.586rem;
     }
   }
   .goHairShareWrapper {
     position: absolute;
-    bottom: 20px;
-    right: 16px;
+    bottom: 0.533rem;
+    right: 0.426rem;
     z-index: 9;
     .goHairShareBack {
-      width: 44px;
-      height: 44px;
+      width: 1.173rem;
+      height: 1.173rem;
       text-align: center;
-      line-height: 44px;
+      line-height: 1.173rem;
       background: #03AEF9;
       border-radius: 50%;
-      box-shadow:0px 1px 10px 0px rgba(205,215,220,1);
+      box-shadow:0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
       .icon {
-        font-size: 22px;
+        font-size: 0.586rem;
         color: #ffffff;
       }
     }
