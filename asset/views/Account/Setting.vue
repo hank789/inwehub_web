@@ -352,24 +352,24 @@
     width:100%;
     overflow: hidden;
     text-align: center;
-    padding-bottom: 43px;
+    padding-bottom: 1.146rem;
   }
   .logo svg{
     font-size: 4rem;
-    margin-top: -42px;
+    margin-top: -1.12rem;
   }
   .logo span {
     display: block;
     color: #444444;
-    line-height: 20px;
-    margin-top: -58px;
+    line-height: 0.533rem;
+    margin-top: -1.546rem;
     font-size:0.373rem;
   }
   .text{
     width:100%;
     overflow: hidden;
     text-align: center;
-    padding-bottom: 29px;
+    padding-bottom: 0.773rem;
   }
   .text p{
     font-size: 0.373rem;
