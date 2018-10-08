@@ -344,8 +344,8 @@
   .foot{
     width:100%;
     overflow: hidden;
-    position: absolute;
-    bottom: 0.773rem;
+    /*position: absolute;*/
+    /*bottom: 0.773rem;*/
 
   }
   .logo{
