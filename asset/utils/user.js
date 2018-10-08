@@ -270,6 +270,17 @@ function getUserLevelPercentage () {
   return result
 }
 
+/**
+ * 获取本地用户phone
+ */
+function getLocalPhone () {
+  var userInfo = getLocalUserInfo()
+  if (userInfo && userInfo.phone) {
+    return userInfo.phone
+  }
+  return null
+}
+
 export {
   getUserInfo,
   updateUserInfoCache,
@@ -282,5 +293,6 @@ export {
   getUserLevelPercentage,
   getLocalUserId,
   getLocalUuid,
-  getLocalUserLevel
+  getLocalUserLevel,
+  getLocalPhone
 }
