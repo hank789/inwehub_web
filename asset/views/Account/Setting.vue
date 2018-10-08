@@ -75,7 +75,7 @@
           <i class="bot"></i>
         </li>
       </ul>
-      <button type="button" class="mui-btn-block mui-btn-primary" @tap.stop.prevent="logOut" v-show="!isWeiXin()">
+      <button type="button" class="mui-btn-block mui-btn-primary mui-wechat-hidden" @tap.stop.prevent="logOut" v-show="!isWeiXin()">
         退出应用
       </button>
 
