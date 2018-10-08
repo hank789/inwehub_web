@@ -57,7 +57,8 @@ function getAskCommunityInteractionAnswers (questionId, description, answerNum, 
  * 邀请注册-模版
  */
 function getInvitation (username, rcCode) {
-  var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
+  var link = process.env.H5_ROOT + '/#' + '/invitation/register?rc_code=' + rcCode
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
 
   return {
     title: username + '邀请您加入InweHub' + '-企业级应用&服务广场',

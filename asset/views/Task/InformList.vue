@@ -25,7 +25,7 @@
             class="listWrapper">
 
               <div class="line-river-after"></div>
-              <div class="noticeWrapper" v-if="isOpenNotification === 1 && closingNotice">
+              <div class="noticeWrapper mui-wechat-hidden" v-if="isOpenNotification === 1 && closingNotice">
                 <div class="closeNotice" @tap.stop.prevent="closeNotice">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-times"></use>

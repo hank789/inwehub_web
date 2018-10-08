@@ -589,6 +589,7 @@
 </script>
 
 <style scoped="scoped">
+
   .groups{
     width: 105%;
     margin-left: -2%;

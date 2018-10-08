@@ -383,6 +383,15 @@ function alertPhoneBindWarning (context, title, phone, avatar, isVip, name, butt
   }
 }
 
+// 去实名认证
+function alsrtRealNameAuthentication (callback) {
+  alertSkyTwo('<span class="font-family-medium authenticationRealNameTitle">请完成实名认证</span> <span class="authenticationNetWorkTitle">使用互联网服务需依法实名认证</span>', '<span class="goAuthentication alertConfirm">去认证</span>', 'icon-chengweizhuanjia1', (num) => {
+    if (num.index === 0) {
+      callback()
+    }
+  }, true)
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -405,5 +414,6 @@ export {
   alertGetCoupon,
   alertNoticeOpenNotifitionPermission,
   alertFreeAskGuide,
-  alertPhoneBindWarning
+  alertPhoneBindWarning,
+  alsrtRealNameAuthentication
 }

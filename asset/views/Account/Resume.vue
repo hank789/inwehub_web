@@ -1074,11 +1074,12 @@
         background-color: #DCDCDC;
       }
       .edit {
-        padding: 0.186rem 0 0.186rem 0.426rem;
+        padding: 0.186rem 0;
         div {
           width: 9.146rem;
           height: 0.96rem;
           color: #ffffff;
+          margin: 0 auto;
           font-size: 0.426rem;
           line-height: 0.96rem;
           text-align: center;

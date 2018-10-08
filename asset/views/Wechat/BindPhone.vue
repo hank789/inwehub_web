@@ -2,10 +2,12 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">输入手机号</h1>
+      <h1 class="mui-title" v-if="bindedPhone">更换手机号</h1>
+      <h1 class="mui-title" v-else>输入手机号</h1>
     </header>
 
     <div class="mui-content">
+      <div class="warningWrapper" v-if="bindedPhone">当前绑定手机<span>{{bindedPhone}}</span>，请输入新的手机号</div>
         <div class="inputWrapper">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shoujihao"></use>
@@ -48,7 +50,7 @@
   import Vue from 'vue'
   import { USERS_APPEND } from '../../stores/types'
   import VTooltip from 'v-tooltip'
-  import { getUserInfo } from '../../utils/user'
+  import { getUserInfo, getLocalPhone } from '../../utils/user'
   import { alertPhoneBindWarning } from '../../utils/dialogList'
   import localEvent from '../../stores/localStorage'
 
@@ -66,14 +68,17 @@
       errorMsg: '',
       redirect: '',
       type: 1, // 1不合并账户 2合并微信账户, 默认1
-      loading: true
+      loading: true,
+      bindedPhone: ''
     }),
     computed: {
       getCodeText () {
         return this.time === 0 ? '发送验证' : this.time + '秒后重发'
       }
     },
-    created () {},
+    created () {
+      this.refreshPageData()
+    },
     watch: {
       phone: function (newValue, oldValue) {
         this.checkSendCodeValid()
@@ -84,6 +89,12 @@
       }
     },
     methods: {
+      refreshPageData () {
+        var phone = getLocalPhone()
+        if (phone) {
+          this.bindedPhone = phone
+        }
+      },
       jumpToForm () {
         window.location.href = 'https://jinshuju.net/f/bWXY8y'
       },
@@ -395,4 +406,12 @@
     margin-top: 1.573rem;
   }
 
+  .warningWrapper{
+    background: #F3F4F6;
+    height:0.906rem;
+    line-height: 0.906rem;
+    padding-left:0.426rem;
+    font-size:0.32rem;
+    color:#B4B4B6;
+  }
 </style>

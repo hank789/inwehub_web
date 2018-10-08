@@ -45,8 +45,8 @@
           <a @tap.stop.prevent="$router.push('/my/info/basic/address')" class="mui-navigate-right">详细地址<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.address_detail ? user.info.address_detail : '必填'}}</span></a>
         </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate">联系手机<span
+        <li class="mui-table-view-cell" @tap.stop.prevent="$router.pushPlus('/wechat/bindPhone')">
+          <a class="mui-navigate-right mui-navigate">联系手机<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.mobile ? user.info.mobile : '必填'
             }}</span></a>
         </li>
@@ -329,22 +329,15 @@
         })
       },
       getUserInfo () {
-        var userInfo = localEvent.getLocalItem('UserInfoReal')
-
-        console.log(localEvent.getLocalItem('UserInfoReal') + 'userInfo')
-        if (userInfo) {
-          this.work_city = userInfo.info.province.name + ' ' + userInfo.info.city.name
-          this.home_city = userInfo.info.hometown_province.name + ' ' + userInfo.info.hometown_city.name
-
-          this.user = userInfo
-          this.loading = 0
-        }
-
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
 
-          this.work_city = user.info.province.name + ' ' + user.info.city.name
-          this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name
+          if (user.info.province.name) {
+            this.work_city = user.info.province.name + ' ' + user.info.city.name
+          }
+          if (user.info.hometown_province.name) {
+            this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name
+          }
 
           this.user = user
           this.loading = 0
@@ -398,7 +391,6 @@
         this.newItem.product_tags = tags
       },
       muiViewBack2: function () {
-        alert('ok')
         window.mui.back()
       },
       muiViewBack: function () {
