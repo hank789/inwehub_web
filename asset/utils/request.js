@@ -136,7 +136,9 @@ export function apiRequest (url, data, showWaiting = true) {
           errorMsg = '网络异常'
           router.push('/exception')
         }
-        window.mui.toast(errorMsg)
+        if (errorMsg) {
+          window.mui.toast(errorMsg)
+        }
       }
     }
     proObj.oldThen(success, fail)
@@ -224,7 +226,9 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
           errorMsg = '网络异常'
           router.push('/exception')
         }
-        window.mui.toast(errorMsg)
+        if (errorMsg) {
+          window.mui.toast(errorMsg)
+        }
       }
     }
     proObj.oldThen(success, fail)
