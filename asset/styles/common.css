@@ -3188,4 +3188,24 @@ a {
 .mui-icon-back:before, .mui-icon-left-nav:before{
   font-size:0.72rem;}
 
+.authenticationRealNameTitle {
+  display: block;
+  color: #444444;
+  font-size: 19px;
+  line-height: 26px;
+  text-align: center;
+  margin-top: 11px;}
+.authenticationNetWorkTitle {
+  display: block;
+  color: #808080;
+  font-size: 14px;
+  margin-top: 7px;
+  line-height: 20px;
+  text-align: center;}
+.goAuthentication {
+  display: block;
+  color: #03AEF9;
+  font-size: 16px;
+  text-align: center;}
+
 
