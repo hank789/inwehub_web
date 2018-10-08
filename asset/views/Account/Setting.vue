@@ -393,10 +393,10 @@
   }
   .bindedPhone{
     position: absolute;
-    right:19px;
-    top:10px;
+    right:0.506rem;
+    top:0.266rem;
     color:#444;
-    font-size:14px;
-    line-height: 25px;
+    font-size:0.373rem;
+    line-height: 0.666rem;
   }
 </style>

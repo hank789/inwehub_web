@@ -408,10 +408,10 @@
 
   .warningWrapper{
     background: #F3F4F6;
-    height:34px;
-    line-height: 34px;
-    padding-left:16px;
-    font-size:12px;
+    height:0.906rem;
+    line-height: 0.906rem;
+    padding-left:0.426rem;
+    font-size:0.32rem;
     color:#B4B4B6;
   }
 </style>
