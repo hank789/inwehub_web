@@ -366,30 +366,11 @@
     width:100%;
     overflow: hidden;
     text-align: center;
-
+    margin-top: 50px;
   }
   .text p{
     font-size: 0.373rem;
     color: #b4b4b6;
-  }
-  /*.mui-plus-hidden, .mui-wechat-hidden {*/
-    /*display: flex !important;*/
-  /*}*/
-  /*适配*/
-  @media (min-width:320px) {
-    .text{
-      margin-top: 0.266rem;
-    }
-  }
-  @media (min-width:375px) {
-    .text{
-      margin-top: 1.813rem;
-    }
-  }
-  @media (min-width:414px) {
-    .text{
-      margin-top: 1.813rem;
-    }
   }
   .bindedPhone{
     position: absolute;
