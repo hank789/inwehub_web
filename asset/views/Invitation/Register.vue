@@ -278,7 +278,8 @@
   /*领取特权部分*/
   .privilege_T {
     width: 100%;
-    height: 13.12rem;
+    height: 13rem;
+    position: relative;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
     svg {
       font-size: 106px;
@@ -547,6 +548,8 @@
   .verification_bg {
     width: 100%;
     height: 3.226rem;
+    position: absolute;
+    bottom: 0;
     background: url("../../statics/images/graywave@3x.png") no-repeat;
     background-size: 100% 100%;
   }
