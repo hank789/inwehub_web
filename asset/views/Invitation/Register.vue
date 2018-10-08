@@ -181,17 +181,6 @@
         let openid = this.$route.query.openid
         let redirect = this.$route.query.redirect ? this.$route.query.redirect : '/my'
         this.redirect = redirect
-        if (!openid) {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: '发生一些错误',
-              time: 1500,
-              status: false
-            })
-          })
-          this.$router.back()
-          return
-        }
         this.openid = openid
       },
       // 提示
