@@ -9,6 +9,14 @@
 
     <div class="mui-content">
       <ul>
+        <li @tap.stop.prevent="$router.pushPlus('/wechat/bindPhone')">
+          <p>绑定手机</p>
+          <span class="bindedPhone">{{bindedPhone}}</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-chakangengduojiantou"></use>
+          </svg>
+          <i class="bot"></i>
+        </li>
         <li class="mui-wechat-hidden">
           <p>绑定微信</p>
           <span class="name" v-if="isBindWeixin">
@@ -96,7 +104,7 @@
   import oauth from '../../components/oauth/oauth.vue'
   import { postRequest, apiRequest } from '../../utils/request'
   import { clearAllWebViewCache } from '../../utils/webview'
-  import { getUserInfo } from '../../utils/user'
+  import { getUserInfo, getLocalPhone } from '../../utils/user'
   import { clearImageCache } from '../../utils/plus'
 
   export default {
@@ -114,7 +122,8 @@
         title: currentUser.title,
         company: currentUser.company,
         ios_market_url: '',
-        android_market_url: ''
+        android_market_url: '',
+        bindedPhone: ''
       }
     },
     components: {
@@ -133,6 +142,7 @@
     },
     methods: {
       refreshPageData () {
+        this.bindedPhone = getLocalPhone()
         this.bindSuccess()
       },
       bindSuccess () {
@@ -254,7 +264,7 @@
       }
     },
     mounted () {
-      this.bindSuccess()
+      this.refreshPageData()
       window.mui('.mui-switch')['switch']()
       window.addEventListener('refreshData', (e) => {
         // 执行刷新
@@ -380,5 +390,13 @@
     .text{
       margin-top: 1.813rem;
     }
+  }
+  .bindedPhone{
+    position: absolute;
+    right:0.506rem;
+    top:0.266rem;
+    color:#444;
+    font-size:0.373rem;
+    line-height: 0.666rem;
   }
 </style>

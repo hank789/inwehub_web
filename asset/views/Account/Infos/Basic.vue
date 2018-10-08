@@ -45,8 +45,8 @@
           <a @tap.stop.prevent="$router.push('/my/info/basic/address')" class="mui-navigate-right">详细地址<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.address_detail ? user.info.address_detail : '必填'}}</span></a>
         </li>
-        <li class="mui-table-view-cell">
-          <a class="mui-navigate">联系手机<span
+        <li class="mui-table-view-cell" @tap.stop.prevent="$router.pushPlus('/wechat/bindPhone')">
+          <a class="mui-navigate-right mui-navigate">联系手机<span
             class="mui-pull-right account-setting-field mui-ellipsis">{{ user.info.mobile ? user.info.mobile : '必填'
             }}</span></a>
         </li>
@@ -398,7 +398,6 @@
         this.newItem.product_tags = tags
       },
       muiViewBack2: function () {
-        alert('ok')
         window.mui.back()
       },
       muiViewBack: function () {
