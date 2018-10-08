@@ -1093,10 +1093,10 @@ input.upload-file[type=file]{
   z-index: 3;
 }
 .alertSkyTwo .titlePreIcon.icon-chengweizhuanjia1 {
-  top: 44px;
+  top: 1.173rem;
   z-index: 3;
-  font-size: 63px;
-  margin-left: -33px;
+  font-size: 1.68rem;
+  margin-left: -0.88rem;
 }
 .alertSkyTwo .titlePre {
   position: relative;
@@ -3191,21 +3191,21 @@ a {
 .authenticationRealNameTitle {
   display: block;
   color: #444444;
-  font-size: 19px;
-  line-height: 26px;
+  font-size: 0.506rem;
+  line-height: 0.693rem;
   text-align: center;
-  margin-top: 11px;}
+  margin-top: 0.293rem;}
 .authenticationNetWorkTitle {
   display: block;
   color: #808080;
-  font-size: 14px;
-  margin-top: 7px;
-  line-height: 20px;
+  font-size: 0.373rem;
+  margin-top: 0.186rem;
+  line-height: 0.533rem;
   text-align: center;}
 .goAuthentication {
   display: block;
   color: #03AEF9;
-  font-size: 16px;
+  font-size: 0.426rem;
   text-align: center;}
 
 
