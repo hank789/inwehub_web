@@ -9,54 +9,25 @@
           <div class="outermost"></div>
           <div class="innermost"></div>
           <img :src="inviterAvatar"/>
-
-
         </div>
         <div class="privilege_share">
           <span>{{ inviterName }}向你发送了特权～</span>
           <span>受邀注册可获随机现金奖励-可用于付费围观等</span>
         </div>
         <div class="privilege_verification">
-          <!--<p class="verification_t">（首次登陆可获1元提问特权）</p>-->
-          <ul>
-            <li>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoujihao"></use>
-              </svg>
-              <input ref="phone" pattern="\d*" type="text" @focus="focus" @blur="blur" maxlength="11"
-                     placeholder="请输入手机号"
-                     name="phone" @hover.stop.prevent="" v-model.trim.num="phone" autocomplete="off"
-                     v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}"/>
-              <span @tap.stop.prevent="getCode" v-if="!isCanGetCode">{{getCodeText}}</span>
-              <span class="getYzm" @tap.stop.prevent="getCode" v-else>{{getCodeText}}</span>
-            </li>
-            <li>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-yanzhengma"></use>
-              </svg>
-              <input type="text" placeholder="请输入验证码" ref="code"
-                     v-tooltip="{content:'请输入验证码', placement:'bottom', trigger:'manual'}" @focus="focus" @blur="blur"
-                     name="code" v-model.trim.num="code" autocomplete="off"/>
-
-            </li>
-            <li>
-              <button :disabled="disableRegister" @click.prevent="register">领取特权</button>
-              <img src="../../statics/images/money@3x.png"/>
-            </li>
-          </ul>
-          <p class="verification_b">号码将作为您InweHub账号</p>
+          <button class="receivePrivilege" @click.prevent="register">领取特权</button>
+          <img class="receivePrivilege-img" src="../../statics/images/money@3x.png"/>
+          <div class="verification_b">点击即同意<span @tap.stop.prevent="$router.push('/protocol/register')">《用户注册服务协议》</span></div>
         </div>
-        <div class="verification_bg">
-
-        </div>
+        <div class="verification_bg"></div>
       </div>
       <div class="privilege_B">
-        <P>企业级应用&amp;服务广场</P>
-        <P>长见识／解疑惑／寻合作／树形象／得收益</P>
+        <span class="font-family-medium">企业级应用&amp;服务广场</span>
+        <span>长见识／解疑惑／寻合作／树形象／得收益</span>
         <div class="margin-10-0-0">
           <img src="../../statics/images/privilege@3x.png"/>
         </div>
-        <P>www.inwehub.com</P>
+        <span>www.inwehub.com</span>
       </div>
     </div>
   </div>
@@ -345,13 +316,7 @@
 </script>
 
 
-<style scoped>
-  /*清除样式*/
-  div, ul, li, p, span, a, i {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+<style scoped lang="less">
 
   .mui-content {
     background: #ececee;
@@ -360,23 +325,33 @@
   /*领取特权部分*/
   .privilege_T {
     width: 100%;
-    height: 16.053rem;
+    height: 13.12rem;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
-
+    svg {
+      font-size: 106px;
+      margin-left: 0.426rem;
+      margin-top: -22px;
+    }
   }
 
-  .privilege_T svg {
-    font-size: 2.053rem;
-    margin-left: 0.426rem;
-  }
-
-  /*用户头像部分*/
   .privilege_avatar {
     width: 100%;
     height: 2.48rem;
     position: relative;
     top: -0.666rem;
-    /*border:0.026rem solid #000000;*/
+    img {
+      width: 1.946rem;
+      height: 1.946rem;
+      border: 0.053rem solid #A0A7AC;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+      z-index: 12;
+    }
   }
 
   .outermost {
@@ -499,304 +474,127 @@
     }
   }
 
-  .privilege_avatar img {
-    width: 1.946rem;
-    height: 1.946rem;
-    border: 0.053rem solid #A0A7AC;
-    border-radius: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
-    z-index: 12;
-  }
-
-  /*分享现金红包cash*/
   .privilege_share {
-    width: 92%;
-    margin-left: 4%;
-    height: 1.6rem;
-    background: #fcc816;
-    border-radius: 0.373rem;
+    width: 343px;
+    height: 62px;
+    margin: -0.266rem auto 0;
+    background: #DCDCDC;
     text-align: center;
-    padding-top: 0.266rem;
-    margin-top: -0.266rem;
+    padding-top: 8px;
     position: relative;
-
-    /*border:0.026rem solid #000000;*/
-  }
-
-  .privilege_share:after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 0;
-    border-left: 0.266rem solid transparent;
-    border-right: 0.266rem solid transparent;
-    border-bottom: 0.266rem solid #fcc816;
-    position: absolute;
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-    left: 0rem;
-    right: 0;
-    top: -0.24rem;
-    margin: auto;
-
-  }
-
-  .privilege_share span:nth-of-type(1) {
-    display: block;
-    font-size: 0.48rem;
-    color: #444444;
-    font-weight: 600;
-  }
-
-  .privilege_share span:nth-of-type(2) {
-    display: block;
-    font-size: 0.373rem;
-    color: #444444;
-  }
-
-  /*验证部分*/
-  .privilege_verification {
-    width: 80%;
-    margin-left: 10%;
-    height: 6.32rem;
-    margin-top: 0.666rem;
-    position: relative;
-    /*border:0.026rem solid #000000;*/
-  }
-
-  .verification_t {
-    font-size: 0.373rem;
-    color: #FFFFFF;
+    border-radius: 0.373rem;
+    &:after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: 0.266rem solid transparent;
+      border-right: 0.266rem solid transparent;
+      border-bottom: 0.266rem solid #DCDCDC;
+      position: absolute;
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+      left: 0rem;
+      right: 0;
+      top: -0.24rem;
+      margin: auto;
+    }
+    span {
+      &:nth-of-type(1) {
+        display: block;
+        font-size: 0.48rem;
+        color: #444444;
+        font-weight: 600;
+        line-height: 25px;
+      }
+      &:nth-of-type(2) {
+        display: block;
+        font-size: 0.373rem;
+        color: #444444;
+        line-height: 20px;
+      }
+    }
   }
 
   .verification_b {
     text-align: center;
-    font-size: 0.32rem;
+    font-size: 12px;
     color: #b4b4b6;
     position: absolute;
-    bottom: 0;
+    bottom: 13px;
     left: 0;
     right: 0;
     margin: auto;
+    span {
+      color: #FFFFFF;
+    }
   }
-
-  .privilege_verification ul {
-    width: 100%;
-    overflow: hidden;
-  }
-
-  .privilege_verification ul li {
-    height: 0.8rem;
+  .privilege_verification {
+    height: 113px;
+    margin-top: 30px;
     position: relative;
+    .receivePrivilege {
+      width: 4rem;
+      height: 1.413rem;
+      background: #03aef9;
+      border-radius: 2.666rem;
+      border-color: #03aef9;
+      font-size: 0.48rem;
+      color: #FFFFFF;
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      z-index: 99;
+    }
+    .receivePrivilege-img {
+      width: 41px;
+      height: 29px;
+      position: absolute;
+      left: 241px;
+      top: 22px;
+    }
   }
-
-  .privilege_verification ul li svg {
-    font-size: 0.586rem;
-    color: #c8c8c8;
-    margin-left: 0.133rem;
-    float: left;
-  }
-
-  .privilege_verification ul li input {
-    width: 50%;
-    height: 80%;
-    float: left;
-    background: #595D60;
-    border: none;
-    font-size: 0.373rem;
-    color: #FFFFFF;
-    margin-left: -0.08rem;
-  }
-
-  .privilege_verification ul li input::-webkit-input-placeholder {
-    color: #b4b4b6;
-    font-size: 0.373rem;
-  }
-
-  .privilege_verification ul li input::-moz-placeholder {
-    /* Firefox 18- */
-    color: #b4b4b6;
-    font-size: 0.373rem;
-  }
-
-  .privilege_verification ul li input::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #b4b4b6;
-    font-size: 0.373rem;
-  }
-
-  .privilege_verification ul li input::-moz-placeholder {
-    /* Firefox 19+ */
-    color: #b4b4b6;
-    font-size: 0.373rem;
-  }
-
-  .privilege_verification ul li span {
-    /*width: 35%;*/
-    padding:0 0.266rem;
-    height: 0.8rem;
-    border: 0.013rem solid #808080;
-    border-radius: 0.133rem;
-    font-size: 0.373rem;
-    color: #ffffff;
-    text-align: center;
-    line-height: 0.8rem;
-    float: right;
-    margin-right: 0.053rem;
-  }
-
-  .privilege_verification ul li:nth-of-type(1) {
-    margin-top: 0.453rem;
-    /*border:0.026rem solid #000000;*/
-  }
-
-  .privilege_verification ul li:nth-of-type(2) {
-    margin-top: 0.746rem;
-    /*border:0.026rem solid #000000;*/
-  }
-
-  .privilege_verification ul li:nth-of-type(2) svg {
-    font-size: 0.613rem;
-  }
-
-  .privilege_verification ul li:nth-of-type(2) input {
-    background: #5E6265;
-  }
-
-  .privilege_verification ul li:nth-of-type(1):after {
-    position: absolute;
-    /*right: 34%;*/
-    bottom: 0.08rem;
-    left: 2%;
-    height: 0.026rem;
-    content: '';
-    -webkit-transform: scaleY(0.5);
-    transform: scaleY(0.5);
-    background-color: #808080;
-  }
-
-  .privilege_verification ul li:nth-of-type(2):after {
-    position: absolute;
-    right: 0rem;
-    bottom: 0.08rem;
-    left: 2%;
-    height: 0.026rem;
-    content: '';
-    -webkit-transform: scaleY(0.5);
-    transform: scaleY(0.5);
-    background-color: #808080;
-  }
-
-  .privilege_verification ul li:nth-of-type(3) {
-    margin-top: 0.8rem;
-    height: 1.413rem;
-
-  }
-
-  .privilege_verification ul li:nth-of-type(3) button {
-    width: 4rem;
-    height: 1.413rem;
-    background: #03aef9;
-    border-radius: 2.666rem;
-    border-color: #03aef9;
-    font-size: 0.48rem;
-    color: #FFFFFF;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 99;
-  }
-
-  .privilege_verification ul li:nth-of-type(3) img {
-    width: 1.093rem;
-    height: 0.773rem;
-    position: absolute;
-    left: 66%;
-    top: 37%;
-  }
-
   /*信息部分*/
   .privilege_B {
     width: 100%;
     padding-bottom: 0.666rem;
     position: relative;
     margin-top: 1.013rem;
-  }
-
-  .privilege_B p:nth-of-type(1) {
-    font-size: 0.48rem;
-    color: #444444;
     text-align: center;
-    font-weight: 600;
-
+      span {
+        &:nth-of-type(1) {
+          display: block;
+          color: #444444;
+          line-height: 25px;
+          font-size: 0.48rem;
+        }
+        &:nth-of-type(2) {
+          color: #444444;
+          line-height: 20px;
+          font-size: 0.373rem;
+          margin-top: 7px;
+        }
+        &:nth-of-type(3) {
+          color: #808080;
+          line-height: 20px;
+          font-size: 0.373rem;
+          margin-top: 0.426rem;
+        }
+      }
+    div {
+      margin-top: 21px;
+      img {
+        width: 6.746rem;
+        height: 9.253rem;
+        margin: 0 auto;
+      }
+    }
   }
-
-  .privilege_B p:nth-of-type(2) {
-    font-size: 0.373rem;
-    color: #444444;
-    text-align: center;
-    margin-top: 0.213rem;
-    margin-bottom: 0.586rem;
-
-  }
-
-  .privilege_B p:nth-of-type(3) {
-    font-size: 0.373rem;
-    color: #808080;
-    text-align: center;
-    margin-top: 0.426rem;
-
-  }
-
-  .privilege_B div {
-    width: 100%;
-    height: 9.253rem;
-    position: relative;
-
-  }
-
-  .privilege_B div img {
-    width: 6.746rem;
-    height: 9.253rem;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-
-  }
-
   .verification_bg {
     width: 100%;
     height: 3.226rem;
     background: url("../../statics/images/graywave@3x.png") no-repeat;
     background-size: 100% 100%;
-  }
-
- /* 适配*/
-  @media (min-width: 320px) {
-   .privilege_verification ul li:nth-of-type(1):after {
-      right: 40%;
-   }
-
-  }
-
-  @media (min-width: 375px) {
-    .privilege_verification ul li:nth-of-type(1):after {
-
-         right: 36%;
-   }
-
-  }
-
-  @media (min-width: 414px) {
-   .privilege_verification ul li:nth-of-type(1):after {
-        right: 34%;
-   }
   }
 </style>
