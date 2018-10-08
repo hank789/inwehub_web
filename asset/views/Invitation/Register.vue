@@ -40,7 +40,7 @@
 
             </li>
             <li>
-              <button :disabled="disableRegister" @click.prevent="register">领取特权</button>
+              <button @click.prevent="register">领取特权</button>
               <img src="../../statics/images/money@3x.png"/>
             </li>
           </ul>
