@@ -282,9 +282,9 @@
     position: relative;
     background: -webkit-gradient(linear, 0 0, 0 bottom, from(#44474B), to(rgba(113, 117, 120, 1)));
     svg {
-      font-size: 106px;
+      font-size: 2.826rem;
       margin-left: 0.426rem;
-      margin-top: -22px;
+      margin-top: -0.586rem;
     }
   }
 
@@ -429,12 +429,12 @@
   }
 
   .privilege_share {
-    width: 343px;
-    height: 62px;
+    width: 9.146rem;
+    height: 1.653rem;
     margin: -0.266rem auto 0;
     background: #DCDCDC;
     text-align: center;
-    padding-top: 8px;
+    padding-top: 0.213rem;
     position: relative;
     border-radius: 0.373rem;
     &:after {
@@ -459,23 +459,23 @@
         font-size: 0.48rem;
         color: #444444;
         font-weight: 600;
-        line-height: 25px;
+        line-height: 0.666rem;
       }
       &:nth-of-type(2) {
         display: block;
         font-size: 0.373rem;
         color: #444444;
-        line-height: 20px;
+        line-height: 0.533rem;
       }
     }
   }
 
   .verification_b {
     text-align: center;
-    font-size: 12px;
+    font-size: 0.32rem;
     color: #b4b4b6;
     position: absolute;
-    bottom: 13px;
+    bottom: 0.346rem;
     left: 0;
     right: 0;
     margin: auto;
@@ -484,8 +484,8 @@
     }
   }
   .privilege_verification {
-    height: 113px;
-    margin-top: 30px;
+    height: 3.013rem;
+    margin-top: 0.8rem;
     position: relative;
     .receivePrivilege {
       width: 4rem;
@@ -502,11 +502,11 @@
       z-index: 99;
     }
     .receivePrivilege-img {
-      width: 41px;
-      height: 29px;
+      width: 1.093rem;
+      height: 0.773rem;
       position: absolute;
-      left: 241px;
-      top: 22px;
+      left: 6.426rem;
+      top: 0.586rem;
     }
   }
   /*信息部分*/
@@ -520,24 +520,24 @@
         &:nth-of-type(1) {
           display: block;
           color: #444444;
-          line-height: 25px;
+          line-height: 0.666rem;
           font-size: 0.48rem;
         }
         &:nth-of-type(2) {
           color: #444444;
-          line-height: 20px;
+          line-height: 0.533rem;
           font-size: 0.373rem;
-          margin-top: 7px;
+          margin-top: 0.186rem;
         }
         &:nth-of-type(3) {
           color: #808080;
-          line-height: 20px;
+          line-height: 0.533rem;
           font-size: 0.373rem;
           margin-top: 0.426rem;
         }
       }
     div {
-      margin-top: 21px;
+      margin-top: 0.56rem;
       img {
         width: 6.746rem;
         height: 9.253rem;
