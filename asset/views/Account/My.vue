@@ -99,12 +99,6 @@
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
-        <div class="optionList" @tap.stop.prevent="ceShi">
-          <span>测试弹窗</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-        </div>
         <div class="gray"></div>
       </div>
 
@@ -172,9 +166,6 @@
       }
     },
     methods: {
-      ceShi () {
-        alsrtRealNameAuthentication(this)
-      },
       recommendRead () {
         postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}, false).then(response => {
           this.list = response.data.data.data
