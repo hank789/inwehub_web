@@ -329,22 +329,15 @@
         })
       },
       getUserInfo () {
-        var userInfo = localEvent.getLocalItem('UserInfoReal')
-
-        console.log(localEvent.getLocalItem('UserInfoReal') + 'userInfo')
-        if (userInfo) {
-          this.work_city = userInfo.info.province.name + ' ' + userInfo.info.city.name
-          this.home_city = userInfo.info.hometown_province.name + ' ' + userInfo.info.hometown_city.name
-
-          this.user = userInfo
-          this.loading = 0
-        }
-
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
 
-          this.work_city = user.info.province.name + ' ' + user.info.city.name
-          this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name
+          if (user.info.province.name) {
+            this.work_city = user.info.province.name + ' ' + user.info.city.name
+          }
+          if (user.info.hometown_province.name) {
+            this.home_city = user.info.hometown_province.name + ' ' + user.info.hometown_city.name
+          }
 
           this.user = user
           this.loading = 0
