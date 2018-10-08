@@ -366,7 +366,7 @@
     width:100%;
     overflow: hidden;
     text-align: center;
-    margin-top: 50px;
+    margin-top: 1.333rem;
   }
   .text p{
     font-size: 0.373rem;
