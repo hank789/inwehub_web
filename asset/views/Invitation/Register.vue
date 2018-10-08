@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="privilege_T">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-logolanse"></use>
