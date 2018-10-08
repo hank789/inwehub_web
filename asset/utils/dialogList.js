@@ -383,6 +383,22 @@ function alertPhoneBindWarning (context, title, phone, avatar, isVip, name, butt
   }
 }
 
+// 去实名认证
+function alsrtRealNameAuthentication (context) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('realNameAuthentication', {}, (titlehtml) => {
+      dialogObj.getHtml('goAuthentication', {}, (contenthtml) => {
+        alertSkyTwo(titlehtml, contenthtml, 'icon-chengweizhuanjia1', (num) => {
+          if (num.index === 0) {
+            console.log('成功')
+          }
+        }, true)
+      })
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -405,5 +421,6 @@ export {
   alertGetCoupon,
   alertNoticeOpenNotifitionPermission,
   alertFreeAskGuide,
-  alertPhoneBindWarning
+  alertPhoneBindWarning,
+  alsrtRealNameAuthentication
 }

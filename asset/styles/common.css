@@ -1092,6 +1092,12 @@ input.upload-file[type=file]{
   margin-left: -0.8rem;
   z-index: 3;
 }
+.alertSkyTwo .titlePreIcon.icon-chengweizhuanjia1 {
+  top: 44px;
+  z-index: 3;
+  font-size: 63px;
+  margin-left: -33px;
+}
 .alertSkyTwo .titlePre {
   position: relative;
   top: 0.64rem;

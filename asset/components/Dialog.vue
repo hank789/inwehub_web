@@ -496,6 +496,13 @@
       </div>
     </div>
 
+    <!--去实名认证-->
+    <div id="realNameAuthentication">
+      <span class="font-family-medium realNameTitle">请完成实名认证</span>
+      <span class="netWorkTitle">使用互联网服务需依法实名认证</span>
+    </div>
+    <div id="goAuthentication"><span class="authentication alertConfirm">去认证</span></div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -589,6 +596,7 @@
 </script>
 
 <style scoped="scoped">
+
   .groups{
     width: 105%;
     margin-left: -2%;
@@ -1817,4 +1825,28 @@
     color: #444444;
     line-height: 0.4rem; }
 
+</style>
+<style lang="less" scoped>
+  .realNameTitle {
+    display: block;
+    color: #444444;
+    font-size: 19px;
+    line-height: 26px;
+    text-align: center;
+    margin-top: 11px;
+  }
+  .netWorkTitle {
+    display: block;
+    color: #808080;
+    font-size: 14px;
+    margin-top: 7px;
+    line-height: 20px;
+    text-align: center;
+  }
+  .authentication {
+    display: block;
+    color: #03AEF9;
+    font-size: 16px;
+    text-align: center;
+  }
 </style>

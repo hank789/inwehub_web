@@ -99,6 +99,12 @@
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
+        <div class="optionList" @tap.stop.prevent="ceShi">
+          <span>测试弹窗</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
         <div class="gray"></div>
       </div>
 
@@ -137,6 +143,7 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
+  import { alsrtRealNameAuthentication } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -165,6 +172,9 @@
       }
     },
     methods: {
+      ceShi () {
+        alsrtRealNameAuthentication(this)
+      },
       recommendRead () {
         postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}, false).then(response => {
           this.list = response.data.data.data
