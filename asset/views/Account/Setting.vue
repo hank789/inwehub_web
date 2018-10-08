@@ -85,7 +85,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-inwehubzuoyou"></use>
           </svg>
-          <span>{{ appVersion }}for andrio</span>
+          <span>{{ appVersion }}</span>
         </div>
 
         <div class="text" @tap.stop.prevent="getOperators">
