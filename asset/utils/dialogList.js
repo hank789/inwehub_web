@@ -384,19 +384,12 @@ function alertPhoneBindWarning (context, title, phone, avatar, isVip, name, butt
 }
 
 // 去实名认证
-function alsrtRealNameAuthentication (context) {
-  var dialogObj = getDialogObj(context)
-  if (dialogObj) {
-    dialogObj.getHtml('realNameAuthentication', {}, (titlehtml) => {
-      dialogObj.getHtml('goAuthentication', {}, (contenthtml) => {
-        alertSkyTwo(titlehtml, contenthtml, 'icon-chengweizhuanjia1', (num) => {
-          if (num.index === 0) {
-            console.log('成功')
-          }
-        }, true)
-      })
-    })
-  }
+function alsrtRealNameAuthentication (callback) {
+  alertSkyTwo('<span class="font-family-medium realNameTitle">请完成实名认证</span> <span class="netWorkTitle">使用互联网服务需依法实名认证</span>', '<span class="authentication alertConfirm">去认证</span>', 'icon-chengweizhuanjia1', (num) => {
+    if (num.index === 0) {
+      callback()
+    }
+  }, true)
 }
 
 export {
