@@ -4,12 +4,14 @@
 
 <script>
   import { postRequest } from '../../utils/request'
+  import { alertPhoneBindWarning } from '../../utils/dialogList'
 
   export default{
     data () {
       return {
         oauth_services: {},
-        oauth_waiting: null
+        oauth_waiting: null,
+        bindType: 1
       }
     },
     props: {
@@ -94,20 +96,47 @@
                 refresh_token: auth.authResult.refresh_token,
                 expires_in: auth.authResult.expires_in,
                 scope: auth.authResult.scope,
-                full_info: auth.userInfo
+                full_info: auth.userInfo,
+                bindType: self.bindType
               }).then(response => {
                 var code = response.data.code
 
-                if (code === 1113) {
-                  window.mui.alert('该微信号已经绑定过其他InweHub账号，请更换其他微信账号绑定。如有疑惑请联系客服小哈 <a href="mailto:hi@inwehub.com" class="mailLink">hi@inwehub.com</a>', null, '知道了', null, 'div')
-                  return
-                }
-
                 if (code !== 1000) {
-                  window.mui.alert(response.data.message)
-                  return
+                  switch (code) {
+                    case 1131:
+                      alertPhoneBindWarning(
+                        self,
+                        '此微信已注册',
+                        response.data.data.wechat_name,
+                        response.data.data.avatar,
+                        response.data.data.is_expert,
+                        response.data.data.name,
+                        '合并账号并绑定',
+                        () => {
+                          self.bindType = 2
+                          self.login(id)
+                        }
+                      )
+                      return
+                    case 1113:
+                      alertPhoneBindWarning(
+                        self,
+                        '此微信已绑定其他手机号',
+                        response.data.data.wechat_name,
+                        response.data.data.avatar,
+                        response.data.data.is_expert,
+                        response.data.data.name,
+                        '联系管理员',
+                        () => {
+                          self.$router.pushPlus('/chat/79')
+                        }
+                      )
+                      return
+                    default:
+                      window.mui.alert(response.data.message)
+                      return
+                  }
                 }
-
                 // 如果返回token有值，则登陆成功，如果为null，走注册流程
                 var token = response.data.data.token
                 console.log('获取微信信息成功: token:' + token + ', openid:' + auth.authResult.openid)

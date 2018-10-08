@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
       <div class="privilege_T">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-logolanse"></use>
@@ -152,17 +152,6 @@
         let openid = this.$route.query.openid
         let redirect = this.$route.query.redirect ? this.$route.query.redirect : '/my'
         this.redirect = redirect
-        if (!openid) {
-          this.$store.dispatch(NOTICE, cb => {
-            cb({
-              text: '发生一些错误',
-              time: 1500,
-              status: false
-            })
-          })
-          this.$router.back()
-          return
-        }
         this.openid = openid
       },
       // 提示
@@ -270,43 +259,7 @@
         this.disableRegister = false
       },
       register () {
-        var data = {
-          mobile: this.phone,
-          code: this.code,
-          registration_code: this.registrationCode,
-          openid: this.openid,
-          rcCode: this.rcCode
-        }
-
-        postRequest('auth/wxgzh/check_rg', data)
-          .then(response => {
-            var code = response.data.code
-
-            if (code !== 1000) {
-              if (code === 1115) {
-                // 去填写注册信息
-                data.redirect = this.redirect
-                localEvent.setLocalItem('wechatInfo', data)
-                this.$router.push({path: '/invitation/info'})
-                return
-              } else {
-                window.mui.toast(response.data.message)
-                return
-              }
-            }
-
-            localEvent.setLocalItem('UserLoginInfo', response.data.data)
-
-            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              cb(user)
-              window.mixpanelIdentify()
-              if (window.mui.os.plus) {
-                this.$router.pushPlus('/invitation/success', '', true, 'none', 'none', true, true)
-              } else {
-                this.$router.replace('/invitation/success')
-              }
-            }))
-          })
+        window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + this.rcCode
       },
       mounted () {
 
