@@ -85,7 +85,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-inwehubzuoyou"></use>
           </svg>
-          <p>{{ appVersion }}</p>
+          <span>{{ appVersion }}for andrio</span>
         </div>
 
         <div class="text" @tap.stop.prevent="getOperators">
@@ -352,21 +352,24 @@
     width:100%;
     overflow: hidden;
     text-align: center;
+    padding-bottom: 43px;
   }
   .logo svg{
     font-size: 4rem;
-    margin-top: -0.8rem;
+    margin-top: -42px;
   }
-  .logo p{
-    font-size:0.373rem;
+  .logo span {
+    display: block;
     color: #444444;
-    margin-top: -1.333rem;
+    line-height: 20px;
+    margin-top: -58px;
+    font-size:0.373rem;
   }
   .text{
     width:100%;
     overflow: hidden;
     text-align: center;
-    margin-top: 1.333rem;
+    padding-bottom: 29px;
   }
   .text p{
     font-size: 0.373rem;
