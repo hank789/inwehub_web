@@ -154,6 +154,10 @@
           this.data = data
 
           setTimeout(() => {
+            window.mui.plusReady(function () {
+              closeSplashscreen()
+            })
+
             window.mui('.mui-slider').slider({
               interval: 5000
             })
@@ -189,9 +193,6 @@
     },
     updated () {},
     mounted () {
-//      window.mui.plusReady(function () {
-//        closeSplashscreen()
-//      })
       saveLocationInfo()
       AppInit(this)
       // 左滑
