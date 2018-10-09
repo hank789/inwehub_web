@@ -39,12 +39,11 @@ const routes = [
         } else {
           window.mui.plusReady(function () {
             next({
-              path: '/ad'
+              path: '/home'
             })
           })
         }
       } else {
-        closeSplashscreen()
         next({
           path: '/home'
         })
@@ -2029,7 +2028,7 @@ const routes = [
     path: '/feedback/advise',
     name: 'feedback',
     meta: {
-      title: '反馈建议',
+      title: '反馈和帮助',
       wechatHideHeader: true,
       keepAlive: true
     },

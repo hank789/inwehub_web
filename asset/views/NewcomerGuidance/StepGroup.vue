@@ -38,6 +38,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
+  import { needRefresh } from '../../utils/plus'
 
   export default {
     data: () => ({
@@ -70,7 +71,8 @@
         var UserInfo = localEvent.getLocalItem('UserInfo')
         localEvent.setLocalItem('num' + UserInfo.phone, {value: 1})
         if (this.$route.query.from === 'feed') {
-          window.mui.back()
+          needRefresh()
+          this.$router.pushPlus('/discover?refresh=1')
         } else {
           this.$router.pushPlus('/my')
         }

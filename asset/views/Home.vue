@@ -106,7 +106,7 @@
   import { getHomeData } from '../utils/home'
   import RefreshList from '../components/refresh/List.vue'
   import { saveLocationInfo } from '../utils/allPlatform'
-  import { AppInit, autoTextArea, openUrlByUrl } from '../utils/plus'
+  import { AppInit, autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
   import userAbility from '../utils/userAbility'
 
   const Home = {
@@ -154,6 +154,10 @@
           this.data = data
 
           setTimeout(() => {
+            window.mui.plusReady(function () {
+              closeSplashscreen()
+            })
+
             window.mui('.mui-slider').slider({
               interval: 5000
             })

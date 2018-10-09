@@ -28,8 +28,30 @@
         :isShowUpToRefreshDescription="false"
         :list="list"
         :emptyDescription="emptyDescription"
+        :autoShowEmpty="false"
         class="listWrapper"
       >
+
+        <div class="feedResult" v-if="!list.length">
+          <div class="noResult">
+            <svg class="icon addressIcon" aria-hidden="true">
+              <use xlink:href="#icon-zanwushuju"></use>
+            </svg>
+            <div class="noResultText">暂无内容~</div>
+          </div>
+
+          <div class="component-feed-item-guide noContent">
+            <div class="line-river-big"></div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gongkai"></use>
+            </svg>
+            <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
+            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
+              <button>去看看</button>
+            </div>
+            <div class="line-river-big"></div>
+          </div>
+        </div>
 
         <template v-for="(item, index) in list">
 
@@ -38,7 +60,7 @@
               <use xlink:href="#icon-gongkai"></use>
             </svg>
             <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
-            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone')">
+            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
               <button>去看看</button>
             </div>
           </div>
@@ -202,7 +224,7 @@
       HomeSearch
     },
     activated: function () {
-
+      this.refreshPageData()
     },
     mounted () {
       // 左滑
@@ -229,6 +251,11 @@
       }
     },
     methods: {
+      refreshPageData () {
+        if (this.$route.query.refresh) {
+          this.$refs.RefreshList.refreshPageData(this.prevOtherData)
+        }
+      },
       messagecountchange (obj) {
         if (obj.contact_id) {
           this.contact_id = obj.contact_id
@@ -327,6 +354,17 @@
       .link {
         font-size: 0.32rem;
         color: #B4B4B6;
+      }
+    }
+  }
+  .feedResult {
+    .noResult {
+      padding-bottom: 0;
+    }
+    .noContent {
+      /*padding-top: 120px;*/
+      .buttonWrapper {
+        margin-bottom: 0.4rem;
       }
     }
   }

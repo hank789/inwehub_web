@@ -46,7 +46,7 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li  @tap.stop.prevent="$router.pushPlus('/help/question', 'list-detail-page-two')">
+        <li  @tap.stop.prevent="$router.pushPlus('/feedback/advise', 'list-detail-page-two')">
           <p>常见问题</p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -85,7 +85,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-inwehubzuoyou"></use>
           </svg>
-          <p>{{ appVersion }}</p>
+          <span>{{ appVersion }}</span>
         </div>
 
         <div class="text" @tap.stop.prevent="getOperators">
@@ -352,21 +352,24 @@
     width:100%;
     overflow: hidden;
     text-align: center;
+    padding-bottom: 1.146rem;
   }
   .logo svg{
     font-size: 4rem;
-    margin-top: -0.8rem;
+    margin-top: -1.12rem;
   }
-  .logo p{
-    font-size:0.373rem;
+  .logo span {
+    display: block;
     color: #444444;
-    margin-top: -1.333rem;
+    line-height: 0.533rem;
+    margin-top: -1.546rem;
+    font-size:0.373rem;
   }
   .text{
     width:100%;
     overflow: hidden;
     text-align: center;
-    margin-top: 1.333rem;
+    padding-bottom: 0.773rem;
   }
   .text p{
     font-size: 0.373rem;
