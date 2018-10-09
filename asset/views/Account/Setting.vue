@@ -46,7 +46,7 @@
           </svg>
           <i class="bot"></i>
         </li>
-        <li  @tap.stop.prevent="$router.pushPlus('/help/question', 'list-detail-page-two')">
+        <li  @tap.stop.prevent="$router.pushPlus('/feedback/advise', 'list-detail-page-two')">
           <p>常见问题</p>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
