@@ -189,10 +189,9 @@
     },
     updated () {},
     mounted () {
-      window.mui.plusReady(function () {
-        closeSplashscreen()
-      })
-      
+//      window.mui.plusReady(function () {
+//        closeSplashscreen()
+//      })
       saveLocationInfo()
       AppInit(this)
       // 左滑
