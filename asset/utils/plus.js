@@ -857,6 +857,10 @@ function clearImageCache () {
   })
 }
 
+function needRefresh () {
+  localEvent.setLocalItem('needRefresh', {value: true})
+}
+
 export {
   dowloadFile,
   getLocalUrl,
@@ -888,5 +892,6 @@ export {
   getContacts,
   downloadImg,
   getCacheImage,
-  clearImageCache
+  clearImageCache,
+  needRefresh
 }

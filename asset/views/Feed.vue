@@ -41,15 +41,15 @@
           </div>
 
           <div class="component-feed-item-guide noContent">
-            <div class="line-river-big" v-if="!list.length"></div>
+            <div class="line-river-big"></div>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-gongkai"></use>
             </svg>
             <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
-            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone')">
+            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
               <button>去看看</button>
             </div>
-            <div class="line-river-big" v-if="!list.length"></div>
+            <div class="line-river-big"></div>
           </div>
         </div>
 
@@ -60,7 +60,7 @@
               <use xlink:href="#icon-gongkai"></use>
             </svg>
             <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
-            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone')">
+            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
               <button>去看看</button>
             </div>
           </div>
@@ -224,7 +224,7 @@
       HomeSearch
     },
     activated: function () {
-
+      this.refreshPageData()
     },
     mounted () {
       // 左滑
@@ -251,6 +251,11 @@
       }
     },
     methods: {
+      refreshPageData () {
+        if (this.$route.query.refresh) {
+          this.$refs.RefreshList.refreshPageData(this.prevOtherData)
+        }
+      },
       messagecountchange (obj) {
         if (obj.contact_id) {
           this.contact_id = obj.contact_id
