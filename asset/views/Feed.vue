@@ -28,8 +28,30 @@
         :isShowUpToRefreshDescription="false"
         :list="list"
         :emptyDescription="emptyDescription"
+        :autoShowEmpty="false"
         class="listWrapper"
       >
+
+        <div class="feedResult" v-if="!list.length">
+          <div class="noResult">
+            <svg class="icon addressIcon" aria-hidden="true">
+              <use xlink:href="#icon-zanwushuju"></use>
+            </svg>
+            <div class="noResultText">暂无内容~</div>
+          </div>
+
+          <div class="component-feed-item-guide noContent">
+            <div class="line-river-big" v-if="!list.length"></div>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gongkai"></use>
+            </svg>
+            <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
+            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone')">
+              <button>去看看</button>
+            </div>
+            <div class="line-river-big" v-if="!list.length"></div>
+          </div>
+        </div>
 
         <template v-for="(item, index) in list">
 
@@ -327,6 +349,17 @@
       .link {
         font-size: 0.32rem;
         color: #B4B4B6;
+      }
+    }
+  }
+  .feedResult {
+    .noResult {
+      padding-bottom: 0;
+    }
+    .noContent {
+      /*padding-top: 120px;*/
+      .buttonWrapper {
+        margin-bottom: 0.4rem;
       }
     }
   }
