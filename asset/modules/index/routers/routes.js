@@ -39,12 +39,11 @@ const routes = [
         } else {
           window.mui.plusReady(function () {
             next({
-              path: '/ad'
+              path: '/home'
             })
           })
         }
       } else {
-        closeSplashscreen()
         next({
           path: '/home'
         })
