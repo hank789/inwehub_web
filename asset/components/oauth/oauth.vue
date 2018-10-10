@@ -139,7 +139,12 @@
                 }
                 // 如果返回token有值，则登陆成功，如果为null，走注册流程
                 var token = response.data.data.token
-                console.log('获取微信信息成功: token:' + token + ', openid:' + auth.authResult.openid)
+                // 是否为新用户注册
+                var isNewUser = response.data.data.newUser
+                if (isNewUser && isNewUser === 1) {
+                  window.trackMixpanelEvent('register:wechat:success', '/login', 'login', '微信登陆')
+                }
+                window.console.log('获取微信信息成功: token:' + token + ', openid:' + auth.authResult.openid)
                 self.$emit('success', token, auth.authResult.openid, auth.userInfo.nickname)
               })
             }, function (e) {
