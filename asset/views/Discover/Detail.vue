@@ -158,17 +158,17 @@
           <p>私密圈子内容加入后可阅读</p>
           <p @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">去加入</p>
         </div>
-        <div class="riverBot"></div>
-        <div class="groupsBot">
-          <groups-list class="small detail"
-                       :list="detail.group"
-                       :type="'small'"
-          ></groups-list>
-        </div>
+        <!--<div class="riverBot"></div>-->
+        <!--<div class="groupsBot">-->
+          <!--<groups-list class="small detail"-->
+                       <!--:list="detail.group"-->
+                       <!--:type="'small'"-->
+          <!--&gt;</groups-list>-->
+        <!--</div>-->
       </div>
 
-        <div class="river"></div>
-        <div class="guessLike"style="color: red">
+        <div class="river" v-if="detail.group.public"></div>
+        <div class="guessLike" v-if="detail.group.public">
           <div class="component-block-title">
             <div class="left">猜您喜欢</div>
           </div>
@@ -190,7 +190,7 @@
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
           </template>
         </div>
-        <div class="river"></div>
+        <div class="river" v-if="detail.group.public"></div>
 
     </vue-pull-refresh>
     </div>
@@ -213,7 +213,7 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer">
+    <div class="container-footer" v-if="detail.group.public">
       <div class="footerLeft">
         <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
         <div class="footerMenuTwo" v-else>
