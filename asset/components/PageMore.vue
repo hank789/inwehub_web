@@ -8,10 +8,9 @@
 
     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
       <div class="title">
-        <span  @tap.stop.prevent="cancelShare()">取消</span>
         分享到
       </div>
-      <div class="line-river-after line-river-after-height"></div>
+      <!--<div class="line-river-after line-river-after-height"></div>-->
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
@@ -41,21 +40,22 @@
         </div>
       </div>
 
-      <div v-if="isShowhidden">
-        <div class="twoLevelLine">
-          <div class="line-river-after"></div>
-        </div>
-        <div class="more twoLevel">
+      <div class="line-river-after line-river-after-height"></div>
+
+      <div v-if="iconMenu.length">
+        <div class="more twoLevel" v-for="(item, index) in iconMenu" :key="index">
           <div class="delete single" @tap.stop.prevent="deleted()">
           <span>
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shanchu1"></use>
+              <use :xlink:href="item.icon"></use>
             </svg>
           </span>
-            <p>删除</p>
+            <p>{{item.text}}</p>
           </div>
         </div>
+        <div class="line-river-after line-river-after-height"></div>
       </div>
+      <div class="cancel" @tap.stop.prevent="cancelShare()"><span class="font-family-medium">取消</span></div>
     </div>
 
 
@@ -105,6 +105,12 @@
     },
     components: {},
     props: {
+      iconMenu: {
+        type: Array,
+        default: () => {
+          return []
+        }
+      },
       isShowhidden: {
         type: Boolean,
         default: false
@@ -622,21 +628,17 @@
     .title {
       background: #FFF;
       text-align: center;
-      font-size: 0.373rem;
-      padding: 0.32rem 0;
+      font-size: 11px;
+      padding: 17px 0 0;
       position: relative;
-      color: #808080;
-      /*border-bottom: 0.026rem solid #DCDCDC;*/
-      span{
-        position: absolute;
-        left:0.586rem;
-        font-size: 0.4rem;
-      }
+      color: #B4B4B6;
+      line-height: 15px;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
     }
     .more {
       background: #fff;
-      padding: 0.266rem;
-
+      padding: 13px 0.266rem;
       .single {
         height: 1.866rem;
         display: inline-block;
@@ -652,16 +654,8 @@
         }
       }
     }
-    .twoLevelLine {
-      padding: 0 0.426rem;
-      background: #fff;
-      .twoLevelTopLine {
-        border-top: 0.026rem solid #DCDCDC;
-      }
-    }
     .twoLevel {
-      padding: 0.266rem;
-      /*border-top: 0.026rem solid #DCDCDC;*/
+      padding: 15px 0.266rem 13px;
       .delete {
         span {
           padding: 0.36rem;
@@ -688,6 +682,16 @@
       right: 0.4rem;
       top: 0.266rem;
       font-size: 1.866rem;
+    }
+  }
+  .cancel {
+    height: 52px;
+    line-height: 52px;
+    background: #FFF;
+    text-align: center;
+    span {
+      color: #444444;
+      font-size: 16px;
     }
   }
 
