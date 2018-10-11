@@ -224,22 +224,26 @@
       @selectedItem="selectedItem"
     ></Options>
 
-    <GroupsShare
+    <PageMore
       ref="share"
       v-if="!loading"
       :title="shareOption.title"
-      :shareName="shareOption.shareName"
       :link="shareOption.link"
+      :shareName="shareOption.shareName"
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :targetId="id"
+      :hideShareBtn="true"
+      :targetType="'group'"
       :pyqTitle="shareOption.pyqTitle"
       :pyqContent="shareOption.pyqContent"
-      :targetId="id"
-      :targetType="'group'"
+      :iconMenu="iconMenus"
       @success="shareSuccess"
       @fail="shareFail"
-    ></GroupsShare>
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
+
     <commentTextarea ref="ctextarea"
                      @sendMessage="sendMessage"
     ></commentTextarea>
@@ -262,14 +266,14 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
-  import GroupsShare from '../../components/GroupsShare.vue'
+  import PageMore from '../../components/PageMore.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
   import userAbility from '../../utils/userAbility'
   import FooterMenu from '../../components/FooterMenu.vue'
-  import { checkPermission, toSettingSystem } from '../../utils/plus'
+  import { checkPermission, toSettingSystem, setClipboardText } from '../../utils/plus'
   import { scrollPage } from '../../utils/dom'
 
   export default {
@@ -294,6 +298,7 @@
         },
         isInGroup: false,
         readyOpenNotice: false
+
       }
     },
     created () {},
@@ -353,6 +358,14 @@
             }
           ]
         }
+      },
+      iconMenus () {
+        return [
+          {
+            icon: '#icon-lianjie2',
+            text: '复制链接'
+          }
+        ]
       }
     },
     components: {
@@ -360,7 +373,7 @@
       GroupsInfo,
       SubmitReadhubAriticle,
       Options,
-      GroupsShare,
+      PageMore,
       DiscoverShare,
       commentTextarea,
       FooterMenu
@@ -374,6 +387,32 @@
       }
     },
     methods: {
+      iconMenusClickedItem (item) {
+        switch (item.text) {
+          case '复制链接':
+            this.shareToCopyLink()
+            break
+        }
+      },
+      shareToCopyLink () {
+        window.mui('#shareWrapper').popover('toggle')
+        setClipboardText(this.shareOption.link)
+        window.mui.toast('已复制')
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:copyLink',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
+      },
       goMoreSetup () {
         if (this.detail.audit_status === 1) {
           this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
@@ -574,8 +613,9 @@
             this.itemOptions.push('置顶')
           }
         }
-
-        this.$refs.itemOptions.toggle()
+        this.iconMenus = [
+        ]
+        this.$refs.share.share()
       },
       selectedItem (item) {
         switch (item) {
