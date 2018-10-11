@@ -204,8 +204,8 @@
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
       :targetId="slug"
+      :iconMenu="iconMenus"
       :targetType="'submission'"
-      :isShowhidden="userId == detail.owner.id"
       @success="shareSuccess"
       @fail="shareFail"
       @del="deleterow"
@@ -335,6 +335,22 @@
           return 0
         }
         return this.description.length
+      },
+      iconMenus () {
+        if (this.userId === this.detail.owner.id) {
+          return [
+            {
+              icon: '#icon-shanchu1',
+              text: '删除'
+            }
+          ]
+        }
+        return [
+          {
+            icon: '#icon-shanchu1',
+            text: '删除'
+          }
+        ]
       }
     },
     components: {
