@@ -208,7 +208,7 @@
       :targetType="'submission'"
       @success="shareSuccess"
       @fail="shareFail"
-      @del="deleterow"
+      @clickedItem="iconMenusClickedItem"
     ></PageMore>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
@@ -249,7 +249,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import ArticleDiscuss from '../../components/discover/ArticleDiscuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl} from '../../utils/plus'
+  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl, setClipboardText} from '../../utils/plus'
   import PageMore from '../../components/PageMore.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
@@ -342,13 +342,25 @@
             {
               icon: '#icon-shanchu1',
               text: '删除'
+            },
+            {
+              icon: '#icon-jubao',
+              text: '举报'
+            },
+            {
+              icon: '#icon-lianjie2',
+              text: '复制链接'
             }
           ]
         }
         return [
           {
-            icon: '#icon-shanchu1',
-            text: '删除'
+            icon: '#icon-jubao',
+            text: '举报'
+          },
+          {
+            icon: '#icon-lianjie2',
+            text: '复制链接'
           }
         ]
       }
@@ -365,6 +377,48 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      iconMenusClickedItem (item) {
+        switch (item.text) {
+          case '删除':
+            this.deleterow()
+            break
+          case '复制链接':
+            this.shareToCopyLink()
+            break
+          case '举报':
+            this.report()
+            break
+        }
+      },
+      report () {
+        window.mui('#shareWrapper').popover('toggle')
+        window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
+          if (e.index === 1) {
+            if (e.value) {
+              window.mui.toast('举报成功')
+            }
+          }
+        }, 'div')
+      },
+      shareToCopyLink () {
+        window.mui('#shareWrapper').popover('toggle')
+        setClipboardText(this.shareOption.link)
+        window.mui.toast('已复制')
+        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          // mixpanel
+          window.mixpanel.track(
+            'inwehub:share:copyLink',
+            {
+              'app': 'inwehub',
+              'user_device': window.getUserAppDevice(),
+              'page': this.$route.fullPath,
+              'page_name': this.$route.name,
+              'page_title': this.$route.meta.title,
+              'referrer_page': ''
+            }
+          )
+        }
+      },
       goComment () {
         this.$refs.discuss.rootComment()
         scrollToElement(this, '#commentTitle', '.pull-down-container')

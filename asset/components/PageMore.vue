@@ -14,43 +14,43 @@
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
-          <p>微信好友</p>
+          <span>微信</span>
         </div>
         <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
-          <p>朋友圈</p>
+          <span>朋友圈</span>
         </div>
         <div class="single" @tap.stop.prevent="shareToChat()">
           <img src="../statics/images/sendFriend@2x.png"/>
-          <p>私信好友</p>
+          <span>私信</span>
         </div>
-        <div class="single" @tap.stop.prevent="shareToCopyLink()">
-          <img src="../statics/images/copyLink@3x.png"/>
-          <p>复制链接</p>
-        </div>
+        <!--<div class="single" @tap.stop.prevent="shareToCopyLink()">-->
+          <!--<img src="../statics/images/copyLink@3x.png"/>-->
+          <!--<span>复制链接</span>-->
+        <!--</div>-->
         <div class="single" @tap.stop.prevent="toPreviewImage()"
              v-if="this.DomConvertImage && isShowSharePng()">
           <img src="../statics/images/sharePng@2x.png"/>
-          <p>生成图片</p>
+          <span>生成图片</span>
         </div>
         <div class="single" @tap.stop.prevent="toPreviewApiImage()"
              v-if="this.showPreviewApiImage">
           <img src="../statics/images/sharePng@2x.png"/>
-          <p>生成图片</p>
+          <span>生成图片</span>
         </div>
       </div>
 
       <div class="line-river-after line-river-after-height"></div>
 
       <div v-if="iconMenu.length">
-        <div class="more twoLevel" v-for="(item, index) in iconMenu" :key="index">
-          <div class="delete single" @tap.stop.prevent="deleted()">
-          <span>
+        <div class="more twoLevel">
+          <div class="delete single" @tap.stop.prevent="clickItem(item)"  v-for="(item, index) in iconMenu" :key="index">
+          <span class="iconBorder">
             <svg class="icon" aria-hidden="true">
               <use :xlink:href="item.icon"></use>
             </svg>
           </span>
-            <p>{{item.text}}</p>
+            <span class="text">{{item.text}}</span>
           </div>
         </div>
         <div class="line-river-after line-river-after-height"></div>
@@ -184,8 +184,8 @@
       }
     },
     methods: {
-      deleted () {
-        this.$emit('del')
+      clickItem (item) {
+        this.$emit('clickedItem', item)
       },
       cancelShare () {
         window.mui('#shareWrapper').popover('toggle')
@@ -638,36 +638,51 @@
     }
     .more {
       background: #fff;
-      padding: 13px 0.266rem;
+      padding: 13px 17px 4px;
+      font-size: 0;
       .single {
         height: 1.866rem;
         display: inline-block;
         img {
-          width: 1.25rem;
-          height: 1.25rem;
-          margin: 0 0.24rem;
+          width: 44px;
+          height: 43px;
+          margin: 0 12px;
         }
-        p{
-          font-size: 0.32rem;
-          color: #b4b4b6;
+        span {
+          display: block;
+          font-size: 12px;
+          color: #808080;
+          line-height: 16px;
           text-align: center;
+          margin-top: -3px;
         }
       }
     }
-    .twoLevel {
-      padding: 15px 0.266rem 13px;
+    .more.twoLevel {
+      padding: 15px 17px 4px;
       .delete {
-        span {
-          padding: 0.36rem;
+        .iconBorder {
+          width: 44px;
+          height: 44px;
+          margin: 0 12px;
+          line-height: 49px;
+          text-align: center;
           display: inline-block;
           border-radius: 0.213rem;
           border: 0.026rem solid #DCDCDC;
-          margin: 0 0.24rem;
           .icon {
-            font-size: 0.533rem;
+            font-size: 22px;
             color: #C8C8C8;
           }
         }
+      }
+      .text {
+        display: block;
+        font-size: 12px;
+        color: #808080;
+        line-height: 16px;
+        text-align: center;
+        margin-top: 8px;
       }
     }
   }
