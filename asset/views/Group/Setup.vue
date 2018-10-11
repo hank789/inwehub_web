@@ -57,6 +57,8 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :pyqTitle="shareOption.pyqTitle"
+      :pyqContent="shareOption.pyqContent"
       :targetId="id"
       :targetType="'group'"
       @success="shareSuccess"

@@ -106,6 +106,10 @@
         type: String,
         default: ''
       },
+      pyqTitle: {
+        type: String,
+        default: ''
+      },
       shareName: {
         type: String,
         default: 'share'
@@ -120,6 +124,10 @@
         default: ''
       },
       content: {
+        type: String,
+        default: ''
+      },
+      pyqContent: {
         type: String,
         default: ''
       },
@@ -266,8 +274,10 @@
         }
         var data = {
           title: this.title,
+          pyqTitle: this.pyqTitle,
           link: this.link + shareParams,
           content: this.content,
+          pyqContent: this.pyqContent,
           imageUrl: this.imageUrl,
           thumbUrl: this.thumbUrl
         }
