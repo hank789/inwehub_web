@@ -95,6 +95,9 @@
       }
     },
     methods: {
+      toggleShareNav () {
+        window.mui('#shareShowWrapper').popover('toggle')
+      },
       clickItem (item) {
         this.$emit('clickedItem', item)
       },

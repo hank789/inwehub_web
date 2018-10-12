@@ -329,10 +329,10 @@
               icon: '#icon-shanchu1',
               text: '删除'
             },
-            {
-              icon: '#icon-jubao',
-              text: '举报'
-            },
+            // {
+            //   icon: '#icon-jubao',
+            //   text: '举报'
+            // },
             {
               icon: '#icon-lianjie2',
               text: '复制链接'
@@ -381,7 +381,23 @@
         window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
           if (e.index === 1) {
             if (e.value) {
-              window.mui.toast('举报成功')
+              postRequest(`system/feedback`, {
+                title: '举报内容',
+                content: e.value
+              }).then(response => {
+                var code = response.data.code
+                if (code !== 1000) {
+                  window.mui.alert(response.data.message)
+                  window.mui.back()
+                  return
+                }
+                if (response.data.data) {
+                  window.mui.back()
+                  window.mui.toast('举报成功')
+                }
+              })
+            } else {
+              window.mui.toast('请填写举报内容')
             }
           }
         }, 'div')

@@ -128,7 +128,6 @@
                   :data="item"
                   :show='isShowItemOption(item)'
                   ref="discoverShare"
-                  @comment="comment"
                   @showItemOptions="showItemOptions(item, index)"
                 ></DiscoverShare>
               </div>
@@ -136,7 +135,6 @@
                 <!--x发布了链接分享-->
                 <SubmitReadhubAriticle :data="item"
                                        :show='isShowItemOption(item)'
-                                       @comment="comment"
                                        @showItemOptions="showItemOptions(item, index)"
                 ></SubmitReadhubAriticle>
               </div>
@@ -144,7 +142,6 @@
                 <!--x发布了原创文章，有title何描述-->
                 <SubmitReadhubAriticle :data="item"
                                        :show='isShowItemOption(item)'
-                                       @comment="comment"
                                        @showItemOptions="showItemOptions(item, index)"
                 ></SubmitReadhubAriticle>
               </div>
@@ -213,7 +210,7 @@
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
   import PageMore from '../../components/PageMore.vue'
-  import { getGroupDetail } from '../../utils/shareTemplate'
+  import { getGroupDetail, getTextDiscoverDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
   import { goThirdPartyArticle } from '../../utils/webview'
   import { checkPermission, toSettingSystem, setClipboardText } from '../../utils/plus'
@@ -242,7 +239,8 @@
         },
         isInGroup: false,
         readyOpenNotice: false,
-        iconMenus: []
+        iconMenus: [],
+        copyLink: ''
       }
     },
     created () {},
@@ -279,8 +277,28 @@
     methods: {
       iconMenusClickedItem (item) {
         switch (item.text) {
+          case '删除':
+            this.del(this.itemOptionsObj, () => {
+            })
+            break
           case '复制链接':
             this.shareToCopyLink()
+            break
+          case '设为精选':
+            this.addGood(this.itemOptionsObj, () => {
+            })
+            break
+          case '取消加精':
+            this.cancelGood(this.itemOptionsObj, () => {
+            })
+            break
+          case '置顶':
+            this.setTop(this.itemOptionsObj, () => {
+            })
+            break
+          case '取消置顶':
+            this.cancelTop(this.itemOptionsObj, () => {
+            })
             break
         }
       },
@@ -294,10 +312,23 @@
             text: '删除'
           })
         }
+        this.iconMenus.push(
+          {
+            icon: '#icon-lianjie2',
+            text: '复制链接'
+          }
+          // {
+          //   icon: '#icon-jubao',
+          //   text: '举报'
+          // }
+        )
 
         if (this.detail.is_joined === 3) {
           if (item.feed.is_recommend) {
-            this.iconMenus.push('取消加精')
+            this.iconMenus.push({
+              icon: '#icon-sheweijingxuan',
+              text: '取消加精'
+            })
           } else {
             this.iconMenus.push({
               icon: '#icon-sheweijingxuan',
@@ -306,25 +337,24 @@
           }
 
           if (item.top) {
-            this.iconMenus.push('取消置顶')
+            this.iconMenus.push({
+              icon: '#icon-zhiding',
+              text: '取消置顶'
+            })
           } else {
             this.iconMenus.push({
-              icon: '',
+              icon: '#icon-zhiding',
               text: '置顶'
             })
           }
         }
-//        this.iconMenus = [
-//          {
-//            icon: '#icon-shanchu1',
-//            text: '删除'
-//          },
-//          {
-//            icon: '#icon-sheweijingxuan',
-//            text: '设为精选'
-//          }
-//        ]
-        this.shareOption = [] // @todo 接sharetempate
+        var shareOption = getTextDiscoverDetail(
+          this.itemOptionsObj.url,
+          this.itemOptionsObj.title,
+          this.itemOptionsObj.user.avatar,
+          this.itemOptionsObj.user.name
+        )
+        this.shareOption = Object.assign(this.shareOption, shareOption)
         this.$refs.share.share()
       },
       shareToCopyLink () {
@@ -449,6 +479,11 @@
         })
       },
       joinShare () {
+        this.iconMenus = []
+        this.iconMenus.push({
+          icon: '#icon-lianjie2',
+          text: '复制链接'
+        })
         var shareOption = getGroupDetail(
           this.id,
           this.detail.name,
@@ -456,10 +491,7 @@
           this.detail.subscribers,
           this.detail.logo
         )
-
         this.shareOption = Object.assign(this.shareOption, shareOption)
-
-        this.iconMenus = []
         this.$refs.share.share()
       },
       shareSuccess () {
@@ -481,36 +513,34 @@
 
         return false
       },
-      selectedItem (item) {
-        switch (item) {
-          case '删除':
-            this.del(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '加精':
-            this.addGood(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '取消加精':
-            this.cancelGood(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '置顶':
-            this.setTop(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '取消置顶':
-            this.cancelTop(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-        }
+      report () {
+        window.mui('#shareWrapper').popover('toggle')
+        window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
+          if (e.index === 1) {
+            if (e.value) {
+              postRequest(`system/feedback`, {
+                title: '举报内容',
+                content: e.value
+              }).then(response => {
+                var code = response.data.code
+                if (code !== 1000) {
+                  window.mui.alert(response.data.message)
+                  window.mui.back()
+                  return
+                }
+                if (response.data.data) {
+                  window.mui.back()
+                  window.mui.toast('举报成功')
+                }
+              })
+            } else {
+              window.mui.toast('请填写举报内容')
+            }
+          }
+        }, 'div')
       },
       setTop (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/setSubmissionTop`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -523,6 +553,7 @@
         })
       },
       cancelTop (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/cancelSubmissionTop`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -535,6 +566,7 @@
         })
       },
       addGood (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/setSubmissionRecommend`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -549,6 +581,7 @@
         })
       },
       cancelGood (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/cancelSubmissionRecommend`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -603,6 +636,7 @@
         })
       },
       del (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         var btnArray = ['取消', '确定']
         var list = this.list
         window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
