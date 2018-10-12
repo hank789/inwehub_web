@@ -2,7 +2,7 @@
   <div>
     <div class="mui-content" v-if="!loading" id="home-content">
 
-      <div v-if="!isInGroup">
+      <div v-if="!isInGroup && !detail.public">
         <div class="header">
           <img v-lazy="detail.background_img" class="lazyImg">
           <div class="backMask"></div>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div v-if="isInGroup">
+      <div v-if="isInGroup || detail.public">
         <RefreshList
           ref="RefreshList"
           v-model="list"
