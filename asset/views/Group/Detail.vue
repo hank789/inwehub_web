@@ -298,7 +298,6 @@
         },
         isInGroup: false,
         readyOpenNotice: false
-
       }
     },
     created () {},
@@ -393,6 +392,41 @@
             this.shareToCopyLink()
             break
         }
+      },
+      showItemOptions (item, index) {
+        this.itemOptions = []
+        this.itemOptionsObj = item
+        this.itemOptionsIndex = index
+        if (getLocalUserId() === item.user.id) {
+          this.itemOptions = [
+            '删除'
+          ]
+        }
+
+        if (this.detail.is_joined === 3) {
+          if (item.feed.is_recommend) {
+            this.itemOptions.push('取消加精')
+          } else {
+            this.itemOptions.push('加精')
+          }
+
+          if (item.top) {
+            this.itemOptions.push('取消置顶')
+          } else {
+            this.itemOptions.push('置顶')
+          }
+        }
+        this.iconMenus = [
+          {
+            icon: '#icon-shanchu1',
+            text: '删除'
+          },
+          {
+            icon: '#icon-sheweijingxuan',
+            text: '设为精选'
+          }
+        ]
+        this.$refs.share.share()
       },
       shareToCopyLink () {
         window.mui('#shareWrapper').popover('toggle')
@@ -589,33 +623,6 @@
         }
 
         return false
-      },
-      showItemOptions (item, index) {
-        this.itemOptions = []
-        this.itemOptionsObj = item
-        this.itemOptionsIndex = index
-        if (getLocalUserId() === item.user.id) {
-          this.itemOptions = [
-            '删除'
-          ]
-        }
-
-        if (this.detail.is_joined === 3) {
-          if (item.feed.is_recommend) {
-            this.itemOptions.push('取消加精')
-          } else {
-            this.itemOptions.push('加精')
-          }
-
-          if (item.top) {
-            this.itemOptions.push('取消置顶')
-          } else {
-            this.itemOptions.push('置顶')
-          }
-        }
-        this.iconMenus = [
-        ]
-        this.$refs.share.share()
       },
       selectedItem (item) {
         switch (item) {
