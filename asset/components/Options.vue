@@ -54,7 +54,7 @@
   }
 </script>
 
-<style scoped="">
+<style scoped>
   .allOptions{
     background:#fff;
   }
@@ -66,5 +66,9 @@
     color:#444;
     height:1.173rem;
     line-height: 1.173rem;
+  }
+  .mui-popover.mui-popover-action .mui-table-view {
+    border-radius: 0 !important;
+    margin: 0 !important;
   }
 </style>
