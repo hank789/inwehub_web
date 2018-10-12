@@ -362,7 +362,7 @@
       padding-bottom: 0;
     }
     .noContent {
-      /*padding-top: 120px;*/
+      /*padding-top: 3.2rem;*/
       .buttonWrapper {
         margin-bottom: 0.4rem;
       }

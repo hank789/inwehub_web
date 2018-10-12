@@ -222,8 +222,8 @@
   .invitation-title .next-step{
     width:2rem;
     /*height:0.906rem;*/
-    line-height: 20px;
-    padding: 7px 0;
+    line-height: 0.533rem;
+    padding: 0.186rem 0;
     border: 0.026rem solid #03aef9;
     border-radius: 1.333rem;
     font-size:0.373rem;
