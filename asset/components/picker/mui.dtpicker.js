@@ -122,7 +122,7 @@
 				}
 			}, false);
 			ui.mask[0].addEventListener('tap', function() {
-				self.hide();
+				self.dispose();
 			}, false);
 			self._create(options);
 			//防止滚动穿透

@@ -26,12 +26,6 @@
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
 
-          <!--<div class="timeData">-->
-            <!--<span>-->
-              <!--<timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>-->
-            <!--</span>-->
-          <!--</div>-->
-
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
           <div class="line-river lineMargin"></div>
@@ -197,15 +191,8 @@
 
     <PageMore
       ref="ShareBtn"
-      :title="shareOption.title"
-      :link="shareOption.link"
-      :shareName="shareOption.shareName"
-      :content="shareOption.content"
-      :imageUrl="shareOption.imageUrl"
-      :thumbUrl="shareOption.thumbUrl"
-      :targetId="slug"
+      :shareOption="shareOption"
       :iconMenu="iconMenus"
-      :targetType="'submission'"
       @success="shareSuccess"
       @fail="shareFail"
       @clickedItem="iconMenusClickedItem"
@@ -266,9 +253,6 @@
   import { upvote, downVote } from '../../utils/discover'
   import VuePullRefresh from 'vue-pull-refresh'
 
-//  import bodymovin from 'bodymovin'
-//  import upvote from '../../bodymovin/upvote.json'
-
   export default {
     data () {
       return {
@@ -317,7 +301,9 @@
           content: '',
           imageUrl: '',
           thumbUrl: '',
-          shareName: ''
+          shareName: '',
+          targetType: 'submission',
+          targetId: ''
         },
         isFollow: true,
         loading: 1
@@ -620,6 +606,7 @@
       },
       getDetail: function () {
         this.slug = this.$route.params.slug
+        this.shareOption.targetId = this.slug
         this.noback = !!this.$route.query.noback
 
         if (!this.slug) {
@@ -637,7 +624,8 @@
 
           this.detail = response.data.data
 
-          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
+          var shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
+          this.shareOption = Object.assign(this.shareOption, shareOption)
 
           if (this.detail.type === 'article') {
             this.title = this.detail.title
