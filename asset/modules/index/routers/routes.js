@@ -546,7 +546,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      next()
+      requestAuth(to, from, next)
     }
   },
   { // 圈子成员
@@ -722,7 +722,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      next()
+      requestAuth(to, from, next)
     }
   },
   {
