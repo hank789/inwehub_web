@@ -13,7 +13,7 @@
         class="container-editor container-editor-app container-editor-add"
         ref="myAddEditor"
         id="discoverAddJeditor"
-        :class="{noBottomFile: images.length === 0 && pdfs.length === 0}"
+        :class="{noBottomFile: images.length === 0 && pdfs.length === 0 && links.length === 0, hasImages : images.length, hasPdfs : pdfs.length, hasLinks : links.length}"
         v-model.trim="description"
         :rows="10"
         :content="description"
@@ -847,7 +847,7 @@
     position: absolute;
     left:0;
     right:0;
-    bottom: 1.173rem;
+    bottom: 1.413rem !important;
     margin-bottom:0 !important;
   }
 </style>
@@ -859,6 +859,15 @@
     right:0;
     bottom: 3.36rem;
     top: 0;
+  }
+  #discoverAddJeditor.hasImages{
+    bottom: 3.36rem;
+  }
+  #discoverAddJeditor.hasLinks{
+    bottom: 4rem;
+  }
+  #discoverAddJeditor.hasPdfs{
+    bottom: 3.36rem;
   }
   #discoverAddJeditor .textarea-wrapper{
     position: absolute;
