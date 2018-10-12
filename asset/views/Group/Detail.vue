@@ -1,21 +1,5 @@
 <template>
   <div>
-    <!--<header class="mui-bar mui-bar-nav">-->
-      <!--<Back></Back>-->
-      <!--<h1 class="mui-title">{{detail.name}}</h1>-->
-      <!--<div class="headerShare" @tap.stop.prevent="joinShare">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
-        <!--</svg>-->
-      <!--</div>-->
-      <!--<div class="headerShare headerNotice">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-tongzhi"></use>-->
-        <!--</svg>-->
-      <!--</div>-->
-    <!--</header>-->
-
-
     <div class="mui-content" v-if="!loading" id="home-content">
 
       <div v-if="!isInGroup">
@@ -132,8 +116,6 @@
         <div class="menu">
           <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
             v-if="search_type === 1"></i></span>
-          <!--<span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i-->
-            <!--v-if="search_type === 2"></i></span>-->
           <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
             v-if="search_type === 3"></i></span>
           <i class="bot"></i>
@@ -206,60 +188,24 @@
           </svg>
         </div>
       </div>
-
     </div>
-    <!---->
-
-    <Options
-      ref="allOptions"
-      :id="'allOptions'"
-      :options="allOptionSelects"
-      @selectedItem="selectedItem"
-    ></Options>
-
-    <Options
-      ref="itemOptions"
-      :id="'itemOptions'"
-      :options="itemOptions"
-      @selectedItem="selectedItem"
-    ></Options>
 
     <PageMore
       ref="share"
       v-if="!loading"
-      :title="shareOption.title"
-      :link="shareOption.link"
-      :shareName="shareOption.shareName"
-      :content="shareOption.content"
-      :imageUrl="shareOption.imageUrl"
-      :thumbUrl="shareOption.thumbUrl"
-      :targetId="id"
+      :shareOption="shareOption"
       :hideShareBtn="true"
-      :targetType="'group'"
-      :pyqTitle="shareOption.pyqTitle"
-      :pyqContent="shareOption.pyqContent"
       :iconMenu="iconMenus"
       @success="shareSuccess"
       @fail="shareFail"
       @clickedItem="iconMenusClickedItem"
     ></PageMore>
 
-    <commentTextarea ref="ctextarea"
-                     @sendMessage="sendMessage"
-    ></commentTextarea>
-
-    <!--<FooterMenu-->
-      <!--:options="footerMenus"-->
-      <!--@clickedItem="footerMenuClickedItem"-->
-      <!--v-if="isInGroup"-->
-    <!--&gt;</FooterMenu>-->
-
   </div>
 </template>
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
-  import Options from '../../components/Options.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
   import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
   import DiscoverShare from '../../components/feed/DiscoverShare.vue'
@@ -269,10 +215,7 @@
   import PageMore from '../../components/PageMore.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
-  import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
-  import userAbility from '../../utils/userAbility'
-  import FooterMenu from '../../components/FooterMenu.vue'
   import { checkPermission, toSettingSystem, setClipboardText } from '../../utils/plus'
   import { scrollPage } from '../../utils/dom'
 
@@ -284,7 +227,6 @@
         search_type: 1,
         detail: null,
         loading: 1,
-        allOptionSelects: [],
         itemOptions: [],
         itemOptionsObj: null,
         itemOptionsIndex: 0,
@@ -294,10 +236,13 @@
           content: '',
           imageUrl: '',
           thumbUrl: '',
-          shareName: ''
+          shareName: '',
+          targetType: 'group',
+          targetId: ''
         },
         isInGroup: false,
-        readyOpenNotice: false
+        readyOpenNotice: false,
+        iconMenus: []
       }
     },
     created () {},
@@ -307,56 +252,6 @@
       },
       nextOtherData () {
         return {id: this.id, type: this.search_type}
-      },
-      footerMenus () {
-        if (this.detail.room_id > 0) {
-          return [
-            {
-              icon: '#icon-tijiaowenzhang1',
-              text: '发分享',
-              number: 0,
-              disable: false,
-              rightLine: true,
-              isLight: false
-            },
-            {
-              icon: '#icon-hudongwenda-',
-              text: '圈聊',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              newNum: this.detail.unread_group_im_messages,
-              isLight: false
-            },
-            {
-              icon: '#icon-fenxiang',
-              text: '邀请加入',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            }
-          ]
-        } else {
-          return [
-            {
-              icon: '#icon-tijiaowenzhang1',
-              text: '发分享',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: false
-            },
-            {
-              icon: '#icon-fenxiang',
-              text: '邀请加入',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            }
-          ]
-        }
       },
       iconMenus () {
         return [
@@ -371,13 +266,9 @@
       RefreshList,
       GroupsInfo,
       SubmitReadhubAriticle,
-      Options,
       PageMore,
-      DiscoverShare,
-      commentTextarea,
-      FooterMenu
+      DiscoverShare
     },
-    props: {},
     watch: {
       '$route' (to, from) {
         if (to.name === from.name) {
@@ -394,38 +285,46 @@
         }
       },
       showItemOptions (item, index) {
-        this.itemOptions = []
+        this.iconMenus = []
         this.itemOptionsObj = item
         this.itemOptionsIndex = index
         if (getLocalUserId() === item.user.id) {
-          this.itemOptions = [
-            '删除'
-          ]
+          this.iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
         }
 
         if (this.detail.is_joined === 3) {
           if (item.feed.is_recommend) {
-            this.itemOptions.push('取消加精')
+            this.iconMenus.push('取消加精')
           } else {
-            this.itemOptions.push('加精')
+            this.iconMenus.push({
+              icon: '#icon-sheweijingxuan',
+              text: '设为精选'
+            })
           }
 
           if (item.top) {
-            this.itemOptions.push('取消置顶')
+            this.iconMenus.push('取消置顶')
           } else {
-            this.itemOptions.push('置顶')
+            this.iconMenus.push({
+              icon: '',
+              text: '置顶'
+            })
           }
         }
-        this.iconMenus = [
-          {
-            icon: '#icon-shanchu1',
-            text: '删除'
-          },
-          {
-            icon: '#icon-sheweijingxuan',
-            text: '设为精选'
-          }
-        ]
+//        this.iconMenus = [
+//          {
+//            icon: '#icon-shanchu1',
+//            text: '删除'
+//          },
+//          {
+//            icon: '#icon-sheweijingxuan',
+//            text: '设为精选'
+//          }
+//        ]
+        this.shareOption = [] // @todo 接sharetempate
         this.$refs.share.share()
       },
       shareToCopyLink () {
@@ -506,56 +405,6 @@
         }, () => {}, () => {}, () => {
         })
       },
-      footerMenuClickedItem (item) {
-        switch (item.text) {
-          case '发分享':
-            this.toDiscoverAdd()
-            break
-          case '圈聊':
-            this.detail.unread_group_im_messages = 0
-            this.toGroupChat()
-            break
-          case '邀请加入':
-            this.joinShare()
-            break
-        }
-      },
-      sendMessage (message) {
-        var commentTarget = message.commentData
-
-        postRequest(`article/comment-store`, {
-          'submission_id': commentTarget.submissionId,
-          body: message.content,
-          parent_id: commentTarget.parentId,
-          mentions: message.noticeUsers
-        }).then(response => {
-          var code = response.data.code
-
-          if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
-            return
-          }
-
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-
-          var data = response.data.data
-
-          window.mui.toast(response.data.message)
-
-          this.commentTargetComponent.prependItem(
-            data.id,
-            message.content,
-            data.created_at,
-            commentTarget.parentId,
-            commentTarget.commentList
-          )
-
-          this.$refs.ctextarea.finish()
-        })
-      },
       goArticle: function (article) {
         goThirdPartyArticle(
           article.view_url,
@@ -574,9 +423,6 @@
           name: this.detail.name
         })
         this.$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + this.id))
-      },
-      toGroupChat () {
-        this.$router.pushPlus('/group/chat/' + this.detail.room_id)
       },
       refreshPageData (param) {
         if (param && param.type && param.type === 'back') {
@@ -603,6 +449,17 @@
         })
       },
       joinShare () {
+        var shareOption = getGroupDetail(
+          this.id,
+          this.detail.name,
+          this.detail.owner.name,
+          this.detail.subscribers,
+          this.detail.logo
+        )
+
+        this.shareOption = Object.assign(this.shareOption, shareOption)
+
+        this.iconMenus = []
         this.$refs.share.share()
       },
       shareSuccess () {
@@ -626,9 +483,6 @@
       },
       selectedItem (item) {
         switch (item) {
-          case '退出圈子':
-            this.quit()
-            break
           case '删除':
             this.del(this.itemOptionsObj, () => {
               this.$refs.itemOptions.toggle()
@@ -652,48 +506,6 @@
           case '取消置顶':
             this.cancelTop(this.itemOptionsObj, () => {
               this.$refs.itemOptions.toggle()
-            })
-            break
-          case '圈成员管理':
-            this.$refs.allOptions.toggle()
-            this.$router.pushPlus('/group/setting/' + this.id)
-            break
-          case '开放圈子群聊':
-            this.$refs.allOptions.toggle()
-            var btnArray = ['取消', '确定']
-            var that = this
-            window.mui.confirm('确定开放圈子群聊吗？', ' ', btnArray, function (e) {
-              if (e.index === 1) {
-                postRequest(`group/openIm`, {id: that.id}).then(response => {
-                  var code = response.data.code
-                  if (code !== 1000) {
-                    window.mui.toast(response.data.message)
-                    that.$router.replace('/groups')
-                    return
-                  }
-                  that.detail.room_id = response.data.data.room_id
-                  window.mui.toast('群聊已开启')
-                })
-              }
-            })
-            break
-          case '关闭圈子群聊':
-            this.$refs.allOptions.toggle()
-            var btnArray2 = ['取消', '确定']
-            var that2 = this
-            window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray2, function (e) {
-              if (e.index === 1) {
-                postRequest(`group/closeIm`, {id: that2.id}).then(response => {
-                  var code = response.data.code
-                  if (code !== 1000) {
-                    window.mui.toast(response.data.message)
-                    that2.$router.replace('/groups')
-                    return
-                  }
-                  that2.detail.room_id = 0
-                  window.mui.toast('群聊已关闭')
-                })
-              }
             })
             break
         }
@@ -750,21 +562,9 @@
           callback()
         })
       },
-      allOptions () {
-        if (this.detail.is_joined === 3) {
-          if (this.detail.room_id > 0) {
-            this.allOptionSelects = ['圈成员管理', '关闭圈子群聊']
-          } else {
-            this.allOptionSelects = ['圈成员管理', '开放圈子群聊']
-          }
-          this.$refs.allOptions.toggle()
-        } else {
-          this.allOptionSelects = ['退出圈子']
-          this.$refs.allOptions.toggle()
-        }
-      },
       getData () {
         this.id = parseInt(this.$route.params.id)
+        this.shareOption.targetId = this.id
         if (!this.id) {
           window.mui.back()
           return
@@ -789,13 +589,15 @@
             this.isInGroup = false
           }
 
-          this.shareOption = getGroupDetail(
+          var shareOption = getGroupDetail(
             this.id,
             this.detail.name,
             this.detail.owner.name,
             this.detail.subscribers,
             this.detail.logo
           )
+
+          this.shareOption = Object.assign(this.shareOption, shareOption)
 
           this.loading = 0
         })
@@ -825,37 +627,8 @@
           }
         })
       },
-      quit () {
-        postRequest(`group/quit`, {id: this.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-
-          if (this.detail.is_joined !== 3) {
-            this.$refs.allOptions.toggle()
-          }
-
-          this.refreshPageData()
-        })
-      },
       chooseType (type) {
         this.search_type = type
-      },
-      comment (submissionId, parentId, commentTargetUsername, list, component) {
-        // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
-        var commentTarget = {
-          submissionId: submissionId,
-          parentId: parentId || 0,
-          commentList: list
-        }
-        var data = {
-          targetUsername: commentTargetUsername || '',
-          commentData: commentTarget
-        }
-        this.commentTargetComponent = component
-        this.$refs.ctextarea.comment(data)
       }
     },
     mounted () {
