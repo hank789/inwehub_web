@@ -71,4 +71,19 @@
     border-radius: 0 !important;
     margin: 0 !important;
   }
+  .mui-popover.mui-popover-action .mui-table-view:first-child {
+    border-top-left-radius: 18px !important;
+    border-top-right-radius: 18px !important;
+  }
+  .mui-popover.mui-popover-action .mui-table-view:last-child .mui-table-view-cell:after {
+    height: 0 !important;
+  }
+  .mui-table-view-cell {
+    padding: 15px 0 !important;
+    color: #444444 !important;
+    font-size: 16px !important;
+  }
+  .mui-popover.mui-popover-action .mui-table-view:last-child {
+    font-family:PingFangSC-Medium;
+  }
 </style>
