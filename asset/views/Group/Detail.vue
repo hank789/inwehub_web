@@ -786,16 +786,16 @@
     background: rgba(3, 174, 249, 1);
   }
   .join {
-    width: 343px;
-    height: 44px;
+    width: 9.146rem;
+    height: 1.173rem;
     position: absolute;
     right:0;
     left:0;
     z-index: 99;
-    bottom: 15px;
+    bottom: 0.4rem;
     margin: auto;
     color: #FFFFFF;
-    line-height: 44px;
+    line-height: 1.173rem;
     text-align: center;
     font-size: 0.426rem;
     background: #03AEF9;
@@ -804,7 +804,7 @@
     box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
   }
   .join.addGroup {
-    width: 94px;
+    width: 2.506rem;
   }
   .join.wait{
     background:rgba(220,220,220,1);
@@ -828,7 +828,7 @@
     margin-bottom: 0.133rem;
   }
   .listWrapper{
-    padding-bottom: 107px;
+    padding-bottom: 2.853rem;
     /*bottom: 1.333rem;*/
   }
 </style>
@@ -944,9 +944,9 @@
     }
     .groupDescription {
       color: #808080;
-      font-size: 14px;
-      line-height: 22px;
-      margin-top: 13px;
+      font-size: 0.373rem;
+      line-height: 0.586rem;
+      margin-top: 0.346rem;
     }
   }
 
