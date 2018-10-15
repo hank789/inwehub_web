@@ -155,6 +155,8 @@
                 window.mui.toast(response.data.message)
                 return
               }
+
+              localEvent.setLocalItem('refreshGroupDetail', {refresh: true})
               window.mui.back()
             })
           }

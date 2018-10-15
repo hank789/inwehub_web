@@ -41,7 +41,7 @@ export default {
             if (needRefresh && needRefresh.value) {
               localEvent.setLocalItem('needRefresh', {value: false})
               if (this.refreshPageData) {
-                console.log('calledMethod: refreshPageData')
+                console.log('calledMethod: refreshPageData param:' + JSON.stringify(e.detail))
                 this.refreshPageData(e.detail)
               }
             }
