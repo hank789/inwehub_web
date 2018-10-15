@@ -104,6 +104,9 @@
                   </svg> · 私密
                 </span>
               </div>
+              <div class="groupDescription">
+                <span>{{detail.description}}</span>
+              </div>
               <div class="goMoreoPerations" v-if="detail.audit_status === 1">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-jinru"></use>
@@ -156,6 +159,7 @@
           </div>
 
         </RefreshList>
+        <div class="join addGroup" v-if="detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
       </div>
 
       <!--不可以浏览-->
@@ -169,7 +173,7 @@
         <div class="groupIntroduce">
           <span class="text-content">{{ detail.description }}</span>
         </div>
-        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
+        <!--<div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>-->
 
         <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
         <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
@@ -377,7 +381,9 @@
         }
       },
       goMoreSetup () {
-        if (this.detail.audit_status === 1) {
+        if (this.detail.is_joined === -1) {
+          window.mui.toast('请加入圈子')
+        } else {
           this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
         }
       },
@@ -777,22 +783,26 @@
     color: rgba(255, 255, 255, 1);
     background: rgba(3, 174, 249, 1);
   }
-  .join{
-    width:92%;
-    height:1.173rem;
-    position: fixed;
+  .join {
+    width: 343px;
+    height: 44px;
+    position: absolute;
     right:0;
     left:0;
-    bottom: 0.4rem;
+    z-index: 99;
+    bottom: 15px;
     margin: auto;
-    background:rgba(3,174,249,1);
-    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
-    border-radius: 1.333rem ;
+    color: #FFFFFF;
+    line-height: 44px;
     text-align: center;
-    line-height: 1.173rem;
     font-size: 0.426rem;
-    color:rgba(255,255,255,1);
-    font-weight: 500;
+    background: #03AEF9;
+    border-radius: 1.333rem ;
+    font-family:PingFangSC-Medium;
+    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
+  }
+  .join.addGroup {
+    width: 94px;
   }
   .join.wait{
     background:rgba(220,220,220,1);
@@ -928,6 +938,12 @@
       .icon {
         font-size: 0.346rem;
       }
+    }
+    .groupDescription {
+      color: #808080;
+      font-size: 14px;
+      line-height: 22px;
+      margin-top: 13px;
     }
   }
 
