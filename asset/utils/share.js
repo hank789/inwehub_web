@@ -110,8 +110,8 @@ var Share = () => {
 
       wx.ready(() => {
         wx.onMenuShareAppMessage({
-          title: stripTags(self.data.title), // 分享标题
-          desc: stripTags(self.data.content), // 分享描述
+          title: stripTags(self.data.title).substr(0, 150), // 分享标题
+          desc: stripTags(self.data.content).substr(0, 150), // 分享描述
           link: self.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: self.data.imageUrl, // 分享图标
           type: self.data.type ? self.data.type : 'link', // 分享类型,music、video或link，不填默认为link
@@ -127,7 +127,7 @@ var Share = () => {
         })
 
         wx.onMenuShareTimeline({
-          title: stripTags(self.data.title), // 分享标题
+          title: stripTags(self.data.title).substr(0, 150), // 分享标题
           link: self.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: self.data.imageUrl, // 分享图标
           success: () => {
