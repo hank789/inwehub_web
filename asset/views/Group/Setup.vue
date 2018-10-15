@@ -151,7 +151,7 @@
             window.mui.toast(response.data.message)
             return
           }
-          this.$router.goBack()
+          window.mui.back()
         })
       },
       toGroupChat () {
