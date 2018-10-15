@@ -276,6 +276,10 @@
     color: #B4B4B6;
     font-size: 0.32rem;
   }
+  .freeQuestion-comment {
+    position: relative;
+    z-index: -1;
+  }
 </style>
 <style>
   #Outermost  p{
@@ -293,6 +297,5 @@
   .container-comments .comment span.Reply{
     float: left;
   }
-
 </style>
 

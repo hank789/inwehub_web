@@ -49,7 +49,6 @@
           ref="RefreshList"
           v-model="list"
           :api="'group/submissionList'"
-          :prevSuccessCallback="prevSuccessCallback"
           :prevOtherData="prevOtherData"
           :nextOtherData="nextOtherData"
           :pageMode="true"
@@ -255,14 +254,6 @@
       },
       nextOtherData () {
         return {id: this.id, type: this.search_type}
-      },
-      iconMenus () {
-        return [
-          {
-            icon: '#icon-lianjie2',
-            text: '复制链接'
-          }
-        ]
       }
     },
     components: {

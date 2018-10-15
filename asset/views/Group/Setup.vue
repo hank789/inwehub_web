@@ -145,13 +145,19 @@
         })
       },
       getQuit () {
-        postRequest(`group/quit`, {id: this.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
+        var that = this
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定要退出圈子吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            postRequest(`group/quit`, {id: that.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                return
+              }
+              window.mui.back()
+            })
           }
-          window.mui.back()
         })
       },
       toGroupChat () {
