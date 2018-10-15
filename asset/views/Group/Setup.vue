@@ -51,6 +51,7 @@
 
     <GroupsShare
       ref="share"
+      :hideShareBtn="true"
       :title="shareOption.title"
       :shareName="shareOption.shareName"
       :link="shareOption.link"
