@@ -104,7 +104,7 @@
                   </svg> · 私密
                 </span>
               </div>
-              <div class="groupDescription">
+              <div class="groupDescription" v-if="detail.is_joined === -1">
                 <span>{{detail.description}}</span>
               </div>
               <div class="goMoreoPerations" v-if="detail.audit_status === 1">
@@ -828,6 +828,7 @@
     margin-bottom: 0.133rem;
   }
   .listWrapper{
+    padding-bottom: 107px;
     /*bottom: 1.333rem;*/
   }
 </style>
