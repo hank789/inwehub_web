@@ -23,6 +23,10 @@
           <img src="../statics/images/sendFriend@2x.png"/>
           <span>私信</span>
         </div>
+        <div class="single" v-clipboard="shareOption.link" @success="shareToCopyLink()" @error="clipboardError">
+          <img src="../statics/images/copyLink@3x.png"/>
+          <span>复制链接</span>
+        </div>
       </div>
 
       <div class="line-river-after line-river-after-height"></div>
@@ -57,7 +61,6 @@
 
   import Share from '../utils/share'
   import { postRequest } from '../utils/request'
-  import { setClipboardText } from '../utils/plus'
   import localEvent from '../stores/localStorage'
 
   export default {
@@ -95,6 +98,9 @@
       }
     },
     methods: {
+      clipboardError () {
+        window.mui.toast('复制失败')
+      },
       toggleShareNav () {
         window.mui('#shareShowWrapper').popover('toggle')
       },
@@ -119,7 +125,6 @@
         }
       },
       shareToCopyLink () {
-        setClipboardText(this.link)
         window.mui.toast('已复制')
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel

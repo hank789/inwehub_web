@@ -52,6 +52,9 @@ import StarRating from './../../components/star-rating/star-rating'
 
 Vue.component('star-rating', StarRating)
 
+import VueClipboards from 'vue-clipboards'
+Vue.use(VueClipboards)
+
 import Back from './../../components/Back.vue'
 Vue.component('Back', Back)
 
