@@ -51,6 +51,7 @@
 
     <GroupsShare
       ref="share"
+      :hideShareBtn="true"
       :title="shareOption.title"
       :shareName="shareOption.shareName"
       :link="shareOption.link"
@@ -72,7 +73,7 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUuid } from '../../utils/user'
   import { getGroupDetail } from '../../utils/shareTemplate'
-  import GroupsShare from '../../components/GroupsShare.vue'
+  import GroupsShare from '../../components/Share.vue'
   import localEvent from '../../stores/localStorage'
   // const currentUser = getLocalUserInfo()
 

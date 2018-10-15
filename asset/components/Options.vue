@@ -72,22 +72,22 @@
     margin: 0 !important;
   }
   .mui-popover.mui-popover-action .mui-table-view:first-child {
-    border-top-left-radius: 18px !important;
-    border-top-right-radius: 18px !important;
+    border-top-left-radius: 0.48rem !important;
+    border-top-right-radius: 0.48rem !important;
   }
   .mui-popover.mui-popover-action .mui-table-view:last-child .mui-table-view-cell:after {
     height: 0 !important;
   }
   .mui-table-view-cell {
-    padding: 15px 0 !important;
+    padding: 0.4rem 0 !important;
     color: #444444 !important;
-    font-size: 16px !important;
+    font-size: 0.426rem !important;
   }
   .mui-popover.mui-popover-action .mui-table-view:last-child {
     font-family:PingFangSC-Medium;
   }
   .mui-popover .mui-table-view:after {
-    height: 1px !important;
+    height: 0.026rem !important;
   }
   .mui-popover.mui-popover-action .mui-table-view:last-child:after {
     height: 0 !important;
