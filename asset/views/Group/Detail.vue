@@ -286,9 +286,6 @@
             this.del(this.itemOptionsObj, () => {
             })
             break
-          case '复制链接':
-            this.shareToCopyLink()
-            break
           case '设为精选':
             this.addGood(this.itemOptionsObj, () => {
             })
@@ -318,10 +315,6 @@
           })
         }
         this.iconMenus.push(
-          {
-            icon: '#icon-lianjie2',
-            text: '复制链接'
-          }
           // {
           //   icon: '#icon-jubao',
           //   text: '举报'
@@ -361,25 +354,6 @@
         )
         this.shareOption = Object.assign(this.shareOption, shareOption)
         this.$refs.share.share()
-      },
-      shareToCopyLink () {
-        window.mui('#shareWrapper').popover('toggle')
-        setClipboardText(this.shareOption.link)
-        window.mui.toast('已复制')
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-          // mixpanel
-          window.mixpanel.track(
-            'inwehub:share:copyLink',
-            {
-              'app': 'inwehub',
-              'user_device': window.getUserAppDevice(),
-              'page': this.$route.fullPath,
-              'page_name': this.$route.name,
-              'page_title': this.$route.meta.title,
-              'referrer_page': ''
-            }
-          )
-        }
       },
       goMoreSetup () {
         if (this.detail.is_joined === -1) {
@@ -487,11 +461,6 @@
         })
       },
       joinShare () {
-        this.iconMenus = []
-        this.iconMenus.push({
-          icon: '#icon-lianjie2',
-          text: '复制链接'
-        })
         var shareOption = getGroupDetail(
           this.id,
           this.detail.name,
@@ -687,12 +656,9 @@
   }
 </script>
 
-<style scoped="scoped">
+<style lang="less" scoped>
   .mui-content {
     background: #ffffff;
-  }
-  .mui-scroll-wrapper {
-    /*top: 6.586rem;*/
   }
   .bot {
     position: absolute;
@@ -704,14 +670,11 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-
   .gray {
     width: 100%;
     height: 0.266rem;
     background: #f3f4f6;
   }
-
-  /*菜单*/
   .menu {
     width: 100%;
     height: 1.04rem;
@@ -723,67 +686,45 @@
     justify-content: space-around;
     line-height: 1.04rem;
     position: absolute;
-    /*top: 6.906rem;*/
-  }
-  .menu span {
-    position: relative;
-    margin-bottom: -0.293rem;
-  }
-  .menu span.bold {
-    font-weight: 500;
-  }
-  .menu span i {
-    position: absolute;
-    width: 0.746rem;
-    height: 0.04rem;
-    border-radius: 1.333rem;
-    background: #03aef9;
-    top: 0.986rem;
-    left: 0;
-    right: 0;
-    margin: auto;
+    span {
+      position: relative;
+      margin-bottom: -0.293rem;
+      &.bold {
+        font-weight: 500;
+      }
+      i {
+        position: absolute;
+        width: 0.746rem;
+        height: 0.04rem;
+        border-radius: 1.333rem;
+        background: #03aef9;
+        top: 0.986rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
   }
   .groups-list {
     margin-top: 1.306rem;
   }
-
-  .invitation {
-    width: 100%;
-    height: 1.333rem;
-    background: #ffffff;
+  .listWrapper{
+    padding-bottom: 2.853rem;
+  }
+  .Nothing {
+    width: 5.626rem;
     position: absolute;
-    bottom: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    border-top: 0.026rem solid #DCDCDC;
-  }
-
-  .invitation p {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.346rem;
-    color: rgba(128, 128, 128, 1);
-  }
-
-  .invitation p:nth-of-type(1) {
-    width: 65%;
-    height: 100%;
-  }
-
-  .invitation p:nth-of-type(1) svg {
-    font-size: 0.64rem;
-    margin-right: 0.24rem;
-  }
-
-  .invitation p:nth-of-type(2) {
-    width: 35%;
-    height: 100%;
-    font-size: 0.426rem;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(3, 174, 249, 1);
+    font-size: 0.32rem;
+    color: rgba(200,200,200,1);
+    left: 0;
+    right: 0;
+    top: 9rem;
+    text-align: center;
+    margin: 2rem auto 0;
+    svg {
+      font-size: 1.6rem;
+      margin-bottom: 0.133rem;
+    }
   }
   .join {
     width: 9.146rem;
@@ -801,40 +742,16 @@
     background: #03AEF9;
     border-radius: 1.333rem ;
     font-family:PingFangSC-Medium;
-    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
+    box-shadow: 0rem 0.026rem 0.266rem 0rem #CDD7DC;
+    &.addGroup {
+      width: 2.506rem;
+    }
+    &.wait{
+      color: #b4b4b6;
+      background: #dcdcdc;
+      box-shadow: 0rem 0.026rem 0.266rem 0rem #CDD7DC;
+    }
   }
-  .join.addGroup {
-    width: 2.506rem;
-  }
-  .join.wait{
-    background:rgba(220,220,220,1);
-    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
-    color:rgba(180,180,182,1);
-  }
-  .Nothing{
-    width: 5.626rem;
-    height: 5.333rem;
-    position: absolute;
-    font-size: 0.32rem;
-    color: rgba(200,200,200,1);
-    left: 0;
-    right: 0;
-    top: 9rem;
-    text-align: center;
-    margin: auto;
-  }
-  .Nothing svg{
-    font-size: 1.6rem;
-    margin-bottom: 0.133rem;
-  }
-  .listWrapper{
-    padding-bottom: 2.853rem;
-    /*bottom: 1.333rem;*/
-  }
-</style>
-
-
-<style lang="less" scoped>
   .headerShare {
     position: absolute;
     right: 0.426rem;
