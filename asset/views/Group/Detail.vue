@@ -219,6 +219,7 @@
   import { goThirdPartyArticle } from '../../utils/webview'
   import { checkPermission, toSettingSystem, setClipboardText } from '../../utils/plus'
   import { scrollPage } from '../../utils/dom'
+  import { alertGroups } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -382,7 +383,8 @@
       },
       goMoreSetup () {
         if (this.detail.is_joined === -1) {
-          window.mui.toast('请加入圈子')
+          alertGroups(this, this.joinIn)
+          // window.mui.toast('请加入圈子')
         } else {
           this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
         }
