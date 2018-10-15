@@ -251,7 +251,7 @@
   import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
   import { upvote, downVote } from '../../utils/discover'
-  import VuePullRefresh from 'vue-pull-refresh'
+  import VuePullRefresh from 'vue-awesome-pull-refresh'
   import { alertGroups } from '../../utils/dialogList'
 
   export default {
