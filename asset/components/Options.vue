@@ -86,4 +86,10 @@
   .mui-popover.mui-popover-action .mui-table-view:last-child {
     font-family:PingFangSC-Medium;
   }
+  .mui-popover .mui-table-view:after {
+    height: 1px !important;
+  }
+  .mui-popover.mui-popover-action .mui-table-view:last-child:after {
+    height: 0 !important;
+  }
 </style>
