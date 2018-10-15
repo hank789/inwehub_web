@@ -1,7 +1,7 @@
 import { postRequest } from './request'
 import localEvent from '../stores/localStorage'
 import router from '../modules/index/routers/index'
-import { alsrtRealNameAuthentication } from './dialogList'
+import { alertRealNameAuthentication } from './dialogList'
 
 var wx = window.wx
 
@@ -60,7 +60,7 @@ function rebootAuth (hash) {
 
 /* 绑定手机号 */
 function bindPhone () {
-  alsrtRealNameAuthentication(() => {
+  alertRealNameAuthentication(() => {
     router.push('/wechat/bindPhone')
   })
 }
