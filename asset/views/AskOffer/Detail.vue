@@ -158,7 +158,7 @@
   import Comment from '../../components/question-detail/CommentNew.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
   import Vue from 'vue'
-  import VuePullRefresh from 'vue-pull-refresh'
+  import VuePullRefresh from 'vue-awesome-pull-refresh'
   import {scrollToElement} from '../../utils/dom'
 
   const AskDetail = {
