@@ -18,7 +18,7 @@
             ref="RefreshList"
             v-model="list"
             :api="'notification/count'"
-            :prevOtherData="{}"
+            :prevOtherData="{need_report: 1}"
             :nextOtherData="{}"
             :isShowUpToRefreshDescription="false"
             :autoShowEmpty="false"
