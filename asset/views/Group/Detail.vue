@@ -464,7 +464,12 @@
       },
       refreshPageData (param) {
         if (param && param.type && param.type === 'back') {
-          return
+          var refreshGroupDetail = localEvent.getLocalItem('refreshGroupDetail')
+          if (!refreshGroupDetail) {
+            return
+          } else {
+            localEvent.clearLocalItem('refreshGroupDetail')
+          }
         }
 
         this.loading = 1
