@@ -217,7 +217,7 @@
   import { getGroupDetail, getTextDiscoverDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
   import { goThirdPartyArticle } from '../../utils/webview'
-  import { checkPermission, toSettingSystem, setClipboardText } from '../../utils/plus'
+  import { checkPermission, toSettingSystem } from '../../utils/plus'
   import { scrollPage } from '../../utils/dom'
   import { alertGroups } from '../../utils/dialogList'
 
@@ -412,11 +412,11 @@
       goMore () {
         this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
       },
-      prevSuccessCallback () {
-        scrollPage('.listWrapper', () => {
-        }, () => {}, () => {}, () => {
-        })
-      },
+      // prevSuccessCallback () {
+      //   scrollPage('.listWrapper', () => {
+      //   }, () => {}, () => {}, () => {
+      //   })
+      // },
       goArticle: function (article) {
         goThirdPartyArticle(
           article.view_url,
