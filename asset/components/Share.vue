@@ -23,7 +23,7 @@
           <img src="../statics/images/sendFriend@2x.png"/>
           <span>私信好友</span>
         </div>
-        <div class="single" @tap.stop.prevent="shareToCopyLink()">
+        <div class="single" v-clipboard="link" @success="shareToCopyLink()" @error="clipboardError">
           <img src="../statics/images/copyLink@3x.png"/>
           <span>复制链接</span>
         </div>
@@ -76,7 +76,7 @@
   import Share from '../utils/share'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
-  import { getLocalUrl, saveImageByBase64, createImageThumb, setClipboardText } from '../utils/plus'
+  import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
   import localEvent from '../stores/localStorage'
 
   export default {
@@ -159,6 +159,9 @@
     },
 
     methods: {
+      clipboardError () {
+        window.mui.toast('复制失败')
+      },
       cancelShare () {
         window.mui('#shareWrapper').popover('toggle')
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
@@ -177,7 +180,7 @@
         }
       },
       shareToCopyLink () {
-        setClipboardText(this.link)
+        // setClipboardText(this.link)
         window.mui.toast('已复制')
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel
