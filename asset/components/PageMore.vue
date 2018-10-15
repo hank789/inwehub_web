@@ -352,7 +352,7 @@
     }
     .more {
       background: #fff;
-      padding: 0.346rem 0.453rem 0.106rem;
+      padding: 0.346rem 0.453rem 0.25rem;
       font-size: 0;
       .single {
         height: 1.866rem;
@@ -373,7 +373,7 @@
       }
     }
     .more.twoLevel {
-      padding: 0.4rem 0.453rem 0.106rem;
+      padding: 0.4rem 0.453rem 0.25rem;
       .delete {
         .iconBorder {
           width: 1.173rem;
