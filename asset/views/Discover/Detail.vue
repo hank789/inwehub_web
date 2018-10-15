@@ -5,7 +5,7 @@
       <h1 class="mui-title" v-text="title"></h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content" v-show="!loading" @tap.capture="onTap($event)">
       <vue-pull-refresh :on-refresh="refreshPageData">
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
 
@@ -65,9 +65,9 @@
             </div>
           </div>
 
-          <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
-               @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
-          </div>
+          <!--<div class="groups"  v-if="typeDesc(detail.group.is_joined)"-->
+               <!--@tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容-->
+          <!--</div>-->
 
           <!-- 新增链接样式 -->
           <div class="link" v-if="detail.type === 'link' && detail.data.url">
@@ -200,7 +200,7 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer" v-if="detail.group.public">
+    <div class="container-footer" v-if="detail.group.public" @tap.capture="onTap($event)">
       <div class="footerLeft">
         <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
         <div class="footerMenuTwo" v-else>
@@ -252,6 +252,7 @@
   import { quillEditor } from '../../components/vue-quill'
   import { upvote, downVote } from '../../utils/discover'
   import VuePullRefresh from 'vue-pull-refresh'
+  import { alertGroups } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -363,6 +364,15 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      onTap (event) {
+        if (this.typeDesc(this.detail.group.is_joined)) {
+          event.stopPropagation()
+          event.preventDefault()
+          alertGroups(this, (num) => {
+            this.$router.pushPlus('/group/detail/' + this.detail.group.id)
+          })
+        }
+      },
       iconMenusClickedItem (item) {
         switch (item.text) {
           case '删除':
