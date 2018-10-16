@@ -457,6 +457,7 @@
         })
       },
       joinShare () {
+        this.iconMenus = []
         var shareOption = getGroupDetail(
           this.id,
           this.detail.name,
@@ -716,7 +717,7 @@
     right: 0;
     top: 9rem;
     text-align: center;
-    margin: 2rem auto 0;
+    margin: 1rem auto 0;
     svg {
       font-size: 1.6rem;
       margin-bottom: 0.133rem;
