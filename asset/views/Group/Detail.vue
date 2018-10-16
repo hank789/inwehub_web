@@ -2,7 +2,7 @@
   <div>
     <div class="mui-content" v-if="!loading" id="home-content">
 
-      <div v-if="!isInGroup && !detail.public">
+      <div v-if="(!isInGroup && !detail.public) || detail.audit_status === 0">
         <div class="header">
           <img v-lazy="detail.background_img" class="lazyImg">
           <div class="backMask"></div>
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <div v-if="isInGroup || detail.public">
+      <div v-if="isInGroup || (detail.public && detail.audit_status === 1)">
         <RefreshList
           ref="RefreshList"
           v-model="list"
@@ -346,9 +346,8 @@
         this.$refs.share.share()
       },
       goMoreSetup () {
-        if (this.detail.is_joined === -1) {
+        if (!this.isInGroup) {
           alertGroups(this, this.joinIn)
-          // window.mui.toast('请加入圈子')
         } else {
           this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
         }
