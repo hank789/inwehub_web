@@ -172,7 +172,7 @@
         <div class="groupIntroduce">
           <span class="text-content">{{ detail.description }}</span>
         </div>
-        <!--<div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>-->
+        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
 
         <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
         <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
@@ -217,7 +217,6 @@
   import localEvent from '../../stores/localStorage'
   import { goThirdPartyArticle } from '../../utils/webview'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
-  import { scrollPage } from '../../utils/dom'
   import { alertGroups } from '../../utils/dialogList'
 
   export default {
