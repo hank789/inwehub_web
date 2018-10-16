@@ -475,17 +475,7 @@
 
       },
       isShowItemOption (item) {
-        if (getLocalUserId() === item.user.id) {
-          // 文章是我写的
-          return true
-        }
-
-        // 我是圈主
-        if (this.detail.is_joined === 3) {
-          return true
-        }
-
-        return false
+        return true
       },
       report () {
         window.mui('#shareWrapper').popover('toggle')
