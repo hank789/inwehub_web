@@ -1,10 +1,27 @@
 <template>
   <div>
-    <div class="container-feed-list">
+    <div class="container-feed-questionAnswer feed-currency">
+      <div class="currency-title">
+        地板行业：成品生产过程中产生的废板可以二次利用再作为原材料投料，但每次投料的废板的比例可以不一样。大概是10%-40%的比例，废板的实际投料数量会根据目前废板库存调整，最高不能超过40%的比例，且因为成品加工过程是类似化工行业罐装投料。盘点困难。这个成本怎样核算比较合理？公司没用SAP... 所以给个正在财务核算逻辑就行，谢谢！
+      </div>
+      <div class="question-statistics">
+        <span>8元悬赏中</span>
+        <span>3回答 · 34关注</span>
+        <span>3评论 · 86%赞</span>
+      </div>
+      <div class="question-answer-box">
+        <span>8元悬赏中</span>
+        <span><i>#供应链#</i>传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？与专通的项目管理模式对比，主要冲突点在哪里？主要冲突点在哪里… </span>
+      </div>
+
+      <div class="line-river-after line-river-after-top"></div>
+    </div>
+
+    <div class="container-feed-list feed-currency">
       <UserInfo
         :uuid="list.user.uuid"
         :avatar="list.user.avatar"
-        :realname="list.user.name"
+        :realname="list.title"
         :isFollow="isFollow"
         :isShowPositionAndCompany="false"
         :isExpert="list.user.is_expert?1:0"
@@ -16,7 +33,8 @@
           <use xlink:href="#icon-dingwei1"></use>
         </svg>{{list.feed.current_address_name}}
       </div>
-      <div class="feed-title">{{list.feed.title}}</div>
+      <div class="currency-title">{{list.feed.title}}</div>
+      <div class="feed-open-all font-family-medium">展开全部</div>
       <!--图片-->
       <div v-if="list.feed.img" class="container-images container-images-discover">
         <div v-for="img in list.feed.img" class="container-image"><img :src="img"></div>
@@ -117,6 +135,14 @@
 </script>
 
 <style lang="less">
+  .feed-currency {
+    .currency-title {
+      color: #444444;
+      font-size: 14px;
+      line-height: 22px;
+      margin-top: -3px;
+    }
+  }
   .container-feed-list {
     position: relative;
     margin-top: 20px;
@@ -145,11 +171,10 @@
       top: 16px;
       left: 112px;
     }
-    .feed-title {
-      color: #444444;
-      font-size: 14px;
-      line-height: 22px;
-      margin-top: -3px;
+    .feed-open-all {
+      color: #03AEF9;
+      font-size: 13px;
+      margin-top: 4px;
     }
     .container-images {
       padding: 10px 0 0;
@@ -170,6 +195,7 @@
       border-radius: 4px;
       padding: 7px 10px;
       display: flex;
+      margin-top: 12px;
       margin-bottom: 10px;
       .linkImg {
         width: 44px;
@@ -257,6 +283,59 @@
           margin-left: 20px;
           .icon {
             margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  .container-feed-questionAnswer {
+    position: relative;
+    margin-top: 20px;
+    padding: 0 16px;
+    .line-river-after {
+      margin-top: 20px;
+    }
+    .question-statistics {
+      margin-top: 13px;
+      color: #B4B4B6;
+      span {
+        font-size: 11px;
+        &:nth-of-type(1) {
+          color: #235280;
+          font-size: 10px;
+          line-height: 14px;
+          padding: 1px 5px;
+          background: #FCC816;
+          display: inline-block;
+          border-radius: 4px;
+        }
+      }
+    }
+    .question-answer-box {
+      width: 343px;
+      padding: 7px 10px;
+      border-radius: 4px;
+      background: #F7F8FA;
+      margin-top: 13px;
+      span {
+        &:nth-of-type(1) {
+          color: #808080;
+          font-size: 10px;
+          padding: 1px 5px;
+          line-height: 14px;
+          border-radius: 4px;
+          background: #DCDCDC;
+          display: inline-block;
+        }
+        &:nth-of-type(2) {
+          color: #808080;
+          font-size: 13px;
+          line-height: 20px;
+          margin-left: -4px;
+          i {
+            color: #235280;
+            font-style: normal;
           }
         }
       }
