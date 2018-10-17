@@ -2,7 +2,7 @@
   <div>
     <div class="mui-content" v-if="!loading" id="home-content">
 
-      <div v-if="(!isInGroup && !detail.public) || detail.audit_status === 0">
+      <div v-if="pageMode === 'info'">
         <div class="header">
           <img v-lazy="detail.background_img" class="lazyImg">
           <div class="backMask"></div>
@@ -42,9 +42,28 @@
             </svg>
           </div>
         </div>
+
+        <div>
+          <div class="gray"></div>
+
+          <div class="group-text">
+            <span class="font-family-medium">圈子介绍</span>
+            <i class="bot"></i>
+          </div>
+          <div class="groupIntroduce">
+            <span class="text-content">{{ detail.description }}</span>
+          </div>
+          <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
+
+          <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
+          <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
+          <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
+          <!--审核不通过-->
+          <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
+        </div>
       </div>
 
-      <div v-if="isInGroup || (detail.public && detail.audit_status === 1)">
+      <div v-if="pageMode === 'detail'">
         <RefreshList
           ref="RefreshList"
           v-model="list"
@@ -116,10 +135,10 @@
 
         <div class="gray"></div>
         <div class="menu">
-          <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
-            v-if="search_type === 1"></i></span>
-          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
-            v-if="search_type === 3"></i></span>
+          <span :class="{'font-family-medium': listType === 1}" @tap.stop.prevent="chooseType(1)">全部<i
+            v-if="listType === 1"></i></span>
+          <span :class="{'font-family-medium': listType === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+            v-if="listType === 3"></i></span>
           <i class="bot"></i>
         </div>
           <div class="groups-list">
@@ -161,26 +180,6 @@
         <div class="join addGroup" v-if="detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
       </div>
 
-      <!--不可以浏览-->
-      <div v-else>
-        <div class="gray"></div>
-
-        <div class="group-text">
-          <span class="font-family-medium">圈子介绍</span>
-          <i class="bot"></i>
-        </div>
-        <div class="groupIntroduce">
-          <span class="text-content">{{ detail.description }}</span>
-        </div>
-        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
-
-        <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
-        <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
-        <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
-        <!--审核不通过-->
-        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
-      </div>
-
       <div class="goHairShareWrapper" v-if="isInGroup" @tap.stop.prevent="toDiscoverAdd">
         <div class="goHairShareBack">
           <svg class="icon" aria-hidden="true">
@@ -188,6 +187,7 @@
           </svg>
         </div>
       </div>
+
     </div>
 
     <PageMore
@@ -222,11 +222,11 @@
   export default {
     data () {
       return {
+        loading: 1,
         id: null,
         list: [],
-        search_type: 1,
+        listType: 1,
         detail: null,
-        loading: 1,
         itemOptions: [],
         itemOptionsObj: null,
         itemOptionsIndex: 0,
@@ -242,17 +242,38 @@
         },
         isInGroup: false,
         readyOpenNotice: false,
-        iconMenus: [],
-        copyLink: ''
+        iconMenus: []
       }
     },
     created () {},
     computed: {
       prevOtherData () {
-        return {id: this.id, type: this.search_type}
+        return {id: this.id, type: this.listType}
       },
       nextOtherData () {
-        return {id: this.id, type: this.search_type}
+        return {id: this.id, type: this.listType}
+      },
+      pageMode () {
+        if (this.detail.audit_status === 0 || this.detail.audit_status === 2 || this.detail.audit_status === 4) {
+          return 'info'
+        }
+
+        if (this.detail.public === 0) {
+          if (this.detail.is_joined !== 1 && this.detail.is_joined !== 3) {
+            return 'info'
+          }
+        }
+
+        return 'detail'
+      },
+      inGroup () {
+        if (this.detail.audit_status === 1) {
+          if (this.detail.is_joined === 1 || this.detail.is_joined === 3) {
+            return true
+          }
+        }
+
+        return false
       }
     },
     components: {
@@ -624,7 +645,7 @@
         })
       },
       chooseType (type) {
-        this.search_type = type
+        this.listType = type
       }
     },
     mounted () {
