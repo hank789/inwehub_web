@@ -14,9 +14,10 @@
       ></UserInfo>
       <div class="currency-title">{{list.feed.answer_content}}</div>
       <div class="question-statistics">
-        <span>{{list.feed.status_description}}</span>
-        <span>{{list.feed.comment_number}}回答 · {{list.feed.follow_number}}关注</span>
-        <span>{{list.feed.comment_number}}评论 · {{list.feed.support_number}}赞 · 4.7分</span>
+        <span class="question-price" :class="addClass ? 'active-yellow':''" v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.status_description}}</span>
+        <span v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.answer_number}}回答 · {{list.feed.follow_number}}关注</span>
+        <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11 || list.feed_type === 12">{{list.feed.comment_number}}回复 · {{list.feed.support_number}}赞</span>
+        <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11"> · 1.4分</span>
       </div>
       <div class="question-answer-box">
         <span>{{list.feed.status_description}}</span>
@@ -26,7 +27,7 @@
       <div class="line-river-after line-river-after-top"></div>
     </div>
     <!-- 分享 -->
-    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5">
+    <div class="container-feed-list feed-currency" v-if="(list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5) && false">
       <UserInfo
         :uuid="list.user.uuid"
         :avatar="list.user.avatar"
@@ -42,7 +43,7 @@
           <use xlink:href="#icon-dingwei1"></use>
         </svg>{{list.feed.current_address_name}}
       </div>
-      <div class="currency-title">{{list.feed.title}}</div>
+      <div class="currency-title text-line-5">{{list.feed.title}}</div>
       <div class="feed-open-all font-family-medium">展开全部</div>
       <!--图片-->
       <div v-if="typeof(list.feed.img) === 'object' && list.feed_type === 15" class="container-images container-images-discover">
@@ -112,7 +113,8 @@
   export default {
     data () {
       return {
-        isFollow: false
+        isFollow: false,
+        addClass: Boolean
       }
     },
     components: {
@@ -128,10 +130,19 @@
         default: {}
       }
     },
-    mounted () {},
+    mounted () {
+      this.addClass()
+    },
     methods: {
       setFollowStatus (status) {
         this.detail.is_followed_author = status
+      },
+      addClass () {
+        if (!this.list.feed.status === 8 && !this.list.feed.status === 9) {
+          this.addClass = true
+        } else {
+          this.addClass = false
+        }
       }
     }
   }
@@ -300,17 +311,21 @@
     .question-statistics {
       margin-top: 0.346rem;
       color: #B4B4B6;
+      .question-price {
+        &.active-yellow {
+          color: #235280;
+          background: #FCC816;
+        }
+        color: #808080;
+        font-size: 0.266rem;
+        line-height: 0.373rem;
+        padding: 0.026rem 0.133rem;
+        background: #DCDCDC;
+        display: inline-block;
+        border-radius: 0.106rem;
+      }
       span {
         font-size: 0.293rem;
-        &:nth-of-type(1) {
-          color: #235280;
-          font-size: 0.266rem;
-          line-height: 0.373rem;
-          padding: 0.026rem 0.133rem;
-          background: #FCC816;
-          display: inline-block;
-          border-radius: 0.106rem;
-        }
       }
     }
     .question-answer-box {
