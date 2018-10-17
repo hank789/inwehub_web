@@ -12,7 +12,7 @@
       :time="list.created_at"
       :setFollowStatus="setFollowStatus"
       ></UserInfo>
-      <div class="currency-title">{{list.feed.answer_content}}</div>
+      <div class="currency-title text-line-5">{{list.feed.answer_content}}</div>
       <div class="question-statistics">
         <span class="question-price" :class="addClass ? 'active-yellow':''" v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.status_description}}</span>
         <span v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.answer_number}}回答 · {{list.feed.follow_number}}关注</span>
@@ -132,6 +132,12 @@
     },
     mounted () {
       this.addClass()
+      var titles = document.querySelectorAll('.currency-title')
+      titles.forEach((item) => {
+        if (item.scrollHeight > item.offsetHeight) {
+          item.nextElementSibling.classList.add('zhankai')
+        }
+      })
     },
     methods: {
       setFollowStatus (status) {
