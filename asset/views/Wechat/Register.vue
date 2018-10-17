@@ -157,7 +157,13 @@
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             cb(user)
             window.mui.closeWaiting()
-            window.mixpanelIdentify()
+            let newUser = this.$route.query.newUser || ''
+            if (newUser === 1) {
+              window.trackMixpanelEvent('register:success', 'oauth', 'wechat-oauth', '微信注册')
+              window.mixpanelIdentify(true)
+            } else {
+              window.mixpanelIdentify()
+            }
             // 存储用户位置信息
             saveLocationInfo()
             if (window.mui.os.plus) {
