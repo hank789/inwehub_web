@@ -140,24 +140,24 @@
 <style lang="less">
   .feed-currency {
     .line-river-after {
-      margin-top: 20px;
+      margin-top: 0.533rem;
     }
     .currency-title {
       color: #444444;
-      font-size: 14px;
-      line-height: 22px;
-      margin-top: -3px;
+      font-size: 0.373rem;
+      line-height: 0.586rem;
+      margin-top: -0.08rem;
     }
     .userInfoWrapper {
       padding: 0 !important;
       .mui-media-body {
-        margin-left: 38px;
+        margin-left: 1.013rem;
         color: #444444;
-        font-size: 13px;
+        font-size: 0.346rem;
         font-family:PingFangSC-Medium;
         .detail {
           color: #B4B4B6;
-          font-size: 11px;
+          font-size: 0.293rem;
           font-family:PingFangSC-Regular;
         }
       }
@@ -165,28 +165,28 @@
   }
   .container-feed-list {
     position: relative;
-    margin-top: 20px;
-    padding: 0 16px;
+    margin-top: 0.533rem;
+    padding: 0 0.426rem;
     .feed-address {
       color: #B4B4B6;
-      font-size: 11px;
+      font-size: 0.293rem;
       position: absolute;
-      top: 16px;
-      left: 112px;
+      top: 0.426rem;
+      left: 2.986rem;
     }
     .feed-open-all {
       color: #03AEF9;
-      font-size: 13px;
-      margin-top: 4px;
+      font-size: 0.346rem;
+      margin-top: 0.106rem;
     }
     .container-images {
-      padding: 10px 0 0;
+      padding: 0.266rem 0 0;
       &.container-images-discover {
         .container-image {
-          width: 111px;
-          height: 111px;
-          margin-right: 5px;
-          margin-bottom: 5px;
+          width: 2.96rem;
+          height: 2.96rem;
+          margin-right: 0.133rem;
+          margin-bottom: 0.133rem;
           &:nth-of-type(3n) {
             margin-right: 0;
           }
@@ -195,87 +195,87 @@
     }
     .feed-link-box {
       background: #F7F8FA;
-      border-radius: 4px;
-      padding: 7px 10px;
+      border-radius: 0.106rem;
+      padding: 0.186rem 0.266rem;
       display: flex;
-      margin-top: 12px;
-      margin-bottom: 10px;
+      margin-top: 0.32rem;
+      margin-bottom: 0.266rem;
       .linkImg {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 4px;
+          border-radius: 0.106rem;
         }
       }
       .linkText {
-        width: 269px;
-        margin-left: 10px;
+        width: 7.173rem;
+        margin-left: 0.266rem;
         span {
           &:nth-of-type(1) {
             width: inherit;
             color: #444444;
-            font-size: 13px;
-            line-height: 20px;
+            font-size: 0.346rem;
+            line-height: 0.533rem;
           }
           &:nth-of-type(2) {
             color: #B4B4B6;
-            font-size: 11px;
+            font-size: 0.293rem;
           }
         }
       }
     }
     .feed-pdf-box {
       background: #F7F8FA;
-      border-radius: 4px;
-      padding: 7px 10px;
+      border-radius: 0.106rem;
+      padding: 0.186rem 0.266rem;
       display: flex;
-      margin-bottom: 10px;
+      margin-bottom: 0.266rem;
       .pdfIcon {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         text-align: center;
-        border-radius: 4px;
+        border-radius: 0.106rem;
         background: #DF6F5A;
         .icon {
           color: #ffffff;
-          font-size: 34px;
-          margin-top: 5px;
+          font-size: 0.906rem;
+          margin-top: 0.133rem;
         }
       }
       .pdfText {
-        width: 269px;
-        margin-left: 10px;
+        width: 7.173rem;
+        margin-left: 0.266rem;
         span {
           width: inherit;
           color: #444444;
-          font-size: 13px;
-          line-height: 20px;
+          font-size: 0.346rem;
+          line-height: 0.533rem;
         }
       }
     }
     .feed-group {
       width: fit-content;
-      height: 21px;
+      height: 0.56rem;
       color: #444444;
-      padding: 0 10px;
-      font-size: 11px;
-      line-height: 21px;
+      padding: 0 0.266rem;
+      font-size: 0.293rem;
+      line-height: 0.56rem;
       background: #F7F8FA;
-      border-radius: 100px;
+      border-radius: 2.666rem;
       display: flex;
-      margin-top: 10px;
+      margin-top: 0.266rem;
       img {
-        width: 11px;
-        height: 11px;
-        margin-top: 5px;
-        margin-right: 3px;
+        width: 0.293rem;
+        height: 0.293rem;
+        margin-top: 0.133rem;
+        margin-right: 0.08rem;
       }
     }
     .feed-moreOperation {
-      margin-top: 15px;
+      margin-top: 0.4rem;
       color: #808080;
       display: flex;
       justify-content: space-between;
@@ -284,9 +284,9 @@
       }
       .feed-operation {
         span {
-          margin-left: 20px;
+          margin-left: 0.533rem;
           .icon {
-            margin-right: 5px;
+            margin-right: 0.133rem;
           }
         }
       }
@@ -295,45 +295,45 @@
 
   .container-feed-questionAnswer {
     position: relative;
-    margin-top: 20px;
-    padding: 0 16px;
+    margin-top: 0.533rem;
+    padding: 0 0.426rem;
     .question-statistics {
-      margin-top: 13px;
+      margin-top: 0.346rem;
       color: #B4B4B6;
       span {
-        font-size: 11px;
+        font-size: 0.293rem;
         &:nth-of-type(1) {
           color: #235280;
-          font-size: 10px;
-          line-height: 14px;
-          padding: 1px 5px;
+          font-size: 0.266rem;
+          line-height: 0.373rem;
+          padding: 0.026rem 0.133rem;
           background: #FCC816;
           display: inline-block;
-          border-radius: 4px;
+          border-radius: 0.106rem;
         }
       }
     }
     .question-answer-box {
-      width: 343px;
-      padding: 7px 10px;
-      border-radius: 4px;
+      width: 9.146rem;
+      padding: 0.186rem 0.266rem;
+      border-radius: 0.106rem;
       background: #F7F8FA;
-      margin-top: 13px;
+      margin-top: 0.346rem;
       span {
         &:nth-of-type(1) {
           color: #808080;
-          font-size: 10px;
-          padding: 1px 5px;
-          line-height: 14px;
-          border-radius: 4px;
+          font-size: 0.266rem;
+          padding: 0.026rem 0.133rem;
+          line-height: 0.373rem;
+          border-radius: 0.106rem;
           background: #DCDCDC;
           display: inline-block;
         }
         &:nth-of-type(2) {
           color: #808080;
-          font-size: 13px;
-          line-height: 20px;
-          margin-left: -4px;
+          font-size: 0.346rem;
+          line-height: 0.533rem;
+          margin-left: -0.106rem;
           i {
             color: #235280;
             font-style: normal;
