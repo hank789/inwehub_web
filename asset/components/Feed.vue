@@ -1,6 +1,16 @@
 <template>
   <div>
     <div class="container-feed-questionAnswer feed-currency">
+      <UserInfo
+      :uuid="list.user.uuid"
+      :avatar="list.user.avatar"
+      :realname="list.title"
+      :isFollow="isFollow"
+      :isShowPositionAndCompany="false"
+      :isExpert="list.user.is_expert?1:0"
+      :time="list.created_at"
+      :setFollowStatus="setFollowStatus"
+      ></UserInfo>
       <div class="currency-title">
         地板行业：成品生产过程中产生的废板可以二次利用再作为原材料投料，但每次投料的废板的比例可以不一样。大概是10%-40%的比例，废板的实际投料数量会根据目前废板库存调整，最高不能超过40%的比例，且因为成品加工过程是类似化工行业罐装投料。盘点困难。这个成本怎样核算比较合理？公司没用SAP... 所以给个正在财务核算逻辑就行，谢谢！
       </div>
@@ -110,7 +120,7 @@
   export default {
     data () {
       return {
-        isFollow: true
+        isFollow: false
       }
     },
     components: {
@@ -136,19 +146,14 @@
 
 <style lang="less">
   .feed-currency {
+    .line-river-after {
+      margin-top: 20px;
+    }
     .currency-title {
       color: #444444;
       font-size: 14px;
       line-height: 22px;
       margin-top: -3px;
-    }
-  }
-  .container-feed-list {
-    position: relative;
-    margin-top: 20px;
-    padding: 0 16px;
-    .line-river-after {
-      margin-top: 20px;
     }
     .userInfoWrapper {
       padding: 0 !important;
@@ -164,6 +169,11 @@
         }
       }
     }
+  }
+  .container-feed-list {
+    position: relative;
+    margin-top: 20px;
+    padding: 0 16px;
     .feed-address {
       color: #B4B4B6;
       font-size: 11px;
@@ -293,9 +303,6 @@
     position: relative;
     margin-top: 20px;
     padding: 0 16px;
-    .line-river-after {
-      margin-top: 20px;
-    }
     .question-statistics {
       margin-top: 13px;
       color: #B4B4B6;
