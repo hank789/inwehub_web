@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 问答 -->
     <div class="container-feed-questionAnswer feed-currency" v-if="list.feed_type <= 3 || list.feed_type === 6 || list.feed_type === 11 || list.feed_type === 12 || list.feed_type === 14">
       <UserInfo
       :uuid="list.user.uuid"
@@ -11,22 +12,20 @@
       :time="list.created_at"
       :setFollowStatus="setFollowStatus"
       ></UserInfo>
-      <div class="currency-title">
-        地板行业：成品生产过程中产生的废板可以二次利用再作为原材料投料，但每次投料的废板的比例可以不一样。大概是10%-40%的比例，废板的实际投料数量会根据目前废板库存调整，最高不能超过40%的比例，且因为成品加工过程是类似化工行业罐装投料。盘点困难。这个成本怎样核算比较合理？公司没用SAP... 所以给个正在财务核算逻辑就行，谢谢！
-      </div>
+      <div class="currency-title">{{list.feed.answer_content}}</div>
       <div class="question-statistics">
-        <span>8元悬赏中</span>
-        <span>3回答 · 34关注</span>
-        <span>3评论 · 86%赞</span>
+        <span>{{list.feed.status_description}}</span>
+        <span>{{list.feed.comment_number}}回答 · {{list.feed.follow_number}}关注</span>
+        <span>{{list.feed.comment_number}}评论 · {{item.feed.support_number}}赞 · 4.7分</span>
       </div>
       <div class="question-answer-box">
-        <span>8元悬赏中</span>
-        <span><i>#供应链#</i>传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？与专通的项目管理模式对比，主要冲突点在哪里？主要冲突点在哪里… </span>
+        <span>{{list.feed.status_description}}</span>
+        <span><i v-for="(item, index) in list.feed.tags" :key="index">#{{item.name}}#</i>{{list.feed.question_title}}</span>
       </div>
 
       <div class="line-river-after line-river-after-top"></div>
     </div>
-
+    <!-- 分享 -->
     <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5">
       <UserInfo
         :uuid="list.user.uuid"
