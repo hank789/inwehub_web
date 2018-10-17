@@ -133,11 +133,11 @@
       next()
     },
     methods: {
-      wechatLoginSuccess (token, openid) {
+      wechatLoginSuccess (token, openid, nickname = '', isNewUser = '') {
         console.log(token)
         console.log(openid)
         if (token) {
-          this.$router.pushPlus('/wechat/register?token=' + token + '&openid=' + openid)
+          this.$router.pushPlus('/wechat/register?token=' + token + '&openid=' + openid + '&newUser=' + isNewUser)
         } else {
           this.$router.pushPlus('/wechat/register?openid=' + openid)
         }
