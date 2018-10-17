@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container-feed-questionAnswer feed-currency">
+    <div class="container-feed-questionAnswer feed-currency" v-if="list.feed_type <= 3 || list.feed_type === 6 || list.feed_type === 11 || list.feed_type === 12 || list.feed_type === 14">
       <UserInfo
       :uuid="list.user.uuid"
       :avatar="list.user.avatar"
@@ -27,7 +27,7 @@
       <div class="line-river-after line-river-after-top"></div>
     </div>
 
-    <div class="container-feed-list feed-currency">
+    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5">
       <UserInfo
         :uuid="list.user.uuid"
         :avatar="list.user.avatar"
@@ -46,36 +46,29 @@
       <div class="currency-title">{{list.feed.title}}</div>
       <div class="feed-open-all font-family-medium">展开全部</div>
       <!--图片-->
-      <div v-if="list.feed.img" class="container-images container-images-discover">
+      <div v-if="typeof(list.feed.img) === 'object' && list.feed_type === 15" class="container-images container-images-discover">
         <div v-for="img in list.feed.img" class="container-image"><img :src="img"></div>
       </div>
+      <div class="container-image lazyImg" v-if="list.feed_type === 15 && typeof(list.feed.img) === 'string'">
+        <img class="lazyImg" v-lazy="list.feed.img">
+      </div>
       <!--链接-->
-      <div class="feed-link-box">
-        <div class="linkImg"><img src="../statics/images/uicon.jpg" alt=""></div>
+      <div class="feed-link-box" v-if="list.feed_type === 16 && list.feed.submission_type === 'link'">
+        <div class="linkImg lazyImg"><img class="lazyImg" v-lazy="list.feed.img"></div>
         <div class="linkText">
-          <span class="font-family-medium text-line-2">未来企业如果没几只爬虫，出门都不好意思打招呼.</span>
-          <span>www.weixin.com</span>
+          <span class="font-family-medium text-line-2">{{list.feed.article_title}}</span>
+          <span>{{list.feed.domain}}</span>
         </div>
       </div>
       <!--PDF-->
-      <div class="feed-pdf-box">
+      <div class="feed-pdf-box" v-if="list.feed_type === 15 && list.feed.files" v-for="(item, index) in list.feed.files" :key="index">
         <div class="pdfIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-pdf"></use>
           </svg>
         </div>
         <div class="pdfText">
-          <span class="font-family-medium text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？实施方法论是</span>
-        </div>
-      </div>
-      <div class="feed-pdf-box">
-        <div class="pdfIcon">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-pdf"></use>
-          </svg>
-        </div>
-        <div class="pdfText">
-          <span class="font-family-medium text-line-2">传统大型企业的IT咨询项目加实施落地，实施方法论是否可以敏捷化？实施方法论是</span>
+          <span class="font-family-medium text-line-2">{{item.name}}</span>
         </div>
       </div>
 
@@ -136,6 +129,7 @@
         default: {}
       }
     },
+    mounted () {},
     methods: {
       setFollowStatus (status) {
         this.detail.is_followed_author = status
@@ -213,6 +207,7 @@
         img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
           border-radius: 4px;
         }
       }
