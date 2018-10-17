@@ -27,7 +27,7 @@
       <div class="line-river-after line-river-after-top"></div>
     </div>
     <!-- 分享 -->
-    <div class="container-feed-list feed-currency" v-if="(list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5) && false">
+    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5">
       <UserInfo
         :uuid="list.user.uuid"
         :avatar="list.user.avatar"
