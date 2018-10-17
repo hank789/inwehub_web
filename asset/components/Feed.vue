@@ -16,7 +16,7 @@
       <div class="question-statistics">
         <span>{{list.feed.status_description}}</span>
         <span>{{list.feed.comment_number}}回答 · {{list.feed.follow_number}}关注</span>
-        <span>{{list.feed.comment_number}}评论 · {{item.feed.support_number}}赞 · 4.7分</span>
+        <span>{{list.feed.comment_number}}评论 · {{list.feed.support_number}}赞 · 4.7分</span>
       </div>
       <div class="question-answer-box">
         <span>{{list.feed.status_description}}</span>
