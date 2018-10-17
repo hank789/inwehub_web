@@ -12,7 +12,7 @@
       :time="list.created_at"
       :setFollowStatus="setFollowStatus"
       ></UserInfo>
-      <div class="currency-title">{{list.feed.answer_content}}</div>
+      <div class="currency-title text-line-5">{{list.feed.answer_content}}</div>
       <div class="question-statistics">
         <span>{{list.feed.status_description}}</span>
         <span>{{list.feed.comment_number}}回答 · {{list.feed.follow_number}}关注</span>
@@ -42,7 +42,7 @@
           <use xlink:href="#icon-dingwei1"></use>
         </svg>{{list.feed.current_address_name}}
       </div>
-      <div class="currency-title">{{list.feed.title}}</div>
+      <div class="currency-title text-line-5">{{list.feed.title}}</div>
       <div class="feed-open-all font-family-medium">展开全部</div>
       <!--图片-->
       <div v-if="typeof(list.feed.img) === 'object' && list.feed_type === 15" class="container-images container-images-discover">
@@ -128,7 +128,14 @@
         default: {}
       }
     },
-    mounted () {},
+    mounted () {
+      var titles = document.querySelectorAll('.currency-title')
+      titles.forEach((item) => {
+        if (item.scrollHeight > item.offsetHeight) {
+          item.nextElementSibling.classList.add('zhankai')
+        }
+      })
+    },
     methods: {
       setFollowStatus (status) {
         this.detail.is_followed_author = status
