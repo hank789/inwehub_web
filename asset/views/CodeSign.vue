@@ -36,7 +36,7 @@
         </button>
         <div class="registerPassword">
           <span>未注册验证即自动创建账号</span>
-          <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/login')">密码登录</span>
+          <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/passwordlogin')">密码登录</span>
         </div>
 
         <div class="weChat" @tap.stop.prevent="wechatLogin()">
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-  import request, { createAPI, apiRequest, postRequest } from '../utils/request'
+  import { apiRequest, postRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
   import errorCodes from '../stores/errorCodes'
   import oauth from '../components/oauth/oauth'
@@ -72,8 +72,6 @@
 
   // 手机号码规则
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
-  const usernameReg = /^[a-zA-Z_\u4E00-\u9FA5\uF900-\uFA2D][a-zA-Z0-9_\u4E00-\u9FA5\uF900-\uFA2D]*$/
-  const codeReg = /^[0-9]{4}$/
   const register = {
     data: () => ({
       isNeedRegistrationCode: false,
@@ -557,7 +555,7 @@
     }
   }
   .mui-content{
-    background:#f3f4f6;
+    background: #FFFFFF;
   }
   .login {
     position: absolute;
@@ -619,9 +617,11 @@
 
   /*图标*/
   .logo {
-    font-size: 3.466rem;
+    font-size: 148px;
     text-align: center;
     margin: 0.133rem 0;
+    padding-top: 20px;
+    height: 148px;
   }
 
   /*输入框的内容*/
@@ -652,7 +652,7 @@
   .inputWrapper .getYzm {
     display: inline-block;
     font-size: 0.373rem;
-    color: #444444;
+    color: #C8C8C8;
     position: absolute;
     right: 0.053rem;
     top: 0.12rem;

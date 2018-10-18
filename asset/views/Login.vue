@@ -30,7 +30,7 @@
         <!--忘记密码和账号-->
         <div class="apply">
           <span @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码？</span>
-          <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/codesign/')">验证码登录</span>
+          <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/login')">验证码登录</span>
         </div>
         <div class="weChat" @tap.stop.prevent="wechatLogin()">
           <div class="weChatIcon">
@@ -299,9 +299,11 @@
 
   /*图标*/
   .logo {
-    font-size: 3.466rem;
+    font-size: 148px;
     text-align: center;
     margin: 0.133rem 0;
+    padding-top: 20px;
+    height: 148px;
   }
 
   /*忘记密码和账号*/
@@ -447,7 +449,7 @@
   }
 
   .mui-content {
-    background-color: #f3f4f6;
+    background-color: #FFFFFF;
     min-height: 15.146rem;
   }
 </style>

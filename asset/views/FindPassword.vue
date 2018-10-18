@@ -346,7 +346,7 @@
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
-    background: #f3f4f6;
+    background: #FFFFFF;
   }
   .login {
     position: absolute;
@@ -358,9 +358,11 @@
   }
 
   .logo {
-    font-size: 3.466rem;
+    font-size: 148px;
     text-align: center;
     margin: 0.133rem 0;
+    padding-top: 20px;
+    height: 148px;
   }
 
   /*小箭头*/

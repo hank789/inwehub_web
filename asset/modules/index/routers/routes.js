@@ -353,7 +353,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: componets.Login,
+    component: componets.CodeSign,
     meta: {
       title: '登录'
     },
@@ -377,11 +377,11 @@ const routes = [
     }
   },
   {
-    path: '/codesign',
-    name: 'codesign',
-    component: componets.CodeSign,
+    path: '/passwordlogin',
+    name: 'passwordlogin',
+    component: componets.Login,
     meta: {
-      title: '验证码登录'
+      title: '密码登录'
     },
     beforeEnter: (to, from, next) => {
       CanNotGetInWhenLogged(to, from, next)
