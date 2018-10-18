@@ -2,10 +2,11 @@
   <div>
     <div class="mui-content absolute">
       <div class="login">
-
-        <svg class="icon logo" aria-hidden="true">
-          <use xlink:href="#icon-logo"></use>
-        </svg>
+        <div class="logo">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-logowenzi"></use>
+          </svg>
+        </div>
 
 
         <div class="inputWrapper">
@@ -24,30 +25,28 @@
                  @tap.stop.prevent="entryPassword"/>
         </div>
 
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
 
         <!--忘记密码和账号-->
         <div class="apply">
-          <div>
-            <span class="forget" @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码</span>
-            <span class="nothing" @tap.stop.prevent="$router.pushPlus('/register/')">还没有账号?</span>
+          <span @tap.stop.prevent="$router.pushPlus('/findpassword/')">忘记密码？</span>
+          <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/codesign/')">验证码登录</span>
+        </div>
+        <div class="weChat" @tap.stop.prevent="wechatLogin()">
+          <div class="weChatIcon">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-wechat"></use>
+            </svg>
           </div>
+          <span>微信授权登录</span>
         </div>
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" @tap.prevent="submit">登录</button>
 
-
-        <div class="wechatWrapper" @tap.stop.prevent="wechatLogin()">
-          <div class="myicon myicon-wechat"></div>
-          通过微信登录
-
-
-
-        </div>
+        <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span></div>
 
       </div>
 
       <oauth ref="oauth" :isShowBtn="false" @success="wechatLoginSuccess" @fail="wechatLoginFail"
              style="display:none"></oauth>
-
     </div>
   </div>
 </template>
@@ -255,72 +254,85 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .weChat {
+    position: absolute;
+    bottom: 56px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    .weChatIcon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto;
+      color: #FFFFFF;
+      font-size: 25px;
+      line-height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(155deg,#7ADF75 0%,#51C944 100%);
+    }
+    span {
+      color: #B4B4B6;
+      font-size: 11px;
+      margin-top: 6px;
+    }
+  }
+  .protocol {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #808080;
+    text-align: center;
+    font-size: 12px;
+    span {
+      color: #3C95F9;
+    }
+  }
   .login {
     position: absolute;
     width: 100%;
     min-height: 100%;
-    background: #f3f4f6;
+    background: #FFFFFF;
     background-size: cover;
-    text-align: center;
+    /*text-align: center;*/
   }
 
   /*图标*/
   .logo {
-
-    font-size: 2.933rem;
-    margin: 2.933rem 0 2rem;
-
+    font-size: 130px;
+    text-align: center;
+    margin: 5px 0;
   }
 
   /*忘记密码和账号*/
   .apply {
-    width: 100%;
-    height: 0.8rem;
-    position: relative;
-    top: -0.586rem;
-
+    padding: 0 37px;
+    display: flex;
+    line-height: 22px;
+    margin-top: 12px;
+    justify-content: space-between;
+    span {
+      &:nth-of-type(1) {
+        color: #03AEF9;
+        font-size: 12px;
+      }
+      &:nth-of-type(2) {
+        color: #444444;
+        font-size: 15px;
+      }
+    }
   }
-
-  .apply > div {
-    width: 80%;
-    height: 100%;
-    position: absolute;
-    top: 0.4rem;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    /*background: #DDDDDD;*/
-
-  }
-
-  .apply > div > span {
-    color: #3c95f9;
-    font-size: 0.373rem;
-  }
-
-  .apply > div > span:nth-of-type(1) {
-    display: block;
-    float: left;
-    width: 50%;
-    text-align: left;
-  }
-
-  .apply > div > span:nth-of-type(2) {
-    display: block;
-    float: right;
-    width: 50%;
-    text-align: right;
-  }
-
   /*登录*/
   .button, .mui-btn {
-    border-radius: 0.133rem;
-    color: #f2f2f2;
+    color: #FFFFFF;
     width: 80%;
     margin-left: 10%;
     margin-top: 0.133rem;
-    background: #3C95F9;
+    background: #03AEF9;
+    border-radius: 0.133rem;
+  }
+  .mui-btn-block {
+    margin-bottom: 0;
   }
 
   /*输入框的内容*/
@@ -334,7 +346,7 @@
   }
 
   .inputWrapper {
-    margin: 0 0.88rem 0.586rem;
+    margin: 0 0.88rem 25px;
     position: relative;
     width: 80%;
     margin-left: 10%;
