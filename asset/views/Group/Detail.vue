@@ -433,7 +433,6 @@
             localEvent.clearLocalItem('refreshGroupDetail')
           }
         }
-
         this.loading = 1
         this.getData()
       },
