@@ -67,108 +67,11 @@
         <div>
           <template v-for="(item, index) in list">
 
-            <!-- 发布了分享 -->
-            <div @tap.stop.prevent="toDetail(item)" class="container-feed-discover-add" v-if="item.feed_type === 15">
-              <div class="container-avatarAndTwoLineText">
-                <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
-                  <div class="avatarInner"><img :src="item.user.avatar">
-                    <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
-                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                    </svg>
-                  </div>
-                </div>
-                <div class="mui-media-body">
-                  <div class="lineWrapper-1">{{ item.title }}
-                    <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
-                  </div>
-                  <div class="lineWrapper-2"><timeago :since="timeago(item.created_at)" :auto-update="60">
-                  </timeago>
-                    <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
-                      <use xlink:href="#icon-dingwei1"></use>
-                    </svg><span class="address">{{ item.feed.current_address_name }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="contentWrapper text-line-3">
-                <span v-for="tag in item.feed.tags" @tap.stop.prevent="toTagDetail(tag.name)" class="tag">#{{tag.name}}#</span>
-                <span v-html="getHighlight(item.feed.title)"></span>
-              </div>
+            <FeedItem
+              :item="item"
+              @showItemMore="showItemMore"
+            ></FeedItem>
 
-              <div v-if="item.feed.img" class="container-images container-images-discover">
-                <div v-for="img in item.feed.img" class="container-image"><img :src="img"></div>
-              </div>
-              <div v-if="item.feed.files" class="container-pdf-list">
-                <div v-for="file in item.feed.files" class="pdf"><span class="text-line-2">{{file.name}}</span></div>
-              </div>
-              <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
-
-            </div>
-
-            <!-- 发布了链接分享 -->
-            <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 16">
-              <div class="container-avatarAndTwoLineText">
-                <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
-                  <div class="avatarInner"><img :src="item.user.avatar">
-                    <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
-                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                    </svg>
-                  </div>
-                </div>
-                <div class="mui-media-body">
-                  <div class="lineWrapper-1">{{ item.title }}
-                    <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
-                  </div>
-                  <div class="lineWrapper-2"><timeago :since="timeago(item.created_at)" :auto-update="60">
-                  </timeago>
-                    <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
-                      <use xlink:href="#icon-dingwei1"></use>
-                    </svg><span class="address">{{ item.feed.current_address_name }}</span>
-                  </div>
-                </div>
-              </div>
-              <!-- 新增链接样式 -->
-              <div class="newLink">
-                <div class="contentWrapper text-line-3" v-html="getHighlight(item.feed.title)"></div>
-                <div class="newLinkBox">
-                  <div class="container-image lazyImg" v-if="item.feed.img">
-                    <img class="lazyImg" v-lazy="item.feed.img">
-                  </div>
-
-                  <div class="linkContent text-line-2" v-if="item.feed.article_title">{{item.feed.article_title}}</div>
-                  <div class="link">{{item.feed.domain}} </div>
-                </div>
-              </div>
-              <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
-            </div>
-
-
-            <!-- 发布了原创文章，有title和描述 -->
-            <div @tap.stop.prevent="toDetail(item)" class="container-feed-article-add" v-if="item.feed_type === 5">
-              <div class="container-avatarAndTwoLineText">
-                <div class="avatar" @tap.stop.prevent="toResume(item.user.uuid)">
-                  <div class="avatarInner"><img :src="item.user.avatar">
-                    <svg class="icon" aria-hidden="true" v-show="item.user.is_expert">
-                      <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                    </svg>
-                  </div>
-                </div>
-                <div class="mui-media-body">
-                  <div class="lineWrapper-1">{{ item.title }}
-                  <div class="component-label component-label-top" v-show="item.top > 0">顶</div>
-                  </div>
-                  <div class="lineWrapper-2">{{ item.created_at }}
-                  <svg class="icon addressIcon" aria-hidden="true" v-show="item.feed.current_address_name">
-                    <use xlink:href="#icon-dingwei1"></use>
-                  </svg><span class="address">{{ item.feed.current_address_name }}</span>
-                  </div>
-                </div>
-              </div>
-              <div class="contentWrapper text-line-3">{{ item.feed.title }}</div>
-              <div class="container-image" v-if="item.feed.img"><img :src="item.feed.img"></div>
-              <div class="container-remarks"><span class="from"><i>来自圈子</i>{{ item.feed.group.name }}</span>{{ item.feed.comment_number }}评论<span class="line-wall"></span>{{ item.feed.support_number }}点赞</div>
-            </div>
-
-            <div class="line-river-big"></div>
           </template>
         </div>
 
@@ -191,6 +94,16 @@
       <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
     </div>
 
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
+
   </div>
 </template>
 
@@ -199,10 +112,14 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
+  import FeedItem from '../../components/feed.vue'
+  import PageMore from '../../components/PageMore.vue'
 
   export default {
     data () {
       return {
+        shareOption: {},
+        iconMenus: [],
         searchText: '',
         confirmSearchText: '',
         isShowCancelButton: false,
@@ -217,7 +134,9 @@
     },
     components: {
       RefreshList,
-      TextDetail
+      TextDetail,
+      FeedItem,
+      PageMore
     },
     created () {
       this.refreshPageData()
@@ -239,6 +158,14 @@
         })
       }
     },
+    updated () {
+      this.$nextTick(() => {
+        var eles = document.querySelectorAll('.currency-title')
+        eles.forEach((item) => {
+          item.innerHTML = this.getHighlight(item.innerHTML)
+        })
+      })
+    },
     mounted () {},
     computed: {
       dataList () {
@@ -257,6 +184,18 @@
       }
     },
     methods: {
+      showItemMore (shareOption) {
+        this.shareOption = shareOption
+        this.$refs.share.share()
+      },
+      shareFail () {
+
+      },
+      shareSuccess () {
+
+      },
+      iconMenusClickedItem () {
+      },
       focus: function () {
         this.confirmSearchText = ''
         this.list = []
