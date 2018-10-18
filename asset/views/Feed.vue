@@ -66,7 +66,8 @@
       unread_count: 0,
       contact_id: '',
       list: [],
-      shareOption: {}
+      shareOption: {},
+      iconMenus: []
     }),
     created () {
 
