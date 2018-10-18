@@ -358,9 +358,9 @@
   }
 
   .logo {
-    font-size: 130px;
+    font-size: 3.466rem;
     text-align: center;
-    margin: 5px 0;
+    margin: 0.133rem 0;
   }
 
   /*小箭头*/
@@ -404,14 +404,14 @@
 
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     position: absolute;
     right: 0.053rem;
     top: 0.12rem;
-    height: 30px;
-    padding: 0 15px;
-    line-height: 30px;
+    height: 0.8rem;
+    padding: 0 0.4rem;
+    line-height: 0.8rem;
     border-radius: 0.133rem;
     border: 0.026rem solid #dcdcdc;
   }
