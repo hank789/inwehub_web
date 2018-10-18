@@ -32,25 +32,32 @@
         class="listWrapper"
       >
         <template v-for="(item, index) in list">
-          <FeedList
-            :list="item"
-            @toDetail="toDetail"
-            @toGroupDetail="toGroupDetail"
-          ></FeedList>
+          <FeedItem
+            :item="item"
+            @showItemMore="showItemMore"
+          ></FeedItem>
         </template>
 
       </RefreshList>
 
     </div>
+
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
   </div>
 </template>
 <script>
   import RefreshList from '../components/refresh/List.vue'
   import HomeSearch from '../components/search/Home'
-  import userAbility from '../utils/userAbility'
-  import { textToLinkHtml, secureHtml, transferTagToLink } from '../utils/dom'
-  import { goThirdPartyArticle } from '../utils/webview'
-  import FeedList from '../components/feed.vue'
+  import FeedItem from '../components/feed.vue'
+  import PageMore from '../components/PageMore.vue'
 
   const Feed = {
     data: () => ({
@@ -58,7 +65,8 @@
       emptyDescription: '暂无内容',
       unread_count: 0,
       contact_id: '',
-      list: []
+      list: [],
+      shareOption: {}
     }),
     created () {
 
@@ -68,7 +76,8 @@
     components: {
       RefreshList,
       HomeSearch,
-      FeedList
+      FeedItem,
+      PageMore
     },
     activated: function () {
       this.refreshPageData()
@@ -98,8 +107,17 @@
       }
     },
     methods: {
-      toGroupDetail (item) {
-        this.$router.pushPlus('/group/detail/' + item.id)
+      showItemMore (shareOption) {
+        this.shareOption = shareOption
+        this.$refs.share.share()
+      },
+      shareFail () {
+
+      },
+      shareSuccess () {
+
+      },
+      iconMenusClickedItem () {
       },
       refreshPageData () {
         if (this.$route.query.refresh) {
@@ -112,59 +130,8 @@
           this.unread_count = obj.unread_count
         }
       },
-      toTagDetail (name) {
-        userAbility.jumpToTagDetail(name)
-      },
       switchSearchType (filter) {
         this.search_type = filter
-      },
-      textToLink (text) {
-        return transferTagToLink(secureHtml(textToLinkHtml(text)))
-      },
-      toResume (uuid) {
-        if (!uuid) {
-          return false
-        }
-        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
-      },
-      goArticle: function (article) {
-        goThirdPartyArticle(
-          article.view_url,
-          article.id,
-          article.title,
-          article.comment_url,
-          article.img_url
-        )
-      },
-      toDetail (item) {
-        switch (item.feed_type) {
-          case 1:
-          case 2:
-          case 3:
-          case 5:
-          case 6:
-          case 11:
-          case 12:
-          case 14:
-          case 15:
-          case 16:
-            this.$router.pushPlus(item.url, 'list-detail-page')
-            break
-          case -1:
-            // 已废弃
-            var linkArticle = {
-              view_url: item.url,
-              id: item.feed.submission_id,
-              title: item.feed.title,
-              comment_url: item.feed.comment_url,
-              img_url: item.feed.img
-            }
-            this.goArticle(linkArticle)
-            break
-          default:
-            this.$router.pushPlus(item.url, 'list-detail-page')
-            break
-        }
       }
     }
   }
