@@ -377,6 +377,17 @@ const routes = [
     }
   },
   {
+    path: '/codesign',
+    name: 'codesign',
+    component: componets.CodeSign,
+    meta: {
+      title: '验证码登录'
+    },
+    beforeEnter: (to, from, next) => {
+      CanNotGetInWhenLogged(to, from, next)
+    }
+  },
+  {
     path: '/findpassword',
     name: 'findpassword',
     component: componets.FindPassword,
