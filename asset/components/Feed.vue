@@ -1,67 +1,66 @@
 <template>
   <div>
+
     <!-- 问答 -->
-    <div class="container-feed-questionAnswer feed-currency" @tap.stop.prevent="toDetail(list)" v-if="list.feed_type <= 3 || list.feed_type === 6 || list.feed_type === 11 || list.feed_type === 12 || list.feed_type === 14">
+    <div class="container-feed-questionAnswer feed-currency" @tap.stop.prevent="toDetail(item)" v-if="isAsk">
       <UserInfo
-      :uuid="list.user.uuid"
-      :avatar="list.user.avatar"
-      :realname="list.title"
-      :isFollow="isFollow"
-      :isShowPositionAndCompany="false"
-      :isExpert="list.user.is_expert?1:0"
-      :time="list.created_at"
-      :setFollowStatus="setFollowStatus"
+        :uuid="item.user.uuid"
+        :avatar="item.user.avatar"
+        :realname="item.title"
+        :isShowPositionAndCompany="false"
+        :isExpert="item.user.is_expert?1:0"
+        :time="item.created_at"
       ></UserInfo>
-      <div class="currency-title ">{{list.feed.answer_content}}</div>
+      <div class="currency-title">{{item.feed.answer_content}}</div>
       <div class="question-statistics">
-        <span class="question-price" :class="list.feed.status !== 8 && list.feed.status !== 9 ? 'active-yellow':''" v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.status_description}}</span>
-        <span v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.answer_number}}回答 · {{list.feed.follow_number}}关注</span>
-        <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11 || list.feed_type === 12">{{list.feed.comment_number}}回复 · {{list.feed.support_number}}赞</span>
-        <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11"> · 1.4分</span>
+        <span class="question-price active-yellow" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
+        <span v-if="answerNumber >=0 ">{{answerNumber}}回答</span>
+        <span v-if="followNumber >=0 ">{{followNumber}}关注</span>
+        <span v-if="supportNumber >=0 ">{{supportNumber}}赞</span>
+        <span v-if="commentNumber >=0 ">{{commentNumber}}回复</span>
+        <span v-if="averageRate >=0 ">{{averageRate}}分</span>
       </div>
       <div class="question-answer-box">
-        <span>{{list.feed.status_description}}</span>
-        <span><i v-for="(item, index) in list.feed.tags" :key="index">#{{item.name}}#</i>{{list.feed.question_title}}</span>
+        <span>{{item.feed.status_description}}</span>
+        <span><i v-for="(tag, tagIndex) in item.feed.tags" :key="tagIndex" @tap.stop.prevent="toTagDetail(tag.name)">#{{tag.name}}#</i>{{item.feed.question_title}}</span>
       </div>
-
       <div class="line-river-after line-river-after-top"></div>
     </div>
+
     <!-- 分享 -->
-    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5 " @tap.stop.prevent="toDetail(list)">
+    <div class="container-feed-item feed-currency" v-if="isDiscover" @tap.stop.prevent="toDetail(item)">
       <UserInfo
-        :uuid="list.user.uuid"
-        :avatar="list.user.avatar"
-        :realname="list.title"
-        :isFollow="isFollow"
+        :uuid="item.user.uuid"
+        :avatar="item.user.avatar"
+        :realname="item.title"
         :isShowPositionAndCompany="false"
-        :isExpert="list.user.is_expert?1:0"
-        :time="list.created_at"
-        :setFollowStatus="setFollowStatus"
+        :isExpert="item.user.is_expert?1:0"
+        :time="item.created_at"
       ></UserInfo>
-      <div class="feed-address" v-if="list.feed.current_address_name">
+      <div class="feed-address" v-if="item.feed.current_address_name">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dingwei1"></use>
-        </svg>{{list.feed.current_address_name}}
+        </svg>
+        {{item.feed.current_address_name}}
       </div>
-      <div class="currency-title text-line-5 ">{{list.feed.title}}</div>
-      <div class="feed-open-all font-family-medium">展开全部</div>
+      <div class="currency-title text-line-5 ">{{item.feed.title}}</div>
+      <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
       <!--图片-->
-      <div v-if="typeof(list.feed.img) === 'object' && list.feed_type === 15 && list.feed.img.length > 0" class="container-images container-images-discover">
-        <div v-for="img in list.feed.img" class="container-image"><img :src="img"></div>
-      </div>
-      <div class="container-image lazyImg" v-if="list.feed_type === 15 && typeof(list.feed.img) === 'string'">
-        <img class="lazyImg" v-lazy="list.feed.img">
+      <div v-if="itemObj.feed.img.length"
+           class="container-images container-images-discover">
+        <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
       <!--链接-->
-      <div class="feed-link-box" v-if="list.feed_type === 16 && list.feed.submission_type === 'link'">
-        <div class="linkImg lazyImg"><img class="lazyImg" v-lazy="list.feed.img"></div>
+      <div class="feed-link-box" v-if="item.feed.submission_type === 'link'">
+        <div class="linkImg lazyImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
         <div class="linkText">
-          <span class="font-family-medium text-line-2">{{list.feed.article_title}}</span>
-          <span>{{list.feed.domain}}</span>
+          <span class="font-family-medium text-line-2">{{item.feed.article_title}}</span>
+          <span>{{item.feed.domain}}</span>
         </div>
       </div>
       <!--PDF-->
-      <div class="feed-pdf-box" v-if="list.feed_type === 15 && list.feed.files" v-for="(item, index) in list.feed.files" :key="index">
+      <div class="feed-pdf-box" v-if="item.feed.files.length" v-for="(item, index) in item.feed.files"
+           :key="index">
         <div class="pdfIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-pdf"></use>
@@ -71,14 +70,14 @@
           <span class="font-family-medium text-line-2">{{item.name}}</span>
         </div>
       </div>
-
-      <div class="feed-group" v-if="list.feed.group.name" @tap.stop.prevent="toGroupDetail(list.feed.group)">
+      <!--圈子-->
+      <div class="feed-group" v-if="item.feed.group.name" @tap.stop.prevent="toGroupDetail(item.feed.group)">
         <img src="../statics/images/feed-group@3x.png" alt="">
-        <span>{{list.feed.group.name}}</span>
+        <span>{{item.feed.group.name}}</span>
       </div>
-
+      <!--操作区-->
       <div class="feed-moreOperation">
-        <div class="feed-mord">
+        <div class="feed-mord" @tap.stop.prevent="showItemMore">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-gengduo1"></use>
           </svg>
@@ -87,17 +86,17 @@
           <span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-pinglun"></use>
-            </svg>{{list.feed.comment_number}}
+            </svg>{{item.feed.comment_number}}
           </span>
-          <span>
+          <span @tap.stop.prevent="discoverDown()">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-cai"></use>
-            </svg>987
+            </svg>{{item.feed.downvote_number}}
           </span>
-          <span>
+          <span @tap.stop.prevent="discoverUp()">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zan"></use>
-            </svg>{{list.feed.support_number}}
+            </svg>{{item.feed.support_number}}
           </span>
         </div>
       </div>
@@ -109,22 +108,89 @@
 
 <script>
   import UserInfo from './question-detail/UserInfo'
+  import userAbility from '../utils/userAbility'
+  import { upvote, downVote } from '../utils/discover'
+  import PageMore from './PageMore.vue'
+  import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
 
   export default {
     data () {
       return {
-        isFollow: false
+        shareOption: {}
       }
     },
     components: {
-      UserInfo
+      UserInfo,
+      PageMore
+    },
+    computed: {
+      isAsk () {
+        switch (this.item.feed_type) {
+          case 1:
+          case 2:
+          case 3:
+          case 6:
+          case 11:
+          case 12:
+          case 14:
+            return true
+          default:
+            return false
+        }
+      },
+      isDiscover () {
+        switch (this.item.feed_type) {
+          case 15:
+          case 16:
+          case 5:
+            return true
+          default:
+            return false
+        }
+      },
+      itemObj () {
+        if (typeof this.item.feed.img === 'string') {
+          if (this.item.img) {
+            this.item.feed.img = [this.item.feed.img]
+          } else {
+            this.item.feed.img = []
+          }
+        }
+        return this.item
+      },
+      commentNumber () {
+        if (this.item.feed.answer_id) {
+          return this.item.feed.comment_number
+        }
+        return -1
+      },
+      answerNumber () {
+        if (!this.item.feed.answer_id) {
+          return this.item.feed.answer_number
+        }
+        return -1
+      },
+      supportNumber () {
+        if (this.item.feed.answer_id) {
+          return this.item.feed.support_number
+        }
+        return -1
+      },
+      followNumber () {
+        if (!this.item.feed.answer_id) {
+          return this.item.feed.follow_number
+        }
+        return -1
+      },
+      averageRate () {
+        if (this.item.feed.average_rate) {
+          return this.item.feed.average_rate
+        }
+        return -1
+      }
     },
     props: {
-      description: {
-        type: String,
-        default: '暂时还没有数据呀～'
-      },
-      list: {
+      item: {
         type: Object,
         default: {}
       }
@@ -138,14 +204,79 @@
       })
     },
     methods: {
-      toGroupDetail (list) {
-        this.$emit('toGroupDetail', list)
+      showItemMore () {
+        if (this.isDiscover) {
+          this.shareOption = getTextDiscoverDetail(
+            this.item.feed.comment_url,
+            this.item.feed.title,
+            this.item.user.avatar,
+            this.item.user.name
+          )
+        }
+
+        if (this.isAsk) {
+          this.shareOption = getAskCommunityInteractionDetail(
+            this.id,
+            this.item.title,
+            this.item.user.name
+          )
+        }
+
+        this.$emit('showItemMore', this.shareOption)
       },
-      toDetail (list) {
-        this.$emit('toDetail', list)
+      discoverUp () {
+        upvote(this, this.item.feed.submission_id, () => {
+          this.item.feed.support_number++
+        }, () => {
+          this.item.feed.support_number--
+        })
       },
-      setFollowStatus (status) {
-        this.detail.is_followed_author = status
+      discoverDown () {
+        downVote(this, this.item.feed.submission_id, () => {
+          this.item.feed.downvote_number++
+        }, () => {
+          this.item.feed.downvote_number--
+        })
+      },
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
+      extendAll (event) {
+        event.target.previousElementSibling.classList.remove('text-line-5')
+        event.target.style.display = 'none'
+      },
+      toGroupDetail (item) {
+        this.$router.pushPlus('/group/detail/' + item.id)
+      },
+      toDetail (item) {
+        switch (item.feed_type) {
+          case 1:
+          case 2:
+          case 3:
+          case 5:
+          case 6:
+          case 11:
+          case 12:
+          case 14:
+          case 15:
+          case 16:
+            this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+          case -1:
+            // 已废弃
+            var linkArticle = {
+              view_url: item.url,
+              id: item.feed.submission_id,
+              title: item.feed.title,
+              comment_url: item.feed.comment_url,
+              img_url: item.feed.img
+            }
+            this.goArticle(linkArticle)
+            break
+          default:
+            this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+        }
       }
     }
   }
@@ -168,16 +299,17 @@
         margin-left: 1.013rem;
         color: #444444;
         font-size: 0.346rem;
-        font-family:PingFangSC-Medium;
+        font-family: PingFangSC-Medium;
         .detail {
           color: #B4B4B6;
           font-size: 0.293rem;
-          font-family:PingFangSC-Regular;
+          font-family: PingFangSC-Regular;
         }
       }
     }
   }
-  .container-feed-list {
+
+  .container-feed-item {
     position: relative;
     margin-top: 0.533rem;
     padding: 0 0.426rem;
