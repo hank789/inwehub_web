@@ -35,6 +35,7 @@
           <FeedList
             :list="item"
             @toDetail="toDetail"
+            @toGroupDetail="toGroupDetail"
           ></FeedList>
         </template>
 
@@ -97,6 +98,9 @@
       }
     },
     methods: {
+      toGroupDetail (item) {
+        this.$router.pushPlus('/group/detail/' + item.id)
+      },
       refreshPageData () {
         if (this.$route.query.refresh) {
           this.$refs.RefreshList.refreshPageData(this.prevOtherData)

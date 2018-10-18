@@ -43,10 +43,10 @@
           <use xlink:href="#icon-dingwei1"></use>
         </svg>{{list.feed.current_address_name}}
       </div>
-      <div class="currency-title text-line-5">{{list.feed.title}}</div>
+      <div class="currency-title text-line-5 ">{{list.feed.title}}</div>
       <div class="feed-open-all font-family-medium">展开全部</div>
       <!--图片-->
-      <div v-if="typeof(list.feed.img) === 'object' && list.feed_type === 15" class="container-images container-images-discover">
+      <div v-if="typeof(list.feed.img) === 'object' && list.feed_type === 15 && list.feed.img.length > 0" class="container-images container-images-discover">
         <div v-for="img in list.feed.img" class="container-image"><img :src="img"></div>
       </div>
       <div class="container-image lazyImg" v-if="list.feed_type === 15 && typeof(list.feed.img) === 'string'">
@@ -72,7 +72,7 @@
         </div>
       </div>
 
-      <div class="feed-group" v-if="list.feed.group.name">
+      <div class="feed-group" v-if="list.feed.group.name" @tap.stop.prevent="toGroupDetail(list.feed.group)">
         <img src="../statics/images/feed-group@3x.png" alt="">
         <span>{{list.feed.group.name}}</span>
       </div>
@@ -135,11 +135,14 @@
       var titles = document.querySelectorAll('.currency-title')
       titles.forEach((item) => {
         if (item.scrollHeight > item.offsetHeight) {
-          item.nextElementSibling.classList.add('zhankai')
+          item.nextElementSibling.classList.add('showOpenAll')
         }
       })
     },
     methods: {
+      toGroupDetail (list) {
+        this.$emit('toGroupDetail', list)
+      },
       toDetail (list) {
         this.$emit('toDetail', list)
       },
@@ -198,6 +201,10 @@
       color: #03AEF9;
       font-size: 0.346rem;
       margin-top: 0.106rem;
+      display: none;
+      &.showOpenAll {
+        display: block;
+      }
     }
     .container-images {
       padding: 0.266rem 0 0;
