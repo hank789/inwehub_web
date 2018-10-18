@@ -236,7 +236,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import ArticleDiscuss from '../../components/discover/ArticleDiscuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl } from '../../utils/plus'
+  import { autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl } from '../../utils/plus'
   import PageMore from '../../components/PageMore.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
