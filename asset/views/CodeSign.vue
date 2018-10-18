@@ -7,11 +7,6 @@
             <use xlink:href="#icon-logowenzi"></use>
           </svg>
         </div>
-        <!--返回箭头-->
-        <!--<svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">-->
-          <!--<use xlink:href="#icon-fanhui"></use>-->
-        <!--</svg>-->
-        <!--账号密码输入框-->
         <div class="inputWrapper half">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shoujihao"></use>
@@ -66,6 +61,7 @@
   import { USERS_APPEND } from '../stores/types'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
+  import { clearAllWebViewCache } from '../utils/webview'
   import Vue from 'vue'
   import VTooltip from 'v-tooltip'
   Vue.use(VTooltip)
@@ -74,36 +70,19 @@
   const phoneReg = /^(((13[0-9]{1})|14[0-9]{1}|(15[0-9]{1})|17[0-9]{1}|(18[0-9]{1}))+\d{8})$/
   const register = {
     data: () => ({
-      isNeedRegistrationCode: false,
       phone: '', // 手机号码
-      password: '', // 密码
-      username: '', // 昵称
       code: '', // 手机验证码
-      passwordText: '', // 明文密码
-      isDisabled: true, // 提交按钮disabled状态
-      isShowClean: false, // 是否显示清除手机号按钮
-      isShowUserClean: false,
-      isShowPasswordText: false, // 是否显示明文密码
-      isShowPassword: true, // 是否显示真实密码
       isCanGetCode: false,
       errors: {}, // 错误对象
       isValidCode: false, // 验证码合法性
       isValidPhone: false, // 是否合法手机号
-      isValidPassword: false, // 是否合法密码
-      isValidUsername: false, // 用户名是否合法
       CodeText: '发送验证', // 获取验证码按钮文字
       registrationCode: '',
       time: 0, // 时间倒计时
-      showUsernameLabel: true,
-      showYqCodeLabel: true,
       showYzmLabel: true,
       showPhoneLabel: true,
-      showPasswordLabel: true,
       disableRegister: true,
       errorMsg: '',
-      formItem: {
-        input: ''
-      },
       isRegisterSuccess: false,
       isLoading: false // 登录loading
     }),
@@ -114,49 +93,30 @@
     },
     created () {
       window.showInwehubWebview()
+      clearAllWebViewCache()
     },
     components: {
       oauth
     },
     mounted () {
-      this.getCacheData()
-
       window.mui('.login').on('focusout', 'input', (e) => {
         switch (e.target.name) {
-          case 'username':
-            if (!this.username) this.showUsernameLabel = true
-            break
-          case 'yqm':
-            if (!this.registrationCode) this.showYqCodeLabel = true
-            break
           case 'code':
             if (!this.code) this.showYzmLabel = true
             break
           case 'phone':
             if (!this.phone) this.showPhoneLabel = true
             break
-          case 'password':
-            if (!this.password) this.showPasswordLabel = true
-            break
         }
       })
 
       window.mui('.login').on('focusin', 'input', (e) => {
         switch (e.target.name) {
-          case 'username':
-            this.showUsernameLabel = false
-            break
-          case 'yqm':
-            this.showYqCodeLabel = false
-            break
           case 'code':
             this.showYzmLabel = false
             break
           case 'phone':
             this.showPhoneLabel = false
-            break
-          case 'password':
-            this.showPasswordLabel = false
             break
         }
       })
@@ -204,22 +164,6 @@
           this.disableRegister = true
           return false
         }
-        // 邀请码；
-        if (this.isNeedRegistrationCode && !this.registrationCode) {
-          this.disableRegister = true
-          return false
-        }
-        // 姓名；
-        if (!this.username) {
-          this.disableRegister = true
-          return false
-        }
-        // 密码
-        if (!this.password) {
-          this.disableRegister = true
-          return false
-        }
-
         this.disableRegister = false
       },
       // 判断手机号是否为空；改变颜色（状态）；
@@ -279,12 +223,6 @@
       entryPhone () {
         this.showPhoneLabel = false
       },
-      entryPassword () {
-        this.showPasswordLabel = false
-      },
-      entryYqCode () {
-        this.showYqCodeLabel = false
-      },
       entryYzm () {
         this.showYzmLabel = false
       },
@@ -312,47 +250,8 @@
         }
         localEvent.setLocalItem('CacheRegister', CacheRegister)
       },
-      getCacheData () {
-        var data = localEvent.getLocalItem('CacheRegister')
-        if (data) {
-          this.username = data.username
-          this.registrationCode = data.registrationCode
-          this.phone = data.phone
-          this.code = data.code
-          this.password = data.password
-
-          if (this.username) {
-            this.showUsernameLabel = false
-          }
-
-          if (this.registrationCode) {
-            this.showYqCodeLabel = false
-          }
-
-          if (this.phone) {
-            this.showPhoneLabel = false
-          }
-
-          if (this.code) {
-            this.showYzmLabel = false
-          }
-
-          if (this.password) {
-            this.showPasswordLabel = false
-          }
-        }
-      },
       cleanUsername () {
         this.username = ''
-      },
-      showPassword () {
-        if (this.isShowPassword) {
-          this.isShowPassword = false
-          this.isShowPasswordText = true
-        } else {
-          this.isShowPassword = true
-          this.isShowPasswordText = false
-        }
       },
       // 获取验证码
       getCode () {
@@ -362,12 +261,6 @@
         if (!this.isCanGetCode) {
           return
         }
-
-        if (this.isNeedRegistrationCode && this.registrationCode.length < 6) {
-          window.mui.toast('邀请码至少6位')
-          return
-        }
-
         if (mobile.length !== 11) {
           this.showTip(this.$refs.phone, '请输入有效的手机号码')
           return
@@ -384,21 +277,6 @@
             var code = response.data.code
             if (code !== 1000) {
               this.isCanGetCode = true
-              var message = response.data.message
-              // 验证码超时 邀请码错误；
-              if (message.indexOf('邀请码错误') > 0) {
-                this.warm(message, '获取邀请码', () => {
-                  this.$router.push('/register/nocode')
-                })
-              } else if (message.indexOf('无效') > 0) {
-                this.warm(message, '重新发送', () => {
-                  this.getCode()
-                })
-              } else if (message.indexOf('超时') > 0) {
-                this.warm(message, '重新发送', () => {
-                  this.getCode()
-                })
-              }
               window.mui.toast(response.data.message)
 
               return
@@ -472,7 +350,6 @@
 
         let {phone, code} = this
         this.isLoading = true
-        this.isDisabled = true
         apiRequest('auth/login', {
           mobile: phone,
           phoneCode: code
@@ -485,7 +362,7 @@
 
             this.loginSuccessCallback()
           })
-      },
+      }
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
