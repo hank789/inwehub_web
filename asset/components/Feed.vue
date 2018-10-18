@@ -14,7 +14,7 @@
       ></UserInfo>
       <div class="currency-title ">{{list.feed.answer_content}}</div>
       <div class="question-statistics">
-        <span class="question-price" :class="addClassActiveYellow ? 'active-yellow':''" v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.status_description}}</span>
+        <span class="question-price" :class="list.feed.status !== 8 && list.feed.status !== 9 ? 'active-yellow':''" v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.status_description}}</span>
         <span v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.answer_number}}回答 · {{list.feed.follow_number}}关注</span>
         <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11 || list.feed_type === 12">{{list.feed.comment_number}}回复 · {{list.feed.support_number}}赞</span>
         <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11"> · 1.4分</span>
@@ -27,7 +27,7 @@
       <div class="line-river-after line-river-after-top"></div>
     </div>
     <!-- 分享 -->
-    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5" @tap.stop.prevent="toDetail(list)">
+    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5 " @tap.stop.prevent="toDetail(list)">
       <UserInfo
         :uuid="list.user.uuid"
         :avatar="list.user.avatar"
@@ -113,8 +113,7 @@
   export default {
     data () {
       return {
-        isFollow: false,
-        addClassActiveYellow: Boolean
+        isFollow: false
       }
     },
     components: {
@@ -131,7 +130,6 @@
       }
     },
     mounted () {
-      this.addClassActiveYellow()
       var titles = document.querySelectorAll('.currency-title')
       titles.forEach((item) => {
         if (item.scrollHeight > item.offsetHeight) {
@@ -148,13 +146,6 @@
       },
       setFollowStatus (status) {
         this.detail.is_followed_author = status
-      },
-      addClassActiveYellow () {
-        if (!this.list.feed.status === 8 && !this.list.feed.status === 9) {
-          this.addClassActiveYellow = true
-        } else {
-          this.addClassActiveYellow = false
-        }
       }
     }
   }
@@ -259,7 +250,7 @@
       border-radius: 0.106rem;
       padding: 0.186rem 0.266rem;
       display: flex;
-      margin-bottom: 0.266rem;
+      margin-top: 0.266rem;
       .pdfIcon {
         width: 1.173rem;
         height: 1.173rem;
