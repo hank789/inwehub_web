@@ -256,34 +256,34 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .weChat {
     position: absolute;
-    bottom: 56px;
+    bottom: 1.493rem;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     .weChatIcon {
-      width: 40px;
-      height: 40px;
+      width: 1.066rem;
+      height: 1.066rem;
       margin: 0 auto;
       color: #FFFFFF;
-      font-size: 25px;
-      line-height: 40px;
+      font-size: 0.666rem;
+      line-height: 1.066rem;
       border-radius: 50%;
       background: linear-gradient(155deg,#7ADF75 0%,#51C944 100%);
     }
     span {
       color: #B4B4B6;
-      font-size: 11px;
-      margin-top: 6px;
+      font-size: 0.293rem;
+      margin-top: 0.16rem;
     }
   }
   .protocol {
     position: absolute;
-    bottom: 20px;
+    bottom: 0.533rem;
     left: 50%;
     transform: translateX(-50%);
     color: #808080;
     text-align: center;
-    font-size: 12px;
+    font-size: 0.32rem;
     span {
       color: #3C95F9;
     }
@@ -299,26 +299,26 @@
 
   /*图标*/
   .logo {
-    font-size: 130px;
+    font-size: 3.466rem;
     text-align: center;
-    margin: 5px 0;
+    margin: 0.133rem 0;
   }
 
   /*忘记密码和账号*/
   .apply {
-    padding: 0 37px;
+    padding: 0 0.986rem;
     display: flex;
-    line-height: 22px;
-    margin-top: 12px;
+    line-height: 0.586rem;
+    margin-top: 0.32rem;
     justify-content: space-between;
     span {
       &:nth-of-type(1) {
         color: #03AEF9;
-        font-size: 12px;
+        font-size: 0.32rem;
       }
       &:nth-of-type(2) {
         color: #444444;
-        font-size: 15px;
+        font-size: 0.4rem;
       }
     }
   }
@@ -346,7 +346,7 @@
   }
 
   .inputWrapper {
-    margin: 0 0.88rem 25px;
+    margin: 0 0.88rem 0.666rem;
     position: relative;
     width: 80%;
     margin-left: 10%;

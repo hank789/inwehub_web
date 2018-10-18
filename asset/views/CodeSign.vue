@@ -519,41 +519,41 @@
 
 <style lang="less" rel="stylesheet/less" scoped>
   .registerPassword {
-    padding: 0 37px;
+    padding: 0 0.986rem;
     display: flex;
     justify-content: space-between;
     span {
       &:nth-of-type(1) {
         color: #B4B4B6;
-        font-size: 12px;
+        font-size: 0.32rem;
         text-align: left;
       }
       &:nth-of-type(2) {
         color: #444444;
-        font-size: 15px;
+        font-size: 0.4rem;
       }
     }
   }
   .weChat {
     position: absolute;
-    bottom: 56px;
+    bottom: 1.493rem;
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     .weChatIcon {
-      width: 40px;
-      height: 40px;
+      width: 1.066rem;
+      height: 1.066rem;
       margin: 0 auto;
       color: #FFFFFF;
-      font-size: 25px;
-      line-height: 40px;
+      font-size: 0.666rem;
+      line-height: 1.066rem;
       border-radius: 50%;
       background: linear-gradient(155deg,#7ADF75 0%,#51C944 100%);
     }
     span {
       color: #B4B4B6;
-      font-size: 11px;
-      margin-top: 6px;
+      font-size: 0.293rem;
+      margin-top: 0.16rem;
     }
   }
   .mui-content{
@@ -569,12 +569,12 @@
   /*协议*/
   .protocol {
     position: absolute;
-    bottom: 20px;
+    bottom: 0.533rem;
     left: 50%;
     transform: translateX(-50%);
     color: #808080;
     text-align: center;
-    font-size: 12px;
+    font-size: 0.32rem;
     span {
       color: #3C95F9;
     }
@@ -586,7 +586,7 @@
     width: 80%;
     margin-left: 10%;
     margin-top: 0.4rem;
-    margin-bottom: 12px;
+    margin-bottom: 0.32rem;
   }
 
   button {
@@ -619,14 +619,14 @@
 
   /*图标*/
   .logo {
-    font-size: 130px;
+    font-size: 3.466rem;
     text-align: center;
-    margin: 5px 0;
+    margin: 0.133rem 0;
   }
 
   /*输入框的内容*/
   .inputWrapper {
-    margin: 0 0.88rem 25px;
+    margin: 0 0.88rem 0.666rem;
     position: relative;
     width: 80%;
     margin-left: 10%;
@@ -651,14 +651,14 @@
   /*验证码*/
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #444444;
     position: absolute;
     right: 0.053rem;
     top: 0.12rem;
-    height: 30px;
-    padding: 0 15px;
-    line-height: 30px;
+    height: 0.8rem;
+    padding: 0 0.4rem;
+    line-height: 0.8rem;
     border-radius: 0.133rem;
     border: 0.026rem solid #dcdcdc;
   }

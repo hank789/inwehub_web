@@ -59,19 +59,19 @@
         </div>
       </div>
       <!--PDF-->
-      <div class="feed-pdf-box" v-if="item.feed.files.length" v-for="(item, index) in item.feed.files"
-           :key="index">
+      <div class="feed-pdf-box" v-if="itemObj.feed.files.length" v-for="(pdf, pdfIndex) in itemObj.feed.files"
+           :key="pdfIndex">
         <div class="pdfIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-pdf"></use>
           </svg>
         </div>
         <div class="pdfText">
-          <span class="font-family-medium text-line-2">{{item.name}}</span>
+          <span class="font-family-medium text-line-2">{{pdf.name}}</span>
         </div>
       </div>
       <!--圈子-->
-      <div class="feed-group" v-if="item.feed.group.name" @tap.stop.prevent="toGroupDetail(item.feed.group)">
+      <div class="feed-group" v-if="item.feed.group && item.feed.group.name" @tap.stop.prevent="toGroupDetail(item.feed.group)">
         <img src="../statics/images/feed-group@3x.png" alt="">
         <span>{{item.feed.group.name}}</span>
       </div>
@@ -149,14 +149,23 @@
         }
       },
       itemObj () {
-        if (typeof this.item.feed.img === 'string') {
-          if (this.item.img) {
-            this.item.feed.img = [this.item.feed.img]
+        var item = this.item
+        if (typeof item.feed.img === 'string') {
+          if (item.feed.img) {
+            item.feed.img = [item.feed.img]
           } else {
-            this.item.feed.img = []
+            item.feed.img = []
           }
         }
-        return this.item
+
+        if (typeof item.feed.files === 'string') {
+          if (item.feed.files) {
+            item.feed.files = [item.feed.files]
+          } else {
+            item.feed.files = []
+          }
+        }
+        return item
       },
       commentNumber () {
         if (this.item.feed.answer_id) {
@@ -222,7 +231,7 @@
           )
         }
 
-        this.$emit('showItemMore', this.shareOption)
+        this.$emit('showItemMore', this.shareOption, this.item)
       },
       discoverUp () {
         upvote(this, this.item.feed.submission_id, () => {
