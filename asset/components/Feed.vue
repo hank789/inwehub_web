@@ -126,6 +126,8 @@
     computed: {
       isAsk () {
         switch (this.item.feed_type) {
+          case 1:
+          case 2:
           case 3:
           case 6:
           case 11:
