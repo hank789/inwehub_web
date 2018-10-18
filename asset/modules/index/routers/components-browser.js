@@ -1,5 +1,6 @@
 const Login = () => import(/* webpackChunkName: "login" */ '../../../views/Login.vue')
 const Register = () => import(/* webpackChunkName: "Register" */ '../../../views/Register.vue')
+const CodeSign = () => import(/* webpackChunkName: "CodeSign" */ '../../../views/CodeSign.vue')
 const FindPassword = () => import(/* webpackChunkName: "FindPassword" */ '../../../views/FindPassword.vue')
 const Feed = () => import(/* webpackChunkName: "Feed" */ '../../../views/Feed.vue')
 const Home = () => import(/* webpackChunkName: "Home" */ '../../../views/Home.vue')
@@ -206,6 +207,7 @@ const BindPhone = () => import(/* webpackChunkName: "BindPhone" */ '../../../vie
 export {
   Login,
   Register,
+  CodeSign,
   FindPassword,
   Feed,
   Home,
