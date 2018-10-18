@@ -31,7 +31,7 @@
                  v-model.trim.num="code" autocomplete="off" @tap.stop.prevent="entryYzm"/>
         </div>
 
-        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" @click.prevent="register"
+        <button type="button" class="mui-btn mui-btn-block mui-btn-primary" :loading="isLoading" @click.prevent="submit"
                 :disabled="disableRegister">登录
         </button>
         <div class="registerPassword">
@@ -39,7 +39,7 @@
           <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/login')">密码登录</span>
         </div>
 
-        <div class="weChat">
+        <div class="weChat" @tap.stop.prevent="wechatLogin()">
           <div class="weChatIcon">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-wechat"></use>
@@ -50,6 +50,9 @@
 
         <div class="protocol">注册即同意<span @tap.stop.prevent="$router.pushPlus('/protocol/register')">《用户注册服务协议》</span></div>
       </div>
+
+      <oauth ref="oauth" :isShowBtn="false" @success="wechatLoginSuccess" @fail="wechatLoginFail"
+             style="display:none"></oauth>
     </div>
   </div>
 </template>
@@ -58,6 +61,7 @@
   import request, { createAPI, apiRequest, postRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
   import errorCodes from '../stores/errorCodes'
+  import oauth from '../components/oauth/oauth'
   import { getUserInfo } from '../utils/user'
   import { USERS_APPEND } from '../stores/types'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
@@ -89,7 +93,7 @@
       isValidPhone: false, // 是否合法手机号
       isValidPassword: false, // 是否合法密码
       isValidUsername: false, // 用户名是否合法
-      CodeText: '获取验证码', // 获取验证码按钮文字
+      CodeText: '发送验证', // 获取验证码按钮文字
       registrationCode: '',
       time: 0, // 时间倒计时
       showUsernameLabel: true,
@@ -107,11 +111,14 @@
     }),
     computed: {
       getCodeText () {
-        return this.time === 0 ? '获取验证码' : this.time + '秒后重发'
+        return this.time === 0 ? '发送验证' : this.time + '秒后重发'
       }
     },
     created () {
       window.showInwehubWebview()
+    },
+    components: {
+      oauth
     },
     mounted () {
       this.getCacheData()
@@ -171,6 +178,22 @@
       next()
     },
     methods: {
+      wechatLoginSuccess (token, openid, nickname = '', isNewUser = '') {
+        console.log(token)
+        console.log(openid)
+        if (token) {
+          this.$router.pushPlus('/wechat/register?token=' + token + '&openid=' + openid + '&newUser=' + isNewUser)
+        } else {
+          this.$router.pushPlus('/wechat/register?openid=' + openid)
+        }
+      },
+      wechatLoginFail (errorMessage) {
+        console.log(errorMessage)
+        window.mui.toast(errorMessage)
+      },
+      wechatLogin () {
+        this.$refs.oauth.login('weixin')
+      },
       // 判断否有值（改变button按钮的状态来改变颜色）；
       checkValid () {
         // 手机；
@@ -336,14 +359,9 @@
       // 获取验证码
       getCode () {
         let mobile = this.phone ? this.phone : ''
-        let type = 'register'
+        let type = 'login'
 
         if (!this.isCanGetCode) {
-          return
-        }
-
-        if (this.isNeedRegistrationCode && !this.registrationCode) {
-          window.mui.toast('请输入邀请码')
           return
         }
 
@@ -413,110 +431,63 @@
             this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]})
           })
       },
+      loginSuccessCallback () {
+        this.$parent.$refs.OpenAppComponent.refreshData()
 
-      // 注册
-      register () {
-        let {username, phone, code, password} = this
+        // 存储设备信息
+        window.mui.plusReady(function () {
+          if (window.mui.os.plus) {
+            var deviceInfo = window.plus.push.getClientInfo()
+            apiRequest(`system/device`, {
+              client_id: deviceInfo.clientid,
+              device_token: deviceInfo.token,
+              appid: deviceInfo.appid,
+              appkey: deviceInfo.appkey,
+              device_type: window.plus.os.name === 'iOS' ? 2 : 1
+            }, false).then(res => {
+
+            })
+          }
+        })
+
+        // 获取用户信息
+        this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+          cb(user)
+          window.mixpanelIdentify()
+          clearAllWebViewCache()
+          // 存储用户位置信息
+          saveLocationInfo()
+          this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
+        }))
+      },
+
+      submit () {
+        if (!this.phone) {
+          window.mui.toast('请输入手机号')
+          return
+        }
+
+        if (!phoneReg.test(this.phone)) {
+          window.mui.toast('请输入正确的手机号')
+          return
+        }
+
+        let {phone, code} = this
         this.isLoading = true
         this.isDisabled = true
-        if (!phoneReg.test(this.phone)) {
-          this.showTip(this.$refs.phone, '请输入有效的手机号码')
-          return
-        }
-
-        if (!this.code) {
-          window.mui.toast('请输入验证码')
-          return
-        }
-
-        if (!codeReg.test(this.code)) {
-          window.mui.toast('验证码错误')
-          return
-        }
-        if (window.mui.os.plus) {
-          window.mui.waiting()
-        }
-
-        request.post(createAPI('auth/register'), {
-          name: username,
+        apiRequest('auth/login', {
           mobile: phone,
-          code,
-          password,
-          'registration_code': this.registrationCode
+          phoneCode: code
         })
           .then(response => {
-            if (window.mui.os.plus) {
-              window.mui.closeWaiting()
-            }
-            var code = response.data.code
-            if (code !== 1000) {
-              this.isDisabled = false
-              this.isLoading = false
-              // 邀请码；
-              var message = response.data.message
-
-              if (message.indexOf('无效') > 0) {
-                this.wran(message, '获取邀请码', () => {
-                  this.$router.push('/register/nocode')
-                })
-              }
-              window.mui.toast(response.data.message)
+            if (response === false) {
               return
             }
+            localEvent.setLocalItem('UserLoginInfo', response)
 
-            localEvent.clearLocalItem('CacheRegister')
-            this.isRegisterSuccess = true
-
-            // 已经有通知发送注册成功的消息，并有积分提示
-            // mui.toast("注册成功！");
-            localEvent.setLocalItem('UserLoginInfo', response.data.data)
-            this.isLoading = false
-            // 存储设备信息
-            if (window.mui.os.plus) {
-              var deviceInfo = window.plus.push.getClientInfo()
-              apiRequest(`system/device`, {
-                client_id: deviceInfo.clientid,
-                device_token: deviceInfo.token,
-                appid: deviceInfo.appid,
-                appkey: deviceInfo.appkey,
-                device_type: window.plus.os.name === 'iOS' ? 2 : 1
-              }, false).then(res => {
-              })
-            }
-
-            this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
-              cb(user)
-              if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-                // mixpanel
-                window.mixpanel.track(
-                  'inwehub:register:success',
-                  {
-                    'app': 'inwehub',
-                    'user_device': window.getUserAppDevice(),
-                    'page': 'register',
-                    'page_name': 'register',
-                    'page_title': '注册成功',
-                    'referrer_page': ''
-                  }
-                )
-                window.mixpanelIdentify(true)
-              }
-              // 存储用户位置信息
-              saveLocationInfo()
-              this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
-            }))
+            this.loginSuccessCallback()
           })
-          .catch(({response: {data = {}} = {}}) => {
-            if (window.mui.os.plus) {
-              window.plus.nativeUI.closeWaiting()
-            }
-            this.isDisabled = false
-            const {code = 'xxxx'} = data
-            this.isLoading = false
-            this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]})
-            window.mui.toast(errorCodes[code])
-          })
-      }
+      },
     },
     watch: {
       registrationCode: function (newValue, oldValue) {
@@ -592,7 +563,7 @@
     position: absolute;
     width: 100%;
     min-height: 100%;
-    background: #f3f4f6;
+    background: #FFFFFF;
     background-size: cover;
   }
   /*协议*/
@@ -655,7 +626,7 @@
 
   /*输入框的内容*/
   .inputWrapper {
-    margin: 0 0.88rem 0.586rem;
+    margin: 0 0.88rem 25px;
     position: relative;
     width: 80%;
     margin-left: 10%;
@@ -680,14 +651,16 @@
   /*验证码*/
   .inputWrapper .getYzm {
     display: inline-block;
-    font-size: 0.373rem;
-    color: #3c95f9;
+    font-size: 14px;
+    color: #444444;
     position: absolute;
     right: 0.053rem;
-    top: 0.112rem;
-    border: 0.026rem solid #3c95f9;
+    top: 0.12rem;
+    height: 30px;
+    padding: 0 15px;
+    line-height: 30px;
     border-radius: 0.133rem;
-    padding: 0.08rem 0.373rem;
+    border: 0.026rem solid #dcdcdc;
   }
 
   .inputWrapper .getYzm.disabled {
