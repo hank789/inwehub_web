@@ -137,7 +137,6 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
-  import { alertRealNameAuthentication } from '../../utils/dialogList'
 
   export default {
     data () {
