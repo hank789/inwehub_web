@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 问答 -->
-    <div class="container-feed-questionAnswer feed-currency" v-if="list.feed_type <= 3 || list.feed_type === 6 || list.feed_type === 11 || list.feed_type === 12 || list.feed_type === 14">
+    <div class="container-feed-questionAnswer feed-currency" @tap.stop.prevent="toDetail(list)" v-if="list.feed_type <= 3 || list.feed_type === 6 || list.feed_type === 11 || list.feed_type === 12 || list.feed_type === 14">
       <UserInfo
       :uuid="list.user.uuid"
       :avatar="list.user.avatar"
@@ -12,9 +12,9 @@
       :time="list.created_at"
       :setFollowStatus="setFollowStatus"
       ></UserInfo>
-      <div class="currency-title text-line-5">{{list.feed.answer_content}}</div>
+      <div class="currency-title ">{{list.feed.answer_content}}</div>
       <div class="question-statistics">
-        <span class="question-price" :class="addClass ? 'active-yellow':''" v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.status_description}}</span>
+        <span class="question-price" :class="addClassActiveYellow ? 'active-yellow':''" v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.status_description}}</span>
         <span v-if="list.feed_type === 6 || list.feed_type === 3">{{list.feed.answer_number}}回答 · {{list.feed.follow_number}}关注</span>
         <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11 || list.feed_type === 12">{{list.feed.comment_number}}回复 · {{list.feed.support_number}}赞</span>
         <span v-if="list.feed_type === 1 || list.feed_type === 2 || list.feed_type === 11"> · 1.4分</span>
@@ -27,7 +27,7 @@
       <div class="line-river-after line-river-after-top"></div>
     </div>
     <!-- 分享 -->
-    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5">
+    <div class="container-feed-list feed-currency" v-if="list.feed_type === 15 || list.feed_type === 16 || list.feed_type === 5" @tap.stop.prevent="toDetail(list)">
       <UserInfo
         :uuid="list.user.uuid"
         :avatar="list.user.avatar"
@@ -114,7 +114,7 @@
     data () {
       return {
         isFollow: false,
-        addClass: Boolean
+        addClassActiveYellow: Boolean
       }
     },
     components: {
@@ -131,7 +131,7 @@
       }
     },
     mounted () {
-      this.addClass()
+      this.addClassActiveYellow()
       var titles = document.querySelectorAll('.currency-title')
       titles.forEach((item) => {
         if (item.scrollHeight > item.offsetHeight) {
@@ -140,14 +140,17 @@
       })
     },
     methods: {
+      toDetail (list) {
+        this.$emit('toDetail', list)
+      },
       setFollowStatus (status) {
         this.detail.is_followed_author = status
       },
-      addClass () {
+      addClassActiveYellow () {
         if (!this.list.feed.status === 8 && !this.list.feed.status === 9) {
-          this.addClass = true
+          this.addClassActiveYellow = true
         } else {
-          this.addClass = false
+          this.addClassActiveYellow = false
         }
       }
     }

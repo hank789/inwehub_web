@@ -32,7 +32,10 @@
         class="listWrapper"
       >
         <template v-for="(item, index) in list">
-          <FeedList :list="item"></FeedList>
+          <FeedList
+            :list="item"
+            @toDetail="toDetail"
+          ></FeedList>
         </template>
 
       </RefreshList>
