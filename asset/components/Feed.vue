@@ -3,14 +3,14 @@
 
     <!-- 问答 -->
     <div class="container-feed-questionAnswer feed-currency" @tap.stop.prevent="toDetail(item)" v-if="isAsk">
-      <UserInfo
+      <FeedUserInfo
         :uuid="item.user.uuid"
         :avatar="item.user.avatar"
         :realname="item.title"
         :isShowPositionAndCompany="false"
         :isExpert="item.user.is_expert?1:0"
         :time="item.created_at"
-      ></UserInfo>
+      ></FeedUserInfo>
       <div class="currency-title">{{item.feed.answer_content}}</div>
       <div class="question-statistics">
         <span class="question-price active-yellow" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
@@ -29,14 +29,14 @@
 
     <!-- 分享 -->
     <div class="container-feed-item feed-currency" v-if="isDiscover" @tap.stop.prevent="toDetail(item)">
-      <UserInfo
+      <FeedUserInfo
         :uuid="item.user.uuid"
         :avatar="item.user.avatar"
         :realname="item.title"
         :isShowPositionAndCompany="false"
         :isExpert="item.user.is_expert?1:0"
         :time="item.created_at"
-      ></UserInfo>
+      ></FeedUserInfo>
       <div class="feed-address" v-if="item.feed.current_address_name">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dingwei1"></use>
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-  import UserInfo from './question-detail/UserInfo'
+  import FeedUserInfo from './feed/FeedUserInfo'
   import userAbility from '../utils/userAbility'
   import { upvote, downVote } from '../utils/discover'
   import PageMore from './PageMore.vue'
@@ -120,7 +120,7 @@
       }
     },
     components: {
-      UserInfo,
+      FeedUserInfo,
       PageMore
     },
     computed: {
