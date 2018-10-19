@@ -456,6 +456,7 @@
   }
   .mui-content{
     background: #FFFFFF;
+    min-height: 15.146rem;
   }
   .login {
     position: absolute;
@@ -552,7 +553,7 @@
   .inputWrapper .getYzm {
     display: inline-block;
     font-size: 0.373rem;
-    color: #C8C8C8;
+    color: #444444;
     position: absolute;
     right: 0.053rem;
     top: 0.12rem;

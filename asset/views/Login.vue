@@ -167,7 +167,7 @@
       goback () {
         window.mui.back()
       },
-      loginSuccessCallback () {
+      loginSuccessCallback (newUser = 0) {
         this.$parent.$refs.OpenAppComponent.refreshData()
 
         // 存储设备信息
@@ -189,7 +189,12 @@
         // 获取用户信息
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
-          window.mixpanelIdentify()
+          if (newUser === 1) {
+            window.trackMixpanelEvent('register:success', 'code-login', 'code-login', '验证码注册')
+            window.mixpanelIdentify(true)
+          } else {
+            window.mixpanelIdentify()
+          }
           clearAllWebViewCache()
           // 存储用户位置信息
           saveLocationInfo()
@@ -242,8 +247,7 @@
               return
             }
             localEvent.setLocalItem('UserLoginInfo', response)
-
-            this.loginSuccessCallback()
+            this.loginSuccessCallback(response.newUser)
           })
       }
     }

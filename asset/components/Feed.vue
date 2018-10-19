@@ -65,9 +65,8 @@
         </div>
       </div>
       <!--PDF-->
-      <div class="container-pdf-box">
-        <div class="feed-pdf-box" v-if="itemObj.feed.files.length" v-for="(pdf, pdfIndex) in itemObj.feed.files"
-             :key="pdfIndex">
+      <div class="container-pdf-box" v-if="itemObj.feed.files.length" >
+        <div class="feed-pdf-box"v-for="(pdf, pdfIndex) in itemObj.feed.files" :key="pdfIndex">
           <div class="pdfIcon">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-pdf"></use>
@@ -336,8 +335,9 @@
     .currency-title {
       color: #444444;
       font-size: 0.373rem;
-      line-height: 0.586rem;
-      margin-top: -0.08rem;
+      line-height: 22px;
+      margin-top: 1px;
+      letter-spacing: 0.5px;
     }
     .userInfoWrapper {
       padding: 0 0.426rem !important;
@@ -411,6 +411,7 @@
               color: #444444;
               font-size: 0.346rem;
               line-height: 0.533rem;
+              letter-spacing: 0.5px;
             }
             &:nth-of-type(2) {
               color: #B4B4B6;
@@ -448,6 +449,7 @@
             color: #444444;
             font-size: 0.346rem;
             line-height: 0.533rem;
+            letter-spacing: 0.5px;
           }
         }
       }
@@ -472,20 +474,26 @@
       }
     }
     .feed-moreOperation {
-      margin-top: 0.4rem;
+      margin-top: 10px;
       color: #808080;
       display: flex;
       padding: 0 0.346rem;
       justify-content: space-between;
       .feed-mord {
-        padding: 0.133rem;
+
+        padding: 5px;
+        color: #808080;
       }
       .feed-operation {
         span {
-          padding: 0.133rem;
+          padding: 5px;
+          font-size: 11px;
+          color: #444444;
           /*margin-left: 0.533rem;*/
           .icon {
             margin-right: 0.133rem;
+            color: #808080;
+            font-size: 15px;
           }
         }
         .activeSpan {
@@ -505,9 +513,10 @@
       padding: 0 0.426rem;
     }
     .question-statistics {
-      margin-top: 0.346rem;
+      margin-top: 7px;
       color: #B4B4B6;
       padding: 0 0.426rem;
+      line-height: 15px;
       .question-price {
         &.active-yellow {
           color: #235280;
