@@ -44,7 +44,7 @@
         </svg>
         {{item.feed.current_address_name}}
       </div>
-      <div class="currency-title text-line-5 ">{{item.feed.title}}</div>
+      <div class="currency-title text-line-5 feed-title"><div>{{item.feed.title}}</div></div>
       <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
       <!--图片-->
       <div v-if="itemObj.feed.img.length && item.feed.submission_type !== 'link'"
@@ -309,7 +309,7 @@
       margin-top: -0.08rem;
     }
     .userInfoWrapper {
-      padding: 0 !important;
+      padding: 0 0.426rem !important;
       .mui-media-body {
         margin-left: 1.013rem;
         color: #444444;
@@ -327,13 +327,17 @@
   .container-feed-item {
     position: relative;
     margin-top: 0.533rem;
-    padding: 0 0.426rem;
     .feed-address {
       color: #B4B4B6;
       font-size: 0.293rem;
       position: absolute;
       top: 0.426rem;
       left: 2.986rem;
+    }
+    .feed-title {
+      div {
+        padding: 0 0.426px;
+      }
     }
     .feed-open-all {
       color: #03AEF9;
@@ -344,20 +348,18 @@
         display: block;
       }
     }
-    .container-images {
-      padding: 0.266rem 0 0;
-      &.container-images-discover {
-        .container-image {
-          width: 2.96rem;
-          height: 2.96rem;
-          margin-right: 0.133rem;
-          margin-bottom: 0.133rem;
-          &:nth-of-type(3n) {
-            margin-right: 0;
-          }
-        }
-      }
-    }
+    /*.container-images {*/
+      /*padding: 0.266rem 0 0;*/
+      /*&.container-images-discover {*/
+        /*.container-image {*/
+          /*margin-right: 0.133rem;*/
+          /*margin-bottom: 0.133rem;*/
+          /*&:nth-of-type(3n) {*/
+            /*margin-right: 0;*/
+          /*}*/
+        /*}*/
+      /*}*/
+    /*}*/
     .feed-link-box {
       background: #F7F8FA;
       border-radius: 0.106rem;
@@ -432,6 +434,7 @@
       border-radius: 2.666rem;
       display: flex;
       margin-top: 0.266rem;
+      margin-left: 16px;
       img {
         width: 0.293rem;
         height: 0.293rem;
@@ -443,13 +446,15 @@
       margin-top: 0.4rem;
       color: #808080;
       display: flex;
+      padding: 0 13px;
       justify-content: space-between;
       .feed-mord {
-
+        padding: 5px;
       }
       .feed-operation {
         span {
-          margin-left: 0.533rem;
+          padding: 5px;
+          /*margin-left: 0.533rem;*/
           .icon {
             margin-right: 0.133rem;
           }
