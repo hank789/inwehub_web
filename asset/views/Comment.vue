@@ -371,14 +371,14 @@
     background: #fff;
   }
   .comment-empty {
-    margin-top: 79px;
+    margin-top: 2.106rem;
     text-align: center;
     position: relative;
     z-index: 99;
     .comment-empty-content {
       .comment-wait-img {
-        width: 70px;
-        height: 89px;
+        width: 1.866rem;
+        height: 2.373rem;
         margin: 0 auto;
         img {
           width: 100%;
@@ -387,20 +387,20 @@
       }
       span {
         color: #C8C8C8;
-        font-size: 12px;
-        margin: 10px 0 17px;
+        font-size: 0.32rem;
+        margin: 0.266rem 0 0.453rem;
         display: inline-block;
       }
       .commeny-button {
-        width: 96px;
-        height: 36px;
+        width: 2.56rem;
+        height: 0.96rem;
         margin: 0 auto;
         color: #FFFFFF;
-        font-size: 14px;
-        line-height: 36px;
+        font-size: 0.373rem;
+        line-height: 0.96rem;
         text-align: center;
         background: #03AEF9;
-        border-radius: 100px;
+        border-radius: 2.666rem;
       }
     }
   }
