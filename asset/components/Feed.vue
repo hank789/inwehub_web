@@ -212,18 +212,23 @@
         default: {}
       }
     },
-    mounted () {},
+    mounted () {
+      this.renderShowOpenAll()
+    },
     updated () {
       this.$nextTick(() => {
+        this.renderShowOpenAll()
+      })
+    },
+    methods: {
+      renderShowOpenAll () {
         var titles = document.querySelectorAll('.currency-title')
         titles.forEach((item) => {
           if (item.scrollHeight > item.offsetHeight) {
             item.nextElementSibling.classList.add('showOpenAll')
           }
         })
-      })
-    },
-    methods: {
+      },
       onTap (event) {
         if (!this.item.feed.is_joined_group) {
           event.stopPropagation()
