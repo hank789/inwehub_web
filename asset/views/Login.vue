@@ -59,7 +59,6 @@
   import { USERS_APPEND } from '../stores/types'
   import { rebootAuth } from '../utils/wechat'
   import oauth from '../components/oauth/oauth'
-  import { clearAllWebViewCache } from '../utils/webview'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
   import VTooltip from 'v-tooltip'
@@ -193,7 +192,6 @@
           } else {
             window.mixpanelIdentify()
           }
-          clearAllWebViewCache()
           // 存储用户位置信息
           saveLocationInfo()
           this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)

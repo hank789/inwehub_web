@@ -92,9 +92,7 @@
         return this.time === 0 ? '发送验证' : this.time + '秒后重发'
       }
     },
-    created () {
-      clearAllWebViewCache()
-    },
+    created () {},
     components: {
       oauth
     },
