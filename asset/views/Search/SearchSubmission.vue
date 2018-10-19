@@ -112,7 +112,7 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
-  import FeedItem from '../../components/feed.vue'
+  import FeedItem from '../../components/Feed.vue'
   import PageMore from '../../components/PageMore.vue'
 
   export default {

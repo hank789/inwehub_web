@@ -11,7 +11,7 @@
         :isExpert="item.user.is_expert?1:0"
         :time="item.created_at"
       ></FeedUserInfo>
-      <div class="currency-title question-titles" v-if="item.feed.answer_content">{{item.feed.answer_content}}</div>
+      <div class="currency-title question-titles" v-if="item.feed.question_title">{{item.feed.question_title}}</div>
       <div class="question-statistics">
         <span class="question-price active-yellow" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
         <span v-if="answerNumber >=0 ">{{answerNumber}}回答 <i></i> </span>
@@ -20,7 +20,7 @@
         <span v-if="commentNumber >=0 ">{{commentNumber}}回复</span>
         <span v-if="averageRate >=0 "> <i></i> {{averageRate}}分</span>
       </div>
-      <div class="container-answer-box">
+      <div class="container-answer-box" v-if="item.feed.answer_id">
         <div class="question-answer-box">
           <span>{{item.feed.status_description}}</span>
           <span><i v-for="(tag, tagIndex) in item.feed.tags" :key="tagIndex" @tap.stop.prevent="toTagDetail(tag.name)">#{{tag.name}}#</i>{{item.feed.question_title}}</span>
