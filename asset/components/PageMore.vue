@@ -93,7 +93,7 @@
       }
     },
     mounted () {
-      if (this.link) {
+      if (this.shareOption.link) {
         this.bindShare()
       }
     },
@@ -146,7 +146,7 @@
         this.hide()
         this.$router.pushPlus('/collectUser?from=all')
         // 保存链接
-        localEvent.setLocalItem('share', this.link)
+        localEvent.setLocalItem('share', this.shareOption.link)
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel
           window.mixpanel.track(
@@ -172,7 +172,7 @@
           fromUser = currentUser.user_id
         }
         var shareParams = 'isShare=1&fromUser=' + fromUser
-        if (this.link.indexOf('?') < 0) {
+        if (this.shareOption.link.indexOf('?') < 0) {
           shareParams = '?' + shareParams
         } else {
           shareParams = '&' + shareParams
@@ -282,7 +282,7 @@
         this.share()
       },
       share () {
-        if (this.link) {
+        if (this.shareOption.link) {
           this.bindShare()
         }
 
