@@ -51,8 +51,8 @@
         <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
       <!--链接-->
-      <div class="container-feed-link-box" @tap.stop.prevent="goArticle()">
-        <div class="feed-link-box" v-if="item.feed.submission_type === 'link'">
+      <div class="container-feed-link-box" v-if="item.feed.submission_type === 'link'" @tap.stop.prevent="goArticle()">
+        <div class="feed-link-box">
           <div class="linkImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
           <div class="linkText">
             <span class="font-family-medium text-line-2">{{item.feed.article_title}}</span>
@@ -74,7 +74,7 @@
         </div>
       </div>
       <!--圈子-->
-      <div class="feed-group" v-if="item.feed.group && item.feed.group.name" @tap.stop.prevent="toGroupDetail(item.feed.group)">
+      <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" v-if="item.feed.group && item.feed.group.name" @tap.stop.prevent="toGroupDetail(item.feed.group)">
         <img src="../statics/images/feed-group@3x.png" alt="">
         <span>{{item.feed.group.name}}</span>
       </div>
@@ -482,6 +482,9 @@
       display: flex;
       margin-top: 0.266rem;
       margin-left: 0.426rem;
+      &.moveUp {
+        margin-top: 0;
+      }
       img {
         width: 0.293rem;
         height: 0.293rem;
