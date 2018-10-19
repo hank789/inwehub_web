@@ -160,9 +160,9 @@
     bottom: 50px; /* px不转换 */
   }
   .component-feed-item-guide {
-    padding-top: 30px;
+    padding-top: 0.8rem;
     .line-river-after {
-      margin-top: 30px;
+      margin-top: 0.8rem;
       &:after {
         left: 0.426rem;
         right: 0.426rem;
