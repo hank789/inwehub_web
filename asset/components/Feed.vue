@@ -39,14 +39,9 @@
         :isShowPositionAndCompany="false"
         :isExpert="item.user.is_expert?1:0"
         :time="item.created_at"
+        :address="item.feed.current_address_name"
         :showSetTop="item.top"
       ></FeedUserInfo>
-      <div class="feed-address" v-if="item.feed.current_address_name">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dingwei1"></use>
-        </svg>
-        {{item.feed.current_address_name}}
-      </div>
       <div class="currency-title text-line-5 feed-title"><div>{{item.feed.title}}</div></div>
       <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
       <!--图片-->
@@ -426,7 +421,7 @@
       .feed-pdf-box {
         background: #F7F8FA;
         border-radius: 0.106rem;
-        padding: 0.186rem 0.266rem;
+        padding: 10px 0.266rem;
         display: flex;
         margin-top: 0.266rem;
         .pdfIcon {

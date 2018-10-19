@@ -23,6 +23,11 @@
       <div class="detail" v-if="time">
         <span class="position" v-if="isTime(time)"><timeago :since="timeago(time)" :auto-update="60"></timeago> </span>
         <span class="position" v-else>{{time}}</span>
+        <span class="container-feedAddress" v-if="address">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dingwei1"></use>
+          </svg>{{address}}
+        </span>
       </div>
 
       <div class="followWrapper" v-if="isFollow && realname !== '匿名' && uuid !== localUuid">
@@ -96,6 +101,10 @@
         default: false
       },
       time: {
+        type: String,
+        default: ''
+      },
+      address: {
         type: String,
         default: ''
       },
@@ -217,6 +226,9 @@
     font-size: 0.32rem;
     color: #C8C8C8;
     margin-top: -0.08rem;
+  }
+  .container-feedAddress {
+    margin-left: 4px;
   }
 
   .split {
