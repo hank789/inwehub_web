@@ -66,6 +66,7 @@
   import { USERS_APPEND } from '../stores/types'
   import { openFullscreen, closeFullscreen } from '../utils/plus'
   import { saveLocationInfo } from '../utils/allPlatform'
+  import { rebootAuth } from '../utils/wechat'
   import Vue from 'vue'
   import VTooltip from 'v-tooltip'
   Vue.use(VTooltip)
@@ -162,8 +163,30 @@
       })
     },
     beforeRouteEnter (to, from, next) {
-      openFullscreen()
+      if (window.mui.os.wechat) {
+        if (process.env.NODE_ENV === 'development') {
+          next()
+          return
+        }
 
+        var hash = null
+        if (to.query.redirect) {
+          hash = to.query.redirect
+        }
+
+        var userAgent = window.navigator.userAgent
+
+        if (userAgent.match(/WindowsWechat/)) {
+          next()
+          return false
+        }
+
+        rebootAuth(hash)
+        // -----
+        return
+      }
+
+      openFullscreen()
       next()
     },
     beforeRouteLeave (to, from, next) {
