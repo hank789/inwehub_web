@@ -383,7 +383,7 @@
       .feed-link-box {
         background: #F7F8FA;
         border-radius: 0.106rem;
-        padding: 0.186rem 0.266rem;
+        padding: 0.266rem;
         display: flex;
         margin-top: 0.32rem;
         margin-bottom: 0.266rem;

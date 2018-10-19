@@ -32,6 +32,18 @@
         class="listWrapper"
       >
         <template v-for="(item, index) in list">
+
+          <div class="component-feed-item-guide" v-if="index === 3 && search_type === 2">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gongkai"></use>
+            </svg>
+            <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
+            <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
+              <button>去看看</button>
+            </div>
+            <div class="line-river-after line-river-after-top"></div>
+          </div>
+
           <FeedItem
             :item="item"
             @showItemMore="showItemMore"
@@ -146,6 +158,16 @@
   .listWrapper {
     top: 1.173rem;
     bottom: 50px; /* px不转换 */
+  }
+  .component-feed-item-guide {
+    padding-top: 30px;
+    .line-river-after {
+      margin-top: 30px;
+      &:after {
+        left: 0.426rem;
+        right: 0.426rem;
+      }
+    }
   }
   .newLink {
     margin-top: 0.24rem;
