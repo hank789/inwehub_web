@@ -335,9 +335,9 @@
     .currency-title {
       color: #444444;
       font-size: 0.373rem;
-      line-height: 22px;
-      margin-top: 1px;
-      letter-spacing: 0.5px;
+      line-height: 0.586rem;
+      margin-top: 0.026rem;
+      letter-spacing: 0.013rem;
     }
     .userInfoWrapper {
       padding: 0 0.426rem !important;
@@ -411,7 +411,7 @@
               color: #444444;
               font-size: 0.346rem;
               line-height: 0.533rem;
-              letter-spacing: 0.5px;
+              letter-spacing: 0.013rem;
             }
             &:nth-of-type(2) {
               color: #B4B4B6;
@@ -449,7 +449,7 @@
             color: #444444;
             font-size: 0.346rem;
             line-height: 0.533rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.013rem;
           }
         }
       }
@@ -474,26 +474,26 @@
       }
     }
     .feed-moreOperation {
-      margin-top: 10px;
+      margin-top: 0.266rem;
       color: #808080;
       display: flex;
       padding: 0 0.346rem;
       justify-content: space-between;
       .feed-mord {
 
-        padding: 5px;
+        padding: 0.133rem;
         color: #808080;
       }
       .feed-operation {
         span {
-          padding: 5px;
-          font-size: 11px;
+          padding: 0.133rem;
+          font-size: 0.293rem;
           color: #444444;
           /*margin-left: 0.533rem;*/
           .icon {
             margin-right: 0.133rem;
             color: #808080;
-            font-size: 15px;
+            font-size: 0.4rem;
           }
         }
         .activeSpan {
@@ -513,10 +513,10 @@
       padding: 0 0.426rem;
     }
     .question-statistics {
-      margin-top: 7px;
+      margin-top: 0.186rem;
       color: #B4B4B6;
       padding: 0 0.426rem;
-      line-height: 15px;
+      line-height: 0.4rem;
       .question-price {
         &.active-yellow {
           color: #235280;
