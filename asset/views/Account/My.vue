@@ -286,7 +286,7 @@
           }
           userAbility.newbieTask(this)
           this.recommendRead()
-        }))
+        }, true))
       }
     },
     activated: function () {
