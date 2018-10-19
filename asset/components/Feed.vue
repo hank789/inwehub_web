@@ -31,6 +31,7 @@
     </div>
 
     <!-- 分享 -->
+    <div @tap.capture="onTap($event)">
     <div class="container-feed-item feed-currency" v-if="isDiscover" @tap.stop.prevent="toDetail(item)">
       <FeedUserInfo
         :uuid="item.user.uuid"
@@ -105,6 +106,7 @@
 
       <div class="line-river-after line-river-after-top"></div>
     </div>
+    </div>
   </div>
 </template>
 
@@ -116,6 +118,7 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
+  import { alertGroups } from '../utils/dialogList'
 
   export default {
     data () {
@@ -209,15 +212,27 @@
         default: {}
       }
     },
-    mounted () {
-      var titles = document.querySelectorAll('.currency-title')
-      titles.forEach((item) => {
-        if (item.scrollHeight > item.offsetHeight) {
-          item.nextElementSibling.classList.add('showOpenAll')
-        }
+    mounted () {},
+    updated () {
+      this.$nextTick(() => {
+        var titles = document.querySelectorAll('.currency-title')
+        titles.forEach((item) => {
+          if (item.scrollHeight > item.offsetHeight) {
+            item.nextElementSibling.classList.add('showOpenAll')
+          }
+        })
       })
     },
     methods: {
+      onTap (event) {
+        if (!this.item.feed.is_joined_group) {
+          event.stopPropagation()
+          event.preventDefault()
+          alertGroups(this.$parent, (num) => {
+            this.$router.pushPlus('/group/detail/' + this.item.feed.group.id)
+          })
+        }
+      },
       goArticle: function () {
         var item = this.item
         if (item.feed.submission_type !== 'link') {
@@ -369,7 +384,7 @@
       margin-top: 0.106rem;
       display: none;
       padding: 0 0.426rem;
-      line-height: 18px;
+      line-height: 0.48rem;
       &.showOpenAll {
         display: block;
       }
@@ -482,7 +497,7 @@
       }
       .feed-operation {
         span {
-          padding: 0.133rem 10px;
+          padding: 0.133rem 0.266rem;
           font-size: 0.293rem;
           color: #444444;
           /*margin-left: 0.533rem;*/
@@ -509,7 +524,7 @@
     position: relative;
     margin-top: 0.533rem;
     .line-river-after {
-      margin-top: 15px;
+      margin-top: 0.4rem;
     }
     .question-titles {
       padding: 0 0.426rem;

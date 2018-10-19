@@ -640,7 +640,7 @@
       /*width: 92%;*/
       margin: 0 auto;
       color: #444444;
-      font-size: 15px;
+      font-size: 0.4rem;
       padding: 0.293rem 0.4rem;
       position: relative;
       display: flex;

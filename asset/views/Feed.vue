@@ -70,6 +70,9 @@
   import HomeSearch from '../components/search/Home'
   import FeedItem from '../components/Feed.vue'
   import PageMore from '../components/PageMore.vue'
+  import { getLocalUserId } from '../utils/user'
+  import { postRequest } from '../utils/request'
+  import { getIndexByIdArray } from '../utils/array'
 
   const Feed = {
     data: () => ({
@@ -79,6 +82,7 @@
       contact_id: '',
       list: [],
       shareOption: {},
+      itemOptionsObj: {},
       iconMenus: []
     }),
     created () {
@@ -120,7 +124,41 @@
       }
     },
     methods: {
-      showItemMore (shareOption) {
+      delDiscover (item, callback) {
+        this.$refs.share.share()
+        var btnArray = ['取消', '确定']
+        var list = this.list
+        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            // 进行删除
+            postRequest(`article/destroy-submission`, {
+              id: item.feed.submission_id
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                return
+              }
+              if (response.data.data) {
+                var index = getIndexByIdArray(list, item.id)
+                list.splice(index, 1)
+                callback()
+                window.mui.toast('删除成功')
+              }
+            })
+          }
+        })
+      },
+      showItemMore (shareOption, item) {
+        this.iconMenus = []
+        this.itemOptionsObj = item
+        if (getLocalUserId() === item.user.id) {
+          this.iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
+        }
         this.shareOption = shareOption
         this.$refs.share.share()
       },
@@ -130,7 +168,13 @@
       shareSuccess () {
 
       },
-      iconMenusClickedItem () {
+      iconMenusClickedItem (item) {
+        switch (item.text) {
+          case '删除':
+            this.delDiscover(this.itemOptionsObj, () => {
+            })
+            break
+        }
       },
       refreshPageData () {
         if (this.$route.query.refresh) {
