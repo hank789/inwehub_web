@@ -158,7 +158,7 @@
         }
       },
       itemObj () {
-        var item = this.item
+        var item = JSON.parse(JSON.stringify(this.item))
         if (typeof item.feed.img === 'string') {
           if (item.feed.img) {
             item.feed.img = [item.feed.img]
