@@ -315,7 +315,7 @@
     .currency-title {
       color: #444444;
       font-size: 0.373rem;
-      line-height: 0.586rem;
+      line-height: 22px;
       margin-top: 1px;
       letter-spacing: 0.5px;
     }
@@ -492,9 +492,10 @@
       padding: 0 0.426rem;
     }
     .question-statistics {
-      margin-top: 0.346rem;
+      margin-top: 7px;
       color: #B4B4B6;
       padding: 0 0.426rem;
+      line-height: 15px;
       .question-price {
         &.active-yellow {
           color: #235280;
