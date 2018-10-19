@@ -228,7 +228,7 @@
     margin-top: -0.08rem;
   }
   .container-feedAddress {
-    margin-left: 4px;
+    margin-left: 0.106rem;
   }
 
   .split {

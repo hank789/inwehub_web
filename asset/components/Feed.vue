@@ -421,7 +421,7 @@
       .feed-pdf-box {
         background: #F7F8FA;
         border-radius: 0.106rem;
-        padding: 10px 0.266rem;
+        padding: 0.266rem 0.266rem;
         display: flex;
         margin-top: 0.266rem;
         .pdfIcon {
