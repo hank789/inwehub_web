@@ -201,7 +201,7 @@
   import { goThirdPartyArticle } from '../../utils/webview'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
   import { alertGroups } from '../../utils/dialogList'
-  import FeedItem from '../../components/feed.vue'
+  import FeedItem from '../../components/Feed.vue'
 
   export default {
     data () {
