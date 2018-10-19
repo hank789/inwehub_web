@@ -22,8 +22,8 @@
       </div>
       <div class="container-answer-box" v-if="item.feed.answer_id">
         <div class="question-answer-box">
-          <span>{{item.feed.status_description}}</span>
-          <span><i v-for="(tag, tagIndex) in item.feed.tags" :key="tagIndex" @tap.stop.prevent="toTagDetail(tag.name)">#{{tag.name}}#</i>{{item.feed.question_title}}</span>
+          <span class="answerPriceBJ" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
+          <span class="tagsAndQuestionTitle"><i v-for="(tag, tagIndex) in item.feed.tags" :key="tagIndex" @tap.stop.prevent="toTagDetail(tag.name)">#{{tag.name}}#</i>{{item.feed.question_title}}</span>
         </div>
       </div>
 
@@ -544,25 +544,23 @@
         border-radius: 0.106rem;
         background: #F7F8FA;
         margin-top: 0.346rem;
-        span {
-          &:nth-of-type(1) {
-            color: #808080;
-            font-size: 0.266rem;
-            padding: 0.026rem 0.133rem;
-            line-height: 0.373rem;
-            border-radius: 0.106rem;
-            background: #DCDCDC;
-            display: inline-block;
-          }
-          &:nth-of-type(2) {
-            color: #808080;
-            font-size: 0.346rem;
-            line-height: 0.533rem;
-            margin-left: -0.106rem;
-            i {
-              color: #235280;
-              font-style: normal;
-            }
+        .answerPriceBJ {
+          color: #808080;
+          font-size: 0.266rem;
+          padding: 0.026rem 0.133rem;
+          line-height: 0.373rem;
+          border-radius: 0.106rem;
+          background: #DCDCDC;
+          display: inline-block;
+        }
+        .tagsAndQuestionTitle {
+          color: #808080;
+          font-size: 0.346rem;
+          line-height: 0.533rem;
+          margin-left: -0.106rem;
+          i {
+            color: #235280;
+            font-style: normal;
           }
         }
       }
