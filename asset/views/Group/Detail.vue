@@ -450,6 +450,7 @@
           } else {
             this.detail.is_joined = 0
           }
+          this.$refs.RefreshList.refreshPageData(this.prevOtherData)
           window.mui.toast('圈子动态更新将第一时间通知您')
         })
       },
