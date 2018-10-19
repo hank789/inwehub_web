@@ -36,6 +36,7 @@
         :isShowPositionAndCompany="false"
         :isExpert="item.user.is_expert?1:0"
         :time="item.created_at"
+        :showSetTop="item.top"
       ></FeedUserInfo>
       <div class="feed-address" v-if="item.feed.current_address_name">
         <svg class="icon" aria-hidden="true">
@@ -46,7 +47,7 @@
       <div class="currency-title text-line-5 ">{{item.feed.title}}</div>
       <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
       <!--图片-->
-      <div v-if="itemObj.feed.img.length"
+      <div v-if="itemObj.feed.img.length && item.feed.submission_type !== 'link'"
            class="container-images container-images-discover">
         <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
@@ -88,12 +89,12 @@
               <use xlink:href="#icon-pinglun"></use>
             </svg>{{item.feed.comment_number}}
           </span>
-          <span @tap.stop.prevent="discoverDown()">
+          <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-cai"></use>
             </svg>{{item.feed.downvote_number}}
           </span>
-          <span @tap.stop.prevent="discoverUp()">
+          <span @tap.stop.prevent="discoverUp()" :class="item.feed.is_upvoted ? 'activeSpan':''">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zan"></use>
             </svg>{{item.feed.support_number}}
@@ -116,7 +117,8 @@
   export default {
     data () {
       return {
-        shareOption: {}
+        shareOption: {},
+        isUpvote: ''
       }
     },
     components: {
@@ -234,17 +236,21 @@
         this.$emit('showItemMore', this.shareOption, this.item)
       },
       discoverUp () {
-        upvote(this, this.item.feed.submission_id, () => {
+        upvote(this, this.item.feed.submission_id, (response) => {
           this.item.feed.support_number++
-        }, () => {
+          this.item.feed.is_upvoted = response.data.data.support_percent
+        }, (response) => {
           this.item.feed.support_number--
+          this.item.feed.is_upvoted = response.data.data.support_percent
         })
       },
       discoverDown () {
-        downVote(this, this.item.feed.submission_id, () => {
+        downVote(this, this.item.feed.submission_id, (response) => {
           this.item.feed.downvote_number++
-        }, () => {
+          this.item.feed.is_downvoted = response.data.data.support_percent
+        }, (response) => {
           this.item.feed.downvote_number--
+          this.item.feed.is_downvoted = response.data.data.support_percent
         })
       },
       toTagDetail (name) {
@@ -446,6 +452,12 @@
           margin-left: 0.533rem;
           .icon {
             margin-right: 0.133rem;
+          }
+        }
+        .activeSpan {
+          color: #B4B4B6;
+          .icon {
+            color: #B4B4B6;
           }
         }
       }

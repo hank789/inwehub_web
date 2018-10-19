@@ -13,7 +13,7 @@
 
     <div class="mui-media-body realnameMtop">
       {{ realname }}
-      <div class="feedSetTop">顶</div>
+      <div class="feedSetTop" v-if="showSetTop">顶</div>
       <div class="detail" v-if="isShowPositionAndCompany">
         <span class="position">{{ position }}</span>
         <span class="split"></span>
@@ -70,6 +70,10 @@
       company: {
         type: String,
         default: ''
+      },
+      showSetTop: {
+        type: Number,
+        default: 0
       },
       isFollow: {
         type: Boolean,
