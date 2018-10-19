@@ -483,7 +483,7 @@
       margin-top: 0.266rem;
       margin-left: 0.426rem;
       &.moveUp {
-        margin-top: 0;
+        margin-top: 5px;
       }
       img {
         width: 0.293rem;
