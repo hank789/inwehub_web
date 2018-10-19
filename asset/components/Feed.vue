@@ -209,12 +209,15 @@
         default: {}
       }
     },
-    mounted () {
-      var titles = document.querySelectorAll('.currency-title')
-      titles.forEach((item) => {
-        if (item.scrollHeight > item.offsetHeight) {
-          item.nextElementSibling.classList.add('showOpenAll')
-        }
+    mounted () {},
+    updated () {
+      this.$nextTick(() => {
+        var titles = document.querySelectorAll('.currency-title')
+        titles.forEach((item) => {
+          if (item.scrollHeight > item.offsetHeight) {
+            item.nextElementSibling.classList.add('showOpenAll')
+          }
+        })
       })
     },
     methods: {
