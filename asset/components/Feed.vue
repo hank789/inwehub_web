@@ -48,7 +48,7 @@
       <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
       <!--图片-->
       <div v-if="itemObj.feed.img.length && item.feed.submission_type !== 'link'"
-           class="container-images container-images-discover">
+           class="container-images container-images-discover" :class="'container-images-' + (itemObj.feed.img.length)">
         <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
       <!--链接-->
@@ -346,17 +346,17 @@
     }
     .container-images {
       padding: 0.266rem 0 0;
-      &.container-images-discover {
-        .container-image {
-          width: 2.96rem;
-          height: 2.96rem;
-          margin-right: 0.133rem;
-          margin-bottom: 0.133rem;
-          &:nth-of-type(3n) {
-            margin-right: 0;
-          }
-        }
-      }
+      /*&.container-images-discover {*/
+        /*.container-image {*/
+          /*width: 2.96rem;*/
+          /*height: 2.96rem;*/
+          /*margin-right: 0.133rem;*/
+          /*margin-bottom: 0.133rem;*/
+          /*&:nth-of-type(3n) {*/
+            /*margin-right: 0;*/
+          /*}*/
+        /*}*/
+      /*}*/
     }
     .feed-link-box {
       background: #F7F8FA;
