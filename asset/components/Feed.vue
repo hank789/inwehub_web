@@ -14,11 +14,11 @@
       <div class="currency-title">{{item.feed.answer_content}}</div>
       <div class="question-statistics">
         <span class="question-price active-yellow" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
-        <span v-if="answerNumber >=0 ">{{answerNumber}}回答</span>
+        <span v-if="answerNumber >=0 ">{{answerNumber}}回答 <i></i> </span>
         <span v-if="followNumber >=0 ">{{followNumber}}关注</span>
-        <span v-if="supportNumber >=0 ">{{supportNumber}}赞</span>
+        <span v-if="supportNumber >=0 ">{{supportNumber}}赞 <i></i> </span>
         <span v-if="commentNumber >=0 ">{{commentNumber}}回复</span>
-        <span v-if="averageRate >=0 ">{{averageRate}}分</span>
+        <span v-if="averageRate >=0 "> <i></i> {{averageRate}}分</span>
       </div>
       <div class="question-answer-box">
         <span>{{item.feed.status_description}}</span>
@@ -486,6 +486,13 @@
       }
       span {
         font-size: 0.293rem;
+        i {
+          width: 2px;
+          height: 2px;
+          background: #B4B4B6;
+          display: inline-block;
+          vertical-align: middle;
+        }
       }
     }
     .question-answer-box {

@@ -183,7 +183,7 @@
               ></FeedItem>
 
 
-              <div class="line-river-big"></div>
+              <!--<div class="line-river-big"></div>-->
             </template>
 
           </div>
