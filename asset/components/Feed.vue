@@ -11,7 +11,7 @@
         :isExpert="item.user.is_expert?1:0"
         :time="item.created_at"
       ></FeedUserInfo>
-      <div class="currency-title question-titles" v-if="item.feed.question_title">{{item.feed.question_title}}</div>
+      <div class="currency-title question-titles">{{ item.feed.answer_id?item.feed.answer_content:item.feed.question_title }}</div>
       <div class="question-statistics">
         <span class="question-price active-yellow" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
         <span v-if="answerNumber >=0 ">{{answerNumber}}回答 <i></i> </span>

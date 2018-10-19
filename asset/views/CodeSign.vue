@@ -93,7 +93,6 @@
       }
     },
     created () {
-      window.showInwehubWebview()
       clearAllWebViewCache()
     },
     components: {
