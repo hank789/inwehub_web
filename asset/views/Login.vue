@@ -77,9 +77,7 @@
       showPasswordLabel: true,
       errorMsg: ''
     }),
-    created () {
-      clearAllWebViewCache()
-    },
+    created () {},
     components: {
       oauth
     },
