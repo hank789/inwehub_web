@@ -302,6 +302,7 @@
       },
       showItemOptions (shareOption, item) {
         this.iconMenus = []
+        this.itemOptionsObj = item
 
         if (getLocalUserId() === item.user.id) {
           this.iconMenus.push({
