@@ -226,6 +226,8 @@
         titles.forEach((item) => {
           if (item.scrollHeight > item.offsetHeight) {
             item.nextElementSibling.classList.add('showOpenAll')
+          } else {
+            item.nextElementSibling.classList.remove('showOpenAll')
           }
         })
       },
