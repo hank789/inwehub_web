@@ -372,7 +372,7 @@
       margin-top: 0.106rem;
       display: none;
       padding: 0 0.426rem;
-      line-height: 18px;
+      line-height: 0.48rem;
       &.showOpenAll {
         display: block;
       }
@@ -485,7 +485,7 @@
       }
       .feed-operation {
         span {
-          padding: 0.133rem 10px;
+          padding: 0.133rem 0.266rem;
           font-size: 0.293rem;
           color: #444444;
           /*margin-left: 0.533rem;*/
@@ -512,7 +512,7 @@
     position: relative;
     margin-top: 0.533rem;
     .line-river-after {
-      margin-top: 15px;
+      margin-top: 0.4rem;
     }
     .question-titles {
       padding: 0 0.426rem;
