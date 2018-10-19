@@ -23,7 +23,7 @@
           <img src="../statics/images/sendFriend@2x.png"/>
           <span>私信</span>
         </div>
-        <div class="single" v-clipboard="shareOption.link" @success="shareToCopyLink()" @error="clipboardError">
+        <div class="single" v-if="shareOption.link" v-clipboard="shareOption.link" @success="shareToCopyLink()" @error="clipboardError">
           <img src="../statics/images/copyLink@3x.png"/>
           <span>复制链接</span>
         </div>
