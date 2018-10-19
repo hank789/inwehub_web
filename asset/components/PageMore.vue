@@ -329,6 +329,10 @@
     font-size: 0.56rem;
   }
 
+  .mui-wechat .shareBtn{
+    display: none;
+  }
+
   .resumeWrapper .shareBtn {
     position: absolute;
     top: 0.64rem !important;
