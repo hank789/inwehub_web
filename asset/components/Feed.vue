@@ -31,6 +31,7 @@
     </div>
 
     <!-- 分享 -->
+    <div @tap.capture="onTap($event)">
     <div class="container-feed-item feed-currency" v-if="isDiscover" @tap.stop.prevent="toDetail(item)">
       <FeedUserInfo
         :uuid="item.user.uuid"
@@ -105,6 +106,7 @@
 
       <div class="line-river-after line-river-after-top"></div>
     </div>
+    </div>
   </div>
 </template>
 
@@ -116,6 +118,7 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
+  import { alertGroups } from '../utils/dialogList'
 
   export default {
     data () {
@@ -221,6 +224,15 @@
       })
     },
     methods: {
+      onTap (event) {
+        if (!this.item.feed.is_joined_group) {
+          event.stopPropagation()
+          event.preventDefault()
+          alertGroups(this.$parent, (num) => {
+            this.$router.pushPlus('/group/detail/' + this.item.feed.group.id)
+          })
+        }
+      },
       goArticle: function () {
         var item = this.item
         if (item.feed.submission_type !== 'link') {
