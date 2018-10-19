@@ -743,7 +743,7 @@ const routes = [
     meta: {
       title: '评论',
       keepAlive: false,
-      wechatHideHeader: true
+      wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
       next()
