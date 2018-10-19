@@ -182,7 +182,7 @@
       },
       resetList () {
         this.page = 1
-        this.list = []
+        this.$refs.RefreshList.refreshPageData(this.prevOtherData)
       },
       switchMode () {
         if (this.mode === '最新') {
@@ -256,7 +256,7 @@
           }
         } else {
           console.log('discuss:commentTarget:' + JSON.stringify(this.commentTarget))
-          if (this.commentTarget.list) {
+          if (this.commentTarget.list.length) {
             this.commentTarget.list.unshift(item)
           } else {
             this.resetList()
