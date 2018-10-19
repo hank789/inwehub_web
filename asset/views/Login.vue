@@ -299,11 +299,11 @@
 
   /*图标*/
   .logo {
-    font-size: 148px;
+    font-size: 3.946rem;
     text-align: center;
     margin: 0.133rem 0;
-    padding-top: 20px;
-    height: 148px;
+    padding-top: 0.533rem;
+    height: 3.946rem;
   }
 
   /*忘记密码和账号*/

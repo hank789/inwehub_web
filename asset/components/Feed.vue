@@ -11,7 +11,7 @@
         :isExpert="item.user.is_expert?1:0"
         :time="item.created_at"
       ></FeedUserInfo>
-      <div class="currency-title">{{item.feed.answer_content}}</div>
+      <div class="currency-title question-titles" v-if="item.feed.answer_content">{{item.feed.answer_content}}</div>
       <div class="question-statistics">
         <span class="question-price active-yellow" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
         <span v-if="answerNumber >=0 ">{{answerNumber}}回答 <i></i> </span>
@@ -20,10 +20,13 @@
         <span v-if="commentNumber >=0 ">{{commentNumber}}回复</span>
         <span v-if="averageRate >=0 "> <i></i> {{averageRate}}分</span>
       </div>
-      <div class="question-answer-box">
-        <span>{{item.feed.status_description}}</span>
-        <span><i v-for="(tag, tagIndex) in item.feed.tags" :key="tagIndex" @tap.stop.prevent="toTagDetail(tag.name)">#{{tag.name}}#</i>{{item.feed.question_title}}</span>
+      <div class="container-answer-box">
+        <div class="question-answer-box">
+          <span>{{item.feed.status_description}}</span>
+          <span><i v-for="(tag, tagIndex) in item.feed.tags" :key="tagIndex" @tap.stop.prevent="toTagDetail(tag.name)">#{{tag.name}}#</i>{{item.feed.question_title}}</span>
+        </div>
       </div>
+
       <div class="line-river-after line-river-after-top"></div>
     </div>
 
@@ -48,27 +51,31 @@
       <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
       <!--图片-->
       <div v-if="itemObj.feed.img.length && item.feed.submission_type !== 'link'"
-           class="container-images container-images-discover">
+           class="container-images container-images-discover" :class="'container-images-' + (itemObj.feed.img.length)">
         <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
       <!--链接-->
-      <div class="feed-link-box" v-if="item.feed.submission_type === 'link'">
-        <div class="linkImg lazyImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
-        <div class="linkText">
-          <span class="font-family-medium text-line-2">{{item.feed.article_title}}</span>
-          <span>{{item.feed.domain}}</span>
+      <div class="container-feed-link-box">
+        <div class="feed-link-box" v-if="item.feed.submission_type === 'link'">
+          <div class="linkImg lazyImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
+          <div class="linkText">
+            <span class="font-family-medium text-line-2">{{item.feed.article_title}}</span>
+            <span>{{item.feed.domain}}</span>
+          </div>
         </div>
       </div>
       <!--PDF-->
-      <div class="feed-pdf-box" v-if="itemObj.feed.files.length" v-for="(pdf, pdfIndex) in itemObj.feed.files"
-           :key="pdfIndex">
-        <div class="pdfIcon">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-pdf"></use>
-          </svg>
-        </div>
-        <div class="pdfText">
-          <span class="font-family-medium text-line-2">{{pdf.name}}</span>
+      <div class="container-pdf-box">
+        <div class="feed-pdf-box" v-if="itemObj.feed.files.length" v-for="(pdf, pdfIndex) in itemObj.feed.files"
+             :key="pdfIndex">
+          <div class="pdfIcon">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-pdf"></use>
+            </svg>
+          </div>
+          <div class="pdfText">
+            <span class="font-family-medium text-line-2">{{pdf.name}}</span>
+          </div>
         </div>
       </div>
       <!--圈子-->
@@ -300,7 +307,11 @@
 <style lang="less">
   .feed-currency {
     .line-river-after {
-      margin-top: 0.533rem;
+      margin-top: 10px;
+      &:after {
+        left: 0.426rem;
+        right: 0.426rem;
+      }
     }
     .currency-title {
       color: #444444;
@@ -335,91 +346,89 @@
       left: 2.986rem;
     }
     .feed-title {
-      div {
-        padding: 0 0.426px;
-      }
+      padding: 0 0.426rem;
     }
     .feed-open-all {
       color: #03AEF9;
       font-size: 0.346rem;
       margin-top: 0.106rem;
       display: none;
+      padding: 0 0.426rem;
       &.showOpenAll {
         display: block;
       }
     }
-    /*.container-images {*/
-      /*padding: 0.266rem 0 0;*/
-      /*&.container-images-discover {*/
-        /*.container-image {*/
-          /*margin-right: 0.133rem;*/
-          /*margin-bottom: 0.133rem;*/
-          /*&:nth-of-type(3n) {*/
-            /*margin-right: 0;*/
-          /*}*/
-        /*}*/
-      /*}*/
-    /*}*/
-    .feed-link-box {
-      background: #F7F8FA;
-      border-radius: 0.106rem;
-      padding: 0.186rem 0.266rem;
-      display: flex;
-      margin-top: 0.32rem;
-      margin-bottom: 0.266rem;
-      .linkImg {
-        width: 1.173rem;
-        height: 1.173rem;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: 0.106rem;
+
+    .container-images {
+      padding: 0.266rem .4rem 0;
+
+    }
+    .container-feed-link-box {
+      padding: 0 0.426rem;
+      .feed-link-box {
+        background: #F7F8FA;
+        border-radius: 0.106rem;
+        padding: 0.186rem 0.266rem;
+        display: flex;
+        margin-top: 0.32rem;
+        margin-bottom: 0.266rem;
+        .linkImg {
+          width: 1.173rem;
+          height: 1.173rem;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0.106rem;
+          }
+        }
+        .linkText {
+          width: 7.173rem;
+          margin-left: 0.266rem;
+          span {
+            &:nth-of-type(1) {
+              width: inherit;
+              color: #444444;
+              font-size: 0.346rem;
+              line-height: 0.533rem;
+            }
+            &:nth-of-type(2) {
+              color: #B4B4B6;
+              font-size: 0.293rem;
+            }
+          }
         }
       }
-      .linkText {
-        width: 7.173rem;
-        margin-left: 0.266rem;
-        span {
-          &:nth-of-type(1) {
+    }
+    .container-pdf-box {
+      padding: 0 0.426rem;
+      .feed-pdf-box {
+        background: #F7F8FA;
+        border-radius: 0.106rem;
+        padding: 0.186rem 0.266rem;
+        display: flex;
+        margin-top: 0.266rem;
+        .pdfIcon {
+          width: 1.173rem;
+          height: 1.173rem;
+          text-align: center;
+          border-radius: 0.106rem;
+          background: #DF6F5A;
+          .icon {
+            color: #ffffff;
+            font-size: 0.906rem;
+            margin-top: 0.133rem;
+          }
+        }
+        .pdfText {
+          width: 7.173rem;
+          margin-left: 0.266rem;
+          span {
             width: inherit;
             color: #444444;
             font-size: 0.346rem;
             line-height: 0.533rem;
           }
-          &:nth-of-type(2) {
-            color: #B4B4B6;
-            font-size: 0.293rem;
-          }
-        }
-      }
-    }
-    .feed-pdf-box {
-      background: #F7F8FA;
-      border-radius: 0.106rem;
-      padding: 0.186rem 0.266rem;
-      display: flex;
-      margin-top: 0.266rem;
-      .pdfIcon {
-        width: 1.173rem;
-        height: 1.173rem;
-        text-align: center;
-        border-radius: 0.106rem;
-        background: #DF6F5A;
-        .icon {
-          color: #ffffff;
-          font-size: 0.906rem;
-          margin-top: 0.133rem;
-        }
-      }
-      .pdfText {
-        width: 7.173rem;
-        margin-left: 0.266rem;
-        span {
-          width: inherit;
-          color: #444444;
-          font-size: 0.346rem;
-          line-height: 0.533rem;
         }
       }
     }
@@ -472,10 +481,13 @@
   .container-feed-questionAnswer {
     position: relative;
     margin-top: 0.533rem;
-    padding: 0 0.426rem;
+    .question-titles {
+      padding: 0 0.426rem;
+    }
     .question-statistics {
       margin-top: 0.346rem;
       color: #B4B4B6;
+      padding: 0 0.426rem;
       .question-price {
         &.active-yellow {
           color: #235280;
@@ -492,38 +504,41 @@
       span {
         font-size: 0.293rem;
         i {
-          width: 2px;
-          height: 2px;
+          width: 0.053rem;
+          height: 0.053rem;
           background: #B4B4B6;
           display: inline-block;
           vertical-align: middle;
         }
       }
     }
-    .question-answer-box {
-      width: 9.146rem;
-      padding: 0.186rem 0.266rem;
-      border-radius: 0.106rem;
-      background: #F7F8FA;
-      margin-top: 0.346rem;
-      span {
-        &:nth-of-type(1) {
-          color: #808080;
-          font-size: 0.266rem;
-          padding: 0.026rem 0.133rem;
-          line-height: 0.373rem;
-          border-radius: 0.106rem;
-          background: #DCDCDC;
-          display: inline-block;
-        }
-        &:nth-of-type(2) {
-          color: #808080;
-          font-size: 0.346rem;
-          line-height: 0.533rem;
-          margin-left: -0.106rem;
-          i {
-            color: #235280;
-            font-style: normal;
+    .container-answer-box {
+      padding: 0 0.426rem;
+      .question-answer-box {
+        width: 9.146rem;
+        padding: 0.186rem 0.266rem;
+        border-radius: 0.106rem;
+        background: #F7F8FA;
+        margin-top: 0.346rem;
+        span {
+          &:nth-of-type(1) {
+            color: #808080;
+            font-size: 0.266rem;
+            padding: 0.026rem 0.133rem;
+            line-height: 0.373rem;
+            border-radius: 0.106rem;
+            background: #DCDCDC;
+            display: inline-block;
+          }
+          &:nth-of-type(2) {
+            color: #808080;
+            font-size: 0.346rem;
+            line-height: 0.533rem;
+            margin-left: -0.106rem;
+            i {
+              color: #235280;
+              font-style: normal;
+            }
           }
         }
       }
