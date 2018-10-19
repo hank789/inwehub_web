@@ -57,7 +57,7 @@
       <!--链接-->
       <div class="container-feed-link-box">
         <div class="feed-link-box" v-if="item.feed.submission_type === 'link'">
-          <div class="linkImg lazyImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
+          <div class="linkImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
           <div class="linkText">
             <span class="font-family-medium text-line-2">{{item.feed.article_title}}</span>
             <span>{{item.feed.domain}}</span>
