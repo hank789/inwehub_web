@@ -86,7 +86,7 @@
           </svg>
         </div>
         <div class="feed-operation">
-          <span>
+          <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-pinglun"></use>
             </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
@@ -567,12 +567,12 @@
         background: #F7F8FA;
         margin-top: 0.346rem;
         .answerPriceBJ {
-          color: #808080;
+          color: #235280;
           font-size: 0.266rem;
           padding: 0.026rem 0.133rem;
           line-height: 0.373rem;
           border-radius: 0.106rem;
-          background: #DCDCDC;
+          background: #FCC816;
           display: inline-block;
         }
         .tagsAndQuestionTitle {
