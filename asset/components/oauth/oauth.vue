@@ -141,11 +141,8 @@
                 var token = response.data.data.token
                 // 是否为新用户注册
                 var isNewUser = response.data.data.newUser
-                if (isNewUser && isNewUser === 1) {
-                  window.trackMixpanelEvent('register:success', 'oauth', 'wechat-oauth', '微信注册')
-                }
-                console.log('获取微信信息成功: token:' + token + ', openid:' + auth.authResult.openid)
-                self.$emit('success', token, auth.authResult.openid, auth.userInfo.nickname)
+                window.console.log('获取微信信息成功: token:' + token + ', openid:' + auth.authResult.openid)
+                self.$emit('success', token, auth.authResult.openid, auth.userInfo.nickname, isNewUser)
               })
             }, function (e) {
               self.$emit('fail', '获取用户信息失败： [' + e.code + ']：' + e.message)

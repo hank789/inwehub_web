@@ -353,7 +353,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: componets.Login,
+    component: componets.CodeSign,
     meta: {
       title: '登录'
     },
@@ -371,6 +371,17 @@ const routes = [
     component: componets.Register,
     meta: {
       title: '注册'
+    },
+    beforeEnter: (to, from, next) => {
+      CanNotGetInWhenLogged(to, from, next)
+    }
+  },
+  {
+    path: '/passwordlogin',
+    name: 'passwordlogin',
+    component: componets.Login,
+    meta: {
+      title: '密码登录'
     },
     beforeEnter: (to, from, next) => {
       CanNotGetInWhenLogged(to, from, next)
@@ -546,7 +557,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      next()
+      requestAuth(to, from, next)
     }
   },
   { // 圈子成员
@@ -722,7 +733,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      next()
+      requestAuth(to, from, next)
     }
   },
   {
@@ -732,7 +743,7 @@ const routes = [
     meta: {
       title: '评论',
       keepAlive: false,
-      wechatHideHeader: true
+      wechatHideHeader: false
     },
     beforeEnter: (to, from, next) => {
       next()

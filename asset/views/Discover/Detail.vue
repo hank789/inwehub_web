@@ -5,7 +5,7 @@
       <h1 class="mui-title" v-text="title"></h1>
     </header>
 
-    <div class="mui-content" v-show="!loading">
+    <div class="mui-content" v-show="!loading" @tap.capture="onTap($event)">
       <vue-pull-refresh :on-refresh="refreshPageData">
       <div v-if="isShow(detail.group.public, detail.group.is_joined)">
 
@@ -25,12 +25,6 @@
             :time="detail.created_at"
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
-
-          <!--<div class="timeData">-->
-            <!--<span>-->
-              <!--<timeago :since="timeago(detail.created_at)" :auto-update="60"></timeago>-->
-            <!--</span>-->
-          <!--</div>-->
 
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
@@ -71,9 +65,9 @@
             </div>
           </div>
 
-          <div class="groups"  v-if="typeDesc(detail.group.is_joined)"
-               @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容
-          </div>
+          <!--<div class="groups"  v-if="typeDesc(detail.group.is_joined)"-->
+               <!--@tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容-->
+          <!--</div>-->
 
           <!-- 新增链接样式 -->
           <div class="link" v-if="detail.type === 'link' && detail.data.url">
@@ -158,17 +152,17 @@
           <p>私密圈子内容加入后可阅读</p>
           <p @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">去加入</p>
         </div>
-        <div class="riverBot"></div>
-        <div class="groupsBot">
-          <groups-list class="small detail"
-                       :list="detail.group"
-                       :type="'small'"
-          ></groups-list>
-        </div>
+        <!--<div class="riverBot"></div>-->
+        <!--<div class="groupsBot">-->
+          <!--<groups-list class="small detail"-->
+                       <!--:list="detail.group"-->
+                       <!--:type="'small'"-->
+          <!--&gt;</groups-list>-->
+        <!--</div>-->
       </div>
 
-        <div class="river"></div>
-        <div class="guessLike"style="color: red">
+        <div class="river" v-if="detail.group.public"></div>
+        <div class="guessLike" v-if="detail.group.public">
           <div class="component-block-title">
             <div class="left">猜您喜欢</div>
           </div>
@@ -190,30 +184,23 @@
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
           </template>
         </div>
-        <div class="river"></div>
+        <div class="river" v-if="detail.group.public"></div>
 
     </vue-pull-refresh>
     </div>
 
     <PageMore
       ref="ShareBtn"
-      :title="shareOption.title"
-      :link="shareOption.link"
-      :shareName="shareOption.shareName"
-      :content="shareOption.content"
-      :imageUrl="shareOption.imageUrl"
-      :thumbUrl="shareOption.thumbUrl"
-      :targetId="slug"
-      :targetType="'submission'"
-      :isShowhidden="userId == detail.owner.id"
+      :shareOption="shareOption"
+      :iconMenu="iconMenus"
       @success="shareSuccess"
       @fail="shareFail"
-      @del="deleterow"
+      @clickedItem="iconMenusClickedItem"
     ></PageMore>
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer">
+    <div class="container-footer" v-if="detail.group.public" @tap.capture="onTap($event)">
       <div class="footerLeft">
         <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
         <div class="footerMenuTwo" v-else>
@@ -249,7 +236,7 @@
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import ArticleDiscuss from '../../components/discover/ArticleDiscuss.vue'
-  import {autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl} from '../../utils/plus'
+  import { autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl } from '../../utils/plus'
   import PageMore from '../../components/PageMore.vue'
   import {getTextDiscoverDetail} from '../../utils/shareTemplate'
   import {goThirdPartyArticle} from '../../utils/webview'
@@ -264,10 +251,8 @@
   import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
   import { upvote, downVote } from '../../utils/discover'
-  import VuePullRefresh from 'vue-pull-refresh'
-
-//  import bodymovin from 'bodymovin'
-//  import upvote from '../../bodymovin/upvote.json'
+  import VuePullRefresh from 'vue-awesome-pull-refresh'
+  import { alertGroups } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -317,7 +302,9 @@
           content: '',
           imageUrl: '',
           thumbUrl: '',
-          shareName: ''
+          shareName: '',
+          targetType: 'submission',
+          targetId: ''
         },
         isFollow: true,
         loading: 1
@@ -335,6 +322,26 @@
           return 0
         }
         return this.description.length
+      },
+      iconMenus () {
+        if (this.userId === this.detail.owner.id) {
+          return [
+            {
+              icon: '#icon-shanchu1',
+              text: '删除'
+            }
+            // {
+            //   icon: '#icon-jubao',
+            //   text: '举报'
+            // },
+          ]
+        }
+        return [
+          // {
+          //   icon: '#icon-jubao',
+          //   text: '举报'
+          // }
+        ]
       }
     },
     components: {
@@ -349,6 +356,51 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      onTap (event) {
+        if (this.typeDesc(this.detail.group.is_joined)) {
+          event.stopPropagation()
+          event.preventDefault()
+          alertGroups(this, (num) => {
+            this.$router.pushPlus('/group/detail/' + this.detail.group.id)
+          })
+        }
+      },
+      iconMenusClickedItem (item) {
+        switch (item.text) {
+          case '删除':
+            this.deleterow()
+            break
+          case '举报':
+            this.report()
+            break
+        }
+      },
+      report () {
+        window.mui('#shareWrapper').popover('toggle')
+        window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
+          if (e.index === 1) {
+            if (e.value) {
+              postRequest(`system/feedback`, {
+                title: '举报内容',
+                content: e.value
+              }).then(response => {
+                var code = response.data.code
+                if (code !== 1000) {
+                  window.mui.alert(response.data.message)
+                  window.mui.back()
+                  return
+                }
+                if (response.data.data) {
+                  window.mui.back()
+                  window.mui.toast('举报成功')
+                }
+              })
+            } else {
+              window.mui.toast('请填写举报内容')
+            }
+          }
+        }, 'div')
+      },
       goComment () {
         this.$refs.discuss.rootComment()
         scrollToElement(this, '#commentTitle', '.pull-down-container')
@@ -550,6 +602,7 @@
       },
       getDetail: function () {
         this.slug = this.$route.params.slug
+        this.shareOption.targetId = this.slug
         this.noback = !!this.$route.query.noback
 
         if (!this.slug) {
@@ -567,7 +620,8 @@
 
           this.detail = response.data.data
 
-          this.shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
+          var shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
+          this.shareOption = Object.assign(this.shareOption, shareOption)
 
           if (this.detail.type === 'article') {
             this.title = this.detail.title

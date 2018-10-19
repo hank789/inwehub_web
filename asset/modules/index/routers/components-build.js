@@ -1,5 +1,6 @@
 const Login = require('../../../views/Login.vue')
 import Register from '../../../views/Register.vue'
+import CodeSign from '../../../views/CodeSign.vue'
 import FindPassword from '../../../views/FindPassword.vue'
 import ActivityActiveList from '../../../views/Activity/ActiveList.vue'
 import Feed from '../../../views/Feed.vue'
@@ -200,6 +201,7 @@ import BindPhone from '../../../views/Wechat/BindPhone.vue'
 export {
   Login,
   Register,
+  CodeSign,
   FindPassword,
   Feed,
   Home,

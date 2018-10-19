@@ -8,37 +8,38 @@
 
     <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
       <div class="title">
-        <span  @tap.stop.prevent="cancelShare()">取消</span>
         分享到
       </div>
       <div class="more">
         <div class="single" @tap.stop.prevent="shareToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
-          <p>微信好友</p>
+          <span>微信好友</span>
         </div>
         <div class="single" @tap.stop.prevent="shareToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
-          <p>朋友圈</p>
+          <span>朋友圈</span>
         </div>
         <div class="single" @tap.stop.prevent="shareToChat()">
           <img src="../statics/images/sendFriend@2x.png"/>
-          <p>私信好友</p>
+          <span>私信好友</span>
         </div>
-        <div class="single" @tap.stop.prevent="shareToCopyLink()">
+        <div class="single" v-if="link" v-clipboard="link" @success="shareToCopyLink()" @error="clipboardError">
           <img src="../statics/images/copyLink@3x.png"/>
-          <p>复制链接</p>
+          <span>复制链接</span>
         </div>
         <div class="single" @tap.stop.prevent="toPreviewImage()"
              v-if="this.DomConvertImage && isShowSharePng()">
           <img src="../statics/images/sharePng@2x.png"/>
-          <p>生成图片</p>
+          <span>生成图片</span>
         </div>
         <div class="single" @tap.stop.prevent="toPreviewApiImage()"
              v-if="this.showPreviewApiImage">
           <img src="../statics/images/sharePng@2x.png"/>
-          <p>生成图片</p>
+          <span>生成图片</span>
         </div>
       </div>
+      <div class="line-river-after line-river-after-height"></div>
+      <div class="cancel" @tap.stop.prevent="cancelShare()"><span class="font-family-medium">取消</span></div>
     </div>
 
 
@@ -47,15 +48,15 @@
       <div class="more">
         <div class="single" @tap.stop.prevent="shareImageToHaoyou()">
           <img src="../statics/images/wechat_2x.png"/>
-          <p>微信好友</p>
+          <span>微信好友</span>
         </div>
         <div class="single" @tap.stop.prevent="shareImageToPengyouQuan()">
           <img src="../statics/images/pengyouquan.png"/>
-          <p>朋友圈</p>
+          <span>朋友圈</span>
         </div>
         <div class="single" @tap.stop.prevent="saveImage()" v-if="isShowApiSharePng()">
           <img src="../statics/images/save-image@2x.png"/>
-          <p>生成图片</p>
+          <span>生成图片</span>
         </div>
       </div>
     </div>
@@ -75,7 +76,7 @@
   import Share from '../utils/share'
   import domtoimage from 'dom-to-image'
   import { postRequest } from '../utils/request'
-  import { getLocalUrl, saveImageByBase64, createImageThumb, setClipboardText } from '../utils/plus'
+  import { getLocalUrl, saveImageByBase64, createImageThumb } from '../utils/plus'
   import localEvent from '../stores/localStorage'
 
   export default {
@@ -158,6 +159,9 @@
     },
 
     methods: {
+      clipboardError () {
+        window.mui.toast('复制失败')
+      },
       cancelShare () {
         window.mui('#shareWrapper').popover('toggle')
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
@@ -176,7 +180,7 @@
         }
       },
       shareToCopyLink () {
-        setClipboardText(this.link)
+        // setClipboardText(this.link)
         window.mui.toast('已复制')
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel
@@ -569,6 +573,9 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+  .line-river-after-height {
+    height: 0;
+  }
   .shareBtn {
     position: fixed;
     right: 0.266rem;
@@ -593,12 +600,15 @@
   .shareWrapper {
     text-align: left;
     .title {
-      background: #ececee;
+      background: #FFF;
       text-align: center;
-      font-size: 0.373rem;
-      padding: 0.32rem 0;
+      font-size: 0.293rem;
+      padding: 0.453rem 0 0;
       position: relative;
-      color: #808080;
+      color: #B4B4B6;
+      line-height: 0.4rem;
+      border-top-left-radius: 0.48rem;
+      border-top-right-radius: 0.48rem;
       span{
         position: absolute;
         left:0.586rem;
@@ -607,20 +617,23 @@
     }
     .more {
       background: #fff;
-      padding: 0.266rem;
-
+      padding: 0.346rem 0.453rem 0.106rem;
+      font-size: 0;
       .single {
         height: 1.866rem;
         display: inline-block;
         img {
-          width: 1.25rem;
-          height: 1.25rem;
-          margin: 0 0.24rem;
+          width: 1.173rem;
+          height: 1.146rem;
+          margin: 0 0.32rem;
         }
-        p{
+        span {
+          display: block;
           font-size: 0.32rem;
-          color: #b4b4b6;
+          color: #808080;
+          line-height: 0.426rem;
           text-align: center;
+          margin-top: -0.08rem;
         }
       }
     }
@@ -636,6 +649,16 @@
       right: 0.4rem;
       top: 0.266rem;
       font-size: 1.866rem;
+    }
+  }
+  .cancel {
+    height: 1.386rem;
+    line-height: 1.386rem;
+    background: #FFF;
+    text-align: center;
+    span {
+      color: #444444;
+      font-size: 0.426rem;
     }
   }
 

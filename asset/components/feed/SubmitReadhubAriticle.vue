@@ -247,4 +247,8 @@
     left: 3.04rem;
     top: 0.506rem;
   }
+  .freeQuestion-comment {
+    position: relative;
+    z-index: -1;
+  }
 </style>

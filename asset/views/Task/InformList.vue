@@ -18,7 +18,7 @@
             ref="RefreshList"
             v-model="list"
             :api="'notification/count'"
-            :prevOtherData="{}"
+            :prevOtherData="{need_report: 1}"
             :nextOtherData="{}"
             :isShowUpToRefreshDescription="false"
             :autoShowEmpty="false"
@@ -34,7 +34,7 @@
                 <div class="noticeText">打开通知，避免错过订阅的热点新闻，深度文章，招聘动态和招标快讯</div>
                 <div class="unlock border-football" @tap.stop.prevent="goUnlock">开启</div>
               </div>
-              <div class="line-river-after"></div>
+              <div class="line-river-after" v-if="isOpenNotification === 1 && closingNotice"></div>
 
               <ul>
                 <div class="notice" @tap.stop.prevent="$router.pushPlus('/task')" v-if="list.todo_task_message.unread_count">

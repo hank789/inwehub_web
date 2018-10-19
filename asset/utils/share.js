@@ -63,11 +63,12 @@ var Share = () => {
             })
           }
 
-          var pengYouQuanTitle = self.data.title + '：' + self.data.content
+          var pengYouQuanTitle = self.data.pyqTitle ? self.data.pyqTitle : self.data.title
+          var pengYouQuanContent = self.data.pyqContent ? self.data.pyqContent : self.data.content
 
           self.context.sendPengYouQuan = () => {
             wechat.send({
-              content: stripTags(self.data.content).substr(0, 150),
+              content: stripTags(pengYouQuanContent).substr(0, 150),
               href: self.data.link,
               title: stripTags(pengYouQuanTitle).substr(0, 150),
               pictures: [self.data.imageUrl],
@@ -126,8 +127,10 @@ var Share = () => {
           }
         })
 
+        var pengYouQuanTitle = self.data.pyqTitle ? self.data.pyqTitle : self.data.title
+
         wx.onMenuShareTimeline({
-          title: stripTags(self.data.title).substr(0, 150), // 分享标题
+          title: stripTags(pengYouQuanTitle).substr(0, 150), // 分享标题
           link: self.data.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
           imgUrl: self.data.imageUrl, // 分享图标
           success: () => {

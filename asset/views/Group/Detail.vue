@@ -1,24 +1,8 @@
 <template>
   <div>
-    <!--<header class="mui-bar mui-bar-nav">-->
-      <!--<Back></Back>-->
-      <!--<h1 class="mui-title">{{detail.name}}</h1>-->
-      <!--<div class="headerShare" @tap.stop.prevent="joinShare">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
-        <!--</svg>-->
-      <!--</div>-->
-      <!--<div class="headerShare headerNotice">-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-tongzhi"></use>-->
-        <!--</svg>-->
-      <!--</div>-->
-    <!--</header>-->
-
-
     <div class="mui-content" v-if="!loading" id="home-content">
 
-      <div v-if="!isInGroup">
+      <div v-if="pageMode === 'info'">
         <div class="header">
           <img v-lazy="detail.background_img" class="lazyImg">
           <div class="backMask"></div>
@@ -58,14 +42,32 @@
             </svg>
           </div>
         </div>
+
+        <div>
+          <div class="gray"></div>
+
+          <div class="group-text">
+            <span class="font-family-medium">圈子介绍</span>
+            <i class="bot"></i>
+          </div>
+          <div class="groupIntroduce">
+            <span class="text-content">{{ detail.description }}</span>
+          </div>
+          <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
+
+          <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
+          <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
+          <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
+          <!--审核不通过-->
+          <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
+        </div>
       </div>
 
-      <div v-if="isInGroup">
+      <div v-if="pageMode === 'detail'">
         <RefreshList
           ref="RefreshList"
           v-model="list"
           :api="'group/submissionList'"
-          :prevSuccessCallback="prevSuccessCallback"
           :prevOtherData="prevOtherData"
           :nextOtherData="nextOtherData"
           :pageMode="true"
@@ -120,6 +122,9 @@
                   </svg> · 私密
                 </span>
               </div>
+              <div class="groupDescription" v-if="detail.is_joined === -1">
+                <span>{{detail.description}}</span>
+              </div>
               <div class="goMoreoPerations" v-if="detail.audit_status === 1">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-jinru"></use>
@@ -130,42 +135,20 @@
 
         <div class="gray"></div>
         <div class="menu">
-          <span :class="{'font-family-medium': search_type === 1}" @tap.stop.prevent="chooseType(1)">全部<i
-            v-if="search_type === 1"></i></span>
-          <!--<span :class="{'font-family-medium': search_type === 2}" @tap.stop.prevent="chooseType(2)">圈主<i-->
-            <!--v-if="search_type === 2"></i></span>-->
-          <span :class="{'font-family-medium': search_type === 3}" @tap.stop.prevent="chooseType(3)">精华<i
-            v-if="search_type === 3"></i></span>
+          <span :class="{'font-family-medium': listType === 1}" @tap.stop.prevent="chooseType(1)">全部<i
+            v-if="listType === 1"></i></span>
+          <span :class="{'font-family-medium': listType === 3}" @tap.stop.prevent="chooseType(3)">精华<i
+            v-if="listType === 3"></i></span>
           <i class="bot"></i>
         </div>
           <div class="groups-list">
             <template v-for="(item, index) in list">
-              <div v-if="item.feed_type === 15" @tap.stop.prevent="toDetail(item)">
-                <!--x发布了分享-->
-                <DiscoverShare
-                  :data="item"
-                  :show='isShowItemOption(item)'
-                  ref="discoverShare"
-                  @comment="comment"
-                  @showItemOptions="showItemOptions(item, index)"
-                ></DiscoverShare>
-              </div>
-              <div v-else-if="item.feed_type === 16"  @tap.stop.prevent="toDetail(item)">
-                <!--x发布了链接分享-->
-                <SubmitReadhubAriticle :data="item"
-                                       :show='isShowItemOption(item)'
-                                       @comment="comment"
-                                       @showItemOptions="showItemOptions(item, index)"
-                ></SubmitReadhubAriticle>
-              </div>
-              <div v-else-if="item.feed_type === 5"  @tap.stop.prevent="toDetail(item)">
-                <!--x发布了原创文章，有title何描述-->
-                <SubmitReadhubAriticle :data="item"
-                                       :show='isShowItemOption(item)'
-                                       @comment="comment"
-                                       @showItemOptions="showItemOptions(item, index)"
-                ></SubmitReadhubAriticle>
-              </div>
+
+              <FeedItem
+                :item="item"
+                @showItemMore="showItemOptions"
+              ></FeedItem>
+
             </template>
           </div>
           <!--为空的提示-->
@@ -177,26 +160,7 @@
           </div>
 
         </RefreshList>
-      </div>
-
-      <!--不可以浏览-->
-      <div v-else>
-        <div class="gray"></div>
-
-        <div class="group-text">
-          <span class="font-family-medium">圈子介绍</span>
-          <i class="bot"></i>
-        </div>
-        <div class="groupIntroduce">
-          <span class="text-content">{{ detail.description }}</span>
-        </div>
-        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
-
-        <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
-        <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
-        <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
-        <!--审核不通过-->
-        <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
+        <div class="join addGroup" v-if="detail.is_joined === -1" @tap.stop.prevent="joinIn">加入圈子</div>
       </div>
 
       <div class="goHairShareWrapper" v-if="isInGroup" @tap.stop.prevent="toDiscoverAdd">
@@ -208,77 +172,45 @@
       </div>
 
     </div>
-    <!---->
 
-    <Options
-      ref="allOptions"
-      :id="'allOptions'"
-      :options="allOptionSelects"
-      @selectedItem="selectedItem"
-    ></Options>
-
-    <Options
-      ref="itemOptions"
-      :id="'itemOptions'"
-      :options="itemOptions"
-      @selectedItem="selectedItem"
-    ></Options>
-
-    <GroupsShare
+    <PageMore
       ref="share"
       v-if="!loading"
-      :title="shareOption.title"
-      :shareName="shareOption.shareName"
-      :link="shareOption.link"
-      :content="shareOption.content"
-      :imageUrl="shareOption.imageUrl"
-      :thumbUrl="shareOption.thumbUrl"
-      :targetId="id"
-      :targetType="'group'"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
       @success="shareSuccess"
       @fail="shareFail"
-    ></GroupsShare>
-    <commentTextarea ref="ctextarea"
-                     @sendMessage="sendMessage"
-    ></commentTextarea>
-
-    <!--<FooterMenu-->
-      <!--:options="footerMenus"-->
-      <!--@clickedItem="footerMenuClickedItem"-->
-      <!--v-if="isInGroup"-->
-    <!--&gt;</FooterMenu>-->
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
 
   </div>
 </template>
 
 <script>
   import RefreshList from '../../components/refresh/List.vue'
-  import Options from '../../components/Options.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
   import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
   import DiscoverShare from '../../components/feed/DiscoverShare.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
   import { getIndexByIdArray } from '../../utils/array'
-  import GroupsShare from '../../components/GroupsShare.vue'
+  import PageMore from '../../components/PageMore.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
-  import commentTextarea from '../../components/comment/Textarea.vue'
   import { goThirdPartyArticle } from '../../utils/webview'
-  import userAbility from '../../utils/userAbility'
-  import FooterMenu from '../../components/FooterMenu.vue'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
-  import { scrollPage } from '../../utils/dom'
+  import { alertGroups } from '../../utils/dialogList'
+  import FeedItem from '../../components/Feed.vue'
 
   export default {
     data () {
       return {
+        loading: 1,
         id: null,
         list: [],
-        search_type: 1,
+        listType: 1,
         detail: null,
-        loading: 1,
-        allOptionSelects: [],
         itemOptions: [],
         itemOptionsObj: null,
         itemOptionsIndex: 0,
@@ -288,82 +220,54 @@
           content: '',
           imageUrl: '',
           thumbUrl: '',
-          shareName: ''
+          shareName: '',
+          targetType: 'group',
+          targetId: ''
         },
         isInGroup: false,
-        readyOpenNotice: false
+        readyOpenNotice: false,
+        iconMenus: []
       }
     },
     created () {},
     computed: {
       prevOtherData () {
-        return {id: this.id, type: this.search_type}
+        return {id: this.id, type: this.listType}
       },
       nextOtherData () {
-        return {id: this.id, type: this.search_type}
+        return {id: this.id, type: this.listType}
       },
-      footerMenus () {
-        if (this.detail.room_id > 0) {
-          return [
-            {
-              icon: '#icon-tijiaowenzhang1',
-              text: '发分享',
-              number: 0,
-              disable: false,
-              rightLine: true,
-              isLight: false
-            },
-            {
-              icon: '#icon-hudongwenda-',
-              text: '圈聊',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              newNum: this.detail.unread_group_im_messages,
-              isLight: false
-            },
-            {
-              icon: '#icon-fenxiang',
-              text: '邀请加入',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            }
-          ]
-        } else {
-          return [
-            {
-              icon: '#icon-tijiaowenzhang1',
-              text: '发分享',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: false
-            },
-            {
-              icon: '#icon-fenxiang',
-              text: '邀请加入',
-              number: 0,
-              disable: false,
-              rightLine: false,
-              isLight: true
-            }
-          ]
+      pageMode () {
+        if (this.detail.audit_status === 0 || this.detail.audit_status === 2 || this.detail.audit_status === 4) {
+          return 'info'
         }
+
+        if (this.detail.public === 0) {
+          if (this.detail.is_joined !== 1 && this.detail.is_joined !== 3) {
+            return 'info'
+          }
+        }
+
+        return 'detail'
+      },
+      inGroup () {
+        if (this.detail.audit_status === 1) {
+          if (this.detail.is_joined === 1 || this.detail.is_joined === 3) {
+            return true
+          }
+        }
+
+        return false
       }
     },
     components: {
       RefreshList,
       GroupsInfo,
       SubmitReadhubAriticle,
-      Options,
-      GroupsShare,
+      PageMore,
       DiscoverShare,
-      commentTextarea,
-      FooterMenu
+      FeedItem
     },
-    props: {},
     watch: {
       '$route' (to, from) {
         if (to.name === from.name) {
@@ -372,8 +276,79 @@
       }
     },
     methods: {
+      iconMenusClickedItem (item) {
+        switch (item.text) {
+          case '删除':
+            this.del(this.itemOptionsObj, () => {
+            })
+            break
+          case '设为精选':
+            this.addGood(this.itemOptionsObj, () => {
+            })
+            break
+          case '取消加精':
+            this.cancelGood(this.itemOptionsObj, () => {
+            })
+            break
+          case '置顶':
+            this.setTop(this.itemOptionsObj, () => {
+            })
+            break
+          case '取消置顶':
+            this.cancelTop(this.itemOptionsObj, () => {
+            })
+            break
+        }
+      },
+      showItemOptions (shareOption, item) {
+        this.iconMenus = []
+        this.itemOptionsObj = item
+
+        if (getLocalUserId() === item.user.id) {
+          this.iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
+        }
+        this.iconMenus.push(
+          // {
+          //   icon: '#icon-jubao',
+          //   text: '举报'
+          // }
+        )
+
+        if (this.detail.is_joined === 3) {
+          if (item.feed.is_recommend) {
+            this.iconMenus.push({
+              icon: '#icon-sheweijingxuan',
+              text: '取消加精'
+            })
+          } else {
+            this.iconMenus.push({
+              icon: '#icon-sheweijingxuan',
+              text: '设为精选'
+            })
+          }
+
+          if (item.top) {
+            this.iconMenus.push({
+              icon: '#icon-zhiding',
+              text: '取消置顶'
+            })
+          } else {
+            this.iconMenus.push({
+              icon: '#icon-zhiding',
+              text: '置顶'
+            })
+          }
+        }
+        this.shareOption = Object.assign(this.shareOption, shareOption)
+        this.$refs.share.share()
+      },
       goMoreSetup () {
-        if (this.detail.audit_status === 1) {
+        if (!this.isInGroup) {
+          alertGroups(this, this.joinIn)
+        } else {
           this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
         }
       },
@@ -426,61 +401,11 @@
       goMore () {
         this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
       },
-      prevSuccessCallback () {
-        scrollPage('.listWrapper', () => {
-        }, () => {}, () => {}, () => {
-        })
-      },
-      footerMenuClickedItem (item) {
-        switch (item.text) {
-          case '发分享':
-            this.toDiscoverAdd()
-            break
-          case '圈聊':
-            this.detail.unread_group_im_messages = 0
-            this.toGroupChat()
-            break
-          case '邀请加入':
-            this.joinShare()
-            break
-        }
-      },
-      sendMessage (message) {
-        var commentTarget = message.commentData
-
-        postRequest(`article/comment-store`, {
-          'submission_id': commentTarget.submissionId,
-          body: message.content,
-          parent_id: commentTarget.parentId,
-          mentions: message.noticeUsers
-        }).then(response => {
-          var code = response.data.code
-
-          if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
-            return
-          }
-
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-
-          var data = response.data.data
-
-          window.mui.toast(response.data.message)
-
-          this.commentTargetComponent.prependItem(
-            data.id,
-            message.content,
-            data.created_at,
-            commentTarget.parentId,
-            commentTarget.commentList
-          )
-
-          this.$refs.ctextarea.finish()
-        })
-      },
+      // prevSuccessCallback () {
+      //   scrollPage('.listWrapper', () => {
+      //   }, () => {}, () => {}, () => {
+      //   })
+      // },
       goArticle: function (article) {
         goThirdPartyArticle(
           article.view_url,
@@ -500,14 +425,15 @@
         })
         this.$router.pushPlus('/discover/add?from=' + encodeURIComponent('/group/detail/' + this.id))
       },
-      toGroupChat () {
-        this.$router.pushPlus('/group/chat/' + this.detail.room_id)
-      },
       refreshPageData (param) {
         if (param && param.type && param.type === 'back') {
-          return
+          var refreshGroupDetail = localEvent.getLocalItem('refreshGroupDetail')
+          if (!refreshGroupDetail) {
+            return
+          } else {
+            localEvent.clearLocalItem('refreshGroupDetail')
+          }
         }
-
         this.loading = 1
         this.getData()
       },
@@ -524,10 +450,20 @@
           } else {
             this.detail.is_joined = 0
           }
+          this.$refs.RefreshList.refreshPageData(this.prevOtherData)
           window.mui.toast('圈子动态更新将第一时间通知您')
         })
       },
       joinShare () {
+        this.iconMenus = []
+        var shareOption = getGroupDetail(
+          this.id,
+          this.detail.name,
+          this.detail.owner.name,
+          this.detail.subscribers,
+          this.detail.logo
+        )
+        this.shareOption = Object.assign(this.shareOption, shareOption)
         this.$refs.share.share()
       },
       shareSuccess () {
@@ -537,119 +473,36 @@
 
       },
       isShowItemOption (item) {
-        if (getLocalUserId() === item.user.id) {
-          // 文章是我写的
-          return true
-        }
-
-        // 我是圈主
-        if (this.detail.is_joined === 3) {
-          return true
-        }
-
-        return false
+        return true
       },
-      showItemOptions (item, index) {
-        this.itemOptions = []
-        this.itemOptionsObj = item
-        this.itemOptionsIndex = index
-        if (getLocalUserId() === item.user.id) {
-          this.itemOptions = [
-            '删除'
-          ]
-        }
-
-        if (this.detail.is_joined === 3) {
-          if (item.feed.is_recommend) {
-            this.itemOptions.push('取消加精')
-          } else {
-            this.itemOptions.push('加精')
+      report () {
+        window.mui('#shareWrapper').popover('toggle')
+        window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
+          if (e.index === 1) {
+            if (e.value) {
+              postRequest(`system/feedback`, {
+                title: '举报内容',
+                content: e.value
+              }).then(response => {
+                var code = response.data.code
+                if (code !== 1000) {
+                  window.mui.alert(response.data.message)
+                  window.mui.back()
+                  return
+                }
+                if (response.data.data) {
+                  window.mui.back()
+                  window.mui.toast('举报成功')
+                }
+              })
+            } else {
+              window.mui.toast('请填写举报内容')
+            }
           }
-
-          if (item.top) {
-            this.itemOptions.push('取消置顶')
-          } else {
-            this.itemOptions.push('置顶')
-          }
-        }
-
-        this.$refs.itemOptions.toggle()
-      },
-      selectedItem (item) {
-        switch (item) {
-          case '退出圈子':
-            this.quit()
-            break
-          case '删除':
-            this.del(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '加精':
-            this.addGood(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '取消加精':
-            this.cancelGood(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '置顶':
-            this.setTop(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '取消置顶':
-            this.cancelTop(this.itemOptionsObj, () => {
-              this.$refs.itemOptions.toggle()
-            })
-            break
-          case '圈成员管理':
-            this.$refs.allOptions.toggle()
-            this.$router.pushPlus('/group/setting/' + this.id)
-            break
-          case '开放圈子群聊':
-            this.$refs.allOptions.toggle()
-            var btnArray = ['取消', '确定']
-            var that = this
-            window.mui.confirm('确定开放圈子群聊吗？', ' ', btnArray, function (e) {
-              if (e.index === 1) {
-                postRequest(`group/openIm`, {id: that.id}).then(response => {
-                  var code = response.data.code
-                  if (code !== 1000) {
-                    window.mui.toast(response.data.message)
-                    that.$router.replace('/groups')
-                    return
-                  }
-                  that.detail.room_id = response.data.data.room_id
-                  window.mui.toast('群聊已开启')
-                })
-              }
-            })
-            break
-          case '关闭圈子群聊':
-            this.$refs.allOptions.toggle()
-            var btnArray2 = ['取消', '确定']
-            var that2 = this
-            window.mui.confirm('确定要关闭群聊吗？', ' ', btnArray2, function (e) {
-              if (e.index === 1) {
-                postRequest(`group/closeIm`, {id: that2.id}).then(response => {
-                  var code = response.data.code
-                  if (code !== 1000) {
-                    window.mui.toast(response.data.message)
-                    that2.$router.replace('/groups')
-                    return
-                  }
-                  that2.detail.room_id = 0
-                  window.mui.toast('群聊已关闭')
-                })
-              }
-            })
-            break
-        }
+        }, 'div')
       },
       setTop (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/setSubmissionTop`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -662,6 +515,7 @@
         })
       },
       cancelTop (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/cancelSubmissionTop`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -674,6 +528,7 @@
         })
       },
       addGood (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/setSubmissionRecommend`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -688,6 +543,7 @@
         })
       },
       cancelGood (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         postRequest(`group/cancelSubmissionRecommend`, {submission_id: item.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -701,21 +557,9 @@
           callback()
         })
       },
-      allOptions () {
-        if (this.detail.is_joined === 3) {
-          if (this.detail.room_id > 0) {
-            this.allOptionSelects = ['圈成员管理', '关闭圈子群聊']
-          } else {
-            this.allOptionSelects = ['圈成员管理', '开放圈子群聊']
-          }
-          this.$refs.allOptions.toggle()
-        } else {
-          this.allOptionSelects = ['退出圈子']
-          this.$refs.allOptions.toggle()
-        }
-      },
       getData () {
         this.id = parseInt(this.$route.params.id)
+        this.shareOption.targetId = this.id
         if (!this.id) {
           window.mui.back()
           return
@@ -740,7 +584,7 @@
             this.isInGroup = false
           }
 
-          this.shareOption = getGroupDetail(
+          var shareOption = getGroupDetail(
             this.id,
             this.detail.name,
             this.detail.owner.name,
@@ -748,10 +592,13 @@
             this.detail.logo
           )
 
+          this.shareOption = Object.assign(this.shareOption, shareOption)
+
           this.loading = 0
         })
       },
       del (item, callback) {
+        window.mui('#shareWrapper').popover('toggle')
         var btnArray = ['取消', '确定']
         var list = this.list
         window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
@@ -776,37 +623,8 @@
           }
         })
       },
-      quit () {
-        postRequest(`group/quit`, {id: this.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-
-          if (this.detail.is_joined !== 3) {
-            this.$refs.allOptions.toggle()
-          }
-
-          this.refreshPageData()
-        })
-      },
       chooseType (type) {
-        this.search_type = type
-      },
-      comment (submissionId, parentId, commentTargetUsername, list, component) {
-        // console.log('comment data:' + window.JSON.stringify(data) + ', comment:' + window.JSON.stringify(comment))
-        var commentTarget = {
-          submissionId: submissionId,
-          parentId: parentId || 0,
-          commentList: list
-        }
-        var data = {
-          targetUsername: commentTargetUsername || '',
-          commentData: commentTarget
-        }
-        this.commentTargetComponent = component
-        this.$refs.ctextarea.comment(data)
+        this.listType = type
       }
     },
     mounted () {
@@ -823,12 +641,9 @@
   }
 </script>
 
-<style scoped="scoped">
+<style lang="less" scoped>
   .mui-content {
     background: #ffffff;
-  }
-  .mui-scroll-wrapper {
-    /*top: 6.586rem;*/
   }
   .bot {
     position: absolute;
@@ -840,14 +655,11 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-
   .gray {
     width: 100%;
     height: 0.266rem;
     background: #f3f4f6;
   }
-
-  /*菜单*/
   .menu {
     width: 100%;
     height: 1.04rem;
@@ -859,93 +671,33 @@
     justify-content: space-around;
     line-height: 1.04rem;
     position: absolute;
-    /*top: 6.906rem;*/
-  }
-  .menu span {
-    position: relative;
-    margin-bottom: -0.293rem;
-  }
-  .menu span.bold {
-    font-weight: 500;
-  }
-  .menu span i {
-    position: absolute;
-    width: 0.746rem;
-    height: 0.04rem;
-    border-radius: 1.333rem;
-    background: #03aef9;
-    top: 0.986rem;
-    left: 0;
-    right: 0;
-    margin: auto;
+    span {
+      position: relative;
+      margin-bottom: -0.293rem;
+      &.bold {
+        font-weight: 500;
+      }
+      i {
+        position: absolute;
+        width: 0.746rem;
+        height: 0.04rem;
+        border-radius: 1.333rem;
+        background: #03aef9;
+        top: 0.986rem;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    }
   }
   .groups-list {
     margin-top: 1.306rem;
   }
-
-  .invitation {
-    width: 100%;
-    height: 1.333rem;
-    background: #ffffff;
-    position: absolute;
-    bottom: 0;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    border-top: 0.026rem solid #DCDCDC;
+  .listWrapper{
+    padding-bottom: 2.853rem;
   }
-
-  .invitation p {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.346rem;
-    color: rgba(128, 128, 128, 1);
-  }
-
-  .invitation p:nth-of-type(1) {
-    width: 65%;
-    height: 100%;
-  }
-
-  .invitation p:nth-of-type(1) svg {
-    font-size: 0.64rem;
-    margin-right: 0.24rem;
-  }
-
-  .invitation p:nth-of-type(2) {
-    width: 35%;
-    height: 100%;
-    font-size: 0.426rem;
-    color: rgba(255, 255, 255, 1);
-    background: rgba(3, 174, 249, 1);
-  }
-  .join{
-    width:92%;
-    height:1.173rem;
-    position: fixed;
-    right:0;
-    left:0;
-    bottom: 0.4rem;
-    margin: auto;
-    background:rgba(3,174,249,1);
-    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
-    border-radius: 1.333rem ;
-    text-align: center;
-    line-height: 1.173rem;
-    font-size: 0.426rem;
-    color:rgba(255,255,255,1);
-    font-weight: 500;
-  }
-  .join.wait{
-    background:rgba(220,220,220,1);
-    box-shadow: 0rem 0.026rem 0.266rem 0rem rgba(205,215,220,1);
-    color:rgba(180,180,182,1);
-  }
-  .Nothing{
+  .Nothing {
     width: 5.626rem;
-    height: 5.333rem;
     position: absolute;
     font-size: 0.32rem;
     color: rgba(200,200,200,1);
@@ -953,19 +705,38 @@
     right: 0;
     top: 9rem;
     text-align: center;
+    margin: 1rem auto 0;
+    svg {
+      font-size: 1.6rem;
+      margin-bottom: 0.133rem;
+    }
+  }
+  .join {
+    width: 9.146rem;
+    height: 1.173rem;
+    position: absolute;
+    right:0;
+    left:0;
+    z-index: 99;
+    bottom: 0.4rem;
     margin: auto;
+    color: #FFFFFF;
+    line-height: 1.173rem;
+    text-align: center;
+    font-size: 0.426rem;
+    background: #03AEF9;
+    border-radius: 1.333rem ;
+    font-family:PingFangSC-Medium;
+    box-shadow: 0rem 0.026rem 0.266rem 0rem #CDD7DC;
+    &.addGroup {
+      width: 2.506rem;
+    }
+    &.wait{
+      color: #b4b4b6;
+      background: #dcdcdc;
+      box-shadow: 0rem 0.026rem 0.266rem 0rem #CDD7DC;
+    }
   }
-  .Nothing svg{
-    font-size: 1.6rem;
-    margin-bottom: 0.133rem;
-  }
-  .listWrapper{
-    /*bottom: 1.333rem;*/
-  }
-</style>
-
-
-<style lang="less" scoped>
   .headerShare {
     position: absolute;
     right: 0.426rem;
@@ -1072,6 +843,12 @@
       .icon {
         font-size: 0.346rem;
       }
+    }
+    .groupDescription {
+      color: #808080;
+      font-size: 0.373rem;
+      line-height: 0.586rem;
+      margin-top: 0.346rem;
     }
   }
 

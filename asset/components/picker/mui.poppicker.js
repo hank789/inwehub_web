@@ -70,7 +70,7 @@
 				}
 			}, false);
 			self.mask[0].addEventListener('tap', function() {
-				self.hide();
+				self.dispose();
 			}, false);
 			self._createPicker();
 			//防止滚动穿透

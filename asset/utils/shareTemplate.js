@@ -164,6 +164,8 @@ function getGroupDetail (id, title, username, userCount, logo) {
     title: '邀您加入InweHub圈子：' + title,
     link: link,
     content: username + '创建，已有' + userCount + '人气 | 点击查看加入',
+    pyqTitle: '向您推荐一个不错的圈子「' + title + '」',
+    pyqContent: username + '创建，已有' + userCount + '人气 | 点击查看加入',
     imageUrl: logo,
     thumbUrl: logo + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '圈子分享'

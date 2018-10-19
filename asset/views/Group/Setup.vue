@@ -51,12 +51,15 @@
 
     <GroupsShare
       ref="share"
+      :hideShareBtn="true"
       :title="shareOption.title"
       :shareName="shareOption.shareName"
       :link="shareOption.link"
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
+      :pyqTitle="shareOption.pyqTitle"
+      :pyqContent="shareOption.pyqContent"
       :targetId="id"
       :targetType="'group'"
       @success="shareSuccess"
@@ -70,7 +73,7 @@
   import { postRequest } from '../../utils/request'
   import { getLocalUuid } from '../../utils/user'
   import { getGroupDetail } from '../../utils/shareTemplate'
-  import GroupsShare from '../../components/GroupsShare.vue'
+  import GroupsShare from '../../components/Share.vue'
   import localEvent from '../../stores/localStorage'
   // const currentUser = getLocalUserInfo()
 
@@ -142,13 +145,21 @@
         })
       },
       getQuit () {
-        postRequest(`group/quit`, {id: this.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
+        var that = this
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定要退出圈子吗？', ' ', btnArray, function (e) {
+          if (e.index === 1) {
+            postRequest(`group/quit`, {id: that.id}).then(response => {
+              var code = response.data.code
+              if (code !== 1000) {
+                window.mui.toast(response.data.message)
+                return
+              }
+
+              localEvent.setLocalItem('refreshGroupDetail', {refresh: true})
+              window.mui.back()
+            })
           }
-          this.$router.goBack()
         })
       },
       toGroupChat () {

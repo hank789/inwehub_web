@@ -2,9 +2,11 @@
   <div>
     <div class="mui-content">
       <div class="login">
-        <svg class="icon logo" aria-hidden="true">
-          <use xlink:href="#icon-logo"></use>
-        </svg>
+        <div class="logo">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-logowenzi"></use>
+          </svg>
+        </div>
 
         <svg class="icon leftNav" aria-hidden="true" @tap.stop.prevent="goback">
           <use xlink:href="#icon-fanhui"></use>
@@ -72,7 +74,7 @@
       isValidCode: false, // 验证码合法性
       isValidPhone: false, // 是否合法手机号
       isValidPassword: false, // 是否合法密码
-      CodeText: '获取验证码', // 获取验证码按钮文字
+      CodeText: '发送验证', // 获取验证码按钮文字
       time: 0, // 时间倒计时
       isLoading: false, // 登录loading
       showYzmLabel: true,
@@ -274,7 +276,7 @@
         return errors[0] || ''
       },
       getCodeText () {
-        return this.time === 0 ? '获取验证码' : this.time + '秒后重发'
+        return this.time === 0 ? '发送验证' : this.time + '秒后重发'
       }
     },
     watch: {
@@ -344,22 +346,23 @@
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
-    background: #f3f4f6;
+    background: #FFFFFF;
   }
   .login {
     position: absolute;
     width: 100%;
     min-height: 100%;
-    background: #f3f4f6;
+    background: #FFFFFF;
     background-size: cover;
-    text-align: center;
+    /*text-align: center;*/
   }
 
   .logo {
-
-    font-size: 2.933rem;
-    margin: 2.933rem 0 2rem;
-
+    font-size: 3.946rem;
+    text-align: center;
+    margin: 0.133rem 0;
+    padding-top: 0.533rem;
+    height: 3.946rem;
   }
 
   /*小箭头*/
@@ -404,13 +407,15 @@
   .inputWrapper .getYzm {
     display: inline-block;
     font-size: 0.373rem;
-    color: #444;
+    color: #444444;
     position: absolute;
     right: 0.053rem;
     top: 0.12rem;
-    border: 0.026rem solid #dcdcdc;
+    height: 0.8rem;
+    padding: 0 0.4rem;
+    line-height: 0.8rem;
     border-radius: 0.133rem;
-    padding: 0.08rem 0.373rem;
+    border: 0.026rem solid #dcdcdc;
   }
 
   .inputWrapper .getYzm.disabled {
@@ -465,7 +470,7 @@
     width: 80%;
     margin-left: 10%;
     margin-top: 0.8rem;
-    background: #3C95F9;
+    background: #03AEF9;
   }
 
   /*2 3图标大小的微调*/

@@ -54,7 +54,7 @@
   }
 </script>
 
-<style scoped="">
+<style scoped>
   .allOptions{
     background:#fff;
   }
@@ -66,5 +66,30 @@
     color:#444;
     height:1.173rem;
     line-height: 1.173rem;
+  }
+  .mui-popover.mui-popover-action .mui-table-view {
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+  .mui-popover.mui-popover-action .mui-table-view:first-child {
+    border-top-left-radius: 0.48rem !important;
+    border-top-right-radius: 0.48rem !important;
+  }
+  .mui-popover.mui-popover-action .mui-table-view:last-child .mui-table-view-cell:after {
+    height: 0 !important;
+  }
+  .mui-table-view-cell {
+    padding: 0.4rem 0 !important;
+    color: #444444 !important;
+    font-size: 0.426rem !important;
+  }
+  .mui-popover.mui-popover-action .mui-table-view:last-child {
+    font-family:PingFangSC-Medium;
+  }
+  .mui-popover .mui-table-view:after {
+    height: 0.026rem !important;
+  }
+  .mui-popover.mui-popover-action .mui-table-view:last-child:after {
+    height: 0 !important;
   }
 </style>
