@@ -282,6 +282,11 @@
           return
         }
         if (mobile.length !== 11) {
+          window.mui.toast('请正确输入手机号')
+          return
+        }
+
+        if (mobile.length !== 11) {
           this.showTip(this.$refs.phone, '请输入有效的手机号码')
           return
         }
@@ -562,8 +567,8 @@
   }
 
   .inputWrapper .getYzm.disabled {
-    border: 0.026rem solid #dcdcdc;
-    color: #444;
+    border: 0.026rem solid #DCDCDC;
+    color: #C8C8C8;
   }
 
   .inputWrapper:after {
