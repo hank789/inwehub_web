@@ -11,7 +11,17 @@
     </header>
 
     <div class="mui-content">
+      <div class="comment-empty" v-if="!list.length">
+        <div class="comment-empty-content">
+          <div class="comment-wait-img">
+            <img src="../statics/images/commentwait@3x.png" alt="">
+          </div>
+          <span>静静等你来评论~</span>
+          <div class="commeny-button" @tap.stop.prevent="newAddcomment">评论</div>
+        </div>
+      </div>
       <RefreshList
+        v-if="list.length"
         ref="RefreshList"
         class="refreshListWrapper"
         v-model="list"
@@ -130,6 +140,9 @@
       }
     },
     methods: {
+      newAddcomment () {
+        this.commentfoucs()
+      },
       prevSuccessCallback () {
         this.totalNumber = this.$refs.RefreshList.getResponse()
         this.totalData = this.totalNumber.data.total
@@ -331,6 +344,9 @@
         console.log('回复 data:' + JSON.stringify(data))
 
         this.$refs.ctextarea.comment(data, autoBlur)
+      },
+      commentfoucs () {
+        this.comment(0, '', this.list)
       }
     },
     mounted () {
@@ -353,6 +369,40 @@
     top: 0;
     bottom: 1.226rem;
     background: #fff;
+  }
+  .comment-empty {
+    margin-top: 79px;
+    text-align: center;
+    position: relative;
+    z-index: 99;
+    .comment-empty-content {
+      .comment-wait-img {
+        width: 70px;
+        height: 89px;
+        margin: 0 auto;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      span {
+        color: #C8C8C8;
+        font-size: 12px;
+        margin: 10px 0 17px;
+        display: inline-block;
+      }
+      .commeny-button {
+        width: 96px;
+        height: 36px;
+        margin: 0 auto;
+        color: #FFFFFF;
+        font-size: 14px;
+        line-height: 36px;
+        text-align: center;
+        background: #03AEF9;
+        border-radius: 100px;
+      }
+    }
   }
   .right {
     color: #808080;
