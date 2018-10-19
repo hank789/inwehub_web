@@ -13,7 +13,7 @@
       ></FeedUserInfo>
       <div class="currency-title question-titles">{{ item.feed.answer_id?item.feed.answer_content:item.feed.question_title }}</div>
       <div class="question-statistics">
-        <span class="question-price active-yellow" v-if="item.feed.status_description">{{item.feed.status_description}}</span>
+        <span class="question-price active-yellow" v-if="item.feed.status_description && !item.feed.answer_id">{{item.feed.status_description}}</span>
         <span v-if="answerNumber >=0 ">{{answerNumber}}回答 <i></i> </span>
         <span v-if="followNumber >=0 ">{{followNumber}}关注</span>
         <span v-if="supportNumber >=0 ">{{supportNumber}}赞 <i></i> </span>
@@ -369,6 +369,7 @@
       margin-top: 0.106rem;
       display: none;
       padding: 0 0.426rem;
+      line-height: 18px;
       &.showOpenAll {
         display: block;
       }
@@ -507,6 +508,9 @@
   .container-feed-questionAnswer {
     position: relative;
     margin-top: 0.533rem;
+    .line-river-after {
+      margin-top: 15px;
+    }
     .question-titles {
       padding: 0 0.426rem;
     }
