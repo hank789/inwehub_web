@@ -243,7 +243,7 @@
     import { isLogined } from '../../utils/auth'
     import RefreshList from '../../components/refresh/List.vue'
     import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
-    import FeedItem from '../../components/feed.vue'
+    import FeedItem from '../../components/Feed.vue'
     import PageMore from '../../components/PageMore.vue'
 
     export default {
