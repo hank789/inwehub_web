@@ -55,7 +55,7 @@
         <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
       <!--链接-->
-      <div class="container-feed-link-box">
+      <div class="container-feed-link-box" @tap.stop.prevent="goArticle()">
         <div class="feed-link-box" v-if="item.feed.submission_type === 'link'">
           <div class="linkImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
           <div class="linkText">
@@ -119,6 +119,8 @@
   import userAbility from '../utils/userAbility'
   import { upvote, downVote } from '../utils/discover'
   import PageMore from './PageMore.vue'
+  import { goThirdPartyArticle } from '../utils/webview'
+  import { openAppUrlByUrl } from '../utils/plus'
   import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
 
   export default {
@@ -222,6 +224,24 @@
       })
     },
     methods: {
+      goArticle: function () {
+        var item = this.item
+        if (item.feed.submission_type !== 'link') {
+          return
+        }
+
+        if (item.feed.link_url.indexOf(process.env.H5_ROOT) === 0) {
+          openAppUrlByUrl(item.feed.link_url)
+        } else {
+          goThirdPartyArticle(
+            item.feed.link_url,
+            item.submission_id,
+            item.feed.article_title,
+            item.feed.comment_url,
+            item.feed.img
+          )
+        }
+      },
       showItemMore () {
         if (this.isDiscover) {
           this.shareOption = getTextDiscoverDetail(
@@ -307,7 +327,7 @@
 <style lang="less">
   .feed-currency {
     .line-river-after {
-      margin-top: 10px;
+      margin-top: 0.266rem;
       &:after {
         left: 0.426rem;
         right: 0.426rem;
@@ -443,7 +463,7 @@
       border-radius: 2.666rem;
       display: flex;
       margin-top: 0.266rem;
-      margin-left: 16px;
+      margin-left: 0.426rem;
       img {
         width: 0.293rem;
         height: 0.293rem;
@@ -455,14 +475,14 @@
       margin-top: 0.4rem;
       color: #808080;
       display: flex;
-      padding: 0 13px;
+      padding: 0 0.346rem;
       justify-content: space-between;
       .feed-mord {
-        padding: 5px;
+        padding: 0.133rem;
       }
       .feed-operation {
         span {
-          padding: 5px;
+          padding: 0.133rem;
           /*margin-left: 0.533rem;*/
           .icon {
             margin-right: 0.133rem;
