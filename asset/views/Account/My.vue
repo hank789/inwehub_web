@@ -260,7 +260,7 @@
           window.mui('#shareWrapper').popover('toggle')
         }, 150)
       },
-      initData () {
+      initData (needReport = false) {
         // 执行刷新
         console.log('refresh-my')
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
@@ -286,11 +286,11 @@
           }
           userAbility.newbieTask(this)
           this.recommendRead()
-        }))
+        }, needReport))
       }
     },
     activated: function () {
-      this.initData()
+      this.initData(true)
     },
     mounted () {}
   }
