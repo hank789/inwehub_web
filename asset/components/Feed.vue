@@ -487,8 +487,8 @@
       span {
         font-size: 0.293rem;
         i {
-          width: 2px;
-          height: 2px;
+          width: 0.053rem;
+          height: 0.053rem;
           background: #B4B4B6;
           display: inline-block;
           vertical-align: middle;

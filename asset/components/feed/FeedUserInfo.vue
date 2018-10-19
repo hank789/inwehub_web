@@ -198,14 +198,14 @@
     min-height: 1.2rem;
   }
   .feedSetTop {
-    height: 15px;
-    padding: 0 5px;
+    height: 0.4rem;
+    padding: 0 0.133rem;
     color: #FFFFFF;
-    font-size: 10px;
+    font-size: 0.266rem;
     text-align: center;
-    line-height: 15px;
+    line-height: 0.4rem;
     background: #FA4975;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     display: inline-block;
   }
 
