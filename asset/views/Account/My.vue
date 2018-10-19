@@ -628,7 +628,7 @@
           width: 0.213rem;
           height: 0.213rem;
           position: absolute;
-          left: 2.3rem;
+          left: 2.1rem;
           top: 0.266rem;
           border-radius: 50%;
           background: #FA4975;
@@ -640,7 +640,7 @@
       /*width: 92%;*/
       margin: 0 auto;
       color: #444444;
-      font-size: 0.426rem;
+      font-size: 15px;
       padding: 0.293rem 0.4rem;
       position: relative;
       display: flex;

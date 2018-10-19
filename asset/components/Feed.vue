@@ -88,17 +88,17 @@
           <span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-pinglun"></use>
-            </svg>{{item.feed.comment_number}}
+            </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
           </span>
           <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-cai"></use>
-            </svg>{{item.feed.downvote_number}}
+            </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
           </span>
           <span @tap.stop.prevent="discoverUp()" :class="item.feed.is_upvoted ? 'activeSpan':''">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zan"></use>
-            </svg>{{item.feed.support_number}}
+            </svg><i v-if="item.feed.support_number">{{item.feed.support_number}}</i>
           </span>
         </div>
       </div>
@@ -481,7 +481,7 @@
       }
       .feed-operation {
         span {
-          padding: 0.133rem;
+          padding: 0.133rem 10px;
           font-size: 0.293rem;
           color: #444444;
           /*margin-left: 0.533rem;*/
@@ -489,6 +489,9 @@
             margin-right: 0.133rem;
             color: #808080;
             font-size: 0.4rem;
+          }
+          i {
+            font-style: normal;
           }
         }
         .activeSpan {
