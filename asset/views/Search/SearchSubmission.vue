@@ -370,7 +370,7 @@
               margin-left: 0.266rem;
               font-size: 0.533rem;
               position: relative;
-              z-index: 10000;
+              z-index: 100;
             }
           }
           input{
@@ -382,7 +382,7 @@
             color: #444444;
             position: absolute;
             left: 0.853rem;
-            z-index: 100000;
+            z-index: 100;
             padding: 0 0.266rem;
           }
         }
