@@ -189,7 +189,7 @@
             parentId
           )
 
-          this.$emit('commentFinish')
+          this.$refs.ctextarea.finish()
         })
       },
       resetList () {
