@@ -21,7 +21,6 @@
         </div>
       </div>
       <RefreshList
-        v-if="list.length"
         ref="RefreshList"
         class="refreshListWrapper"
         v-model="list"
