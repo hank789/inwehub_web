@@ -74,7 +74,7 @@
         </div>
       </div>
       <!--圈子-->
-      <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" v-if="item.feed.group && item.feed.group.name" @tap.stop.prevent="toGroupDetail(item.feed.group)">
+      <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
         <img src="../statics/images/feed-group@3x.png" alt="">
         <span>{{item.feed.group.name}}</span>
       </div>
@@ -226,6 +226,8 @@
         titles.forEach((item) => {
           if (item.scrollHeight > item.offsetHeight) {
             item.nextElementSibling.classList.add('showOpenAll')
+          } else {
+            item.nextElementSibling.classList.remove('showOpenAll')
           }
         })
       },
@@ -262,7 +264,8 @@
             this.item.feed.comment_url,
             this.item.feed.title,
             this.item.user.avatar,
-            this.item.user.name
+            this.item.user.name,
+            this.item.feed.group.name
           )
         }
 
