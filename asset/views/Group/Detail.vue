@@ -141,7 +141,7 @@
             v-if="listType === 3"></i></span>
           <i class="bot"></i>
         </div>
-          <div class="groups-list">
+          <div class="groups-list group-detail-feed">
             <template v-for="(item, index) in list">
 
               <FeedItem
@@ -893,4 +893,9 @@
     }
   }
 
+</style>
+<style>
+  .group-detail-feed .feed-group{
+    display: none;
+  }
 </style>
