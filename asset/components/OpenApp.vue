@@ -1,28 +1,28 @@
 <template>
   <div>
     <!--手机端-->
-    <div class="suspend" v-if="isH5">
-      <p>
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">
-          <use xlink:href="#icon-guanbi"></use>
-        </svg>
-      </p>
-      <p>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-logotuxing"></use>
-        </svg>
-      </p>
-      <p>
-        <span>下载APP</span>
-        <span>查看更多专家信息</span>
-      </p>
-      <p>
-        <a id="btnOpenAppH5" :href="url" target="_blank">立即打开</a>
-      </p>
-    </div>
+    <!--<div class="suspend" v-if="isH5">-->
+      <!--<p>-->
+        <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">-->
+          <!--<use xlink:href="#icon-guanbi"></use>-->
+        <!--</svg>-->
+      <!--</p>-->
+      <!--<p>-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-logotuxing"></use>-->
+        <!--</svg>-->
+      <!--</p>-->
+      <!--<p>-->
+        <!--<span>下载APP</span>-->
+        <!--<span>查看更多专家信息</span>-->
+      <!--</p>-->
+      <!--<p>-->
+        <!--<a id="btnOpenAppH5" :href="url" target="_blank">立即打开</a>-->
+      <!--</p>-->
+    <!--</div>-->
 
     <!--微信端-->
-    <div class="suspension" v-if="isWeixin">
+    <div class="suspension" v-if="isWeixin || isH5">
       <div class="component-wechat-top">
         <div class="left" @tap.stop.prevent="$router.push('/home')">
           <svg class="icon" aria-hidden="true">
