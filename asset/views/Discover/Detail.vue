@@ -7,7 +7,7 @@
 
     <div class="mui-content" v-show="!loading" @tap.capture="onTap($event)">
       <vue-pull-refresh :on-refresh="refreshPageData">
-      <div v-if="isShow(detail.group.public, detail.group.is_joined)">
+      <div v-if="isShow">
 
         <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
           <img v-lazy="detail.data.img" class="lazyImg">
@@ -161,8 +161,8 @@
         <!--</div>-->
       </div>
 
-        <div class="river" v-if="detail.group.public"></div>
-        <div class="guessLike" v-if="detail.group.public">
+        <div class="river" v-if="isShow"></div>
+        <div class="guessLike" v-if="isShow">
           <div class="component-block-title">
             <div class="left">猜您喜欢</div>
           </div>
@@ -184,7 +184,7 @@
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
           </template>
         </div>
-        <div class="river" v-if="detail.group.public"></div>
+        <div class="river" v-if="isShow"></div>
 
     </vue-pull-refresh>
     </div>
@@ -200,7 +200,7 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer" v-if="detail.group.public" @tap.capture="onTap($event)">
+    <div class="container-footer" v-if="isShow" @tap.capture="onTap($event)">
       <div class="footerLeft">
         <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
         <div class="footerMenuTwo" v-else>
@@ -311,6 +311,20 @@
       }
     },
     computed: {
+      isShow () {
+        var ispublic = this.detail.group.public
+        var type = this.detail.group.is_joined
+        //  公开的都展示
+        if (ispublic) {
+          return true
+        } else {
+          if (type === 1 || type === 3) {
+            return true
+          } else {
+            return false
+          }
+        }
+      },
       discussStoreParams () {
         return {'submission_id': this.detail.id}
       },
@@ -502,18 +516,6 @@
             return true
           case 3:
             return false
-        }
-      },
-      isShow (ispublic, type) {
-        //  公开的都展示
-        if (ispublic) {
-          return true
-        } else {
-          if (type === 1 || type === 3) {
-            return true
-          } else {
-            return false
-          }
         }
       },
       showAllContentWrapper () {
@@ -801,7 +803,7 @@
     },
     updated () {
       this.$nextTick(function () {
-        if (this.isShow(this.detail.group.public, this.detail.group.is_joined)) {
+        if (this.isShow) {
           setTimeout(() => {
             this.shotContentHeight()
           }, 200)

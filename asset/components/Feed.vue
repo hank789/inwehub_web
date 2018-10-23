@@ -119,6 +119,7 @@
   import { openAppUrlByUrl } from '../utils/plus'
   import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
   import { alertGroups } from '../utils/dialogList'
+  import { postRequest } from '../utils/request'
 
   export default {
     data () {
@@ -231,12 +232,25 @@
           }
         })
       },
-      onTap (event) {
-        if (!this.item.feed.is_joined_group) {
-          event.stopPropagation()
-          event.preventDefault()
-          alertGroups(this.$parent, (num) => {
-            this.$router.pushPlus('/group/detail/' + this.item.feed.group.id)
+      async onTap (event) {
+        if (this.item.feed.group && this.item.feed.group.id) {
+          var groupId = this.item.feed.group.id
+
+          await postRequest(`group/detail`, {id: groupId}).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+            var data = response.data.data
+
+            if (data.is_joined !== 1 && data.is_joined !== 3) {
+              event.stopPropagation()
+              event.preventDefault()
+              alertGroups(this.$parent, (num) => {
+                this.$router.pushPlus('/group/detail/' + this.item.feed.group.id)
+              })
+            }
           })
         }
       },
