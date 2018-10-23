@@ -232,24 +232,24 @@
           }
         })
       },
-      onTap (event) {
+      async onTap (event) {
         if (this.item.feed.group && this.item.feed.group.id) {
           var groupId = this.item.feed.group.id
-          event.stopPropagation()
-          event.preventDefault()
-          postRequest(`group/detail`, {id: groupId}).then(response => {
+
+          await postRequest(`group/detail`, {id: groupId}).then(response => {
             var code = response.data.code
             if (code !== 1000) {
               window.mui.toast(response.data.message)
               return
             }
             var data = response.data.data
+
             if (data.is_joined !== 1 && data.is_joined !== 3) {
+              event.stopPropagation()
+              event.preventDefault()
               alertGroups(this.$parent, (num) => {
                 this.$router.pushPlus('/group/detail/' + this.item.feed.group.id)
               })
-            } else {
-              this.toDetail(this.item)
             }
           })
         }
