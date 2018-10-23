@@ -158,14 +158,6 @@
         })
       }
     },
-    updated () {
-      this.$nextTick(() => {
-        var eles = document.querySelectorAll('.currency-title')
-        eles.forEach((item) => {
-          item.innerHTML = this.getHighlight(item.innerHTML)
-        })
-      })
-    },
     mounted () {},
     computed: {
       dataList () {
