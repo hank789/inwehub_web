@@ -215,6 +215,11 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
       back: 'close'
     })
   }
+
+  setTimeout(function () {
+    window.plus.nativeUI.closeWaiting()
+  }, 5000)
+
   currentWebview.append(webview)
 
   // 创建底部菜单
