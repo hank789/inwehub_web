@@ -106,7 +106,7 @@
   import { getHomeData } from '../utils/home'
   import RefreshList from '../components/refresh/List.vue'
   import { saveLocationInfo } from '../utils/allPlatform'
-  import { AppInit, autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
+  import { autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
   import userAbility from '../utils/userAbility'
 
   const Home = {
@@ -194,7 +194,7 @@
     updated () {},
     mounted () {
       saveLocationInfo()
-      AppInit(this)
+
       // 左滑
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
