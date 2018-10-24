@@ -262,6 +262,18 @@
     -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
     -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
   }
+  .openAppH5 .suspension {
+    width: 100%;
+    height: 1.306rem;
+    position: fixed;
+    opacity: 0.9;
+    top: 0rem;
+    background: #FFFFFF;
+    z-index: 997;
+    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+  }
 
   .suspension {
     width: 100%;

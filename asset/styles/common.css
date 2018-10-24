@@ -952,21 +952,21 @@ input.upload-file[type=file]{
 }
 
 .openAppH5 .mui-bar-nav{
-  top:1.44rem;
+  top:1.306rem;
 }
 
 .openAppH5 .mui-content{
-  top:1.44rem;
+  top:1.306rem;
   padding-top: 0;
 }
 
 .openAppH5 .mui-bar-nav ~  .mui-content{
-  top:2.613rem;
+  top:2.48rem;
   padding-top: 0;
 }
 
 .openAppH5 .shareBtn{
-  top:1.706rem !important;
+  top:1.573rem !important;
 }
 
 .openAppWechat .mui-bar-nav{
