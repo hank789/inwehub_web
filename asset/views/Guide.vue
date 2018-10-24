@@ -292,25 +292,25 @@
     top: 66%;
     width: 6.24rem;
     text-align: center;
-    margin-top: 49px;
+    margin-top: 1.306rem;
   }
   .guide .guide-text div:nth-of-type(1) {
     color: #03AEF9;
-    font-size: 21px;
+    font-size: 0.56rem;
   }
   .guide .guide-text div:nth-of-type(2) {
     color: #A0A0A0;
-    font-size: 15px;
-    margin-top: 13px;
+    font-size: 0.4rem;
+    margin-top: 0.346rem;
   }
   .guide .guide-text div:nth-of-type(2) i {
     display: inline-block;
-    width: 2px;
-    height: 2px;
+    width: 0.053rem;
+    height: 0.053rem;
     background: #A0A0A0;
     border-radius: 50%;
-    /*margin-bottom: 3px;*/
-    margin: 0 3px 4px;
+    /*margin-bottom: 0.08rem;*/
+    margin: 0 0.08rem 0.106rem;
   }
 
 

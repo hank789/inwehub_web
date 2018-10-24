@@ -367,7 +367,7 @@
     .currency-title {
       color: #444444;
       font-size: 0.373rem;
-      line-height: 22px;
+      line-height: 0.586rem;
       margin-top: 0.026rem;
       letter-spacing: 0.013rem;
     }
@@ -403,7 +403,7 @@
     .feed-open-all {
       color: #03AEF9;
       font-size: 0.346rem;
-      margin-top: 8px;
+      margin-top: 0.213rem;
       display: none;
       padding: 0 0.426rem;
       line-height: 0.48rem;
