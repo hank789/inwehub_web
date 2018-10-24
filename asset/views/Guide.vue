@@ -337,11 +337,11 @@
     background-color: #ffffff;
   }
   .guide-4 .logo {
-    margin-left: -3.5rem;
+    margin-left: -3.12rem;
     position: absolute;
     left: 50%;
     top: 20%;
-    width: 7rem;
+    width: 6.24rem;
     height: 3.546rem;
     background-image: url(../statics/images/guide_05.png);
     background-color: #ffffff;
