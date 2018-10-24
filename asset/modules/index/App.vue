@@ -92,7 +92,7 @@
       }
 
       initDocRem()
-      AppPageInit()
+      AppPageInit(this)
     }
   }
 </script>
