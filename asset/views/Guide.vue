@@ -6,19 +6,29 @@
 
         <!-- 第一张 -->
         <div class="mui-slider-item guide guide-0">
-
+          <div class="guide-text">
+            <div>行业情报信息一站式提供</div>
+            <div>精选行业资讯<i></i>追踪领域热点</div>
+          </div>
         </div>
         <!-- 第二张 -->
         <div class="mui-slider-item guide guide-1">
-
+          <div class="guide-text">
+            <div>打造有影响力的行业人脉</div>
+            <div>圈子动态分享<i></i>互助解疑答惑</div>
+          </div>
         </div>
         <!-- 第三张 -->
         <div class="mui-slider-item guide guide-2">
+          <div class="guide-text">
+            <div>助力企业明智决策与购买</div>
+            <div>企业服务推荐<i></i>真实互动评价</div>
+          </div>
         </div>
         <!-- 第四张 -->
-        <div class="mui-slider-item guide guide-3">
+        <!--<div class="mui-slider-item guide guide-3">-->
 
-        </div>
+        <!--</div>-->
 
         <!-- 第五张 -->
         <div class="mui-slider-item guide guide-4">
@@ -36,7 +46,7 @@
         <div class="mui-indicator"></div>
         <div class="mui-indicator"></div>
         <div class="mui-indicator"></div>
-        <div class="mui-indicator"></div>
+        <!--<div class="mui-indicator"></div>-->
       </div>
     </div>
   </div>
@@ -275,26 +285,57 @@
     background-size: contain;
     background-color: #f2fbfe;
   }
+  .guide .guide-text {
+    margin-left: -3.12rem;
+    position: absolute;
+    left: 50%;
+    top: 66%;
+    width: 6.24rem;
+    text-align: center;
+    margin-top: 1.306rem;
+  }
+  .guide .guide-text div:nth-of-type(1) {
+    color: #03AEF9;
+    font-size: 0.56rem;
+  }
+  .guide .guide-text div:nth-of-type(2) {
+    color: #A0A0A0;
+    font-size: 0.4rem;
+    margin-top: 0.346rem;
+  }
+  .guide .guide-text div:nth-of-type(2) i {
+    display: inline-block;
+    width: 0.053rem;
+    height: 0.053rem;
+    background: #A0A0A0;
+    border-radius: 50%;
+    /*margin-bottom: 0.08rem;*/
+    margin: 0 0.08rem 0.106rem;
+  }
+
 
   .guide-0 {
-    background-image: url(../statics/images/guide_01.png);
+    background-image: url(../statics/images/guide2_02.jpg);
+    background-color: #ffffff;
   }
 
   .guide-1 {
-    background-image: url(../statics/images/guide_02.png);
-    background-color: #646668;
+    background-image: url(../statics/images/guide2_03.png);
+    background-color: #ffffff;
   }
 
   .guide-2 {
-    background-image: url(../statics/images/guide_03.png);
-    background-color: #f2fbfe;
+    background-image: url(../statics/images/guide2_04.jpg);
+    background-color: #ffffff;
   }
 
   .guide-3 {
     background-image: url(../statics/images/guide_04.png);
-    background-color: #646668;
+    background-color: #ffffff;
   }
-
+  .guide-4 {
+    background-color: #ffffff;
+  }
   .guide-4 .logo {
     margin-left: -3.12rem;
     position: absolute;
@@ -303,7 +344,7 @@
     width: 6.24rem;
     height: 3.546rem;
     background-image: url(../statics/images/guide_05.png);
-    background-color: #f2fbfe;
+    background-color: #ffffff;
     background-size: 92%;
     background-repeat: no-repeat;
     background-position: center center;
@@ -311,7 +352,7 @@
 
   .guide-4 .logo .title {
     font-size: 0.4rem;
-    color: #323436;
+    color: #747576;
     text-align: center;
     position: absolute;
     bottom: 0.186rem;
