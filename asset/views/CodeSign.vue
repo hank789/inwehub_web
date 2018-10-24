@@ -354,7 +354,7 @@
         // 获取用户信息
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
-          if (newUser === 1) {
+          if (newUser) {
             window.trackMixpanelEvent('register:success', 'code-login', 'code-login', '验证码注册')
             window.mixpanelIdentify(true)
           } else {
