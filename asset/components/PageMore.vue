@@ -88,7 +88,7 @@
       }
     },
     watch: {
-      'link' (newVal, oldVal) {
+      'shareOption.link' (newVal, oldVal) {
         this.bindShare()
       }
     },
