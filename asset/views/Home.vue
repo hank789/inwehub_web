@@ -261,14 +261,14 @@
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle >= 160) {
-          this.$router.replace('/domain')
+          this.$router.replace('/discover')
         }
       })
       // 右滑
       document.getElementById('home-content').addEventListener('swiperight', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle <= 20) {
-          this.$router.replace('/domain')
+          this.$router.replace('/discover')
         }
       })
     }

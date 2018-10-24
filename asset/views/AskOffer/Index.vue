@@ -125,7 +125,7 @@
       document.getElementById('home-content').addEventListener('swiperight', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle <= 20) {
-          this.$router.replace('/discover')
+          this.$router.replace('/groups')
         }
       })
     }

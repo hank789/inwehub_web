@@ -31,12 +31,22 @@
         :autoShowEmpty="false"
         class="listWrapper"
       >
+        <div class="component-feed-item-guide feedListNo" v-if="list.length === 0">
+          <div class="feed-IconImg">
+            <img src="../statics/images/feed@3x.png" alt="">
+          </div>
+          <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
+          <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
+            <button>去看看</button>
+          </div>
+        </div>
+
         <template v-for="(item, index) in list">
 
           <div class="component-feed-item-guide" v-if="index === 3 && search_type === 2">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-gongkai"></use>
-            </svg>
+            <div class="feed-IconImg">
+              <img src="../statics/images/feed@3x.png" alt="">
+            </div>
             <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
             <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
               <button>去看看</button>
@@ -104,14 +114,14 @@
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle >= 160) {
-          this.$router.replace('/ask/offers')
+          this.$router.replace('/home')
         }
       })
       // 右滑
       document.getElementById('home-content').addEventListener('swiperight', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle <= 20) {
-          this.$router.replace('/groups')
+          this.$router.replace('home')
         }
       })
     },
@@ -208,11 +218,26 @@
   }
   .component-feed-item-guide {
     padding-top: 0.8rem;
+    &.feedListNo {
+      margin-top: 100px;
+      button {
+        margin-top: 17px;
+      }
+    }
     .line-river-after {
       margin-top: 0.8rem;
       &:after {
         left: 0.426rem;
         right: 0.426rem;
+      }
+    }
+    .feed-IconImg {
+      width: 120px;
+      height: 74px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
   }

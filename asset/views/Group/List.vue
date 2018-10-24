@@ -108,7 +108,7 @@
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle >= 160) {
-          this.$router.replace('/discover')
+          this.$router.replace('/ask/offers')
         }
       })
       // 右滑
