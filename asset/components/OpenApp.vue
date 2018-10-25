@@ -366,15 +366,15 @@
   /*微信端*/
   .mui-wechat .suspension.backgroundGrey {
     background: #F3F4F6;
-    box-shadow:0px 2px 26px 0px #F0F2F5;
+    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
   }
   .openAppH5 .suspension.backgroundGrey {
     background: #F3F4F6;
-    box-shadow:0px 2px 26px 0px #F0F2F5;
+    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
   }
   .suspension.backgroundGrey {
     background: #F3F4F6;
-    box-shadow:0px 2px 26px 0px #F0F2F5;
+    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
   }
   .mui-wechat .suspension {
     width: 100%;
@@ -384,9 +384,9 @@
     top: 0rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow:0px 2px 26px 0px #F0F2F5;
-    -webkit-box-shadow:0px 2px 26px 0px #F0F2F5;
-    -moz-box-shadow:0px 2px 26px 0px #F0F2F5;
+    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    -webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    -moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
   }
   .openAppH5 .suspension {
     width: 100%;
@@ -396,9 +396,9 @@
     top: 0rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow:0px 2px 26px 0px #F0F2F5;
-    -webkit-box-shadow:0px 2px 26px 0px #F0F2F5;
-    -moz-box-shadow:0px 2px 26px 0px #F0F2F5;
+    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    -webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    -moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
   }
 
   .suspension {
@@ -408,9 +408,9 @@
     top: 1.173rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow:0px 2px 26px 0px #F0F2F5;
-    -webkit-box-shadow:0px 2px 26px 0px #F0F2F5;
-    -moz-box-shadow:0px 2px 26px 0px #F0F2F5;
+    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    -webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    -moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
   }
 
   .component-wechat-top {
@@ -425,29 +425,29 @@
     position: relative; }
   .component-wechat-top .left .userImg {
     position: absolute;
-    left: 11px;
-    top: 8px;
-    width: 33px;
-    height: 33px;}
+    left: 0.293rem;
+    top: 0.213rem;
+    width: 0.88rem;
+    height: 0.88rem;}
   .component-wechat-top .left .userImg img {
     width: 100%;
     height: 100%;
     border-radius: 50%;}
   .component-wechat-top .left .userName {
     position: absolute;
-    top: 8px;
-    left: 56px;
+    top: 0.213rem;
+    left: 1.493rem;
     color: #444444;
-    font-size: 13px;
+    font-size: 0.346rem;
   }
   .component-wechat-top .left .icon:nth-child(1) {
     position: absolute;
-    left: 11px;
+    left: 0.293rem;
     top: 0.133rem;
     font-size: 1.08rem; }
   .component-wechat-top .left .icon:nth-child(2) {
     position: absolute;
-    left: 54px;
+    left: 1.44rem;
     top: -0.533rem;
     font-size: 2.186rem; }
   .component-wechat-top .left .desc {
@@ -455,9 +455,9 @@
     font-size: 0.266rem;
     position: relative;
     top: 0.666rem;
-    left: 58px; }
+    left: 1.546rem; }
   .component-wechat-top .left .desc.userSlogen {
-    left: 56px ;
+    left: 1.493rem ;
   }
   .component-wechat-top .right {
     height: 1.306rem;
@@ -466,14 +466,14 @@
     color: #03AEF9;
     font-size: 0.373rem; }
   .component-wechat-top .right .downloadApp {
-    width: 71px;
-    height: 26px;
+    width: 1.893rem;
+    height: 0.693rem;
     text-align: center;
-    line-height: 26px;
+    line-height: 0.693rem;
     color: #FFFFFF;
-    font-size: 13px;
+    font-size: 0.346rem;
     background: #03AEF9;
-    border-radius: 8px;
+    border-radius: 0.213rem;
     display: inline-block;
   }
   .component-wechat-top .right a {
@@ -493,6 +493,6 @@
     background-color: #dcdcdc;
   }
   .mui-slider .mui-slider-group .mui-slider-item {
-    height: 64px !important;
+    height: 1.706rem !important;
   }
 </style>
