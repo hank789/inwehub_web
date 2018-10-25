@@ -1,4 +1,5 @@
 var whiteLogo = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
+import { getLocalUuid } from './user'
 
 /**
  * 专业问答详情页-微信分享模版
@@ -6,7 +7,7 @@ var whiteLogo = 'https://cdn.inwehub.com/system/whiteLogo@2x.png'
  */
 function getAskCommunityMajorDetail (questionId, questionDescription, answerUsername) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/major/' + questionId
-  var link = process.env.H5_ROOT + '/#' + '/askCommunity/major/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/askCommunity/major/' + questionId + '?uuid=' + getLocalUuid()
 
   return {
     title: '专业问答|' + questionDescription + '-' + answerUsername + '的回答',
@@ -24,7 +25,7 @@ function getAskCommunityMajorDetail (questionId, questionDescription, answerUser
  */
 function getAskCommunityInteractionDetail (answerId, questionDescription, answerUsername) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/askCommunity/interaction/' + answerId
-  var link = process.env.H5_ROOT + '/#' + '/ask/offer/' + answerId
+  var link = process.env.H5_ROOT + '/#' + '/ask/offer/' + answerId + '?uuid=' + getLocalUuid()
 
   return {
     title: '问答|' + questionDescription + '-' + answerUsername + '的回答',
@@ -41,7 +42,7 @@ function getAskCommunityInteractionDetail (answerId, questionDescription, answer
  */
 function getAskCommunityInteractionAnswers (questionId, description, answerNum, followNum) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/ask/offer/answers/' + questionId
-  var link = process.env.H5_ROOT + '/#' + '/ask/offer/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/ask/offer/answers/' + questionId + '?uuid=' + getLocalUuid()
 
   return {
     title: '问答|' + description,
@@ -57,7 +58,7 @@ function getAskCommunityInteractionAnswers (questionId, description, answerNum, 
  * 邀请注册-模版
  */
 function getInvitation (username, rcCode) {
-  var link = process.env.H5_ROOT + '/#' + '/invitation/register?rc_code=' + rcCode
+  var link = process.env.H5_ROOT + '/#' + '/invitation/register?rc_code=' + rcCode + '&uuid=' + getLocalUuid()
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=/invitation/register?rc_code=' + rcCode
 
   return {
@@ -75,7 +76,7 @@ function getInvitation (username, rcCode) {
  */
 function getDiscoverDetail (pathUrl, title, imgUrl) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
-  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1'
+  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1' + '&uuid=' + getLocalUuid()
 
   if (!imgUrl) {
     imgUrl = whiteLogo
@@ -102,7 +103,7 @@ function getDiscoverDetail (pathUrl, title, imgUrl) {
  */
 function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
-  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1'
+  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1&uuid=' + getLocalUuid()
 
   if (!imgUrl) {
     imgUrl = whiteLogo
@@ -128,7 +129,7 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
  */
 function getInviteAnswerDetail (questionId, description, answernum, followednum) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + '/ask/offer/answers/' + questionId
-  var link = process.env.H5_ROOT + '/#' + '/ask/offer/answers/' + questionId
+  var link = process.env.H5_ROOT + '/#' + '/ask/offer/answers/' + questionId + '?uuid=' + getLocalUuid()
 
   return {
     title: '邀您回答|' + description,
@@ -141,7 +142,7 @@ function getInviteAnswerDetail (questionId, description, answernum, followednum)
 }
 
 function getResumeDetail (uuid, realname, companyName, avatarUrl) {
-  var link = process.env.H5_ROOT + '/#/share/resume/' + uuid + '?time=' + (new Date().getTime())
+  var link = process.env.H5_ROOT + '/#/share/resume/' + uuid + '?time=' + (new Date().getTime()) + '&uuid=' + getLocalUuid()
 
   return {
     title: 'InweHub名片 | ' + realname + '@' + companyName,
@@ -158,7 +159,7 @@ function getResumeDetail (uuid, realname, companyName, avatarUrl) {
  * url: /group/detail/221
  */
 function getGroupDetail (id, title, username, userCount, logo) {
-  var link = process.env.H5_ROOT + '/#' + '/group/detail/' + id
+  var link = process.env.H5_ROOT + '/#' + '/group/detail/' + id + '?uuid=' + getLocalUuid()
 
   return {
     title: '邀您加入InweHub圈子：' + title,
@@ -177,7 +178,7 @@ function getGroupDetail (id, title, username, userCount, logo) {
  * url: /recommends
  */
 function getRecommends (count) {
-  var link = process.env.H5_ROOT + '/#' + '/recommends'
+  var link = process.env.H5_ROOT + '/#' + '/recommends' + '?uuid=' + getLocalUuid()
 
   return {
     title: 'InweHub精选推荐-企业级应用&服务广场',
