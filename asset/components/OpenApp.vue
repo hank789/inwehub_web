@@ -168,14 +168,10 @@
       }
     },
     created () {
+      this.getUserInfo()
       this.showOpenApp()
     },
     mounted () {
-      this.shareUuid = this.$route.query.uuid
-      console.log('shareUUid:' + JSON.stringify(this.$route.query))
-      if (this.shareUuid) {
-        this.getShareInfo()
-      }
       var mlink = 'https://adsolj.mlinks.cc/' + process.env.DEEP_LINK_KEY
 
       var Mlink = null
@@ -244,7 +240,8 @@
       swiperSlide
     },
     watch: {
-      $route () {
+      '$route' () {
+        this.getUserInfo()
         if (this.$route.path === '/share/resume') {
           this.check()
         } else {
@@ -253,6 +250,13 @@
       }
     },
     methods: {
+      getUserInfo () {
+        this.shareUuid = this.$route.query.uuid
+        console.log('shareUUid:' + JSON.stringify(this.$route.query))
+        if (this.shareUuid) {
+          this.getShareInfo()
+        }
+      },
       getShareInfo () {
         postRequest('profile/resumeInfo', {uuid: this.shareUuid}).then(response => {
           var code = response.data.code
