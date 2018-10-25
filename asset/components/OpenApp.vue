@@ -25,9 +25,9 @@
 
     <div id="OpenAppSlider" class="homeMuiSlider mui-slider" v-if="isWeixin || isH5">
       <div class="mui-slider-group  mui-slider-loop">
-        <div class="mui-slider-item mui-slider-item-duplicate" v-if="shareUuid">
+        <div class="mui-slider-item mui-slider-item-duplicate">
 
-          <div class="suspension backgroundGrey">
+          <div class="suspension backgroundGrey" v-if="shareUuid">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
                 <div class="userImg">
@@ -37,6 +37,23 @@
                 <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
               </div>
               <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+            </div>
+          </div>
+
+          <div class="mui-slider-item" v-else>
+            <div class="suspension">
+              <div class="component-wechat-top">
+                <div class="left" @tap.stop.prevent="$router.push('/home')">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-logotuxing"></use>
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-logowenzi"></use>
+                  </svg>
+                  <div class="desc">聚焦行业解决方案，共筑人脉圈子</div>
+                </div>
+                <div class="right"><a class="downloadApp AppThree" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+              </div>
             </div>
           </div>
 
@@ -73,6 +90,7 @@
             </div>
           </div>
         </div>
+
         <div class="mui-slider-item">
           <div class="suspension">
             <div class="component-wechat-top">
@@ -89,6 +107,7 @@
             </div>
           </div>
         </div>
+
         <div class="mui-slider-item" v-if="shareUuid">
           <div class="suspension backgroundGrey">
             <div class="component-wechat-top">
@@ -139,6 +158,7 @@
 
   export default {
     created () {
+      this.shareUuid = this.$route.query.uuid
       this.showOpenApp()
     },
     mounted () {
@@ -203,7 +223,7 @@
 //        })
       }
 
-      window.mui('.mui-slider').slider({
+      window.mui('#OpenAppSlider').slider({
         interval: 5000
       })
     },
@@ -311,7 +331,7 @@
         isWeixin: false,
         isH5: false,
         isLogined: isLogined(),
-        shareUuid: this.$route.query.uuid,
+        shareUuid: '',
         shareInfo: {}
       }
     }
@@ -529,6 +549,6 @@
     background-color: #dcdcdc;
   }
   .mui-slider .mui-slider-group .mui-slider-item {
-    height: 1.706rem !important;
+    height: 1.306rem !important;
   }
 </style>
