@@ -22,20 +22,110 @@
     <!--</div>-->
 
     <!--微信端-->
-    <div class="suspension" v-if="isWeixin || isH5">
-      <div class="component-wechat-top">
-        <div class="left" @tap.stop.prevent="$router.push('/home')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-logotuxing"></use>
-          </svg>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-logowenzi"></use>
-          </svg>
-          <div class="desc">企业级应用&amp;服务广场</div>
+
+    <div id="OpenAppSlider" class="homeMuiSlider mui-slider" v-if="isWeixin || isH5">
+      <div class="mui-slider-group  mui-slider-loop">
+        <div class="mui-slider-item mui-slider-item-duplicate">
+
+          <div class="suspension backgroundGrey">
+            <div class="component-wechat-top">
+              <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="userImg">
+                  <img :src="shareInfo.avatar_url" alt="">
+                </div>
+                <div class="userName">{{shareInfo.name}}</div>
+                <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
+              </div>
+              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+            </div>
+          </div>
+
         </div>
-        <div class="right"><a id="btnOpenAppWeixin" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a><i class="line-wall"></i><a v-if="isLogined" @tap.stop.prevent="$router.push('/home')">返回首页</a><a href="" target="_self" @tap.stop.prevent="$router.push('/login')" v-else >登录/注册</a></div>
+        <div class="mui-slider-item">
+          <div class="suspension">
+            <div class="component-wechat-top">
+              <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-logotuxing"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-logowenzi"></use>
+                </svg>
+                <div class="desc">企业级应用＆服务广场</div>
+              </div>
+              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="mui-slider-item">
+          <div class="suspension backgroundGrey">
+            <div class="component-wechat-top">
+              <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-logotuxing"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-logowenzi"></use>
+                </svg>
+                <div class="desc">追踪每日企服行业新热点</div>
+              </div>
+              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="mui-slider-item">
+          <div class="suspension">
+            <div class="component-wechat-top">
+              <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-logotuxing"></use>
+                </svg>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-logowenzi"></use>
+                </svg>
+                <div class="desc">聚焦行业解决方案，共筑人脉圈子</div>
+              </div>
+              <div class="right"><a id="btnOpenAppWeixin" class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="mui-slider-item">
+          <div class="suspension backgroundGrey">
+            <div class="component-wechat-top">
+              <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="userImg">
+                  <img :src="shareInfo.avatar_url" alt="">
+                </div>
+                <div class="userName">{{shareInfo.name}}</div>
+                <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
+              </div>
+              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="mui-slider-item mui-slider-item-duplicate">
+          <div class="mui-slider-item">
+
+            <div class="suspension">
+              <div class="component-wechat-top">
+                <div class="left" @tap.stop.prevent="$router.push('/home')">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-logotuxing"></use>
+                  </svg>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-logowenzi"></use>
+                  </svg>
+                  <div class="desc">企业级应用＆服务广场</div>
+                </div>
+                <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -44,12 +134,15 @@
 
   import localEvent from '../stores/sessionStorage'
   import { isLogined } from '../utils/auth'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { postRequest } from '../utils/request'
 
   export default {
     created () {
       this.showOpenApp()
     },
     mounted () {
+      this.getShareInfo()
       var mlink = 'https://adsolj.mlinks.cc/' + process.env.DEEP_LINK_KEY
 
       var Mlink = null
@@ -73,6 +166,15 @@
 //          cparams: {path: 'my'}
 //        })
       }
+
+      window.mui('.mui-slider').slider({
+        interval: 5000
+      })
+    },
+
+    components: {
+      swiper,
+      swiperSlide
     },
     watch: {
       $route () {
@@ -84,6 +186,16 @@
       }
     },
     methods: {
+      getShareInfo () {
+        postRequest('profile/resumeInfo', {uuid: this.shareUuid}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.shareInfo = response.data.data.info
+        })
+      },
       downloadApp () {
         window.location.href = this.url
       },
@@ -162,7 +274,9 @@
         url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp',
         isWeixin: false,
         isH5: false,
-        isLogined: isLogined()
+        isLogined: isLogined(),
+        shareUuid: this.$route.query.uuiid,
+        shareInfo: {}
       }
     }
   }
@@ -250,6 +364,18 @@
   }
 
   /*微信端*/
+  .mui-wechat .suspension.backgroundGrey {
+    background: #F3F4F6;
+    box-shadow:0px 2px 26px 0px #F0F2F5;
+  }
+  .openAppH5 .suspension.backgroundGrey {
+    background: #F3F4F6;
+    box-shadow:0px 2px 26px 0px #F0F2F5;
+  }
+  .suspension.backgroundGrey {
+    background: #F3F4F6;
+    box-shadow:0px 2px 26px 0px #F0F2F5;
+  }
   .mui-wechat .suspension {
     width: 100%;
     height: 1.306rem;
@@ -258,9 +384,9 @@
     top: 0rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
-    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
-    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    box-shadow:0px 2px 26px 0px #F0F2F5;
+    -webkit-box-shadow:0px 2px 26px 0px #F0F2F5;
+    -moz-box-shadow:0px 2px 26px 0px #F0F2F5;
   }
   .openAppH5 .suspension {
     width: 100%;
@@ -270,9 +396,9 @@
     top: 0rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
-    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
-    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    box-shadow:0px 2px 26px 0px #F0F2F5;
+    -webkit-box-shadow:0px 2px 26px 0px #F0F2F5;
+    -moz-box-shadow:0px 2px 26px 0px #F0F2F5;
   }
 
   .suspension {
@@ -282,9 +408,9 @@
     top: 1.173rem;
     background: #FFFFFF;
     z-index: 997;
-    box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
-    -webkit-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
-    -moz-box-shadow: 0rem 0.08rem 0.133rem #b4b4b6;
+    box-shadow:0px 2px 26px 0px #F0F2F5;
+    -webkit-box-shadow:0px 2px 26px 0px #F0F2F5;
+    -moz-box-shadow:0px 2px 26px 0px #F0F2F5;
   }
 
   .component-wechat-top {
@@ -297,14 +423,31 @@
     height: 1.306rem; }
   .component-wechat-top .left {
     position: relative; }
+  .component-wechat-top .left .userImg {
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    width: 33px;
+    height: 33px;}
+  .component-wechat-top .left .userImg img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;}
+  .component-wechat-top .left .userName {
+    position: absolute;
+    top: 8px;
+    left: 56px;
+    color: #444444;
+    font-size: 13px;
+  }
   .component-wechat-top .left .icon:nth-child(1) {
     position: absolute;
-    left: 0.266rem;
+    left: 11px;
     top: 0.133rem;
     font-size: 1.08rem; }
   .component-wechat-top .left .icon:nth-child(2) {
     position: absolute;
-    left: 1.266rem;
+    left: 54px;
     top: -0.533rem;
     font-size: 2.186rem; }
   .component-wechat-top .left .desc {
@@ -312,13 +455,27 @@
     font-size: 0.266rem;
     position: relative;
     top: 0.666rem;
-    left: 1.333rem; }
+    left: 58px; }
+  .component-wechat-top .left .desc.userSlogen {
+    left: 56px ;
+  }
   .component-wechat-top .right {
     height: 1.306rem;
     line-height: 1.306rem;
     padding-right: 0.426rem;
     color: #03AEF9;
     font-size: 0.373rem; }
+  .component-wechat-top .right .downloadApp {
+    width: 71px;
+    height: 26px;
+    text-align: center;
+    line-height: 26px;
+    color: #FFFFFF;
+    font-size: 13px;
+    background: #03AEF9;
+    border-radius: 8px;
+    display: inline-block;
+  }
   .component-wechat-top .right a {
     color: #03AEF9; }
   .component-wechat-top .right .line-wall {
@@ -334,5 +491,8 @@
     width: 0.026rem;
     height: 0.266rem;
     background-color: #dcdcdc;
+  }
+  .mui-slider .mui-slider-group .mui-slider-item {
+    height: 64px !important;
   }
 </style>
