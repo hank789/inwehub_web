@@ -118,7 +118,6 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
-  import { alertGroups } from '../utils/dialogList'
   import { postRequest } from '../utils/request'
 
   export default {
@@ -234,7 +233,6 @@
       },
       async onTap (event) {
         if (this.item.feed.group && this.item.feed.group.id) {
-
           if (this.item.isPass) {
             this.item.isPass = false
             return
@@ -253,8 +251,9 @@
             var data = response.data.data
 
             if (data.is_joined !== 1 && data.is_joined !== 3) {
-              alertGroups(this.$parent, (num) => {
-                this.$router.pushPlus('/group/detail/' + this.item.feed.group.id)
+              userAbility.inviteJoinInGroup(this.$parent, groupId, () => {
+                this.item.isPass = true
+                window.mui.trigger(event.target, 'tap')
               })
             } else {
               this.item.isPass = true

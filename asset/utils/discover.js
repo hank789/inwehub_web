@@ -9,7 +9,7 @@ function upvote (context, submissionId, increaseCallback, decreaseCallback) {
     var code = response.data.code
     if (code !== 1000) {
       if (code === 6108) {
-        userAbility.alertGroups(context, response.data.data.group_id)
+        userAbility.inviteJoinInGroup(context, response.data.data.group_id)
         return
       }
 
@@ -35,7 +35,7 @@ function downVote (context, submissionId, increaseCallback, decreaseCallback) {
     var code = response.data.code
     if (code !== 1000) {
       if (code === 6108) {
-        userAbility.alertGroups(context, response.data.data.group_id)
+        userAbility.inviteJoinInGroup(context, response.data.data.group_id)
         return
       }
 

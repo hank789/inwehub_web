@@ -252,7 +252,6 @@
   import { quillEditor } from '../../components/vue-quill'
   import { upvote, downVote } from '../../utils/discover'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
-  import { alertGroups } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -374,8 +373,9 @@
         if (this.typeDesc(this.detail.group.is_joined)) {
           event.stopPropagation()
           event.preventDefault()
-          alertGroups(this, (num) => {
-            this.$router.pushPlus('/group/detail/' + this.detail.group.id)
+
+          userAbility.inviteJoinInGroup(this, this.detail.group.id, () => {
+            this.refreshPageData()
           })
         }
       },
@@ -671,7 +671,7 @@
         postRequest(`article/bookmark-submission`, data).then(response => {
           var code = response.data.code
           if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
+            userAbility.inviteJoinInGroup(this, response.data.data.group_id)
             return
           } else if (code !== 1000) {
             window.mui.alert(response.data.message)

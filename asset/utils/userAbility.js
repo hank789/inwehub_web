@@ -13,10 +13,11 @@ import {getLocalUserInfo, isCompanyStatus, getLocalUuid} from '../utils/user'
 import router from '../modules/index/routers/index'
 import {alertZoom, alertSimple, getDialogObj, alertHtml} from '../utils/dialog'
 import {postRequest} from '../utils/request'
-import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat, alertFreeAskGuide } from '../utils/dialogList'
+import { alertSignIn, alertGetCredits, alertGetCoupon, alertChat, alertFreeAskGuide, alertGroups } from '../utils/dialogList'
 import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stores/types'
 import { getContacts, toSettingSystem } from '../utils/plus'
 import { isLogined } from '../utils/auth'
+import { joinIn } from '../utils/group'
 
 var UserAbility = () => {
   /**
@@ -226,22 +227,7 @@ var UserAbility = () => {
       })
     }
   }
-  // 圈子弹窗
-  var alertGroups = (context, id, callback) => {
-    var dialog = getDialogObj(context)
-    if (dialog) {
-      dialog.getHtml('groups', {}, (html) => {
-        alertSimple(html, '加入圈子', (num) => {
-          if (callback) {
-            callback(num)
-          }
-          if (num.index === 0) {
-            router.pushPlus('/group/detail/' + id)
-          }
-        }, true)
-      })
-    }
-  }
+
   // 受邀红包样式
   var InvitationCoupon = (context) => {
     // 红包请求
@@ -480,6 +466,13 @@ var UserAbility = () => {
     }
   }
 
+  /* 邀请用户加入圈子 */
+  var inviteJoinInGroup = (context, groupId, callback) => {
+    alertGroups(context, (num) => {
+      joinIn(groupId, callback)
+    })
+  }
+
   return {
     canDo: canDo,
     jumpToAddProject: jumpToAddProject,
@@ -499,10 +492,10 @@ var UserAbility = () => {
     InvitationCoupon: InvitationCoupon,
     luckDraw: luckDraw,
     jumpToChat: jumpToChat,
-    alertGroups: alertGroups,
     jumpToResume: jumpToResume,
     getLocalContact: getLocalContact,
-    showFreeAskGuide: showFreeAskGuide
+    showFreeAskGuide: showFreeAskGuide,
+    inviteJoinInGroup: inviteJoinInGroup
   }
 }
 

@@ -30,7 +30,7 @@
           bodyWebview.setStyle({
             opacity: 0
           })
-          userAbility.alertGroups(this, event.detail.group_id, () => {
+          userAbility.inviteJoinInGroup(this, event.detail.group_id, () => {
             bodyWebview.setStyle({
               opacity: 1
             })
