@@ -159,6 +159,7 @@
   export default {
     created () {
       this.shareUuid = this.$route.query.uuid
+      console.log('shareUUid:' + this.shareUuid)
       this.showOpenApp()
     },
     mounted () {
