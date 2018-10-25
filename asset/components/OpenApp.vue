@@ -29,7 +29,7 @@
 
           <div class="suspension backgroundGrey" v-if="shareUuid">
             <div class="component-wechat-top">
-              <div class="left" @tap.stop.prevent="$router.push('/home')">
+              <div class="left">
                 <div class="userImg">
                   <img :src="shareInfo.avatar_url" alt="">
                 </div>
@@ -111,7 +111,7 @@
         <div class="mui-slider-item" v-if="shareUuid">
           <div class="suspension backgroundGrey">
             <div class="component-wechat-top">
-              <div class="left" @tap.stop.prevent="$router.push('/home')">
+              <div class="left">
                 <div class="userImg">
                   <img :src="shareInfo.avatar_url" alt="">
                 </div>
