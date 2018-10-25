@@ -25,7 +25,7 @@
 
     <div id="OpenAppSlider" class="homeMuiSlider mui-slider" v-if="isWeixin || isH5">
       <div class="mui-slider-group  mui-slider-loop">
-        <div class="mui-slider-item mui-slider-item-duplicate">
+        <div class="mui-slider-item mui-slider-item-duplicate" v-if="shareUuid">
 
           <div class="suspension backgroundGrey">
             <div class="component-wechat-top">
@@ -89,7 +89,7 @@
             </div>
           </div>
         </div>
-        <div class="mui-slider-item">
+        <div class="mui-slider-item" v-if="shareUuid">
           <div class="suspension backgroundGrey">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
