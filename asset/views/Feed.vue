@@ -219,9 +219,9 @@
   .component-feed-item-guide {
     padding-top: 0.8rem;
     &.feedListNo {
-      margin-top: 100px;
+      margin-top: 2.666rem;
       button {
-        margin-top: 17px;
+        margin-top: 0.453rem;
       }
     }
     .line-river-after {
@@ -232,8 +232,8 @@
       }
     }
     .feed-IconImg {
-      width: 120px;
-      height: 74px;
+      width: 3.2rem;
+      height: 1.973rem;
       margin: 0 auto;
       img {
         width: 100%;

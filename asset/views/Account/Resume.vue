@@ -703,8 +703,8 @@
             display: block;
           }
           .empty-IconImg {
-            width: 62px;
-            height: 89px;
+            width: 1.653rem;
+            height: 2.373rem;
             margin: 0 auto;
             img {
               width: 100%;
@@ -713,12 +713,12 @@
           }
           &.goAddpage {
             span {
-              margin-top: 10px;
-              line-height: 16px;
+              margin-top: 0.266rem;
+              line-height: 0.426rem;
             }
             .empty-IconImg {
-              width: 100px;
-              height: 74px;
+              width: 2.666rem;
+              height: 1.973rem;
               margin: 0 auto;
               img {
                 width: 100%;
@@ -726,16 +726,16 @@
               }
             }
             .releaseButton {
-              margin-top: 17px;
+              margin-top: 0.453rem;
               button {
-                width: 93px;
-                height: 36px;
+                width: 2.48rem;
+                height: 0.96rem;
                 border: none;
                 color: #FFFFFF;
-                font-size: 14px;
-                line-height: 14px;
+                font-size: 0.373rem;
+                line-height: 0.373rem;
                 background: #03AEF9;
-                border-radius: 100px;
+                border-radius: 2.666rem;
               }
             }
           }

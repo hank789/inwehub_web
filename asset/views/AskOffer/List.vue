@@ -438,16 +438,16 @@
     padding-top: 0.08rem;
   }
   .robAnswer {
-    width: 93px;
-    height: 36px;
+    width: 2.48rem;
+    height: 0.96rem;
     position: relative;
     z-index: 22;
-    margin: -20px auto 30px;
+    margin: -0.533rem auto 0.8rem;
     text-align: center;
-    line-height: 36px;
+    line-height: 0.96rem;
     color: #03AEF9;
-    border-radius: 100px;
-    border: 1px solid #DCDCDC;
+    border-radius: 2.666rem;
+    border: 0.026rem solid #DCDCDC;
   }
 </style>
 

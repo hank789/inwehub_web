@@ -53,8 +53,8 @@
       color: #c8c8c8;
     }
     .emptyWrapper-IconImg {
-      width: 70px;
-      height: 89px;
+      width: 1.866rem;
+      height: 2.373rem;
       margin: 0 auto;
       img {
         width: 100%;
@@ -62,8 +62,8 @@
       }
     }
     .AnswerClose-IconImg {
-      width: 61px;
-      height: 89px;
+      width: 1.626rem;
+      height: 2.373rem;
       margin: 0 auto;
       img {
         width: 100%;

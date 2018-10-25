@@ -2914,7 +2914,7 @@ a {
   margin-left: 0.266rem; }
 .container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab {
   margin: 0 0.266rem;
-  font-size: 16px;
+  font-size: 0.426rem;
   display: inline-block; }
 .container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab.active {
   color: #444444;
@@ -2922,15 +2922,15 @@ a {
   font-family: PingFangSC-Medium; }
 .container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab.active:after {
   position: absolute;
-  bottom: 4px;
-  left: 8px;
+  bottom: 0.106rem;
+  left: 0.213rem;
   right: 0;
-  width: 16px;
+  width: 0.426rem;
   content: '';
   text-align: center;
   background-color: #03AEF9;
-  height: 4px;
-  border-radius: 117px;;}
+  height: 0.106rem;
+  border-radius: 3.12rem;;}
 .container-control-logoAndTabsAndSearch .searchIcon {
   font-size: 0.48rem;
   color: #444;
