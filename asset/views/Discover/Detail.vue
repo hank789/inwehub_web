@@ -804,9 +804,9 @@
     updated () {
       this.$nextTick(function () {
         if (this.isShow) {
-          setTimeout(() => {
-            this.shotContentHeight()
-          }, 200)
+//          setTimeout(() => {
+//            this.shotContentHeight()
+//          }, 200)
           openVendorUrl(this.$el.querySelector('#contentWrapper'))
           openAppUrl(this.$el.querySelector('#contentWrapper'))
         }
