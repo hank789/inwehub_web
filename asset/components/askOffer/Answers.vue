@@ -4,7 +4,12 @@
     <div class="component-title-home"><div class="left">回答{{list.length ? '(' + list.length + ')' : ''}}</div></div>
     <div class="line-river line-river-full"></div>
 
-    <Empty :description="emptyDesc" v-if="list.length === 0"></Empty>
+    <Empty
+      :description="emptyDesc"
+      v-if="list.length === 0"
+      :emptyAnswerShow="emptyAnswerShow"
+      :answerCloseShow="answerCloseShow"
+    ></Empty>
 
 
     <div class="item listBottomBorder" v-else v-for="(item, index) in list" @tap.stop.prevent="toDetail(item.id)">
@@ -61,7 +66,15 @@
       },
       questionId: '',
       isAsker: false,
-      emptyDesc: ''
+      emptyDesc: '',
+      emptyAnswerShow: {
+        type: Boolean,
+        default: false
+      },
+      answerCloseShow: {
+        type: Boolean,
+        default: false
+      }
     },
     created () {
 

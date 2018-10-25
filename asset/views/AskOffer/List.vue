@@ -43,7 +43,10 @@
           :questionId="ask.question.id"
           :isAsker="isAsker"
           :emptyDesc="ask.question.status_description"
+          :emptyAnswerShow="answers.length === 0 && ask.question.status !== 9"
+          :answerCloseShow="ask.question.status === 9"
         ></Answers>
+        <div class="robAnswer" v-if="answers.length === 0 && ask.question.status !== 9 && !isAsker" @tap.stop.prevent="goRobAnswer">抢个沙发</div>
 
         <div class="line-river-big"></div>
         <RecommentList
@@ -277,6 +280,9 @@
       }
     },
     methods: {
+      goRobAnswer () {
+        toAnswer(this, this.ask.question.id)
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
@@ -430,6 +436,18 @@
 
   .mui-android .container-label .border-football {
     padding-top: 0.08rem;
+  }
+  .robAnswer {
+    width: 93px;
+    height: 36px;
+    position: relative;
+    z-index: 22;
+    margin: -20px auto 30px;
+    text-align: center;
+    line-height: 36px;
+    color: #03AEF9;
+    border-radius: 100px;
+    border: 1px solid #DCDCDC;
   }
 </style>
 
