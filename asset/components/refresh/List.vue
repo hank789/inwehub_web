@@ -252,9 +252,9 @@
             this.perPage = response.data.data.per_page
           }
 
-          if (list.length < this.perPage) {
-            this.disableLoadMore = true
-          }
+//          if (list.length < this.perPage) {
+//            this.disableLoadMore = true
+//          }
 
           if (list) {
             this.list = list
