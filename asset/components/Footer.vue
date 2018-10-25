@@ -6,32 +6,32 @@
       <div class="menu active" v-if="isHome">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-tuijian-hover"></use>
+            <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">推荐</div>
+        <div class="desc">首页</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.push('/home')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-tuijian"></use>
+            <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">推荐</div>
+        <div class="desc">首页</div>
       </div>
 
       <div class="menu active" v-if="isDiscover">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shequ-hover"></use>
+            <use xlink:href="#icon-shequ1"></use>
           </svg>
         </div>
         <div class="desc">社区</div>
       </div>
-      <div class="menu" @tap.stop.prevent="$router.push('/discover')" v-else>
+      <div class="menu" @tap.stop.prevent="$router.replace('/groups')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shequ"></use>
+            <use xlink:href="#icon-shequ1"></use>
           </svg>
         </div>
         <div class="desc">社区</div>
@@ -44,7 +44,7 @@
       <div class="menu active" v-if="isAsk">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiaoxi-hover"></use>
+            <use xlink:href="#icon-xiaoxi2"></use>
           </svg>
         </div>
         <div class="desc">消息</div>
@@ -53,7 +53,7 @@
       <div class="menu" @tap.stop.prevent="$router.push('/inform')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiaoxi1"></use>
+            <use xlink:href="#icon-xiaoxi2"></use>
           </svg>
         </div>
         <div class="desc">消息</div>
@@ -63,7 +63,7 @@
       <div class="menu active" v-if="isMy">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wode-hover"></use>
+            <use xlink:href="#icon-wode2"></use>
           </svg>
         </div>
         <div class="desc">我的</div>
@@ -71,7 +71,7 @@
       <div class="menu" @tap.stop.prevent="$router.push('/my')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wode1"></use>
+            <use xlink:href="#icon-wode2"></use>
           </svg>
         </div>
         <div class="desc">我的</div>
@@ -215,12 +215,12 @@
           case '/home':
           case '/home?refresh=1':
           case '/domain':
+          case '/discover':
             this.isHome = true
             break
           case '/my':
             this.isMy = true
             break
-          case '/discover':
           case '/ask/offers':
           case '/groups':
             this.isDiscover = true
@@ -307,7 +307,7 @@
     width: 100%; }
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
-    color: #808080;
+    color: #B4B4B6;
     position: relative;
     top: 16px; /* px不转换 */
     line-height: 18px; /* px不转换 */}
@@ -315,6 +315,7 @@
     position: absolute;
     top: 7px; /* px不转换 */
     left: 50%;
+    color: #B4B4B6;
     margin-left: -12px; /* px不转换 */
     font-size: 24px; /* px不转换 */
     display: -webkit-box;
@@ -340,7 +341,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100% 100%; }
-  .container-footer.active .desc {
+  .container-footer .menu.active .desc,.container-footer .menu.active .iconWrapper {
     color: #444; }
 
   .mui-badge {

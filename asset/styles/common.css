@@ -2914,7 +2914,7 @@ a {
   margin-left: 0.266rem; }
 .container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab {
   margin: 0 0.266rem;
-  font-size: 0.373rem;
+  font-size: 16px;
   display: inline-block; }
 .container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab.active {
   color: #444444;
@@ -2922,14 +2922,15 @@ a {
   font-family: PingFangSC-Medium; }
 .container-control-logoAndTabsAndSearch .logoAndTabsAndSearchTabs .tab.active:after {
   position: absolute;
-  bottom: 0rem;
-  left: 0;
+  bottom: 4px;
+  left: 8px;
   right: 0;
+  width: 16px;
   content: '';
+  text-align: center;
   background-color: #03AEF9;
-  height: 0.08rem;
-  -webkit-transform: scaleY(0.5);
-  transform: scaleY(0.5); }
+  height: 4px;
+  border-radius: 117px;;}
 .container-control-logoAndTabsAndSearch .searchIcon {
   font-size: 0.48rem;
   color: #444;
@@ -3017,9 +3018,10 @@ a {
   border-radius: 0.106rem;
   margin-right: 0.133rem; }
 .container-tabLabels .tab.active {
-  background: #F3F4F6;
+  /*background: #F3F4F6;*/
   color: #444;
-  border: none; }
+  border: none;
+  font-family:PingFangSC-Medium; }
 
 .pull-down-header{
   background-color:#f3f4f6 !important;

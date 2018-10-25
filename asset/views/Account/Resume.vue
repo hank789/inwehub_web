@@ -157,11 +157,21 @@
           </div>
           <div class="description">
 
-            <div class="noDynamic" v-if="list.length === 0">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zanwushuju"></use>
-              </svg>
+            <div class="noDynamic" v-if="list.length === 0 && uuid !== cuuid">
+              <div class="empty-IconImg">
+                <img src="../../statics/images/empty@3x.png" alt="">
+              </div>
               <span>暂无动态</span>
+            </div>
+
+            <div class="noDynamic goAddpage" v-if="list.length === 0 && uuid === cuuid">
+              <div class="empty-IconImg">
+                <img src="../../statics/images/dynamic@3x.png" alt="">
+              </div>
+              <span>快来创建你的第一条分享吧~</span>
+              <div class="releaseButton" @tap.stop.prevent="$router.pushPlus('/discover/add')">
+                <button>发布</button>
+              </div>
             </div>
 
             <template v-for="(item, index) in list" v-else>
@@ -691,6 +701,43 @@
             color: #C8C8C8;
             font-size: 0.32rem;
             display: block;
+          }
+          .empty-IconImg {
+            width: 62px;
+            height: 89px;
+            margin: 0 auto;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          &.goAddpage {
+            span {
+              margin-top: 10px;
+              line-height: 16px;
+            }
+            .empty-IconImg {
+              width: 100px;
+              height: 74px;
+              margin: 0 auto;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .releaseButton {
+              margin-top: 17px;
+              button {
+                width: 93px;
+                height: 36px;
+                border: none;
+                color: #FFFFFF;
+                font-size: 14px;
+                line-height: 14px;
+                background: #03AEF9;
+                border-radius: 100px;
+              }
+            }
           }
         }
       }

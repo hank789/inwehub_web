@@ -439,7 +439,7 @@
     min-width: 0.48rem;
     height: 0.48rem;
     background: #f03c69;
-    border-radius: 50%;
+    border-radius: 0.48rem;
     text-align: center;
     line-height: 0.48rem;
     left: 1.2rem;
