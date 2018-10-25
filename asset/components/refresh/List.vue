@@ -1,11 +1,12 @@
 <template>
   <div class="mui-scroll-wrapper" :class="{hideUpToRefreshDescription:!isShowUpToRefreshDescription}"
-       id="refreshContainer" v-show="!loading">
+       id="refreshContainer">
     <div class="mui-scroll">
+      <slot name="listHeader"></slot>
       <Empty v-if="nothing===1 && autoShowEmpty"
         :description="emptyDescription"
       ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
-      <div class="listWrapper" id="listWrapper" v-else>
+      <div class="listWrapper" id="listWrapper" v-show="!loading" v-else>
         <slot></slot>
       </div>
     </div>

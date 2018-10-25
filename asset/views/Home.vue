@@ -27,7 +27,7 @@
         :autoShowEmpty="false"
       >
 
-        <div id="slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
+        <div id="slider" slot="listHeader" class="homeMuiSlider mui-slider" v-if="data.banners.length">
           <div class="mui-slider-group  mui-slider-loop">
             <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
               <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
