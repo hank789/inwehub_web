@@ -235,7 +235,7 @@
       }
 
       window.mui('#OpenAppSlider').slider({
-        interval: 5000
+        interval: 2000
       })
     },
 
