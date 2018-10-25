@@ -26,55 +26,46 @@
         :pageMode="true"
         :autoShowEmpty="false"
       >
-
-        <div id="slider" slot="listHeader" class="homeMuiSlider mui-slider" v-if="data.banners.length">
-          <div class="mui-slider-group  mui-slider-loop">
-            <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-              <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
+        <template slot="listHeader">
+          <div id="slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
+            <div class="mui-slider-group  mui-slider-loop">
+              <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
+                <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
+              </div>
+              <div class="mui-slider-item" v-for="(notice, index) in data.banners">
+                <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
+              </div>
+              <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
+                <a @tap.stop.prexvent="goLink(data.banners[0].url)">
+                  <img class="lazyImg" v-lazy="data.banners[0].img_url" />
+                </a>
+              </div>
             </div>
-            <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-              <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
+            <div class="home mui-slider-indicator">
+              <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in data.banners"></div>
             </div>
-            <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
-              <a @tap.stop.prexvent="goLink(data.banners[0].url)">
-                <img class="lazyImg" v-lazy="data.banners[0].img_url" />
-              </a>
-            </div>
-          </div>
-          <div class="home mui-slider-indicator">
-            <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in data.banners"></div>
-          </div>
-        </div>
-
-        <div class="container-tags">
-          <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
-          <div class="container-tabLabels">
-            <swiper :options="swiperOption" class="container-upload-images">
-              <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
-                <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
-              </swiper-slide>
-            </swiper>
-          </div>
-          <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-gengduoxuanze"></use>
-            </svg>
-          </div>
           </div>
 
+          <div class="container-tags-home">
+            <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
+            <div class="container-tabLabels">
+              <swiper :options="swiperOption" class="container-upload-images">
+                <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
+                  <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+                </swiper-slide>
+              </swiper>
+            </div>
+            <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-gengduoxuanze"></use>
+              </svg>
+            </div>
+          </div>
+        </template>
           <div class="component-title-iconAndText" v-if="!selectTagValue">
             <div class="hotSpotTop"><span>热点TOP</span></div>
-            <!--<div class="iconAndTextLeft">-->
-            <!--<svg class="icon" aria-hidden="true">-->
-              <!--<use xlink:href="#icon-huo"></use>-->
-            <!--</svg>实时热点TOP-->
-          <!--</div>-->
-          <!--<div class="iconAndTextRight" @tap.stop.prevent="toDiscoverAdd()">-->
-            <!--<svg class="icon" aria-hidden="true">-->
-              <!--<use xlink:href="#icon-tianjia"></use>-->
-            <!--</svg>爆料-->
-          <!--</div>-->
         </div>
+
 
 
         <div id="home-content" class="container-list-article">
@@ -103,22 +94,6 @@
             </div>
           </template>
           <div class="line-river-big" v-if="list.length-1"></div>
-
-          <!--<template v-for="(item, index) in list">-->
-            <!--<div class="component-item-article" @tap.stop.prevent="toDetail(item)">-->
-              <!--<div class="itemArticleLeft">-->
-                <!--<div class="titleWrapper">-->
-                  <!--<div class="title text-line-2 text-content">{{item.data.title}}</div>-->
-                <!--</div>-->
-                <!--<div class="explain">-->
-                  <!--<label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">-->
-                <!--</timeago>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>-->
-            <!--</div>-->
-            <!--<div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>-->
-          <!--</template>-->
         </div>
       </RefreshList>
 
@@ -286,40 +261,6 @@
   }
   .mui-content{
     background: #fff;
-  }
-  .container-tags {
-    height: 0.906rem;
-    display: flex;
-    color: #808080;
-    font-size: 0.346rem;
-    padding: 0 0.426rem;
-    margin-top: 0.266rem;
-    /*background: #8a6de9;*/
-    justify-content: space-around;
-    box-shadow:0rem 0.186rem 0.346rem 0rem rgba(240,242,245,1);
-    .container-allTags {
-      line-height: 0.906rem;
-      padding-right: 0.24rem;
-      &.active {
-        font-family:PingFangSC-Medium;
-        color: #444444;
-      }
-    }
-    .container-tabLabels {
-      width: 7.466rem;
-      line-height: 0.906rem;
-      .tab {
-        border: none;
-        padding: 0 0.24rem;
-        margin-right: 0;
-      }
-    }
-    .container-moreIcon {
-      font-size: 0.426rem;
-      color: #808080;
-      line-height: 0.906rem;
-      padding-left: 0.24rem;
-    }
   }
 
   .tagLabel{
