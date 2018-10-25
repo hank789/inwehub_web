@@ -36,7 +36,7 @@
                 <div class="userName">{{shareInfo.name}}</div>
                 <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
               </div>
-              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+              <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
 
@@ -53,7 +53,7 @@
                 </svg>
                 <div class="desc">企业级应用＆服务广场</div>
               </div>
-              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+              <div class="right"><a class="downloadApp AppOne" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@
                 </svg>
                 <div class="desc">追踪每日企服行业新热点</div>
               </div>
-              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+              <div class="right"><a class="downloadApp AppTwo" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@
                 </svg>
                 <div class="desc">聚焦行业解决方案，共筑人脉圈子</div>
               </div>
-              <div class="right"><a id="btnOpenAppWeixin" class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+              <div class="right"><a class="downloadApp AppThree" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
@@ -99,7 +99,7 @@
                 <div class="userName">{{shareInfo.name}}</div>
                 <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
               </div>
-              <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+              <div class="right"><a class="downloadApp AppFour" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@
                   </svg>
                   <div class="desc">企业级应用＆服务广场</div>
                 </div>
-                <div class="right"><a class="downloadApp" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+                <div class="right"><a class="downloadApp AppOne1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
               </div>
             </div>
 
@@ -142,7 +142,9 @@
       this.showOpenApp()
     },
     mounted () {
-      this.getShareInfo()
+      if (this.shareUuid) {
+        this.getShareInfo()
+      }
       var mlink = 'https://adsolj.mlinks.cc/' + process.env.DEEP_LINK_KEY
 
       var Mlink = null
@@ -151,7 +153,41 @@
         // 深度链接
         Mlink = new window.Mlink({
           mlink: mlink + '?name=1', // 短链地址
-          button: document.querySelector('a#btnOpenAppH5'),
+          button: document.querySelector('.AppOne'),
+          params: {url: 'test'},
+          cparams: {path: 'my'}
+        })
+
+        Mlink = new window.Mlink({
+          mlink: mlink + '?name=1', // 短链地址
+          button: document.querySelector('.AppTwo'),
+          params: {url: 'test'},
+          cparams: {path: 'my'}
+        })
+
+        Mlink = new window.Mlink({
+          mlink: mlink + '?name=1', // 短链地址
+          button: document.querySelector('.AppThree'),
+          params: {url: 'test'},
+          cparams: {path: 'my'}
+        })
+        if (this.shareUuid) {
+          Mlink = new window.Mlink({
+            mlink: mlink + '?name=1', // 短链地址
+            button: document.querySelector('.AppFour'),
+            params: {url: 'test'},
+            cparams: {path: 'my'}
+          })
+          Mlink = new window.Mlink({
+            mlink: mlink + '?name=1', // 短链地址
+            button: document.querySelector('.AppFour1'),
+            params: {url: 'test'},
+            cparams: {path: 'my'}
+          })
+        }
+        Mlink = new window.Mlink({
+          mlink: mlink + '?name=1', // 短链地址
+          button: document.querySelector('.AppOne1'),
           params: {url: 'test'},
           cparams: {path: 'my'}
         })
@@ -275,7 +311,7 @@
         isWeixin: false,
         isH5: false,
         isLogined: isLogined(),
-        shareUuid: this.$route.query.uuiid,
+        shareUuid: this.$route.query.uuid,
         shareInfo: {}
       }
     }
