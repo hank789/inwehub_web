@@ -157,12 +157,22 @@
   import { postRequest } from '../utils/request'
 
   export default {
+    data () {
+      return {
+        url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp',
+        isWeixin: false,
+        isH5: false,
+        isLogined: isLogined(),
+        shareUuid: '',
+        shareInfo: {}
+      }
+    },
     created () {
-      this.shareUuid = this.$route.query.uuid
-      console.log('shareUUid:' + JSON.stringify(this.$route.query))
       this.showOpenApp()
     },
     mounted () {
+      this.shareUuid = this.$route.query.uuid
+      console.log('shareUUid:' + JSON.stringify(this.$route.query))
       if (this.shareUuid) {
         this.getShareInfo()
       }
@@ -324,16 +334,6 @@
       refreshData () {
         console.log('openApp refreshData() fired')
         this.isLogined = isLogined()
-      }
-    },
-    data () {
-      return {
-        url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.inwehub.InwehubApp',
-        isWeixin: false,
-        isH5: false,
-        isLogined: isLogined(),
-        shareUuid: '',
-        shareInfo: {}
       }
     }
   }
