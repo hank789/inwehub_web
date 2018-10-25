@@ -9,9 +9,12 @@
       </header>
 
       <div class="cont">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use>
-        </svg>
+        <div class="abnormal-IconImg">
+          <img src="../../statics/images/abnormal@3x.png" alt="">
+        </div>
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-xitongbengkuimeiyouwangluo"></use>-->
+        <!--</svg>-->
         <!--<p>这可能是你手机的问题！不是bug！！</p>-->
         <p>{{error}}</p>
 
@@ -31,7 +34,7 @@
 <script>
   export default {
     data: () => ({
-      error: '您的网络异常！'
+      error: '这可能是你手机的问题！不是bug！！'
     }),
     methods: {
       refresh () {
@@ -80,12 +83,21 @@
 
   .cont {
     width: 100%;
-    height: 2.666rem;
+    height: 5.666rem;
     /*background: #CCCCCC;*/
     position: absolute;
     top: 0;
     bottom: 0;
     margin: auto;
+    .abnormal-IconImg {
+      width: 62px;
+      height: 89px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
 
   .cont svg {
@@ -97,8 +109,7 @@
   }
 
   .cont p {
-
-    margin-top: 1.866rem;
+    margin-top: 10px;
     font-size: 0.373rem;
     color: #B4B4B6;
     text-align: center;
