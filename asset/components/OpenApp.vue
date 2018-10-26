@@ -483,7 +483,7 @@
     justify-content: space-between;
     height: 1.306rem; }
   .component-wechat-top .left {
-    position: relative; }
+    position: relative;}
   .component-wechat-top .left .userImg {
     position: absolute;
     left: 0.293rem;

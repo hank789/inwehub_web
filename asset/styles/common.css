@@ -3186,6 +3186,15 @@ a {
   line-height: 0.906rem;
   background: #03AEF9;
   border-radius: 2.666rem;}
+.noResult .empty-Img {
+  width: 120px;
+  height: 74px;
+  margin: 0 auto;}
+.noResult .empty-Img img {
+  width: 100%;
+  height: 100%;}
+
+
 
 
 .mui-icon-back:before, .mui-icon-left-nav:before{

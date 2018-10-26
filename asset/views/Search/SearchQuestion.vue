@@ -73,9 +73,9 @@
       </AskCommunityListItem>
 
       <div class="noResult" v-if="list.length">
-        <svg class="icon addressIcon" aria-hidden="true">
-          <use xlink:href="#icon-zanwushuju"></use>
-        </svg>
+        <div class="empty-Img">
+          <img src="../../statics/images/feed@3x.png" alt="">
+        </div>
         <div class="noResultText" v-if="list.length">无更多结果，提问快速获取回答~</div>
         <div class="goRelease"  @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
       </div>
@@ -84,9 +84,9 @@
     </RefreshList>
 
     <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
-      <svg class="icon addressIcon" aria-hidden="true">
-        <use xlink:href="#icon-zanwushuju"></use>
-      </svg>
+      <div class="empty-Img">
+        <img src="../../statics/images/feed@3x.png" alt="">
+      </div>
       <div class="noResultText">暂无结果，提问快速获取回答~</div>
       <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/ask')">去提问</div>
     </div>
