@@ -337,7 +337,7 @@
   .container-footer .menu .imgWrapper {
     width: 40.5px; /* px不转换 */
     height: 40.5px; /* px不转换 */
-    background: url("../statics/images/home_ask_btn@2x.png");
+    background: url("../statics/images/home_ask_btn@3x.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
