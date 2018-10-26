@@ -132,7 +132,6 @@
         this.slug = this.$route.params.slug
 
         return {
-          page: this.page,
           order_by: this.order_by,
           submission_slug: this.slug
         }
