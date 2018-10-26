@@ -229,10 +229,6 @@
 //          cparams: {path: 'my'}
 //        })
       }
-
-      window.mui('#OpenAppSlider').slider({
-        interval: 2000
-      })
     },
 
     components: {
@@ -254,10 +250,18 @@
         this.shareUuid = this.$route.query.uuid
         console.log('shareUUid:' + JSON.stringify(this.$route.query))
         if (this.shareUuid) {
-          this.getShareInfo()
+          this.getShareInfo(() => {
+            window.mui('#OpenAppSlider').slider({
+              interval: 2000
+            })
+          })
+        } else {
+          window.mui('#OpenAppSlider').slider({
+            interval: 2000
+          })
         }
       },
-      getShareInfo () {
+      getShareInfo (callback) {
         postRequest('profile/resumeInfo', {uuid: this.shareUuid}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -265,6 +269,9 @@
             return
           }
           this.shareInfo = response.data.data.info
+          if (callback) {
+            callback()
+          }
         })
       },
       downloadApp () {
