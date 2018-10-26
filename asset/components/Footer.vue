@@ -340,7 +340,9 @@
     background: url("../statics/images/home_ask_btn@2x.png");
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100% 100%; }
+    background-size: 100% 100%;
+    box-shadow: 0px 2px 12px 0px rgba(168,223,247,1);
+    border-radius: 50%;}
   .container-footer .menu.active .desc,.container-footer .menu.active .iconWrapper {
     color: #444; }
 
