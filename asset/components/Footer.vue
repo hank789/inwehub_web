@@ -6,32 +6,32 @@
       <div class="menu active" v-if="isHome">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-tuijian-hover"></use>
+            <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">推荐</div>
+        <div class="desc">首页</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.push('/home')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-tuijian"></use>
+            <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">推荐</div>
+        <div class="desc">首页</div>
       </div>
 
       <div class="menu active" v-if="isDiscover">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shequ-hover"></use>
+            <use xlink:href="#icon-shequ1"></use>
           </svg>
         </div>
         <div class="desc">社区</div>
       </div>
-      <div class="menu" @tap.stop.prevent="$router.push('/discover')" v-else>
+      <div class="menu" @tap.stop.prevent="$router.replace('/groups')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shequ"></use>
+            <use xlink:href="#icon-shequ1"></use>
           </svg>
         </div>
         <div class="desc">社区</div>
@@ -44,7 +44,7 @@
       <div class="menu active" v-if="isAsk">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiaoxi-hover"></use>
+            <use xlink:href="#icon-xiaoxi2"></use>
           </svg>
         </div>
         <div class="desc">消息</div>
@@ -53,7 +53,7 @@
       <div class="menu" @tap.stop.prevent="$router.push('/inform')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiaoxi1"></use>
+            <use xlink:href="#icon-xiaoxi2"></use>
           </svg>
         </div>
         <div class="desc">消息</div>
@@ -63,7 +63,7 @@
       <div class="menu active" v-if="isMy">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wode-hover"></use>
+            <use xlink:href="#icon-wode2"></use>
           </svg>
         </div>
         <div class="desc">我的</div>
@@ -71,7 +71,7 @@
       <div class="menu" @tap.stop.prevent="$router.push('/my')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-wode1"></use>
+            <use xlink:href="#icon-wode2"></use>
           </svg>
         </div>
         <div class="desc">我的</div>
@@ -215,12 +215,12 @@
           case '/home':
           case '/home?refresh=1':
           case '/domain':
+          case '/discover':
             this.isHome = true
             break
           case '/my':
             this.isMy = true
             break
-          case '/discover':
           case '/ask/offers':
           case '/groups':
             this.isDiscover = true
@@ -272,7 +272,7 @@
     -ms-flex-align: center;
     align-items: center;
     height: 50px; /* px不转换 */
-    background: #F3F4F6;
+    background: #FFFFFF;
     position: absolute;
     width: 100%;
     bottom: 0;
@@ -307,16 +307,17 @@
     width: 100%; }
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
-    color: #808080;
+    color: #B4B4B6;
     position: relative;
-    top: 16px; /* px不转换 */
+    top: 14px; /* px不转换 */
     line-height: 18px; /* px不转换 */}
   .container-footer .menu .iconWrapper {
     position: absolute;
     top: 7px; /* px不转换 */
     left: 50%;
-    margin-left: -12px; /* px不转换 */
-    font-size: 24px; /* px不转换 */
+    color: #B4B4B6;
+    margin-left: -10.5px; /* px不转换 */
+    font-size: 21px; /* px不转换 */
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -324,23 +325,25 @@
     -ms-flex-align: center;
     align-items: center; }
   .container-footer .menu:nth-child(2) .iconWrapper {
-    font-size: 24px; /* px不转换 */
+    font-size: 21px; /* px不转换 */
     top: 6px; /* px不转换 */
     left: 50%;
-    margin-left: -12px; /* px不转换 */}
+    margin-left: -10.5px; /* px不转换 */}
   .container-footer .menu:nth-child(4) .iconWrapper {
-    font-size: 25px; /* px不转换 */
+    font-size: 22px; /* px不转换 */
     top: 7px; /* px不转换 */
     left: 50%;
-    margin-left: -12px; /* px不转换 */}
+    margin-left: -11px; /* px不转换 */}
   .container-footer .menu .imgWrapper {
     width: 40.5px; /* px不转换 */
     height: 40.5px; /* px不转换 */
-    background: url("../statics/images/home_ask_btn@2x.png");
+    background: url("../statics/images/home_ask_btn@3x.png");
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 100% 100%; }
-  .container-footer.active .desc {
+    background-size: 100% 100%;
+    box-shadow: 0rem 0.053rem 0.32rem 0rem rgba(168,223,247,1);
+    border-radius: 50%;}
+  .container-footer .menu.active .desc,.container-footer .menu.active .iconWrapper {
     color: #444; }
 
   .mui-badge {

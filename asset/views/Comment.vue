@@ -21,7 +21,6 @@
         </div>
       </div>
       <RefreshList
-        v-if="list.length"
         ref="RefreshList"
         class="refreshListWrapper"
         v-model="list"
@@ -133,7 +132,6 @@
         this.slug = this.$route.params.slug
 
         return {
-          page: this.page,
           order_by: this.order_by,
           submission_slug: this.slug
         }
@@ -170,7 +168,7 @@
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.alertGroups(this.$parent, response.data.data.group_id)
+            userAbility.inviteJoinInGroup(this.$parent, response.data.data.group_id)
             return
           }
 
@@ -190,7 +188,7 @@
             parentId
           )
 
-          this.$emit('commentFinish')
+          this.$refs.ctextarea.finish()
         })
       },
       resetList () {

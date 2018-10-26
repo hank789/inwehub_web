@@ -57,6 +57,7 @@
 
           <div class="join wait" v-if="detail.audit_status === 0">正在审核</div>
           <div class="join wait" v-if="detail.audit_status === 2">审核不通过</div>
+          <div class="join wait" v-if="detail.audit_status === 4">圈子已关闭</div>
           <div class="join wait" v-if="detail.audit_status === 1 && detail.is_joined === 0">入圈审核中</div>
           <!--审核不通过-->
           <div class="join" v-if="detail.audit_status === 1 && detail.is_joined === 2" @tap.stop.prevent="joinIn">重新申请</div>
@@ -141,7 +142,7 @@
             v-if="listType === 3"></i></span>
           <i class="bot"></i>
         </div>
-          <div class="groups-list">
+          <div class="groups-list group-detail-feed">
             <template v-for="(item, index) in list">
 
               <FeedItem
@@ -893,4 +894,9 @@
     }
   }
 
+</style>
+<style>
+  .group-detail-feed .feed-group{
+    display: none;
+  }
 </style>

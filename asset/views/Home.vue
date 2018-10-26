@@ -7,7 +7,7 @@
         </svg><span class="splitCircle"></span>
         <div class="logoAndTabsAndSearchTabs">
           <div class="tab active">热点</div>
-          <div class="tab" @tap.stop.prevent="toDomain()">领域</div>
+          <div class="tab" @tap.stop.prevent="toDiscover()">关注</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
@@ -26,48 +26,56 @@
         :pageMode="true"
         :autoShowEmpty="false"
       >
+        <template slot="listHeader">
+          <div id="slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
+            <div class="mui-slider-group  mui-slider-loop">
+              <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
+                <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
+              </div>
+              <div class="mui-slider-item" v-for="(notice, index) in data.banners">
+                <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
+              </div>
+              <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
+                <a @tap.stop.prexvent="goLink(data.banners[0].url)">
+                  <img class="lazyImg" v-lazy="data.banners[0].img_url" />
+                </a>
+              </div>
+            </div>
+            <div class="home mui-slider-indicator">
+              <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in data.banners"></div>
+            </div>
+          </div>
 
-        <div id="slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
-          <div class="mui-slider-group  mui-slider-loop">
-            <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-              <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
+          <div class="container-tags-home">
+            <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
+            <div class="container-tabLabels">
+              <swiper :options="swiperOption" class="container-upload-images">
+                <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
+                  <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+                </swiper-slide>
+              </swiper>
             </div>
-            <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-              <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
-            </div>
-            <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
-              <a @tap.stop.prexvent="goLink(data.banners[0].url)">
-                <img class="lazyImg" v-lazy="data.banners[0].img_url" />
-              </a>
-            </div>
-          </div>
-          <div class="home mui-slider-indicator">
-            <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in data.banners"></div>
-          </div>
-        </div>
-
-        <div class="component-title-iconAndText">
-          <div class="iconAndTextLeft">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-huo"></use>
-            </svg>实时热点TOP
-          </div>
-            <div class="iconAndTextRight" @tap.stop.prevent="toDiscoverAdd()">
+            <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-tianjia"></use>
-              </svg>爆料
+                <use xlink:href="#icon-gengduoxuanze"></use>
+              </svg>
+            </div>
           </div>
-        </div>
+        </template>
+          <div class="component-title-iconAndText" v-if="!selectTagValue">
+            <span class="hotSpotTop">热点TOP</span>
+          </div>
+
 
 
         <div id="home-content" class="container-list-article">
 
           <template v-for="(item, index) in list">
-            <div class="line-river-big" v-if="index === 5"></div>
+            <!--<div class="line-river-big" v-if="index === 5"></div>-->
             <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
               <div class="itemArticleLeft">
                 <div class="titleWrapper">
-                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5">{{index+1}}.</span>{{item.data.title}}</div>
+                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5 && !selectTagValue">{{index+1}}.</span>{{item.data.title}}</div>
                 </div>
                 <div class="explain">
                   <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
@@ -77,24 +85,15 @@
               <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
             </div>
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
-          </template>
-          <div class="line-river-big"></div>
 
-          <!--<template v-for="(item, index) in list">-->
-            <!--<div class="component-item-article" @tap.stop.prevent="toDetail(item)">-->
-              <!--<div class="itemArticleLeft">-->
-                <!--<div class="titleWrapper">-->
-                  <!--<div class="title text-line-2 text-content">{{item.data.title}}</div>-->
-                <!--</div>-->
-                <!--<div class="explain">-->
-                  <!--<label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">-->
-                <!--</timeago>-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>-->
-            <!--</div>-->
-            <!--<div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>-->
-          <!--</template>-->
+            <div v-if="index === 4 && !selectTagValue">
+              <div class="line-river-big"></div>
+              <div class="component-title-iconAndText">
+                <span class="hotSpotTop">推荐</span>
+              </div>
+            </div>
+          </template>
+          <div class="line-river-big" v-if="list.length-1"></div>
         </div>
       </RefreshList>
 
@@ -106,22 +105,36 @@
   import { getHomeData } from '../utils/home'
   import RefreshList from '../components/refresh/List.vue'
   import { saveLocationInfo } from '../utils/allPlatform'
-  import { AppInit, autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
+  import { autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
   import userAbility from '../utils/userAbility'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import { postRequest } from '../utils/request'
 
   const Home = {
     data () {
       return {
         loading: 1,
         list: [],
+        swiperOption: {
+          slidesPerView: 'auto',
+          spaceBetween: 0,
+          freeMode: true
+        },
         data: {
           banners: []
-        }
+        },
+        isRecommendType: 1,
+        selectTagValue: null,
+        tags: []
       }
     },
-    created () {},
+    created () {
+      this.refreshPageData()
+    },
     components: {
-      RefreshList
+      RefreshList,
+      swiper,
+      swiperSlide
     },
     activated: function () {
       this.refreshPageData()
@@ -130,23 +143,47 @@
       prevOtherData () {
         return {
           orderBy: 1,
-          recommendType: 1
+          recommendType: this.isRecommendType,
+          tagFilter: this.selectTagValue
         }
       }
     },
     methods: {
+      getAllRecommend () {
+        this.selectTagValue = null
+        this.isRecommendType = 1
+      },
+      selectTag (tag) {
+        if (tag.value === this.selectTagValue) {
+          this.selectTagValue = null
+          this.isRecommendType = 1
+        } else {
+          this.selectTagValue = tag.value
+          this.isRecommendType = 2
+        }
+      },
       goLink: function (url) {
         openUrlByUrl(url)
       },
-      toDomain () {
-        this.$router.replace('/domain')
+      toDiscover () {
+        this.$router.replace('/discover')
       },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
+      getTags () {
+        postRequest('profile/info', {}).then(response => {
+          var tags = response.data.data.info.region_tags
+          this.tags = tags
+          if (!this.tags.length) {
+            this.$router.pushPlus('/userGuide/interst?from=home')
+          }
+        })
+      },
       refreshPageData () {
+        this.getTags()
         userAbility.newbieTask(this)
         autoTextArea()
 
@@ -194,19 +231,19 @@
     updated () {},
     mounted () {
       saveLocationInfo()
-      AppInit(this)
+
       // 左滑
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle >= 160) {
-          this.$router.replace('/domain')
+          this.$router.replace('/discover')
         }
       })
       // 右滑
       document.getElementById('home-content').addEventListener('swiperight', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle <= 20) {
-          this.$router.replace('/domain')
+          this.$router.replace('/discover')
         }
       })
     }
@@ -225,8 +262,28 @@
   .mui-content{
     background: #fff;
   }
+
+  .tagLabel{
+    width:auto !important;
+  }
   .component-title-iconAndText{
-    margin-top: 0.426rem;
+    margin-top: 0.266rem;
+    .hotSpotTop {
+      /*width: 1.76rem;*/
+      height: 0.426rem;
+      color: #FFFFFF;
+      font-size: 0.266rem;
+      padding: 0 0.266rem 0 0.426rem;
+      text-align: center;
+      line-height: 0.426rem;
+      border-top-right-radius: 2.666rem;
+      border-bottom-right-radius: 2.666rem;
+      background:linear-gradient(90deg,#03AEF9 0%,#10C6FF 100%);
+    }
+  }
+
+  .mui-android .component-title-iconAndText .hotSpotTop {
+    line-height: 0.493rem;
   }
 
   .refreshListWrapper{

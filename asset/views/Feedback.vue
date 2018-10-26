@@ -219,7 +219,7 @@
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.alertGroups(this, response.data.data.group_id)
+            userAbility.inviteJoinInGroup(this, response.data.data.group_id)
             return
           }
 

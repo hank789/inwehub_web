@@ -332,7 +332,7 @@
             this.errors = Object.assign({}, this.errors, {serverError: errorCodes[code]})
           })
       },
-      loginSuccessCallback () {
+      loginSuccessCallback (newUser = 0) {
         this.$parent.$refs.OpenAppComponent.refreshData()
 
         // 存储设备信息
@@ -354,7 +354,12 @@
         // 获取用户信息
         this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
           cb(user)
-          window.mixpanelIdentify()
+          if (newUser) {
+            window.trackMixpanelEvent('register:success', 'code-login', 'code-login', '验证码注册')
+            window.mixpanelIdentify(true)
+          } else {
+            window.mixpanelIdentify()
+          }
           clearAllWebViewCache()
           // 存储用户位置信息
           saveLocationInfo()
@@ -385,7 +390,7 @@
             }
             localEvent.setLocalItem('UserLoginInfo', response)
 
-            this.loginSuccessCallback()
+            this.loginSuccessCallback(response.newUser)
           })
       }
     },

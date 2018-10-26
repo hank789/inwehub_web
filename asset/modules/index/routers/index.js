@@ -40,7 +40,7 @@ router.pushReadHubPage = function (url) {
 router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', forceWebView = false, reload = false) {
   autoBlur()
   console.log('pushPlus 准备打开:' + url)
-  var footerTab = ['/discover', '/home', '/inform', '/my']
+  var footerTab = ['/group-list', '/home', '/inform', '/my']
 
   var nextUrl = ''
   if (window.mui.os.plus && window.mui.os.ios) {

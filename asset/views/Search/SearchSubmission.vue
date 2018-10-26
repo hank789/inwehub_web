@@ -76,9 +76,9 @@
         </div>
 
         <div class="noResult" v-if="list.length">
-          <svg class="icon addressIcon" aria-hidden="true">
-            <use xlink:href="#icon-zanwushuju"></use>
-          </svg>
+          <div class="empty-Img">
+            <img src="../../statics/images/feed@3x.png" alt="">
+          </div>
           <div class="noResultText" v-if="list.length">无更多结果，快来发布相关分享~</div>
           <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
         </div>
@@ -87,9 +87,9 @@
     </div>
 
     <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
-      <svg class="icon addressIcon" aria-hidden="true">
-        <use xlink:href="#icon-zanwushuju"></use>
-      </svg>
+      <div class="empty-Img">
+        <img src="../../statics/images/feed@3x.png" alt="">
+      </div>
       <div class="noResultText">暂无结果，快来发布相关分享~</div>
       <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
     </div>
@@ -157,14 +157,6 @@
           }
         })
       }
-    },
-    updated () {
-      this.$nextTick(() => {
-        var eles = document.querySelectorAll('.currency-title')
-        eles.forEach((item) => {
-          item.innerHTML = this.getHighlight(item.innerHTML)
-        })
-      })
     },
     mounted () {},
     computed: {
@@ -370,7 +362,7 @@
               margin-left: 0.266rem;
               font-size: 0.533rem;
               position: relative;
-              z-index: 10000;
+              z-index: 100;
             }
           }
           input{
@@ -382,7 +374,7 @@
             color: #444444;
             position: absolute;
             left: 0.853rem;
-            z-index: 100000;
+            z-index: 100;
             padding: 0 0.266rem;
           }
         }

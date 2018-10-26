@@ -157,11 +157,21 @@
           </div>
           <div class="description">
 
-            <div class="noDynamic" v-if="list.length === 0">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zanwushuju"></use>
-              </svg>
+            <div class="noDynamic" v-if="list.length === 0 && uuid !== cuuid">
+              <div class="empty-IconImg">
+                <img src="../../statics/images/empty@3x.png" alt="">
+              </div>
               <span>暂无动态</span>
+            </div>
+
+            <div class="noDynamic goAddpage" v-if="list.length === 0 && uuid === cuuid">
+              <div class="empty-IconImg">
+                <img src="../../statics/images/dynamic@3x.png" alt="">
+              </div>
+              <span>快来创建你的第一条分享吧~</span>
+              <div class="releaseButton" @tap.stop.prevent="$router.pushPlus('/discover/add')">
+                <button>发布</button>
+              </div>
             </div>
 
             <template v-for="(item, index) in list" v-else>
@@ -691,6 +701,43 @@
             color: #C8C8C8;
             font-size: 0.32rem;
             display: block;
+          }
+          .empty-IconImg {
+            width: 1.653rem;
+            height: 2.373rem;
+            margin: 0 auto;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          &.goAddpage {
+            span {
+              margin-top: 0.266rem;
+              line-height: 0.426rem;
+            }
+            .empty-IconImg {
+              width: 2.666rem;
+              height: 1.973rem;
+              margin: 0 auto;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .releaseButton {
+              margin-top: 0.453rem;
+              button {
+                width: 2.48rem;
+                height: 0.96rem;
+                border: none;
+                color: #FFFFFF;
+                font-size: 0.373rem;
+                line-height: 0.373rem;
+                background: #03AEF9;
+                border-radius: 2.666rem;
+              }
+            }
           }
         }
       }

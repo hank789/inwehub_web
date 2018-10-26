@@ -74,7 +74,7 @@
         </div>
       </div>
       <!--圈子-->
-      <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" v-if="item.feed.group && item.feed.group.name" @tap.stop.prevent="toGroupDetail(item.feed.group)">
+      <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
         <img src="../statics/images/feed-group@3x.png" alt="">
         <span>{{item.feed.group.name}}</span>
       </div>
@@ -118,7 +118,7 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
-  import { alertGroups } from '../utils/dialogList'
+  import { postRequest } from '../utils/request'
 
   export default {
     data () {
@@ -231,12 +231,34 @@
           }
         })
       },
-      onTap (event) {
-        if (!this.item.feed.is_joined_group) {
+      async onTap (event) {
+        if (this.item.feed.group && this.item.feed.group.id) {
+          if (this.item.isPass) {
+            this.item.isPass = false
+            return
+          }
+
           event.stopPropagation()
           event.preventDefault()
-          alertGroups(this.$parent, (num) => {
-            this.$router.pushPlus('/group/detail/' + this.item.feed.group.id)
+
+          var groupId = this.item.feed.group.id
+          await postRequest(`group/detail`, {id: groupId}).then(response => {
+            var code = response.data.code
+            if (code !== 1000) {
+              window.mui.toast(response.data.message)
+              return
+            }
+            var data = response.data.data
+
+            if (data.is_joined !== 1 && data.is_joined !== 3) {
+              userAbility.inviteJoinInGroup(this.$parent, groupId, () => {
+                this.item.isPass = true
+                window.mui.trigger(event.target, 'tap')
+              })
+            } else {
+              this.item.isPass = true
+              window.mui.trigger(event.target, 'tap')
+            }
           })
         }
       },
@@ -264,7 +286,8 @@
             this.item.feed.comment_url,
             this.item.feed.title,
             this.item.user.avatar,
-            this.item.user.name
+            this.item.user.name,
+            this.item.feed.group.name
           )
         }
 
@@ -388,7 +411,7 @@
     .feed-open-all {
       color: #03AEF9;
       font-size: 0.346rem;
-      margin-top: 0.106rem;
+      margin-top: 0.213rem;
       display: none;
       padding: 0 0.426rem;
       line-height: 0.48rem;

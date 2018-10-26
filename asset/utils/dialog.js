@@ -103,9 +103,9 @@ function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback =
 
     setTimeout(() => {
       closeDiv.onclick = () => {
-        alertObj.close(-1, '')
+        alertObj.close(-1, false)
       }
-    }, 100)
+    }, 500)
   }
 
   var alertConfirms = alertObj.element.querySelectorAll('.alertConfirm')
@@ -184,9 +184,9 @@ function alertSky (titleHtml, contentHtml = '', iconType = '', callback = null, 
 
     setTimeout(() => {
       closeDiv.onclick = () => {
-        alertObj.close(-1, '')
+        alertObj.close(-1, false)
       }
-    }, 100)
+    }, 500)
   }
 
   var alertConfirms = alertObj.element.querySelectorAll('.alertConfirm')
@@ -260,12 +260,12 @@ function alertSimple (contentHtml = '', btnString = '确定', callback = null, c
     setTimeout(() => {
       var closeCallback = (e) => {
         e.stopPropagation()
-        alertObj.close(-1, '')
+        alertObj.close(-1, false)
         closeDiv.removeEventListener('click', closeCallback, false)
       }
 
       closeDiv.addEventListener('click', closeCallback, false)
-    }, 100)
+    }, 500)
   }
 }
 

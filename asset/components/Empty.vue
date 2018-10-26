@@ -1,10 +1,16 @@
 <template>
   <div class="emptyWrapper">
-    <svg class="icon" aria-hidden="true">
-      <use xlink:href="#icon-zanwushuju"></use>
-    </svg>
+    <div class="emptyWrapper-IconImg" v-if="defaultShow">
+      <img src="../statics/images/commentwait@3x.png" alt="">
+    </div>
+    <div class="emptyWrapper-IconImg" v-if="emptyAnswerShow">
+      <img src="../statics/images/commentwait@3x.png" alt="">
+    </div>
+    <div class="AnswerClose-IconImg" v-if="answerCloseShow">
+      <img src="../statics/images/empty@3x.png" alt="">
+    </div>
     <div class="description">{{description}}</div>
-    
+
     <slot name="emptyBottom"></slot>
 
     <div class="buttonWrapper" v-if="description === '暂无您关注的用户的动态'">
@@ -24,6 +30,18 @@
       description: {
         type: String,
         default: '暂时还没有数据呀～'
+      },
+      emptyAnswerShow: {
+        type: Boolean,
+        default: false
+      },
+      answerCloseShow: {
+        type: Boolean,
+        default: false
+      },
+      defaultShow: {
+        type: Boolean,
+        default: true
       }
     }
   }
@@ -40,6 +58,24 @@
       margin-top: 0.133rem;
       font-size: 0.32rem;
       color: #c8c8c8;
+    }
+    .emptyWrapper-IconImg {
+      width: 1.866rem;
+      height: 2.373rem;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .AnswerClose-IconImg {
+      width: 1.626rem;
+      height: 2.373rem;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 
