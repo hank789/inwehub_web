@@ -63,8 +63,8 @@
           </div>
         </template>
           <div class="component-title-iconAndText" v-if="!selectTagValue">
-            <div class="hotSpotTop"><span>热点TOP</span></div>
-        </div>
+            <span class="hotSpotTop">热点TOP</span>
+          </div>
 
 
 
@@ -89,7 +89,7 @@
             <div v-if="index === 4 && !selectTagValue">
               <div class="line-river-big"></div>
               <div class="component-title-iconAndText">
-                <div class="hotSpotTop"><span>推荐</span></div>
+                <span class="hotSpotTop">推荐</span>
               </div>
             </div>
           </template>
@@ -270,19 +270,20 @@
     margin-top: 0.266rem;
     .hotSpotTop {
       /*width: 1.76rem;*/
-      /*height: 0.426rem;*/
-      padding: 0rem 0.266rem 0rem 0.426rem;
+      height: 16px;
+      color: #FFFFFF;
+      font-size: 0.266rem;
+      padding: 0 0.266rem 0 0.426rem;
       text-align: center;
-      /*line-height: 0.346rem;*/
+      line-height: 16px;
       border-top-right-radius: 2.666rem;
       border-bottom-right-radius: 2.666rem;
       background:linear-gradient(90deg,#03AEF9 0%,#10C6FF 100%);
-      span {
-        color: #FFFFFF;
-        font-size: 0.266rem;
-        /*line-height: 0.373rem;*/
-      }
     }
+  }
+
+  .mui-android .component-title-iconAndText .hotSpotTop {
+    line-height: 18.5px;
   }
 
   .refreshListWrapper{
