@@ -341,7 +341,7 @@
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    box-shadow: 0px 2px 12px 0px rgba(168,223,247,1);
+    box-shadow: 0rem 0.053rem 0.32rem 0rem rgba(168,223,247,1);
     border-radius: 50%;}
   .container-footer .menu.active .desc,.container-footer .menu.active .iconWrapper {
     color: #444; }

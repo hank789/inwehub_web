@@ -270,12 +270,12 @@
     margin-top: 0.266rem;
     .hotSpotTop {
       /*width: 1.76rem;*/
-      height: 16px;
+      height: 0.426rem;
       color: #FFFFFF;
       font-size: 0.266rem;
       padding: 0 0.266rem 0 0.426rem;
       text-align: center;
-      line-height: 16px;
+      line-height: 0.426rem;
       border-top-right-radius: 2.666rem;
       border-bottom-right-radius: 2.666rem;
       background:linear-gradient(90deg,#03AEF9 0%,#10C6FF 100%);
@@ -283,7 +283,7 @@
   }
 
   .mui-android .component-title-iconAndText .hotSpotTop {
-    line-height: 18.5px;
+    line-height: 0.493rem;
   }
 
   .refreshListWrapper{
