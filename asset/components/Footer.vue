@@ -309,15 +309,15 @@
     font-size: 11px; /* px不转换 */
     color: #B4B4B6;
     position: relative;
-    top: 16px; /* px不转换 */
+    top: 14px; /* px不转换 */
     line-height: 18px; /* px不转换 */}
   .container-footer .menu .iconWrapper {
     position: absolute;
     top: 7px; /* px不转换 */
     left: 50%;
     color: #B4B4B6;
-    margin-left: -12px; /* px不转换 */
-    font-size: 24px; /* px不转换 */
+    margin-left: -10.5px; /* px不转换 */
+    font-size: 21px; /* px不转换 */
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -325,19 +325,19 @@
     -ms-flex-align: center;
     align-items: center; }
   .container-footer .menu:nth-child(2) .iconWrapper {
-    font-size: 24px; /* px不转换 */
+    font-size: 21px; /* px不转换 */
     top: 6px; /* px不转换 */
     left: 50%;
-    margin-left: -12px; /* px不转换 */}
+    margin-left: -10.5px; /* px不转换 */}
   .container-footer .menu:nth-child(4) .iconWrapper {
-    font-size: 25px; /* px不转换 */
+    font-size: 22px; /* px不转换 */
     top: 7px; /* px不转换 */
     left: 50%;
-    margin-left: -12px; /* px不转换 */}
+    margin-left: -11px; /* px不转换 */}
   .container-footer .menu .imgWrapper {
     width: 40.5px; /* px不转换 */
     height: 40.5px; /* px不转换 */
-    background: url("../statics/images/home_ask_btn@2x.png");
+    background: url("../statics/images/home_ask_btn@3x.png");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
