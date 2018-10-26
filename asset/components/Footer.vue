@@ -316,7 +316,7 @@
     top: 7px; /* px不转换 */
     left: 50%;
     color: #B4B4B6;
-    margin-left: -12px; /* px不转换 */
+    margin-left: -10.5px; /* px不转换 */
     font-size: 21px; /* px不转换 */
     display: -webkit-box;
     display: -ms-flexbox;
@@ -328,12 +328,12 @@
     font-size: 21px; /* px不转换 */
     top: 6px; /* px不转换 */
     left: 50%;
-    margin-left: -12px; /* px不转换 */}
+    margin-left: -10.5px; /* px不转换 */}
   .container-footer .menu:nth-child(4) .iconWrapper {
     font-size: 22px; /* px不转换 */
     top: 7px; /* px不转换 */
     left: 50%;
-    margin-left: -12px; /* px不转换 */}
+    margin-left: -11px; /* px不转换 */}
   .container-footer .menu .imgWrapper {
     width: 40.5px; /* px不转换 */
     height: 40.5px; /* px不转换 */
