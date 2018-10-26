@@ -45,6 +45,7 @@
           :emptyDesc="ask.question.status_description"
           :emptyAnswerShow="answers.length === 0 && ask.question.status !== 9"
           :answerCloseShow="ask.question.status === 9"
+          :defaultShow="false"
         ></Answers>
         <div class="robAnswer" v-if="answers.length === 0 && ask.question.status !== 9 && !isAsker" @tap.stop.prevent="goRobAnswer">抢个沙发</div>
 

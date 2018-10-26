@@ -9,6 +9,7 @@
       v-if="list.length === 0"
       :emptyAnswerShow="emptyAnswerShow"
       :answerCloseShow="answerCloseShow"
+      :defaultShow="defaultShow"
     ></Empty>
 
 
@@ -74,6 +75,10 @@
       answerCloseShow: {
         type: Boolean,
         default: false
+      },
+      defaultShow: {
+        type: Boolean,
+        default: true
       }
     },
     created () {

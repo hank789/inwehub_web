@@ -1,5 +1,8 @@
 <template>
   <div class="emptyWrapper">
+    <div class="emptyWrapper-IconImg" v-if="defaultShow">
+      <img src="../statics/images/commentwait@3x.png" alt="">
+    </div>
     <div class="emptyWrapper-IconImg" v-if="emptyAnswerShow">
       <img src="../statics/images/commentwait@3x.png" alt="">
     </div>
@@ -35,6 +38,10 @@
       answerCloseShow: {
         type: Boolean,
         default: false
+      },
+      defaultShow: {
+        type: Boolean,
+        default: true
       }
     }
   }
