@@ -272,7 +272,7 @@
     -ms-flex-align: center;
     align-items: center;
     height: 50px; /* px不转换 */
-    background: #F3F4F6;
+    background: #FFFFFF;
     position: absolute;
     width: 100%;
     bottom: 0;
