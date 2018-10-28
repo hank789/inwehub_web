@@ -406,6 +406,28 @@ var alertGroups = (context, callback) => {
   }
 }
 
+// function alertshi (context, callback) {
+//   var dialogObj = getDialogObj(context)
+//   if (dialogObj) {
+//     dialogObj.getHtml('meiyou', {}, (html) => {
+//       alertSimple(html, (num) => {
+//         if (num.index === 0) {
+//           callback()
+//         }
+//       })
+//     })
+//   }
+// }
+
+function alertshi (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('noPublish', {}, (html) => {
+      alertHtml(html, callback)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -430,5 +452,6 @@ export {
   alertFreeAskGuide,
   alertPhoneBindWarning,
   alertRealNameAuthentication,
-  alertGroups
+  alertGroups,
+  alertshi
 }
