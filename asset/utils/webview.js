@@ -169,7 +169,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   // body部分
   console.log('body url:' + url)
 
-  var bodyTop = '0px'
+  var bodyTop = (immersedHeight + 44) + 'px'
   var bodyBottom = '0px'
   if (window.mui.os.android) {
     bodyTop = '44px'
