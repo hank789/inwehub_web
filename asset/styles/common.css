@@ -3321,42 +3321,42 @@ a {
   left: 0;
   right: 0;}
 
+.openAppReadBox {
+  display: none;}
 .openAppRead {
-  display: none;
   height: 1.173rem;
   color: #03AEF9;
   text-align: center;
   line-height: 1.173rem;
   background: #FFFFFF;}
-.openAppReadRiver{
-  display: none;
-}
 .openAppRead span {
   font-size: 0.4rem;}
 .followCode {
-  display: none;
+  position: relative;
   text-align: center;}
 .followCode .CodeImg {
-  width: 2.4rem;
-  height: 2.426rem;
-  margin: 0.8rem auto 0.266rem;}
+  height: 198px;}
 .followCode .CodeImg img {
   width: 100%;
   height: 100%;}
-.followCode div:nth-of-type(2) {
+.followCode .codeText {
+  width: 100%;
+  position: absolute;
+  top: 131px;}
+.followCode .codeText div:nth-of-type(1) {
   color: #B4B4B6;
   font-size: 0.293rem;
   line-height: 0.4rem;}
-.followCode div:nth-of-type(3) {
+.followCode .codeText div:nth-of-type(2) {
   color: #444444;
   font-size: 0.373rem;
   line-height: 0.533rem;
   margin-top: 0.133rem;
   margin-bottom: 0.72rem;}
-.mui-wechat .openAppRead, .mui-wechat .openAppReadRiver, .mui-wechat .followCode{
+.mui-wechat .openAppReadBox {
   display: block;
 }
-.openAppH5 .openAppRead, .openAppH5 .openAppReadRiver, .openAppH5 .followCode{
+.openAppH5 .openAppReadBox {
   display: block;
 }
 
