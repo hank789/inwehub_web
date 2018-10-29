@@ -44,9 +44,9 @@
         </div>
       </div>
 
-      <!--part2-->
+      <!--part2 $router.pushPlus('/my/publishAnswers')-->
       <ul class="part2">
-        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
+        <li @tap.stop.prevent="publishAnswers">
           <span class="font-family-medium">{{publishes}}</span>
           <span>发布</span>
         </li>
@@ -100,6 +100,13 @@
           </svg>
         </div>
         <div class="gray"></div>
+
+        <div class="optionList" @tap.stop.prevent="testpopup">
+          <span>测试弹窗</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
       </div>
 
       <div class="guessLike">
@@ -137,6 +144,7 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
+  import { alertshi } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -165,6 +173,16 @@
       }
     },
     methods: {
+      publishAnswers () {
+        if (this.publishes) {
+          this.$router.pushPlus('/my/publishAnswers')
+        } else {
+          alertshi(this)
+        }
+      },
+      testpopup () {
+        alertshi(this)
+      },
       recommendRead () {
         postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}, false).then(response => {
           this.list = response.data.data.data

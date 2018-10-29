@@ -496,6 +496,23 @@
       </div>
     </div>
 
+    <div id="noPublish">
+      <div class="component-noPublish">
+        <div class="noPublishBag">
+          <div class="closePopup">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-guanbi"></use>
+            </svg>
+          </div>
+          <div class="noPublishImg">
+            <img src="../statics/images/dynamic@3x.png" alt="">
+          </div>
+          <div class="noPublishText">发布你的第一条动态吧~</div>
+        </div>
+        <div class="triangle"></div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -589,6 +606,56 @@
 </script>
 
 <style scoped="scoped">
+  .triangle {
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: 18px 17px 0;
+    border-style: solid;
+    border-color: #ffffff transparent transparent;
+    position: absolute;
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+  .component-noPublish {
+    height: 175px;
+    margin-top: 147%;
+  }
+  .component-noPublish .noPublishBag {
+    width: 210px;
+    height: 154px;
+    background: #ffffff;
+    position: relative;
+    z-index: 9;
+    margin: 0 auto;
+    border-radius: 18px;
+    padding-top: 35px;
+  }
+  .component-noPublish .noPublishImg {
+    width: 100px;
+    height: 74px;
+    margin: 0 auto;
+  }
+  .component-noPublish .noPublishImg img {
+    width: 100%;
+    height: 100%;
+  }
+  .component-noPublish .closePopup {
+    position: absolute;
+    right: 0;
+    padding: 0.266rem;
+    top: -0.08rem;
+    z-index: 3;
+    color: #808080;
+  }
+  .component-noPublish .noPublishText {
+    color: #C8C8C8;
+    font-size: 12px;
+    line-height: 16px;
+    margin-top: 10px;
+  }
 
   .groups{
     width: 105%;
