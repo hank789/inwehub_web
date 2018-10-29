@@ -333,7 +333,7 @@
     position: absolute;
     background: #fff;
     z-index: 7;
-    top: 0.906rem;
+    top: 0.88rem;
     display: block;
   }
 </style>
