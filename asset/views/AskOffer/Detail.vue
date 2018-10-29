@@ -87,6 +87,22 @@
         v-if="ask.answer && ask.answer.content"
         @delCommentSuccess="delCommentSuccess"
       ></Discuss>
+
+        <div class="river openAppReadRiver"></div>
+        <div class="openAppRead" @tap.stop.prevent="openApp">
+          <span class="font-family-medium">打开APP</span>
+          <span>阅读更多推荐</span>
+        </div>
+        <div class="river openAppReadRiver"></div>
+        <div class="followCode">
+          <div class="CodeImg">
+            <img src="../../statics/images/CodeImg@3x.png" alt="">
+          </div>
+          <div>长按识别二维码，关注InweHub服务号</div>
+          <div>探索更多资讯/人脉/服务</div>
+        </div>
+        <div class="river openAppReadRiver"></div>
+
       </vue-pull-refresh>
     </div>
 
@@ -437,6 +453,9 @@
       })
     },
     methods: {
+      openApp () {
+        window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
       toPay () {
         this.$refs.pay.showSelectMoney()
       },

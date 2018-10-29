@@ -169,7 +169,7 @@
           <div class="line-river-after"></div>
           <template  v-for="(item, index) in list">
             <div class="line-river-big" v-if="index === 5"></div>
-            <div class="component-item-article" @tap.stop.prevent="openApp()">
+            <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
               <div class="itemArticleLeft">
                 <div class="titleWrapper">
                   <div class="title text-line-2 text-content"><!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}</div>
@@ -439,6 +439,11 @@
         this.collect()
       },
       goDetail (item) {
+        if (!window.mui.os.plus) {
+          this.openApp()
+          return
+        }
+
         switch (item.read_type) {
           case 1:
             window.trackMixpanelEvent('redirect-to-recommend', '/c/' + item.data.category_id + '/' + item.data.slug, 'discover_detail', '分享', this.$router.fullPath)
