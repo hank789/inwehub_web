@@ -406,27 +406,19 @@ var alertGroups = (context, callback) => {
   }
 }
 
-// function alertshi (context, callback) {
+// 我的 页面 弹窗
+// function alertshi (context) {
 //   var dialogObj = getDialogObj(context)
 //   if (dialogObj) {
-//     dialogObj.getHtml('meiyou', {}, (html) => {
-//       alertSimple(html, (num) => {
-//         if (num.index === 0) {
-//           callback()
+//     dialogObj.getHtml('noPublish', {}, (html) => {
+//       alertHtml(html, (num) => {
+//         if (num > -1) {
+//           return true
 //         }
 //       })
 //     })
 //   }
 // }
-
-function alertshi (context, callback) {
-  var dialogObj = getDialogObj(context)
-  if (dialogObj) {
-    dialogObj.getHtml('noPublish', {}, (html) => {
-      alertHtml(html, callback)
-    })
-  }
-}
 
 export {
   alertFenhongxize,
@@ -452,6 +444,6 @@ export {
   alertFreeAskGuide,
   alertPhoneBindWarning,
   alertRealNameAuthentication,
-  alertGroups,
-  alertshi
+  alertGroups
+  // alertshi
 }

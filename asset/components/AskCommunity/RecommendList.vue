@@ -40,6 +40,9 @@
     },
     methods: {
       toDetail (id, type) {
+        if (!window.mui.os.plus) {
+          window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+        }
         this.$router.pushPlus('/ask/offer/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
       },
       getStateClass (state) {

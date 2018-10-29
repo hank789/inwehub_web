@@ -46,7 +46,7 @@
 
       <!--part2 $router.pushPlus('/my/publishAnswers')-->
       <ul class="part2">
-        <li @tap.stop.prevent="publishAnswers">
+        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
           <span class="font-family-medium">{{publishes}}</span>
           <span>发布</span>
         </li>
@@ -100,13 +100,6 @@
           </svg>
         </div>
         <div class="gray"></div>
-
-        <div class="optionList" @tap.stop.prevent="testpopup">
-          <span>测试弹窗</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-        </div>
       </div>
 
       <div class="guessLike">
@@ -144,7 +137,7 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
-  import { alertshi } from '../../utils/dialogList'
+  // import { alertshi } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -173,16 +166,13 @@
       }
     },
     methods: {
-      publishAnswers () {
-        if (this.publishes) {
-          this.$router.pushPlus('/my/publishAnswers')
-        } else {
-          alertshi(this)
-        }
-      },
-      testpopup () {
-        alertshi(this)
-      },
+      // publishAnswers () {
+      //   if (this.publishes) {
+      //     this.$router.pushPlus('/my/publishAnswers')
+      //   } else {
+      //     alertshi(this)
+      //   }
+      // },
       recommendRead () {
         postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}, false).then(response => {
           this.list = response.data.data.data
@@ -403,7 +393,7 @@
     margin-top: 0.106rem;
     margin-left: 0.266rem;
     position: relative;
-    z-index: 1000;
+    z-index: 98;
     .my-info {
       position: relative;
       span {
@@ -417,7 +407,7 @@
         }
         &:nth-of-type(2) {
           position: relative;
-          z-index: 100;
+          z-index: 1;
           padding: 0.026rem 0.133rem;
           position: relative;
           top: -0.08rem;

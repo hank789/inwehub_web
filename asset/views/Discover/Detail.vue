@@ -186,6 +186,19 @@
         </div>
         <div class="river" v-if="isShow"></div>
 
+        <div class="openAppRead" @tap.stop.prevent="openApp()">
+          <span class="font-family-medium">打开APP</span>
+          <span>阅读更多推荐</span>
+        </div>
+        <div class="river openAppReadRiver"></div>
+        <div class="followCode">
+          <div class="CodeImg">
+            <img src="../../statics/images/CodeImg@3x.png" alt="">
+          </div>
+          <div>长按识别二维码，关注InweHub服务号</div>
+          <div>探索更多资讯/人脉/服务</div>
+        </div>
+
     </vue-pull-refresh>
     </div>
 
@@ -369,6 +382,9 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      openApp () {
+        window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
       onTap (event) {
         if (this.typeDesc(this.detail.group.is_joined)) {
           event.stopPropagation()
@@ -423,6 +439,11 @@
         this.collect()
       },
       goDetail (item) {
+        if (!window.mui.os.plus) {
+          this.openApp()
+          return
+        }
+
         switch (item.read_type) {
           case 1:
             window.trackMixpanelEvent('redirect-to-recommend', '/c/' + item.data.category_id + '/' + item.data.slug, 'discover_detail', '分享', this.$router.fullPath)
@@ -826,6 +847,8 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
+
+
   .active {
     color: #d4d4d4;
   }

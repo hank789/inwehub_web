@@ -62,21 +62,7 @@
             </div>
           </div>
 
-          <div class="container-tags-home container-tags-home-hide">
-            <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
-            <div class="container-tabLabels">
-              <swiper :options="swiperOption" class="container-upload-images">
-                <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
-                  <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
-                </swiper-slide>
-              </swiper>
-            </div>
-            <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-gengduoxuanze"></use>
-              </svg>
-            </div>
-          </div>
+
         </template>
           <div class="component-title-iconAndText" v-if="!selectTagValue">
             <span class="hotSpotTop">热点TOP</span>
@@ -112,6 +98,24 @@
           <div class="line-river-big" v-if="list.length-1"></div>
         </div>
       </RefreshList>
+
+
+      <div class="container-tags-home container-tags-home-hide">
+        <div class="line-river-after line-river-after-short"></div>
+        <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
+        <div class="container-tabLabels">
+          <swiper :options="swiperOption" class="container-upload-images">
+            <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
+              <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+            </swiper-slide>
+          </swiper>
+        </div>
+        <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-gengduoxuanze"></use>
+          </svg>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -248,14 +252,17 @@
     updated () {},
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-        if (y > 140) {
+        var height = document.querySelector('#home_banner_slider').clientHeight
+        if (y > height) {
           document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
-          document.querySelector('.container-tags-home-hide').style.top = (y - 20) + 'px'
+          // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
         }
       }, null, (container, y) => {
-        if (y < 140) {
+        var height = document.querySelector('#home_banner_slider').clientHeight
+        if (y < height) {
           document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
         }
+        // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
       })
 
       saveLocationInfo()
@@ -286,6 +293,7 @@
     border-radius: 0.133rem;
     margin-left:0.4rem;
     overflow: hidden;
+    padding-bottom: 0.266rem;
   }
   .mui-content{
     background: #fff;
@@ -326,9 +334,9 @@
   }
   .showTagsHome{
     position: absolute;
-    background:#fff;
-    z-index:7;
-    top:140px;
+    background: #fff;
+    z-index: 7;
+    top: 1.173rem;
     display: block;
   }
 </style>
