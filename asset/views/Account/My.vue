@@ -46,7 +46,7 @@
 
       <!--part2 $router.pushPlus('/my/publishAnswers')-->
       <ul class="part2">
-        <li @tap.stop.prevent="publishAnswers">
+        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
           <span class="font-family-medium">{{publishes}}</span>
           <span>发布</span>
         </li>
@@ -137,7 +137,7 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
-  import { alertshi } from '../../utils/dialogList'
+  // import { alertshi } from '../../utils/dialogList'
 
   export default {
     data () {
