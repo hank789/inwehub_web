@@ -252,12 +252,14 @@
     updated () {},
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-        if (y > 135) {
+        var height = document.querySelector('#home_banner_slider').clientHeight
+        if (y > height) {
           document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
           // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
         }
       }, null, (container, y) => {
-        if (y < 135) {
+        var height = document.querySelector('#home_banner_slider').clientHeight
+        if (y < height) {
           document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
         }
         // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
@@ -291,6 +293,7 @@
     border-radius: 0.133rem;
     margin-left:0.4rem;
     overflow: hidden;
+    padding-bottom: 0.266rem;
   }
   .mui-content{
     background: #fff;
@@ -333,9 +336,8 @@
     position: absolute;
     background: #fff;
     z-index: 7;
-    top: 45px;
+    top: 1.173rem;
     display: block;
-    margin-top: 0;
   }
 </style>
 
