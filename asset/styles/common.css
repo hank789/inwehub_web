@@ -3322,32 +3322,32 @@ a {
   right: 0;}
 
 .openAppRead {
-  height: 44px;
+  height: 1.173rem;
   color: #03AEF9;
   text-align: center;
-  line-height: 44px;
+  line-height: 1.173rem;
   background: #FFFFFF;}
 .openAppRead span {
-  font-size: 15px;}
+  font-size: 0.4rem;}
 .followCode {
   text-align: center;}
 .followCode .CodeImg {
-  width: 90px;
-  height: 91px;
-  margin: 30px auto 10px;}
+  width: 2.4rem;
+  height: 2.426rem;
+  margin: 0.8rem auto 0.266rem;}
 .followCode .CodeImg img {
   width: 100%;
   height: 100%;}
 .followCode div:nth-of-type(2) {
   color: #B4B4B6;
-  font-size: 11px;
-  line-height: 15px;}
+  font-size: 0.293rem;
+  line-height: 0.4rem;}
 .followCode div:nth-of-type(3) {
   color: #444444;
-  font-size: 14px;
-  line-height: 20px;
-  margin-top: 5px;
-  margin-bottom: 27px;}
+  font-size: 0.373rem;
+  line-height: 0.533rem;
+  margin-top: 0.133rem;
+  margin-bottom: 0.72rem;}
 
 
 
