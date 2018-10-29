@@ -58,6 +58,20 @@
         ></RecommentList>
 
         <div class="line-river-big"></div>
+        <div class="openAppRead">
+          <span class="font-family-medium">打开APP</span>
+          <span>阅读更多推荐</span>
+        </div>
+        <div class="line-river-big"></div>
+        <div class="followCode">
+          <div class="CodeImg">
+            <img src="../../statics/images/CodeImg@3x.png" alt="">
+          </div>
+          <div>长按识别二维码，关注InweHub服务号</div>
+          <div>探索更多资讯/人脉/服务</div>
+        </div>
+
+        <div class="line-river-big"></div>
         <div class="component-goAskOffers" @tap.stop.prevent="$router.pushPlus('/ask/offers')">
           <span>前往问答社区</span>
           <span>（更多精彩问答）</span>

@@ -839,42 +839,8 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  .openAppRead {
-    height: 44px;
-    color: #03AEF9;
-    text-align: center;
-    line-height: 44px;
-    background: #FFFFFF;
-    span {
-      font-size: 15px;
-    }
-  }
-  .followCode {
-    text-align: center;
-    .CodeImg {
-      width: 90px;
-      height: 91px;
-      margin: 30px auto 10px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    div {
-      &:nth-of-type(2) {
-        color: #B4B4B6;
-        font-size: 11px;
-        line-height: 15px;
-      }
-      &:nth-of-type(3) {
-        color: #444444;
-        font-size: 14px;
-        line-height: 20px;
-        margin-top: 5px;
-        margin-bottom: 27px;
-      }
-    }
-  }
+
+
   .active {
     color: #d4d4d4;
   }
