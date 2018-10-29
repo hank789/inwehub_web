@@ -3322,14 +3322,19 @@ a {
   right: 0;}
 
 .openAppRead {
+  display: none;
   height: 1.173rem;
   color: #03AEF9;
   text-align: center;
   line-height: 1.173rem;
   background: #FFFFFF;}
+.openAppReadRiver{
+  display: none;
+}
 .openAppRead span {
   font-size: 0.4rem;}
 .followCode {
+  display: none;
   text-align: center;}
 .followCode .CodeImg {
   width: 2.4rem;
@@ -3348,6 +3353,12 @@ a {
   line-height: 0.533rem;
   margin-top: 0.133rem;
   margin-bottom: 0.72rem;}
+.mui-wechat .openAppRead, .mui-wechat .openAppReadRiver, .mui-wechat .followCode{
+  display: block;
+}
+.openAppH5 .openAppRead, .openAppH5 .openAppReadRiver, .openAppH5 .followCode{
+  display: block;
+}
 
 
 

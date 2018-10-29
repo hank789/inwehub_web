@@ -169,7 +169,7 @@
           <div class="line-river-after"></div>
           <template  v-for="(item, index) in list">
             <div class="line-river-big" v-if="index === 5"></div>
-            <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
+            <div class="component-item-article" @tap.stop.prevent="openApp()">
               <div class="itemArticleLeft">
                 <div class="titleWrapper">
                   <div class="title text-line-2 text-content"><!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}</div>
@@ -186,11 +186,11 @@
         </div>
         <div class="river" v-if="isShow"></div>
 
-        <div class="openAppRead">
+        <div class="openAppRead" @tap.stop.prevent="openApp()">
           <span class="font-family-medium">打开APP</span>
           <span>阅读更多推荐</span>
         </div>
-        <div class="river"></div>
+        <div class="river openAppReadRiver"></div>
         <div class="followCode">
           <div class="CodeImg">
             <img src="../../statics/images/CodeImg@3x.png" alt="">
@@ -382,6 +382,9 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      openApp () {
+        window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
       onTap (event) {
         if (this.typeDesc(this.detail.group.is_joined)) {
           event.stopPropagation()
