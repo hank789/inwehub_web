@@ -252,12 +252,12 @@
     updated () {},
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-        if (y > 142) {
+        if (y > 135) {
           document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
           // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
         }
       }, null, (container, y) => {
-        if (y < 142) {
+        if (y < 135) {
           document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
         }
         // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
@@ -333,8 +333,9 @@
     position: absolute;
     background: #fff;
     z-index: 7;
-    top: 0.88rem;
+    top: 45px;
     display: block;
+    margin-top: 0;
   }
 </style>
 
