@@ -674,7 +674,7 @@
     .openNotice {
       float: right;
       font-size: 0.64rem;
-      padding-top: 10.5px;
+      padding-top: 0.28rem;
     }
     .share {
       float: right;

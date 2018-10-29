@@ -610,32 +610,32 @@
     display: block;
     width: 0;
     height: 0;
-    border-width: 18px 17px 0;
+    border-width: 0.48rem 0.453rem 0;
     border-style: solid;
     border-color: #ffffff transparent transparent;
     position: absolute;
-    bottom: 7px;
+    bottom: 0.186rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
   }
   .component-noPublish {
-    height: 175px;
+    height: 4.666rem;
     margin-top: 147%;
   }
   .component-noPublish .noPublishBag {
-    width: 210px;
-    height: 154px;
+    width: 5.6rem;
+    height: 4.106rem;
     background: #ffffff;
     position: relative;
     z-index: 9;
     margin: 0 auto;
-    border-radius: 18px;
-    padding-top: 35px;
+    border-radius: 0.48rem;
+    padding-top: 0.933rem;
   }
   .component-noPublish .noPublishImg {
-    width: 100px;
-    height: 74px;
+    width: 2.666rem;
+    height: 1.973rem;
     margin: 0 auto;
   }
   .component-noPublish .noPublishImg img {
@@ -652,9 +652,9 @@
   }
   .component-noPublish .noPublishText {
     color: #C8C8C8;
-    font-size: 12px;
-    line-height: 16px;
-    margin-top: 10px;
+    font-size: 0.32rem;
+    line-height: 0.426rem;
+    margin-top: 0.266rem;
   }
 
   .groups{
