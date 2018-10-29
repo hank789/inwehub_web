@@ -205,7 +205,7 @@ function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
       maxY = Math.abs(refreshContainer.maxScrollY)
     }
 
-    console.log('top:' + y + ', maxY:' + maxY)
+    // console.log('top:' + y + ', maxY:' + maxY)
 
     if (y > prevTop) {
       prevTop = y
