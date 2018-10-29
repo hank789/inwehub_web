@@ -80,26 +80,26 @@
         >
           <div>
 
-            <header class="mui-bar mui-bar-nav content-header-hide">
-              <Back></Back>
-              <h1 class="mui-title">我的圈子</h1>
-              <div class="openNotice share" @tap.stop.prevent="joinShare">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-shoucang-xiao"></use>
-                </svg>
-              </div>
-              <div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="closeNotice">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-tongzhi"></use>
-                </svg>
-              </div>
+            <!--<header class="mui-bar mui-bar-nav content-header-hide">-->
+              <!--<Back></Back>-->
+              <!--<h1 class="mui-title">我的圈子</h1>-->
+              <!--<div class="openNotice share" @tap.stop.prevent="joinShare">-->
+                <!--<svg class="icon" aria-hidden="true">-->
+                  <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
+                <!--</svg>-->
+              <!--</div>-->
+              <!--<div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="closeNotice">-->
+                <!--<svg class="icon" aria-hidden="true">-->
+                  <!--<use xlink:href="#icon-tongzhi"></use>-->
+                <!--</svg>-->
+              <!--</div>-->
 
-              <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="openNotice">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-tongzhiguanbi"></use>
-                </svg>
-              </div>
-            </header>
+              <!--<div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="openNotice">-->
+                <!--<svg class="icon" aria-hidden="true">-->
+                  <!--<use xlink:href="#icon-tongzhiguanbi"></use>-->
+                <!--</svg>-->
+              <!--</div>-->
+            <!--</header>-->
 
             <div class="header">
               <img class="lazyImg" v-lazy="detail.background_img" alt="">
@@ -225,6 +225,7 @@
   import { checkPermission, toSettingSystem } from '../../utils/plus'
   import { alertGroups } from '../../utils/dialogList'
   import FeedItem from '../../components/Feed.vue'
+  // import { scrollPage } from '../../utils/dom'
 
   export default {
     data () {
@@ -646,6 +647,11 @@
       }
     },
     mounted () {
+      // scrollPage ('#refreshContainer > .mui-scroll', (container, y) => {
+      //   if (y > 100) {
+      //     console.log('测试')
+      //   }
+      // }, null, (container, y) => {})
       window.addEventListener('resume', () => {
         if (this.readyOpenNotice === 1) {
           this.openNotice()

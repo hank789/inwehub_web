@@ -166,13 +166,13 @@
       }
     },
     methods: {
-      publishAnswers () {
-        if (this.publishes) {
-          this.$router.pushPlus('/my/publishAnswers')
-        } else {
-          alertshi(this)
-        }
-      },
+      // publishAnswers () {
+      //   if (this.publishes) {
+      //     this.$router.pushPlus('/my/publishAnswers')
+      //   } else {
+      //     alertshi(this)
+      //   }
+      // },
       recommendRead () {
         postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}, false).then(response => {
           this.list = response.data.data.data

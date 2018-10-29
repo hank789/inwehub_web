@@ -496,22 +496,22 @@
       </div>
     </div>
 
-    <div id="noPublish">
-      <div class="component-noPublish">
-        <div class="noPublishBag">
-          <div class="closePopup alertClose">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-guanbi"></use>
-            </svg>
-          </div>
-          <div class="noPublishImg">
-            <img src="../statics/images/dynamic@3x.png" alt="">
-          </div>
-          <div class="noPublishText">发布你的第一条动态吧~</div>
-        </div>
-        <div class="triangle"></div>
-      </div>
-    </div>
+    <!--<div id="noPublish">-->
+      <!--<div class="component-noPublish">-->
+        <!--<div class="noPublishBag">-->
+          <!--<div class="closePopup alertClose">-->
+            <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-guanbi"></use>-->
+            <!--</svg>-->
+          <!--</div>-->
+          <!--<div class="noPublishImg">-->
+            <!--<img src="../statics/images/dynamic@3x.png" alt="">-->
+          <!--</div>-->
+          <!--<div class="noPublishText">发布你的第一条动态吧~</div>-->
+        <!--</div>-->
+        <!--<div class="triangle"></div>-->
+      <!--</div>-->
+    <!--</div>-->
 
   </div>
 </template>
