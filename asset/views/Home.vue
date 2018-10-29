@@ -27,7 +27,7 @@
         :autoShowEmpty="false"
       >
         <template slot="listHeader">
-          <div id="slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
+          <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
             <div class="mui-slider-group  mui-slider-loop">
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
                 <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
@@ -47,6 +47,22 @@
           </div>
 
           <div class="container-tags-home">
+            <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
+            <div class="container-tabLabels">
+              <swiper :options="swiperOption" class="container-upload-images">
+                <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
+                  <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+                </swiper-slide>
+              </swiper>
+            </div>
+            <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-gengduoxuanze"></use>
+              </svg>
+            </div>
+          </div>
+
+          <div class="container-tags-home container-tags-home-hide">
             <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
             <div class="container-tabLabels">
               <swiper :options="swiperOption" class="container-upload-images">
@@ -109,6 +125,7 @@
   import userAbility from '../utils/userAbility'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../utils/request'
+  import { scrollPage } from '../utils/dom'
 
   const Home = {
     data () {
@@ -195,7 +212,7 @@
               closeSplashscreen()
             })
 
-            window.mui('.mui-slider').slider({
+            window.mui('#home_banner_slider').slider({
               interval: 5000
             })
           }, 100)
@@ -230,6 +247,17 @@
     },
     updated () {},
     mounted () {
+      scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
+        if (y > 140) {
+          document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
+          document.querySelector('.container-tags-home-hide').style.top = (y - 20) + 'px'
+        }
+      }, null, (container, y) => {
+        if (y < 140) {
+          document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
+        }
+      })
+
       saveLocationInfo()
 
       // 左滑
@@ -292,6 +320,16 @@
   }
   .component-title-iconAndText .iconAndTextLeft .icon{
     color:#FA4975 !important;
+  }
+  .container-tags-home-hide{
+    display: none;
+  }
+  .showTagsHome{
+    position: absolute;
+    background:#fff;
+    z-index:7;
+    top:140px;
+    display: block;
   }
 </style>
 

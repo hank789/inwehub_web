@@ -193,29 +193,39 @@ function initDocRem () {
 function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
   var prevTop = 0
   var container = document.querySelector(element)
-
+  var refreshContainer = null
+  if (element === '#refreshContainer > .mui-scroll') {
+    refreshContainer = window.mui('#refreshContainer').scroll()
+  }
   container.addEventListener('scroll', function (e) {
-    console.log('top:' + container.scrollTop + ', clientHeight:' + container.clientHeight + ', scrollHeight:' + container.scrollHeight)
+    var y = container.scrollTop
+    var maxY = container.scrollHeight - container.clientHeight
+    if (element === '#refreshContainer > .mui-scroll') {
+      y = Math.abs(refreshContainer.y)
+      maxY = Math.abs(refreshContainer.maxScrollY)
+    }
 
-    if (container.scrollTop > prevTop) {
-      prevTop = container.scrollTop
+    console.log('top:' + y + ', maxY:' + maxY)
+
+    if (y > prevTop) {
+      prevTop = y
 
       // 手指上滑
-      if (container.scrollTop >= container.scrollHeight - container.clientHeight) {
+      if (y >= maxY) {
         // 页面已到底部
-        if (toUpEnd) { toUpEnd(container) }
+        if (toUpEnd) { toUpEnd(container, y) }
       } else {
-        if (toUp) { toUp(container) }
+        if (toUp) { toUp(container, y) }
       }
-    } else if (container.scrollTop < prevTop) {
-      prevTop = container.scrollTop
+    } else if (y < prevTop) {
+      prevTop = y
 
       // 手指下滑
-      if (container.scrollTop === 0) {
+      if (y === 0) {
         // 页面已到顶部
-        if (toDownEnd) { toDownEnd(container) }
+        if (toDownEnd) { toDownEnd(container, y) }
       } else {
-        if (toDown) { toDown(container) }
+        if (toDown) { toDown(container, y) }
       }
     }
   })
