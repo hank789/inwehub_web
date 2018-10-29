@@ -158,7 +158,7 @@
             cb(user)
             window.mui.closeWaiting()
             let newUser = this.$route.query.newUser || ''
-            if (newUser) {
+            if (newUser >= 1) {
               window.trackMixpanelEvent('register:success', 'oauth', 'wechat-oauth', '微信注册')
               window.mixpanelIdentify(true)
             } else {
