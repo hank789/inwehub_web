@@ -499,7 +499,7 @@
     <div id="noPublish">
       <div class="component-noPublish">
         <div class="noPublishBag">
-          <div class="closePopup">
+          <div class="closePopup alertClose">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-guanbi"></use>
             </svg>

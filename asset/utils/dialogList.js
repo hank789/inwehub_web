@@ -419,11 +419,15 @@ var alertGroups = (context, callback) => {
 //   }
 // }
 
-function alertshi (context, callback) {
+function alertshi (context) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('noPublish', {}, (html) => {
-      alertHtml(html, callback)
+      alertHtml(html, (num) => {
+        if (num > -1) {
+          return true
+        }
+      })
     })
   }
 }

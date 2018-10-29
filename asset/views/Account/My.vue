@@ -403,7 +403,7 @@
     margin-top: 0.106rem;
     margin-left: 0.266rem;
     position: relative;
-    z-index: 1000;
+    z-index: 98;
     .my-info {
       position: relative;
       span {
@@ -417,7 +417,7 @@
         }
         &:nth-of-type(2) {
           position: relative;
-          z-index: 100;
+          z-index: 1;
           padding: 0.026rem 0.133rem;
           position: relative;
           top: -0.08rem;
