@@ -79,6 +79,28 @@
           class="listWrapper"
         >
           <div>
+
+            <header class="mui-bar mui-bar-nav content-header-hide">
+              <Back></Back>
+              <h1 class="mui-title">我的圈子</h1>
+              <div class="openNotice share" @tap.stop.prevent="joinShare">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-shoucang-xiao"></use>
+                </svg>
+              </div>
+              <div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="closeNotice">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tongzhi"></use>
+                </svg>
+              </div>
+
+              <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="openNotice">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-tongzhiguanbi"></use>
+                </svg>
+              </div>
+            </header>
+
             <div class="header">
               <img class="lazyImg" v-lazy="detail.background_img" alt="">
               <div class="backMask"></div>
@@ -402,11 +424,6 @@
       goMore () {
         this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
       },
-      // prevSuccessCallback () {
-      //   scrollPage('.listWrapper', () => {
-      //   }, () => {}, () => {}, () => {
-      //   })
-      // },
       goArticle: function (article) {
         goThirdPartyArticle(
           article.view_url,
@@ -645,6 +662,25 @@
 <style lang="less" scoped>
   .mui-content {
     background: #ffffff;
+  }
+  .showHeader {
+    display: block;
+  }
+  .content-header-hide {
+     display: none;
+   }
+  .mui-bar-nav {
+    top: 0 !important;
+    .openNotice {
+      float: right;
+      font-size: 0.64rem;
+      padding-top: 10.5px;
+    }
+    .share {
+      float: right;
+      padding-right: 0.2rem;
+      padding-left: 0.462rem;
+    }
   }
   .bot {
     position: absolute;
