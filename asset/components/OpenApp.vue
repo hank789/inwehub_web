@@ -33,7 +33,7 @@
                 <div class="userImg">
                   <img :src="shareInfo.avatar_url" alt="">
                 </div>
-                <div class="userName">{{shareInfo.name}}</div>
+                <div class="userName font-family-medium">{{shareInfo.name}}</div>
                 <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
               </div>
               <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
@@ -115,7 +115,7 @@
                 <div class="userImg">
                   <img :src="shareInfo.avatar_url" alt="">
                 </div>
-                <div class="userName">{{shareInfo.name}}</div>
+                <div class="userName font-family-medium">{{shareInfo.name}}</div>
                 <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
               </div>
               <div class="right"><a class="downloadApp AppFour" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
@@ -502,6 +502,7 @@
     height: 100%;
     border-radius: 50%;}
   .component-wechat-top .left .userName {
+    width: 100%;
     position: absolute;
     top: 0.213rem;
     left: 1.493rem;
