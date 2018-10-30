@@ -133,7 +133,7 @@
         console.log(token)
         console.log(openid)
         if (token) {
-          this.$router.pushPlus('/wechat/register?token=' + token + '&openid=' + openid + '&newUser=' + isNewUser)
+          this.$router.pushPlus('/wechat/register?newUser=' + isNewUser + '&token=' + token + '&openid=' + openid)
         } else {
           this.$router.pushPlus('/wechat/register?openid=' + openid)
         }
