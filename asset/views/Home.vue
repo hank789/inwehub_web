@@ -350,7 +350,7 @@
     position: absolute;
     background: #fff;
     z-index: 7;
-    left: -1000px;
+    left: -26.666rem;
     display: block;
   }
   .showTagsHome{
