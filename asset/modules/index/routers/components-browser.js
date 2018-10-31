@@ -203,8 +203,12 @@ const ComponentsComment = () => import(/* webpackChunkName: "ComponentsComment" 
 const Followed = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Account/Followed.vue')
 const GroupsMore = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Group/Setup.vue')
 const BindPhone = () => import(/* webpackChunkName: "BindPhone" */ '../../../views/Wechat/BindPhone.vue')
-const CommentIndex = () => import(/* webpackChunkName: "CommentIndex" */ '../../../views/Comment/index.vue')
-const ProductService = () => import(/* webpackChunkName: "ProductService" */ '../../../views/Comment/ProductService.vue')
+const DianpingIndex = () => import(/* webpackChunkName: "DianpingIndex" */ '../../../views/Dianping/Index.vue')
+const DianpingAdd = () => import(/* webpackChunkName: "DianpingAdd" */ '../../../views/Dianping/Add.vue')
+const DianpingProductList = () => import(/* webpackChunkName: "DianpingProductList" */ '../../../views/Dianping/Product/List.vue')
+const DianpingProductDetail = () => import(/* webpackChunkName: "DianpingProductDetail" */ '../../../views/Dianping/Product/Detail.vue')
+const DianpingCommentList = () => import(/* webpackChunkName: "DianpingCommentList" */ '../../../views/Dianping/Comment/List.vue')
+const DianpingCommentDetail = () => import(/* webpackChunkName: "DianpingCommentDetail" */ '../../../views/Dianping/Comment/Detail.vue')
 
 export {
   Login,
@@ -406,6 +410,15 @@ export {
   Followed,
   GroupsMore,
   BindPhone,
+<<<<<<< HEAD
   CommentIndex,
   ProductService
+=======
+  DianpingIndex,
+  DianpingAdd,
+  DianpingProductList,
+  DianpingProductDetail,
+  DianpingCommentList,
+  DianpingCommentDetail
+>>>>>>> 8c1174670690914135bfd3f9596275cb15d86bca
 }
