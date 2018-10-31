@@ -223,7 +223,7 @@
             break
           case '/ask/offers':
           case '/groups':
-          case '/comment/index':
+          case '/dianping':
             this.isDiscover = true
             break
           case '/discoverGroup':

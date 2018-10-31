@@ -404,15 +404,10 @@ export {
   Followed,
   GroupsMore,
   BindPhone,
-<<<<<<< HEAD
-  CommentIndex,
-  ProductService
-=======
   DianpingIndex,
   DianpingAdd,
   DianpingProductList,
   DianpingProductDetail,
   DianpingCommentList,
   DianpingCommentDetail
->>>>>>> 8c1174670690914135bfd3f9596275cb15d86bca
 }
