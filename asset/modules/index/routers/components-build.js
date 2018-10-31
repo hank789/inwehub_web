@@ -197,6 +197,8 @@ import ComponentsComment from '../../../views/Comment.vue'
 import Followed from '../../../views/Account/Followed.vue'
 import GroupsMore from '../../../views/Group/Setup.vue'
 import BindPhone from '../../../views/Wechat/BindPhone.vue'
+import CommentIndex from '../../../views/Comment/index.vue'
+import ProductService from '../../../views/Comment/ProductService.vue'
 
 export {
   Login,
@@ -397,5 +399,7 @@ export {
   AccountDetailInfo,
   Followed,
   GroupsMore,
-  BindPhone
+  BindPhone,
+  CommentIndex,
+  ProductService
 }

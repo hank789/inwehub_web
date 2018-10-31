@@ -203,6 +203,8 @@ const ComponentsComment = () => import(/* webpackChunkName: "ComponentsComment" 
 const Followed = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Account/Followed.vue')
 const GroupsMore = () => import(/* webpackChunkName: "BeFollowed" */ '../../../views/Group/Setup.vue')
 const BindPhone = () => import(/* webpackChunkName: "BindPhone" */ '../../../views/Wechat/BindPhone.vue')
+const CommentIndex = () => import(/* webpackChunkName: "CommentIndex" */ '../../../views/Comment/index.vue')
+const ProductService = () => import(/* webpackChunkName: "ProductService" */ '../../../views/Comment/ProductService.vue')
 
 export {
   Login,
@@ -403,5 +405,7 @@ export {
   AccountDetailInfo,
   Followed,
   GroupsMore,
-  BindPhone
+  BindPhone,
+  CommentIndex,
+  ProductService
 }

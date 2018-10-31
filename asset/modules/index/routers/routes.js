@@ -497,6 +497,32 @@ const routes = [
     }
   },
   {
+    path: '/comment/index',
+    name: 'group-list',
+    component: componets.CommentIndex,
+    meta: {
+      title: '点评',
+      keepAlive: true,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/product/service',
+    name: 'group-list',
+    component: componets.ProductService,
+    meta: {
+      title: '产品服务',
+      keepAlive: true,
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
     path: '/group/add',
     name: 'group-add',
     component: componets.GroupsAdd,
