@@ -197,6 +197,12 @@ import ComponentsComment from '../../../views/Comment.vue'
 import Followed from '../../../views/Account/Followed.vue'
 import GroupsMore from '../../../views/Group/Setup.vue'
 import BindPhone from '../../../views/Wechat/BindPhone.vue'
+import DianpingIndex from '../../../views/Dianping/Index.vue'
+import DianpingAdd from '../../../views/Dianping/Add.vue'
+import DianpingProductList from '../../../views/Dianping/Product/List.vue'
+import DianpingProductDetail from '../../../views/Dianping/Product/Detail.vue'
+import DianpingCommentList from '../../../views/Dianping/Comment/List.vue'
+import DianpingCommentDetail from '../../../views/Dianping/Comment/Detail.vue'
 
 export {
   Login,
@@ -397,5 +403,11 @@ export {
   AccountDetailInfo,
   Followed,
   GroupsMore,
-  BindPhone
+  BindPhone,
+  DianpingIndex,
+  DianpingAdd,
+  DianpingProductList,
+  DianpingProductDetail,
+  DianpingCommentList,
+  DianpingCommentDetail
 }

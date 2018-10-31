@@ -2485,6 +2485,84 @@ const routes = [
     },
     component: componets.componentsShortTcut
   },
+  { // 点评首页
+    path: '/dianping',
+    name: 'dianping',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingIndex,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 添加点评
+    path: '/dianping/add',
+    name: 'dianping-add',
+    meta: {
+      title: '添加点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingAdd,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 产品列表
+    path: '/dianping/product',
+    name: 'dianping-product',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingProductList,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 产品详情
+    path: '/dianping/product/:id',
+    name: 'dianping-product-detail',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingProductDetail,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 点评列表
+    path: '/dianping/comment',
+    name: 'dianping-comment',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingCommentList,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 点评详情页
+    path: '/dianping/comment/:id',
+    name: 'dianping-comment-detail',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingCommentDetail,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',
