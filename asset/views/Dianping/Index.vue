@@ -19,7 +19,7 @@
 
       <div class="container-product-comment">
         <div class="comment-info">
-          <div class="avatarImg" @tap.stop.prevent="$router.replace('/dianping')">
+          <div class="avatarImg" @tap.stop.prevent="$router.replace('/dianping/product/1')">
             <img src="../../statics/images/uicon.jpg" alt="">
           </div>
           <div class="comment-name">

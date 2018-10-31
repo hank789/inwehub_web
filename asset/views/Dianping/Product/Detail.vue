@@ -21,7 +21,7 @@
         <div class="supply"><span>供应商</span><span class="font-family-medium">TradeShift</span></div>
       </div>
       <div class="optionlList">
-        <div class="list">
+        <div class="list" @tap.stop.prevent="$router.replace('/dianping/product')">
           <span>采购软件</span>
           <span class="ranking">No.2</span>
           <svg class="icon" aria-hidden="true">
@@ -91,6 +91,7 @@
       img {
         width: 100%;
         height: 100%;
+        border-radius: 4px;
       }
     }
     .companyNmae {

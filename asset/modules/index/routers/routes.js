@@ -2528,7 +2528,7 @@ const routes = [
     path: '/dianping/product/:id',
     name: 'dianping-product-detail',
     meta: {
-      title: '点评',
+      title: '产品服务',
       wechatHideHeader: false,
       keepAlive: false
     },
@@ -2554,7 +2554,7 @@ const routes = [
     path: '/dianping/comment/:id',
     name: 'dianping-comment-detail',
     meta: {
-      title: '点评',
+      title: '点评详情',
       wechatHideHeader: false,
       keepAlive: false
     },
