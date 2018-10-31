@@ -49,7 +49,7 @@
           <div class="container-tags-home">
             <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
             <div class="container-tabLabels">
-              <swiper :options="swiperOption" class="container-upload-images">
+              <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
                 <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
                   <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
                 </swiper-slide>
@@ -104,7 +104,7 @@
         <div class="line-river-after line-river-after-short"></div>
         <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
         <div class="container-tabLabels">
-          <swiper :options="swiperOption" class="container-upload-images">
+          <swiper ref="outTags" :options="swiperOption" class="container-upload-images">
             <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
               <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
             </swiper-slide>
@@ -139,7 +139,18 @@
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
-          freeMode: true
+          freeMode: true,
+          on: {
+            setTranslate: (translate) => {
+              if (this.outTags.translate !== translate) {
+                this.outTags.setTranslate(translate)
+              }
+
+              if (this.inTags.translate !== translate) {
+                this.inTags.setTranslate(translate)
+              }
+            }
+          }
         },
         data: {
           banners: []
@@ -161,6 +172,12 @@
       this.refreshPageData()
     },
     computed: {
+      outTags () {
+        return this.$refs.outTags.swiper
+      },
+      inTags () {
+        return this.$refs.inTags.swiper
+      },
       prevOtherData () {
         return {
           orderBy: 1,
@@ -330,13 +347,18 @@
     color:#FA4975 !important;
   }
   .container-tags-home-hide{
-    display: none;
+    position: absolute;
+    background: #fff;
+    z-index: 7;
+    left: -26.666rem;
+    display: block;
   }
   .showTagsHome{
     position: absolute;
     background: #fff;
     z-index: 7;
     top: 1.173rem;
+    left:0;
     display: block;
   }
 </style>

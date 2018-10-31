@@ -2,6 +2,28 @@
   <div>
     <div class="mui-content" v-if="!loading" id="home-content">
 
+      <!--content-header-hide-->
+      <header class="mui-bar mui-bar-nav content-header-hide">
+        <Back></Back>
+        <h1 class="mui-title">{{detail.name}}</h1>
+        <div class="openNotice share" @tap.stop.prevent="joinShare">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shoucang-xiao"></use>
+          </svg>
+        </div>
+        <div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="closeNotice">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-tongzhi"></use>
+          </svg>
+        </div>
+
+        <div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="openNotice">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-tongzhiguanbi"></use>
+          </svg>
+        </div>
+      </header>
+
       <div v-if="pageMode === 'info'">
         <div class="header">
           <img v-lazy="detail.background_img" class="lazyImg">
@@ -76,30 +98,10 @@
           :autoShowEmpty="false"
           :isLoadingByRefresh="false"
           :list="list"
+          :prevSuccessCallback="prevSuccessCallback"
           class="listWrapper"
         >
           <div>
-
-            <!--<header class="mui-bar mui-bar-nav content-header-hide">-->
-              <!--<Back></Back>-->
-              <!--<h1 class="mui-title">我的圈子</h1>-->
-              <!--<div class="openNotice share" @tap.stop.prevent="joinShare">-->
-                <!--<svg class="icon" aria-hidden="true">-->
-                  <!--<use xlink:href="#icon-shoucang-xiao"></use>-->
-                <!--</svg>-->
-              <!--</div>-->
-              <!--<div class="openNotice" v-if="detail.current_user_notify" @tap.stop.prevent="closeNotice">-->
-                <!--<svg class="icon" aria-hidden="true">-->
-                  <!--<use xlink:href="#icon-tongzhi"></use>-->
-                <!--</svg>-->
-              <!--</div>-->
-
-              <!--<div class="openNotice" v-if="!detail.current_user_notify" @tap.stop.prevent="openNotice">-->
-                <!--<svg class="icon" aria-hidden="true">-->
-                  <!--<use xlink:href="#icon-tongzhiguanbi"></use>-->
-                <!--</svg>-->
-              <!--</div>-->
-            <!--</header>-->
 
             <div class="header">
               <img class="lazyImg" v-lazy="detail.background_img" alt="">
@@ -225,7 +227,7 @@
   import { checkPermission, toSettingSystem } from '../../utils/plus'
   import { alertGroups } from '../../utils/dialogList'
   import FeedItem from '../../components/Feed.vue'
-  // import { scrollPage } from '../../utils/dom'
+  import { scrollPage } from '../../utils/dom'
 
   export default {
     data () {
@@ -300,6 +302,23 @@
       }
     },
     methods: {
+      prevSuccessCallback () {
+        scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
+          console.log(y + ':y上滑高度')
+          var headerBackHeader = document.querySelector('.headerBack').clientHeight
+          if (y > headerBackHeader) {
+            document.querySelector('.content-header-hide').classList.add('showHeader')
+            document.querySelector('.content-header-hide').style.opacity = y / 250
+          }
+        }, null, (container, y) => {
+          console.log(y + ':y下滑高度')
+          var headerBackHeader = document.querySelector('.headerBack').clientHeight
+          if (y < headerBackHeader) {
+            document.querySelector('.content-header-hide').classList.remove('showHeader')
+          }
+          document.querySelector('.content-header-hide').style.opacity = y / 250
+        })
+      },
       iconMenusClickedItem (item) {
         switch (item.text) {
           case '删除':
@@ -646,22 +665,16 @@
         this.listType = type
       }
     },
+    activated: function () {
+      this.refreshPageData()
+    },
     mounted () {
-      // scrollPage ('#refreshContainer > .mui-scroll', (container, y) => {
-      //   if (y > 100) {
-      //     console.log('测试')
-      //   }
-      // }, null, (container, y) => {})
       window.addEventListener('resume', () => {
         if (this.readyOpenNotice === 1) {
           this.openNotice()
         }
       }, true)
-    },
-    activated: function () {
-      this.refreshPageData()
-    },
-    updated () {}
+    }
   }
 </script>
 
@@ -670,15 +683,18 @@
     background: #ffffff;
   }
   .showHeader {
-    display: block;
+    display: block !important;
   }
   .content-header-hide {
      display: none;
    }
   .mui-bar-nav {
+    transition: all ease-out .3s;
     top: 0 !important;
     .openNotice {
       float: right;
+      position: relative;
+      z-index: 9;
       font-size: 0.64rem;
       padding-top: 0.28rem;
     }

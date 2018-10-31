@@ -88,20 +88,24 @@
         @delCommentSuccess="delCommentSuccess"
       ></Discuss>
 
-        <div class="river openAppReadRiver"></div>
-        <div class="openAppRead" @tap.stop.prevent="openApp">
-          <span class="font-family-medium">打开APP</span>
-          <span>阅读更多推荐</span>
-        </div>
-        <div class="river openAppReadRiver"></div>
-        <div class="followCode">
-          <div class="CodeImg">
-            <img src="../../statics/images/CodeImg@3x.png" alt="">
+        <div class="openAppReadBox">
+          <div class="river openAppReadRiver"></div>
+          <div class="openAppRead" @tap.stop.prevent="openApp()">
+            <span class="font-family-medium">打开APP</span>
+            <span>阅读更多推荐</span>
           </div>
-          <div>长按识别二维码，关注InweHub服务号</div>
-          <div>探索更多资讯/人脉/服务</div>
+          <div class="river openAppReadRiver"></div>
+          <div class="followCode">
+            <div class="CodeImg">
+              <img src="../../statics/images/group_3@3x 2.png" alt="">
+            </div>
+            <div class="codeText">
+              <div>长按识别二维码，关注InweHub服务号</div>
+              <div>探索更多资讯/人脉/服务</div>
+            </div>
+          </div>
+          <div class="river openAppReadRiver"></div>
         </div>
-        <div class="river openAppReadRiver"></div>
 
       </vue-pull-refresh>
     </div>

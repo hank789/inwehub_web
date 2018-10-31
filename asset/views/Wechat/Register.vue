@@ -157,9 +157,9 @@
           this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
             cb(user)
             window.mui.closeWaiting()
-            let newUser = this.$route.query.newUser || ''
+            var newUser = this.$route.query.newUser || ''
             if (newUser >= 1) {
-              window.trackMixpanelEvent('register:success', 'oauth', 'wechat-oauth', '微信注册')
+              window.trackMixpanelEvent('register:success', 'oauth', 'wechat-oauth', '微信注册-' + newUser)
               window.mixpanelIdentify(true)
             } else {
               window.mixpanelIdentify()
