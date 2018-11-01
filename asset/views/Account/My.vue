@@ -70,14 +70,14 @@
 
       <!--列表内容-->
       <div class="component-option">
-        <div class="optionList" @tap.stop.prevent="$router.pushPlus('/my/Finance')">
+        <div v-if="show_my_wallet" class="optionList" @tap.stop.prevent="$router.pushPlus('/my/Finance')">
           <span>我的钱包</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
         </div>
         <div class="gray"></div>
-        <div class="optionList invite" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
+        <div v-if="show_my_wallet" class="optionList invite" @tap.stop.prevent="$router.pushPlus('/invitation/index')">
           <span>邀请好友</span>
           <span>5%返现</span>
           <svg class="icon" aria-hidden="true">
