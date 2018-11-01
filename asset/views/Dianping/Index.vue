@@ -17,35 +17,40 @@
 
       <div class="line-river-after line-river-after-top"></div>
 
-      <div class="container-product-comment">
-        <div class="comment-info">
-          <div class="avatarImg" @tap.stop.prevent="$router.replace('/dianping/product/1')">
-            <img src="../../statics/images/uicon.jpg" alt="">
-          </div>
-          <div class="comment-name">
-            <div class="font-family-medium">郭伟</div>
-            <div>3分钟前</div>
-          </div>
-          <div class="comment-mark font-family-medium">4.3分</div>
-        </div>
-        <div class="comment-content text-line-3">德勤的《未来汽车行业价值链-2025年以后》报告，探讨在如今诸多不确定性的时代德勤的《未来汽车行业价值链-2025年以后》报告德勤的《未来汽车行业价值链-2025年以后》报告</div>
-        <div class="comment-product">
-          <div class="product-info">
-            <div class="product-img">
-              <img src="../../statics/images/uicon.jpg" alt="">
+      <swiper :options="swiperOption" class="dianpingBanners">
+        <swiper-slide v-for="(tag, index) in tags" :key="index">
+          <div class="container-product-comment">
+            <div class="comment-info">
+              <div class="avatarImg" @tap.stop.prevent="$router.replace('/dianping/product/1')">
+                <img src="../../statics/images/uicon.jpg" alt="">
+              </div>
+              <div class="comment-name">
+                <div class="font-family-medium">郭伟</div>
+                <div>3分钟前</div>
+              </div>
+              <div class="comment-mark font-family-medium">4.3分</div>
             </div>
-            <div class="product-detail">
-              <div class="productName font-family-medium">Studio Science Reviews</div>
-              <div class="productMark">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-shoucangdilantongyi"></use>
-                </svg><span>4.3分</span>
-                <i></i><span>6条评论</span>
+            <div class="comment-content text-line-3">德勤的《未来汽车行业价值链-2025年以后》报告，探讨在如今诸多不确定性的时代德勤的《未来汽车行业价值链-2025年以后》报告德勤的《未来汽车行业价值链-2025年以后》报告</div>
+            <div class="comment-product">
+              <div class="product-info">
+                <div class="product-img">
+                  <img src="../../statics/images/uicon.jpg" alt="">
+                </div>
+                <div class="product-detail">
+                  <div class="productName font-family-medium">Studio Science Reviews</div>
+                  <div class="productMark">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shoucangdilantongyi"></use>
+                    </svg><span>4.3分</span>
+                    <i></i><span>6条评论</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
 
       <div class="container-product-list">
         <div class="productMenu">
@@ -130,9 +135,40 @@
 </template>
 
 <script>
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
+
   export default {
     data () {
-      return {}
+      return {
+        tags: [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        swiperOption: {
+          loop: true,
+          effect: 'coverflow',
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          spaceBetween: 30,
+          coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 60,
+            modifier: 2,
+            slideShadows: false
+          },
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        }
+      }
+    },
+    components: {
+      swiper,
+      swiperSlide
     },
     methods: {
     }
@@ -147,10 +183,17 @@
     background: #FFFFFF;
   }
 
+  .dianpingBanners{
+    padding-top:15px;
+    .swiper-slide{
+      width:auto !important;
+    }
+  }
+
   .container-product-comment {
+    display: inline-block;
     width: 313px;
     background: #ffffff;
-    margin: 15px auto 0;
     border-radius: 8px;
     .comment-info {
       overflow: hidden;
