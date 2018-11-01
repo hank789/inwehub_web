@@ -203,6 +203,7 @@ import DianpingProductList from '../../../views/Dianping/Product/List.vue'
 import DianpingProductDetail from '../../../views/Dianping/Product/Detail.vue'
 import DianpingCommentList from '../../../views/Dianping/Comment/List.vue'
 import DianpingCommentDetail from '../../../views/Dianping/Comment/Detail.vue'
+import DianpingTanchuang from '../../../components/select/DropDownMenu.vue'
 
 export {
   Login,
@@ -409,5 +410,6 @@ export {
   DianpingProductList,
   DianpingProductDetail,
   DianpingCommentList,
-  DianpingCommentDetail
+  DianpingCommentDetail,
+  DianpingTanchuang
 }
