@@ -8,6 +8,15 @@
     </header>
 
     <div class="mui-content">
+      <div class="component-mark">
+        <span>就您的感受而言，您会给他打多少分？</span>
+        <div class="stars">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-shoucangdilantongyi"></use>
+          </svg>
+        </div>
+        <div class="line-river-after line-river-after-top"></div>
+      </div>
 
       <Jeditor
         class="container-editor container-editor-app container-editor-add"
@@ -26,12 +35,39 @@
         @onEditorChange="onEditorChange"
       ></Jeditor>
 
-      <div class="component-textareaWithImage container-editor container-editor-app">
+      <div class="container-editor container-editor-app component-box">
         <swiper :options="swiperOption" class="container-upload-images" v-show="images.length">
           <swiper-slide class="image" v-for="(image, index) in images" :key="'image_'+index" ><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
             <use xlink:href="#icon-times1"></use>
           </svg></swiper-slide>
         </swiper>
+
+        <div class="container-camera">
+          <div class="camera">
+            <svg class="icon" aria-hidden="true" >
+              <use xlink:href="#icon-xiangji1"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="line-river-big"></div>
+
+      <div class="container-identity">
+        <div class="identityTitle">
+          <span>请告诉我们您的身份</span>
+          <svg class="icon" aria-hidden="true" >
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+        </div>
+        <div class="line-river-after line-river-after-top"></div>
+        <div class="assessDomain">您的评价属于哪个领域</div>
+        <div class="domainList">
+          <span class="border-football active">Staffing Services</span><span class="border-football">Business Services</span><span class="border-football">Solution Consulting Providers</span>
+        </div>
+        <div class="fixedContainer">
+          <span class="niming" @tap.stop.prevent="selectType(1)"><label class="nimingCheckbox" :class="{'active':type}"></label>匿名</span>
+        </div>
       </div>
     </div>
 
@@ -84,7 +120,8 @@
         editorObj: null,
         text: '',
         html: '',
-        descPlaceholder: '说说您您喜欢/不喜欢的点，他帮助您或公司解决了哪些业务上的问题？'
+        descPlaceholder: '说说您您喜欢/不喜欢的点，他帮助您或公司解决了哪些业务上的问题？',
+        type: 1
       }
     },
     computed: {
@@ -110,6 +147,11 @@
       window.mui.previewImage()
     },
     methods: {
+      selectType (type) {
+        if (!this.id) {
+          this.type = type
+        }
+      },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
@@ -265,6 +307,173 @@
     bottom: 1.413rem !important;
     margin-bottom:0 !important;
   }
+  .component-mark {
+    padding: 8px 16px 10px;
+    span {
+      color: #B4B4B6;
+      font-size: 12px;
+      line-height: 16.5px;
+    }
+    .stars {
+      color: #FCC816;
+      font-size: 23px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+    }
+  }
+  .component-box {
+    margin: 16px 0 0 16px;
+  }
+
+  .container-camera {
+    padding-top: 5px;
+    display: inline-block;
+  }
+  .camera {
+    width: 61px;
+    height: 61px;
+    position: relative;
+    top: -5px;
+    background: #DCDCDC;
+    border-radius: 4px;
+    margin-top: 10px;
+    .icon {
+      font-size: 28px;
+      color: #FFFFFF;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+    }
+  }
+  .container-identity {
+    .line-river-after {
+      &:after {
+        left: 16px;
+        right: 16px;
+      }
+    }
+    .identityTitle {
+      padding: 12px 16px 11px;
+      line-height: 21px;
+      display: flex;
+      justify-content: space-between;
+      span {
+        color: #444444;
+        font-size: 15px;
+      }
+      .icon {
+        color: #808080;
+        margin-top: 3px;
+      }
+    }
+    .assessDomain {
+      color: #B4B4B6;
+      font-size: 12px;
+      padding: 12.5px 16px 6px;
+      line-height: 16.5px;
+    }
+    .domainList {
+      padding: 0 16px;
+      .border-football {
+        &:after {
+          border-color: #DCDCDC;
+        }
+      }
+      span {
+        color: #B4B4B6;
+        font-size: 12px;
+        line-height: 16.5px;
+        padding: 5px 11px;
+        margin-right: 10px;
+        margin-top: 6.5px;
+        display: inline-block;
+        border-radius: 100px;
+        &.active {
+          color: #444444;
+          background: #F3F4F6;
+          &.border-football {
+            &:after {
+              border-color: #F3F4F6 !important;
+            }
+          }
+        }
+      }
+    }
+  }
+  .fixedContainer {
+    position: relative;
+    background: #ffff;
+    padding: 0.026rem 0.32rem;
+    margin-top: 16.5px;
+    .niming {
+      color: #444444;
+      position: relative;
+      font-size: 0.373rem;
+      padding-left: 0.24rem;
+      margin-right: 0.6rem;
+      &:nth-of-type(2) {
+        margin-right: 0;
+      }
+      i {
+        color: #808080;
+        font-size: 0.373rem;
+        font-style: normal;
+      }
+      input {
+        position: absolute;
+        top: 0.106rem;
+        left: 0;
+        vertical-align: bottom;
+      }
+    }
+    .nimingCheckbox {
+      display: inline-block;
+      width: 0.426rem;
+      height: 0.426rem;
+      position: relative;
+      border: 0.026rem solid #c8c8c8;
+      border-radius: 50%;
+      top: 0.08rem;
+      right: 0.133rem;
+      &.active {
+        &:after {
+          content: ' ';
+          display: inline-block;
+          width: 0.106rem;
+          height: 0.106rem;
+          position: absolute;
+          border: 0.026rem solid #03aef9;
+          background-color: #03aef9;
+          border-radius: 50%;
+          left: 50%;
+          margin-left: -0.07rem;
+          top: 50%;
+          margin-top: -0.08rem;
+        }
+      }
+    }
+  }
 </style>
-
-
+<style>
+  .container-editor.container-editor-add .textarea-wrapper {
+    border: none;
+    margin: 0;
+  }
+  .ql-editor {
+    padding-top: 0 !important;
+  }
+  .quill-editor {
+    height: 3rem !important;
+  }
+  .container-upload-images .image {
+    /*margin-top: 0 !important;*/
+    display: inline-block;
+  }
+  .component-box .swiper-container {
+    display: inline-block;
+  }
+  .ql-container {
+    height: 3rem !important;
+  }
+</style>
