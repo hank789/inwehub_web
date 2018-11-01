@@ -17,7 +17,7 @@
 
       <div class="line-river-after line-river-after-top"></div>
 
-      <swiper :options="swiperOption" class="dianpingBanners">
+      <swiper :options="swiperOption" class="dianpingBanners"  @tap.stop.prevent="$router.replace('/dianping/add')">
         <swiper-slide v-for="(tag, index) in tags" :key="index">
           <div class="container-product-comment">
             <div class="comment-info">
