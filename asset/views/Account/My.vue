@@ -85,7 +85,7 @@
           </svg>
           <i class="bot"></i>
         </div>
-        <div class="optionList signIn" @tap.stop.prevent="toSignIGift()">
+        <div v-if="show_my_wallet" class="optionList signIn" @tap.stop.prevent="toSignIGift()">
           <span>每日签到</span>
           <span v-if="!current_day_signed"></span>
           <svg class="icon" aria-hidden="true">
