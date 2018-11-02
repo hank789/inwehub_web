@@ -24,39 +24,38 @@
         :nextOtherData="nextOtherData"
         :pageMode = "true"
         :isShowUpToRefreshDescription="false"
-        :list="list"
-        :emptyDescription="emptyDescription"
+        v-model="list"
         :autoShowEmpty="false"
         class="listWrapper"
       >
 
-      <swiper :options="swiperOption" class="dianpingBanners"  @tap.stop.prevent="$router.replace('/dianping/add')">
+      <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
-        <swiper-slide v-for="(tag, index) in tags" :key="index">
-          <div class="container-product-comment">
+        <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="index">
+          <div class="container-product-comment" @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.id)">
             <div class="comment-info">
               <div class="avatarImg" @tap.stop.prevent="$router.replace('/dianping/product/1')">
-                <img src="../../statics/images/uicon.jpg" alt="">
+                <img class="lazyImg" v-lazy="recommandProduct.user.avatar" alt="">
               </div>
               <div class="comment-name">
-                <div class="font-family-medium">郭伟</div>
-                <div>3分钟前</div>
+                <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
+                <div><timeago :since="timeago(recommandProduct.created_at.date)" :auto-update="60"></timeago> </div>
               </div>
               <div class="comment-mark font-family-medium">4.3分</div>
             </div>
-            <div class="comment-content text-line-3">德勤的《未来汽车行业价值链-2025年以后》报告，探讨在如今诸多不确定性的时代德勤的《未来汽车行业价值链-2025年以后》报告德勤的《未来汽车行业价值链-2025年以后》报告</div>
+            <div class="comment-content text-line-3">{{ recommandProduct.title }}</div>
             <div class="comment-product">
               <div class="product-info">
                 <div class="product-img">
-                  <img src="../../statics/images/uicon.jpg" alt="">
+                  <img class="lazyImg" v-lazy="recommandProduct.tag.logo" alt="">
                 </div>
                 <div class="product-detail">
-                  <div class="productName font-family-medium">Studio Science Reviews</div>
+                  <div class="productName font-family-medium">{{ recommandProduct.tag.name }}</div>
                   <div class="productMark">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-shoucangdilantongyi"></use>
-                    </svg><span>4.3分</span>
-                    <i></i><span>6条评论</span>
+                    </svg><span>{{ recommandProduct.tag.review_average_rate }}分</span>
+                    <i></i><span>{{ recommandProduct.tag.review_count }}条评论</span>
                   </div>
                 </div>
               </div>
@@ -83,78 +82,28 @@
         </div>
 
         <div class="productList">
-          <div class="comment-product">
-            <div class="product-info">
+
+          <div class="comment-product" v-for="(item, index) in list" :key="index">
+            <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.id)">
               <div class="product-img">
-                <img src="../../statics/images/uicon.jpg" alt="">
+                <img class="lazyImg" v-lazy="item.logo" alt="">
               </div>
               <div class="product-detail">
-                <div class="productName font-family-medium">Studio Science Reviews</div>
+                <div class="productName font-family-medium">{{ item.name }}</div>
                 <div class="productMark">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shoucangdilantongyi"></use>
-                  </svg><span>4.3分</span>
-                  <i></i><span>6条评论</span>
+                  </svg><span>{{ item.review_average_rate }}分</span>
+                  <i></i><span>{{ item.review_count }}条评论</span>
                 </div>
               </div>
             </div>
             <div class="line-river-after line-river-after-top"></div>
           </div>
-          <div class="comment-product">
-            <div class="product-info">
-              <div class="product-img">
-                <img src="../../statics/images/uicon.jpg" alt="">
-              </div>
-              <div class="product-detail">
-                <div class="productName font-family-medium">Studio Science Reviews</div>
-                <div class="productMark">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucangdilantongyi"></use>
-                  </svg><span>4.3分</span>
-                  <i></i><span>6条评论</span>
-                </div>
-              </div>
-            </div>
-            <div class="line-river-after line-river-after-top"></div>
-          </div>
-          <div class="comment-product">
-            <div class="product-info">
-              <div class="product-img">
-                <img src="../../statics/images/uicon.jpg" alt="">
-              </div>
-              <div class="product-detail">
-                <div class="productName font-family-medium">Studio Science Reviews</div>
-                <div class="productMark">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucangdilantongyi"></use>
-                  </svg><span>4.3分</span>
-                  <i></i><span>6条评论</span>
-                </div>
-              </div>
-            </div>
-            <div class="line-river-after line-river-after-top"></div>
-          </div>
-          <div class="comment-product">
-            <div class="product-info">
-              <div class="product-img">
-                <img src="../../statics/images/uicon.jpg" alt="">
-              </div>
-              <div class="product-detail">
-                <div class="productName font-family-medium">Studio Science Reviews</div>
-                <div class="productMark">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucangdilantongyi"></use>
-                  </svg><span>4.3分</span>
-                  <i></i><span>6条评论</span>
-                </div>
-              </div>
-            </div>
-            <div class="line-river-after line-river-after-top"></div>
-          </div>
+
         </div>
       </div>
       </RefreshList>
-
     </div>
   </div>
 </template>
@@ -162,10 +111,13 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import RefreshList from '../../components/refresh/List.vue'
+  import { getRecommandProductList } from '../../utils/dianping'
 
   export default {
     data () {
       return {
+        list: [],
+        recommandProductList: [],
         tags: [
           1,
           2,
@@ -206,6 +158,19 @@
       RefreshList
     },
     methods: {
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
+      refreshPageData () {
+        getRecommandProductList(this, 5, (recommandProductList) => {
+          this.recommandProductList = recommandProductList
+        })
+      }
+    },
+    created () {
+      this.refreshPageData()
     }
   }
 </script>
