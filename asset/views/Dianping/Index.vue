@@ -73,7 +73,7 @@
               <use xlink:href="#icon-xiangxiajiantou"></use>
             </svg>
           </div>
-          <div class="productSort">
+          <div class="productSort" @tap.stop.prevent="selectSort()">
             <span>排序</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-paixu"></use>
@@ -110,6 +110,13 @@
       ref="dropdownMenu"
     ></DropDownMenu>
 
+    <Options
+      ref="itemOptions"
+      :id="'itemOptions'"
+      :options="['评分', '热度']"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
@@ -118,12 +125,14 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { getRecommandProductList } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
+  import Options from '../../components/Options.vue'
 
   export default {
     data () {
       return {
         list: [],
         recommandProductList: [],
+        orderBy: 1,
         tags: [
           1,
           2,
@@ -152,19 +161,34 @@
     },
     computed: {
       prevOtherData () {
-        return {category_id: ''}
+        return {category_id: '', orderBy: this.orderBy}
       },
       nextOtherData () {
-        return {category_id: ''}
+        return {category_id: '', orderBy: this.orderBy}
       }
     },
     components: {
       swiper,
       swiperSlide,
       RefreshList,
-      DropDownMenu
+      DropDownMenu,
+      Options
     },
     methods: {
+      selectedItem (text) {
+        this.$refs.itemOptions.toggle()
+        switch (text) {
+          case '评分':
+            this.orderBy = 1
+            break
+          case '热度':
+            this.orderBy = 2
+            break
+        }
+      },
+      selectSort () {
+        this.$refs.itemOptions.toggle()
+      },
       showDropdownMenu () {
         this.$refs.dropdownMenu.show()
       },
