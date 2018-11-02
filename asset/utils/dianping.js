@@ -55,7 +55,7 @@ function add (context, data, options, callback) {
 /* 精华点评列表 */
 function getRecommandProductList (context, num, callback) {
   postRequest(`tags/getRecommendReview`, {
-    perPage: 4,
+    perPage: num,
     page: 1
   }).then(response => {
     var code = response.data.code
@@ -64,7 +64,7 @@ function getRecommandProductList (context, num, callback) {
       return
     }
 
-    callback(response.data.data)
+    callback(response.data.data.data)
   })
 }
 
