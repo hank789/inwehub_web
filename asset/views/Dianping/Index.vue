@@ -31,6 +31,7 @@
       >
 
       <swiper :options="swiperOption" class="dianpingBanners"  @tap.stop.prevent="$router.replace('/dianping/add')">
+
         <swiper-slide v-for="(tag, index) in tags" :key="index">
           <div class="container-product-comment">
             <div class="comment-info">
@@ -67,8 +68,18 @@
 
       <div class="container-product-list">
         <div class="productMenu">
-          <div class="productType">产品类型</div>
-          <div class="productSort">排序</div>
+          <div class="productType">
+            <span>产品类型</span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xiangxiajiantou"></use>
+            </svg>
+          </div>
+          <div class="productSort" @tap.stop.prevent="$router.replace('/dianping/add')">
+            <span>排序</span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-paixu"></use>
+            </svg>
+          </div>
         </div>
 
         <div class="productList">
@@ -209,6 +220,7 @@
 
   .dianpingBanners{
     padding-top:15px;
+    height: 252px;
     .swiper-slide{
       width:auto !important;
     }
@@ -313,7 +325,7 @@
   }
   .container-product-list {
     background: #ffffff;
-    margin-top: 30px;
+    margin-top: 10px;
     padding-bottom: 15px;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
@@ -326,6 +338,18 @@
       line-height: 34px;
       justify-content: space-between;
       box-shadow:0px 5px 10px 0px rgba(249,249,251,1);
+      .productType {
+        .icon {
+          color: #B4B4B6;
+          font-size: 7px;
+        }
+      }
+      .productSort {
+        .icon {
+          color: #B4B4B6;
+          font-size: 10px;
+        }
+      }
     }
     .productList {
       .comment-product {
@@ -338,8 +362,21 @@
     }
   }
 
-  .listWrapper{
+
+  .listWrapper {
     top: 1.173rem;
     bottom: 50px; /* px不转换 */
+  }
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: -2px;
+  }
+</style>
+
+<style>
+  .swiper-pagination-bullet {
+    border-radius: 100px !important;
+  }
+  .swiper-pagination-bullets .swiper-pagination-bullet-active {
+    width: 10.5px;
   }
 </style>

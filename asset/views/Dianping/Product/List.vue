@@ -8,6 +8,9 @@
       <div class="listSelect">
         <div>
           <span class="font-family-medium">采购软件</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xiangxiajiantou"></use>
+          </svg>
         </div>
         <div>
           <span class="font-family-medium">好评</span>
@@ -73,6 +76,17 @@
     div {
       color: #444444;
       font-size: 13px;
+      &:nth-of-type(1) {
+        .icon {
+          font-size: 7px;
+          margin-bottom: 1px;
+        }
+      }
+      &:nth-of-type(2) {
+        .icon {
+          font-size: 10px;
+        }
+      }
     }
   }
 

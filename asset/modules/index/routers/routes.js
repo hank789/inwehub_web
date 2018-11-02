@@ -2563,6 +2563,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 点评弹窗
+    path: '/dianping/tanchuang',
+    name: 'dianping-tanchuang',
+    meta: {
+      title: '点评详情',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingTanchuang,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',
