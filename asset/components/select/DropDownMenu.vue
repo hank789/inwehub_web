@@ -18,26 +18,26 @@
         </div>
 
         <div class="list" v-for="(select, index) in selectList" :key="index">
-          <div class="text ListTitle" :class="showSelect ? 'active' : ''" @tap.stop.prevent="showHidePopup(select)">
+          <div class="text ListTitle" :class="select.showSelect ? 'active' : ''" @tap.stop.prevent="showHidePopup(select)">
             <span>{{select.text}}（{{index}}）</span>
-            <svg class="icon" aria-hidden="true" v-if="showSelect">
+            <svg class="icon" aria-hidden="true" v-if="select.showSelect">
               <use xlink:href="#icon-xiangshangjiantou"></use>
             </svg>
           </div>
-          <div class="listChildren" v-if="showSelect">
+          <div class="listChildren" v-if="select.showSelect">
             <div class="list">
               <div class="text ListTitle">
                 <span>全部</span>
               </div>
             </div>
             <div class="list">
-              <div class="text ListTitle">
+              <div class="text ListTitle" @tap.stop.prevent="showHidePopup(select)">
                 <span>产品1</span>
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-xiangshangjiantou"></use>
                 </svg>
               </div>
-              <div class="listChildren" v-if="listChildren2">
+              <div class="listChildren" v-if="select.showSelect">
                 <div class="list">
                   <div class="text ListTitle">
                     <span>产品1-1</span>
@@ -84,8 +84,7 @@
     },
     methods: {
       showHidePopup (select) {
-        console.log(select.showSelect + '看看')
-        select.showSelect = select.showSelect ? !select.showSelect : true
+        this.$set(select, 'showSelect', select.showSelect ? !select.showSelect : true)
       },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
