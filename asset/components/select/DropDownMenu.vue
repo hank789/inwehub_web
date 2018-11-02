@@ -97,6 +97,13 @@
 </script>
 
 <style scoped="scoped" lang="less">
+  .container-select > .list {
+    &:last-child {
+      border-bottom-right-radius: 18px;
+      border-bottom-left-radius: 18px;
+      overflow: hidden;
+    }
+  }
   .container-select {
     margin-top: 2.173rem;
     .select-top {
