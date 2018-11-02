@@ -206,11 +206,7 @@
       },
       empty () {
         this.resetData()
-        if (this.$route.query.from) {
-          window.mui.back()
-        } else {
-          this.$router.pushPlus('/home')
-        }
+        window.mui.back()
       },
       uploadImage: function () {
         if (!this.isUploadImage) {

@@ -86,7 +86,7 @@
           reviews: 0
         },
         footerMenus: [{
-          icon: '#icon-pinglun',
+          icon: '#icon-yaoqing',
           text: '邀人点评',
           number: 0,
           disable: false,
@@ -94,7 +94,7 @@
           isLight: false
         },
         {
-          icon: '#icon-pinglun',
+          icon: '#icon-shoucang',
           text: '关注',
           number: 0,
           disable: false,
