@@ -41,7 +41,7 @@
                 <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
                 <div><timeago :since="timeago(recommandProduct.created_at.date)" :auto-update="60"></timeago> </div>
               </div>
-              <div class="comment-mark font-family-medium">4.3分</div>
+              <div class="comment-mark font-family-medium">{{ recommandProduct.rate_star }}分</div>
             </div>
             <div class="comment-content text-line-3">{{ recommandProduct.title }}</div>
             <div class="comment-product">
@@ -67,13 +67,13 @@
 
       <div class="container-product-list">
         <div class="productMenu">
-          <div class="productType" @tap.stop.prevent="$router.replace('/dianping/comment')">
+          <div class="productType" @tap.stop.prevent="showDropdownMenu()">
             <span>产品类型</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangxiajiantou"></use>
             </svg>
           </div>
-          <div class="productSort" @tap.stop.prevent="$router.replace('/dianping/add')">
+          <div class="productSort">
             <span>排序</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-paixu"></use>
@@ -105,6 +105,11 @@
       </div>
       </RefreshList>
     </div>
+
+    <DropDownMenu
+      ref="dropdownMenu"
+    ></DropDownMenu>
+
   </div>
 </template>
 
@@ -112,6 +117,7 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import RefreshList from '../../components/refresh/List.vue'
   import { getRecommandProductList } from '../../utils/dianping'
+  import DropDownMenu from '../../components/select/DropDownMenu.vue'
 
   export default {
     data () {
@@ -155,9 +161,13 @@
     components: {
       swiper,
       swiperSlide,
-      RefreshList
+      RefreshList,
+      DropDownMenu
     },
     methods: {
+      showDropdownMenu () {
+        this.$refs.dropdownMenu.show()
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
