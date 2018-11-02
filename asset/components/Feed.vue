@@ -402,7 +402,7 @@
             this.$router.pushPlus(item.url, 'list-detail-page')
             break
           case 17:
-            this.$router.pushPlus('/dianping/comment/' + this.item.id, 'list-detail-page')
+            this.$router.pushPlus('/dianping/comment/' + this.item.feed.slug, 'list-detail-page')
             break
           case -1:
             // 已废弃
