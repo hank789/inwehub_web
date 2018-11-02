@@ -17,6 +17,19 @@
 
       <div class="line-river-after line-river-after-top"></div>
 
+      <RefreshList
+        ref="RefreshList"
+        :api="'tags/productList'"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
+        :pageMode = "true"
+        :isShowUpToRefreshDescription="false"
+        :list="list"
+        :emptyDescription="emptyDescription"
+        :autoShowEmpty="false"
+        class="listWrapper"
+      >
+
       <swiper :options="swiperOption" class="dianpingBanners"  @tap.stop.prevent="$router.replace('/dianping/add')">
         <swiper-slide v-for="(tag, index) in tags" :key="index">
           <div class="container-product-comment">
@@ -129,6 +142,7 @@
           </div>
         </div>
       </div>
+      </RefreshList>
 
     </div>
   </div>
@@ -136,6 +150,7 @@
 
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import RefreshList from '../../components/refresh/List.vue'
 
   export default {
     data () {
@@ -166,9 +181,18 @@
         }
       }
     },
+    computed: {
+      prevOtherData () {
+        return {category_id: ''}
+      },
+      nextOtherData () {
+        return {category_id: ''}
+      }
+    },
     components: {
       swiper,
-      swiperSlide
+      swiperSlide,
+      RefreshList
     },
     methods: {
     }
@@ -312,5 +336,10 @@
         }
       }
     }
+  }
+
+  .listWrapper{
+    top: 1.173rem;
+    bottom: 50px; /* px不转换 */
   }
 </style>

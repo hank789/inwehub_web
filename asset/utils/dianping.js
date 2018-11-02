@@ -31,7 +31,7 @@ function getCommentDetail (context, id, callback) {
 }
 
 /* 点评 */
-function add (context, data, callback) {
+function add (context, data, options, callback) {
   postRequest(`article/store`, {
     type: 'review',
     title: data.content,
@@ -41,7 +41,7 @@ function add (context, data, callback) {
     rate_star: data.rate_star,
     hide: data.isHide,
     identity: data.identity
-  }).then(response => {
+  }, false, options).then(response => {
     var code = response.data.code
     if (code !== 1000) {
       window.mui.toast(response.data.message)

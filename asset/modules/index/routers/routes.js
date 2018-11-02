@@ -2499,7 +2499,7 @@ const routes = [
     }
   },
   { // 添加点评
-    path: '/dianping/add',
+    path: '/dianping/add/:id',
     name: 'dianping-add',
     meta: {
       title: '添加点评',

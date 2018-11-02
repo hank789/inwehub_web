@@ -11,9 +11,17 @@
       <div class="component-mark">
         <span>就您的感受而言，您会给他打多少分？</span>
         <div class="stars">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shoucangdilantongyi"></use>
-          </svg>
+          <star-rating
+            :increment="0.1"
+            :round-start-rating="false"
+            v-model="star"
+            :padding="20"
+            :activeColor="'#fcc816'"
+            :star-size="30"
+            :show-rating="true"
+            :star-points="[23,2, 14,17, 0,19, 10,34, 7,50, 23,43, 38,50, 36,34, 46,19, 31,17]"
+          ></star-rating>
+
         </div>
         <div class="line-river-after line-river-after-top"></div>
       </div>
@@ -29,6 +37,7 @@
         :descMaxLength="descMaxLength"
         :placeholder="descPlaceholder"
         :allowRichStyle="false"
+        :isShowCounter="false"
         @ready="onEditorReady($event)"
         @onEditorBlur="onEditorBlur"
         @onEditorFocus="onEditorFocus"
@@ -54,7 +63,7 @@
       <div class="line-river-big"></div>
 
       <div class="container-identity">
-        <div class="identityTitle">
+        <div class="identityTitle" @tap.stop.prevent="selectUserRole()">
           <span>请告诉我们您的身份</span>
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-jinru"></use>
@@ -66,7 +75,7 @@
           <span class="border-football active">Staffing Services</span><span class="border-football">Business Services</span><span class="border-football">Solution Consulting Providers</span>
         </div>
         <div class="fixedContainer">
-          <span class="niming" @tap.stop.prevent="selectType(1)"><label class="nimingCheckbox" :class="{'active':type}"></label>匿名</span>
+          <span class="niming" @tap.stop.prevent="switchHide()"><label class="nimingCheckbox" :class="{'active': hide}"></label>匿名</span>
         </div>
       </div>
     </div>
@@ -85,6 +94,14 @@
                  @success="uploadImageSuccess"
                  :ImageMaximum="maxImageCount - this.images.length"
     ></uploadImage>
+
+    <Options
+      ref="allOptions"
+      :id="'allOptions'"
+      :options="allOption"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
@@ -96,6 +113,8 @@
   const currentUser = getLocalUserInfo()
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import Options from '../../components/Options.vue'
+  import { add } from '../../utils/dianping'
 
   export default {
     data () {
@@ -106,7 +125,7 @@
           freeMode: true
         },
         id: currentUser.user_id,
-        noticeUsers: [],
+        identity: '',
         description: {},
         images: [],
         maxImageCount: 9,
@@ -120,8 +139,13 @@
         editorObj: null,
         text: '',
         html: '',
+        star: 0,
         descPlaceholder: '说说您您喜欢/不喜欢的点，他帮助您或公司解决了哪些业务上的问题？',
-        type: 1
+        type: 1,
+        allOption: [
+          '终端用户',
+          '管理人员'
+        ]
       }
     },
     computed: {
@@ -136,7 +160,8 @@
       uploadImage,
       Jeditor,
       swiper,
-      swiperSlide
+      swiperSlide,
+      Options
     },
     created () {},
     activated: function () {
@@ -147,10 +172,15 @@
       window.mui.previewImage()
     },
     methods: {
-      selectType (type) {
-        if (!this.id) {
-          this.type = type
-        }
+      switchHide () {
+        this.hide = !this.hide
+      },
+      selectUserRole () {
+        this.$refs.allOptions.toggle()
+      },
+      selectedItem (item) {
+        this.identity = item
+        this.$refs.allOptions.toggle()
       },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
@@ -213,9 +243,13 @@
         }
 
         var data = {
-          type: 'text',
-          title: html,
-          photos: []
+          content: html,
+          category_ids: [],
+          photos: [],
+          product_id: '',
+          rate_star: this.star,
+          isHide: this.hide,
+          identity: this.identity
         }
 
         for (var i in this.images) {
@@ -232,35 +266,10 @@
 
         window.mui.showUploadWaiting()
 
-        postRequest(`article/store`, data, false, options).then(response => {
-          var code = response.data.code
-          if (code === 6101) {
-            // 已存在
-            window.mui.toast(response.data.message)
-            this.$router.replace(response.data.data.exist_url)
-            return
-          }
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
+        add(this, data, options, (res) => {
           window.mui.toast('发布成功！')
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-            // mixpanel
-            window.mixpanel.track(
-              'inwehub:discover:publishSuccessfully',
-              {
-                'app': 'inwehub',
-                'user_device': window.getUserAppDevice(),
-                'page': this.$route.fullPath,
-                'page_name': this.$route.name,
-                'page_title': this.$route.meta.title,
-                'referrer_page': ''
-              }
-            )
-          }
           this.resetData()
-          this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
+          this.$router.replace('/dianping/comment/' + res.id)
         })
       }
     }
