@@ -8,7 +8,7 @@
         <div class="logoAndTabsAndSearchTabs">
           <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
           <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
-          <div class="tab active" @tap.stop.prevent="$router.replace('/comment/index')">点评</div>
+          <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
@@ -54,7 +54,7 @@
 
       <div class="container-product-list">
         <div class="productMenu">
-          <div class="productType">
+          <div class="productType" @tap.stop.prevent="$router.replace('/dianping/comment')">
             <span>产品类型</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangxiajiantou"></use>
@@ -342,10 +342,10 @@
 </style>
 
 <style>
-  .swiper-pagination-bullet {
+  .dianpingBanners .swiper-pagination-bullet {
     border-radius: 100px !important;
   }
-  .swiper-pagination-bullets .swiper-pagination-bullet-active {
+  .dianpingBanners .swiper-pagination-bullets .swiper-pagination-bullet-active {
     width: 10.5px;
   }
 </style>

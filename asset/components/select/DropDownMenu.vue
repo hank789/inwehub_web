@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div class="list">
+      <div class="list" v-for="(list, index) in selectList" :key="index">
         <div class="text ListTitle active">
           <span>产品（7）</span>
           <svg class="icon" aria-hidden="true">
@@ -66,44 +66,7 @@
                 </div>
                 <div class="listChildren"></div>
               </div>
-              <div class="list">
-                <div class="text ListTitle active">
-                  <span>产品2-2</span>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-xiangshangjiantou"></use>
-                  </svg>
-                </div>
-                <div class="listChildren">
-                  <div class="list">
-                    <div class="text ListTitle">
-                      <span>全部</span>
-                      <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-xiangshangjiantou"></use>
-                      </svg>
-                    </div>
-                    <div class="listChildren"></div>
-                  </div>
-                  <div class="list">
-                    <div class="text ListTitle">
-                      <span>产品2-2-1</span>
-                      <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-xiangshangjiantou"></use>
-                      </svg>
-                    </div>
-                    <div class="listChildren"></div>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="list">
-            <div class="text ListTitle">
-              <span>产品3</span>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-xiangshangjiantou"></use>
-              </svg>
-            </div>
-            <div class="listChildren"></div>
           </div>
         </div>
       </div>
@@ -114,7 +77,12 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        selectList: [
+          1,
+          2
+        ]
+      }
     },
     components: {},
     props: {

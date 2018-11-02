@@ -42,25 +42,28 @@
       <div class="recommend">
         <div class="recommendTitle">
           <span class="font-family-medium">推荐顾问</span>
-          <span>
-            排序<svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-paixu"></use>
-              </svg>
-          </span>
         </div>
-        <div class="recommendList">
-          <div class="avatar">
-            <img src="../../../statics/images/uicon.jpg" alt="">
-          </div>
-          <div class="personalInfo">
-            <div class="name">
-              <span class="font-family-medium">曹丽</span>
+
+        <swiper :options="swiperOption" class="recommenBanners">
+          <swiper-slide v-for="(advisers, index) in recommendAdvisers" :key="index">
+            <div class="recommendList">
+              <div class="avatar">
+                <img src="../../../statics/images/uicon.jpg" alt="">
+              </div>
+              <div class="personalInfo">
+                <div class="name">
+                  <span class="font-family-medium">曹丽</span>
+                </div>
+                <div class="good">擅长“TradeShift”</div>
+              </div>
+              <div class="speak"><span class="border-football">沟通</span></div>
             </div>
-            <div class="good">擅长“TradeShift”</div>
-          </div>
-          <div class="speak"><span class="border-football">沟通</span></div>
-        </div>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
+
       </div>
+
       <div class="line-river-big"></div>
 
     </div>
@@ -68,14 +71,57 @@
 </template>
 
 <script>
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
+  export default {
+    data () {
+      return {
+        recommendAdvisers: [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        swiperOption: {
+          loop: true,
+          effect: 'coverflow',
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          spaceBetween: 30,
+          coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 60,
+            modifier: 2,
+            slideShadows: false
+          },
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        }
+      }
+    },
+    components: {
+      swiper,
+      swiperSlide
+    },
+    methods: {
+    }
+  }
 </script>
 
 <style scoped lang="less">
   .mui-content {
     background: #ffffff;
   }
-
+  .recommenBanners{
+    height: 123px;
+    padding-top: 44px;
+    .swiper-slide{
+      width:auto !important;
+    }
+  }
   .product-introduce {
     width: 343px;
     margin: 0 auto;
@@ -168,11 +214,11 @@
     }
   }
   .recommend {
-    padding-bottom: 25px;
+    position: relative;
+    /*padding-bottom: 25px;*/
     .recommendTitle {
-      padding: 0 16px 10.5px;
-      display: flex;
-      justify-content: space-between;
+      position: absolute;
+      padding: 11px 16px 0;
       span {
         &:nth-of-type(1) {
           color: #444444;
@@ -180,66 +226,72 @@
           line-height: 22.5px;
           margin-top: 11px;
         }
-        &:nth-of-type(2) {
-          color: #808080;
-          font-size: 13px;
-          line-height: 18.5px;
-          margin-top: 13px;
-          .icon {
-            font-size: 10px;
-            margin-left: 3.5px;
-          }
+      }
+    }
+  }
+
+  .recommendList {
+    width: 304.5px;
+    margin: 0 auto 25px;
+    padding: 10px 15px;
+    background: #F7F8FA;
+    border-radius: 8px;
+    overflow: hidden;
+    .avatar {
+      width: 44px;
+      height: 44px;
+      float: left;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    .personalInfo {
+      float: left;
+      margin-top: 3px;
+      margin-left: 10px;
+      .name {
+        color: #565656;
+        line-height: 20px;
+        font-size: 14px;
+      }
+      .good {
+        color: #B4B4B6;
+        font-size: 12px;
+        line-height: 16.5px;
+      }
+    }
+    .speak {
+      float: right;
+      margin-top: 8.5px;
+      span {
+        color: #03AEF9;
+        font-size: 12px;
+        padding: 0 10px;
+        line-height: 27px;
+        display: inline-block;
+      }
+      .border-football {
+        &:after {
+          border-color: #03AEF9;
         }
       }
     }
-    .recommendList {
-      width: 304.5px;
-      margin: 0 auto;
-      padding: 10px 15px;
-      background: #F7F8FA;
-      border-radius: 8px;
-      overflow: hidden;
-      .avatar {
-        width: 44px;
-        height: 44px;
-        float: left;
-        img {
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-        }
-      }
-      .personalInfo {
-        float: left;
-        margin-top: 3px;
-        margin-left: 10px;
-        .name {
-          color: #565656;
-          line-height: 20px;
-          font-size: 14px;
-        }
-        .good {
-          color: #B4B4B6;
-          font-size: 12px;
-          line-height: 16.5px;
-        }
-      }
-      .speak {
-        float: right;
-        margin-top: 8.5px;
-        span {
-          color: #03AEF9;
-          font-size: 12px;
-          padding: 0 10px;
-          line-height: 27px;
-          display: inline-block;
-        }
-        .border-football {
-          &:after {
-            border-color: #03AEF9;
-          }
-        }
-      }
-    }
+  }
+
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    bottom: 90px;
+    right: -129px;
+    left: auto;
+  }
+</style>
+
+<style>
+  .recommenBanners .swiper-pagination-bullet {
+    border-radius: 100px !important;
+  }
+  .recommenBanners .swiper-pagination-bullets .swiper-pagination-bullet-active {
+    width: 10.5px;
   }
 </style>

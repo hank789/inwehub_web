@@ -6,14 +6,21 @@
     </header>
     <div class="mui-content">
       <div class="commentList">
-        <div class="mark">
-          <span>评分</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shoucangdilantongyi"></use>
-          </svg>
+        <div class="commentUser">
+          <div class="userInfo">
+            <div class="avatar">
+              <img src="../../../statics/images/uicon.jpg" alt="">
+            </div>
+            <div class="userName">
+              <span class="font-family-medium">郭伟</span>
+              <span class="border-football">优质</span>
+              <div class="time">3分钟前</div>
+            </div>
+          </div>
+          <div class="mark font-family-medium">4.0分</div>
         </div>
-        <div class="commentFeedTitle text-line-5">德勤的《未来汽车行业价值链-2025年以后》报告，探讨在如今诸多不确定性的时代，以及汽车行业领导者要如何做出投资决策</div>
-
+        <div class="commentFeedTitle text-line-5">德勤的《未来汽车行业价值链-2025年以后》报告，探讨在如今诸多不确定性的时代，以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策</div>
+        <div class="feed-open-all font-family-medium"  @tap.stop.prevent="extendAll">展开全部</div>
         <div class="feed-moreOperation">
           <div class="feed-mord">
             <svg class="icon" aria-hidden="true">
@@ -53,6 +60,30 @@
       }
     },
     components () {
+    },
+    mounted () {
+      this.renderShowOpenAll()
+    },
+    updated () {
+      this.$nextTick(() => {
+        this.renderShowOpenAll()
+      })
+    },
+    methods: {
+      renderShowOpenAll () {
+        var titles = document.querySelectorAll('.commentFeedTitle')
+        titles.forEach((item) => {
+          if (item.scrollHeight > item.offsetHeight) {
+            item.nextElementSibling.classList.add('showOpenAll')
+          } else {
+            item.nextElementSibling.classList.remove('showOpenAll')
+          }
+        })
+      },
+      extendAll (event) {
+        event.target.previousElementSibling.classList.remove('text-line-5')
+        event.target.style.display = 'none'
+      }
     }
   }
 </script>
@@ -70,16 +101,58 @@
         right: 0.426rem;
       }
     }
-    .mark {
+    .commentUser {
+      display: flex;
       padding: 0 16px;
-      span {
-        color: #B4B4B6;
-        font-size: 11px;
-        line-height: 15px;
+      justify-content: space-between;
+      .userInfo {
+        display: flex;
+        .avatar {
+          width: 34px;
+          height: 34px;
+          margin-right: 8px;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+        .userName {
+          margin-top: -2px;
+          .border-football {
+            &:after {
+              border-radius: 8px;
+              border-color: #FA4975;
+            }
+          }
+          span {
+            &:nth-of-type(1) {
+              color: #444444;
+              font-size: 13px;
+              line-height: 18.5px;
+            }
+            &:nth-of-type(2) {
+              height: 15px;
+              color: #FA4975;
+              font-size: 10px;
+              padding: 0 5px;
+              line-height: 15px;
+              display: inline-block;
+            }
+          }
+          .time {
+            color: #B4B4B6;
+            font-size: 11px;
+            line-height: 15px;
+            margin-top: 2px;
+          }
+        }
       }
-      .icon {
+      .mark {
         color: #FCC816;
-        font-size: 12px;
+        font-size: 13px;
+        line-height: 18.5px;
       }
     }
     .commentFeedTitle {
@@ -89,6 +162,17 @@
       line-height: 0.586rem;
       margin-top: 6px;
       letter-spacing: 0.013rem;
+    }
+    .feed-open-all {
+      color: #03AEF9;
+      font-size: 0.346rem;
+      margin-top: 0.213rem;
+      display: none;
+      padding: 0 0.426rem;
+      line-height: 0.48rem;
+      &.showOpenAll {
+        display: block;
+      }
     }
     .feed-moreOperation {
       margin-top: 0.266rem;
@@ -126,5 +210,9 @@
         }
       }
     }
+  }
+
+  .mui-android .commentList .commentUser .userInfo .userName span:nth-of-type(2) {
+    line-height: 18px;
   }
 </style>
