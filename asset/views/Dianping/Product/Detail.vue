@@ -32,7 +32,6 @@
           <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
         </template>
       </div>
-      <div class="line-river-big"></div>
 
       <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
         <div class="recommendTitle">
@@ -66,7 +65,7 @@
         <feedDianping :isDianping="true" :isFollow="false"></feedDianping>
       </div>
 
-      <div class="openAllDianPing font-family-medium">查看全部23条点评</div>
+      <div class="openAllDianPing font-family-medium" @tap.stop.prevent="$router.pushPlus('/dianping/comment')">查看全部23条点评</div>
       <div class="line-river-big"></div>
 
       <div class="component-score">
@@ -87,6 +86,29 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xingxingkongxin"></use>
           </svg>
+        </div>
+      </div>
+      <div class="line-river-big"></div>
+      <div class="allDianPing font-family-medium">相关推荐</div>
+      <div class="line-river-after line-river-after-top"></div>
+
+      <div class="productList">
+        <div class="comment-product">
+          <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.name)">
+            <div class="product-img">
+              <img class="lazyImg" src="../../../statics/images/uicon.jpg" alt="">
+            </div>
+            <div class="product-detail">
+              <div class="productName font-family-medium">呜呜呜</div>
+              <div class="productMark">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-shoucangdilantongyi"></use>
+                </svg><span>4分</span>
+                <i></i><span>22条评论</span>
+              </div>
+            </div>
+          </div>
+          <div class="line-river-after line-river-after-top"></div>
         </div>
       </div>
       <div class="line-river-big"></div>
@@ -220,6 +242,7 @@
 <style scoped lang="less">
   .mui-content {
     background: #ffffff;
+    bottom: 1.33333rem;
   }
   .recommenBanners{
     height: 123px;
@@ -410,6 +433,67 @@
       .icon {
         font-size: 23px;
         color: #FCC816;
+      }
+    }
+  }
+
+  .productList {
+    .comment-product {
+      padding: 13px 15px 0;
+      .product-info {
+        padding: 0 0 15px;
+        background: none;
+      }
+    }
+  }
+  .comment-product {
+    padding: 11px 15px 15px;
+    .product-info {
+      overflow: hidden;
+      background: #F7F8FA;
+      padding: 10px;
+      .product-img {
+        width: 44px;
+        height: 44px;
+        float: left;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 4px;
+        }
+      }
+      .product-detail {
+        float: left;
+        margin-left: 10px;
+        .productName {
+          color: #444444;
+          font-size: 16px;
+          line-height: 22.5px;
+        }
+        .productMark {
+          .icon {
+            color: #FCC816;
+            font-size: 12px;
+          }
+          span {
+            color: #B4B4B6;
+            font-size: 11px;
+            line-height: 15px;
+            &:nth-of-type(1) {
+              color: #FCC816;
+              margin-left: 3px;
+            }
+          }
+          i {
+            width: 2px;
+            height: 2px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border-radius: 50%;
+            background: #B4B4B6;
+            display: inline-block;
+          }
+        }
       }
     }
   }
