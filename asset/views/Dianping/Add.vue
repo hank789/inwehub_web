@@ -72,7 +72,7 @@
         <div class="line-river-after line-river-after-top"></div>
         <div class="assessDomain">您的评价属于哪个领域</div>
         <div class="domainList">
-          <span class="border-football active">Staffing Services</span><span class="border-football">Business Services</span><span class="border-football">Solution Consulting Providers</span>
+          <span class="border-football" @tap.stop.prevent="selectCategory($event, category.id)" v-for="(category, index) in detail.categories">{{ category.name }}</span>
         </div>
         <div class="fixedContainer">
           <span class="niming" @tap.stop.prevent="switchHide()"><label class="nimingCheckbox" :class="{'active': hide}"></label>匿名</span>
@@ -114,11 +114,13 @@
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import Options from '../../components/Options.vue'
-  import { add } from '../../utils/dianping'
+  import { add, getProductDetail } from '../../utils/dianping'
 
   export default {
     data () {
       return {
+        loading: 1,
+        detail: {},
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 10,
@@ -145,7 +147,8 @@
         allOption: [
           '终端用户',
           '管理人员'
-        ]
+        ],
+        category_ids: []
       }
     },
     computed: {
@@ -163,15 +166,44 @@
       swiperSlide,
       Options
     },
-    created () {},
+    created () {
+      this.refreshPageData()
+    },
     activated: function () {
-      this.initData()
+      this.refreshPageData()
     },
     mounted () {
       autoTextArea()
       window.mui.previewImage()
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
+    },
     methods: {
+      selectCategory (event, id) {
+        event.target.classList.add('active')
+        this.category_ids.push(id)
+      },
+      refreshPageData () {
+        this.initData()
+        let id = this.$route.params.id
+
+        if (!id) {
+          window.mui.toast('请求异常')
+          window.mui.back()
+          return
+        }
+        this.id = id
+
+        getProductDetail(this, id, (data) => {
+          this.detail = data
+          this.loading = 0
+        })
+      },
       switchHide () {
         this.hide = !this.hide
       },
@@ -186,9 +218,6 @@
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
         }
-      },
-      refreshPageData () {
-        this.initData()
       },
       initData () {
         console.log('initData() fired')
@@ -206,11 +235,7 @@
       },
       empty () {
         this.resetData()
-        if (this.$route.query.from) {
-          window.mui.back()
-        } else {
-          this.$router.pushPlus('/home')
-        }
+        window.mui.back()
       },
       uploadImage: function () {
         if (!this.isUploadImage) {
@@ -244,9 +269,9 @@
 
         var data = {
           content: html,
-          category_ids: [],
+          category_ids: this.category_ids,
           photos: [],
-          product_id: '',
+          product_id: this.detail.id,
           rate_star: this.star,
           isHide: this.hide,
           identity: this.identity

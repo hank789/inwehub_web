@@ -4,57 +4,52 @@
       <Back></Back>
       <h1 class="mui-title">产品服务</h1>
     </header>
-    <div class="mui-content">
+    <div class="mui-content" v-show="!loading">
 
       <div class="product-introduce">
         <div class="companyLogo">
-          <img src="../../../statics/images/uicon.jpg" alt="">
+          <img class="lazyImg" v-lazy="detail.logo" alt="">
         </div>
-        <div class="companyNmae font-family-medium">TradeShift</div>
+        <div class="companyNmae font-family-medium">{{ detail.name }}</div>
         <div class="companyMark">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shoucangdilantongyi"></use>
-          </svg><span>4.3分</span>
-          <i></i><span class="comment">6条评论</span>
+          </svg><span>{{ detail.review_average_rate }}分</span>
+          <i></i><span class="comment">{{ detail.review_count }}条评论</span>
         </div>
-        <div class="companyDescribe">外包此活动为您提供财务空间和更多时间，可用于贵公司的核心竞争力和战略方向</div>
-        <div class="supply"><span>供应商</span><span class="font-family-medium">TradeShift</span></div>
+        <div class="companyDescribe">{{ detail.description }}</div>
+        <div class="supply" v-if="detail.vendor" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span class="font-family-medium">{{ detail.vendor.name }}</span></div>
       </div>
       <div class="optionlList">
-        <div class="list" @tap.stop.prevent="$router.replace('/dianping/product')">
-          <span>采购软件</span>
-          <span class="ranking">No.2</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-        </div>
-        <div class="line-river-after line-river-after-top"></div>
-        <div class="list">
-          <span>供应商管理软件</span>
-          <span class="ranking">No.2</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-        </div>
+        <template v-for="(category, index) in detail.categories">
+          <div class="list" @tap.stop.prevent="$router.pushPlus('/dianping/product')">
+            <span>{{ category.name }}</span>
+            <span class="ranking">No.{{ category.rate }}</span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-jinru"></use>
+            </svg>
+          </div>
+          <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
+        </template>
       </div>
       <div class="line-river-big"></div>
 
-      <div class="recommend">
+      <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
         <div class="recommendTitle">
           <span class="font-family-medium">推荐顾问</span>
         </div>
 
         <swiper :options="swiperOption" class="recommenBanners">
-          <swiper-slide v-for="(advisers, index) in recommendAdvisers" :key="index">
-            <div class="recommendList">
+          <swiper-slide v-for="(advisers, index) in detail.recommend_users" :key="index">
+            <div class="recommendList" @tap.stop.prevent="goChat(advisers.uuid)">
               <div class="avatar">
-                <img src="../../../statics/images/uicon.jpg" alt="">
+                <img class="lazyImg" v-lazy="advisers.avatar_url" alt="">
               </div>
               <div class="personalInfo">
                 <div class="name">
-                  <span class="font-family-medium">曹丽</span>
+                  <span class="font-family-medium">{{ advisers.name }}</span>
                 </div>
-                <div class="good">擅长“TradeShift”</div>
+                <div class="good">擅长“{{ advisers.skill }}”</div>
               </div>
               <div class="speak"><span class="border-football">沟通</span></div>
             </div>
@@ -97,16 +92,54 @@
       <div class="line-river-big"></div>
 
     </div>
+
+    <FooterMenu
+      :options="footerMenus"
+      @clickedItem="footerMenuClickedItem"
+    ></FooterMenu>
+
   </div>
 </template>
 
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import feedDianping from '../../../components/Feed.vue'
+  import { getProductDetail, getProductComments } from '../../../utils/dianping'
+  import userAbility from '../../../utils/userAbility'
+  import FooterMenu from '../../../components/FooterMenu.vue'
 
   export default {
     data () {
       return {
+        loading: 1,
+        id: '',
+        detail: {
+          reviews: 0
+        },
+        footerMenus: [{
+          icon: '#icon-yaoqing',
+          text: '邀人点评',
+          number: 0,
+          disable: false,
+          rightLine: true,
+          isLight: false
+        },
+        {
+          icon: '#icon-shoucang',
+          text: '关注',
+          number: 0,
+          disable: false,
+          rightLine: true,
+          isLight: false
+        },
+        {
+          icon: '#icon-pinglun',
+          text: '写点评',
+          number: 0,
+          disable: false,
+          rightLine: false,
+          isLight: true
+        }],
         recommendAdvisers: [
           1,
           2,
@@ -130,15 +163,56 @@
           pagination: {
             el: '.swiper-pagination'
           }
-        }
+        },
+        productComments: []
       }
     },
     components: {
       swiper,
       swiperSlide,
-      feedDianping
+      feedDianping,
+      FooterMenu
     },
     methods: {
+      goChat (uid) {
+        userAbility.jumpToChat(uid, this)
+      },
+      refreshPageData () {
+        let id = this.$route.params.id
+
+        if (!id) {
+          window.mui.toast('请求异常')
+          window.mui.back()
+          return
+        }
+        this.id = id
+
+        getProductDetail(this, id, (data) => {
+          this.detail = data
+          this.loading = 0
+        })
+
+        getProductComments(this, id, 3, (productComments) => {
+          this.productComments = productComments
+        })
+      },
+      footerMenuClickedItem (item) {
+        switch (item.text) {
+          case '写点评':
+            this.$router.pushPlus('/dianping/add/' + this.detail.name)
+            break
+        }
+      }
+    },
+    created () {
+      this.refreshPageData()
+    },
+    watch: {
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
     }
   }
 </script>

@@ -48,7 +48,7 @@ function add (context, data, options, callback) {
       return
     }
 
-    callback()
+    callback(response.data.data)
   })
 }
 
@@ -83,11 +83,49 @@ function getCategories (context, callback) {
   })
 }
 
+/* 关注产品 */
+function collectProduct (context, id, upCallback, downCallback) {
+  postRequest(`follow/tag`, {
+    id: id
+  }).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    window.mui.toast(response.data.data.tip)
+    if (response.data.data.type === 'unfollow') {
+      downCallback()
+    } else {
+      upCallback()
+    }
+  })
+}
+
+/* 产品点评列表 */
+function getProductComments (context, id, pageNum, callback) {
+  postRequest(`tags/productReviewList`, {
+    tag_name: id,
+    perPage: pageNum
+  }).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    callback(response.data.data.data)
+  })
+}
+
 export {
   add,
   getCommentDetail,
   getProductDetail,
   getRecommandProductList,
-  getCategories
+  getCategories,
+  collectProduct,
+  getProductComments
 }
 
