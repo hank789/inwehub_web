@@ -63,7 +63,37 @@
         </swiper>
 
       </div>
+      <div class="line-river-big"></div>
+      <div class="allDianPing font-family-medium">点评 (23)</div>
+      <div class="line-river-after line-river-after-top"></div>
 
+      <div>
+        <feedDianping :isDianping="true" :isFollow="false"></feedDianping>
+      </div>
+
+      <div class="openAllDianPing font-family-medium">查看全部23条点评</div>
+      <div class="line-river-big"></div>
+
+      <div class="component-score">
+        <div class="text">就您的感受而言，您会给他打多少分？</div>
+        <div class="stars">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xingxingkongxin"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xingxingkongxin"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xingxingkongxin"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xingxingkongxin"></use>
+          </svg>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-xingxingkongxin"></use>
+          </svg>
+        </div>
+      </div>
       <div class="line-river-big"></div>
 
     </div>
@@ -72,6 +102,7 @@
 
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import feedDianping from '../../../components/Feed.vue'
 
   export default {
     data () {
@@ -104,7 +135,8 @@
     },
     components: {
       swiper,
-      swiperSlide
+      swiperSlide,
+      feedDianping
     },
     methods: {
     }
@@ -276,6 +308,34 @@
         &:after {
           border-color: #03AEF9;
         }
+      }
+    }
+  }
+
+  .allDianPing {
+    padding: 0 16px;
+    color: #444444;
+    font-size: 16px;
+    line-height: 44px;
+  }
+  .openAllDianPing {
+    text-align: center;
+    font-size: 14px;
+    color: #808080;
+    line-height: 44px;
+  }
+  .component-score {
+    padding: 12.5px 16px 15px;
+    .text {
+      color: #B4B4B6;
+      font-size: 12px;
+      line-height: 16.5px;
+      margin-bottom: 8px;
+    }
+    .stars {
+      .icon {
+        font-size: 23px;
+        color: #FCC816;
       }
     }
   }
