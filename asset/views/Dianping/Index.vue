@@ -84,7 +84,7 @@
         <div class="productList">
 
           <div class="comment-product" v-for="(item, index) in list" :key="index">
-            <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.id)">
+            <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.name)">
               <div class="product-img">
                 <img class="lazyImg" v-lazy="item.logo" alt="">
               </div>
