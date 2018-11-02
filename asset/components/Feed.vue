@@ -2,7 +2,7 @@
   <div>
 
     <!-- 问答 -->
-    <div class="container-feed-questionAnswer feed-currency" @tap.stop.prevent="toDetail(item)" v-if="isAsk && isFollow">
+    <div class="container-feed-questionAnswer feed-currency" @tap.stop.prevent="toDetail(item)" v-if="isAsk">
       <FeedUserInfo
         :uuid="item.user.uuid"
         :avatar="item.user.avatar"
@@ -31,7 +31,7 @@
     </div>
 
     <!-- 分享 -->
-    <div @tap.capture="onTap($event)" v-if="isFollow">
+    <div @tap.capture="onTap($event)">
       <div class="container-feed-item feed-currency" v-if="isDiscover" @tap.stop.prevent="toDetail(item)">
         <FeedUserInfo
           :uuid="item.user.uuid"
@@ -109,44 +109,44 @@
     </div>
 
     <!--点评-->
-    <div class="commentList" v-if="isDianping">
+    <div class="commentList" v-if="isComment" @tap.stop.prevent="toDetail(item)">
       <div class="commentUser">
         <div class="userInfo">
           <div class="avatar">
-            <img src="../statics/images/uicon.jpg" alt="">
+            <img class="lazyImg" v-lazy="item.user.avatar" alt="">
           </div>
           <div class="userName">
-            <span class="font-family-medium">郭伟</span>
-            <span class="border-football">优质</span>
-            <div class="time">3分钟前</div>
+            <span class="font-family-medium">{{ item.user.name }}</span>
+            <span class="border-football" v-if="item.feed.is_recommend">优质</span>
+            <div class="time"><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></div>
           </div>
         </div>
-        <div class="mark font-family-medium">4.0分</div>
+        <div class="mark font-family-medium">{{ item.feed.rate_star }}分</div>
       </div>
-      <div class="commentFeedTitle text-line-5 currency-title">德勤的《未来汽车行业价值链-2025年以后》报告，探讨在如今诸多不确定性的时代，以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策以及汽车行业领导者要如何做出投资决策</div>
+      <div class="commentFeedTitle text-line-5 currency-title">{{ item.feed.title }}</div>
       <div class="feed-open-all font-family-medium"  @tap.stop.prevent="extendAll">展开全部</div>
       <div class="feed-moreOperation">
-        <div class="feed-mord">
+        <div class="feed-mord"  @tap.stop.prevent="showItemMore">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-gengduo1"></use>
           </svg>
         </div>
         <div class="feed-operation">
-          <span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-pinglun"></use>
-            </svg><i>22</i>
-          </span>
-          <span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-cai"></use>
-            </svg><i>10</i>
-          </span>
-          <span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zan"></use>
-            </svg><i>33</i>
-          </span>
+            <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pinglun"></use>
+              </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
+            </span>
+          <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-cai"></use>
+              </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
+            </span>
+          <span @tap.stop.prevent="discoverUp()" :class="item.feed.is_upvoted ? 'activeSpan':''">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zan"></use>
+              </svg><i v-if="item.feed.support_number">{{item.feed.support_number}}</i>
+            </span>
         </div>
       </div>
       <div class="line-river-after line-river-after-top"></div>
@@ -196,6 +196,14 @@
           case 15:
           case 16:
           case 5:
+            return true
+          default:
+            return false
+        }
+      },
+      isComment () {
+        switch (this.item.feed_type) {
+          case 17:
             return true
           default:
             return false
@@ -255,14 +263,6 @@
       item: {
         type: Object,
         default: {}
-      },
-      isFollow: {
-        type: Boolean,
-        default: true
-      },
-      isDianping: {
-        type: Boolean,
-        default: false
       }
     },
     mounted () {
@@ -274,6 +274,11 @@
       })
     },
     methods: {
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       renderShowOpenAll () {
         var titles = document.querySelectorAll('.currency-title')
         titles.forEach((item) => {
@@ -395,6 +400,9 @@
           case 15:
           case 16:
             this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+          case 17:
+            this.$router.pushPlus('/dianping/comment/' + this.item.id, 'list-detail-page')
             break
           case -1:
             // 已废弃

@@ -58,17 +58,19 @@
 
       </div>
       <div class="line-river-big"></div>
-      <div class="allDianPing font-family-medium">点评 (23)</div>
+      <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}</div>
       <div class="line-river-after line-river-after-top"></div>
 
       <div>
-        <feedDianping :isDianping="true" :isFollow="false"></feedDianping>
+        <template v-for="(comment, index) in productComments">
+          <feedDianping :item="comment"></feedDianping>
+        </template>
       </div>
 
-      <div class="openAllDianPing font-family-medium" @tap.stop.prevent="$router.pushPlus('/dianping/comment')">查看全部23条点评</div>
+      <div class="openAllDianPing font-family-medium" @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.id + '/comment')">查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评</div>
       <div class="line-river-big"></div>
 
-      <div class="component-score">
+      <div class="component-score" @tap.stop.prevent="$router.pushPlus('/dianping/add/' + detail.name)">
         <div class="text">就您的感受而言，您会给他打多少分？</div>
         <div class="stars">
           <svg class="icon" aria-hidden="true">
@@ -93,18 +95,18 @@
       <div class="line-river-after line-river-after-top"></div>
 
       <div class="productList">
-        <div class="comment-product">
-          <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.name)">
+        <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
+          <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + tag.name)">
             <div class="product-img">
-              <img class="lazyImg" src="../../../statics/images/uicon.jpg" alt="">
+              <img class="lazyImg"  v-lazy="tag.logo" alt="">
             </div>
             <div class="product-detail">
-              <div class="productName font-family-medium">呜呜呜</div>
+              <div class="productName font-family-medium">{{ tag.name }}</div>
               <div class="productMark">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-shoucangdilantongyi"></use>
-                </svg><span>4分</span>
-                <i></i><span>22条评论</span>
+                </svg><span>{{ tag.review_average_rate }}分</span>
+                <i></i><span>{{ tag.review_count }}条评论</span>
               </div>
             </div>
           </div>
@@ -112,7 +114,6 @@
         </div>
       </div>
       <div class="line-river-big"></div>
-
     </div>
 
     <FooterMenu

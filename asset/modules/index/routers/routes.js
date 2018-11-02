@@ -2538,7 +2538,7 @@ const routes = [
     }
   },
   { // 点评列表
-    path: '/dianping/comment',
+    path: '/dianping/:id/comment',
     name: 'dianping-comment',
     meta: {
       title: '点评',
