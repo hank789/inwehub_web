@@ -34,7 +34,7 @@
         <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="index">
           <div class="container-product-comment" @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.id)">
             <div class="comment-info">
-              <div class="avatarImg" @tap.stop.prevent="$router.replace('/dianping/product/1')">
+              <div class="avatarImg">
                 <img class="lazyImg" v-lazy="recommandProduct.user.avatar" alt="">
               </div>
               <div class="comment-name">
