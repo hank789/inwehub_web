@@ -162,7 +162,7 @@
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '写点评':
-            this.$router.pushPlus('/dianping/add/' + this.detail.id)
+            this.$router.pushPlus('/dianping/add/' + this.detail.name)
             break
         }
       }
