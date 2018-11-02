@@ -103,12 +103,29 @@ function collectProduct (context, id, upCallback, downCallback) {
   })
 }
 
+/* 产品点评列表 */
+function getProductComments (context, id, pageNum, callback) {
+  postRequest(`tags/productReviewList`, {
+    tag_name: id,
+    perPage: pageNum
+  }).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    callback(response.data.data.data)
+  })
+}
+
 export {
   add,
   getCommentDetail,
   getProductDetail,
   getRecommandProductList,
   getCategories,
-  collectProduct
+  collectProduct,
+  getProductComments
 }
 

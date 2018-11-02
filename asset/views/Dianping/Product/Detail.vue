@@ -73,7 +73,7 @@
 
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { getProductDetail } from '../../../utils/dianping'
+  import { getProductDetail, getProductComments } from '../../../utils/dianping'
   import userAbility from '../../../utils/userAbility'
   import FooterMenu from '../../../components/FooterMenu.vue'
 
@@ -132,7 +132,8 @@
           pagination: {
             el: '.swiper-pagination'
           }
-        }
+        },
+        productComments: []
       }
     },
     components: {
@@ -157,6 +158,10 @@
         getProductDetail(this, id, (data) => {
           this.detail = data
           this.loading = 0
+        })
+
+        getProductComments(this, id, 3, (productComments) => {
+          this.productComments = productComments
         })
       },
       footerMenuClickedItem (item) {
