@@ -67,7 +67,7 @@
         </template>
       </div>
 
-      <div class="openAllDianPing font-family-medium" @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.id + '/comment')">查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评</div>
+      <div class="openAllDianPing font-family-medium" @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.name + '/comment')">查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评</div>
       <div class="line-river-big"></div>
 
       <div class="component-score" @tap.stop.prevent="$router.pushPlus('/dianping/add/' + detail.name)">
