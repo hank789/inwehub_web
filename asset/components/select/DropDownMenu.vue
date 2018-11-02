@@ -3,7 +3,7 @@
     <div id="dropDownMenuWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-top">
       <div class="container-select">
         <div class="select-top">
-          <div class="type">
+          <div class="type" @tap.stop.prevent="show">
             <span>选择类型</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangshangjiantou"></use>
@@ -17,20 +17,17 @@
           </div>
         </div>
 
-        <div class="list" v-for="(list, index) in selectList" :key="index">
-          <div class="text ListTitle active">
-            <span>产品（7）</span>
-            <svg class="icon" aria-hidden="true">
+        <div class="list" v-for="(select, index) in selectList" :key="index">
+          <div class="text ListTitle" :class="showSelect ? 'active' : ''" @tap.stop.prevent="showHidePopup(select)">
+            <span>{{select.text}}（{{index}}）</span>
+            <svg class="icon" aria-hidden="true" v-if="showSelect">
               <use xlink:href="#icon-xiangshangjiantou"></use>
             </svg>
           </div>
-          <div class="listChildren">
+          <div class="listChildren" v-if="showSelect">
             <div class="list">
               <div class="text ListTitle">
                 <span>全部</span>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-xiangshangjiantou"></use>
-                </svg>
               </div>
             </div>
             <div class="list">
@@ -40,32 +37,16 @@
                   <use xlink:href="#icon-xiangshangjiantou"></use>
                 </svg>
               </div>
-            </div>
-            <div class="list">
-              <div class="text ListTitle active">
-                <span>产品2</span>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-xiangshangjiantou"></use>
-                </svg>
-              </div>
-              <div class="listChildren">
+              <div class="listChildren" v-if="listChildren2">
                 <div class="list">
                   <div class="text ListTitle">
-                    <span>全部</span>
+                    <span>产品1-1</span>
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-xiangshangjiantou"></use>
                     </svg>
                   </div>
-                  <div class="listChildren"></div>
-                </div>
-                <div class="list">
-                  <div class="text ListTitle">
-                    <span>产品2-1</span>
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-xiangshangjiantou"></use>
-                    </svg>
+                  <div class="listChildren">
                   </div>
-                  <div class="listChildren"></div>
                 </div>
               </div>
             </div>
@@ -81,9 +62,15 @@
     data () {
       return {
         selectList: [
-          1,
-          2
-        ]
+          {
+            text: '产品'
+          },
+          {
+            text: '服务'
+          }
+        ],
+        showSelect: false,
+        listChildren2: false
       }
     },
     components: {},
@@ -96,6 +83,10 @@
       }
     },
     methods: {
+      showHidePopup (select) {
+        console.log(select.showSelect + '看看')
+        select.showSelect = select.showSelect ? !select.showSelect : true
+      },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
       }
@@ -113,7 +104,7 @@
   }
 
   .container-select {
-    margin-top: 2.173rem;
+    margin-top: 94px;
     .select-top {
       height: 34px;
       font-size: 13px;
@@ -122,6 +113,7 @@
       display: flex;
       position: relative;
       z-index: 2;
+      background: #ffffff;
       justify-content: space-between;
       box-shadow: 0px 5px 10px 0px #F9F9FB;
       .type {
@@ -141,8 +133,14 @@
 </style>
 <style scoped="scoped">
 
+  .showTagsHome {
+    display: block !important;
+  }
   .list {
     background: #F9F9FB;
+  }
+  .list .listChildren {
+    /*display: none;*/
   }
 
   .list .text.active {
@@ -182,5 +180,8 @@
   .list .text .icon {
     font-size: 7px;
     margin: 11px 16px 0;
+  }
+  .mui-popover-top {
+    top: 0;
   }
 </style>
