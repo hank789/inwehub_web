@@ -9,12 +9,6 @@
               <use xlink:href="#icon-xiangshangjiantou"></use>
             </svg>
           </div>
-          <div class="order">
-            <span>排序</span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-paixu"></use>
-            </svg>
-          </div>
         </div>
         <div class="listWrapper">
           <div class="list" v-for="(item, index) in tree" :key="index">
@@ -143,7 +137,7 @@
 </script>
 
 <style scoped="scoped" lang="less">
-  .container-select > .list {
+  .container-select .listWrapper > .list {
     &:last-child {
       border-bottom-right-radius: 18px;
       border-bottom-left-radius: 18px;
@@ -168,12 +162,6 @@
         color: #03AEF9;
         .icon {
           font-size: 7px;
-        }
-      }
-      .order {
-        color: #808080;
-        .icon {
-          font-size: 10px;
         }
       }
     }
@@ -231,9 +219,14 @@
     padding: 0 16px;
   }
 
+  .list .text.active .icon {
+    display: block;
+    color: #03AEF9;
+  }
   .list .text .icon {
     font-size: 7px;
     margin: 11px 16px 0;
+    display: none;
   }
 
   .mui-popover-top {
