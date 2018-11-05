@@ -148,16 +148,16 @@
   }
 
   .container-product-comment {
-    width: 313px;
+    width: 8.346rem;
     background: #ffffff;
-    margin: 15px auto 0;
-    border-radius: 8px;
+    margin: 0.4rem auto 0;
+    border-radius: 0.213rem;
     .comment-info {
       overflow: hidden;
-      padding: 15px 15px 10px;
+      padding: 0.4rem 0.4rem 0.266rem;
       .avatarImg {
-        width: 34px;
-        height: 34px;
+        width: 0.906rem;
+        height: 0.906rem;
         float: left;
         img {
           width: 100%;
@@ -167,74 +167,74 @@
       }
       .comment-name {
         color: #B4B4B6;
-        font-size: 11px;
-        line-height: 15px;
+        font-size: 0.293rem;
+        line-height: 0.4rem;
         float: left;
-        margin-left: 8px;
+        margin-left: 0.213rem;
         .font-family-medium {
           color: #444444;
-          font-size: 13px;
-          line-height: 18px;
-          margin-bottom: 2px;
+          font-size: 0.346rem;
+          line-height: 0.48rem;
+          margin-bottom: 0.053rem;
         }
       }
       .comment-mark {
         float: right;
         color: #FCC816;
-        font-size: 13px;
-        line-height: 18px;
+        font-size: 0.346rem;
+        line-height: 0.48rem;
       }
     }
     .comment-content {
       color: #444444;
-      font-size: 14px;
-      line-height: 22.5px;
-      padding: 0 15px;
+      font-size: 0.373rem;
+      line-height: 0.6rem;
+      padding: 0 0.4rem;
     }
   }
 
   .comment-product {
-    padding: 11px 15px 15px;
+    padding: 0.293rem 0.4rem 0.4rem;
     .product-info {
       overflow: hidden;
       background: #F7F8FA;
-      padding: 10px;
+      padding: 0.266rem;
       .product-img {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         float: left;
         img {
           width: 100%;
           height: 100%;
-          border-radius: 4px;
+          border-radius: 0.106rem;
         }
       }
       .product-detail {
         float: left;
-        margin-left: 10px;
+        margin-left: 0.266rem;
         .productName {
           color: #444444;
-          font-size: 16px;
-          line-height: 22.5px;
+          font-size: 0.426rem;
+          line-height: 0.6rem;
         }
         .productMark {
           .icon {
             color: #FCC816;
-            font-size: 12px;
+            font-size: 0.32rem;
           }
           span {
             color: #B4B4B6;
-            font-size: 11px;
-            line-height: 15px;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
             &:nth-of-type(1) {
               color: #FCC816;
-              margin-left: 3px;
+              margin-left: 0.08rem;
             }
           }
           i {
-            width: 2px;
-            height: 2px;
-            margin-right: 5px;
+            width: 0.053rem;
+            height: 0.053rem;
+            margin-right: 0.133rem;
             vertical-align: middle;
             border-radius: 50%;
             background: #B4B4B6;
@@ -246,25 +246,25 @@
   }
   .container-product-list {
     background: #ffffff;
-    margin-top: 30px;
-    padding-bottom: 15px;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    margin-top: 0.8rem;
+    padding-bottom: 0.4rem;
+    border-top-left-radius: 0.426rem;
+    border-top-right-radius: 0.426rem;
     .productMenu {
-      height: 34px;
+      height: 0.906rem;
       display: flex;
       color: #808080;
-      font-size: 13px;
-      padding: 0 16px;
-      line-height: 34px;
+      font-size: 0.346rem;
+      padding: 0 0.426rem;
+      line-height: 0.906rem;
       justify-content: space-between;
-      box-shadow:0px 5px 10px 0px rgba(249,249,251,1);
+      box-shadow:0rem 0.133rem 0.266rem 0rem rgba(249,249,251,1);
     }
     .productList {
       .comment-product {
-        padding: 13px 15px 0;
+        padding: 0.346rem 0.4rem 0;
         .product-info {
-          padding: 0 0 15px;
+          padding: 0 0 0.4rem;
           background: none;
         }
       }

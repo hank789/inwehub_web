@@ -246,50 +246,50 @@
     bottom: 1.33333rem;
   }
   .recommenBanners{
-    height: 123px;
-    padding-top: 44px;
+    height: 3.28rem;
+    padding-top: 1.173rem;
     .swiper-slide{
       width:auto !important;
     }
   }
   .product-introduce {
-    width: 343px;
+    width: 9.146rem;
     margin: 0 auto;
-    padding: 10px 0 17px;
+    padding: 0.266rem 0 0.453rem;
     background: #ffffff;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow:0px 7px 13px 0px rgba(240,242,245,1);
+    border-bottom-left-radius: 0.533rem;
+    border-bottom-right-radius: 0.533rem;
+    box-shadow:0rem 0.186rem 0.346rem 0rem rgba(240,242,245,1);
     .companyLogo {
-      width: 60px;
-      height: 60px;
-      margin: 0 auto 10px;
+      width: 1.6rem;
+      height: 1.6rem;
+      margin: 0 auto 0.266rem;
       img {
         width: 100%;
         height: 100%;
-        border-radius: 4px;
+        border-radius: 0.106rem;
         object-fit: cover;
       }
     }
     .companyNmae {
       color: #444444;
-      font-size: 18px;
+      font-size: 0.48rem;
       text-align: center;
-      line-height: 25px;
+      line-height: 0.666rem;
     }
     .companyMark {
       color: #FCC816;
-      font-size: 11px;
-      line-height: 15px;
+      font-size: 0.293rem;
+      line-height: 0.4rem;
       text-align: center;
-      margin-top: 8px;
+      margin-top: 0.213rem;
       .comment {
         color: #B4B4B6;
       }
       i {
-        width: 2px;
-        height: 2px;
-        margin-right: 5px;
+        width: 0.053rem;
+        height: 0.053rem;
+        margin-right: 0.133rem;
         vertical-align: middle;
         border-radius: 50%;
         background: #B4B4B6;
@@ -298,22 +298,22 @@
     }
     .companyDescribe {
       color: #808080;
-      font-size: 12px;
-      padding: 0 16px;
-      margin-top: 9px;
-      line-height: 19px;
-      letter-spacing: 0.5px
+      font-size: 0.32rem;
+      padding: 0 0.426rem;
+      margin-top: 0.24rem;
+      line-height: 0.506rem;
+      letter-spacing: 0.013rem
     }
     .supply {
       text-align: right;
-      padding: 0 16px;
+      padding: 0 0.426rem;
       span {
         color: #444444;
-        font-size: 12px;
-        line-height: 16.5px;
+        font-size: 0.32rem;
+        line-height: 0.44rem;
         &:nth-of-type(1) {
           color: #B4B4B6;
-          margin-right: 3px;
+          margin-right: 0.08rem;
         }
       }
     }
@@ -321,56 +321,56 @@
   .optionlList {
     .list {
       color: #444444;
-      font-size: 14px;
-      padding: 12px 16px;
+      font-size: 0.373rem;
+      padding: 0.32rem 0.426rem;
       display: flex;
       position: relative;
       justify-content: space-between;
       .ranking {
         color: #B4B4B6;
-        font-size: 10px;
-        right: 33px;
+        font-size: 0.266rem;
+        right: 0.88rem;
         position: absolute;
       }
       .icon {
         color: #808080;
-        margin-top: 3px;
+        margin-top: 0.08rem;
       }
     }
     .line-river-after {
       &:after {
-        left: 16px;
-        right: 16px;
+        left: 0.426rem;
+        right: 0.426rem;
       }
     }
   }
   .recommend {
     position: relative;
-    /*padding-bottom: 25px;*/
+    /*padding-bottom: 0.666rem;*/
     .recommendTitle {
       position: absolute;
-      padding: 11px 16px 0;
+      padding: 0.293rem 0.426rem 0;
       span {
         &:nth-of-type(1) {
           color: #444444;
-          font-size: 16px;
-          line-height: 22.5px;
-          margin-top: 11px;
+          font-size: 0.426rem;
+          line-height: 0.6rem;
+          margin-top: 0.293rem;
         }
       }
     }
   }
 
   .recommendList {
-    width: 304.5px;
-    margin: 0 auto 25px;
-    padding: 10px 15px;
+    width: 8.12rem;
+    margin: 0 auto 0.666rem;
+    padding: 0.266rem 0.4rem;
     background: #F7F8FA;
-    border-radius: 8px;
+    border-radius: 0.213rem;
     overflow: hidden;
     .avatar {
-      width: 44px;
-      height: 44px;
+      width: 1.173rem;
+      height: 1.173rem;
       float: left;
       img {
         width: 100%;
@@ -380,27 +380,27 @@
     }
     .personalInfo {
       float: left;
-      margin-top: 3px;
-      margin-left: 10px;
+      margin-top: 0.08rem;
+      margin-left: 0.266rem;
       .name {
         color: #565656;
-        line-height: 20px;
-        font-size: 14px;
+        line-height: 0.533rem;
+        font-size: 0.373rem;
       }
       .good {
         color: #B4B4B6;
-        font-size: 12px;
-        line-height: 16.5px;
+        font-size: 0.32rem;
+        line-height: 0.44rem;
       }
     }
     .speak {
       float: right;
-      margin-top: 8.5px;
+      margin-top: 0.226rem;
       span {
         color: #03AEF9;
-        font-size: 12px;
-        padding: 0 10px;
-        line-height: 27px;
+        font-size: 0.32rem;
+        padding: 0 0.266rem;
+        line-height: 0.72rem;
         display: inline-block;
       }
       .border-football {
@@ -412,28 +412,28 @@
   }
 
   .allDianPing {
-    padding: 0 16px;
+    padding: 0 0.426rem;
     color: #444444;
-    font-size: 16px;
-    line-height: 44px;
+    font-size: 0.426rem;
+    line-height: 1.173rem;
   }
   .openAllDianPing {
     text-align: center;
-    font-size: 14px;
+    font-size: 0.373rem;
     color: #808080;
-    line-height: 44px;
+    line-height: 1.173rem;
   }
   .component-score {
-    padding: 12.5px 16px 15px;
+    padding: 0.333rem 0.426rem 0.4rem;
     .text {
       color: #B4B4B6;
-      font-size: 12px;
-      line-height: 16.5px;
-      margin-bottom: 8px;
+      font-size: 0.32rem;
+      line-height: 0.44rem;
+      margin-bottom: 0.213rem;
     }
     .stars {
       .icon {
-        font-size: 23px;
+        font-size: 0.613rem;
         color: #FCC816;
       }
     }
@@ -441,56 +441,56 @@
 
   .productList {
     .comment-product {
-      padding: 13px 15px 0;
+      padding: 0.346rem 0.4rem 0;
       .product-info {
-        padding: 0 0 15px;
+        padding: 0 0 0.4rem;
         background: none;
       }
     }
   }
   .comment-product {
-    padding: 11px 15px 15px;
+    padding: 0.293rem 0.4rem 0.4rem;
     .product-info {
       overflow: hidden;
       background: #F7F8FA;
-      padding: 10px;
+      padding: 0.266rem;
       .product-img {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         float: left;
         img {
           width: 100%;
           height: 100%;
-          border-radius: 4px;
+          border-radius: 0.106rem;
           object-fit: cover;
         }
       }
       .product-detail {
         float: left;
-        margin-left: 10px;
+        margin-left: 0.266rem;
         .productName {
           color: #444444;
-          font-size: 16px;
-          line-height: 22.5px;
+          font-size: 0.426rem;
+          line-height: 0.6rem;
         }
         .productMark {
           .icon {
             color: #FCC816;
-            font-size: 12px;
+            font-size: 0.32rem;
           }
           span {
             color: #B4B4B6;
-            font-size: 11px;
-            line-height: 15px;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
             &:nth-of-type(1) {
               color: #FCC816;
-              margin-left: 3px;
+              margin-left: 0.08rem;
             }
           }
           i {
-            width: 2px;
-            height: 2px;
-            margin-right: 5px;
+            width: 0.053rem;
+            height: 0.053rem;
+            margin-right: 0.133rem;
             vertical-align: middle;
             border-radius: 50%;
             background: #B4B4B6;
@@ -502,17 +502,17 @@
   }
 
   .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: 90px;
-    right: -129px;
+    bottom: 2.4rem;
+    right: -3.44rem;
     left: auto;
   }
 </style>
 
 <style>
   .recommenBanners .swiper-pagination-bullet {
-    border-radius: 100px !important;
+    border-radius: 2.666rem !important;
   }
   .recommenBanners .swiper-pagination-bullets .swiper-pagination-bullet-active {
-    width: 10.5px;
+    width: 0.28rem;
   }
 </style>

@@ -119,75 +119,75 @@
     top: 37px;
   }
   .listSelect {
-    height: 34px;
-    padding: 0 16px;
-    line-height: 34px;
+    height: 0.906rem;
+    padding: 0 0.426rem;
+    line-height: 0.906rem;
     display: flex;
     justify-content: space-between;
-    box-shadow:0px 5px 10px 0px rgba(249,249,251,1);
+    box-shadow:0rem 0.133rem 0.266rem 0rem rgba(249,249,251,1);
     div {
       color: #444444;
-      font-size: 13px;
+      font-size: 0.346rem;
       &:nth-of-type(1) {
         .icon {
-          font-size: 7px;
-          margin-bottom: 1px;
+          font-size: 0.186rem;
+          margin-bottom: 0.026rem;
         }
       }
       &:nth-of-type(2) {
         .icon {
-          font-size: 10px;
+          font-size: 0.266rem;
         }
       }
     }
   }
 
   .list {
-    margin-top: 1.5px;
+    margin-top: 0.04rem;
   }
   .comment-product {
-    padding: 14px 15px 0;
+    padding: 0.373rem 0.4rem 0;
     .product-info {
       overflow: hidden;
-      padding-bottom: 16px;
+      padding-bottom: 0.426rem;
       .product-img {
-        width: 44px;
-        height: 44px;
+        width: 1.173rem;
+        height: 1.173rem;
         float: left;
         img {
           width: 100%;
           height: 100%;
-          border-radius: 4px;
           object-fit: cover;
+          border-radius: 0.106rem;
         }
       }
       .product-detail {
         float: left;
-        margin-left: 10px;
+        margin-left: 0.266rem;
         .productName {
           width: 284px;
           color: #444444;
-          font-size: 16px;
-          line-height: 22.5px;
+          font-size: 0.426rem;
+          line-height: 0.6rem;
         }
         .productMark {
           .icon {
             color: #FCC816;
-            font-size: 12px;
+            font-size: 0.32rem;
           }
           span {
             color: #B4B4B6;
-            font-size: 11px;
-            line-height: 15px;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
             &:nth-of-type(1) {
               color: #FCC816;
-              margin-left: 3px;
+              margin-left: 0.08rem;
             }
           }
           i {
-            width: 2px;
-            height: 2px;
-            margin-right: 5px;
+            width: 0.053rem;
+            height: 0.053rem;
+            margin-right: 0.133rem;
             vertical-align: middle;
             border-radius: 50%;
             background: #B4B4B6;
