@@ -66,16 +66,6 @@
   export default {
     data () {
       return {
-        selectList: [
-          {
-            text: '产品'
-          },
-          {
-            text: '服务'
-          }
-        ],
-        showSelect: false,
-        listChildren2: false
       }
     },
     components: {},
