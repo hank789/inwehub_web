@@ -118,7 +118,7 @@
           if (curEle.nextElementSibling) {
             curEle.nextElementSibling.classList.add('active')
           } else {
-            this.$emit('input', item.id)
+            this.$emit('input', {id: item.id, name: item.name})
             window.mui('#dropDownMenuWrapper').popover('toggle')
           }
         } else {
