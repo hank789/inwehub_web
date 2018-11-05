@@ -68,7 +68,7 @@
       <div class="container-product-list">
         <div class="productMenu">
           <div class="productType" @tap.stop.prevent="showDropdownMenu()">
-            <span>产品类型</span>
+            <span>{{ !category.name?'选择类型': category.name }}</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangxiajiantou"></use>
             </svg>
@@ -89,7 +89,7 @@
                 <img class="lazyImg" v-lazy="item.logo" alt="">
               </div>
               <div class="product-detail">
-                <div class="productName font-family-medium">{{ item.name }}</div>
+                <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
                 <div class="productMark">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-shoucangdilantongyi"></use>
@@ -101,6 +101,13 @@
             <div class="line-river-after line-river-after-top"></div>
           </div>
 
+        </div>
+
+        <div class="noData" v-if="!list.length">
+          <div class="DataImg">
+            <img src="../../statics/images/empty@3x.png" alt="">
+          </div>
+          <div class="noDataText">暂时没有数据～</div>
         </div>
       </div>
       </RefreshList>
@@ -361,7 +368,30 @@
           padding: 0 0 15px;
           background: none;
         }
+        .productName {
+          width: 284px;
+        }
       }
+    }
+  }
+  .noData {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    .DataImg {
+      width: 1.626rem;
+      height: 2.373rem;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .noDataText {
+      color: #C8C8C8;
+      font-size: 12px;
+      line-height: 16px;
+      margin-top: 10px;
+      text-align: center;
     }
   }
 
