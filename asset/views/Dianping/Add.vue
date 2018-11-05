@@ -51,7 +51,7 @@
           </svg></swiper-slide>
         </swiper>
 
-        <div class="container-camera">
+        <div class="container-camera"  @tap.stop.prevent="uploadImage">
           <div class="camera">
             <svg class="icon" aria-hidden="true" >
               <use xlink:href="#icon-xiangji1"></use>
@@ -81,12 +81,14 @@
     </div>
 
     <div class="container-bottom-menus">
+      <div class="line-river-after line-river-after-top"></div>
 
-      <span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">
-          <svg class="icon" aria-hidden="true" >
-            <use xlink:href="#icon-tupian"></use>
-          </svg>
-        </span>
+      <!--<span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">-->
+        <!--<svg class="icon" aria-hidden="true" >-->
+          <!--<use xlink:href="#icon-tupian"></use>-->
+        <!--</svg>-->
+      <!--</span>-->
+      <div class="productName">{{ detail.name }}</div>
     </div>
 
     <uploadImage ref="uploadImage"
@@ -106,7 +108,6 @@
 </template>
 
 <script>
-  import { postRequest } from '../../utils/request'
   import uploadImage from '../../components/uploadImage'
   import { autoTextArea } from '../../utils/plus'
   import { getLocalUserInfo } from '../../utils/user'
@@ -312,16 +313,23 @@
 
   .container-bottom-menus{
     position: absolute;
-    padding-left: 0.2rem;
+    /*padding-left: 0.2rem;*/
     background: #fff;
     left:0;
   }
   .container-bottom-menus span{
     display: block;
     float: left;
-    padding: 0 0.2rem;
+    /*padding: 0 0.2rem;*/
     font-size: 0.506rem;
     color: grey;
+  }
+  .container-bottom-menus .productName {
+    float: right;
+    padding-right: 16px;
+    font-size: 13px;
+    color: #3C3E44;
+    font-family:PingFangSC-Medium;
   }
 
   .component-photograph{
@@ -509,5 +517,13 @@
   }
   .ql-container {
     height: 3rem !important;
+  }
+
+  .star-rating {
+    height: 28px;
+    padding-top: 10px;
+  }
+  .star-rating .rating-text {
+    margin-top: -17px !important;
   }
 </style>
