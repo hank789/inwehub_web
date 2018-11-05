@@ -109,6 +109,7 @@
     <DropDownMenu
       ref="dropdownMenu"
       :tree="categories"
+      v-model="category"
     ></DropDownMenu>
 
     <Options
@@ -135,13 +136,9 @@
         list: [],
         recommandProductList: [],
         orderBy: 1,
-        tags: [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
+        category: {
+          id: ''
+        },
         swiperOption: {
           loop: true,
           effect: 'coverflow',
@@ -163,10 +160,10 @@
     },
     computed: {
       prevOtherData () {
-        return {category_id: '', orderBy: this.orderBy}
+        return {category_id: this.category.id, orderBy: this.orderBy}
       },
       nextOtherData () {
-        return {category_id: '', orderBy: this.orderBy}
+        return {category_id: this.category.id, orderBy: this.orderBy}
       }
     },
     components: {

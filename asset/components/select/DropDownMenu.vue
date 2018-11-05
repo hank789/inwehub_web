@@ -16,36 +16,47 @@
             </svg>
           </div>
         </div>
-
-        <div class="list" v-for="(select, index) in selectList" :key="index">
-          <div class="text ListTitle" :class="select.showSelect ? 'active' : ''" @tap.stop.prevent="showHidePopup(select)">
-            <span>{{select.text}}（{{index}}）</span>
-            <svg class="icon" aria-hidden="true" v-if="select.showSelect">
-              <use xlink:href="#icon-xiangshangjiantou"></use>
-            </svg>
-          </div>
-          <div class="listChildren" v-if="select.showSelect">
-            <div class="list">
-              <div class="text ListTitle">
-                <span>全部</span>
-              </div>
+        <div class="listWrapper">
+          <div class="list" v-for="(item, index) in tree" :key="index">
+            <div class="text ListTitle" @tap.capture="selectItem($event, item)">
+              <span>{{item.name}}（{{item.children_count}}）</span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-xiangshangjiantou"></use>
+              </svg>
             </div>
-            <div class="list">
-              <div class="text ListTitle" @tap.stop.prevent="showHidePopup(select)">
-                <span>产品1</span>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-xiangshangjiantou"></use>
-                </svg>
+            <div class="listChildren" v-if="item.children.length">
+              <div class="list">
+                <div class="text ListTitle" @tap.capture="selectItem($event, item)">
+                  <span>全部</span>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-xiangshangjiantou"></use>
+                  </svg>
+                </div>
               </div>
-              <div class="listChildren" v-if="select.showSelect">
-                <div class="list">
-                  <div class="text ListTitle">
-                    <span>产品1-1</span>
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-xiangshangjiantou"></use>
-                    </svg>
+              <div class="list" v-for="(itemTwo, itemTwoindex) in item.children" :key="'itemtwo_' + itemTwoindex">
+                <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
+                  <span>{{ itemTwo.name }}（{{itemTwo.children_count}}）</span>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-xiangshangjiantou"></use>
+                  </svg>
+                </div>
+                <div class="listChildren" v-if="itemTwo.children.length">
+                  <div class="list">
+                    <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
+                      <span>全部</span>
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-xiangshangjiantou"></use>
+                      </svg>
+                    </div>
                   </div>
-                  <div class="listChildren">
+                  <div class="list" v-for="(itemThree, itemThreeindex) in itemTwo.children"
+                       :key="'itemthree_' + itemThreeindex">
+                    <div class="text ListTitle" @tap.capture="selectItem($event, itemThree)">
+                      <span>{{ itemThree.name }}（{{itemThree.children_count}}）</span>
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-xiangshangjiantou"></use>
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -76,18 +87,46 @@
     components: {},
     props: {
       tree: {
-        type: Object,
+        type: Array,
         default: function () {
-          return {}
+          return []
         }
       }
     },
     methods: {
-      showHidePopup (select) {
-        this.$set(select, 'showSelect', select.showSelect ? !select.showSelect : true)
-      },
-      selectItem (item) {
+      selectItem (event, item) {
+        var curEle = event.target
+        if (curEle.tagName === 'SPAN') {
+          curEle = curEle.parentElement
+        }
 
+        var status = curEle.classList.contains('active')
+        window.mui.each(curEle.parentElement.parentElement.children, function (index, children) {
+          var listTitle = children.querySelector('.ListTitle')
+          if (listTitle) {
+            listTitle.classList.remove('active')
+          }
+          var listChildren = children.querySelector('.listChildren')
+          if (listChildren) {
+            listChildren.classList.remove('active')
+          }
+        })
+
+        if (!status) {
+          curEle.classList.add('active')
+
+          if (curEle.nextElementSibling) {
+            curEle.nextElementSibling.classList.add('active')
+          } else {
+            this.$emit('input', {id: item.id, name: item.name})
+            window.mui('#dropDownMenuWrapper').popover('toggle')
+          }
+        } else {
+          curEle.classList.remove('active')
+          if (curEle.nextElementSibling) {
+            curEle.nextElementSibling.classList.remove('active')
+          }
+        }
       },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
@@ -143,11 +182,17 @@
   .showTagsHome {
     display: block !important;
   }
+
   .list {
     background: #F9F9FB;
   }
+
   .list .listChildren {
-    /*display: none;*/
+    display: none;
+  }
+
+  .list .listChildren.active {
+    display: block;
   }
 
   .list .text.active {
@@ -191,6 +236,6 @@
 
   .mui-popover-top {
     top: 0;
-    bottom:auto !important;
+    bottom: auto !important;
   }
 </style>
