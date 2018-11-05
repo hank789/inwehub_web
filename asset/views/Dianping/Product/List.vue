@@ -116,7 +116,7 @@
     background: #ffffff;
   }
   .listWrapper {
-    top: 37px;
+    top: 0.986rem;
   }
   .listSelect {
     height: 0.906rem;
@@ -165,7 +165,7 @@
         float: left;
         margin-left: 0.266rem;
         .productName {
-          width: 284px;
+          width: 7.573rem;
           color: #444444;
           font-size: 0.426rem;
           line-height: 0.6rem;
@@ -198,8 +198,8 @@
     }
   }
   .noData {
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 1.333rem;
+    margin-bottom: 1.333rem;
     .DataImg {
       width: 1.626rem;
       height: 2.373rem;
@@ -211,9 +211,9 @@
     }
     .noDataText {
       color: #C8C8C8;
-      font-size: 12px;
-      line-height: 16px;
-      margin-top: 10px;
+      font-size: 0.32rem;
+      line-height: 0.426rem;
+      margin-top: 0.266rem;
       text-align: center;
     }
   }
