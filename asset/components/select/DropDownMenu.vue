@@ -118,8 +118,10 @@
           if (curEle.nextElementSibling) {
             curEle.nextElementSibling.classList.add('active')
           } else {
-            this.$emit('input', {id: item.id, name: item.name})
             window.mui('#dropDownMenuWrapper').popover('toggle')
+            setTimeout(() => {
+              this.$emit('input', {id: item.id, name: item.name})
+            }, 100)
           }
         } else {
           curEle.classList.remove('active')
