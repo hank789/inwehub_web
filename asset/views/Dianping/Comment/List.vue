@@ -86,6 +86,6 @@
   }
 
   .mui-android .commentList .commentUser .userInfo .userName span:nth-of-type(2) {
-    line-height: 18px;
+    line-height: 0.48rem;
   }
 </style>

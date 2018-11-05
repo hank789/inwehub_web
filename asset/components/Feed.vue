@@ -686,7 +686,7 @@
   /*点评样式*/
 
   .commentList {
-    margin-top: 20px;
+    margin-top: 0.533rem;
     .line-river-after {
       margin-top: 0.266rem;
       &:after {
@@ -696,14 +696,14 @@
     }
     .commentUser {
       display: flex;
-      padding: 0 16px;
+      padding: 0 0.426rem;
       justify-content: space-between;
       .userInfo {
         display: flex;
         .avatar {
-          width: 34px;
-          height: 34px;
-          margin-right: 8px;
+          width: 0.906rem;
+          height: 0.906rem;
+          margin-right: 0.213rem;
           img {
             width: 100%;
             height: 100%;
@@ -712,48 +712,48 @@
           }
         }
         .userName {
-          margin-top: -2px;
+          margin-top: -0.053rem;
           .border-football {
             &:after {
-              border-radius: 8px;
+              border-radius: 0.213rem;
               border-color: #FA4975;
             }
           }
           span {
             &:nth-of-type(1) {
               color: #444444;
-              font-size: 13px;
-              line-height: 18.5px;
+              font-size: 0.346rem;
+              line-height: 0.493rem;
             }
             &:nth-of-type(2) {
-              height: 15px;
+              height: 0.4rem;
               color: #FA4975;
-              font-size: 10px;
-              padding: 0 5px;
-              line-height: 15px;
+              font-size: 0.266rem;
+              padding: 0 0.133rem;
+              line-height: 0.4rem;
               display: inline-block;
             }
           }
           .time {
             color: #B4B4B6;
-            font-size: 11px;
-            line-height: 15px;
-            margin-top: 2px;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
+            margin-top: 0.053rem;
           }
         }
       }
       .mark {
         color: #FCC816;
-        font-size: 13px;
-        line-height: 18.5px;
+        font-size: 0.346rem;
+        line-height: 0.493rem;
       }
     }
     .commentFeedTitle {
-      padding: 0 16px;
+      padding: 0 0.426rem;
       color: #444444;
       font-size: 0.373rem;
       line-height: 0.586rem;
-      margin-top: 6px;
+      margin-top: 0.16rem;
       letter-spacing: 0.013rem;
     }
     .feed-open-all {
@@ -772,7 +772,7 @@
       color: #808080;
       display: flex;
       padding: 0 0.346rem;
-      margin-bottom: 10px;
+      margin-bottom: 0.266rem;
       justify-content: space-between;
       .feed-mord {
 
@@ -780,7 +780,7 @@
         color: #808080;
       }
       .feed-operation {
-        padding-top: 5px;
+        padding-top: 0.133rem;
         span {
           padding: 0.133rem 0.266rem;
           font-size: 0.293rem;

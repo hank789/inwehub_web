@@ -326,8 +326,8 @@
   }
   .container-bottom-menus .productName {
     float: right;
-    padding-right: 16px;
-    font-size: 13px;
+    padding-right: 0.426rem;
+    font-size: 0.346rem;
     color: #3C3E44;
     font-family:PingFangSC-Medium;
   }
@@ -350,37 +350,37 @@
     margin-bottom:0 !important;
   }
   .component-mark {
-    padding: 8px 16px 10px;
+    padding: 0.213rem 0.426rem 0.266rem;
     span {
       color: #B4B4B6;
-      font-size: 12px;
-      line-height: 16.5px;
+      font-size: 0.32rem;
+      line-height: 0.44rem;
     }
     .stars {
       color: #FCC816;
-      font-size: 23px;
-      margin-top: 8px;
-      margin-bottom: 15px;
+      font-size: 0.613rem;
+      margin-top: 0.213rem;
+      margin-bottom: 0.4rem;
     }
   }
   .component-box {
-    margin: 16px 0 0 16px;
+    margin: 0.426rem 0 0 0.426rem;
   }
 
   .container-camera {
-    padding-top: 5px;
+    padding-top: 0.133rem;
     display: inline-block;
   }
   .camera {
-    width: 61px;
-    height: 61px;
+    width: 1.626rem;
+    height: 1.626rem;
     position: relative;
-    top: -5px;
+    top: -0.133rem;
     background: #DCDCDC;
-    border-radius: 4px;
-    margin-top: 10px;
+    border-radius: 0.106rem;
+    margin-top: 0.266rem;
     .icon {
-      font-size: 28px;
+      font-size: 0.746rem;
       color: #FFFFFF;
       position: absolute;
       top: 50%;
@@ -391,32 +391,32 @@
   .container-identity {
     .line-river-after {
       &:after {
-        left: 16px;
-        right: 16px;
+        left: 0.426rem;
+        right: 0.426rem;
       }
     }
     .identityTitle {
-      padding: 12px 16px 11px;
-      line-height: 21px;
+      padding: 0.32rem 0.426rem 0.293rem;
+      line-height: 0.56rem;
       display: flex;
       justify-content: space-between;
       span {
         color: #444444;
-        font-size: 15px;
+        font-size: 0.4rem;
       }
       .icon {
         color: #808080;
-        margin-top: 3px;
+        margin-top: 0.08rem;
       }
     }
     .assessDomain {
       color: #B4B4B6;
-      font-size: 12px;
-      padding: 12.5px 16px 6px;
-      line-height: 16.5px;
+      font-size: 0.32rem;
+      padding: 0.333rem 0.426rem 0.16rem;
+      line-height: 0.44rem;
     }
     .domainList {
-      padding: 0 16px;
+      padding: 0 0.426rem;
       .border-football {
         &:after {
           border-color: #DCDCDC;
@@ -424,13 +424,13 @@
       }
       span {
         color: #B4B4B6;
-        font-size: 12px;
-        line-height: 16.5px;
-        padding: 5px 11px;
-        margin-right: 10px;
-        margin-top: 6.5px;
+        font-size: 0.32rem;
+        line-height: 0.44rem;
+        padding: 0.133rem 0.293rem;
+        margin-right: 0.266rem;
+        margin-top: 0.173rem;
         display: inline-block;
-        border-radius: 100px;
+        border-radius: 2.666rem;
         &.active {
           color: #444444;
           background: #F3F4F6;
@@ -447,7 +447,7 @@
     position: relative;
     background: #ffff;
     padding: 0.026rem 0.32rem;
-    margin-top: 16.5px;
+    margin-top: 0.44rem;
     .niming {
       color: #444444;
       position: relative;
@@ -520,10 +520,10 @@
   }
 
   .star-rating {
-    height: 28px;
-    padding-top: 10px;
+    height: 0.746rem;
+    padding-top: 0.266rem;
   }
   .star-rating .rating-text {
-    margin-top: -17px !important;
+    margin-top: -0.453rem !important;
   }
 </style>

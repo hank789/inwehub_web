@@ -272,7 +272,7 @@
   }
   .link {
     padding: 0 0.426rem;
-    margin-bottom: 17.5px;
+    margin-bottom: 0.466rem;
     .linkBox {
       padding: 0.266rem;
       border-radius: 0.106rem;
@@ -323,7 +323,7 @@
   .timeContainer {
     display: flex;
     color: #B4B4B6;
-    margin-bottom: 22.5px;
+    margin-bottom: 0.6rem;
     padding: 0 0.426rem;
     justify-content: space-between;
     .makingCopy {

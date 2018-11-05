@@ -128,7 +128,7 @@
         window.mui('#dropDownMenuWrapper').popover('toggle')
         setTimeout(() => {
           if (document.querySelector('.mui-backdrop')) {
-            document.querySelector('.mui-backdrop').style.top = '93px'
+            document.querySelector('.mui-backdrop').style.top = '2.48rem'
           }
         }, 100)
       }
@@ -139,29 +139,29 @@
 <style scoped="scoped" lang="less">
   .container-select .listWrapper > .list {
     &:last-child {
-      border-bottom-right-radius: 18px;
-      border-bottom-left-radius: 18px;
+      border-bottom-right-radius: 0.48rem;
+      border-bottom-left-radius: 0.48rem;
       overflow: hidden;
     }
   }
 
   .container-select {
-    margin-top: 93px;
+    margin-top: 2.48rem;
     .select-top {
-      height: 34px;
-      font-size: 13px;
-      line-height: 34px;
-      padding: 0 16px;
+      height: 0.906rem;
+      font-size: 0.346rem;
+      line-height: 0.906rem;
+      padding: 0 0.426rem;
       display: flex;
       position: relative;
       z-index: 2;
       background: #ffffff;
       justify-content: space-between;
-      box-shadow: 0px 5px 10px 0px #F9F9FB;
+      box-shadow: 0rem 0.133rem 0.266rem 0rem #F9F9FB;
       .type {
         color: #03AEF9;
         .icon {
-          font-size: 7px;
+          font-size: 0.186rem;
         }
       }
     }
@@ -209,14 +209,14 @@
 
   .list .text {
     color: #444444;
-    font-size: 14px;
-    line-height: 34px;
+    font-size: 0.373rem;
+    line-height: 0.906rem;
     display: flex;
     justify-content: space-between;
   }
 
   .list .text span {
-    padding: 0 16px;
+    padding: 0 0.426rem;
   }
 
   .list .text.active .icon {
@@ -224,8 +224,8 @@
     color: #03AEF9;
   }
   .list .text .icon {
-    font-size: 7px;
-    margin: 11px 16px 0;
+    font-size: 0.186rem;
+    margin: 0.293rem 0.426rem 0;
     display: none;
   }
 
