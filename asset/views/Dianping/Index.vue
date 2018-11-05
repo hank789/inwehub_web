@@ -32,7 +32,7 @@
       <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
         <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="index">
-          <div class="container-product-comment" @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.id)">
+          <div class="container-product-comment" @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
             <div class="comment-info">
               <div class="avatarImg">
                 <img class="lazyImg" v-lazy="recommandProduct.user.avatar" alt="">

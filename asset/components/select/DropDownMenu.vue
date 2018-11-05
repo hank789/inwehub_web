@@ -125,12 +125,12 @@
         }
       },
       show () {
-        window.mui('#dropDownMenuWrapper').popover('toggle')
-        setTimeout(() => {
-          if (document.querySelector('.mui-backdrop')) {
-            document.querySelector('.mui-backdrop').style.top = '2.48rem'
-          }
-        }, 100)
+        window.mui('#dropDownMenuWrapper').popover('toggle', document.querySelector('.mui-content'))
+//        setTimeout(() => {
+//          if (document.querySelector('.mui-backdrop')) {
+//            document.querySelector('.mui-backdrop').style.top = '2.48rem'
+//          }
+//        }, 1)
       }
     }
   }
