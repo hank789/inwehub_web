@@ -108,6 +108,7 @@
 
     <DropDownMenu
       ref="dropdownMenu"
+      :tree="categories"
     ></DropDownMenu>
 
     <Options
@@ -123,13 +124,14 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import RefreshList from '../../components/refresh/List.vue'
-  import { getRecommandProductList } from '../../utils/dianping'
+  import { getRecommandProductList, getCategories } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
 
   export default {
     data () {
       return {
+        categories: [],
         list: [],
         recommandProductList: [],
         orderBy: 1,
@@ -200,6 +202,10 @@
       refreshPageData () {
         getRecommandProductList(this, 5, (recommandProductList) => {
           this.recommandProductList = recommandProductList
+        })
+
+        getCategories(this, (categories) => {
+          this.categories = categories
         })
       }
     },

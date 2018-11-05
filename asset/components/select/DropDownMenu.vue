@@ -86,8 +86,16 @@
       showHidePopup (select) {
         this.$set(select, 'showSelect', select.showSelect ? !select.showSelect : true)
       },
+      selectItem (item) {
+
+      },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
+        setTimeout(() => {
+          if (document.querySelector('.mui-backdrop')) {
+            document.querySelector('.mui-backdrop').style.top = '93px'
+          }
+        }, 100)
       }
     }
   }
@@ -103,7 +111,7 @@
   }
 
   .container-select {
-    margin-top: 94px;
+    margin-top: 93px;
     .select-top {
       height: 34px;
       font-size: 13px;
@@ -180,7 +188,9 @@
     font-size: 7px;
     margin: 11px 16px 0;
   }
+
   .mui-popover-top {
     top: 0;
+    bottom:auto !important;
   }
 </style>
