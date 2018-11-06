@@ -534,7 +534,7 @@
     .text {
       color: #FCC816;
       font-size: 0.293rem;
-      /*margin-top: 0.053rem;*/
+      margin-top: 0.053rem;
       margin-left: 0.08rem;
     }
   }
@@ -621,7 +621,7 @@
           padding: 0;
           .text {
             color: #FCC816;
-            /*margin-top: 0.026rem;*/
+            margin-top: 0 !important;
           }
           i {
             width: 0.053rem;
