@@ -198,9 +198,9 @@ function getRecommends (count) {
  * @param username
  * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
  */
-function getDianpingCommentDetail (pathUrl, title, imgUrl, username) {
+function getDianpingCommentDetail (slug, title, imgUrl, username) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
-  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1&uuid=' + getLocalUuid()
+  var link = process.env.H5_ROOT + '/#' + '/dianping/comment/' + slug + '?noback=1&uuid=' + getLocalUuid()
 
   if (!imgUrl) {
     imgUrl = whiteLogo
@@ -216,6 +216,32 @@ function getDianpingCommentDetail (pathUrl, title, imgUrl, username) {
   }
 }
 
+/**
+ * 点评产品详情
+ * @param productName
+ * @param productDesc
+ * @param imgUrl
+ * @param username
+ * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
+ */
+function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + '/dianping/product/' + productName + '?noback=1&uuid=' + getLocalUuid()
+
+  if (!imgUrl) {
+    imgUrl = whiteLogo
+  }
+
+  return {
+    title: username + '邀请您点评',
+    link: link,
+    content: productName,
+    imageUrl: imgUrl,
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '点评产品'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
@@ -227,5 +253,6 @@ export {
   getResumeDetail,
   getGroupDetail,
   getRecommends,
-  getDianpingCommentDetail
+  getDianpingCommentDetail,
+  getDianpingProductDetail
 }
