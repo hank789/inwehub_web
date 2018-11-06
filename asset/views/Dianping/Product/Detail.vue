@@ -3,6 +3,11 @@
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
       <h1 class="mui-title">产品服务</h1>
+      <div class="topMore" @tap.stop.prevent="joinShare">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-gengduo1"></use>
+        </svg>
+      </div>
     </header>
     <div class="mui-content" v-show="!loading">
 
@@ -174,6 +179,7 @@
   import userAbility from '../../../utils/userAbility'
   import FooterMenu from '../../../components/DianPingFooterMenu.vue'
   import PageMore from '../../../components/PageMore.vue'
+  import {getTextDiscoverDetail} from '../../../utils/shareTemplate'
 
   export default {
     data () {
@@ -254,6 +260,18 @@
         this.shareOption = shareOption
         this.$refs.share.share()
       },
+      joinShare () {
+        this.iconMenus = []
+        var shareOption = getTextDiscoverDetail(
+          '/dianping/product' + '/' +
+          this.id,
+          this.detail.name,
+          this.detail.subscribers,
+          this.detail.logo
+        )
+        this.shareOption = Object.assign(this.shareOption, shareOption)
+        this.$refs.share.share()
+      },
       goChat (uid) {
         userAbility.jumpToChat(uid, this)
       },
@@ -319,7 +337,12 @@
       width: auto !important;
     }
   }
-
+  .topMore {
+    float: right;
+    color: #3C3E44;
+    margin-top: 10px;
+    font-size: 0.56rem;
+  }
   .product-introduce {
     width: 9.146rem;
     margin: 0 auto;

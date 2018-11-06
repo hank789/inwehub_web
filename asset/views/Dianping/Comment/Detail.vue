@@ -444,7 +444,7 @@
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
-          var shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
+          var shareOption = getTextDiscoverDetail('/dianping/comment/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
           this.shareOption = Object.assign(this.shareOption, shareOption)
           this.loading = 0
         })
