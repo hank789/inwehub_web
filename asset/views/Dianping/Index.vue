@@ -30,6 +30,7 @@
           class="listWrapper"
         >
 
+        <template slot="listHeader">
         <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
           <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="index">
@@ -40,7 +41,7 @@
                 </div>
                 <div class="comment-name">
                   <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
-                  <div><timeago :since="timeago(recommandProduct.created_at.date)" :auto-update="60"></timeago> </div>
+                  <div><timeago :since="timeago(recommandProduct.created_at)" :auto-update="60"></timeago> </div>
                 </div>
                 <div class="comment-mark font-family-medium">{{ recommandProduct.rate_star }}分</div>
               </div>
@@ -79,6 +80,7 @@
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
+        </template>
 
         <div class="container-product-list">
           <div class="productMenu">
@@ -89,7 +91,7 @@
               </svg>
             </div>
             <div class="productSort" @tap.stop.prevent="selectSort()">
-              <span>排序</span>
+              <span>{{ orderByName }}</span>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-paixu"></use>
               </svg>
@@ -201,6 +203,16 @@
       },
       nextOtherData () {
         return {category_id: this.category.id, orderBy: this.orderBy}
+      },
+      orderByName () {
+        switch (this.orderBy) {
+          case 0:
+            return '排序'
+          case 1:
+            return '评分'
+          case 2:
+            return '热度'
+        }
       }
     },
     components: {

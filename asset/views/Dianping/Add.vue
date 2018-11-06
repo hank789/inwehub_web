@@ -68,6 +68,7 @@
       <div class="container-identity">
         <div class="identityTitle" @tap.stop.prevent="selectUserRole()">
           <span>请告诉我们您的身份</span>
+          {{ identity }}
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-jinru"></use>
           </svg>
@@ -75,7 +76,7 @@
         <div class="line-river-after line-river-after-top"></div>
         <div class="assessDomain">您的评价属于哪个领域</div>
         <div class="domainList">
-          <span class="border-football" @tap.stop.prevent="selectCategory($event, category.id)" v-for="(category, index) in detail.categories">{{ category.name }}</span>
+          <span class="border-football" :class="{active: !!category.selected}" @tap.stop.prevent="selectCategory($event, category)" v-for="(category, index) in detail.categories">{{ category.name }}</span>
         </div>
         <div class="fixedContainer">
           <span class="niming" @tap.stop.prevent="switchHide()"><label class="nimingCheckbox" :class="{'active': hide}"></label>匿名</span>
@@ -119,6 +120,7 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import Options from '../../components/Options.vue'
   import { add, getProductDetail } from '../../utils/dianping'
+  import Vue from 'vue'
 
   export default {
     data () {
@@ -151,8 +153,7 @@
         allOption: [
           '终端用户',
           '管理人员'
-        ],
-        category_ids: []
+        ]
       }
     },
     computed: {
@@ -161,6 +162,16 @@
           return false
         }
         return true
+      },
+      category_ids () {
+        var ids = []
+        for (var i in this.detail.categories) {
+          var item = this.detail.categories[i]
+          if (item.selected) {
+            ids.push(item.id)
+          }
+        }
+        return ids
       }
     },
     components: {
@@ -188,9 +199,8 @@
       }
     },
     methods: {
-      selectCategory (event, id) {
-        event.target.classList.add('active')
-        this.category_ids.push(id)
+      selectCategory (event, item) {
+        Vue.set(item, 'selected', !item.selected)
       },
       refreshPageData () {
         this.initData()
@@ -268,6 +278,11 @@
         var text = this.text.replace(/\s/g, '').trim()
         if (!text) {
           window.mui.toast('请填写内容')
+          return
+        }
+
+        if (!this.identity) {
+          window.mui.toast('请选择您的身份')
           return
         }
 

@@ -12,8 +12,8 @@
             <use xlink:href="#icon-xiangxiajiantou"></use>
           </svg>
         </div>
-        <div>
-          <span class="font-family-medium" @tap.stop.prevent="selectSort()">排序</span>
+        <div @tap.stop.prevent="selectSort()">
+          <span class="font-family-medium">{{ orderByName }}</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-paixu"></use>
           </svg>
@@ -117,6 +117,16 @@
       },
       nextOtherData () {
         return {category_id: this.category.id, orderBy: this.orderBy}
+      },
+      orderByName () {
+        switch (this.orderBy) {
+          case 0:
+            return '排序'
+          case 1:
+            return '评分'
+          case 2:
+            return '热度'
+        }
       }
     },
     methods: {
