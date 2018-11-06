@@ -273,7 +273,7 @@
 
   .dianpingBanners{
     padding-top:0.4rem;
-    height: 280px;
+    height: 7.466rem;
     background:linear-gradient(180deg,rgba(220,220,220,1) 0%,rgba(243,244,246,1) 100%);
     .swiper-slide{
       width:auto !important;
@@ -383,7 +383,7 @@
   }
   .container-product-list {
     background: #ffffff;
-    margin-top: -14px;
+    margin-top: -0.373rem;
     padding-bottom: 0.4rem;
     position: relative;
     z-index: 10;
@@ -405,8 +405,8 @@
           font-size: 0.186rem;
         }
         .jianTou {
-          margin-left: 3px;
-          margin-top: -2px;
+          margin-left: 0.08rem;
+          margin-top: -0.053rem;
         }
       }
       .productSort {
@@ -456,7 +456,7 @@
     bottom: 50px; /* px不转换 */
   }
   .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: 24px;
+    bottom: 0.64rem;
   }
 </style>
 

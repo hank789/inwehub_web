@@ -144,7 +144,7 @@
 
 <style scoped="scoped" lang="less">
   .listWrapper{
-    max-height:300px;
+    max-height:8rem;
     overflow: scroll;
   }
   .container-select .listWrapper > .list {

@@ -52,14 +52,14 @@
 
 <style scoped>
   .container-menuFooter .menu.lightWidth .desc {
-    width: 93px !important;
-    height: 31px;
-    border-radius: 8px;
+    width: 2.48rem !important;
+    height: 0.826rem;
+    border-radius: 0.213rem;
     background: #03AEF9;
-    line-height: 31px !important;
+    line-height: 0.826rem !important;
     color: #FFFFFF;
-    font-size: 14px;
-    top: 11px;
-    left: 16px;
+    font-size: 0.373rem;
+    top: 0.293rem;
+    left: 0.426rem;
   }
 </style>
