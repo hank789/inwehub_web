@@ -64,7 +64,7 @@
         </li>
       </ul>
       <div class="enjoy" @tap.stop.prevent="$router.pushPlus('/my/choiceRole')">
-        <img src="../../statics/images/enjoy2x.png" alt="">
+        <img v-if="show_my_wallet" src="../../statics/images/enjoy2x.png" alt="">
       </div>
       <div class="gray"></div>
 
