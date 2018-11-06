@@ -63,7 +63,7 @@
 
       <div>
         <template v-for="(comment, index) in productComments">
-          <feedDianping :item="comment"></feedDianping>
+          <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
         </template>
       </div>
 
@@ -121,6 +121,13 @@
       @clickedItem="footerMenuClickedItem"
     ></FooterMenu>
 
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
+    ></PageMore>
+
   </div>
 </template>
 
@@ -130,6 +137,7 @@
   import { getProductDetail, getProductComments } from '../../../utils/dianping'
   import userAbility from '../../../utils/userAbility'
   import FooterMenu from '../../../components/FooterMenu.vue'
+  import PageMore from '../../../components/PageMore.vue'
 
   export default {
     data () {
@@ -187,16 +195,24 @@
             el: '.swiper-pagination'
           }
         },
-        productComments: []
+        productComments: [],
+        shareOption: {},
+        iconMenus: []
       }
     },
     components: {
       swiper,
       swiperSlide,
       feedDianping,
-      FooterMenu
+      FooterMenu,
+      PageMore
     },
     methods: {
+      showItemMore (shareOption, item) {
+        this.iconMenus = []
+        this.shareOption = shareOption
+        this.$refs.share.share()
+      },
       goChat (uid) {
         userAbility.jumpToChat(uid, this)
       },

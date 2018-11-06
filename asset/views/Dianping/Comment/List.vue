@@ -18,28 +18,40 @@
         class="listWrapper"
       >
         <template v-for="(comment, index) in list">
-          <feedDianping :item="comment"></feedDianping>
+          <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
         </template>
       </RefreshList>
     </div>
+
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
+    ></PageMore>
+
   </div>
 </template>
 
 <script>
   import feedDianping from '../../../components/Feed.vue'
   import RefreshList from '../../../components/refresh/List.vue'
+  import PageMore from '../../../components/PageMore.vue'
 
   export default {
     data () {
       return {
         id: '',
         list: [],
-        orderBy: 1
+        orderBy: 1,
+        shareOption: {},
+        iconMenus: []
       }
     },
     components: {
       feedDianping,
-      RefreshList
+      RefreshList,
+      PageMore
     },
     computed: {
       prevOtherData () {
@@ -66,6 +78,11 @@
       }
     },
     methods: {
+      showItemMore (shareOption, item) {
+        this.iconMenus = []
+        this.shareOption = shareOption
+        this.$refs.share.share()
+      },
       refreshPageData () {
         let id = this.$route.params.id
 
