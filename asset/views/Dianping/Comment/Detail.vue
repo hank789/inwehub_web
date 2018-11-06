@@ -471,19 +471,19 @@
   }
   .mark {
     display: flex;
-    padding: 0 16px;
-    margin-bottom: 7px;
+    padding: 0 0.426rem;
+    margin-bottom: 0.186rem;
     .stars {
       color: #FCC816;
       .icon {
-        font-size: 11.5px;
+        font-size: 0.306rem;
       }
     }
     .text {
       color: #FCC816;
-      font-size: 11px;
-      margin-top: 2px;
-      margin-left: 3px;
+      font-size: 0.293rem;
+      margin-top: 0.053rem;
+      margin-left: 0.08rem;
     }
   }
   .allDianPing {
@@ -569,20 +569,20 @@
           padding: 0;
           .text {
             color: #FCC816;
-            margin-top: 1px;
+            margin-top: 0.026rem;
           }
           i {
-            width: 2px;
-            height: 2px;
+            width: 0.053rem;
+            height: 0.053rem;
             background: #B4B4B6;
             border-radius: 50%;
-            margin: 11px 5px 0;
+            margin: 0.293rem 0.133rem 0;
             /*display: inline-block;*/
           }
           .comment {
             color: #B4B4B6;
-            font-size: 11px;
-            margin-top: 1px;
+            font-size: 0.293rem;
+            margin-top: 0.026rem;
           }
         }
       }
