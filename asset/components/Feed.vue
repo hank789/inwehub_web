@@ -359,7 +359,7 @@
 
         if (this.isComment) {
           this.shareOption = getDianpingCommentDetail(
-            this.item.feed.comment_url,
+            this.item.feed.slug,
             this.item.feed.title,
             this.item.user.avatar,
             this.item.user.name
