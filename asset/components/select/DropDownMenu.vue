@@ -143,10 +143,6 @@
 </script>
 
 <style scoped="scoped" lang="less">
-  .listWrapper{
-    max-height:8rem;
-    overflow: scroll;
-  }
   .container-select .listWrapper > .list {
     &:last-child {
       border-bottom-right-radius: 0.48rem;
@@ -175,8 +171,6 @@
       }
     }
   }
-</style>
-<style scoped="scoped">
 
   .showTagsHome {
     display: block !important;
@@ -247,9 +241,14 @@
     top: 2.479rem;
     bottom: auto !important;
   }
+  .immersed-top{
+    top:0;
+  }
 
   .dropDownMenuRoot{
     position: absolute;
     width:100%;
+    overflow:scroll;
+    bottom:0;
   }
 </style>
