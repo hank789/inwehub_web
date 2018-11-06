@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="immersed-top dropDownMenuRoot">
     <div id="dropDownMenuWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-top">
       <div class="container-select">
         <div class="select-top">
@@ -115,12 +115,21 @@
         }
       },
       show () {
-        window.mui('#dropDownMenuWrapper').popover('toggle', document.querySelector('.mui-content'))
-//        setTimeout(() => {
-//          if (document.querySelector('.mui-backdrop')) {
-//            document.querySelector('.mui-backdrop').style.top = '2.48rem'
-//          }
-//        }, 1)
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+
+        if (document.querySelector('.mui-backdrop')) {
+          var topHeight = 0
+          var logoAndTabs = document.querySelector('.container-control-logoAndTabsAndSearch')
+          if (logoAndTabs) {
+            topHeight += logoAndTabs.offsetHeight + 5
+          }
+          var openAppHeight = 0
+          var openAppSlider = document.querySelector('#OpenAppSlider')
+          if (openAppSlider) {
+            openAppHeight += openAppSlider.offsetHeight
+          }
+          document.querySelector('.mui-backdrop').style.top = (topHeight + openAppHeight + window.immersedHeight) + 'px'
+        }
       }
     }
   }
@@ -136,7 +145,6 @@
   }
 
   .container-select {
-    margin-top: 2.48rem;
     .select-top {
       height: 0.906rem;
       font-size: 0.346rem;
@@ -220,7 +228,17 @@
   }
 
   .mui-popover-top {
-    top: 0;
+    top: 1.173rem;
     bottom: auto !important;
+  }
+
+  .openAppH5 .mui-popover-top {
+    top: 2.479rem;
+    bottom: auto !important;
+  }
+
+  .dropDownMenuRoot{
+    position: absolute;
+    width:100%;
   }
 </style>
