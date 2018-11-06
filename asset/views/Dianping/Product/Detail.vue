@@ -307,6 +307,7 @@
             })
             break
           case '邀人点评':
+            this.joinShare()
             break
         }
       }
