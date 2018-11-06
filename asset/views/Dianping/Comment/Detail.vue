@@ -20,8 +20,22 @@
             :time="detail.created_at"
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
-
           <div class="line-river lineMargin"></div>
+
+          <div class="mark">
+            <div class="stars">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shixinxingxing"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shixinxingxing"></use>
+              </svg>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shixinxingxing"></use>
+              </svg>
+            </div>
+            <div class="text">4.3分</div>
+          </div>
 
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper container-editor container-editor-app" id="contentWrapper">
@@ -47,7 +61,18 @@
               <div class="linkContent">
                 <div v-if="detail.tags[0].name" class="text-line-2">{{detail.tags[0].name}}</div>
                 <span v-else class="seat"></span>
-                <div class="text-line-1">{{detail.tags[0].reviews}}条评论</div>
+                <div class="mark">
+                  <div class="stars">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shixinxingxing"></use>
+                    </svg>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shixinxingxing"></use>
+                    </svg>
+                  </div>
+                  <div class="text">4.3分</div><i></i>
+                  <div class="comment">{{detail.tags[0].reviews}}条评论</div>
+                </div>
               </div>
             </div>
           </div>
@@ -444,11 +469,21 @@
     background: #ffffff;
     bottom: 1.333rem;
   }
-  .topImg {
-    margin-bottom: 0.32rem;
-    img {
-      width: 10rem;
-      height: 5.333rem;
+  .mark {
+    display: flex;
+    padding: 0 16px;
+    margin-bottom: 7px;
+    .stars {
+      color: #FCC816;
+      .icon {
+        font-size: 11.5px;
+      }
+    }
+    .text {
+      color: #FCC816;
+      font-size: 11px;
+      margin-top: 2px;
+      margin-left: 3px;
     }
   }
   .allDianPing {
@@ -530,9 +565,25 @@
         .text-line-2 {
           color: #808080;
         }
-        .text-line-1 {
-          color: #B4B4B6;
-          font-size: 0.32rem;
+        .mark {
+          padding: 0;
+          .text {
+            color: #FCC816;
+            margin-top: 1px;
+          }
+          i {
+            width: 2px;
+            height: 2px;
+            background: #B4B4B6;
+            border-radius: 50%;
+            margin: 11px 5px 0;
+            /*display: inline-block;*/
+          }
+          .comment {
+            color: #B4B4B6;
+            font-size: 11px;
+            margin-top: 1px;
+          }
         }
       }
     }
