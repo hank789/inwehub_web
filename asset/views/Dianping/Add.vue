@@ -67,8 +67,7 @@
 
       <div class="container-identity">
         <div class="identityTitle" @tap.stop.prevent="selectUserRole()">
-          <span>请告诉我们您的身份</span>
-          {{ identity }}
+          <span>{{ !identity ? '请告诉我们您的身份' : identity }}</span>
           <svg class="icon" aria-hidden="true" >
             <use xlink:href="#icon-jinru"></use>
           </svg>

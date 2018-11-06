@@ -86,9 +86,11 @@
           <div class="productMenu">
             <div class="productType" @tap.stop.prevent="showDropdownMenu()">
               <span>{{ !category.name?'选择类型': category.name }}</span>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-xiangxiajiantou"></use>
-              </svg>
+              <div class="jianTou">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-xiangxiajiantou"></use>
+                </svg>
+              </div>
             </div>
             <div class="productSort" @tap.stop.prevent="selectSort()">
               <span>{{ orderByName }}</span>
@@ -397,9 +399,14 @@
       justify-content: space-between;
       box-shadow:0rem 0.133rem 0.266rem 0rem rgba(249,249,251,1);
       .productType {
+        display: flex;
         .icon {
           color: #B4B4B6;
           font-size: 0.186rem;
+        }
+        .jianTou {
+          margin-left: 3px;
+          margin-top: -2px;
         }
       }
       .productSort {
