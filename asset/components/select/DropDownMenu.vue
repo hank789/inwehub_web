@@ -143,6 +143,10 @@
 </script>
 
 <style scoped="scoped" lang="less">
+  .listWrapper{
+    max-height:300px;
+    overflow: scroll;
+  }
   .container-select .listWrapper > .list {
     &:last-child {
       border-bottom-right-radius: 0.48rem;
