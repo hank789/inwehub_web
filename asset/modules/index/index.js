@@ -47,9 +47,9 @@ Vue.use(infiniteScroll)
 
 // 正在加载的图片；
 import loadingGif from './../../statics/images/loading.gif'
-// vue 评分插件；
-import StarRating from './../../components/star-rating/star-rating'
 
+// vue 评分插件；
+import StarRating from 'vue-star-rating'
 Vue.component('star-rating', StarRating)
 
 import VueClipboards from 'vue-clipboards'
