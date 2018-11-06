@@ -54,10 +54,24 @@
                   <div class="product-detail">
                     <div class="productName font-family-medium">{{ recommandProduct.tag.name }}</div>
                     <div class="productMark">
-                      <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-shoucangdilantongyi"></use>
-                      </svg><span>{{ recommandProduct.tag.review_average_rate }}分</span>
-                      <i></i><span>{{ recommandProduct.tag.review_count }}条评论</span>
+                      <div class="stars">
+                        <star-rating
+                          :padding="3"
+                          :activeColor="'#fcc816'"
+                          :star-size="11"
+                          :show-rating="false"
+                          :border-color="'#fcc816'"
+                          :border-width="1"
+                          :inactive-color="'#F7F8FA'"
+                          :rating="recommandProduct.tag.review_average_rate"
+                          :read-only="true"
+                          :starPoints="[938.5,323.6,704,289.8,599,76.3,595.3,69.9,586.6,58.2,576.3,48,564.5,39.2,558.1,35.3,552.8,32.6,541.9,28.4,530.6,25.6,519,24.2,513,24.1,506.3,24.3,493,26.1,480.4,29.6,468.4,34.7,457.3,41.4,447.1,49.7,438.1,59.3,430.4,70.3,427,76.3,319.5,289.8,85,323.6,77.9,325,64.3,329.6,51.4,336.2,39.7,344.7,34.3,349.7,30.8,353.3,24.5,360.8,19,368.8,14.5,377.2,10.8,385.9,8,394.9,6.1,404,5,413.3,4.9,422.6,5.6,431.9,7.3,441.1,9.8,450.1,13.2,458.9,17.5,467.4,22.8,475.5,28.9,483.2,32.3,486.9,202.2,652.8,161.8,887.3,161.1,894.6,161.3,909.3,163.6,923.8,168,937.8,171,944.6,174.3,950.6,182,961.8,191,971.6,201.3,980.1,212.6,987.1,224.8,992.5,237.7,996.2,251.2,998.2,258,998.4,263.6,998.3,274.7,997.1,285.5,994.5,296,990.7,301.1,988.2,511,877.6,721.4,988.2,726.7,990.8,737.5,995.1,748.8,997.9,760.2,999.3,766,999.4,767.5,999.4,774.1,999.1,780.8,998.4,785.6,997.5,794.8,995.1,803.8,991.9,812.3,987.8,820.3,982.9,827.7,977.2,834.6,970.7,840.9,963.4,843.8,959.5,846.5,955.6,851.4,947.4,855.4,938.8,858.6,929.9,860.8,920.7,862.1,911.3,862.4,901.7,861.8,892.1,861.2,887.3,820.7,652.8,990.7,486.9,995.7,481.4,1004.2,469.5,1010.9,456.6,1015.4,442.6,1016.8,435.2,1017.7,430.3,1018.5,420.6,1018.4,411,1017.3,401.6,1015.3,392.4,1012.4,383.5,1008.6,375,1004,366.9,998.7,359.3,992.7,352.3,985.9,345.8,978.6,340,970.6,334.9,962,330.6,953,327.1,943.4,324.5,938.5,323.6,938.5,323.6]"
+                        ></star-rating>
+                      </div>
+                      <div class="starsText">
+                        <span>{{ recommandProduct.tag.review_average_rate }}分</span>
+                        <i></i><span>{{ recommandProduct.tag.review_count }}条评论</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -94,10 +108,24 @@
                 <div class="product-detail">
                   <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
                   <div class="productMark">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-shoucangdilantongyi"></use>
-                    </svg><span>{{ item.review_average_rate }}分</span>
-                    <i></i><span>{{ item.review_count }}条评论</span>
+                    <div class="stars">
+                      <star-rating
+                        :padding="3"
+                        :activeColor="'#fcc816'"
+                        :star-size="11"
+                        :show-rating="false"
+                        :border-color="'#fcc816'"
+                        :border-width="1"
+                        :inactive-color="'#FFFFFF'"
+                        :rating="item.review_average_rate"
+                        :read-only="true"
+                        :starPoints="[938.5,323.6,704,289.8,599,76.3,595.3,69.9,586.6,58.2,576.3,48,564.5,39.2,558.1,35.3,552.8,32.6,541.9,28.4,530.6,25.6,519,24.2,513,24.1,506.3,24.3,493,26.1,480.4,29.6,468.4,34.7,457.3,41.4,447.1,49.7,438.1,59.3,430.4,70.3,427,76.3,319.5,289.8,85,323.6,77.9,325,64.3,329.6,51.4,336.2,39.7,344.7,34.3,349.7,30.8,353.3,24.5,360.8,19,368.8,14.5,377.2,10.8,385.9,8,394.9,6.1,404,5,413.3,4.9,422.6,5.6,431.9,7.3,441.1,9.8,450.1,13.2,458.9,17.5,467.4,22.8,475.5,28.9,483.2,32.3,486.9,202.2,652.8,161.8,887.3,161.1,894.6,161.3,909.3,163.6,923.8,168,937.8,171,944.6,174.3,950.6,182,961.8,191,971.6,201.3,980.1,212.6,987.1,224.8,992.5,237.7,996.2,251.2,998.2,258,998.4,263.6,998.3,274.7,997.1,285.5,994.5,296,990.7,301.1,988.2,511,877.6,721.4,988.2,726.7,990.8,737.5,995.1,748.8,997.9,760.2,999.3,766,999.4,767.5,999.4,774.1,999.1,780.8,998.4,785.6,997.5,794.8,995.1,803.8,991.9,812.3,987.8,820.3,982.9,827.7,977.2,834.6,970.7,840.9,963.4,843.8,959.5,846.5,955.6,851.4,947.4,855.4,938.8,858.6,929.9,860.8,920.7,862.1,911.3,862.4,901.7,861.8,892.1,861.2,887.3,820.7,652.8,990.7,486.9,995.7,481.4,1004.2,469.5,1010.9,456.6,1015.4,442.6,1016.8,435.2,1017.7,430.3,1018.5,420.6,1018.4,411,1017.3,401.6,1015.3,392.4,1012.4,383.5,1008.6,375,1004,366.9,998.7,359.3,992.7,352.3,985.9,345.8,978.6,340,970.6,334.9,962,330.6,953,327.1,943.4,324.5,938.5,323.6,938.5,323.6]"
+                      ></star-rating>
+                    </div>
+                    <div class="starsText">
+                      <span>{{ item.review_average_rate }}分</span>
+                      <i></i><span>{{ item.review_count }}条评论</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -214,7 +242,7 @@
       },
       timeago (time) {
         let newDate = new Date()
-        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        // newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
       refreshPageData () {
@@ -234,11 +262,8 @@
 </script>
 
 <style scoped lang="less">
-  .dianPingWrapper {
-    background: #FFFFFF;
-  }
   .mui-content {
-    background:linear-gradient(180deg,#DCDCDC 0%,#F3F4F6 100%);
+    background: #FFFFFF;
   }
   .container-control-logoAndTabsAndSearch {
     background: #FFFFFF;
@@ -246,7 +271,8 @@
 
   .dianpingBanners{
     padding-top:0.4rem;
-    height: 6.72rem;
+    height: 280px;
+    background:linear-gradient(180deg,rgba(220,220,220,1) 0%,rgba(243,244,246,1) 100%);
     .swiper-slide{
       width:auto !important;
     }
@@ -324,6 +350,7 @@
           line-height: 0.6rem;
         }
         .productMark {
+          display: flex;
           .icon {
             color: #FCC816;
             font-size: 0.32rem;
@@ -346,14 +373,18 @@
             background: #B4B4B6;
             display: inline-block;
           }
+          .starsText {
+          }
         }
       }
     }
   }
   .container-product-list {
     background: #ffffff;
-    margin-top: 0.266rem;
+    margin-top: -14px;
     padding-bottom: 0.4rem;
+    position: relative;
+    z-index: 10;
     border-top-left-radius: 0.426rem;
     border-top-right-radius: 0.426rem;
     .productMenu {
@@ -418,7 +449,7 @@
     bottom: 50px; /* px不转换 */
   }
   .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: -0.053rem;
+    bottom: 24px;
   }
 </style>
 
