@@ -5,7 +5,7 @@
       <h1 class="mui-title" v-text="title"></h1>
     </header>
 
-    <div class="mui-content" v-if="loading">
+    <div class="mui-content" v-if="!loading">
       <vue-pull-refresh :on-refresh="refreshPageData">
 
         <div class="mui-table-view detail-discover">
@@ -192,6 +192,13 @@
       </div>
     </div>
 
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="false"
+      :iconMenu="iconMenus"
+    ></PageMore>
+
   </div>
 </template>
 <script>
@@ -209,6 +216,8 @@
   import { upvote, downVote } from '../../../utils/discover'
   import { quillEditor } from '../../../components/vue-quill'
   import hljs from 'highlight.js'
+  import PageMore from '../../../components/PageMore.vue'
+  import {getTextDiscoverDetail} from '../../../utils/shareTemplate'
 
   export default {
     data () {
@@ -226,6 +235,17 @@
             username: ''
           }
         },
+        shareOption: {
+          title: '',
+          link: '',
+          content: '',
+          imageUrl: '',
+          thumbUrl: '',
+          shareName: '',
+          targetType: 'submission',
+          targetId: ''
+        },
+        iconMenus: [],
         loading: 1,
         isFollow: true,
         editorOptionRead: {
@@ -243,6 +263,7 @@
       ArticleDiscuss,
       commentTextarea,
       quillEditor,
+      PageMore,
       'vue-pull-refresh': VuePullRefresh
     },
     computed: {
@@ -254,6 +275,11 @@
       }
     },
     methods: {
+      showItemMore (shareOption, item) {
+        this.iconMenus = []
+        this.shareOption = shareOption
+        this.$refs.share.share()
+      },
       openApp () {
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
       },
@@ -418,6 +444,9 @@
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
+          var shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
+          this.shareOption = Object.assign(this.shareOption, shareOption)
+          this.loading = 0
         })
       },
       setFollowStatus (status) {
