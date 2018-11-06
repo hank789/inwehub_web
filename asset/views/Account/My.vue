@@ -63,7 +63,7 @@
           <span>圈子</span>
         </li>
       </ul>
-      <div class="enjoy" @tap.stop.prevent="$router.pushPlus('/my/choiceRole')">
+      <div v-if="show_my_wallet" class="enjoy" @tap.stop.prevent="$router.pushPlus('/my/choiceRole')">
         <img src="../../statics/images/enjoy2x.png" alt="">
       </div>
       <div class="gray"></div>
