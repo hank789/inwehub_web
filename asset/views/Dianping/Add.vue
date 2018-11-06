@@ -382,7 +382,7 @@
     }
   }
   .component-box {
-    margin: 0.426rem 0 0 0.426rem;
+    margin: 0 0 0 0.426rem;
   }
 
   .container-camera {
@@ -524,7 +524,7 @@
     padding-top: 0 !important;
   }
   .addDianPing .quill-editor {
-    height: 3rem !important;
+    height: 2rem !important;
   }
  .addDianPing .container-upload-images .image {
     /*margin-top: 0 !important;*/
@@ -534,7 +534,7 @@
     display: inline-block;
   }
  .addDianPing .ql-container {
-    height: 3rem !important;
+    height: 2rem !important;
   }
 
   .addDianPing .star-rating {

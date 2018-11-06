@@ -172,7 +172,7 @@
   import feedDianping from '../../../components/Feed.vue'
   import { getProductDetail, getProductComments, collectProduct } from '../../../utils/dianping'
   import userAbility from '../../../utils/userAbility'
-  import FooterMenu from '../../../components/FooterMenu.vue'
+  import FooterMenu from '../../../components/DianPingFooterMenu.vue'
   import PageMore from '../../../components/PageMore.vue'
 
   export default {
@@ -232,7 +232,7 @@
           isLight: false
         },
         {
-          icon: '#icon-pinglun',
+          // icon: '#icon-pinglun',
           text: '写点评',
           number: 0,
           disable: false,
