@@ -14,6 +14,11 @@ Vue.use(timeago)
 
 import router from './routers/index'
 
+require('remote-debug-client')
+window.Debug.start('http://10.105.20.47:30000')
+window.Debug.monitorVue(Vue, router)
+// require('edwin-dom-change')
+
 require('swiper/dist/css/swiper.css')
 
 // import VueLazyloadImg from 'vue-lazyload-img';
