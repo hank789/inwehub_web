@@ -7,7 +7,7 @@
          class="mui-btn appPageSubmit mui-btn-link mui-pull-right">确认发布</a>
     </header>
 
-    <div class="mui-content">
+    <div class="mui-content addDianPing">
       <div class="component-mark">
         <span>就您的感受而言，您会给他打多少分？</span>
         <div class="stars">
@@ -15,12 +15,12 @@
             :increment="0.1"
             :round-start-rating="false"
             v-model="star"
-            :padding="20"
+            :padding="8"
             :activeColor="'#fcc816'"
-            :star-size="30"
+            :star-size="20"
             :show-rating="true"
             :border-color="'#fcc816'"
-            :border-width="1"
+            :border-width="3"
             :inactive-color="'#FFFFFF'"
             :starPoints="[938.5,323.6,704,289.8,599,76.3,595.3,69.9,586.6,58.2,576.3,48,564.5,39.2,558.1,35.3,552.8,32.6,541.9,28.4,530.6,25.6,519,24.2,513,24.1,506.3,24.3,493,26.1,480.4,29.6,468.4,34.7,457.3,41.4,447.1,49.7,438.1,59.3,430.4,70.3,427,76.3,319.5,289.8,85,323.6,77.9,325,64.3,329.6,51.4,336.2,39.7,344.7,34.3,349.7,30.8,353.3,24.5,360.8,19,368.8,14.5,377.2,10.8,385.9,8,394.9,6.1,404,5,413.3,4.9,422.6,5.6,431.9,7.3,441.1,9.8,450.1,13.2,458.9,17.5,467.4,22.8,475.5,28.9,483.2,32.3,486.9,202.2,652.8,161.8,887.3,161.1,894.6,161.3,909.3,163.6,923.8,168,937.8,171,944.6,174.3,950.6,182,961.8,191,971.6,201.3,980.1,212.6,987.1,224.8,992.5,237.7,996.2,251.2,998.2,258,998.4,263.6,998.3,274.7,997.1,285.5,994.5,296,990.7,301.1,988.2,511,877.6,721.4,988.2,726.7,990.8,737.5,995.1,748.8,997.9,760.2,999.3,766,999.4,767.5,999.4,774.1,999.1,780.8,998.4,785.6,997.5,794.8,995.1,803.8,991.9,812.3,987.8,820.3,982.9,827.7,977.2,834.6,970.7,840.9,963.4,843.8,959.5,846.5,955.6,851.4,947.4,855.4,938.8,858.6,929.9,860.8,920.7,862.1,911.3,862.4,901.7,861.8,892.1,861.2,887.3,820.7,652.8,990.7,486.9,995.7,481.4,1004.2,469.5,1010.9,456.6,1015.4,442.6,1016.8,435.2,1017.7,430.3,1018.5,420.6,1018.4,411,1017.3,401.6,1015.3,392.4,1012.4,383.5,1008.6,375,1004,366.9,998.7,359.3,992.7,352.3,985.9,345.8,978.6,340,970.6,334.9,962,330.6,953,327.1,943.4,324.5,938.5,323.6,938.5,323.6]"
           ></star-rating>
@@ -516,32 +516,32 @@
   }
 </style>
 <style>
-  .container-editor.container-editor-add .textarea-wrapper {
+  .addDianPing .container-editor.container-editor-add .textarea-wrapper {
     border: none;
     margin: 0;
   }
-  .ql-editor {
+  .addDianPing .ql-editor {
     padding-top: 0 !important;
   }
-  .quill-editor {
+  .addDianPing .quill-editor {
     height: 3rem !important;
   }
-  .container-upload-images .image {
+ .addDianPing .container-upload-images .image {
     /*margin-top: 0 !important;*/
     display: inline-block;
   }
-  .component-box .swiper-container {
+  .addDianPing .component-box .swiper-container {
     display: inline-block;
   }
-  .ql-container {
+ .addDianPing .ql-container {
     height: 3rem !important;
   }
 
-  .star-rating {
+  .addDianPing .star-rating {
     height: 0.746rem;
     padding-top: 0.266rem;
   }
-  .star-rating .rating-text {
+  .addDianPing .star-rating .rating-text {
     margin-top: -0.453rem !important;
   }
 </style>
