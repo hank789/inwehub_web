@@ -10,46 +10,48 @@
             </svg>
           </div>
         </div>
-        <div class="listWrapper">
-          <div class="list" v-for="(item, index) in tree" :key="index">
-            <div class="text ListTitle" @tap.capture="selectItem($event, item)">
-              <span>{{item.name}}（{{item.children_count}}）</span>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-xiangshangjiantou"></use>
-              </svg>
-            </div>
-            <div class="listChildren" v-if="item.children.length">
-              <div class="list">
-                <div class="text ListTitle" @tap.capture="selectItem($event, item)">
-                  <span>全部</span>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-xiangshangjiantou"></use>
-                  </svg>
-                </div>
+        <div class="mui-scroll-wrapper">
+          <div class="listWrapper mui-scroll">
+            <div class="list" v-for="(item, index) in tree" :key="index">
+              <div class="text ListTitle" @tap.capture="selectItem($event, item)">
+                <span>{{item.name}}（{{item.children_count}}）</span>
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-xiangshangjiantou"></use>
+                </svg>
               </div>
-              <div class="list" v-for="(itemTwo, itemTwoindex) in item.children" :key="'itemtwo_' + itemTwoindex">
-                <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
-                  <span>{{ itemTwo.name }}（{{itemTwo.children_count}}）</span>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-xiangshangjiantou"></use>
-                  </svg>
-                </div>
-                <div class="listChildren" v-if="itemTwo.children.length">
-                  <div class="list">
-                    <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
-                      <span>全部</span>
-                      <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-xiangshangjiantou"></use>
-                      </svg>
-                    </div>
+              <div class="listChildren" v-if="item.children.length">
+                <div class="list">
+                  <div class="text ListTitle" @tap.capture="selectItem($event, item)">
+                    <span>全部</span>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-xiangshangjiantou"></use>
+                    </svg>
                   </div>
-                  <div class="list" v-for="(itemThree, itemThreeindex) in itemTwo.children"
-                       :key="'itemthree_' + itemThreeindex">
-                    <div class="text ListTitle" @tap.capture="selectItem($event, itemThree)">
-                      <span>{{ itemThree.name }}（{{itemThree.children_count}}）</span>
-                      <svg class="icon" aria-hidden="true">
-                        <use xlink:href="#icon-xiangshangjiantou"></use>
-                      </svg>
+                </div>
+                <div class="list" v-for="(itemTwo, itemTwoindex) in item.children" :key="'itemtwo_' + itemTwoindex">
+                  <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
+                    <span>{{ itemTwo.name }}（{{itemTwo.children_count}}）</span>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-xiangshangjiantou"></use>
+                    </svg>
+                  </div>
+                  <div class="listChildren" v-if="itemTwo.children.length">
+                    <div class="list">
+                      <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
+                        <span>全部</span>
+                        <svg class="icon" aria-hidden="true">
+                          <use xlink:href="#icon-xiangshangjiantou"></use>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="list" v-for="(itemThree, itemThreeindex) in itemTwo.children"
+                         :key="'itemthree_' + itemThreeindex">
+                      <div class="text ListTitle" @tap.capture="selectItem($event, itemThree)">
+                        <span>{{ itemThree.name }}（{{itemThree.children_count}}）</span>
+                        <svg class="icon" aria-hidden="true">
+                          <use xlink:href="#icon-xiangshangjiantou"></use>
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -65,8 +67,7 @@
 <script>
   export default {
     data () {
-      return {
-      }
+      return {}
     },
     components: {},
     props: {
@@ -76,6 +77,11 @@
           return []
         }
       }
+    },
+    mounted () {
+      window.mui('.mui-scroll-wrapper').scroll({
+        deceleration: 0.0005
+      })
     },
     methods: {
       selectItem (event, item) {
@@ -143,10 +149,11 @@
 </script>
 
 <style scoped="scoped" lang="less">
-  .listWrapper{
-    max-height:8rem;
+  .listWrapper {
+    max-height: 8rem;
     overflow: scroll;
   }
+
   .container-select .listWrapper > .list {
     &:last-child {
       border-bottom-right-radius: 0.48rem;
@@ -175,8 +182,6 @@
       }
     }
   }
-</style>
-<style scoped="scoped">
 
   .showTagsHome {
     display: block !important;
@@ -232,6 +237,7 @@
     display: block;
     color: #03AEF9;
   }
+
   .list .text .icon {
     font-size: 0.186rem;
     margin: 0.293rem 0.426rem 0;
@@ -248,8 +254,12 @@
     bottom: auto !important;
   }
 
-  .dropDownMenuRoot{
+  .immersed-top {
+    top: 0;
+  }
+
+  .dropDownMenuRoot {
     position: absolute;
-    width:100%;
+    width: 100%;
   }
 </style>
