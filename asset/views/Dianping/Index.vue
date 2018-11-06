@@ -1,116 +1,118 @@
 <template>
   <div>
-    <div class="mui-content">
-      <div class="container-control-logoAndTabsAndSearch">
-        <svg class="icon logoIcon" aria-hidden="true">
-          <use xlink:href="#icon-logowenzi"></use>
-        </svg><span class="splitCircle"></span>
-        <div class="logoAndTabsAndSearchTabs">
-          <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
-          <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
-          <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
+    <div class="dianPingWrapper">
+      <div class="mui-content">
+        <div class="container-control-logoAndTabsAndSearch">
+          <svg class="icon logoIcon" aria-hidden="true">
+            <use xlink:href="#icon-logowenzi"></use>
+          </svg><span class="splitCircle"></span>
+          <div class="logoAndTabsAndSearchTabs">
+            <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
+            <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
+            <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
+          </div>
+          <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
+            <use xlink:href="#icon-sousuo"></use>
+          </svg>
         </div>
-        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
-          <use xlink:href="#icon-sousuo"></use>
-        </svg>
-      </div>
 
-      <div class="line-river-after line-river-after-top"></div>
+        <div class="line-river-after line-river-after-top"></div>
 
-      <RefreshList
-        ref="RefreshList"
-        :api="'tags/productList'"
-        :prevOtherData="prevOtherData"
-        :nextOtherData="nextOtherData"
-        :pageMode = "true"
-        :isShowUpToRefreshDescription="false"
-        v-model="list"
-        :autoShowEmpty="false"
-        class="listWrapper"
-      >
+        <RefreshList
+          ref="RefreshList"
+          :api="'tags/productList'"
+          :prevOtherData="prevOtherData"
+          :nextOtherData="nextOtherData"
+          :pageMode = "true"
+          :isShowUpToRefreshDescription="false"
+          v-model="list"
+          :autoShowEmpty="false"
+          class="listWrapper"
+        >
 
-      <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
+        <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
-        <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="index">
-          <div class="container-product-comment" @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
-            <div class="comment-info">
-              <div class="avatarImg">
-                <img class="lazyImg" v-lazy="recommandProduct.user.avatar" alt="">
-              </div>
-              <div class="comment-name">
-                <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
-                <div><timeago :since="timeago(recommandProduct.created_at.date)" :auto-update="60"></timeago> </div>
-              </div>
-              <div class="comment-mark font-family-medium">{{ recommandProduct.rate_star }}分</div>
-            </div>
-            <div class="comment-content text-line-3">{{ recommandProduct.title }}</div>
-            <div class="comment-product">
-              <div class="product-info">
-                <div class="product-img">
-                  <img class="lazyImg" v-lazy="recommandProduct.tag.logo" alt="">
+          <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="index">
+            <div class="container-product-comment" @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
+              <div class="comment-info">
+                <div class="avatarImg">
+                  <img class="lazyImg" v-lazy="recommandProduct.user.avatar" alt="">
                 </div>
-                <div class="product-detail">
-                  <div class="productName font-family-medium">{{ recommandProduct.tag.name }}</div>
-                  <div class="productMark">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-shoucangdilantongyi"></use>
-                    </svg><span>{{ recommandProduct.tag.review_average_rate }}分</span>
-                    <i></i><span>{{ recommandProduct.tag.review_count }}条评论</span>
+                <div class="comment-name">
+                  <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
+                  <div><timeago :since="timeago(recommandProduct.created_at.date)" :auto-update="60"></timeago> </div>
+                </div>
+                <div class="comment-mark font-family-medium">{{ recommandProduct.rate_star }}分</div>
+              </div>
+              <div class="comment-content text-line-3">{{ recommandProduct.title }}</div>
+              <div class="comment-product">
+                <div class="product-info">
+                  <div class="product-img">
+                    <img class="lazyImg" v-lazy="recommandProduct.tag.logo" alt="">
+                  </div>
+                  <div class="product-detail">
+                    <div class="productName font-family-medium">{{ recommandProduct.tag.name }}</div>
+                    <div class="productMark">
+                      <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-shoucangdilantongyi"></use>
+                      </svg><span>{{ recommandProduct.tag.review_average_rate }}分</span>
+                      <i></i><span>{{ recommandProduct.tag.review_count }}条评论</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination"></div>
-      </swiper>
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination"></div>
+        </swiper>
 
-      <div class="container-product-list">
-        <div class="productMenu">
-          <div class="productType" @tap.stop.prevent="showDropdownMenu()">
-            <span>{{ !category.name?'选择类型': category.name }}</span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-xiangxiajiantou"></use>
-            </svg>
+        <div class="container-product-list">
+          <div class="productMenu">
+            <div class="productType" @tap.stop.prevent="showDropdownMenu()">
+              <span>{{ !category.name?'选择类型': category.name }}</span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-xiangxiajiantou"></use>
+              </svg>
+            </div>
+            <div class="productSort" @tap.stop.prevent="selectSort()">
+              <span>排序</span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-paixu"></use>
+              </svg>
+            </div>
           </div>
-          <div class="productSort" @tap.stop.prevent="selectSort()">
-            <span>排序</span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-paixu"></use>
-            </svg>
-          </div>
-        </div>
 
-        <div class="productList">
+          <div class="productList">
 
-          <div class="comment-product" v-for="(item, index) in list" :key="index">
-            <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.name)">
-              <div class="product-img">
-                <img class="lazyImg" v-lazy="item.logo" alt="">
-              </div>
-              <div class="product-detail">
-                <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
-                <div class="productMark">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucangdilantongyi"></use>
-                  </svg><span>{{ item.review_average_rate }}分</span>
-                  <i></i><span>{{ item.review_count }}条评论</span>
+            <div class="comment-product" v-for="(item, index) in list" :key="index">
+              <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.name)">
+                <div class="product-img">
+                  <img class="lazyImg" v-lazy="item.logo" alt="">
+                </div>
+                <div class="product-detail">
+                  <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
+                  <div class="productMark">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shoucangdilantongyi"></use>
+                    </svg><span>{{ item.review_average_rate }}分</span>
+                    <i></i><span>{{ item.review_count }}条评论</span>
+                  </div>
                 </div>
               </div>
+              <div class="line-river-after line-river-after-top"></div>
             </div>
-            <div class="line-river-after line-river-after-top"></div>
+
           </div>
 
-        </div>
-
-        <div class="noData" v-if="!list.length">
-          <div class="DataImg">
-            <img src="../../statics/images/empty@3x.png" alt="">
+          <div class="noData" v-if="!list.length">
+            <div class="DataImg">
+              <img src="../../statics/images/empty@3x.png" alt="">
+            </div>
+            <div class="noDataText">暂时没有数据～</div>
           </div>
-          <div class="noDataText">暂时没有数据～</div>
         </div>
+        </RefreshList>
       </div>
-      </RefreshList>
     </div>
 
     <DropDownMenu
@@ -220,6 +222,9 @@
 </script>
 
 <style scoped lang="less">
+  .dianPingWrapper {
+    background: #FFFFFF;
+  }
   .mui-content {
     background:linear-gradient(180deg,#DCDCDC 0%,#F3F4F6 100%);
   }
