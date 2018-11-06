@@ -162,7 +162,7 @@
   import PageMore from './PageMore.vue'
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
-  import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
+  import { getDianpingCommentDetail, getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
   import { postRequest } from '../utils/request'
 
   export default {
@@ -353,6 +353,15 @@
           this.shareOption = getAskCommunityInteractionDetail(
             this.id,
             this.item.title,
+            this.item.user.name
+          )
+        }
+
+        if (this.isComment) {
+          this.shareOption = getDianpingCommentDetail(
+            this.item.feed.comment_url,
+            this.item.feed.title,
+            this.item.user.avatar,
             this.item.user.name
           )
         }

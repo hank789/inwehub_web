@@ -190,6 +190,32 @@ function getRecommends (count) {
   }
 }
 
+/**
+ * 点评详情
+ * @param pathUrl
+ * @param title
+ * @param imgUrl
+ * @param username
+ * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
+ */
+function getDianpingCommentDetail (pathUrl, title, imgUrl, username) {
+  // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
+  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1&uuid=' + getLocalUuid()
+
+  if (!imgUrl) {
+    imgUrl = whiteLogo
+  }
+
+  return {
+    title: title, // '分享 ' + username + ' 的InweHub动态',
+    link: link,
+    content: '来自InweHub' + username + '的点评',
+    imageUrl: imgUrl,
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '点评'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
@@ -200,5 +226,6 @@ export {
   getInviteAnswerDetail,
   getResumeDetail,
   getGroupDetail,
-  getRecommends
+  getRecommends,
+  getDianpingCommentDetail
 }

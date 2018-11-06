@@ -128,7 +128,14 @@
           if (openAppSlider) {
             openAppHeight += openAppSlider.offsetHeight
           }
-          document.querySelector('.mui-backdrop').style.top = (topHeight + openAppHeight + window.immersedHeight) + 'px'
+
+          var muiBarHeight = 0
+          var muiBar = document.querySelector('.mui-bar-nav')
+          if (muiBar) {
+            muiBarHeight += muiBar.offsetHeight
+          }
+
+          document.querySelector('.mui-backdrop').style.top = (muiBarHeight + topHeight + openAppHeight + window.immersedHeight) + 'px'
         }
       }
     }

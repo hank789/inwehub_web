@@ -13,7 +13,7 @@
           </svg>
         </div>
         <div>
-          <span class="font-family-medium">好评</span>
+          <span class="font-family-medium" @tap.stop.prevent="selectSort()">排序</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-paixu"></use>
           </svg>
@@ -64,6 +64,13 @@
       v-model="category"
     ></DropDownMenu>
 
+    <Options
+      ref="itemOptions"
+      :id="'itemOptions'"
+      :options="['评分', '热度']"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
@@ -71,6 +78,8 @@
   import DropDownMenu from '../../../components/select/DropDownMenu.vue'
   import { getCategories } from '../../../utils/dianping'
   import RefreshList from '../../../components/refresh/List.vue'
+  import Options from '../../../components/Options.vue'
+
   export default {
     data () {
       return {
@@ -78,12 +87,14 @@
           id: ''
         },
         categories: [],
-        list: []
+        list: [],
+        orderBy: 1
       }
     },
     components: {
       DropDownMenu,
-      RefreshList
+      RefreshList,
+      Options
     },
     computed: {
       prevOtherData () {
@@ -94,6 +105,20 @@
       }
     },
     methods: {
+      selectSort () {
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (text) {
+        this.$refs.itemOptions.toggle()
+        switch (text) {
+          case '评分':
+            this.orderBy = 1
+            break
+          case '热度':
+            this.orderBy = 2
+            break
+        }
+      },
       showDropdownMenu () {
         this.$refs.dropdownMenu.show()
       },
