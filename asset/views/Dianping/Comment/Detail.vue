@@ -7,11 +7,6 @@
 
     <div class="mui-content" v-if="loading">
       <vue-pull-refresh :on-refresh="refreshPageData">
-        <div>
-          <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
-            <img v-lazy="detail.data.img" class="lazyImg">
-          </div>
-        </div>
 
         <div class="mui-table-view detail-discover">
           <UserInfo
@@ -26,34 +21,14 @@
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
 
-          <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
-
           <div class="line-river lineMargin"></div>
 
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper container-editor container-editor-app" id="contentWrapper">
               <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
-
-              <div class="richText container-editor container-editor-app" v-show="detail.type === 'article'">
-                <div class="quill-editor">
-                  <div class="ql-container ql-snow">
-                    <div class="ql-editor discoverContent">
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <quill-editor
-                class="hiddenWrapper"
-                ref="myTextEditorRead"
-                :options="editorOptionRead"
-                @ready="onEditorReadyRead($event)"
-                @change="change"
-              >
-              </quill-editor>
             </div>
 
-            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
+            <div class="linkWrapper Column" v-if="detail.type === 'review' && detail.data.img && detail.data.img.length">
               <template v-for="(image, index) in detail.data.img">
                 <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
                      :data-preview-group="1"/>
@@ -141,7 +116,7 @@
     </div>
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer" @tap.capture="onTap($event)">
+    <div class="container-footer">
       <div class="footerLeft">
         <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
         <div class="footerMenuTwo" v-else>
@@ -150,7 +125,7 @@
         </div>
       </div>
       <div class="footerRight">
-        <div class="collectionComment" @tap.stop.prevent="collection()">
+        <div class="collectionComment" @tap.stop.prevent="collect()">
           <div>
             <svg class="icon" aria-hidden="true" :class="{active: detail.is_bookmark}">
               <use xlink:href="#icon-shoucangdilantongyi"></use>
@@ -173,7 +148,9 @@
 </template>
 <script>
   import { getCommentDetail } from '../../../utils/dianping.js'
-  import { textToLinkHtml, transferTagToLink } from '../../../utils/dom'
+  import { textToLinkHtml, transferTagToLink, addPreviewAttrForImg } from '../../../utils/dom'
+  import {postRequest} from '../../../utils/request'
+  import userAbility from '../../../utils/userAbility'
   import UserInfo from '../../../components/question-detail/UserInfo.vue'
   import { openVendorUrl, openAppUrl } from '../../../utils/plus'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
@@ -181,6 +158,9 @@
   import localEvent from '../../../stores/localStorage'
   import ArticleDiscuss from '../../../components/discover/ArticleDiscuss.vue'
   import commentTextarea from '../../../components/comment/Textarea.vue'
+  import { upvote, downVote } from '../../../utils/discover'
+  import { quillEditor } from '../../../components/vue-quill'
+  import hljs from 'highlight.js'
 
   export default {
     data () {
@@ -214,9 +194,155 @@
       UserInfo,
       ArticleDiscuss,
       commentTextarea,
+      quillEditor,
       'vue-pull-refresh': VuePullRefresh
     },
+    computed: {
+      discussStoreParams () {
+        return {'submission_id': this.detail.id}
+      },
+      discussListParams () {
+        return {'submission_slug': this.detail.slug, sort: 'hot'}
+      }
+    },
     methods: {
+      openApp () {
+        window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
+      collect () {
+        var data = {
+          id: this.detail.id
+        }
+
+        postRequest(`article/bookmark-submission`, data).then(response => {
+          var code = response.data.code
+          if (code === 6108) {
+            userAbility.inviteJoinInGroup(this, response.data.data.group_id)
+            return
+          } else if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          if (response.data.data.type === 'unbookmarked') {
+            this.detail.bookmarks--
+            this.detail.is_bookmark = 0
+          } else {
+            this.detail.bookmarks++
+            this.detail.is_bookmark = 1
+          }
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:bookmark:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': this.isCollected ? 'cancel' : 'bookmark',
+                'referrer_page': ''
+              }
+            )
+          }
+        })
+      },
+      detailDownVote () {
+        downVote(this, this.detail.id, (response) => {
+          this.detail.is_downvoted = 1
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+          this.isUpvote = response.data.data.type
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:downvote:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': 'downvote',
+                'referrer_page': ''
+              }
+            )
+          }
+        }, (response) => {
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+          this.detail.is_downvoted = 0
+          this.isUpvote = response.data.data.type
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:downvote:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': 'cancelDownvote',
+                'referrer_page': ''
+              }
+            )
+          }
+        })
+      },
+      upVote () {
+        upvote(this, this.detail.id, (response) => {
+          this.detail.upvotes++
+          this.detail.is_upvoted = 1
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+          this.isUpvote = response.data.data.type
+          var support = {
+            name: this.name,
+            uuid: this.uuid
+          }
+          this.detail.supporter_list = this.detail.supporter_list.concat(support)
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': 'support',
+                'referrer_page': ''
+              }
+            )
+          }
+        }, (response) => {
+          this.detail.upvotes--
+          this.detail.is_upvoted = 0
+          this.detail.support_description = response.data.data.support_description
+          this.detail.support_percent = response.data.data.support_percent
+          this.isUpvote = response.data.data.type
+          for (var i in this.detail.supporter_list) {
+            if (this.detail.supporter_list[i].uuid === this.uuid) {
+              this.detail.supporter_list.splice(i, 1)
+            }
+          }
+
+          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            // mixpanel
+            window.mixpanel.track(
+              'inwehub:support:success',
+              {
+                'app': 'inwehub',
+                'user_device': window.getUserAppDevice(),
+                'page': this.id,
+                'page_name': 'submission',
+                'page_title': 'cancelSupport',
+                'referrer_page': ''
+              }
+            )
+          }
+        })
+      },
       refreshPageData () {
         this.getDetail()
       },
@@ -246,17 +372,17 @@
           this.detail = detail
         })
       },
-      discussStoreParams () {
-        return {'submission_id': this.detail.id}
-      },
-      discussListParams () {
-        return {'submission_slug': this.detail.slug, sort: 'hot'}
-      },
       setFollowStatus (status) {
         this.detail.is_followed_author = status
       },
       textToLink (text) {
         return transferTagToLink(textToLinkHtml(' ' + text))
+      },
+      onEditorReadyRead (editor) {
+        this.editorReadObj = editor
+        if (this.editorReadContentObj) {
+          this.editorReadObj.setContents(this.editorReadContentObj)
+        }
       },
       change (editor) {
         var html = editor.html
@@ -346,6 +472,20 @@
     color: #444;
     line-height: 0.693rem;
     margin-bottom: 0.693rem;
+  }
+
+  .linkWrapper {
+    padding: 0 0.426rem;
+  }
+  .Column {
+    width: 100%;
+    height: max-content;
+  }
+  .Column .discover_img {
+    width: 100%;
+    border-radius: 0.106rem;
+    margin-bottom: 0.693rem;
+    vertical-align: top;
   }
   .link {
     padding: 0 0.426rem;
