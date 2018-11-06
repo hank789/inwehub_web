@@ -340,7 +340,7 @@
   .topMore {
     float: right;
     color: #3C3E44;
-    margin-top: 10px;
+    margin-top: 0.266rem;
     font-size: 0.56rem;
   }
   .product-introduce {
