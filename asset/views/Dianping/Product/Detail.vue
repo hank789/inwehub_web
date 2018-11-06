@@ -14,11 +14,14 @@
         <div class="companyMark">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shoucangdilantongyi"></use>
-          </svg><span>{{ detail.review_average_rate }}分</span>
+          </svg>
+          <span>{{ detail.review_average_rate }}分</span>
           <i></i><span class="comment">{{ detail.review_count }}条评论</span>
         </div>
         <div class="companyDescribe">{{ detail.description }}</div>
-        <div class="supply" v-if="detail.vendor" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span class="font-family-medium">{{ detail.vendor.name }}</span></div>
+        <div class="supply" v-if="detail.vendor"
+             @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span
+          class="font-family-medium">{{ detail.vendor.name }}</span></div>
       </div>
       <div class="optionlList">
         <template v-for="(category, index) in detail.categories">
@@ -58,7 +61,9 @@
 
       </div>
       <div class="line-river-big"></div>
-      <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}</div>
+      <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}
+
+      </div>
       <div class="line-river-after line-river-after-top"></div>
 
       <div>
@@ -67,7 +72,11 @@
         </template>
       </div>
 
-      <div class="openAllDianPing font-family-medium" @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.name + '/comment')">查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评</div>
+      <div class="openAllDianPing font-family-medium"
+           @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.name + '/comment')">
+        查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评
+
+      </div>
       <div class="line-river-big"></div>
 
       <div class="component-score" @tap.stop.prevent="$router.pushPlus('/dianping/add/' + detail.name)">
@@ -96,16 +105,17 @@
 
       <div class="productList">
         <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
-          <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + tag.name)">
+          <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + tag.name)">
             <div class="product-img">
-              <img class="lazyImg"  v-lazy="tag.logo" alt="">
+              <img class="lazyImg" v-lazy="tag.logo" alt="">
             </div>
             <div class="product-detail">
               <div class="productName font-family-medium">{{ tag.name }}</div>
               <div class="productMark">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-shoucangdilantongyi"></use>
-                </svg><span>{{ tag.review_average_rate }}分</span>
+                </svg>
+                <span>{{ tag.review_average_rate }}分</span>
                 <i></i><span>{{ tag.review_count }}条评论</span>
               </div>
             </div>
@@ -134,7 +144,7 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import feedDianping from '../../../components/Feed.vue'
-  import { getProductDetail, getProductComments } from '../../../utils/dianping'
+  import { getProductDetail, getProductComments, collectProduct } from '../../../utils/dianping'
   import userAbility from '../../../utils/userAbility'
   import FooterMenu from '../../../components/FooterMenu.vue'
   import PageMore from '../../../components/PageMore.vue'
@@ -145,32 +155,9 @@
         loading: 1,
         id: '',
         detail: {
-          reviews: 0
+          reviews: 0,
+          followers: 0
         },
-        footerMenus: [{
-          icon: '#icon-yaoqing',
-          text: '邀人点评',
-          number: 0,
-          disable: false,
-          rightLine: true,
-          isLight: false
-        },
-        {
-          icon: '#icon-shoucang',
-          text: '关注',
-          number: 0,
-          disable: false,
-          rightLine: true,
-          isLight: false
-        },
-        {
-          icon: '#icon-pinglun',
-          text: '写点评',
-          number: 0,
-          disable: false,
-          rightLine: false,
-          isLight: true
-        }],
         recommendAdvisers: [
           1,
           2,
@@ -198,6 +185,34 @@
         productComments: [],
         shareOption: {},
         iconMenus: []
+      }
+    },
+    computed: {
+      footerMenus () {
+        return [{
+          icon: '#icon-yaoqing',
+          text: '邀人点评',
+          number: 0,
+          disable: false,
+          rightLine: true,
+          isLight: false
+        },
+        {
+          icon: '#icon-shoucang',
+          text: '关注',
+          number: 0,
+          disable: this.detail.followers,
+          rightLine: true,
+          isLight: false
+        },
+        {
+          icon: '#icon-pinglun',
+          text: '写点评',
+          number: 0,
+          disable: false,
+          rightLine: false,
+          isLight: true
+        }]
       }
     },
     components: {
@@ -240,6 +255,15 @@
           case '写点评':
             this.$router.pushPlus('/dianping/add/' + this.detail.name)
             break
+          case '关注':
+            collectProduct(this, this.detail.id, () => {
+              this.detail.followers = 1
+            }, () => {
+              this.detail.followers = 0
+            })
+            break
+          case '邀人点评':
+            break
         }
       }
     },
@@ -261,13 +285,15 @@
     background: #ffffff;
     bottom: 1.33333rem;
   }
-  .recommenBanners{
+
+  .recommenBanners {
     height: 3.28rem;
     padding-top: 1.173rem;
-    .swiper-slide{
-      width:auto !important;
+    .swiper-slide {
+      width: auto !important;
     }
   }
+
   .product-introduce {
     width: 9.146rem;
     margin: 0 auto;
@@ -275,7 +301,7 @@
     background: #ffffff;
     border-bottom-left-radius: 0.533rem;
     border-bottom-right-radius: 0.533rem;
-    box-shadow:0rem 0.186rem 0.346rem 0rem rgba(240,242,245,1);
+    box-shadow: 0rem 0.186rem 0.346rem 0rem rgba(240, 242, 245, 1);
     .companyLogo {
       width: 1.6rem;
       height: 1.6rem;
@@ -334,6 +360,7 @@
       }
     }
   }
+
   .optionlList {
     .list {
       color: #444444;
@@ -360,6 +387,7 @@
       }
     }
   }
+
   .recommend {
     position: relative;
     /*padding-bottom: 0.666rem;*/
@@ -433,12 +461,14 @@
     font-size: 0.426rem;
     line-height: 1.173rem;
   }
+
   .openAllDianPing {
     text-align: center;
     font-size: 0.373rem;
     color: #808080;
     line-height: 1.173rem;
   }
+
   .component-score {
     padding: 0.333rem 0.426rem 0.4rem;
     .text {
@@ -464,6 +494,7 @@
       }
     }
   }
+
   .comment-product {
     padding: 0.293rem 0.4rem 0.4rem;
     .product-info {
@@ -528,6 +559,7 @@
   .recommenBanners .swiper-pagination-bullet {
     border-radius: 2.666rem !important;
   }
+
   .recommenBanners .swiper-pagination-bullets .swiper-pagination-bullet-active {
     width: 0.28rem;
   }
