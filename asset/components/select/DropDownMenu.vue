@@ -176,11 +176,11 @@
 
 <style scoped="scoped" lang="less">
   #dropDownMenuWrapper, .mui-scroll-wrapper, .dropDownMenuRoot{
-    /*max-height:400px;*/
+    /*max-height:10.666rem;*/
   }
 
   .mui-scroll-wrapper, .container-select{
-    /*height:400px;*/
+    /*height:10.666rem;*/
   }
 
   .mui-scroll-wrapper{
