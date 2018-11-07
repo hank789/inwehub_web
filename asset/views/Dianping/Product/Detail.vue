@@ -61,7 +61,7 @@
 
         <swiper :options="swiperOption" class="recommenBanners">
           <swiper-slide v-for="(advisers, index) in detail.recommend_users" :key="index">
-            <div class="recommendList" @tap.stop.prevent="goChat(advisers.uuid)">
+            <div class="recommendList" @tap.stop.prevent="goChat(advisers.id)">
               <div class="avatar">
                 <img class="lazyImg" v-lazy="advisers.avatar_url" alt="">
               </div>
