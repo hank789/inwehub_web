@@ -36,7 +36,7 @@
             <i></i><span class="comment">{{ detail.review_count }}条评论</span>
           </div>
         </div>
-        <div class="companyDescribe">{{ detail.description }}</div>
+        <div class="companyDescribe">{{ detail.summary }}</div>
         <div class="supply" v-if="detail.vendor"
              @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span
           class="font-family-medium">{{ detail.vendor.name }}</span></div>
@@ -179,7 +179,7 @@
   import userAbility from '../../../utils/userAbility'
   import FooterMenu from '../../../components/DianPingFooterMenu.vue'
   import PageMore from '../../../components/PageMore.vue'
-  import {getTextDiscoverDetail} from '../../../utils/shareTemplate'
+  import {getDianpingProductDetail} from '../../../utils/shareTemplate'
 
   export default {
     data () {
@@ -262,8 +262,7 @@
       },
       joinShare () {
         this.iconMenus = []
-        var shareOption = getTextDiscoverDetail(
-          '/dianping/product' + '/' +
+        var shareOption = getDianpingProductDetail(
           this.id,
           this.detail.name,
           this.detail.subscribers,
@@ -330,7 +329,6 @@
     background: #ffffff;
     bottom: 1.33333rem;
   }
-
   .recommenBanners {
     height: 3.28rem;
     padding-top: 1.173rem;
@@ -380,6 +378,8 @@
       }
       .starsText {
         display: inline-block;
+        position: relative;
+        top: -1px;
       }
       .comment {
         color: #B4B4B6;
@@ -578,6 +578,9 @@
         }
         .productMark {
           display: flex;
+          .stars {
+            margin-top: 1px;
+          }
           .icon {
             color: #FCC816;
             font-size: 0.32rem;

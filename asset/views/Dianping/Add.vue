@@ -12,7 +12,7 @@
         <span>就您的感受而言，您会给他打多少分？</span>
         <div class="stars">
           <star-rating
-            :increment="0.1"
+            :increment="1"
             :round-start-rating="false"
             v-model="star"
             :padding="8"
@@ -199,6 +199,9 @@
     },
     methods: {
       selectCategory (event, item) {
+        if (this.categories.length === 1) {
+          return false
+        }
         Vue.set(item, 'selected', !item.selected)
       },
       refreshPageData () {
@@ -213,6 +216,9 @@
         this.id = id
 
         getProductDetail(this, id, (data) => {
+          if (data.categories.length === 1) {
+            data.categories[0].selected = true
+          }
           this.detail = data
           this.loading = 0
         })
