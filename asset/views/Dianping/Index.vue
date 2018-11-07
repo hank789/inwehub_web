@@ -30,7 +30,6 @@
         :autoShowEmpty="false"
         class="listWrapper"
       >
-
         <template slot="listHeader">
           <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
