@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
+    <div id="home-content" class="mui-content">
       <div class="container-control-logoAndTabsAndSearch">
         <svg class="icon logoIcon" aria-hidden="true">
           <use xlink:href="#icon-logowenzi"></use>
