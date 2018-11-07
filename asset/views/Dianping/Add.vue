@@ -200,7 +200,7 @@
     },
     methods: {
       selectCategory (event, item) {
-        if (this.categories.length === 1) {
+        if (this.detail && this.detail.categories.length === 1) {
           return false
         }
         Vue.set(item, 'selected', !item.selected)
