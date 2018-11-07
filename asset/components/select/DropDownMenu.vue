@@ -5,9 +5,11 @@
       <div class="select-top">
         <div class="type" @tap.stop.prevent="show">
           <span>选择类型</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xiangshangjiantou"></use>
-          </svg>
+          <div class="jianTou">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xiangshangjiantou"></use>
+            </svg>
+          </div>
         </div>
       </div>
       <div class="mui-scroll-wrapper dropDownScrollWrapper">
@@ -154,14 +156,23 @@
       justify-content: space-between;
       box-shadow: 0rem 0.133rem 0.266rem 0rem #F9F9FB;
       .type {
+        display: flex;
         color: #03AEF9;
         .icon {
           font-size: 0.186rem;
         }
+        .jianTou {
+          margin-left: 0.08rem;
+          margin-top: -0.053rem;
+        }
       }
     }
   }
-
+  .mui-popover .mui-scroll-wrapper {
+    overflow: hidden;
+    border-bottom-right-radius: 0.48rem !important;
+    border-bottom-left-radius: 0.48rem !important;
+  }
   .dropDownMenuRoot .shareWrapper {
     border-bottom-right-radius: 0.48rem;
     border-bottom-left-radius: 0.48rem;

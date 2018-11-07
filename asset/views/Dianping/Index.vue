@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content">
+    <div id="home-content" class="mui-content">
       <div class="container-control-logoAndTabsAndSearch">
         <svg class="icon logoIcon" aria-hidden="true">
           <use xlink:href="#icon-logowenzi"></use>
@@ -86,7 +86,7 @@
           </swiper>
         </template>
 
-        <div id="home-content" class="container-product-list">
+        <div class="container-product-list">
           <div class="productMenu">
             <div class="productType" @tap.stop.prevent="showDropdownMenu()">
               <span>{{ !category.name ? '选择类型' : category.name }}</span>
@@ -162,8 +162,8 @@
           </svg>
           <span class="splitCircle"></span>
           <div class="logoAndTabsAndSearchTabs">
-            <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
-            <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
+            <div class="tab" @tap.stop.prevent="goGroups">圈子</div>
+            <div class="tab" @tap.stop.prevent="goAskOffers">问答</div>
             <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
           </div>
           <svg class="icon searchIcon" aria-hidden="true"
@@ -246,6 +246,14 @@
       Options
     },
     methods: {
+      goGroups () {
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+        this.$router.replace('/groups')
+      },
+      goAskOffers () {
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+        this.$router.replace('/ask/offers')
+      },
       selectedItem (text) {
         this.$refs.itemOptions.toggle()
         switch (text) {

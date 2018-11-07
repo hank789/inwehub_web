@@ -62,4 +62,7 @@
     top: 0.293rem;
     left: 0.426rem;
   }
+  .container-menuFooter .menu_1 .iconWrapper svg {
+    font-size: 22px;
+  }
 </style>
