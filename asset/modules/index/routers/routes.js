@@ -2491,7 +2491,7 @@ const routes = [
     meta: {
       title: '点评',
       wechatHideHeader: false,
-      keepAlive: false
+      keepAlive: true
     },
     component: componets.DianpingIndex,
     beforeEnter: (to, from, next) => {
