@@ -218,10 +218,10 @@ function getDianpingCommentDetail (slug, title, imgUrl, username) {
 
 /**
  * 点评产品详情
+ * @param username
  * @param productName
  * @param productDesc
  * @param imgUrl
- * @param username
  * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
  */
 function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
