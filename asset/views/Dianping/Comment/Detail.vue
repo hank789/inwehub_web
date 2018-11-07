@@ -206,7 +206,7 @@
 </template>
 <script>
   import { getCommentDetail } from '../../../utils/dianping.js'
-  import { textToLinkHtml, transferTagToLink, addPreviewAttrForImg } from '../../../utils/dom'
+  import { textToLinkHtml, transferTagToLink, addPreviewAttrForImg, scrollToElement } from '../../../utils/dom'
   import {postRequest} from '../../../utils/request'
   import userAbility from '../../../utils/userAbility'
   import UserInfo from '../../../components/question-detail/UserInfo.vue'
@@ -428,7 +428,7 @@
       },
       goComment () {
         this.$refs.discuss.rootComment()
-        // scrollToElement(this, '#commentTitle', '.pull-down-container')
+        scrollToElement(this, '#commentTitle', '.pull-down-container')
       },
       commentFinish () {
         this.commentNumAdd()

@@ -86,7 +86,7 @@
           </swiper>
         </template>
 
-        <div class="container-product-list">
+        <div class="container-product-list" id="containerProductList">
           <div class="productMenu">
             <div class="productType" @tap.stop.prevent="showDropdownMenu()">
               <span>{{ !category.name ? '选择类型' : category.name }}</span>
@@ -190,6 +190,7 @@
   import { getRecommandProductList, getCategories } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
+  import { scrollToElement } from '../../utils/dom.js'
 
   export default {
     data () {
@@ -269,6 +270,7 @@
         this.$refs.itemOptions.toggle()
       },
       showDropdownMenu () {
+        scrollToElement(this, '#containerProductList', '#listWrapper')
         this.$refs.dropdownMenu.show()
       },
       timeago (time) {

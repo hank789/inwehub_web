@@ -11,153 +11,155 @@
     </header>
     <div class="mui-content" v-show="!loading">
 
-      <div class="product-introduce">
-        <div class="companyLogo border-football">
-          <img class="lazyImg" v-lazy="detail.logo" alt="">
-        </div>
-        <div class="companyNmae font-family-medium">{{ detail.name }}</div>
-        <div class="companyMark">
-          <div class="stars">
-            <star-rating
-              :increment="0.1"
-              :padding="3"
-              :activeColor="'#fcc816'"
-              :star-size="11"
-              :show-rating="false"
-              :border-color="'#fcc816'"
-              :border-width="1"
-              :inactive-color="'#FFFFFF'"
-              :rating="detail.review_average_rate"
-              :read-only="true"
-              :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
-            ></star-rating>
+      <vue-pull-refresh :on-refresh="refreshPageData">
+        <div class="product-introduce">
+          <div class="companyLogo border-football">
+            <img class="lazyImg" v-lazy="detail.logo" alt="">
           </div>
-          <div class="starsText">
-            <span>{{ detail.review_average_rate }}分</span>
-            <i></i><span class="comment">{{ detail.review_count }}条评论</span>
-          </div>
-        </div>
-        <div class="companyDescribe">{{ detail.summary }}</div>
-        <div class="supply" v-if="detail.vendor"
-             @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span
-          class="font-family-medium">{{ detail.vendor.name }}</span></div>
-      </div>
-      <div class="optionlList">
-        <template v-for="(category, index) in detail.categories">
-          <div class="list" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + category.id + '/' + encodeURIComponent(category.name))">
-            <span>{{ category.name }}</span>
-            <span class="ranking">No.{{ category.rate }}</span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-jinru"></use>
-            </svg>
-          </div>
-          <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
-        </template>
-      </div>
-      <div class="line-river-big"></div>
-
-      <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
-        <div class="recommendTitle">
-          <span class="font-family-medium">推荐顾问</span>
-        </div>
-
-        <swiper :options="swiperOption" class="recommenBanners">
-          <swiper-slide v-for="(advisers, index) in detail.recommend_users" :key="index">
-            <div class="recommendList" @tap.stop.prevent="goChat(advisers.id)">
-              <div class="avatar">
-                <img class="lazyImg" v-lazy="advisers.avatar_url" alt="">
-              </div>
-              <div class="personalInfo">
-                <div class="name">
-                  <span class="font-family-medium">{{ advisers.name }}</span>
-                </div>
-                <div class="good">擅长“{{ advisers.skill }}”</div>
-              </div>
-              <div class="speak"><span class="border-football">沟通</span></div>
+          <div class="companyNmae font-family-medium">{{ detail.name }}</div>
+          <div class="companyMark">
+            <div class="stars">
+              <star-rating
+                :increment="0.1"
+                :padding="3"
+                :activeColor="'#fcc816'"
+                :star-size="11"
+                :show-rating="false"
+                :border-color="'#fcc816'"
+                :border-width="1"
+                :inactive-color="'#FFFFFF'"
+                :rating="detail.review_average_rate"
+                :read-only="true"
+                :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
+              ></star-rating>
             </div>
-          </swiper-slide>
-          <div class="swiper-pagination" slot="pagination"></div>
-        </swiper>
-
-      </div>
-      <div v-if="detail.review_count">
-        <div class="line-river-big"></div>
-        <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}</div>
-        <div class="line-river-after line-river-after-top"></div>
-
-        <div>
-          <template v-for="(comment, index) in productComments">
-            <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
+            <div class="starsText">
+              <span>{{ detail.review_average_rate }}分</span>
+              <i></i><span class="comment">{{ detail.review_count }}条评论</span>
+            </div>
+          </div>
+          <div class="companyDescribe">{{ detail.summary }}</div>
+          <div class="supply" v-if="detail.vendor"
+               @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span
+            class="font-family-medium">{{ detail.vendor.name }}</span></div>
+        </div>
+        <div class="optionlList">
+          <template v-for="(category, index) in detail.categories">
+            <div class="list" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + category.id + '/' + encodeURIComponent(category.name))">
+              <span>{{ category.name }}</span>
+              <span class="ranking">No.{{ category.rate }}</span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-jinru"></use>
+              </svg>
+            </div>
+            <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
           </template>
         </div>
+        <div class="line-river-big"></div>
 
-        <div class="openAllDianPing font-family-medium"
-             @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.name + '/comment')">
-          查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评
-        </div>
-      </div>
+        <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
+          <div class="recommendTitle">
+            <span class="font-family-medium">推荐顾问</span>
+          </div>
 
-      <div class="line-river-big"></div>
-
-      <div class="component-score" @tap.stop.prevent="goDianping()">
-        <div class="text">就您的感受而言，您会给他打多少分？</div>
-        <div class="stars">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xingxingkongxin"></use>
-          </svg>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xingxingkongxin"></use>
-          </svg>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xingxingkongxin"></use>
-          </svg>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xingxingkongxin"></use>
-          </svg>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-xingxingkongxin"></use>
-          </svg>
-        </div>
-      </div>
-      <div class="line-river-big"></div>
-      <div class="allDianPing font-family-medium">相关推荐</div>
-      <div class="line-river-after line-river-after-top"></div>
-
-      <div class="productList">
-        <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
-          <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(tag.name))">
-            <div class="product-img">
-              <img class="lazyImg" v-lazy="tag.logo" alt="">
-            </div>
-            <div class="product-detail">
-              <div class="productName font-family-medium">{{ tag.name }}</div>
-              <div class="productMark">
-                <div class="stars">
-                  <star-rating
-                    :increment="0.1"
-                    :padding="3"
-                    :activeColor="'#fcc816'"
-                    :star-size="11"
-                    :show-rating="false"
-                    :border-color="'#fcc816'"
-                    :border-width="1"
-                    :inactive-color="'#FFFFFF'"
-                    :rating="tag.review_average_rate"
-                    :read-only="true"
-                    :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
-                  ></star-rating>
+          <swiper :options="swiperOption" class="recommenBanners">
+            <swiper-slide v-for="(advisers, index) in detail.recommend_users" :key="index">
+              <div class="recommendList" @tap.stop.prevent="goChat(advisers.id)">
+                <div class="avatar">
+                  <img class="lazyImg" v-lazy="advisers.avatar_url" alt="">
                 </div>
-                <div class="starsText">
-                  <span>{{ tag.review_average_rate }}分</span>
-                  <i></i><span>{{ tag.review_count }}条评论</span>
+                <div class="personalInfo">
+                  <div class="name">
+                    <span class="font-family-medium">{{ advisers.name }}</span>
+                  </div>
+                  <div class="good">擅长“{{ advisers.skill }}”</div>
+                </div>
+                <div class="speak"><span class="border-football">沟通</span></div>
+              </div>
+            </swiper-slide>
+            <div class="swiper-pagination" slot="pagination"></div>
+          </swiper>
+
+        </div>
+        <div v-if="detail.review_count">
+          <div class="line-river-big"></div>
+          <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}</div>
+          <div class="line-river-after line-river-after-top"></div>
+
+          <div>
+            <template v-for="(comment, index) in productComments">
+              <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
+            </template>
+          </div>
+
+          <div class="openAllDianPing font-family-medium"
+               @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.name + '/comment')">
+            查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评
+          </div>
+        </div>
+
+        <div class="line-river-big"></div>
+
+        <div class="component-score" @tap.stop.prevent="goDianping()">
+          <div class="text">就您的感受而言，您会给他打多少分？</div>
+          <div class="stars">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xingxingkongxin"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xingxingkongxin"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xingxingkongxin"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xingxingkongxin"></use>
+            </svg>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-xingxingkongxin"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="line-river-big"></div>
+        <div class="allDianPing font-family-medium">相关推荐</div>
+        <div class="line-river-after line-river-after-top"></div>
+
+        <div class="productList">
+          <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
+            <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(tag.name))">
+              <div class="product-img">
+                <img class="lazyImg" v-lazy="tag.logo" alt="">
+              </div>
+              <div class="product-detail">
+                <div class="productName font-family-medium">{{ tag.name }}</div>
+                <div class="productMark">
+                  <div class="stars">
+                    <star-rating
+                      :increment="0.1"
+                      :padding="3"
+                      :activeColor="'#fcc816'"
+                      :star-size="11"
+                      :show-rating="false"
+                      :border-color="'#fcc816'"
+                      :border-width="1"
+                      :inactive-color="'#FFFFFF'"
+                      :rating="tag.review_average_rate"
+                      :read-only="true"
+                      :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
+                    ></star-rating>
+                  </div>
+                  <div class="starsText">
+                    <span>{{ tag.review_average_rate }}分</span>
+                    <i></i><span>{{ tag.review_count }}条评论</span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="line-river-after line-river-after-top"  v-if="index !== 4 && index !== detail.related_tags.length-1"></div>
           </div>
-          <div class="line-river-after line-river-after-top"  v-if="index !== 4 && index !== detail.related_tags.length-1"></div>
         </div>
-      </div>
-      <div class="line-river-big"></div>
+        <div class="line-river-big"></div>
+      </vue-pull-refresh>
     </div>
 
     <FooterMenu
@@ -187,6 +189,7 @@
   import localEvent from '../../../stores/localStorage'
   import { urlencode } from '../../../utils/string'
   import { scrollToElement } from '../../../utils/dom'
+  import VuePullRefresh from 'vue-awesome-pull-refresh'
 
   export default {
     data () {
@@ -254,7 +257,8 @@
       swiperSlide,
       feedDianping,
       FooterMenu,
-      PageMore
+      PageMore,
+      'vue-pull-refresh': VuePullRefresh
     },
     methods: {
       showItemMore (shareOption, item) {
