@@ -11,7 +11,7 @@
     <template v-for="(child, childIndex) in tree.children">
         <div class="list">
           <div class="text ListTitle" @tap.capture="selectItem($event, child)">
-            <span>{{ child.name }}（{{child.children_count}}）</span>
+            <span>{{ child.name }} {{parseInt(child.children_count) > 0 ? '(' + child.children_count + ')' : ''}}</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-xiangshangjiantou"></use>
             </svg>

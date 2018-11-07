@@ -17,7 +17,7 @@
           <div class="listWrapper">
             <div class="list" v-for="(item, index) in tree" :key="index">
               <div class="text ListTitle" @tap.capture="selectItem($event, item)">
-                <span>{{item.name}} {{item.children_count ? '(' + item.children_count + ')' : '' }}</span>
+                <span>{{item.name}} {{parseInt(item.children_count) > 0 ? '(' + item.children_count + ')' : '' }}</span>
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-xiangshangjiantou"></use>
                 </svg>
