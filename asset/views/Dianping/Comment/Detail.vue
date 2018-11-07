@@ -614,7 +614,7 @@
         }
         &.border-football {
           &:after {
-            border-radius: 8px;
+            border-radius: 0.213rem;
             border-color: #DCDCDC;
           }
         }

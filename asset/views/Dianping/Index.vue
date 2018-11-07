@@ -275,7 +275,7 @@
       },
       timeago (time) {
         let newDate = new Date()
-        // newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
       refreshPageData () {
@@ -426,7 +426,7 @@
           .stars {
             display: flex;
             div {
-              margin-right: 3px;
+              margin-right: 0.08rem;
             }
           }
           .starsText {

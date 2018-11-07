@@ -145,6 +145,11 @@
           window.mui('#refreshContainer').pullRefresh().scrollTo(0, 0, 100)
         }
       },
+      scrollTo (x, y, time) {
+        if (window.mui('#refreshContainer')) {
+          window.mui('#refreshContainer').pullRefresh().scrollTo(x, y, time)
+        }
+      },
       scrollToBottom () {
         if (window.mui(this.$el)) {
           window.mui(this.$el).scroll().reLayout()
