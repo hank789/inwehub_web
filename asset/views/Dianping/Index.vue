@@ -262,6 +262,22 @@
     },
     created () {
       this.refreshPageData()
+    },
+    mounted () {
+      // 左滑
+      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle >= 160) {
+          this.$router.replace('/groups')
+        }
+      })
+      // 右滑
+      document.getElementById('home-content').addEventListener('swiperight', (e) => {
+        var angle = Math.abs(e.detail.angle)
+        if (angle <= 20) {
+          this.$router.replace('/ask/offers')
+        }
+      })
     }
   }
 </script>

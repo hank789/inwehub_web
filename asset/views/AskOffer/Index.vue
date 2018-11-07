@@ -118,7 +118,7 @@
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
         if (angle >= 160) {
-          this.$router.replace('/groups')
+          this.$router.replace('/dianping')
         }
       })
       // 右滑
