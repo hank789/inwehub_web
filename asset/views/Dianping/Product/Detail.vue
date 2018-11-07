@@ -36,7 +36,7 @@
             <i></i><span class="comment">{{ detail.review_count }}条评论</span>
           </div>
         </div>
-        <div class="companyDescribe">{{ detail.description }}</div>
+        <div class="companyDescribe">{{ detail.summary }}</div>
         <div class="supply" v-if="detail.vendor"
              @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span
           class="font-family-medium">{{ detail.vendor.name }}</span></div>
