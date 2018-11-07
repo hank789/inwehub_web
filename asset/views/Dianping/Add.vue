@@ -148,7 +148,7 @@
         html: '',
         identityId: '',
         star: 0,
-        descPlaceholder: '说说您您喜欢/不喜欢的点，他帮助您或公司解决了哪些业务上的问题？',
+        descPlaceholder: '说说您喜欢/不喜欢的点，他帮助您或公司解决了哪些业务上的问题？',
         type: 1,
         allOption: []
       }
