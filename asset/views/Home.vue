@@ -46,7 +46,7 @@
             </div>
           </div>
 
-          <div class="container-tags-home">
+          <div class="container-tags-home container-tags-home-margin">
             <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
             <div class="container-tabLabels">
               <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
@@ -269,13 +269,13 @@
     updated () {},
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight
+        var height = document.querySelector('#home_banner_slider').clientHeight + 10
         if (y > height) {
           document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
           // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
         }
       }, null, (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight
+        var height = document.querySelector('#home_banner_slider').clientHeight + 10
         if (y < height) {
           document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
         }
@@ -345,6 +345,9 @@
   }
   .component-title-iconAndText .iconAndTextLeft .icon{
     color:#FA4975 !important;
+  }
+  .container-tags-home-margin {
+    margin-top: 10px;
   }
   .container-tags-home-hide{
     position: absolute;
