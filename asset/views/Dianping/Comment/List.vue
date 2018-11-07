@@ -21,6 +21,15 @@
           <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
         </template>
       </RefreshList>
+
+      <div class="container-addComment" @tap.stop.prevent="goAddComment">
+        <div class="container-addComment-icon">
+          <svg class="icon logoIcon" aria-hidden="true">
+            <use xlink:href="#icon-fabu"></use>
+          </svg>
+        </div>
+      </div>
+
     </div>
 
     <PageMore
@@ -45,7 +54,8 @@
         list: [],
         orderBy: 1,
         shareOption: {},
-        iconMenus: []
+        iconMenus: [],
+        id: ''
       }
     },
     components: {
@@ -78,6 +88,10 @@
       }
     },
     methods: {
+      goAddComment () {
+        this.id = this.$route.params.id
+        this.$router.pushPlus('/dianping/add/' + this.id)
+      },
       showItemMore (shareOption, item) {
         this.iconMenus = []
         this.shareOption = shareOption

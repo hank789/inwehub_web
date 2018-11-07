@@ -12,13 +12,14 @@
     <div class="mui-content" v-show="!loading">
 
       <div class="product-introduce">
-        <div class="companyLogo">
+        <div class="companyLogo border-football">
           <img class="lazyImg" v-lazy="detail.logo" alt="">
         </div>
         <div class="companyNmae font-family-medium">{{ detail.name }}</div>
         <div class="companyMark">
           <div class="stars">
             <star-rating
+              :increment="0.1"
               :padding="3"
               :activeColor="'#fcc816'"
               :star-size="11"
@@ -53,6 +54,7 @@
           <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
         </template>
       </div>
+      <div class="line-river-big"></div>
 
       <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
         <div class="recommendTitle">
@@ -124,7 +126,7 @@
       <div class="productList">
         <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
           <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + tag.name)">
-            <div class="product-img">
+            <div class="product-img border-football">
               <img class="lazyImg" v-lazy="tag.logo" alt="">
             </div>
             <div class="product-detail">
@@ -132,6 +134,7 @@
               <div class="productMark">
                 <div class="stars">
                   <star-rating
+                    :increment="0.1"
                     :padding="3"
                     :activeColor="'#fcc816'"
                     :star-size="11"
@@ -180,12 +183,15 @@
   import FooterMenu from '../../../components/DianPingFooterMenu.vue'
   import PageMore from '../../../components/PageMore.vue'
   import {getDianpingProductDetail} from '../../../utils/shareTemplate'
+  const currentUser = localEvent.getLocalItem('UserInfo')
+  import localEvent from '../../../stores/localStorage'
 
   export default {
     data () {
       return {
         loading: 1,
         id: '',
+        userName: currentUser.name,
         detail: {
           reviews: 0,
           followers: 0
@@ -263,9 +269,9 @@
       joinShare () {
         this.iconMenus = []
         var shareOption = getDianpingProductDetail(
-          this.id,
+          this.userName,
           this.detail.name,
-          this.detail.subscribers,
+          this.detail.summary,
           this.detail.logo
         )
         this.shareOption = Object.assign(this.shareOption, shareOption)
