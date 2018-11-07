@@ -350,7 +350,7 @@
     color: grey;
   }
   .container-bottom-menus .productName {
-    max-width: 90px;
+    max-width: 2.4rem;
     float: right;
     padding-right: 0.426rem;
     font-size: 0.346rem;
@@ -391,8 +391,8 @@
       .ratingNumber {
         position: absolute;
         right: 0;
-        bottom: 2px;
-        font-size: 18px;
+        bottom: 0.053rem;
+        font-size: 0.48rem;
       }
     }
   }

@@ -424,7 +424,7 @@
           .stars {
             display: flex;
             div {
-              margin-right: 3px;
+              margin-right: 0.08rem;
             }
           }
           .starsText {

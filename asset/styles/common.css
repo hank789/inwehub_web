@@ -3361,29 +3361,29 @@ a {
 }
 
 .comment-product .border-football:after, .product-introduce .border-football:after {
-  border-radius: 8px;
+  border-radius: 0.213rem;
   border-color: #DCDCDC;}
 
 .container-addComment {
   position: absolute;
-  bottom: 20px;
-  right: 16px;
+  bottom: 0.533rem;
+  right: 0.426rem;
   z-index: 10;
 }
 .container-addComment .container-addComment-icon {
-  width: 44px;
-  height: 44px;
+  width: 1.173rem;
+  height: 1.173rem;
   position: relative;
   background: #03AEF9;
   border-radius: 50%;
-  box-shadow:0px 2px 12px 0px rgba(168,223,247,1);
+  box-shadow:0rem 0.053rem 0.32rem 0rem rgba(168,223,247,1);
 }
 .container-addComment .container-addComment-icon .icon {
   color: #FFFFFF;
-  font-size: 22px;
+  font-size: 0.586rem;
   position: absolute;
-  top: 11.5px;
-  left: 10.5px;
+  top: 0.306rem;
+  left: 0.28rem;
 }
 
 
