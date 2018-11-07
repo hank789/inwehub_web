@@ -162,8 +162,8 @@
           </svg>
           <span class="splitCircle"></span>
           <div class="logoAndTabsAndSearchTabs">
-            <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
-            <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
+            <div class="tab" @tap.stop.prevent="goGroups">圈子</div>
+            <div class="tab" @tap.stop.prevent="goAskOffers">问答</div>
             <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
           </div>
           <svg class="icon searchIcon" aria-hidden="true"
@@ -246,6 +246,14 @@
       Options
     },
     methods: {
+      goGroups () {
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+        this.$router.replace('/groups')
+      },
+      goAskOffers () {
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+        this.$router.replace('/ask/offers')
+      },
       selectedItem (text) {
         this.$refs.itemOptions.toggle()
         switch (text) {
