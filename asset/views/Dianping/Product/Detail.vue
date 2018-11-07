@@ -151,7 +151,7 @@
               </div>
             </div>
           </div>
-          <div class="line-river-after line-river-after-top"></div>
+          <div class="line-river-after line-river-after-top"  v-if="index !== 4 && index !== detail.related_tags.length-1"></div>
         </div>
       </div>
       <div class="line-river-big"></div>
