@@ -379,7 +379,7 @@
       .starsText {
         display: inline-block;
         position: relative;
-        top: -1px;
+        top: -0.026rem;
       }
       .comment {
         color: #B4B4B6;
@@ -579,7 +579,7 @@
         .productMark {
           display: flex;
           .stars {
-            margin-top: 1px;
+            margin-top: 0.026rem;
           }
           .icon {
             color: #FCC816;

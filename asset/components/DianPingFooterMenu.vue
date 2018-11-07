@@ -63,6 +63,6 @@
     left: 0.426rem;
   }
   .container-menuFooter .menu_1 .iconWrapper svg {
-    font-size: 22px;
+    font-size: 0.586rem;
   }
 </style>
