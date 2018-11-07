@@ -43,7 +43,7 @@
       </div>
       <div class="optionlList">
         <template v-for="(category, index) in detail.categories">
-          <div class="list" @tap.stop.prevent="$router.pushPlus('/dianping/product')">
+          <div class="list" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + category.id + '/' + encodeURIComponent(category.name))">
             <span>{{ category.name }}</span>
             <span class="ranking">No.{{ category.rate }}</span>
             <svg class="icon" aria-hidden="true">
@@ -191,13 +191,6 @@
           reviews: 0,
           followers: 0
         },
-        recommendAdvisers: [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
         swiperOption: {
           loop: true,
           effect: 'coverflow',
