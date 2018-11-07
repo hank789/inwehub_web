@@ -534,7 +534,7 @@
     .text {
       color: #FCC816;
       font-size: 0.293rem;
-      margin-top: 0.053rem;
+      /*margin-top: 0.053rem;*/
       margin-left: 0.08rem;
     }
   }
