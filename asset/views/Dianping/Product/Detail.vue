@@ -78,23 +78,23 @@
         </swiper>
 
       </div>
-      <div class="line-river-big"></div>
-      <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}
+      <div v-if="detail.review_count">
+        <div class="line-river-big"></div>
+        <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}</div>
+        <div class="line-river-after line-river-after-top"></div>
 
+        <div>
+          <template v-for="(comment, index) in productComments">
+            <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
+          </template>
+        </div>
+
+        <div class="openAllDianPing font-family-medium"
+             @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.name + '/comment')">
+          查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评
+        </div>
       </div>
-      <div class="line-river-after line-river-after-top"></div>
 
-      <div>
-        <template v-for="(comment, index) in productComments">
-          <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
-        </template>
-      </div>
-
-      <div class="openAllDianPing font-family-medium"
-           @tap.stop.prevent="$router.pushPlus('/dianping/' + detail.name + '/comment')">
-        查看全部{{ detail.review_count ? detail.review_count + '条' : '' }}点评
-
-      </div>
       <div class="line-river-big"></div>
 
       <div class="component-score" @tap.stop.prevent="$router.pushPlus('/dianping/add/' + detail.name)">
@@ -151,7 +151,7 @@
               </div>
             </div>
           </div>
-          <div class="line-river-after line-river-after-top"></div>
+          <div class="line-river-after line-river-after-top"  v-if="index !== 4 && index !== detail.related_tags.length-1"></div>
         </div>
       </div>
       <div class="line-river-big"></div>
