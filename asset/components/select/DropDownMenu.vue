@@ -185,6 +185,11 @@
       }
     }
   }
+  .dropDownMenuRoot .shareWrapper {
+    border-bottom-right-radius: 0.48rem;
+    border-bottom-left-radius: 0.48rem;
+    overflow: hidden;
+  }
 
   .showTagsHome {
     display: block !important;
