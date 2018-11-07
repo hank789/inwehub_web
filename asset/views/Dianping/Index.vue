@@ -273,7 +273,7 @@
       },
       timeago (time) {
         let newDate = new Date()
-        // newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
       refreshPageData () {
