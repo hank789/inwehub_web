@@ -217,7 +217,7 @@
   import { quillEditor } from '../../../components/vue-quill'
   import hljs from 'highlight.js'
   import PageMore from '../../../components/PageMore.vue'
-  import {getTextDiscoverDetail} from '../../../utils/shareTemplate'
+  import {getDianpingCommentDetail} from '../../../utils/shareTemplate'
 
   export default {
     data () {
@@ -444,7 +444,7 @@
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
-          var shareOption = getTextDiscoverDetail('/dianping/comment/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
+          var shareOption = getDianpingCommentDetail(this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
           this.shareOption = Object.assign(this.shareOption, shareOption)
           this.loading = 0
         })
