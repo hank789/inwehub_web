@@ -12,7 +12,7 @@
         <span>就您的感受而言，您会给他打多少分？</span>
         <div class="stars">
           <star-rating
-            :increment="0.1"
+            :increment="1"
             :round-start-rating="false"
             v-model="star"
             :padding="8"

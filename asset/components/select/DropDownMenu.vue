@@ -174,11 +174,11 @@
 
 
   #dropDownMenuWrapper {
-    top: 1.173rem;
     bottom: auto !important;
   }
 
   .openAppH5 #dropDownMenuWrapper {
+    top: 1.173rem;
     bottom: auto !important;
   }
 
