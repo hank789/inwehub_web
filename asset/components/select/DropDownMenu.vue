@@ -10,46 +10,50 @@
             </svg>
           </div>
         </div>
-        <div class="listWrapper">
-          <div class="list" v-for="(item, index) in tree" :key="index">
-            <div class="text ListTitle" @tap.capture="selectItem($event, item)">
-              <span>{{item.name}}（{{item.children_count}}）</span>
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-xiangshangjiantou"></use>
-              </svg>
-            </div>
-            <div class="listChildren" v-if="item.children.length">
-              <div class="list">
+        <div class="mui-scroll-wrapper dropDownScrollWrapper">
+          <div class="mui-scroll">
+            <div class="listWrapper">
+              <div class="list" v-for="(item, index) in tree" :key="index">
                 <div class="text ListTitle" @tap.capture="selectItem($event, item)">
-                  <span>全部</span>
+                  <span>{{item.name}}（{{item.children_count}}）</span>
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-xiangshangjiantou"></use>
                   </svg>
                 </div>
-              </div>
-              <div class="list" v-for="(itemTwo, itemTwoindex) in item.children" :key="'itemtwo_' + itemTwoindex">
-                <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
-                  <span>{{ itemTwo.name }}（{{itemTwo.children_count}}）</span>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-xiangshangjiantou"></use>
-                  </svg>
-                </div>
-                <div class="listChildren" v-if="itemTwo.children.length">
+                <div class="listChildren" v-if="item.children.length">
                   <div class="list">
-                    <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
+                    <div class="text ListTitle" @tap.capture="selectItem($event, item)">
                       <span>全部</span>
                       <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-xiangshangjiantou"></use>
                       </svg>
                     </div>
                   </div>
-                  <div class="list" v-for="(itemThree, itemThreeindex) in itemTwo.children"
-                       :key="'itemthree_' + itemThreeindex">
-                    <div class="text ListTitle" @tap.capture="selectItem($event, itemThree)">
-                      <span>{{ itemThree.name }}（{{itemThree.children_count}}）</span>
+                  <div class="list" v-for="(itemTwo, itemTwoindex) in item.children" :key="'itemtwo_' + itemTwoindex">
+                    <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
+                      <span>{{ itemTwo.name }}（{{itemTwo.children_count}}）</span>
                       <svg class="icon" aria-hidden="true">
                         <use xlink:href="#icon-xiangshangjiantou"></use>
                       </svg>
+                    </div>
+                    <div class="listChildren" v-if="itemTwo.children.length">
+                      <div class="list">
+                        <div class="text ListTitle" @tap.capture="selectItem($event, itemTwo)">
+                          <span>全部</span>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-xiangshangjiantou"></use>
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="list" v-for="(itemThree, itemThreeindex) in itemTwo.children"
+                           :key="'itemthree_' + itemThreeindex">
+                        <div class="text ListTitle" @tap.capture="selectItem($event, itemThree)">
+                          <span>{{ itemThree.name }}（{{itemThree.children_count}}）</span>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-xiangshangjiantou"></use>
+                          </svg>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -76,14 +80,15 @@
         }
       }
     },
-    updated () {
-      this.$nextTick(() => {
-//        setTimeout(() => {
-//          window.mui('.mui-scroll-wrapper').scroll({
-//            deceleration: 0.0005
-//          })
-//        }, 1000)
-      })
+    mounted () {
+      setTimeout(() => {
+        window.mui('.dropDownScrollWrapper').scroll({
+          scrollY: true,
+          scrollX: false,
+          indicators: true,
+          bounce: false
+        })
+      }, 100)
     },
     methods: {
       selectItem (event, item) {
@@ -121,9 +126,22 @@
             curEle.nextElementSibling.classList.remove('active')
           }
         }
+
+        setTimeout(() => {
+          this.autoScrollWrapperHeight()
+        }, 100)
+      },
+      autoScrollWrapperHeight () {
+        var height = document.querySelector('.dropDownScrollWrapper > .mui-scroll').offsetHeight
+        if (height > 400) {
+          height = 400
+        }
+
+        document.querySelector('.dropDownScrollWrapper').style.height = height + 'px'
       },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
+        this.autoScrollWrapperHeight()
 
         if (document.querySelector('.mui-backdrop')) {
           var topHeight = 0
@@ -143,7 +161,13 @@
             muiBarHeight += muiBar.offsetHeight
           }
 
-          document.querySelector('.mui-backdrop').style.top = (muiBarHeight + topHeight + openAppHeight + window.immersedHeight) + 'px'
+          var immersedWrapperHeight = 0
+          var immersedWrapper = document.querySelector('#immersedWrapper')
+          if (immersedWrapper) {
+            immersedWrapperHeight += immersedWrapper.offsetHeight
+          }
+
+          document.querySelector('.mui-backdrop').style.top = (muiBarHeight + topHeight + openAppHeight + immersedWrapperHeight) + 'px'
         }
       }
     }
@@ -151,10 +175,18 @@
 </script>
 
 <style scoped="scoped" lang="less">
-  .listWrapper {
-    max-height: 8rem;
-    overflow: scroll;
-    height: 300px;
+  #dropDownMenuWrapper, .mui-scroll-wrapper, .dropDownMenuRoot{
+    /*max-height:400px;*/
+  }
+
+  .mui-scroll-wrapper, .container-select{
+    /*height:400px;*/
+  }
+
+  .mui-scroll-wrapper{
+    top:0.906rem;
+    margin-top:0 !important;
+    border-radius: 0 !important;
   }
 
   .container-select .listWrapper > .list {
@@ -166,6 +198,9 @@
   }
 
   .container-select {
+    position: absolute;
+    width:100%;
+
     .select-top {
       height: 0.906rem;
       font-size: 0.346rem;
@@ -185,10 +220,10 @@
       }
     }
   }
+
   .dropDownMenuRoot .shareWrapper {
     border-bottom-right-radius: 0.48rem;
     border-bottom-left-radius: 0.48rem;
-    overflow: hidden;
   }
 
   .showTagsHome {
