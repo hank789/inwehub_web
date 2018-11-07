@@ -312,7 +312,7 @@
         add(this, data, options, (res) => {
           window.mui.toast('发布成功！')
           this.resetData()
-          this.$router.replace('/dianping/comment/' + res.id)
+          this.$router.replace('/dianping/comment/' + res.slug)
         })
       }
     }
