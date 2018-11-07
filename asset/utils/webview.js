@@ -392,21 +392,21 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
   var pathUrl = detailUrl
 
   if (/^http/i.test(url)) {
+    if (window.mixpanel.track) {
+      window.mixpanel.track(
+        'inwehub:read_page_detail', {
+          'app': 'inwehub',
+          'user_device': window.getUserAppDevice(),
+          'page': url,
+          'page_title': title
+        }
+      )
+    }
+    if (window.ga) {
+      window.ga('set', 'page', url)
+      window.ga('send', 'pageview')
+    }
     if (window.mui.os.plus) {
-      if (window.mixpanel.track) {
-        window.mixpanel.track(
-          'inwehub:read_page_detail', {
-            'app': 'inwehub',
-            'user_device': window.getUserAppDevice(),
-            'page': url,
-            'page_title': title
-          }
-        )
-      }
-      if (window.ga) {
-        window.ga('set', 'page', url)
-        window.ga('send', 'pageview')
-      }
       var articleParams = {
         article_id: id,
         article_url: url,
