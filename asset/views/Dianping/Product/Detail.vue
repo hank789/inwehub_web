@@ -97,7 +97,7 @@
 
       <div class="line-river-big"></div>
 
-      <div class="component-score" @tap.stop.prevent="$router.pushPlus('/dianping/add/' + detail.name)">
+      <div class="component-score" @tap.stop.prevent="goDianping()">
         <div class="text">就您的感受而言，您会给他打多少分？</div>
         <div class="stars">
           <svg class="icon" aria-hidden="true">
@@ -123,7 +123,7 @@
 
       <div class="productList">
         <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
-          <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + tag.name)">
+          <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(tag.name))">
             <div class="product-img">
               <img class="lazyImg" v-lazy="tag.logo" alt="">
             </div>
@@ -180,6 +180,7 @@
   import FooterMenu from '../../../components/DianPingFooterMenu.vue'
   import PageMore from '../../../components/PageMore.vue'
   import {getDianpingProductDetail} from '../../../utils/shareTemplate'
+  import { urlencode } from '../../../utils/string'
 
   export default {
     data () {
@@ -293,10 +294,13 @@
           this.productComments = productComments
         })
       },
+      goDianping () {
+        this.$router.pushPlus('/dianping/add/' + urlencode(this.detail.name))
+      },
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '写点评':
-            this.$router.pushPlus('/dianping/add/' + this.detail.name)
+            this.goDianping()
             break
           case '关注':
             collectProduct(this, this.detail.id, () => {

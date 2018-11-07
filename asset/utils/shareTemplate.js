@@ -226,7 +226,7 @@ function getDianpingCommentDetail (slug, title, imgUrl, username) {
  */
 function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
-  var link = process.env.H5_ROOT + '/#' + '/dianping/product/' + productName + '?noback=1&uuid=' + getLocalUuid()
+  var link = process.env.H5_ROOT + '/#' + '/dianping/product/' + encodeURIComponent(productName) + '?noback=1&uuid=' + getLocalUuid()
 
   if (!imgUrl) {
     imgUrl = whiteLogo
