@@ -3360,6 +3360,34 @@ a {
   display: block;
 }
 
+.comment-product .border-football:after, .product-introduce .border-football:after {
+  border-radius: 8px;
+  border-color: #DCDCDC;}
+
+.container-addComment {
+  position: absolute;
+  bottom: 20px;
+  right: 16px;
+  z-index: 10;
+}
+.container-addComment .container-addComment-icon {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  background: #03AEF9;
+  border-radius: 50%;
+  box-shadow:0px 2px 12px 0px rgba(168,223,247,1);
+}
+.container-addComment .container-addComment-icon .icon {
+  color: #FFFFFF;
+  font-size: 22px;
+  position: absolute;
+  top: 11.5px;
+  left: 10.5px;
+}
+
+
+
 
 
 

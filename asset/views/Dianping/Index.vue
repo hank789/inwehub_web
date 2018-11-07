@@ -51,7 +51,7 @@
                 <div class="comment-content text-line-3">{{ recommandProduct.title }}</div>
                 <div class="comment-product">
                   <div class="product-info">
-                    <div class="product-img">
+                    <div class="product-img border-football">
                       <img class="lazyImg" v-lazy="recommandProduct.tag.logo" alt="">
                     </div>
                     <div class="product-detail">
@@ -59,6 +59,7 @@
                       <div class="productMark">
                         <div class="stars">
                           <star-rating
+                            :increment="0.1"
                             :padding="3"
                             :activeColor="'#fcc816'"
                             :star-size="11"
@@ -104,7 +105,6 @@
           </div>
 
           <div class="productList">
-
             <div class="comment-product" v-for="(item, index) in list" :key="'comment-product_' + index">
               <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
                 <div class="product-img">
@@ -115,6 +115,7 @@
                   <div class="productMark">
                     <div class="stars">
                       <star-rating
+                        :increment="0.1"
                         :padding="3"
                         :activeColor="'#fcc816'"
                         :star-size="11"
@@ -419,6 +420,12 @@
             border-radius: 50%;
             background: #B4B4B6;
             display: inline-block;
+          }
+          .stars {
+            display: flex;
+            div {
+              margin-right: 3px;
+            }
           }
           .starsText {
           }

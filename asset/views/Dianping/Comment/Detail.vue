@@ -54,13 +54,15 @@
           </div>
           <!-- 新增链接样式 -->
           <div class="link" v-if="detail.tags">
-            <div class="linkBox" @tap.stop.prevent="goArticle(detail)">
+            <div class="linkBox" @tap.stop.prevent="goProductDetail()">
               <span class="linkIimg" v-if="!detail.tags[0].logo">
                 <svg class="icon" aria-hidden="true" >
                   <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
                 </svg>
               </span>
-              <img class="lazyImg" v-lazy="detail.tags[0].logo" v-else>
+              <div class="productLogo border-football" v-else>
+                <img class="lazyImg" v-lazy="detail.tags[0].logo">
+              </div>
               <div class="linkContent">
                 <div v-if="detail.tags[0].name" class="text-line-2">{{detail.tags[0].name}}</div>
                 <span v-else class="seat"></span>
@@ -119,6 +121,7 @@
                 <div class="productMark">
                   <div class="stars">
                     <star-rating
+                      :increment="0.1"
                       :padding="3"
                       :activeColor="'#fcc816'"
                       :star-size="11"
@@ -275,6 +278,9 @@
       }
     },
     methods: {
+      goProductDetail () {
+        this.$router.replace('/dianping/product/' + this.detail.tags[0].name)
+      },
       showItemMore (shareOption, item) {
         this.iconMenus = []
         this.shareOption = shareOption
@@ -595,13 +601,23 @@
           font-size: 0.746rem;
         }
       }
-      img {
+      .productLogo {
         width: 1.173rem;
         height: 1.173rem;
         float: left;
         margin-right: 0.266rem;
-        border-radius: 0.106rem;
-        object-fit: cover;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.106rem;
+          object-fit: cover;
+        }
+        &.border-football {
+          &:after {
+            border-radius: 8px;
+            border-color: #DCDCDC;
+          }
+        }
       }
       .linkContent {
         font-size: 0.373rem;
