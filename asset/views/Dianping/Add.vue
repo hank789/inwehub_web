@@ -199,6 +199,9 @@
     },
     methods: {
       selectCategory (event, item) {
+        if (this.categories.length === 1) {
+          return false
+        }
         Vue.set(item, 'selected', !item.selected)
       },
       refreshPageData () {
@@ -213,6 +216,9 @@
         this.id = id
 
         getProductDetail(this, id, (data) => {
+          if (data.categories.length === 1) {
+            data.categories[0].selected = true
+          }
           this.detail = data
           this.loading = 0
         })
