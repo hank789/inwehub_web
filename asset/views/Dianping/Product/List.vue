@@ -7,7 +7,7 @@
     <div class="mui-content">
       <div class="listSelect">
         <div @tap.stop.prevent="showDropdownMenu()">
-          <span class="font-family-medium">{{ !category.name?'采购软件': category.name }}</span>
+          <span class="font-family-medium">{{ !category.name ? '选择类型' : category.name }}</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-xiangxiajiantou"></use>
           </svg>
@@ -32,7 +32,7 @@
       >
         <div class="list">
           <div class="comment-product" v-for="(item, index) in list" :key="index">
-            <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.name)">
+            <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
               <div class="product-img">
                 <img class="lazyImg" v-lazy="item.logo" alt="">
               </div>
@@ -99,7 +99,8 @@
     data () {
       return {
         category: {
-          id: ''
+          id: '',
+          name: ''
         },
         categories: [],
         list: [],
@@ -148,6 +149,18 @@
         this.$refs.dropdownMenu.show()
       },
       refreshPageData () {
+        let categoryId = this.$route.params.categoryId
+
+        if (categoryId) {
+          this.category.id = categoryId
+        }
+
+        let categoryName = this.$route.params.categoryName
+
+        if (categoryName) {
+          this.category.name = categoryName
+        }
+
         getCategories(this, (categories) => {
           this.categories = categories
         })
@@ -157,6 +170,13 @@
     },
     created () {
       this.refreshPageData()
+    },
+    watch: {
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
     }
   }
 </script>

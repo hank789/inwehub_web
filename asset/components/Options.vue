@@ -1,7 +1,7 @@
 <template>
   <div :id="id" class="mui-popover mui-popover-action mui-popover-bottom">
     <ul class="mui-table-view">
-      <li class="mui-table-view-cell" v-for="(item, index) in options" @tap.stop.prevent="selectItem(item)">{{item}}</li>
+      <li class="mui-table-view-cell" v-for="(item, index) in options" @tap.stop.prevent="selectItem(item)">{{item.text ? item.text : item}}</li>
     </ul>
 
     <ul class="mui-table-view">

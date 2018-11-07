@@ -34,7 +34,7 @@
         <template slot="listHeader">
           <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
-            <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="index">
+            <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="'recommandProductList_' + index">
               <div class="container-product-comment"
                    @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
                 <div class="comment-info">
@@ -106,10 +106,9 @@
           </div>
 
           <div class="productList">
-
-            <div class="comment-product" v-for="(item, index) in list" :key="index">
-              <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + item.name)">
-                <div class="product-img border-football">
+            <div class="comment-product" v-for="(item, index) in list" :key="'comment-product_' + index">
+              <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
+                <div class="product-img">
                   <img class="lazyImg" v-lazy="item.logo" alt="">
                 </div>
                 <div class="product-detail">

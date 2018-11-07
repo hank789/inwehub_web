@@ -17,7 +17,7 @@
           <div class="listWrapper">
             <div class="list" v-for="(item, index) in tree" :key="index">
               <div class="text ListTitle" @tap.capture="selectItem($event, item)">
-                <span>{{item.name}}（{{item.children_count}}）</span>
+                <span>{{item.name}} {{parseInt(item.children_count) > 0 ? '(' + item.children_count + ')' : '' }}</span>
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-xiangshangjiantou"></use>
                 </svg>
@@ -115,7 +115,7 @@
         document.querySelector('#dropDownMenuWrapper').style.height = height + 'px'
         document.querySelector('.container-select').style.height = height + 'px'
 
-        document.querySelector('.dropDownScrollWrapper > .mui-scroll').style.transform = 'translate3d(0px, 0, 0px) translateZ(0px)'
+        document.querySelector('.dropDownScrollWrapper > .mui-scroll').style.transform = 'translate3d(0rem, 0, 0rem) translateZ(0rem)'
       },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')

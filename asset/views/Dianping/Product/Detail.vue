@@ -44,7 +44,7 @@
       </div>
       <div class="optionlList">
         <template v-for="(category, index) in detail.categories">
-          <div class="list" @tap.stop.prevent="$router.pushPlus('/dianping/product')">
+          <div class="list" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + category.id + '/' + encodeURIComponent(category.name))">
             <span>{{ category.name }}</span>
             <span class="ranking">No.{{ category.rate }}</span>
             <svg class="icon" aria-hidden="true">
@@ -99,7 +99,7 @@
 
       <div class="line-river-big"></div>
 
-      <div class="component-score" @tap.stop.prevent="$router.pushPlus('/dianping/add/' + detail.name)">
+      <div class="component-score" @tap.stop.prevent="goDianping()">
         <div class="text">就您的感受而言，您会给他打多少分？</div>
         <div class="stars">
           <svg class="icon" aria-hidden="true">
@@ -125,8 +125,8 @@
 
       <div class="productList">
         <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
-          <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + tag.name)">
-            <div class="product-img border-football">
+          <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(tag.name))">
+            <div class="product-img">
               <img class="lazyImg" v-lazy="tag.logo" alt="">
             </div>
             <div class="product-detail">
@@ -185,6 +185,7 @@
   import {getDianpingProductDetail} from '../../../utils/shareTemplate'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import localEvent from '../../../stores/localStorage'
+  import { urlencode } from '../../../utils/string'
 
   export default {
     data () {
@@ -196,13 +197,6 @@
           reviews: 0,
           followers: 0
         },
-        recommendAdvisers: [
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
         swiperOption: {
           loop: true,
           effect: 'coverflow',
@@ -299,10 +293,13 @@
           this.productComments = productComments
         })
       },
+      goDianping () {
+        this.$router.pushPlus('/dianping/add/' + urlencode(this.detail.name))
+      },
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '写点评':
-            this.$router.pushPlus('/dianping/add/' + this.detail.name)
+            this.goDianping()
             break
           case '关注':
             collectProduct(this, this.detail.id, () => {
@@ -385,7 +382,7 @@
       .starsText {
         display: inline-block;
         position: relative;
-        top: -1px;
+        top: -0.026rem;
       }
       .comment {
         color: #B4B4B6;
@@ -585,7 +582,7 @@
         .productMark {
           display: flex;
           .stars {
-            margin-top: 1px;
+            margin-top: 0.026rem;
           }
           .icon {
             color: #FCC816;

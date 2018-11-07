@@ -119,6 +119,21 @@ function getProductComments (context, id, pageNum, callback) {
   })
 }
 
+/* 获取角色列表 */
+function getTags (context, callback) {
+  postRequest(`tags/load`, {
+    tag_type: 8
+  }).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    callback(response.data.data.tags)
+  })
+}
+
 export {
   add,
   getCommentDetail,
@@ -126,6 +141,7 @@ export {
   getRecommandProductList,
   getCategories,
   collectProduct,
-  getProductComments
+  getProductComments,
+  getTags
 }
 

@@ -2512,7 +2512,7 @@ const routes = [
     }
   },
   { // 产品列表
-    path: '/dianping/product',
+    path: '/dianping/products/:categoryId?/:categoryName?',
     name: 'dianping-product',
     meta: {
       title: '点评',

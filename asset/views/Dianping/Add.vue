@@ -118,7 +118,7 @@
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import Options from '../../components/Options.vue'
-  import { add, getProductDetail } from '../../utils/dianping'
+  import { add, getProductDetail, getTags } from '../../utils/dianping'
   import Vue from 'vue'
 
   export default {
@@ -146,13 +146,11 @@
         editorObj: null,
         text: '',
         html: '',
+        identityId: '',
         star: 0,
-        descPlaceholder: '说说您您喜欢/不喜欢的点，他帮助您或公司解决了哪些业务上的问题？',
+        descPlaceholder: '说说您喜欢/不喜欢的点，他帮助您或公司解决了哪些业务上的问题？',
         type: 1,
-        allOption: [
-          '终端用户',
-          '管理人员'
-        ]
+        allOption: []
       }
     },
     computed: {
@@ -181,6 +179,9 @@
       Options
     },
     created () {
+      getTags(this, (tags) => {
+        this.allOption = tags
+      })
       this.refreshPageData()
     },
     activated: function () {
@@ -199,7 +200,7 @@
     },
     methods: {
       selectCategory (event, item) {
-        if (this.categories.length === 1) {
+        if (this.detail && this.detail.categories.length === 1) {
           return false
         }
         Vue.set(item, 'selected', !item.selected)
@@ -230,7 +231,8 @@
         this.$refs.allOptions.toggle()
       },
       selectedItem (item) {
-        this.identity = item
+        this.identityId = item.value
+        this.identity = item.text
         this.$refs.allOptions.toggle()
       },
       uploadImageSuccess (images) {
@@ -298,7 +300,7 @@
           product_id: this.detail.id,
           rate_star: this.star,
           isHide: this.hide,
-          identity: this.identity
+          identity: this.identityId
         }
 
         for (var i in this.images) {
