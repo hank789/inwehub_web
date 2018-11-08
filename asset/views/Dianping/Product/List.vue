@@ -310,9 +310,9 @@
     background-color: #FFF;
     /*display: flex;*/
     .headerBack {
-      font-size: 25px;
+      font-size: 0.666rem;
       color: #3C3E44;
-      margin-left: 10px;
+      margin-left: 0.266rem;
     }
     .headerTitle {
       color: #3C3E44;
