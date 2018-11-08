@@ -1,5 +1,5 @@
 <template>
-  <div id="dropDownMenuWrapper" class="immersed-top shareWrapper mui-popover mui-popover-action mui-popover-top">
+  <div id="dropDownMenuWrapper" class="immersed-top shareWrapper mui-popover mui-popover-top">
     <slot name="dropDownMenuHeader"></slot>
     <div class="container-select">
       <div class="select-top">
@@ -120,6 +120,11 @@
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
         this.autoScrollWrapperHeight()
+        var backdrop = document.querySelector('.mui-backdrop')
+        if (backdrop) {
+          var offsetTop = document.querySelector('#dropDownMenuWrapper').offsetTop
+          document.querySelector('.mui-backdrop').style.top = offsetTop + 'px'
+        }
       }
     }
   }
@@ -185,11 +190,13 @@
 
 
   #dropDownMenuWrapper {
+    width:100%;
     bottom: auto !important;
+    box-shadow: none !important;
   }
 
   .openAppH5 #dropDownMenuWrapper {
-    top: 1.173rem;
+    top: 1.306rem;
     bottom: auto !important;
   }
 
