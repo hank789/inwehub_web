@@ -148,6 +148,27 @@
           </div>
         </div>
       </RefreshList>
+
+      <div class="container-product-list dianpingBannersHide">
+        <div class="line-river-after line-river-after-top"></div>
+        <div class="productMenu">
+          <div class="productType" @tap.stop.prevent="showDropdownMenu()">
+            <span>{{ !category.name ? '产品类型' : category.name }}</span>
+            <div class="jianTou">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-xiangxiajiantou"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="productSort" @tap.stop.prevent="selectSort()">
+            <span>{{ orderByName }}</span>
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-paixu"></use>
+            </svg>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <DropDownMenu
@@ -191,6 +212,7 @@
   import { getRecommandProductList, getCategories } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
+  import { scrollPage } from '../../utils/dom.js'
 
   export default {
     data () {
@@ -293,6 +315,17 @@
       this.refreshPageData()
     },
     mounted () {
+      scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
+        var height = document.querySelector('.dianpingBanners').clientHeight - 20
+        if (y > height) {
+          document.querySelector('.dianpingBannersHide').classList.add('showTagsHome')
+        }
+      }, null, (container, y) => {
+        var height = document.querySelector('.dianpingBanners').clientHeight - 20
+        if (y < height) {
+          document.querySelector('.dianpingBannersHide').classList.remove('showTagsHome')
+        }
+      })
       // 左滑
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
@@ -320,6 +353,26 @@
     background: #FFFFFF;
   }
 
+  .container-product-list.dianpingBannersHide {
+    margin-top: 0;
+    border-radius: 0;
+    padding-bottom: 0;
+  }
+  .dianpingBannersHide {
+    position: absolute;
+    background: #fff;
+    z-index: 7;
+    left: -26.666rem;
+    display: block;
+  }
+  .showTagsHome{
+    position: absolute;
+    background: #fff;
+    z-index: 7;
+    top: -3px;
+    left:0;
+    display: block;
+  }
   .dianpingBanners {
     padding-top: 0.4rem;
     height: 7.466rem;
