@@ -293,6 +293,7 @@
         getProductDetail(this, id, (data) => {
           this.detail = data
           this.loading = 0
+          this.title = '产品服务'
           scrollToElement(this, '.product-introduce', '.pull-down-container')
         })
 
@@ -322,16 +323,10 @@
       }
     },
     mounted () {
-      scrollPage('.mui-content > #pullDownContainer', (container, y) => {
-        var height = document.querySelector('.product-introduce').clientHeight
-        if (y > height) {
-          this.title = this.detail.name
-        }
-      }, null, (container, y) => {
-        var height = document.querySelector('.product-introduce').clientHeight
-        if (y < height) {
-          this.title = '产品服务'
-        }
+      scrollPage('.mui-content > #pullDownContainer', () => {
+        this.title = this.detail.name
+      }, null, () => {
+        this.title = '产品服务'
       })
     },
     created () {
