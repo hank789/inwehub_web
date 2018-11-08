@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">点评</h1>
+      <h1 class="mui-title">产品服务</h1>
     </header>
     <div class="mui-content">
       <div class="listSelect">
@@ -77,7 +77,18 @@
       ref="dropdownMenu"
       :tree="categories"
       v-model="category"
-    ></DropDownMenu>
+    >
+      <template slot="dropDownMenuHeader">
+        <div class="dianPingListHeader">
+          <div class="headerBack" @tap.stop.prevent="goBack">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-fanhui"></use>
+            </svg>
+          </div>
+          <div class="headerTitle"><div>产品服务</div></div>
+        </div>
+      </template>
+    </DropDownMenu>
 
     <Options
       ref="itemOptions"
@@ -131,6 +142,10 @@
       }
     },
     methods: {
+      goBack () {
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+        window.mui.back()
+      },
       selectSort () {
         this.$refs.itemOptions.toggle()
       },
@@ -286,6 +301,28 @@
       line-height: 0.426rem;
       margin-top: 0.266rem;
       text-align: center;
+    }
+  }
+  .dianPingListHeader {
+    position: relative;
+    height: 1.173rem;
+    line-height: 1.173rem;
+    background-color: #FFF;
+    /*display: flex;*/
+    .headerBack {
+      font-size: 25px;
+      color: #3C3E44;
+      margin-left: 10px;
+    }
+    .headerTitle {
+      color: #3C3E44;
+      font-size: 0.48rem;
+      text-align: center;
+      font-family:PingFangSC-Medium;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 </style>
