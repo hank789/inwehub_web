@@ -78,11 +78,11 @@
     <div class="container-bottom-menus">
       <div class="line-river-after line-river-after-top"></div>
 
-      <span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">
-        <svg class="icon" aria-hidden="true" >
-          <use xlink:href="#icon-tupian"></use>
-        </svg>
-      </span>
+      <!--<span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">-->
+        <!--<svg class="icon" aria-hidden="true" >-->
+          <!--<use xlink:href="#icon-tupian"></use>-->
+        <!--</svg>-->
+      <!--</span>-->
       <div class="productName text-line-1">{{ detail.name }}</div>
     </div>
 
@@ -545,6 +545,7 @@
   }
   .addDianPing .component-photograph {
     float: left;
+    margin-bottom: 10px;
   }
   .addDianPing .container-images .container-image:nth-of-type(3n) {
     margin-right: .26667rem;
