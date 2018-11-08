@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">点评{{ list.length ? '(' + list.length + ')': '' }}</h1>
+      <h1 class="mui-title">点评{{ totalData ? '(' + totalData + ')': '' }}</h1>
     </header>
     <div class="mui-content">
       <RefreshList
@@ -16,6 +16,7 @@
         v-model="list"
         :autoShowEmpty="true"
         class="listWrapper"
+        :prevSuccessCallback="prevSuccessCallback"
       >
         <template v-for="(comment, index) in list">
           <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
@@ -55,7 +56,7 @@
         orderBy: 1,
         shareOption: {},
         iconMenus: [],
-        id: ''
+        totalData: ''
       }
     },
     components: {
@@ -88,6 +89,10 @@
       }
     },
     methods: {
+      prevSuccessCallback () {
+        this.totalNumber = this.$refs.RefreshList.getResponse()
+        this.totalData = this.totalNumber.data.total
+      },
       goAddComment () {
         this.id = this.$route.params.id
         this.$router.pushPlus('/dianping/add/' + this.id)
