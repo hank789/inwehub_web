@@ -545,7 +545,7 @@
   }
   .addDianPing .component-photograph {
     float: left;
-    margin-bottom: 10px;
+    margin-bottom: 0.266rem;
   }
   .addDianPing .container-images .container-image:nth-of-type(3n) {
     margin-right: .26667rem;
