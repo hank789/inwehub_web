@@ -38,7 +38,7 @@
                    @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
                 <div class="comment-info">
                   <div class="avatarImg">
-                    <img class="lazyImg" v-lazy="recommandProduct.user.avatar" alt="">
+                    <img :src="recommandProduct.user.avatar">
                   </div>
                   <div class="comment-name">
                     <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
@@ -52,7 +52,7 @@
                 <div class="comment-product">
                   <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(recommandProduct.tag.name))">
                     <div class="product-img border-football">
-                      <img class="lazyImg" v-lazy="recommandProduct.tag.logo" alt="">
+                      <img :src="recommandProduct.tag.logo">
                     </div>
                     <div class="product-detail">
                       <div class="productName font-family-medium">{{ recommandProduct.tag.name }}</div>
