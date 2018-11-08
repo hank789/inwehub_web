@@ -709,6 +709,9 @@
         right: 0.426rem;
       }
     }
+    .container-images {
+      margin-top: 10px;
+    }
     .commentUser {
       display: flex;
       padding: 0 0.426rem;
