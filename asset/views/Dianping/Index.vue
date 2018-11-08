@@ -50,7 +50,7 @@
                 </div>
                 <div class="comment-content text-line-3">{{ recommandProduct.title }}</div>
                 <div class="comment-product">
-                  <div class="product-info">
+                  <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(recommandProduct.tag.name))">
                     <div class="product-img border-football">
                       <img class="lazyImg" v-lazy="recommandProduct.tag.logo" alt="">
                     </div>
