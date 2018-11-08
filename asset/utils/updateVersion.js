@@ -9,7 +9,7 @@ function checkUpdate () {
       var wgtVer = inf.version
       console.log('当前应用版本：' + wgtVer)
       localEvent.setLocalItem('app_version', {version: wgtVer})
-      apiRequest(`system/version`, {app_uuid: window.plus.device.uuid}, false).then(responseData => {
+      apiRequest(`system/version`, {app_uuid: window.plus.device.uuid + wgtVer}, false).then(responseData => {
         if (responseData !== false) {
           var appVersion = responseData.app_version
           if (appVersion && wgtVer < appVersion) {
@@ -38,6 +38,7 @@ function checkUpdate () {
             } else if ((isIosForce === 2 && window.mui.os.ios) || (isAndroidForce === 2 && window.mui.os.android)) {
               // 什么都不做
             } else {
+              localEvent.setLocalItem('app_update_msg', {msg: responseData.update_msg})
               // 下载升级包
               downWgt(packageUrl)
             }
@@ -49,7 +50,7 @@ function checkUpdate () {
 }
 
 function downWgt (wgtUrl) {
-  window.plus.nativeUI.showWaiting('有新版本更新')
+  // window.plus.nativeUI.showWaiting('有新版本更新')
   window.plus.downloader.createDownload(wgtUrl, {filename: '_doc/update/'}, function (d, status) {
     if (status === 200) {
       installWgt(d.filename) // 安装wgt包
@@ -62,16 +63,17 @@ function downWgt (wgtUrl) {
 
 // 更新应用资源
 function installWgt (path) {
-  window.plus.nativeUI.showWaiting()
+  // window.plus.nativeUI.showWaiting()
   window.plus.runtime.install(path, {}, function () {
     window.plus.nativeUI.closeWaiting()
     console.log('安装wgt文件成功！')
     removeFile(path)
-    var wvs = window.plus.webview.all()
-    for (var i = 0; i < wvs.length; i++) {
-      if (wvs[i].id !== window.plus.runtime.appid) wvs[i].close()
-    }
-    window.plus.runtime.restart()
+    var updateMsg = localEvent.getLocalItem('app_update_msg')
+    window.mui.confirm(updateMsg.msg, '新版本更新', ['取消', '确定'], (e) => {
+      if (e.index === 1) {
+        window.plus.runtime.restart()
+      }
+    }, 'div')
   }, function (e) {
     window.plus.nativeUI.closeWaiting()
     removeFile(path)
