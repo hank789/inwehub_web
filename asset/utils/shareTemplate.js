@@ -209,7 +209,7 @@ function getDianpingCommentDetail (slug, title, imgUrl, username) {
   return {
     title: title, // '分享 ' + username + ' 的InweHub动态',
     link: link,
-    content: '来自InweHub' + username + '的点评',
+    content: '来自InweHub-' + username + '的点评',
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '点评'
