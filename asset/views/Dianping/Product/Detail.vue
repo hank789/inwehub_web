@@ -72,7 +72,7 @@
                   <div class="name">
                     <span class="font-family-medium">{{ advisers.name }}</span>
                   </div>
-                  <div class="good">擅长“{{ advisers.skill }}”</div>
+                  <div class="good text-line-1">擅长“{{ advisers.skill }}”</div>
                 </div>
                 <div class="speak"><span class="border-football">沟通</span></div>
               </div>
@@ -506,6 +506,7 @@
         font-size: 0.373rem;
       }
       .good {
+        width: 4.5rem;
         color: #B4B4B6;
         font-size: 0.32rem;
         line-height: 0.44rem;
