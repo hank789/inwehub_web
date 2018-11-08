@@ -347,7 +347,7 @@
     color:#FA4975 !important;
   }
   .container-tags-home-margin {
-    margin-top: 10px;
+    margin-top: 0.266rem;
   }
   .container-tags-home-hide{
     position: absolute;
