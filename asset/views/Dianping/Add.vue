@@ -11,9 +11,8 @@
       <div class="component-mark">
         <span>就您的感受而言，您会给他打多少分？</span>
         <div class="stars">
-          <star-rating
-            :increment="0.1"
-            :round-start-rating="false"
+          <starRating
+            :increment="1"
             v-model="star"
             :padding="4"
             :activeColor="'#fcc816'"
@@ -23,7 +22,7 @@
             :border-width="3"
             :inactive-color="'#FFFFFF'"
             :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
-          ></star-rating>
+          ></starRating>
           <div class="ratingNumber" v-if="star">{{ star }}分</div>
         </div>
         <div class="line-river-after line-river-after-top"></div>
@@ -120,6 +119,7 @@
   import Options from '../../components/Options.vue'
   import { add, getProductDetail, getTags } from '../../utils/dianping'
   import Vue from 'vue'
+  import starRating from '../../components/star-rating/star-rating.vue'
 
   export default {
     data () {
@@ -176,7 +176,8 @@
       Jeditor,
       swiper,
       swiperSlide,
-      Options
+      Options,
+      starRating
     },
     created () {
       getTags(this, (tags) => {
