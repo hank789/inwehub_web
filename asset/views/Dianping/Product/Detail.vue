@@ -127,7 +127,7 @@
         <div class="productList">
           <div class="comment-product" v-for="(tag, index) in detail.related_tags" :key="index">
             <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(tag.name))">
-              <div class="product-img">
+              <div class="product-img border-football">
                 <img class="lazyImg" v-lazy="tag.logo" alt="">
               </div>
               <div class="product-detail">
