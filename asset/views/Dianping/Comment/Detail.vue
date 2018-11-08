@@ -281,7 +281,7 @@
     },
     methods: {
       goProductDetail () {
-        this.$router.replace('/dianping/product/' + this.detail.tags[0].name)
+        this.$router.pushPlus('/dianping/product/' + encodeURIComponent(this.detail.tags[0].name))
       },
       showItemMore (shareOption, item) {
         this.iconMenus = []

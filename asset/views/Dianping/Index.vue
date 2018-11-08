@@ -371,6 +371,7 @@
       font-size: 0.373rem;
       line-height: 0.6rem;
       padding: 0 0.4rem;
+      height: 65px;
     }
   }
 
@@ -380,6 +381,7 @@
       overflow: hidden;
       background: #F7F8FA;
       padding: 0.266rem;
+      border-radius: 4px;
       .product-img {
         width: 1.173rem;
         height: 1.173rem;

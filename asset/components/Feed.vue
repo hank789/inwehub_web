@@ -125,6 +125,12 @@
       </div>
       <div class="commentFeedTitle text-line-5 currency-title">{{ item.feed.title }}</div>
       <div class="feed-open-all font-family-medium"  @tap.stop.prevent="extendAll">展开全部</div>
+
+      <div v-if="itemObj.feed.img.length && item.feed.submission_type === 'review'"
+           class="container-images container-images-discover" :class="'container-images-' + (itemObj.feed.img.length)">
+        <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
+      </div>
+
       <div class="feed-moreOperation">
         <div class="feed-mord"  @tap.stop.prevent="showItemMore">
           <svg class="icon" aria-hidden="true">
