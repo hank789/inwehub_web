@@ -41,6 +41,7 @@
                 <div class="productMark">
                   <div class="stars">
                     <star-rating
+                      :increment="0.1"
                       :padding="3"
                       :activeColor="'#fcc816'"
                       :star-size="11"
