@@ -2,7 +2,7 @@
   <div>
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">{{ detail.name }}</h1>
+      <h1 class="mui-title">{{ title }}</h1>
       <div class="topMore" @tap.stop.prevent="joinShare">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-gengduo1"></use>
@@ -11,7 +11,7 @@
     </header>
     <div class="mui-content" v-show="!loading">
 
-      <vue-pull-refresh :on-refresh="refreshPageData">
+      <vue-pull-refresh :on-refresh="refreshPageData" id="pullDownContainer">
         <div class="product-introduce">
           <div class="companyLogo border-football">
             <img class="lazyImg" v-lazy="detail.logo" alt="">
@@ -188,7 +188,7 @@
   const currentUser = localEvent.getLocalItem('UserInfo')
   import localEvent from '../../../stores/localStorage'
   import { urlencode } from '../../../utils/string'
-  import { scrollToElement } from '../../../utils/dom'
+  import { scrollToElement, scrollPage } from '../../../utils/dom'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
 
   export default {
@@ -320,6 +320,19 @@
             break
         }
       }
+    },
+    mounted () {
+      scrollPage('.mui-content > #pullDownContainer', (container, y) => {
+        var height = document.querySelector('.product-introduce').clientHeight
+        if (y > height) {
+          this.title = this.detail.name
+        }
+      }, null, (container, y) => {
+        var height = document.querySelector('.product-introduce').clientHeight
+        if (y < height) {
+          this.title = '产品服务'
+        }
+      })
     },
     created () {
       this.refreshPageData()
