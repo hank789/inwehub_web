@@ -438,7 +438,7 @@
 
   .container-product-list {
     background: #ffffff;
-    margin-top: -20px;
+    margin-top: -0.533rem;
     padding-bottom: 0.4rem;
     position: relative;
     z-index: 10;
@@ -512,7 +512,7 @@
   }
 
   .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: 30px;
+    bottom: 0.8rem;
   }
 </style>
 

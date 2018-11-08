@@ -532,7 +532,7 @@
   .mark {
     display: flex;
     padding: 0 0.426rem;
-    margin-top: -8px;
+    margin-top: -0.213rem;
     margin-bottom: 0.186rem;
     .stars {
       color: #FCC816;

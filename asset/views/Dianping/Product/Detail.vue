@@ -624,7 +624,7 @@
   .swiper-container-horizontal > .swiper-pagination-bullets {
     bottom: 2.4rem;
     text-align: right;
-    padding-right: 16px;
+    padding-right: 0.426rem;
   }
 </style>
 

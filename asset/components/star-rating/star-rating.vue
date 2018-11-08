@@ -203,8 +203,8 @@
   }
 
   .vue-star-rating-rating-text {
-    margin-top: 7px;
-    margin-left: 7px;
+    margin-top: 0.186rem;
+    margin-left: 0.186rem;
   }
 
   .vue-star-rating-rtl {
@@ -212,7 +212,7 @@
   }
 
   .vue-star-rating-rtl .vue-star-rating-rating-text {
-    margin-right: 10px;
+    margin-right: 0.266rem;
     direction: rtl;
   }
 </style>
