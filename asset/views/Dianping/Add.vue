@@ -294,6 +294,11 @@
           return
         }
 
+        if (this.star < 1) {
+          window.mui.toast('您还没为星级打分')
+          return
+        }
+
         var data = {
           content: html,
           category_ids: this.category_ids,
