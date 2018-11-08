@@ -55,7 +55,7 @@
             <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
           </template>
         </div>
-        <div class="line-river-big"></div>
+        <div class="line-river-big" v-if="detail.recommend_users && detail.recommend_users.length"></div>
 
         <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
           <div class="recommendTitle">
@@ -237,7 +237,7 @@
         {
           icon: '#icon-shoucang',
           text: '关注',
-          number: 0,
+          number: this.detail.followers,
           disable: this.detail.followers,
           rightLine: true,
           isLight: false
@@ -617,20 +617,33 @@
       }
     }
   }
+  .container-menuFooter .menu .iconWrapper {
+    color: red;
+  }
 
   .swiper-container-horizontal > .swiper-pagination-bullets {
     bottom: 2.4rem;
-    right: -3.44rem;
-    left: auto;
+    text-align: right;
+    padding-right: 16px;
   }
 </style>
 
 <style>
   .recommenBanners .swiper-pagination-bullet {
-    border-radius: 2.666rem !important;
+    width: 5px; /* px不转换 */
+    height: 5px; /* px不转换 */
+    margin: 0 2px !important; /* px不转换 */
+    background: #D8D8D8;
+    opacity: 1;
   }
 
   .recommenBanners .swiper-pagination-bullets .swiper-pagination-bullet-active {
-    width: 0.28rem;
+    background: #03AEF9;
+    width: 7.5px; /* px不转换 */
+    border-radius: 100px !important; /* px不转换 */
+  }
+
+  .recommenBanners .container-menuFooter .menu .iconWrapper .icon {
+    color: red;
   }
 </style>

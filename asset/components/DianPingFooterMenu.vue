@@ -62,6 +62,16 @@
     top: 0.293rem;
     left: 0.426rem;
   }
+  .container-menuFooter .menu .iconWrapper svg {
+    color: #808080;
+  }
+  .container-menuFooter .menu .desc {
+    color: #B4B4B6;
+  }
+  .container-menuFooter .menu.disable .iconWrapper svg {
+    color: #c8c8c8;
+  }
+
   .container-menuFooter .menu_1 .iconWrapper svg {
     font-size: 0.586rem;
   }
