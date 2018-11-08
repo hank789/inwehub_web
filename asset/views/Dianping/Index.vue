@@ -171,6 +171,7 @@
             <use xlink:href="#icon-sousuo"></use>
           </svg>
         </div>
+        <div class="line-river-after line-river-after-top"></div>
       </template>
     </DropDownMenu>
 
