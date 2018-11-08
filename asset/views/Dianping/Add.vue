@@ -46,20 +46,13 @@
         @onEditorChange="onEditorChange"
       ></Jeditor>
 
-      <div class="container-editor container-editor-app component-box">
-        <swiper :options="swiperOption" class="container-upload-images" v-show="images.length">
-          <swiper-slide class="image" v-for="(image, index) in images" :key="'image_'+index" ><img :src="image.base64" :data-preview-src="image.base64" :data-preview-group="1"/><svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
+      <div class="container-images">
+        <div class="container-image" v-for="(image, index) in images">
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="delImg(index)">
             <use xlink:href="#icon-times1"></use>
-          </svg></swiper-slide>
-        </swiper>
-
-        <div class="container-camera"  @tap.stop.prevent="uploadImage">
-          <div class="camera">
-            <svg class="icon" aria-hidden="true" >
-              <use xlink:href="#icon-xiangji1"></use>
-            </svg>
-          </div>
-        </div>
+          </svg>
+          <img :id="'image_' + index" :src="image.base64"/>
+        </div><div class="component-photograph" @tap.stop.prevent="uploadImage()" v-if="images.length < maxImageCount"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xiangji1"></use></svg></div>
       </div>
 
       <div class="line-river-big"></div>
@@ -85,11 +78,11 @@
     <div class="container-bottom-menus">
       <div class="line-river-after line-river-after-top"></div>
 
-      <!--<span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">-->
-        <!--<svg class="icon" aria-hidden="true" >-->
-          <!--<use xlink:href="#icon-tupian"></use>-->
-        <!--</svg>-->
-      <!--</span>-->
+      <span @tap.stop.prevent="uploadImage" :class="{'disable': !isUploadImage}">
+        <svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-tupian"></use>
+        </svg>
+      </span>
       <div class="productName text-line-1">{{ detail.name }}</div>
     </div>
 
@@ -547,15 +540,14 @@
   .addDianPing .quill-editor {
     height: 2rem !important;
   }
- .addDianPing .container-upload-images .image {
-    /*margin-top: 0 !important;*/
-    display: inline-block;
-  }
-  .addDianPing .component-box .swiper-container {
-    display: inline-block;
-  }
- .addDianPing .ql-container {
+  .addDianPing .ql-container {
     height: 2rem !important;
+  }
+  .addDianPing .component-photograph {
+    float: left;
+  }
+  .addDianPing .container-images .container-image:nth-of-type(3n) {
+    margin-right: .26667rem;
   }
 
   .addDianPing .star-rating {
