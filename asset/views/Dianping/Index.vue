@@ -270,7 +270,8 @@
         this.$refs.itemOptions.toggle()
       },
       showDropdownMenu () {
-        scrollToElement(this, '#containerProductList', '#listWrapper')
+        var height = document.querySelector('.dianpingBanners').clientHeight - 14
+        this.$refs.RefreshList.scrollTo(0, -height, 800)
         this.$refs.dropdownMenu.show()
       },
       timeago (time) {
