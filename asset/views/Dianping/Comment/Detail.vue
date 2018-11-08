@@ -109,11 +109,13 @@
         <div class="river"></div>
 
         <div class="allDianPing font-family-medium">大家都在评</div>
+        <div class="line-river-after line-river-after-top"></div>
+
         <div class="productList">
 
           <div class="comment-product" v-for="(item, index) in detail.related_tags" :key="index">
             <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
-              <div class="product-img">
+              <div class="product-img border-football">
                 <img class="lazyImg" v-lazy="item.logo" alt="">
               </div>
               <div class="product-detail">
@@ -530,6 +532,7 @@
   .mark {
     display: flex;
     padding: 0 0.426rem;
+    margin-top: -8px;
     margin-bottom: 0.186rem;
     .stars {
       color: #FCC816;
@@ -540,7 +543,7 @@
     .text {
       color: #FCC816;
       font-size: 0.293rem;
-      /*margin-top: 0.053rem;*/
+      margin-top: 0.053rem;
       margin-left: 0.08rem;
     }
   }
@@ -635,6 +638,7 @@
         }
         .mark {
           padding: 0;
+          margin-top: 0;
           .text {
             color: #FCC816;
             margin-top: 0 !important;

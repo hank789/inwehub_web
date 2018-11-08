@@ -33,7 +33,7 @@
         <div class="list">
           <div class="comment-product" v-for="(item, index) in list" :key="index">
             <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
-              <div class="product-img">
+              <div class="product-img border-football">
                 <img class="lazyImg" v-lazy="item.logo" alt="">
               </div>
               <div class="product-detail">

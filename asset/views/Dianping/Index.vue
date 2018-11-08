@@ -89,7 +89,7 @@
         <div class="container-product-list" id="containerProductList">
           <div class="productMenu">
             <div class="productType" @tap.stop.prevent="showDropdownMenu()">
-              <span>{{ !category.name ? '选择类型' : category.name }}</span>
+              <span>{{ !category.name ? '产品类型' : category.name }}</span>
               <div class="jianTou">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-xiangxiajiantou"></use>
@@ -107,7 +107,7 @@
           <div class="productList">
             <div class="comment-product" v-for="(item, index) in list" :key="'comment-product_' + index">
               <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
-                <div class="product-img">
+                <div class="product-img border-football">
                   <img class="lazyImg" v-lazy="item.logo" alt="">
                 </div>
                 <div class="product-detail">
@@ -190,7 +190,6 @@
   import { getRecommandProductList, getCategories } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
-  import { scrollToElement } from '../../utils/dom.js'
 
   export default {
     data () {
@@ -198,7 +197,7 @@
         categories: [],
         list: [],
         recommandProductList: [],
-        orderBy: 1,
+        orderBy: 0,
         category: {
           id: ''
         },
@@ -270,7 +269,7 @@
         this.$refs.itemOptions.toggle()
       },
       showDropdownMenu () {
-        var height = document.querySelector('.dianpingBanners').clientHeight - 14
+        var height = document.querySelector('.dianpingBanners').clientHeight - 20
         this.$refs.RefreshList.scrollTo(0, -height, 800)
         this.$refs.dropdownMenu.show()
       },
@@ -439,7 +438,7 @@
 
   .container-product-list {
     background: #ffffff;
-    margin-top: -0.373rem;
+    margin-top: -20px;
     padding-bottom: 0.4rem;
     position: relative;
     z-index: 10;
@@ -513,16 +512,22 @@
   }
 
   .swiper-container-horizontal > .swiper-pagination-bullets {
-    bottom: 0.64rem;
+    bottom: 30px;
   }
 </style>
 
 <style>
   .dianpingBanners .swiper-pagination-bullet {
-    border-radius: 2.666rem !important;
+    width: 5px; /* px不转换 */
+    height: 5px; /* px不转换 */
+    margin: 0 2px !important; /* px不转换 */
+    background: #D8D8D8;
+    opacity: 1;
   }
 
   .dianpingBanners .swiper-pagination-bullets .swiper-pagination-bullet-active {
-    width: 0.28rem;
+    background: #03AEF9;
+    width: 7.5px; /* px不转换 */
+    border-radius: 100px !important; /* px不转换 */
   }
 </style>

@@ -16,7 +16,7 @@
             v-model="star"
             :padding="4"
             :activeColor="'#fcc816'"
-            :star-size="20"
+            :star-size="23"
             :show-rating="false"
             :border-color="'#fcc816'"
             :border-width="3"
@@ -387,7 +387,7 @@
       position: relative;
       color: #FCC816;
       font-size: 0.613rem;
-      margin-top: 0.213rem;
+      /*margin-top: 0.213rem;*/
       margin-bottom: 0.4rem;
       .ratingNumber {
         position: absolute;
