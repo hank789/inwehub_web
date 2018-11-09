@@ -64,8 +64,8 @@
 
           <swiper :options="swiperOption" class="recommenBanners">
             <swiper-slide v-for="(advisers, index) in detail.recommend_users" :key="index">
-              <div class="recommendList" @tap.stop.prevent="goChat(advisers.id)">
-                <div class="avatar">
+              <div class="recommendList">
+                <div class="avatar" @tap.stop.prevent="toResume(advisers.uuid)">
                   <img :src="advisers.avatar_url">
                 </div>
                 <div class="personalInfo">
@@ -74,7 +74,7 @@
                   </div>
                   <div class="good text-line-1">擅长“{{ advisers.skill }}”</div>
                 </div>
-                <div class="speak"><span class="border-football">沟通</span></div>
+                <div class="speak" @tap.stop.prevent="goChat(advisers.id)"><span class="border-football">沟通</span></div>
               </div>
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
@@ -261,6 +261,9 @@
       'vue-pull-refresh': VuePullRefresh
     },
     methods: {
+      toResume (uuid) {
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       showItemMore (shareOption, item) {
         this.iconMenus = []
         this.shareOption = shareOption

@@ -89,14 +89,14 @@
         <div class="container-product-list" id="containerProductList">
           <div class="productMenu">
             <div class="productType" @tap.stop.prevent="showDropdownMenu()">
-              <span>{{ !category.name ? '产品类型' : category.name }}</span>
-              <div class="jianTou">
+              <span :class="category.name ? 'active' : ''">{{ !category.name ? '产品类型' : category.name }}</span>
+              <div class="jianTou" :class="category.name ? 'active' : ''">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-xiangxiajiantou"></use>
                 </svg>
               </div>
             </div>
-            <div class="productSort" @tap.stop.prevent="selectSort()">
+            <div class="productSort" :class="orderBy ? 'active' : ''" @tap.stop.prevent="selectSort()">
               <span>{{ orderByName }}</span>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-paixu"></use>
@@ -153,14 +153,14 @@
         <div class="line-river-after line-river-after-top"></div>
         <div class="productMenu">
           <div class="productType" @tap.stop.prevent="showDropdownMenu()">
-            <span>{{ !category.name ? '产品类型' : category.name }}</span>
-            <div class="jianTou">
+            <span :class="category.name ? 'active' : ''">{{ !category.name ? '产品类型' : category.name }}</span>
+            <div class="jianTou" :class="category.name ? 'active' : ''">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiangxiajiantou"></use>
               </svg>
             </div>
           </div>
-          <div class="productSort" @tap.stop.prevent="selectSort()">
+          <div class="productSort" :class="orderBy ? 'active' : ''" @tap.stop.prevent="selectSort()">
             <span>{{ orderByName }}</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-paixu"></use>
@@ -511,6 +511,13 @@
       box-shadow: 0rem 0.133rem 0.266rem 0rem rgba(249, 249, 251, 1);
       .productType {
         display: flex;
+        span {
+          &:nth-of-type(1) {
+            &.active {
+              color: #03AEF9;
+            }
+          }
+        }
         .icon {
           color: #B4B4B6;
           font-size: 0.186rem;
@@ -518,9 +525,20 @@
         .jianTou {
           margin-left: 0.08rem;
           margin-top: -0.053rem;
+          &.active {
+            .icon {
+              color: #03AEF9;
+            }
+          }
         }
       }
       .productSort {
+        &.active {
+          color: #03AEF9;
+          .icon {
+            color: #03AEF9;
+          }
+        }
         .icon {
           color: #B4B4B6;
           font-size: 0.266rem;
