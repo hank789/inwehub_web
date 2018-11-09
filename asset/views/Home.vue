@@ -30,14 +30,14 @@
           <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
             <div class="mui-slider-group  mui-slider-loop">
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-                <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="data.banners[data.banners.length-1].img_url"></a>
+                <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="getImageSuffix(data.banners[data.banners.length-1].img_url, 1029)"></a>
               </div>
               <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-                <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="notice.img_url"></a>
+                <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="getImageSuffix(notice.img_url, 1029)"></a>
               </div>
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
                 <a @tap.stop.prexvent="goLink(data.banners[0].url)">
-                  <img class="lazyImg" v-lazy="data.banners[0].img_url" />
+                  <img class="lazyImg" v-lazy="getImageSuffix(data.banners[0].img_url, 1029)" />
                 </a>
               </div>
             </div>
@@ -46,7 +46,7 @@
             </div>
           </div>
 
-          <div class="container-tags-home">
+          <div class="container-tags-home container-tags-home-margin">
             <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
             <div class="container-tabLabels">
               <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
@@ -84,7 +84,7 @@
                 </timeago>
                 </div>
               </div>
-              <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
+              <div class="itemArticleRight"><img class="lazyImg" v-lazy="getImageSuffix(item.data.img, 333)"></div>
             </div>
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
 
@@ -130,6 +130,7 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../utils/request'
   import { scrollPage } from '../utils/dom'
+  import { getImageSuffix } from '../utils/image'
 
   const Home = {
     data () {
@@ -187,6 +188,9 @@
       }
     },
     methods: {
+      getImageSuffix (img, width, height) {
+        return getImageSuffix(img, width, height)
+      },
       getAllRecommend () {
         this.selectTagValue = null
         this.isRecommendType = 1
@@ -269,13 +273,13 @@
     updated () {},
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight
+        var height = document.querySelector('#home_banner_slider').clientHeight + 10
         if (y > height) {
           document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
           // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
         }
       }, null, (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight
+        var height = document.querySelector('#home_banner_slider').clientHeight + 10
         if (y < height) {
           document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
         }
@@ -345,6 +349,9 @@
   }
   .component-title-iconAndText .iconAndTextLeft .icon{
     color:#FA4975 !important;
+  }
+  .container-tags-home-margin {
+    margin-top: 0.266rem;
   }
   .container-tags-home-hide{
     position: absolute;

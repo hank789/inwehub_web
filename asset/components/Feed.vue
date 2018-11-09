@@ -32,81 +32,135 @@
 
     <!-- 分享 -->
     <div @tap.capture="onTap($event)">
-    <div class="container-feed-item feed-currency" v-if="isDiscover" @tap.stop.prevent="toDetail(item)">
-      <FeedUserInfo
-        :uuid="item.user.uuid"
-        :avatar="item.user.avatar"
-        :realname="item.title"
-        :isShowPositionAndCompany="false"
-        :isExpert="item.user.is_expert?1:0"
-        :time="item.created_at"
-        :address="item.feed.current_address_name"
-        :showSetTop="item.top"
-      ></FeedUserInfo>
-      <div class="currency-title text-line-5 feed-title"><div>{{item.feed.title}}</div></div>
-      <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
-      <!--图片-->
-      <div v-if="itemObj.feed.img.length && item.feed.submission_type !== 'link'"
+      <div class="container-feed-item feed-currency" v-if="isDiscover" @tap.stop.prevent="toDetail(item)">
+        <FeedUserInfo
+          :uuid="item.user.uuid"
+          :avatar="item.user.avatar"
+          :realname="item.title"
+          :isShowPositionAndCompany="false"
+          :isExpert="item.user.is_expert?1:0"
+          :time="item.created_at"
+          :address="item.feed.current_address_name"
+          :showSetTop="item.top"
+        ></FeedUserInfo>
+        <div class="currency-title text-line-5 feed-title"><div>{{item.feed.title}}</div></div>
+        <div class="feed-open-all font-family-medium" @tap.stop.prevent="extendAll">展开全部</div>
+        <!--图片-->
+        <div v-if="itemObj.feed.img.length && item.feed.submission_type !== 'link'"
+             class="container-images container-images-discover" :class="'container-images-' + (itemObj.feed.img.length)">
+          <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
+        </div>
+        <!--链接-->
+        <div class="container-feed-link-box" v-if="item.feed.submission_type === 'link'" @tap.stop.prevent="goArticle()">
+          <div class="feed-link-box">
+            <div class="linkImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
+            <div class="linkText">
+              <span class="font-family-medium text-line-2">{{item.feed.article_title}}</span>
+              <span>{{item.feed.domain}}</span>
+            </div>
+          </div>
+        </div>
+        <!--PDF-->
+        <div class="container-pdf-box" v-if="itemObj.feed.files.length" >
+          <div class="feed-pdf-box"v-for="(pdf, pdfIndex) in itemObj.feed.files" :key="pdfIndex">
+            <div class="pdfIcon">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pdf"></use>
+              </svg>
+            </div>
+            <div class="pdfText">
+              <span class="font-family-medium text-line-2">{{pdf.name}}</span>
+            </div>
+          </div>
+        </div>
+        <!--圈子-->
+        <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
+          <img src="../statics/images/feed-group@3x.png" alt="">
+          <span>{{item.feed.group.name}}</span>
+        </div>
+        <!--操作区-->
+        <div class="feed-moreOperation">
+          <div class="feed-mord" @tap.stop.prevent="showItemMore">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-gengduo1"></use>
+            </svg>
+          </div>
+          <div class="feed-operation">
+            <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pinglun"></use>
+              </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
+            </span>
+            <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-cai"></use>
+              </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
+            </span>
+            <span @tap.stop.prevent="discoverUp()" :class="item.feed.is_upvoted ? 'activeSpan':''">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zan"></use>
+              </svg><i v-if="item.feed.support_number">{{item.feed.support_number}}</i>
+            </span>
+          </div>
+        </div>
+
+        <div class="line-river-after line-river-after-top"></div>
+      </div>
+    </div>
+
+    <!--点评-->
+    <div class="commentList" v-if="isComment" @tap.stop.prevent="toDetail(item)">
+      <div class="commentUser">
+        <div class="userInfo">
+          <div class="avatar">
+            <img class="lazyImg" v-lazy="item.user.avatar" alt="">
+          </div>
+          <div class="userName">
+            <div class="userNameTop">
+              <span class="font-family-medium">{{ item.user.name }}</span>
+              <div class="border-football" v-if="item.feed.is_recommend">优质</div>
+            </div>
+
+            <div class="time"><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></div>
+          </div>
+        </div>
+        <div class="mark font-family-medium">{{ item.feed.rate_star }}分</div>
+      </div>
+      <div class="commentFeedTitle text-line-5 currency-title">{{ item.feed.title }}</div>
+      <div class="feed-open-all font-family-medium"  @tap.stop.prevent="extendAll">展开全部</div>
+
+      <div v-if="itemObj.feed.img.length && item.feed.submission_type === 'review'"
            class="container-images container-images-discover" :class="'container-images-' + (itemObj.feed.img.length)">
         <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
-      <!--链接-->
-      <div class="container-feed-link-box" v-if="item.feed.submission_type === 'link'" @tap.stop.prevent="goArticle()">
-        <div class="feed-link-box">
-          <div class="linkImg"><img class="lazyImg" v-lazy="item.feed.img"></div>
-          <div class="linkText">
-            <span class="font-family-medium text-line-2">{{item.feed.article_title}}</span>
-            <span>{{item.feed.domain}}</span>
-          </div>
-        </div>
-      </div>
-      <!--PDF-->
-      <div class="container-pdf-box" v-if="itemObj.feed.files.length" >
-        <div class="feed-pdf-box"v-for="(pdf, pdfIndex) in itemObj.feed.files" :key="pdfIndex">
-          <div class="pdfIcon">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-pdf"></use>
-            </svg>
-          </div>
-          <div class="pdfText">
-            <span class="font-family-medium text-line-2">{{pdf.name}}</span>
-          </div>
-        </div>
-      </div>
-      <!--圈子-->
-      <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
-        <img src="../statics/images/feed-group@3x.png" alt="">
-        <span>{{item.feed.group.name}}</span>
-      </div>
-      <!--操作区-->
+
       <div class="feed-moreOperation">
-        <div class="feed-mord" @tap.stop.prevent="showItemMore">
+        <div class="feed-mord"  @tap.stop.prevent="showItemMore">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-gengduo1"></use>
           </svg>
         </div>
         <div class="feed-operation">
-          <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-pinglun"></use>
-            </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
-          </span>
+            <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-pinglun"></use>
+              </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
+            </span>
           <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-cai"></use>
-            </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
-          </span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-cai"></use>
+              </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
+            </span>
           <span @tap.stop.prevent="discoverUp()" :class="item.feed.is_upvoted ? 'activeSpan':''">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zan"></use>
-            </svg><i v-if="item.feed.support_number">{{item.feed.support_number}}</i>
-          </span>
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zan"></use>
+              </svg><i v-if="item.feed.support_number">{{item.feed.support_number}}</i>
+            </span>
         </div>
       </div>
-
       <div class="line-river-after line-river-after-top"></div>
     </div>
-    </div>
+
   </div>
 </template>
 
@@ -117,7 +171,7 @@
   import PageMore from './PageMore.vue'
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
-  import { getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
+  import { getDianpingCommentDetail, getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
   import { postRequest } from '../utils/request'
 
   export default {
@@ -151,6 +205,14 @@
           case 15:
           case 16:
           case 5:
+            return true
+          default:
+            return false
+        }
+      },
+      isComment () {
+        switch (this.item.feed_type) {
+          case 17:
             return true
           default:
             return false
@@ -221,6 +283,11 @@
       })
     },
     methods: {
+      timeago (time) {
+        let newDate = new Date()
+        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
+        return newDate
+      },
       renderShowOpenAll () {
         var titles = document.querySelectorAll('.currency-title')
         titles.forEach((item) => {
@@ -299,6 +366,15 @@
           )
         }
 
+        if (this.isComment) {
+          this.shareOption = getDianpingCommentDetail(
+            this.item.feed.slug,
+            this.item.feed.title,
+            this.item.user.avatar,
+            this.item.user.name
+          )
+        }
+
         this.$emit('showItemMore', this.shareOption, this.item)
       },
       discoverUp () {
@@ -342,6 +418,9 @@
           case 15:
           case 16:
             this.$router.pushPlus(item.url, 'list-detail-page')
+            break
+          case 17:
+            this.$router.pushPlus('/dianping/comment/' + this.item.feed.slug, 'list-detail-page')
             break
           case -1:
             // 已废弃
@@ -616,6 +695,138 @@
           i {
             color: #235280;
             font-style: normal;
+          }
+        }
+      }
+    }
+  }
+
+  /*点评样式*/
+
+  .commentList {
+    margin-top: 0.533rem;
+    .line-river-after {
+      margin-top: 0.266rem;
+      &:after {
+        left: 0.426rem;
+        right: 0.426rem;
+      }
+    }
+    .container-images {
+      margin-top: 0.266rem;
+    }
+    .commentUser {
+      display: flex;
+      padding: 0 0.426rem;
+      justify-content: space-between;
+      .userInfo {
+        display: flex;
+        .avatar {
+          width: 0.906rem;
+          height: 0.906rem;
+          margin-right: 0.213rem;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+        .userName {
+          /*margin-top: -0.053rem;*/
+          .border-football {
+            &:after {
+              border-radius: 0.213rem;
+              border-color: #FA4975;
+            }
+          }
+          .userNameTop {
+            display: flex;
+            div {
+              height: 0.4rem;
+              color: #FA4975;
+              font-size: 0.266rem;
+              padding: 0 0.133rem;
+              line-height: 0.4rem;
+              margin-left: 0.08rem;
+              /*display: inline-block;*/
+            }
+          }
+          span {
+            &:nth-of-type(1) {
+              color: #444444;
+              font-size: 0.346rem;
+              line-height: 0.493rem;
+            }
+            &:nth-of-type(2) {
+
+            }
+          }
+          .time {
+            color: #B4B4B6;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
+            margin-top: 0.053rem;
+          }
+        }
+      }
+      .mark {
+        color: #FCC816;
+        font-size: 0.346rem;
+        line-height: 0.493rem;
+      }
+    }
+    .commentFeedTitle {
+      padding: 0 0.426rem;
+      color: #444444;
+      font-size: 0.373rem;
+      line-height: 0.586rem;
+      margin-top: 0.16rem;
+      letter-spacing: 0.013rem;
+    }
+    .feed-open-all {
+      color: #03AEF9;
+      font-size: 0.346rem;
+      margin-top: 0.213rem;
+      display: none;
+      padding: 0 0.426rem;
+      line-height: 0.48rem;
+      &.showOpenAll {
+        display: block;
+      }
+    }
+    .feed-moreOperation {
+      margin-top: 0.266rem;
+      color: #808080;
+      display: flex;
+      padding: 0 0.346rem;
+      margin-bottom: 0.266rem;
+      justify-content: space-between;
+      .feed-mord {
+
+        padding: 0.133rem;
+        color: #808080;
+      }
+      .feed-operation {
+        padding-top: 0.133rem;
+        span {
+          padding: 0.133rem 0.266rem;
+          font-size: 0.293rem;
+          color: #444444;
+          /*margin-left: 0.533rem;*/
+          .icon {
+            margin-right: 0.133rem;
+            color: #808080;
+            font-size: 0.4rem;
+          }
+          i {
+            font-style: normal;
+          }
+        }
+        .activeSpan {
+          color: #B4B4B6;
+          .icon {
+            color: #B4B4B6;
           }
         }
       }

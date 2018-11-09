@@ -7,12 +7,17 @@ function checkUpdate () {
     // 获取本地应用资源版本号
     window.plus.runtime.getProperty(window.plus.runtime.appid, function (inf) {
       var wgtVer = inf.version
+      var app_install_version = localEvent.getLocalItem('app_install_version')
+      if (!app_install_version.version) {
+        app_install_version.version = wgtVer
+      }
       console.log('当前应用版本：' + wgtVer)
+      console.log('当前安装版本：' + app_install_version.version)
       localEvent.setLocalItem('app_version', {version: wgtVer})
-      apiRequest(`system/version`, {app_uuid: window.plus.device.uuid}, false).then(responseData => {
+      apiRequest(`system/version`, {app_uuid: window.plus.device.uuid + wgtVer}, false).then(responseData => {
         if (responseData !== false) {
           var appVersion = responseData.app_version
-          if (appVersion && wgtVer < appVersion) {
+          if (appVersion && app_install_version.version < appVersion) {
             var packageUrl = responseData.package_url
             var isIosForce = responseData.is_ios_force
             var isAndroidForce = responseData.is_android_force
@@ -38,8 +43,9 @@ function checkUpdate () {
             } else if ((isIosForce === 2 && window.mui.os.ios) || (isAndroidForce === 2 && window.mui.os.android)) {
               // 什么都不做
             } else {
+              localEvent.setLocalItem('app_update_msg', {msg: responseData.update_msg})
               // 下载升级包
-              downWgt(packageUrl)
+              downWgt(packageUrl, appVersion)
             }
           }
         }
@@ -48,11 +54,12 @@ function checkUpdate () {
   }
 }
 
-function downWgt (wgtUrl) {
-  window.plus.nativeUI.showWaiting('有新版本更新')
+function downWgt (wgtUrl, appVersion) {
+  // window.plus.nativeUI.showWaiting('有新版本更新')
   window.plus.downloader.createDownload(wgtUrl, {filename: '_doc/update/'}, function (d, status) {
     if (status === 200) {
-      installWgt(d.filename) // 安装wgt包
+      console.log('下载wgt文件成功！' + appVersion)
+      installWgt(d.filename, appVersion) // 安装wgt包
     } else {
       window.plus.nativeUI.alert('下载更新文件失败:' + status)
     }
@@ -61,17 +68,19 @@ function downWgt (wgtUrl) {
 }
 
 // 更新应用资源
-function installWgt (path) {
-  window.plus.nativeUI.showWaiting()
+function installWgt (path, appVersion) {
+  // window.plus.nativeUI.showWaiting()
   window.plus.runtime.install(path, {}, function () {
     window.plus.nativeUI.closeWaiting()
-    console.log('安装wgt文件成功！')
+    console.log('安装wgt文件成功！' + appVersion)
     removeFile(path)
-    var wvs = window.plus.webview.all()
-    for (var i = 0; i < wvs.length; i++) {
-      if (wvs[i].id !== window.plus.runtime.appid) wvs[i].close()
-    }
-    window.plus.runtime.restart()
+    localEvent.setLocalItem('app_install_version', {version: appVersion})
+    var updateMsg = localEvent.getLocalItem('app_update_msg')
+    window.mui.confirm(updateMsg.msg, '新版本更新', ['取消', '确定'], (e) => {
+      if (e.index === 1) {
+        window.plus.runtime.restart()
+      }
+    }, 'div')
   }, function (e) {
     window.plus.nativeUI.closeWaiting()
     removeFile(path)

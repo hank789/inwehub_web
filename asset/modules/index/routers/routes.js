@@ -2485,6 +2485,97 @@ const routes = [
     },
     component: componets.componentsShortTcut
   },
+  { // 点评首页
+    path: '/dianping',
+    name: 'dianping',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: true
+    },
+    component: componets.DianpingIndex,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 添加点评
+    path: '/dianping/add/:id',
+    name: 'dianping-add',
+    meta: {
+      title: '添加点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingAdd,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 产品列表
+    path: '/dianping/products/:categoryId?/:categoryName?',
+    name: 'dianping-product',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingProductList,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 产品详情
+    path: '/dianping/product/:id',
+    name: 'dianping-product-detail',
+    meta: {
+      title: '产品服务',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingProductDetail,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 点评列表
+    path: '/dianping/:id/comment',
+    name: 'dianping-comment',
+    meta: {
+      title: '点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingCommentList,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 点评详情页
+    path: '/dianping/comment/:id',
+    name: 'dianping-comment-detail',
+    meta: {
+      title: '点评详情',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingCommentDetail,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 点评弹窗
+    path: '/dianping/tanchuang',
+    name: 'dianping-tanchuang',
+    meta: {
+      title: '点评详情',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingTanchuang,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',

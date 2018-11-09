@@ -262,7 +262,7 @@
         }
       },
       getShareInfo (callback) {
-        postRequest('profile/resumeInfo', {uuid: this.shareUuid}).then(response => {
+        postRequest('profile/infoByUuid', {uuid: this.shareUuid}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)

@@ -120,6 +120,7 @@ function autoHeight (context) {
 
 function initImmersed (context) {
   var immersedHeight = getImmersedHeight()
+  window.immersedHeight = immersedHeight
   document.body.classList.add('immersed' + immersedHeight)
 
   var routerView = context // document.getElementById('router-view')

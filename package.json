@@ -81,7 +81,7 @@
     "vue-lazyload": "1.0.5",
     "vue-loader": "11.3.4",
     "vue-scroller": "2.2.1",
-    "vue-star-rating": "1.4.0",
+    "vue-star-rating": "1.6.1",
     "vue-style-loader": "2.0.5",
     "vue-template-compiler": "2.3.4",
     "webpack": "3.10.0",
