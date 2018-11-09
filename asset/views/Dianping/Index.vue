@@ -96,8 +96,8 @@
                 </svg>
               </div>
             </div>
-            <div class="productSort" :class="orderBy ? 'active' : ''" @tap.stop.prevent="selectSort()">
-              <span>{{ orderByName }}</span>
+            <div class="productSort" :class="sortOrderByName !== '排序' ? 'active' : ''" @tap.stop.prevent="selectSort()">
+              <span>{{ sortOrderByName }}</span>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-paixu"></use>
               </svg>
@@ -160,8 +160,8 @@
               </svg>
             </div>
           </div>
-          <div class="productSort" :class="orderBy ? 'active' : ''" @tap.stop.prevent="selectSort()">
-            <span>{{ orderByName }}</span>
+          <div class="productSort" :class="sortOrderByName !== '排序' ? 'active' : ''" @tap.stop.prevent="selectSort()">
+            <span>{{ sortOrderByName }}</span>
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-paixu"></use>
             </svg>
@@ -220,10 +220,11 @@
         categories: [],
         list: [],
         recommandProductList: [],
-        orderBy: 0,
+        orderBy: 1,
         category: {
           id: ''
         },
+        sortOrderByName: '排序',
         swiperOption: {
           loop: true,
           effect: 'coverflow',
@@ -282,9 +283,11 @@
         switch (text) {
           case '评分':
             this.orderBy = 1
+            this.sortOrderByName = '评分'
             break
           case '热度':
             this.orderBy = 2
+            this.sortOrderByName = '热度'
             break
         }
       },
@@ -514,7 +517,8 @@
         span {
           &:nth-of-type(1) {
             &.active {
-              color: #03AEF9;
+              color: #444444;
+              font-family:PingFangSC-Medium;
             }
           }
         }
@@ -527,16 +531,17 @@
           margin-top: -0.053rem;
           &.active {
             .icon {
-              color: #03AEF9;
+              color: #444444;
             }
           }
         }
       }
       .productSort {
         &.active {
-          color: #03AEF9;
+          color: #444444;
+          font-family:PingFangSC-Medium;
           .icon {
-            color: #03AEF9;
+            color: #444444;
           }
         }
         .icon {
