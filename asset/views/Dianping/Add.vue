@@ -9,7 +9,7 @@
 
     <div class="mui-content addDianPing">
       <div class="component-mark">
-        <span>就您的感受而言，您会给他打多少分？</span>
+        <span>{{ markTips ? markTips : '就您的感受而言，您会给他打多少分？' }}</span>
         <div class="stars">
           <starRating
             :increment="1"
@@ -162,6 +162,20 @@
           }
         }
         return ids
+      },
+      markTips () {
+        switch (this.star) {
+          case 1:
+            return '很烂，不得不吐糟说一说'
+          case 2:
+            return '凑活，马马虎虎令人不满'
+          case 3:
+            return '一般，达到行业平均水平'
+          case 4:
+            return '不错，给人留下深刻印象'
+          case 5:
+            return '超赞，各方面都比较杰出'
+        }
       }
     },
     components: {
