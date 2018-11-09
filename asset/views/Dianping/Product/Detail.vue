@@ -373,7 +373,7 @@
     background: #ffffff;
     border-bottom-left-radius: 0.533rem;
     border-bottom-right-radius: 0.533rem;
-    box-shadow: 0rem 0.186rem 20px 0rem rgba(240, 242, 245, 1);
+    box-shadow: 0rem 0.186rem 0.533rem 0rem rgba(240, 242, 245, 1);
     .companyLogo {
       width: 1.6rem;
       height: 1.6rem;
