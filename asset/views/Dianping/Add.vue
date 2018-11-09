@@ -349,10 +349,7 @@
 <style lang="less" rel="stylesheet/less" scoped>
   .mui-content{
     background:#fff;
-  }
-
-  .mui-ios .mui-content{
-    overflow: hidden !important;
+    bottom:1.17333rem;
   }
 
   .container-bottom-menus{
@@ -441,6 +438,7 @@
     }
   }
   .container-identity {
+    padding-bottom:0.266rem;
     .line-river-after {
       &:after {
         left: 0.426rem;
@@ -553,16 +551,20 @@
   .addDianPing .container-editor.container-editor-add .textarea-wrapper {
     border: none;
     margin: 0;
+    padding-bottom:0 !important;
   }
   .addDianPing .ql-editor {
     padding-top: 0 !important;
   }
   .addDianPing .quill-editor {
-    height: 2rem !important;
+    min-height: 2rem !important;
+    height:auto !important;
   }
   .addDianPing .ql-container {
-    height: 2rem !important;
+    min-height: 2rem !important;
+    height:auto !important;
   }
+
   .addDianPing .component-photograph {
     float: left;
     margin-bottom: 0.266rem;
