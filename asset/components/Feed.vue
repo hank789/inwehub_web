@@ -748,7 +748,7 @@
               font-size: 0.266rem;
               padding: 0 0.133rem;
               line-height: 0.4rem;
-              margin-left: 3px;
+              margin-left: 0.08rem;
               /*display: inline-block;*/
             }
           }

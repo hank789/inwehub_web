@@ -369,7 +369,7 @@
     position: absolute;
     background: #fff;
     z-index: 7;
-    top: -3px;
+    top: -0.08rem;
     left:0;
     display: block;
   }
