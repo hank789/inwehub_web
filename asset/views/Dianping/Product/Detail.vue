@@ -131,7 +131,7 @@
                 <img class="lazyImg" v-lazy="tag.logo" alt="">
               </div>
               <div class="product-detail">
-                <div class="productName font-family-medium">{{ tag.name }}</div>
+                <div class="productName font-family-medium text-line-1">{{ tag.name }}</div>
                 <div class="productMark">
                   <div class="stars">
                     <star-rating
@@ -370,7 +370,7 @@
     background: #ffffff;
     border-bottom-left-radius: 0.533rem;
     border-bottom-right-radius: 0.533rem;
-    box-shadow: 0rem 0.186rem 0.346rem 0rem rgba(240, 242, 245, 1);
+    box-shadow: 0rem 0.186rem 20px 0rem rgba(240, 242, 245, 1);
     .companyLogo {
       width: 1.6rem;
       height: 1.6rem;
@@ -593,6 +593,7 @@
       .product-detail {
         float: left;
         margin-left: 0.266rem;
+        width: 7.5rem;
         .productName {
           color: #444444;
           font-size: 0.426rem;
