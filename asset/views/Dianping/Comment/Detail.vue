@@ -65,7 +65,7 @@
                 <img class="lazyImg" v-lazy="detail.tags[0].logo">
               </div>
               <div class="linkContent">
-                <div v-if="detail.tags[0].name" class="text-line-2">{{detail.tags[0].name}}</div>
+                <div v-if="detail.tags[0].name" class="text-line-1">{{detail.tags[0].name}}</div>
                 <span v-else class="seat"></span>
                 <div class="mark">
                   <div class="stars">

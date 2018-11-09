@@ -55,7 +55,7 @@
                       <img :src="getImageSuffix(recommandProduct.tag.logo, 132)">
                     </div>
                     <div class="product-detail">
-                      <div class="productName font-family-medium">{{ recommandProduct.tag.name }}</div>
+                      <div class="productName font-family-medium text-line-1">{{ recommandProduct.tag.name }}</div>
                       <div class="productMark">
                         <div class="stars">
                           <star-rating
@@ -433,6 +433,11 @@
       line-height: 0.6rem;
       padding: 0 0.4rem;
       height: 1.733rem;
+    }
+    .product-detail {
+      .productName {
+        width: 5.5rem;
+      }
     }
   }
 
