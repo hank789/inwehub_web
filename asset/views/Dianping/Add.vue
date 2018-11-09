@@ -113,6 +113,7 @@
   import { add, getProductDetail, getTags } from '../../utils/dianping'
   import Vue from 'vue'
   import starRating from '../../components/star-rating/star-rating.vue'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -214,6 +215,11 @@
         Vue.set(item, 'selected', !item.selected)
       },
       refreshPageData () {
+        var dianpingRating = localEvent.getLocalItem('dianping_rating')
+        if (dianpingRating && dianpingRating.rating) {
+          this.star = dianpingRating.rating
+          localEvent.clearLocalItem('dianping_rating')
+        }
         this.initData()
         let id = this.$route.params.id
 
