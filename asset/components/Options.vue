@@ -1,6 +1,6 @@
 <template>
   <div :id="id" class="mui-popover mui-popover-action mui-popover-bottom">
-    <ul class="mui-table-view">
+    <ul class="mui-table-view optionsWrapper">
       <li class="mui-table-view-cell" v-for="(item, index) in options" @tap.stop.prevent="selectItem(item)">{{item.text ? item.text : item}}</li>
     </ul>
 
@@ -91,5 +91,8 @@
   }
   .mui-popover.mui-popover-action .mui-table-view:last-child:after {
     height: 0 !important;
+  }
+  .optionsWrapper{
+    max-height:none !important;
   }
 </style>
