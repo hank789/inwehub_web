@@ -234,6 +234,7 @@ function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
 
   return {
     title: username + '邀请您点评',
+    pyqTitle: username + '邀请您点评:' + productName,
     link: link,
     content: productName,
     imageUrl: imgUrl,
