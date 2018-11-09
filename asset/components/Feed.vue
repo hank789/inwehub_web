@@ -116,8 +116,11 @@
             <img class="lazyImg" v-lazy="item.user.avatar" alt="">
           </div>
           <div class="userName">
-            <span class="font-family-medium">{{ item.user.name }}</span>
-            <span class="border-football" v-if="item.feed.is_recommend">优质</span>
+            <div class="userNameTop">
+              <span class="font-family-medium">{{ item.user.name }}</span>
+              <div class="border-football" v-if="item.feed.is_recommend">优质</div>
+            </div>
+
             <div class="time"><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></div>
           </div>
         </div>
@@ -730,11 +733,23 @@
           }
         }
         .userName {
-          margin-top: -0.053rem;
+          /*margin-top: -0.053rem;*/
           .border-football {
             &:after {
               border-radius: 0.213rem;
               border-color: #FA4975;
+            }
+          }
+          .userNameTop {
+            display: flex;
+            div {
+              height: 0.4rem;
+              color: #FA4975;
+              font-size: 0.266rem;
+              padding: 0 0.133rem;
+              line-height: 0.4rem;
+              margin-left: 3px;
+              /*display: inline-block;*/
             }
           }
           span {
@@ -744,12 +759,7 @@
               line-height: 0.493rem;
             }
             &:nth-of-type(2) {
-              height: 0.4rem;
-              color: #FA4975;
-              font-size: 0.266rem;
-              padding: 0 0.133rem;
-              line-height: 0.4rem;
-              display: inline-block;
+
             }
           }
           .time {
