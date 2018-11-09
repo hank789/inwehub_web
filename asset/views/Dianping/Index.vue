@@ -226,7 +226,7 @@
         },
         sortOrderByName: '排序',
         swiperOption: {
-          loop: true,
+          loop: false,
           effect: 'coverflow',
           centeredSlides: true,
           slidesPerView: 'auto',
