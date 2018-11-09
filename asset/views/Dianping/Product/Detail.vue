@@ -106,6 +106,7 @@
             :increment="1"
             :padding="4"
             :activeColor="'#fcc816'"
+            v-model="star"
             :star-size="23"
             :show-rating="false"
             :border-color="'#fcc816'"
@@ -217,7 +218,8 @@
         },
         productComments: [],
         shareOption: {},
-        iconMenus: []
+        iconMenus: [],
+        star: 0
       }
     },
     computed: {
@@ -261,6 +263,7 @@
       waitGoDianping (rating) {
         localEvent.setLocalItem('dianping_rating', {rating: rating})
         setTimeout(() => {
+          this.star = 0
           this.goDianping()
         }, 500)
       },
