@@ -38,7 +38,7 @@
                    @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
                 <div class="comment-info">
                   <div class="avatarImg">
-                    <img :src="recommandProduct.user.avatar">
+                    <img :src="getImageSuffix(recommandProduct.user.avatar, 102)">
                   </div>
                   <div class="comment-name">
                     <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
@@ -52,7 +52,7 @@
                 <div class="comment-product">
                   <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(recommandProduct.tag.name))">
                     <div class="product-img border-football">
-                      <img :src="recommandProduct.tag.logo">
+                      <img :src="getImageSuffix(recommandProduct.tag.logo, 132)">
                     </div>
                     <div class="product-detail">
                       <div class="productName font-family-medium">{{ recommandProduct.tag.name }}</div>
@@ -108,7 +108,7 @@
             <div class="comment-product" v-for="(item, index) in list" :key="'comment-product_' + index">
               <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
                 <div class="product-img border-football">
-                  <img class="lazyImg" v-lazy="item.logo" alt="">
+                  <img class="lazyImg" v-lazy="getImageSuffix(item.logo, 132)" alt="">
                 </div>
                 <div class="product-detail">
                   <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
@@ -213,6 +213,7 @@
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
   import { scrollPage } from '../../utils/dom.js'
+  import { getImageSuffix } from '../../utils/image'
 
   export default {
     data () {
@@ -270,6 +271,9 @@
       Options
     },
     methods: {
+      getImageSuffix (img, width, height) {
+        return getImageSuffix(img, width, height)
+      },
       goGroups () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
         this.$router.replace('/groups')
