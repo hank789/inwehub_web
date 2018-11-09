@@ -225,7 +225,7 @@
           id: ''
         },
         swiperOption: {
-          loop: true,
+          loop: false,
           effect: 'coverflow',
           centeredSlides: true,
           slidesPerView: 'auto',
