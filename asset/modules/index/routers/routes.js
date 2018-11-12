@@ -2524,6 +2524,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/dianping/product/add',
+    name: 'dianping_product_add',
+    meta: {
+      title: '创建产品',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingProductAdd,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 产品详情
     path: '/dianping/product/:id',
     name: 'dianping-product-detail',

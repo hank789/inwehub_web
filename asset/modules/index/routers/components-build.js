@@ -207,6 +207,7 @@ import DianpingTanchuang from '../../../components/select/DropDownMenu.vue'
 import DianpingMyPublishComment from '../../../views/Dianping/My/PublishComment.vue'
 import DianpingMyCollectProduct from '../../../views/Dianping/My/CollectProduct.vue'
 import DianpingMyFollowProduct from '../../../views/Dianping/My/FollowProduct.vue'
+import DianpingProductAdd from '../../../views/Dianping/Product/Add.vue'
 
 export {
   Login,
@@ -417,5 +418,6 @@ export {
   DianpingTanchuang,
   DianpingMyPublishComment,
   DianpingMyCollectProduct,
-  DianpingMyFollowProduct
+  DianpingMyFollowProduct,
+  DianpingProductAdd
 }
