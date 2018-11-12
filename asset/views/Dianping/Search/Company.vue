@@ -29,6 +29,19 @@
             <div class="componyImg border-football">
               <img src="../../../statics/images/uicon.jpg">
             </div>
+            <div class="componyInfo">
+              <div class="componyName">思爱普（中国）有限公司</div>
+              <div class="componyTags">专业服务</div>
+              <div class="componyAddress">
+                <div class="address">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg>
+                  <span>上海市黄浦区</span>
+                </div>
+                <div class="interval">< 200m</div>
+              </div>
+            </div>
             <i class="bot"></i>
           </div>
         </div>
@@ -78,6 +91,7 @@
       .container-componyList {
         position: relative;
         padding: 15px 0 12.5px;
+        display: flex;
         .componyImg {
           width: 42px;
           height: 42px;
@@ -91,6 +105,14 @@
             &:after {
               border-radius: 8px;
             }
+          }
+        }
+        .componyInfo {
+          margin-left: 13px;
+          .componyAddress {
+            width: 286.5px;
+            display: flex;
+            justify-content: space-between;
           }
         }
       }
