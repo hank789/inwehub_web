@@ -210,6 +210,9 @@ const DianpingProductDetail = () => import(/* webpackChunkName: "DianpingProduct
 const DianpingCommentList = () => import(/* webpackChunkName: "DianpingCommentList" */ '../../../views/Dianping/Comment/List.vue')
 const DianpingCommentDetail = () => import(/* webpackChunkName: "DianpingCommentDetail" */ '../../../views/Dianping/Comment/Detail.vue')
 const DianpingTanchuang = () => import(/* webpackChunkName: "DianpingCommentDetail" */ '../../../components/select/DropDownMenu.vue')
+const DianpingMyPublishComment = () => import(/* webpackChunkName: "DianpingMyPublishComment" */ '../../../views/Dianping/My/PublishComment.vue')
+const DianpingMyCollectProduct = () => import(/* webpackChunkName: "DianpingMyCollectProduct" */ '../../../views/Dianping/My/CollectProduct.vue')
+const DianpingMyFollowProduct = () => import(/* webpackChunkName: "DianpingMyFollowProduct" */ '../../../views/Dianping/My/FollowProduct.vue')
 
 export {
   Login,
@@ -417,5 +420,8 @@ export {
   DianpingProductDetail,
   DianpingCommentList,
   DianpingCommentDetail,
-  DianpingTanchuang
+  DianpingTanchuang,
+  DianpingMyPublishComment,
+  DianpingMyCollectProduct,
+  DianpingMyFollowProduct
 }

@@ -58,6 +58,9 @@ Vue.use(VueClipboards)
 import Back from './../../components/Back.vue'
 Vue.component('Back', Back)
 
+import ImageView from './../../components/image/ImageView.vue'
+Vue.component('ImageView', ImageView)
+
 window.loading_gif = loadingGif
 
 // mui的插件；
