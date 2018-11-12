@@ -48,6 +48,7 @@ var Share = () => {
         if (wechat.nativeClient) {
           self.context.sendHaoyou = () => {
             var data = {
+              type: 'web',
               content: self.data.content ? stripTags(self.data.content).substr(0, 150) : self.data.content,
               href: self.data.link,
               title: self.data.title ? stripTags(self.data.title).substr(0, 150) : self.data.title,
@@ -68,6 +69,7 @@ var Share = () => {
 
           self.context.sendPengYouQuan = () => {
             wechat.send({
+              type: 'web',
               content: stripTags(pengYouQuanContent).substr(0, 150),
               href: self.data.link,
               title: stripTags(pengYouQuanTitle).substr(0, 150),
