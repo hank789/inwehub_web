@@ -2590,7 +2590,7 @@ const routes = [
     }
   },
   { // 发布的点评
-    path: '/my/publish/comment',
+    path: '/dianping/my/publishComments',
     name: 'my-publish-comment',
     meta: {
       title: '我的发布-点评',
@@ -2603,7 +2603,7 @@ const routes = [
     }
   },
   { // 我收藏的产品
-    path: '/my/collect/product',
+    path: '/dianping/my/collectProducts',
     name: 'collect-product',
     meta: {
       title: '我的收藏-产品',
@@ -2616,7 +2616,7 @@ const routes = [
     }
   },
   { // 我关注的产品
-    path: '/my/follow/product',
+    path: '/dianping/my/followProducts',
     name: 'follow-product',
     meta: {
       title: '我的关注-产品服务',
@@ -2676,6 +2676,19 @@ const routes = [
       keepAlive: false
     },
     component: componets.DianpingSearchCompany,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/product/feedback',
+    name: 'dianping_product_feedback',
+    meta: {
+      title: '产品问题反馈',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingProductFeedback,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

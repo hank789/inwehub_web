@@ -212,6 +212,7 @@ import DianpingSearchComment from '../../../views/Dianping/Search/Comment.vue'
 import DianpingSearchProduct from '../../../views/Dianping/Search/Product.vue'
 import DianpingSearchCategory from '../../../views/Dianping/Search/Category.vue'
 import DianpingSearchCompany from '../../../views/Dianping/Search/Company.vue'
+import DianpingProductFeedback from '../../../views/Dianping/Product/Feedback.vue'
 
 export {
   Login,
@@ -427,5 +428,6 @@ export {
   DianpingSearchComment,
   DianpingSearchProduct,
   DianpingSearchCategory,
-  DianpingSearchCompany
+  DianpingSearchCompany,
+  DianpingProductFeedback
 }

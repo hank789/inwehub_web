@@ -218,6 +218,7 @@ const DianpingSearchComment = () => import(/* webpackChunkName: "DianpingSearchC
 const DianpingSearchProduct = () => import(/* webpackChunkName: "DianpingSearchProduct" */ '../../../views/Dianping/Search/Product.vue')
 const DianpingSearchCategory = () => import(/* webpackChunkName: "DianpingSearchCategory" */ '../../../views/Dianping/Search/Category.vue')
 const DianpingSearchCompany = () => import(/* webpackChunkName: "DianpingSearchCompany" */ '../../../views/Dianping/Search/Company.vue')
+const DianpingProductFeedback = () => import(/* webpackChunkName: "DianpingProductFeedback" */ '../../../views/Dianping/Product/Feedback.vue')
 
 export {
   Login,
@@ -433,5 +434,6 @@ export {
   DianpingSearchComment,
   DianpingSearchProduct,
   DianpingSearchCategory,
-  DianpingSearchCompany
+  DianpingSearchCompany,
+  DianpingProductFeedback
 }
