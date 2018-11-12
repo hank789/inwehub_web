@@ -218,33 +218,13 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer" v-if="isShow" @tap.capture="onTap($event)">
-      <div class="footerLeft">
-        <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
-        <div class="footerMenuTwo" v-else>
-          <div class="noBullish containerBtn" @tap.stop.prevent="detailDownVote()">{{detail.downvote_tip}}</div>
-          <div class="bullish containerBtn" @tap.stop.prevent="upVote()">{{detail.support_tip}}</div>
-        </div>
-      </div>
-      <div class="footerRight">
-        <div class="collectionComment" @tap.stop.prevent="collection()">
-          <div>
-            <svg class="icon" aria-hidden="true" :class="{active: detail.is_bookmark}">
-              <use xlink:href="#icon-shoucangdilantongyi"></use>
-            </svg>
-          </div>
-          <span>收藏<i v-if="detail.bookmarks">{{detail.bookmarks}}</i></span>
-        </div>
-        <div class="collectionComment" @tap.stop.prevent="goComment()">
-          <div>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-pinglun"></use>
-            </svg>
-          </div>
-          <span>评论<i v-if="detail.comments_number">{{detail.comments_number}}</i></span>
-        </div>
-      </div>
-    </div>
+    <DetailMenu
+      :detail="this.detail"
+      :iconOptions="iconOptions"
+      @detailMenuIcon="detailMenuIcon"
+      @WriteComment="goComment"
+    ></DetailMenu>
+
   </div>
 </template>
 
@@ -270,6 +250,7 @@
   import { quillEditor } from '../../components/vue-quill'
   import { upvote, downVote } from '../../utils/discover'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
+  import DetailMenu from '../../components/menu/Detail.vue'
 
   export default {
     data () {
@@ -373,6 +354,32 @@
           //   text: '举报'
           // }
         ]
+      },
+      iconOptions () {
+        return [
+          {
+            icon: '#icon-pinglun',
+            text: '评论',
+            number: this.detail.comments_number
+          },
+          {
+            icon: '#icon-cai',
+            text: '踩',
+            number: this.detail.downvotes,
+            showClass: this.detail.is_downvoted
+          },
+          {
+            icon: '#icon-zan',
+            text: '赞',
+            number: this.detail.upvotes,
+            showClass: this.detail.is_upvoted
+          },
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享',
+            number: 0
+          }
+        ]
       }
     },
     components: {
@@ -384,9 +391,26 @@
       commentTextarea,
       groupsList,
       quillEditor,
-      'vue-pull-refresh': VuePullRefresh
+      'vue-pull-refresh': VuePullRefresh,
+      DetailMenu
     },
     methods: {
+      detailMenuIcon (item) {
+        switch (item.text) {
+          case '评论':
+            this.$router.pushPlus('/comment/' + this.detail.category_id + '/' + this.detail.slug + '/' + this.detail.id)
+            break
+          case '踩':
+            this.detailDownVote()
+            break
+          case '赞':
+            this.upVote()
+            break
+          case '分享':
+            this.$refs.ShareBtn.share()
+            break
+        }
+      },
       openApp () {
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
       },
@@ -783,6 +807,7 @@
       },
       detailDownVote () {
         downVote(this, this.detail.id, (response) => {
+          this.detail.downvotes++
           this.detail.is_downvoted = 1
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
@@ -802,6 +827,7 @@
             )
           }
         }, (response) => {
+          this.detail.downvotes--
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.detail.is_downvoted = 0

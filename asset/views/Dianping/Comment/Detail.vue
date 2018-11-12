@@ -172,7 +172,12 @@
     </div>
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <Detail :detail="this.detail" :iconOptions="iconOptions" @detailMenuIcon="detailMenuIcon"></Detail>
+    <Detail
+      :detail="this.detail"
+      :iconOptions="iconOptions"
+      @detailMenuIcon="detailMenuIcon"
+      @WriteComment="goComment"
+    ></Detail>
 
     <PageMore
       ref="share"

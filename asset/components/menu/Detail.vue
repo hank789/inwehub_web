@@ -1,19 +1,11 @@
 <template>
   <div class="container-footer">
-    <div class="footerLeft" @tap.stop.prevent="goComment()">
+    <div class="footerLeft" @tap.stop.prevent="WriteComment()">
       <div class="footerMenuOne">说点什么</div>
     </div>
     <div class="footerRight">
-      <!--<div class="collectionComment">-->
-        <!--<div @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">-->
-          <!--<svg class="icon" aria-hidden="true">-->
-            <!--<use xlink:href="#icon-pinglun"></use>-->
-          <!--</svg>-->
-        <!--</div>-->
-        <!--<span v-if="detail.comments_number">{{ detail.comments_number }}</span>-->
-      <!--</div>-->
 
-      <div class="collectionComment" v-for="(menuItem, index) in iconOptions" @tap.stop.prevent="detailMenuIcon(menuItem)">
+      <div class="collectionComment" v-for="(menuItem, index) in iconOptions" :key="index" @tap.stop.prevent="detailMenuIcon(menuItem)">
         <div :class="menuItem.showClass ? 'active' : ''">
           <svg class="icon" :class="menuItem.showClass ? 'active' : ''" aria-hidden="true">
             <use :xlink:href="menuItem.icon"></use>
@@ -45,6 +37,9 @@
     methods: {
       detailMenuIcon (item) {
         this.$emit('detailMenuIcon', item)
+      },
+      WriteComment () {
+        this.$emit('WriteComment')
       }
     }
   }
