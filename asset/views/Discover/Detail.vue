@@ -28,7 +28,7 @@
 
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
-          <div class="line-river lineMargin"></div>
+          <!--<div class="line-river lineMargin"></div>-->
 
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper container-editor container-editor-app" id="contentWrapper">
@@ -1010,6 +1010,7 @@
   }
   .mui-table-view-cell {
     padding-top: 0.133rem;
+    padding-bottom: 14px;
   }
 
   .detail-discover:before {
@@ -1427,6 +1428,18 @@
 </style>
 
 <style type="text/css">
+  .detail-discover .followWrapper {
+    margin-top: 8px;
+  }
+  .detail-discover .followWrapper .followButton {
+    min-width: 44px;
+    height: 21px;
+    line-height: 21px;
+    font-size: 12px;
+    width: auto;
+    padding: 0 10px;
+  }
+
 
 </style>
 

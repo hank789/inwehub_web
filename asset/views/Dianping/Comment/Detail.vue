@@ -20,7 +20,7 @@
             :time="detail.created_at"
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
-          <div class="line-river lineMargin"></div>
+          <!--<div class="line-river lineMargin"></div>-->
 
           <div class="mark">
             <div class="stars">
@@ -286,6 +286,26 @@
             text: '分享',
             number: 0
           }
+        ]
+      },
+      iconMenus () {
+        if (this.userId === this.detail.owner.id) {
+          return [
+            {
+              icon: '#icon-shanchu1',
+              text: '删除'
+            }
+            // {
+            //   icon: '#icon-jubao',
+            //   text: '举报'
+            // },
+          ]
+        }
+        return [
+          // {
+          //   icon: '#icon-jubao',
+          //   text: '举报'
+          // }
         ]
       }
     },
@@ -809,5 +829,19 @@
   }
   .active {
     color: #d4d4d4;
+  }
+</style>
+
+<style type="text/css">
+  .detail-discover .followWrapper {
+    margin-top: 8px;
+  }
+  .detail-discover .followWrapper .followButton {
+    min-width: 44px;
+    height: 21px;
+    line-height: 21px;
+    font-size: 12px;
+    width: auto;
+    padding: 0 10px;
   }
 </style>
