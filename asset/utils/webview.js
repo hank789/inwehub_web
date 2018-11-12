@@ -64,6 +64,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
           currentWebview.loadURL(url)
         } else {
           saveCurrentWebviewId(id)
+          currentWebview.setVisible(false)
           window.mui.fire(currentWebview, 'go_to_target_page', {url: shotUrl})
         }
       }
