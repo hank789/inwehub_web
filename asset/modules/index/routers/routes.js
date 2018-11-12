@@ -2576,6 +2576,45 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 发布的点评
+    path: '/my/publish/comment',
+    name: 'my-publish-comment',
+    meta: {
+      title: '我的发布-点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingMyPublishComment,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我收藏的产品
+    path: '/my/collect/product',
+    name: 'collect-product',
+    meta: {
+      title: '我的收藏-产品',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingMyCollectProduct,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我关注的产品
+    path: '/my/follow/product',
+    name: 'follow-product',
+    meta: {
+      title: '我的关注-产品服务',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingMyFollowProduct,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',
