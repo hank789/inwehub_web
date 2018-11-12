@@ -84,6 +84,7 @@
           @delCommentSuccess="delCommentSuccess"
           ref="discuss"
         ></ArticleDiscuss>
+        <div class="seeAll" v-if="detail.comments_number > 3" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">查看全部{{detail.comments_number}}条评论</div>
         <div class="river"></div>
 
         <div class="allDianPing font-family-medium">大家都在评</div>
@@ -135,33 +136,12 @@
     </div>
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer">
-      <div class="footerLeft">
-        <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
-        <div class="footerMenuTwo" v-else>
-          <div class="noBullish containerBtn" @tap.stop.prevent="detailDownVote()">{{detail.downvote_tip}}</div>
-          <div class="bullish containerBtn" @tap.stop.prevent="upVote()">{{detail.support_tip}}</div>
-        </div>
-      </div>
-      <div class="footerRight">
-        <div class="collectionComment" @tap.stop.prevent="collect()">
-          <div>
-            <svg class="icon" aria-hidden="true" :class="{active: detail.is_bookmark}">
-              <use xlink:href="#icon-shoucangdilantongyi"></use>
-            </svg>
-          </div>
-          <span>收藏<i v-if="detail.bookmarks">{{detail.bookmarks}}</i></span>
-        </div>
-        <div class="collectionComment" @tap.stop.prevent="goComment()">
-          <div>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-pinglun"></use>
-            </svg>
-          </div>
-          <span>评论<i v-if="detail.comments_number">{{detail.comments_number}}</i></span>
-        </div>
-      </div>
-    </div>
+    <Detail
+      :detail="this.detail"
+      :iconOptions="iconOptions"
+      @detailMenuIcon="detailMenuIcon"
+      @WriteComment="goComment"
+    ></Detail>
 
     <PageMore
       ref="share"
@@ -190,6 +170,7 @@
   import PageMore from '../../../components/PageMore.vue'
   import {getDianpingCommentDetail} from '../../../utils/shareTemplate'
   import StarView from '../../../components/star-rating/starView.vue'
+  import Detail from '../../../components/menu/Detail.vue'
 
   export default {
     data () {
@@ -237,7 +218,8 @@
       quillEditor,
       PageMore,
       'vue-pull-refresh': VuePullRefresh,
-      StarView
+      StarView,
+      Detail
     },
     computed: {
       discussStoreParams () {
@@ -245,9 +227,51 @@
       },
       discussListParams () {
         return {'submission_slug': this.detail.slug, sort: 'hot'}
+      },
+      iconOptions () {
+        return [
+          {
+            icon: '#icon-pinglun',
+            text: '评论',
+            number: this.detail.comments_number
+          },
+          {
+            icon: '#icon-cai',
+            text: '踩',
+            number: this.detail.downvotes,
+            showClass: this.detail.is_downvoted
+          },
+          {
+            icon: '#icon-zan',
+            text: '赞',
+            number: this.detail.upvotes,
+            showClass: this.detail.is_upvoted
+          },
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享',
+            number: 0
+          }
+        ]
       }
     },
     methods: {
+      detailMenuIcon (item) {
+        switch (item.text) {
+          case '评论':
+            this.$router.pushPlus('/comment/' + this.detail.category_id + '/' + this.detail.slug + '/' + this.detail.id)
+            break
+          case '踩':
+            this.detailDownVote()
+            break
+          case '赞':
+            this.upVote()
+            break
+          case '分享':
+            this.$refs.share.share()
+            break
+        }
+      },
       goProductDetail () {
         this.$router.pushPlus('/dianping/product/' + encodeURIComponent(this.detail.tags[0].name))
       },
@@ -298,6 +322,7 @@
       },
       detailDownVote () {
         downVote(this, this.detail.id, (response) => {
+          this.detail.downvotes++
           this.detail.is_downvoted = 1
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
@@ -317,6 +342,7 @@
             )
           }
         }, (response) => {
+          this.detail.downvotes--
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.detail.is_downvoted = 0
@@ -495,7 +521,7 @@
 <style scoped lang="less">
   .mui-content {
     background: #ffffff;
-    bottom: 1.333rem;
+    bottom: 44px; /* px不转换 */
   }
   .mark {
     display: flex;
@@ -514,6 +540,13 @@
       margin-top: 0.053rem;
       margin-left: 0.08rem;
     }
+  }
+  .seeAll {
+    padding: 0.32rem 0;
+    font-size: 0.373rem;
+    color: #808080;
+    line-height: 0.533rem;
+    text-align: center;
   }
   .allDianPing {
     padding: 0 0.426rem;
@@ -739,96 +772,6 @@
   .lineMargin {
     margin-top: -0.426rem;
     margin-bottom: 0.373rem;
-  }
-
-  .container-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 1.333rem;
-    overflow: hidden;
-    /*padding: 0.36rem 0.426rem;*/
-    background: #FFFFFF;
-    &:before {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: .02667rem;
-      content: '';
-      -webkit-transform: scaleY(.5);
-      transform: scaleY(.5);
-      background-color: #dcdcdc;
-    }
-    .footerLeft {
-      display: flex;
-      font-size: 0.373rem;
-      float: left;
-      padding: 0.186rem 0 0.186rem 0.426rem;
-      .footerMenuTwo {
-        display: flex;
-        .containerBtn {
-          display: flex;
-          width: 2.96rem;
-          height: 0.96rem;
-          color: #ffffff;
-          margin-right: 0.133rem;
-          line-height: 0.96rem;
-          text-align: center;
-          border-radius: 0.213rem;
-          justify-content: center;
-        }
-        .noBullish {
-          background: #FA4975;
-        }
-        .bullish {
-          background: #03AEF9;
-        }
-      }
-      .footerMenuOne {
-        width: 5.933rem;
-        height: 0.96rem;
-        display: flex;
-        color: #03AEF9;
-        line-height: 0.96rem;
-        border-radius: 0.213rem;
-        background: #F3F4F6;
-        text-align: center;
-        justify-content: center;
-        &.activeRed {
-          color: #FA4975;
-        }
-        &.activeBlue {
-          color: #03AEF9;
-        }
-      }
-    }
-    .footerRight {
-      color: #B4B4B6;
-      font-size: 0.266rem;
-      text-align: center;
-      display: flex;
-      float: right;
-      margin-top: 0.186rem;
-      margin-right: 0.426rem;
-      .collectionComment {
-        width: 1.333rem;
-        height: 1.306rem;
-        flex-grow:1;
-        color: #808080;
-        span {
-          color: #B4B4B6;
-          display: block;
-          margin-top: -0.106rem;
-          i {
-            font-style: normal;
-          }
-        }
-      }
-      .icon {
-        font-size: 0.586rem;
-        /*margin-top: -0.106rem;*/
-      }
-    }
   }
   .active {
     color: #d4d4d4;
