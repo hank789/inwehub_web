@@ -208,6 +208,10 @@ import DianpingMyPublishComment from '../../../views/Dianping/My/PublishComment.
 import DianpingMyCollectProduct from '../../../views/Dianping/My/CollectProduct.vue'
 import DianpingMyFollowProduct from '../../../views/Dianping/My/FollowProduct.vue'
 import DianpingProductAdd from '../../../views/Dianping/Product/Add.vue'
+import DianpingSearchComment from '../../../views/Dianping/Search/Comment.vue'
+import DianpingSearchProduct from '../../../views/Dianping/Search/Product.vue'
+import DianpingSearchCategory from '../../../views/Dianping/Search/Category.vue'
+import DianpingSearchCompany from '../../../views/Dianping/Search/Company.vue'
 
 export {
   Login,
@@ -419,5 +423,9 @@ export {
   DianpingMyPublishComment,
   DianpingMyCollectProduct,
   DianpingMyFollowProduct,
-  DianpingProductAdd
+  DianpingProductAdd,
+  DianpingSearchComment,
+  DianpingSearchProduct,
+  DianpingSearchCategory,
+  DianpingSearchCompany
 }

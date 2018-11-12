@@ -2628,6 +2628,58 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/dianping/search/comments',
+    name: 'dianping_search_comment',
+    meta: {
+      title: '搜索点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchComment,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/search/products',
+    name: 'dianping_search_product',
+    meta: {
+      title: '搜索产品',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchProduct,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/search/categories',
+    name: 'dianping_search_category',
+    meta: {
+      title: '搜索分类',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchCategory,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/search/companys',
+    name: 'dianping_search_company',
+    meta: {
+      title: '搜索公司',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchCompany,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',
