@@ -553,14 +553,14 @@ function AppPageInit (context) {
           if (currentUrl === url || (currentUrl === '/home' && url === '/home?refresh=1')) {
             window.mui.fire(ws, 'refreshPageData', {type: 'forward'})
           }
-          ws.setVisible(true)
+          ws.setContentVisible(true)
           setWebviewNewUrl()
         }, () => {
           window.mui.fire(ws, 'autoHeight', true)
           if (currentUrl === url) {
             window.mui.fire(ws, 'refreshPageData', {type: 'forward'})
           }
-          ws.setVisible(true)
+          ws.setContentVisible(true)
           setWebviewNewUrl()
         })
       })
