@@ -207,6 +207,12 @@ import DianpingTanchuang from '../../../components/select/DropDownMenu.vue'
 import DianpingMyPublishComment from '../../../views/Dianping/My/PublishComment.vue'
 import DianpingMyCollectProduct from '../../../views/Dianping/My/CollectProduct.vue'
 import DianpingMyFollowProduct from '../../../views/Dianping/My/FollowProduct.vue'
+import DianpingProductAdd from '../../../views/Dianping/Product/Add.vue'
+import DianpingSearchComment from '../../../views/Dianping/Search/Comment.vue'
+import DianpingSearchProduct from '../../../views/Dianping/Search/Product.vue'
+import DianpingSearchCategory from '../../../views/Dianping/Search/Category.vue'
+import DianpingSearchCompany from '../../../views/Dianping/Search/Company.vue'
+import DianpingProductFeedback from '../../../views/Dianping/Product/Feedback.vue'
 
 export {
   Login,
@@ -417,5 +423,11 @@ export {
   DianpingTanchuang,
   DianpingMyPublishComment,
   DianpingMyCollectProduct,
-  DianpingMyFollowProduct
+  DianpingMyFollowProduct,
+  DianpingProductAdd,
+  DianpingSearchComment,
+  DianpingSearchProduct,
+  DianpingSearchCategory,
+  DianpingSearchCompany,
+  DianpingProductFeedback
 }
