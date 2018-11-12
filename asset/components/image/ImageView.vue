@@ -23,24 +23,24 @@
         default: true
       },
       width: {
-        type: Number,
         default: 0
       },
       height: {
-        type: Number,
         default: 0
       }
     },
     created () {},
     methods: {
       getImage (src) {
-        if (this.width) {
-          this.width *= getDpi()
+        var width = parseFloat(this.width)
+        if (width) {
+          width *= getDpi()
         }
-        if (this.height) {
-          this.height *= getDpi()
+        var height = parseFloat(this.height)
+        if (height) {
+          height *= getDpi()
         }
-        return getImageSuffix(src, this.width, this.height)
+        return getImageSuffix(src, width, height)
       }
     }
   }
