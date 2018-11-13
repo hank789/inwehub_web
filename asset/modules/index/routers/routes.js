@@ -2590,7 +2590,7 @@ const routes = [
     }
   },
   { // 发布的点评
-    path: '/dianping/my/publishComments',
+    path: '/dianping/my/publishComments/:uuid',
     name: 'my-publish-comment',
     meta: {
       title: '我的发布-点评',
