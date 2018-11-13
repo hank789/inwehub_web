@@ -12,7 +12,7 @@
           <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true"
-             @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
+             @tap.stop.prevent="$router.pushPlus('/dianping/search/comments','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>
@@ -30,7 +30,24 @@
         :autoShowEmpty="false"
         class="listWrapper"
       >
+
         <template slot="listHeader">
+
+          <div class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/comments')">
+            <div class="searchInput">
+              <div class="searchLeft">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-sousuo"></use>
+                </svg>
+                <span>搜索点评、产品、分类、公司</span>
+              </div>
+              <div class="searchRight">
+                <i class="line-wall"></i>
+                <span>合作</span>
+              </div>
+            </div>
+          </div>
+
           <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
             <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="'recommandProductList_' + index">
@@ -364,6 +381,40 @@
     background: linear-gradient(180deg, rgba(220, 220, 220, 1) 0%, rgba(243, 244, 246, 1) 100%);
     .swiper-slide {
       width: auto !important;
+    }
+  }
+
+  .searchWrapper {
+    padding-top: 9px;
+    background: #DCDCDC;
+    .searchInput {
+      width: 343px;
+      height: 34px;
+      margin: 0 auto;
+      line-height: 34px;
+      border-radius: 100px;
+      background: #FFFFFF;
+      display: flex;
+      padding: 0 10px;
+      justify-content: space-between;
+      .searchLeft {
+        color: #C8C8C8;
+        .icon {
+          font-size: 17px;
+        }
+        span {
+          font-size: 14px;
+        }
+      }
+      .searchRight {
+        color: #444444;
+        font-size: 13px;
+        .line-wall {
+          height: 14px;
+          top: 2px;
+          right: 6px;
+        }
+      }
     }
   }
 

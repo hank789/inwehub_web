@@ -3460,3 +3460,44 @@ a {
   right: 0;
   bottom: 0;
   margin: auto;}
+
+.container-noMore {
+  padding: 12.5px 0 28px;
+  color: #C8C8C8;
+  font-size: 12px;
+  text-align: center;}
+
+.container-hotSearch {
+  padding: 0.32rem 0.426rem;}
+.container-hotSearch .history {
+  margin-top: 0.16rem;}
+.container-hotSearch .hotSearchText {
+  padding-bottom: 0.32rem;}
+.container-hotSearch .hotSearchText span {
+  color: #444444;
+  font-size: 0.426rem;
+  line-height: 0.586rem;}
+.container-hotSearch .hotSearchText .icon {
+  color: #FA4975;}
+.container-hotSearch .hotSearchList span {
+  height: 0.72rem;
+  line-height: 0.72rem;
+  color: #444444;
+  font-size: 0.32rem;
+  padding: 0rem 0.266rem;
+  background: #F3F4F6;
+  border-radius: 2.666rem;
+  margin: 0 0.133rem 0.266rem 0;
+  display: inline-block;}
+.container-searchList {
+  padding: 0 0.426rem;
+  position: relative;
+  z-index: 1000;}
+.container-searchList div {
+  color: #808080;
+  font-size: 0.4rem;
+  padding: 0.32rem 0;
+  line-height: 0.586rem;
+  position: relative;}
+.container-searchList .listOne {
+  color: #03AEF9;}

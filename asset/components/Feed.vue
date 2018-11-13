@@ -134,6 +134,30 @@
         <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
       </div>
 
+      <div class="link" v-if="item.feed.tags && isShowLink">
+        <div class="linkBox" @tap.stop.prevent="goProductDetail()">
+              <span class="linkIimg" v-if="!item.feed.tags[0].logo">
+                <svg class="icon" aria-hidden="true" >
+                  <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+                </svg>
+              </span>
+          <div class="productLogo border-football" v-else>
+            <img class="lazyImg" v-lazy="item.feed.tags[0].logo">
+          </div>
+          <div class="linkContent">
+            <div v-if="item.feed.tags[0].name" class="text-line-1">{{item.feed.tags[0].name}}</div>
+            <span v-else class="seat"></span>
+            <div class="mark">
+              <div class="stars">
+                <StarView :rating="item.feed.tags[0].review_average_rate"></StarView>
+              </div>
+              <div class="text">{{ item.feed.tags[0].review_average_rate }}分</div><i></i>
+              <div class="comment">{{item.feed.tags[0].reviews}}条评论</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="feed-moreOperation">
         <div class="feed-mord"  @tap.stop.prevent="showItemMore">
           <svg class="icon" aria-hidden="true">
@@ -173,6 +197,7 @@
   import { openAppUrlByUrl } from '../utils/plus'
   import { getDianpingCommentDetail, getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
   import { postRequest } from '../utils/request'
+  import StarView from '../components/star-rating/starView.vue'
 
   export default {
     data () {
@@ -183,7 +208,8 @@
     },
     components: {
       FeedUserInfo,
-      PageMore
+      PageMore,
+      StarView
     },
     computed: {
       isAsk () {
@@ -272,6 +298,10 @@
       item: {
         type: Object,
         default: {}
+      },
+      isShowLink: {
+        type: Boolean,
+        default: false
       }
     },
     mounted () {
@@ -283,6 +313,9 @@
       })
     },
     methods: {
+      goProductDetail () {
+        this.$router.pushPlus('/dianping/product/' + encodeURIComponent(this.item.feed.tags[0].name))
+      },
       timeago (time) {
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
@@ -829,6 +862,96 @@
             color: #B4B4B6;
           }
         }
+      }
+    }
+  }
+  .link {
+    padding: 10px 0.426rem 0;
+    /*margin-bottom: 0.466rem;*/
+    .linkBox {
+      padding: 0.266rem;
+      border-radius: 0.106rem;
+      background: #F7F8FA;
+      .linkIimg {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        text-align: center;
+        line-height: 1.333rem;
+        margin-right: 0.266rem;
+        border-radius: 0.106rem;
+        background: #ECECEE;
+        .icon {
+          color: #C8C8C8;
+          font-size: 0.746rem;
+        }
+      }
+      .productLogo {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        margin-right: 0.266rem;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.106rem;
+          object-fit: cover;
+        }
+        &.border-football {
+          &:after {
+            border-radius: 0.213rem;
+            border-color: #DCDCDC;
+          }
+        }
+      }
+      .linkContent {
+        font-size: 0.373rem;
+        color: #808080;
+        .seat {
+          width: 0.266rem;
+          height: 0.4rem;
+          display: inline-block;
+        }
+        div {
+          word-break: break-all;
+        }
+        .text-line-2 {
+          color: #808080;
+        }
+        .mark {
+          padding: 0;
+          margin-top: 0;
+          .text {
+            color: #FCC816;
+            margin-top: 0 !important;
+          }
+          i {
+            width: 0.053rem;
+            height: 0.053rem;
+            background: #B4B4B6;
+            border-radius: 50%;
+            margin: 0.26rem 0.133rem 0;
+          }
+          .comment {
+            color: #B4B4B6;
+            font-size: 0.293rem;
+          }
+        }
+      }
+    }
+    .mark {
+      display: flex;
+      padding: 0 0.426rem;
+      margin-top: -0.213rem;
+      margin-bottom: 0.186rem;
+      .stars {
+        color: #FCC816;
+      }
+      .text {
+        color: #FCC816;
+        font-size: 0.293rem;
+        margin-top: 0.053rem;
+        margin-left: 0.08rem;
       }
     }
   }

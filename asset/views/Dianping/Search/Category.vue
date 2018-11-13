@@ -23,27 +23,86 @@
         <i class="bot"></i>
       </div>
 
-      <div class="container-searchResult">
-        <div class="container-resultList">
-          <div class="container-result" v-for="(item, index) in 5" :key="index">
-            <span>Marketing Services</span>
-            <i class="bot"></i>
+      <RefreshList
+        ref="refreshlist"
+        v-model="list"
+        :api="'search/productCategory'"
+        :pageMode="true"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
+        :autoShowEmpty="false"
+        :isShowUpToRefreshDescription="false"
+        :prevSuccessCallback="prevSuccessCallback"
+        class="listWrapper">
+
+        <div class="container-searchResult">
+          <div class="container-resultList">
+            <div class="container-result" v-for="(item, index) in list" :key="index">
+              <span>{{ item.name }}</span>
+              <i class="bot"></i>
+            </div>
           </div>
+          <div class="container-noMore">暂无更多</div>
         </div>
-        <div class="noMore">暂无更多</div>
-      </div>
+
+      </RefreshList>
 
     </div>
   </div>
 </template>
 
 <script>
+  import RefreshList from '../../../components/refresh/List.vue'
 
   export default {
     data () {
       return {
         searchText: '',
-        isShowCancelButton: false
+        isShowCancelButton: false,
+        confirmSearchText: '',
+        list: [],
+        resultLoading: 1,
+        searchAdviceList: []
+      }
+    },
+    components: {
+      RefreshList
+    },
+    computed: {
+      dataList () {
+        return {search_word: this.confirmSearchText}
+      }
+    },
+    methods: {
+      back () {
+        window.mui.back()
+        return
+      },
+      prevSuccessCallback () {
+        this.resultLoading = 0
+      },
+      refreshPageData: function () {
+        var text = this.$route.query.text
+        if (text) {
+          this.searchText = text
+          this.selectConfirmSearchText(text)
+          setTimeout(() => {
+            this.$refs.refreshlist.refreshPageData(this.dataList)
+          }, 200)
+        }
+      },
+      enterKeyCode: function (ev) {
+        if (ev.keyCode === 13) {
+          this.selectConfirmSearchText(this.searchText)
+        }
+      },
+      selectConfirmSearchText (text) {
+        this.searchText = text
+        if (text) {
+          this.resultLoading = 1
+          this.confirmSearchText = text
+        }
+        this.searchAdviceList = []
       }
     }
   }
@@ -83,12 +142,6 @@
           line-height: 21px;
         }
       }
-    }
-    .noMore {
-      padding: 12.5px 0 28px;
-      color: #C8C8C8;
-      font-size: 12px;
-      text-align: center;
     }
   }
 </style>

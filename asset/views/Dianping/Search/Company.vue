@@ -23,41 +23,101 @@
         <i class="bot"></i>
       </div>
 
-      <div class="container-searchCompony">
-        <div class="container-searchComponyList">
-          <div class="container-componyList">
-            <div class="componyImg border-football">
-              <img src="../../../statics/images/uicon.jpg">
-            </div>
-            <div class="componyInfo">
-              <div class="componyName">思爱普（中国）有限公司</div>
-              <div class="componyTags">专业服务</div>
-              <div class="componyAddress">
-                <div class="address">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-dingwei1"></use>
-                  </svg>
-                  <span>上海市黄浦区</span>
-                </div>
-                <div class="interval">< 200m</div>
+      <RefreshList
+        ref="refreshlist"
+        v-model="list"
+        :api="'search/company'"
+        :pageMode="true"
+        :prevOtherData="dataList"
+        :nextOtherData="dataList"
+        :autoShowEmpty="false"
+        :isShowUpToRefreshDescription="false"
+        :prevSuccessCallback="prevSuccessCallback"
+        class="listWrapper">
+
+        <div class="container-searchCompony">
+          <div class="container-searchComponyList">
+            <div class="container-componyList" v-for="(item, index) in list" :key="index">
+              <div class="componyImg border-football">
+                <img src="../../../statics/images/uicon.jpg">
               </div>
+              <div class="componyInfo">
+                <div class="componyName">{{ item.name }}</div>
+                <div class="componyTags">专业服务</div>
+                <div class="componyAddress">
+                  <div class="address">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-dingwei"></use>
+                    </svg>
+                    <span>{{ item.address_province }}</span>
+                  </div>
+                  <div class="interval">< {{ item.distance_format }}</div>
+                </div>
+              </div>
+              <i class="bot"></i>
             </div>
-            <i class="bot"></i>
           </div>
+          <div class="container-noMore">暂无更多</div>
         </div>
-      </div>
+
+      </RefreshList>
 
     </div>
   </div>
 </template>
 
 <script>
+  import RefreshList from '../../../components/refresh/List.vue'
 
   export default {
     data () {
       return {
         searchText: '',
-        isShowCancelButton: false
+        confirmSearchText: '',
+        isShowCancelButton: false,
+        resultLoading: 1,
+        list: [],
+        searchAdviceList: []
+      }
+    },
+    components: {
+      RefreshList
+    },
+    computed: {
+      dataList () {
+        return {search_word: this.confirmSearchText}
+      }
+    },
+    methods: {
+      back () {
+        window.mui.back()
+        return
+      },
+      prevSuccessCallback () {
+        this.resultLoading = 0
+      },
+      refreshPageData: function () {
+        var text = this.$route.query.text
+        if (text) {
+          this.searchText = text
+          this.selectConfirmSearchText(text)
+          setTimeout(() => {
+            this.$refs.refreshlist.refreshPageData(this.dataList)
+          }, 200)
+        }
+      },
+      enterKeyCode: function (ev) {
+        if (ev.keyCode === 13) {
+          this.selectConfirmSearchText(this.searchText)
+        }
+      },
+      selectConfirmSearchText (text) {
+        this.searchText = text
+        if (text) {
+          this.resultLoading = 1
+          this.confirmSearchText = text
+        }
+        this.searchAdviceList = []
       }
     }
   }
@@ -109,10 +169,33 @@
         }
         .componyInfo {
           margin-left: 13px;
+          .componyName {
+            color: #444444;
+            font-size: 16px;
+            line-height: 22.5px;
+          }
+          .componyTags {
+            color: #808080;
+            font-size: 13px;
+            line-height: 18.5px;
+            margin-top: 4px;
+            margin-bottom: 5px;
+          }
           .componyAddress {
             width: 286.5px;
             display: flex;
             justify-content: space-between;
+            .address {
+              color: #B4B4B6;
+              .icon {
+                font-size: 14px;
+              }
+              span {
+                font-size: 11px;
+                line-height: 15px;
+                margin-left: -4px;
+              }
+            }
           }
         }
       }
