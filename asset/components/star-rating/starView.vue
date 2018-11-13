@@ -42,6 +42,7 @@
     position: absolute;
     color: #fcc816;
     top:-27px;
+    overflow: hidden;
   }
   .downStar{
     position: absolute;
