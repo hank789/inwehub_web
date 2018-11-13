@@ -76,7 +76,9 @@
               </div>
               <div class="componyInfo">
                 <div class="componyName text-line-1" v-html="getHighlight(item.name)"></div>
-                <div class="componyTags">专业服务</div>
+                <div class="componyTags" v-if="item.tags.length">
+                  <span v-for="(tags, tagsIndex) in item.tags" :key="tagsIndex">{{ tags.name }}<i v-if="index !== tags.length-1"></i></span>
+                </div>
                 <div class="componyAddress">
                   <div class="address">
                     <svg class="icon" aria-hidden="true">
@@ -279,6 +281,17 @@
             line-height: 18.5px;
             margin-top: 4px;
             margin-bottom: 5px;
+            span {
+              i {
+                width: 2px;
+                height: 2px;
+                background: #B4B4B6;
+                border-radius: 100px;
+                display: inline-block;
+                vertical-align: middle;
+                margin: -3px 5px 0;
+              }
+            }
           }
           .componyAddress {
             width: 286.5px;
