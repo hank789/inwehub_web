@@ -23,7 +23,40 @@
         <i class="bot"></i>
       </div>
 
+      <div class="container-hotSearch" v-if="getCurrentMode === 'history'">
+        <div class="hotSearchText">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-huo"></use>
+          </svg>
+          <span class="font-family-medium">热搜</span>
+        </div>
+        <div class="hotSearchList">
+          <span v-for="(item, index) in hotSearchHistory.top" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">{{item}}</span>
+        </div>
+        <div class="hotSearchText history">
+          <span class="font-family-medium">历史</span>
+        </div>
+        <div class="hotSearchList">
+          <span v-for="(item, index) in hotSearchHistory.history" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">{{item}}</span>
+        </div>
+      </div>
+
+      <div class="container-searchList" v-if="getCurrentMode === 'match'">
+        <div v-for="(item, index) in searchAdviceList" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">
+          {{item}}
+          <i class="bot"></i>
+        </div>
+      </div>
+
+      <div class="container-searchList" v-if="getCurrentMode === 'match' && !searchAdviceList.length">
+        <div class="listOne" @tap.stop.prevent="selectConfirmSearchText(searchText)">
+          查看“{{searchText}}”的搜索结果
+          <i class="bot"></i>
+        </div>
+      </div>
+
       <RefreshList
+        v-if="getCurrentMode === 'result'"
         ref="refreshlist"
         v-model="list"
         :api="'search/productCategory'"
@@ -38,11 +71,18 @@
         <div class="container-searchResult">
           <div class="container-resultList">
             <div class="container-result" v-for="(item, index) in list" :key="index">
-              <span>{{ item.name }}</span>
+              <span v-html="getHighlight(item.name)"></span>
               <i class="bot"></i>
             </div>
           </div>
-          <div class="container-noMore">暂无更多</div>
+          <div class="container-noMore" v-if="list.length">暂无更多</div>
+        </div>
+
+        <div class="noResult increase dianping-search" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
+          <div class="empty-Img">
+            <img src="../../../statics/images/empty@3x.png">
+          </div>
+          <div class="noResultText">暂无结果，换个关键词试试~</div>
         </div>
 
       </RefreshList>
@@ -53,6 +93,7 @@
 
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
+  import { postRequest } from '../../../utils/request'
 
   export default {
     data () {
@@ -62,7 +103,11 @@
         confirmSearchText: '',
         list: [],
         resultLoading: 1,
-        searchAdviceList: []
+        searchAdviceList: [],
+        hotSearchHistory: {
+          history: [],
+          top: []
+        }
       }
     },
     components: {
@@ -71,7 +116,24 @@
     computed: {
       dataList () {
         return {search_word: this.confirmSearchText}
+      },
+      getCurrentMode () {
+        if (this.searchText === '') {
+          return 'history'
+        }
+
+        if (this.searchText !== this.confirmSearchText) {
+          return 'match'
+        }
+
+        return 'result'
       }
+    },
+    created () {
+      this.refreshPageData()
+    },
+    activated () {
+      this.refreshPageData()
     },
     methods: {
       back () {
@@ -90,6 +152,36 @@
             this.$refs.refreshlist.refreshPageData(this.dataList)
           }, 200)
         }
+        this.hotSearch()
+      },
+      focus: function () {
+        this.confirmSearchText = ''
+        this.list = []
+        if (this.searchText) {
+          this.searchAdvice(this.searchText)
+        }
+      },
+      hotSearch () {
+        postRequest(`search/topInfo`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.hotSearchHistory = response.data.data
+        })
+      },
+      searchAdvice (searchText) {
+        postRequest(`search/suggest`, {
+          search_word: searchText
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.searchAdviceList = response.data.data.suggest
+        })
       },
       enterKeyCode: function (ev) {
         if (ev.keyCode === 13) {
@@ -103,6 +195,12 @@
           this.confirmSearchText = text
         }
         this.searchAdviceList = []
+      },
+      // 文字高亮
+      getHighlight (content) {
+        var reg = new RegExp('(' + this.searchText + ')', 'gi')  // 正则验证匹配
+        var newstr = content.replace(reg, '<span style="color: #03aef9">$1</span>')  // 动态添加颜色
+        return newstr
       }
     }
   }

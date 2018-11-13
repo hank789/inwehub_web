@@ -75,6 +75,14 @@
             @showItemMore="showItemMore"
           ></DianPingFeed>
         </template>
+        <div class="container-noMore" v-if="list.length">暂无更多</div>
+
+        <div class="noResult increase dianping-search" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
+          <div class="empty-Img">
+            <img src="../../../statics/images/empty@3x.png">
+          </div>
+          <div class="noResultText">暂无结果，换个关键词试试~</div>
+        </div>
 
       </RefreshList>
 
@@ -220,6 +228,7 @@
             this.$refs.refreshlist.refreshPageData(this.dataList)
           }, 200)
         }
+        this.hotSearch()
       },
       enterKeyCode: function (ev) {
         if (ev.keyCode === 13) {
