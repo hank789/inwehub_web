@@ -33,7 +33,7 @@
 
         <template slot="listHeader">
 
-          <div class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/comments')">
+          <div id="searchWrapper" class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/comments')">
             <div class="searchInput">
               <div class="searchLeft">
                 <svg class="icon" aria-hidden="true">
@@ -294,7 +294,8 @@
         this.$refs.itemOptions.toggle()
       },
       showDropdownMenu () {
-        var height = document.querySelector('.dianpingBanners').clientHeight - 20
+        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
+        var height = document.querySelector('.dianpingBanners').clientHeight + searchInputHeight - 20
         this.$refs.RefreshList.scrollTo(0, -height, 800)
         this.$refs.dropdownMenu.show()
       },
@@ -318,13 +319,15 @@
     },
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
+        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y > height) {
+        if (y > height + searchInputHeight) {
           document.querySelector('.dianpingBannersHide').classList.add('showTagsHome')
         }
       }, null, (container, y) => {
+        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y < height) {
+        if (y < height + searchInputHeight) {
           document.querySelector('.dianpingBannersHide').classList.remove('showTagsHome')
         }
       })
