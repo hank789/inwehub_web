@@ -5,7 +5,7 @@ import router from '../modules/index/routers/index'
 // 判断是否可以进入目标路由
 function requestAuth (to, from, next) {
   let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
-  if (UserLoginInfo.token) {
+  if (window.mui.os.wechat === undefined || UserLoginInfo.token) {
     next()
   } else {
     next({
