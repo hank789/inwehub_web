@@ -294,7 +294,7 @@
         this.$refs.itemOptions.toggle()
       },
       showDropdownMenu () {
-        var height = document.querySelector('.dianpingBanners').clientHeight - 20
+        var height = document.querySelector('.dianpingBanners').clientHeight + 30
         this.$refs.RefreshList.scrollTo(0, -height, 800)
         this.$refs.dropdownMenu.show()
       },
@@ -318,12 +318,12 @@
     },
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-        var height = document.querySelector('.dianpingBanners').clientHeight - 20
+        var height = document.querySelector('.dianpingBanners').clientHeight + 30
         if (y > height) {
           document.querySelector('.dianpingBannersHide').classList.add('showTagsHome')
         }
       }, null, (container, y) => {
-        var height = document.querySelector('.dianpingBanners').clientHeight - 20
+        var height = document.querySelector('.dianpingBanners').clientHeight + 30
         if (y < height) {
           document.querySelector('.dianpingBannersHide').classList.remove('showTagsHome')
         }
