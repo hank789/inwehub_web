@@ -13,17 +13,71 @@
         <i class="bot"></i>
       </div>
 
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'collected/reviews'"
+        :prevOtherData="{}"
+        :nextOtherData="{}"
+        :autoShowEmpty="false"
+        class="listWrapper"
+      >
+
+        <template v-for="(comment, index) in list">
+          <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
+        </template>
+
+      </RefreshList>
+
     </div>
+
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
+    ></PageMore>
+
   </div>
 </template>
 
 <script>
+  import RefreshList from '../../../components/refresh/List.vue'
+  import feedDianping from '../../../components/Feed.vue'
+  import PageMore from '../../../components/PageMore.vue'
+
+  export default {
+    data () {
+      return {
+        list: [],
+        shareOption: {},
+        iconMenus: []
+      }
+    },
+    components: {
+      RefreshList,
+      feedDianping,
+      PageMore
+    },
+    methods: {
+      showItemMore (shareOption, item) {
+        this.iconMenus = []
+        this.shareOption = shareOption
+        this.$refs.share.share()
+      }
+    },
+    mounted () {
+    }
+  }
 
 </script>
 
 <style scoped lang="less">
   .mui-content {
     background: #ffffff;
+  }
+  .listWrapper {
+    top: 39px;
   }
 
   .bot {
