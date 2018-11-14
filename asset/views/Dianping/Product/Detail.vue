@@ -72,7 +72,7 @@
                   <div class="name">
                     <span class="font-family-medium">{{ advisers.name }}</span>
                   </div>
-                  <div class="good text-line-1">擅长“{{ advisers.skill }}”</div>
+                  <div class="good text-line-1">熟悉“{{ advisers.skill }}”</div>
                 </div>
                 <div class="speak" @tap.stop.prevent="goChat(advisers.id)"><span class="border-football">沟通</span></div>
               </div>
