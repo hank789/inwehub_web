@@ -5,16 +5,15 @@
       <h1 class="mui-title">我的收藏</h1>
     </header>
 
-
-    <!--组件-->
     <div class="mui-content">
-      <!--导航栏-->
-       <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/my/collectedAnswers')">问答  </span>
-        <span>分享 <i></i></span>
 
+      <div class="container-searchMenu">
+        <span @tap.stop.prevent="$router.replace('/my/collectedAnswers')">问答</span>
+        <span class="font-family-medium" >分享<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/dianping/my/collectProducts')">点评</span>
+        <i class="bot"></i>
       </div>
+
       <!--内容区域-->
       <RefreshList
         ref="RefreshList"
@@ -78,53 +77,12 @@
 </script>
 
 <style scoped="scoped">
-  .mui-wechat .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-    top: 0;
-  }
+  .container-searchMenu {
+     margin-top: 0;
+   }
 
   .mui-content {
     background: #FFFFFF;
-  }
-  /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-  }
-
-  .menu span {
-    display: block;
-    width: 50%;
-    height: 100%;
-    float: left;
-    font-size: 0.373rem;
-    color: #444444;
-    text-align: center;
-    line-height: 1.2rem;
-    font-weight: 600;
-  }
-
-  .menu span:nth-of-type(2) {
-    color: #3c95f9;
-    position: relative;
-  }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 0.72rem;
-    height: 0.04rem;
-    left: 42.5%;
-    bottom: 0.013rem;
-    background: #3c95f9;
   }
 
   .bot {
@@ -139,7 +97,6 @@
   }
   /*清掉自带样式*/
 
-  div,
   p,
   span,
   i,
@@ -168,6 +125,7 @@
   }
    .answer li div{
      margin-bottom: 0.32rem;
+     margin-top: 0;
    }
   .answer li p:nth-of-type(1){
     font-size:0.4rem;

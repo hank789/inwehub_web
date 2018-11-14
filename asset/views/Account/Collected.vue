@@ -8,10 +8,11 @@
 
     <div class="mui-content">
       <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="">问答  <i></i></span>
+      <div class="container-searchMenu">
+        <span class="font-family-medium" @tap.stop.prevent="">问答<i></i></span>
         <span @tap.stop.prevent="$router.replace('/my/collectedArticle')">分享</span>
-
+        <span @tap.stop.prevent="$router.replace('/dianping/my/collectProducts')">点评</span>
+        <i class="bot"></i>
       </div>
 
 
@@ -78,9 +79,9 @@
 </script>
 
 <style scoped>
-  /*清掉自带样式*/
-
-  div,
+.container-searchMenu {
+  margin-top: 0;
+}
   p,
   span,
   i,
@@ -97,49 +98,12 @@
   .mui-content{
     background: #FFFFFF;
   }
-  /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-  }
-
-  .menu span {
-    display: block;
-    width: 50%;
-    height: 100%;
-    float: left;
-    font-size: 0.373rem;
-    color: #444444;
-    text-align: center;
-    line-height: 1.2rem;
-    font-weight: 600;
-  }
-
-  .menu span:nth-of-type(1) {
-    color: #3c95f9;
-    position: relative;
-  }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 0.72rem;
-    height: 0.04rem;
-    left: 42%;
-    bottom: 0.013rem;
-    background: #3c95f9;
-  }
-
 
   .bot {
     position: absolute;
-    right: 0.4rem;
+    right: 0;
     bottom: 0;
-    left:0.4rem;
+    left: 0;
     height: 0.026rem;
     -webkit-transform: scaleY(.5);
     transform: scaleY(.5);
