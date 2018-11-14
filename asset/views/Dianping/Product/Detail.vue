@@ -204,6 +204,7 @@
   import { scrollToElement, scrollPage } from '../../../utils/dom'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
   import starRating from '../../../components/star-rating/star-rating.vue'
+  import { getLocalName } from '../../../utils/user.js'
 
   export default {
     data () {
@@ -217,7 +218,7 @@
           followers: 0
         },
         swiperOption: {
-          loop: true,
+          loop: false,
           effect: 'coverflow',
           centeredSlides: true,
           slidesPerView: 'auto',
@@ -296,14 +297,7 @@
         this.$refs.share.share()
       },
       joinShare () {
-        this.iconMenus = []
-        var shareOption = getDianpingProductDetail(
-          this.userName,
-          this.detail.name,
-          this.detail.summary,
-          this.detail.logo
-        )
-        this.shareOption = Object.assign(this.shareOption, shareOption)
+        this.getShareOption()
         this.$refs.share.share()
       },
       goChat (uid) {
@@ -323,12 +317,24 @@
           this.detail = data
           this.loading = 0
           this.title = '产品服务'
+          this.getShareOption()
           scrollToElement(this, '.product-introduce', '.pull-down-container')
         })
 
         getProductComments(this, id, 3, (productComments) => {
           this.productComments = productComments
         })
+      },
+      getShareOption () {
+        this.iconMenus = []
+        var getUserName = getLocalName()
+        var shareOption = getDianpingProductDetail(
+          getUserName,
+          this.detail.name,
+          this.detail.summary,
+          this.detail.logo
+        )
+        this.shareOption = Object.assign(this.shareOption, shareOption)
       },
       goDianping () {
         this.$router.pushPlus('/dianping/add/' + urlencode(this.detail.name))
