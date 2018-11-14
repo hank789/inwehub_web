@@ -27,11 +27,11 @@
         class="listWrapper">
 
         <div class="container-publishComment">
-          <div class="container-commentWrapper" v-for="(ask, index) in list" :key="index">
+          <div class="container-commentWrapper" v-for="(item, index) in list" :key="index" @tap.stop.prevent="goToCommentPage(item.type, item.comment_url)">
             <div class="container-commentList">
-              <div class="title text-line-2" v-html="textToLink(ask.title)"></div>
-              <div class="content text-line-1" v-html="textToLink(ask.category_name)"></div>
-              <div class="time"><timeago :since="timeago(ask.created_at)" :auto-update="60"></timeago></div>
+              <div class="title text-line-2" v-html="textToLink(item.title)"></div>
+              <div class="content text-line-1" v-html="textToLink(item.category_name)"></div>
+              <div class="time"><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></div>
               <i class="bot"></i>
             </div>
           </div>
@@ -91,6 +91,13 @@
         let newDate = new Date()
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
+      },
+      goToCommentPage (type, url) {
+        if (type === 2) {
+          this.$router.pushReadHubPage(url)
+        } else {
+          this.$router.pushPlus(url)
+        }
       }
     }
   }
@@ -114,7 +121,9 @@
     background-color: #dcdcdc;
   }
 
-
+  .container-searchMenu {
+    margin-top: 0;
+  }
   .container-publishComment {
     .container-commentWrapper {
       padding: 0 16px;

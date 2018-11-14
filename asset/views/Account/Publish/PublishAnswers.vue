@@ -6,17 +6,17 @@
       <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
-
-    <!--组件-->
     <div class="mui-content">
-      <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="">回答  <i></i></span>
+
+      <div class="container-searchMenu">
+        <span class="font-family-medium">回答<i></i></span>
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions/' + uuid)">提问</span>
         <span @tap.stop.prevent="$router.replace('/my/publishArticle/' + uuid)">分享</span>
         <span @tap.stop.prevent="$router.replace('/my/publishComment/' + uuid)">评论</span>
+        <span @tap.stop.prevent="$router.replace('/dianping/my/publishComments/' + uuid)">点评</span>
+        <i class="bot"></i>
       </div>
-      <!--内容区域-->
+
       <RefreshList
         ref="RefreshList"
         v-model="list"
@@ -25,6 +25,7 @@
         :nextOtherData="{type:0, uuid:this.uuid }"
         :list="list"
         class="listWrapper">
+
         <ul class="answer">
           <li v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
             <p class="mui-ellipsis-2" v-html="textToLink(ask.description)"></p>
@@ -35,12 +36,10 @@
             <i class="bot"></i>
           </li>
         </ul>
+
       </RefreshList>
 
-      <!---->
     </div>
-    <!---->
-
   </div>
 </template>
 
@@ -107,56 +106,8 @@
 </script>
 
 <style scoped="scoped">
-  .mui-wechat .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-    top: 0;
-  }
-
   .mui-content {
     background: #FFFFFF;
-  }
-
-  /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-  }
-
-  .menu span {
-    display: block;
-    width: 25%;
-    height: 100%;
-    float: left;
-    font-size: 0.373rem;
-    color: #444444;
-    text-align: center;
-    line-height: 1.2rem;
-    font-weight: 600;
-  }
-
-  .menu span:nth-of-type(1) {
-    color: #3c95f9;
-    position: relative;
-  }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 0.72rem;
-    height: 0.04rem;
-    left:0;
-    right:0;
-    bottom: 0.013rem;
-    margin:auto;
-    background: #3c95f9;
   }
 
   .bot {
@@ -170,9 +121,6 @@
     background-color: rgb(220, 220, 220);
   }
 
-  /*清掉自带样式*/
-
-  div,
   p,
   span,
   i,
@@ -240,5 +188,8 @@
 
   .listWrapper {
     top: 1.2rem;
+  }
+  .container-searchMenu {
+    margin-top: 0;
   }
 </style>
