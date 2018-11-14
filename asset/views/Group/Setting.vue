@@ -69,6 +69,8 @@
   import Switches from 'vue-switches'
   import localEvent from '../../stores/localStorage'
   import Options from '../../components/Options.vue'
+  import { needRefresh } from '../../utils/plus'
+
   export default {
     data () {
       return {
@@ -175,6 +177,7 @@
               }
               that.openChat = !!response.data.data.room_id
               window.mui.toast('群聊已开启')
+              needRefresh()
             })
           } else {
             that.openChat = 0
@@ -196,6 +199,7 @@
               }
               that.openChat = false
               window.mui.toast('群聊已关闭')
+              needRefresh()
             })
           } else {
             that.openChat = 1
