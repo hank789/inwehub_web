@@ -148,6 +148,7 @@
       :shareOption="shareOption"
       :hideShareBtn="false"
       :iconMenu="iconMenus"
+      @clickedItem="iconMenusClickedItem"
     ></PageMore>
 
   </div>
@@ -253,26 +254,6 @@
             number: 0
           }
         ]
-      },
-      iconMenus () {
-        if (this.userId === this.detail.owner.id) {
-          return [
-            {
-              icon: '#icon-shanchu1',
-              text: '删除'
-            }
-            // {
-            //   icon: '#icon-jubao',
-            //   text: '举报'
-            // },
-          ]
-        }
-        return [
-          // {
-          //   icon: '#icon-jubao',
-          //   text: '举报'
-          // }
-        ]
       }
     },
     methods: {
@@ -303,6 +284,42 @@
       openApp () {
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
       },
+      iconMenusClickedItem (item) {
+        switch (item.text) {
+          case '删除':
+            this.deleterow()
+            break
+          case '收藏':
+            this.collect()
+            break
+          case '已收藏':
+            this.collect()
+            break
+        }
+      },
+      showItemOptions () {
+        this.iconMenus = []
+
+        if (this.uuid === this.detail.owner.uuid) {
+          this.iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
+        }
+        if (this.detail.is_bookmark) {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '已收藏',
+            isBookMark: 1
+          })
+        } else {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            isBookMark: 0
+          })
+        }
+      },
       collect () {
         var data = {
           id: this.detail.id
@@ -320,9 +337,11 @@
           if (response.data.data.type === 'unbookmarked') {
             this.detail.bookmarks--
             this.detail.is_bookmark = 0
+            window.mui.toast('已取消收藏')
           } else {
             this.detail.bookmarks++
             this.detail.is_bookmark = 1
+            window.mui.toast('收藏成功')
           }
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
@@ -337,6 +356,33 @@
                 'referrer_page': ''
               }
             )
+          }
+          window.mui('#shareWrapper').popover('toggle')
+          this.showItemOptions()
+        })
+      },
+      // 删除
+      deleterow () {
+        window.mui('#shareWrapper').popover('toggle')
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
+          if (e.index === 1) {
+            // 进行删除
+            postRequest(`article/destroy-submission`, {
+              id: this.detail.id
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.alert(response.data.message)
+                window.mui.back()
+                return
+              }
+              if (response.data.data) {
+                window.mui.back()
+                window.mui.toast('删除成功')
+              }
+            })
           }
         })
       },
@@ -466,6 +512,7 @@
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
+          this.showItemOptions()
           var shareOption = getDianpingCommentDetail(this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
           this.shareOption = Object.assign(this.shareOption, shareOption)
           this.loading = 0

@@ -34,12 +34,12 @@
       <div v-if="iconMenu.length">
         <div class="more twoLevel">
           <div class="delete single" @tap.stop.prevent="clickItem(item)"  v-for="(item, index) in iconMenu" :key="index">
-          <span class="iconBorder">
+          <span class="iconBorder" :class="item.isBookMark ? 'active' : ''">
             <svg class="icon" aria-hidden="true">
               <use :xlink:href="item.icon"></use>
             </svg>
           </span>
-            <span class="text">{{item.text}}</span>
+            <span class="text" :class="item.isBookMark ? 'active' : ''">{{item.text}}</span>
           </div>
         </div>
         <div class="line-river-after line-river-after-height"></div>
@@ -393,9 +393,12 @@
           display: inline-block;
           border-radius: 0.213rem;
           border: 0.026rem solid #DCDCDC;
+          color: #C8C8C8;
+          &.active {
+            color: #DCDCDC;
+          }
           .icon {
             font-size: 0.586rem;
-            color: #C8C8C8;
           }
         }
       }
@@ -406,6 +409,9 @@
         line-height: 0.426rem;
         text-align: center;
         margin-top: 0.213rem;
+        &.active {
+          color: #C8C8C8;
+        }
       }
     }
   }

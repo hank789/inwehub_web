@@ -305,7 +305,8 @@
           targetId: ''
         },
         isFollow: true,
-        loading: 1
+        loading: 1,
+        iconMenus: []
       }
     },
     computed: {
@@ -334,26 +335,6 @@
           return 0
         }
         return this.description.length
-      },
-      iconMenus () {
-        if (this.userId === this.detail.owner.id) {
-          return [
-            {
-              icon: '#icon-shanchu1',
-              text: '删除'
-            }
-            // {
-            //   icon: '#icon-jubao',
-            //   text: '举报'
-            // },
-          ]
-        }
-        return [
-          // {
-          //   icon: '#icon-jubao',
-          //   text: '举报'
-          // }
-        ]
       },
       iconOptions () {
         return [
@@ -431,6 +412,12 @@
             break
           case '举报':
             this.report()
+            break
+          case '收藏':
+            this.collect()
+            break
+          case '已收藏':
+            this.collect()
             break
         }
       },
@@ -652,6 +639,29 @@
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
+      showItemOptions () {
+        this.iconMenus = []
+
+        if (this.userId === this.detail.owner.id) {
+          this.iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
+        }
+        if (this.detail.is_bookmark) {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '已收藏',
+            isBookMark: 1
+          })
+        } else {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            isBookMark: 0
+          })
+        }
+      },
       getDetail: function () {
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
@@ -674,7 +684,7 @@
 
           var shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
           this.shareOption = Object.assign(this.shareOption, shareOption)
-
+          this.showItemOptions()
           if (this.detail.type === 'article') {
             this.title = this.detail.title
             var objs = JSON.parse(this.detail.data.description)
@@ -730,9 +740,11 @@
           if (response.data.data.type === 'unbookmarked') {
             this.detail.bookmarks--
             this.detail.is_bookmark = 0
+            window.mui.toast('已取消收藏')
           } else {
             this.detail.bookmarks++
             this.detail.is_bookmark = 1
+            window.mui.toast('收藏成功')
           }
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
@@ -748,6 +760,8 @@
               }
             )
           }
+          window.mui('#shareWrapper').popover('toggle')
+          this.showItemOptions()
         })
       },
       upVote () {
