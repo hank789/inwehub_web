@@ -282,6 +282,17 @@ function getLocalPhone () {
   return null
 }
 
+/**
+ * 获取本地用户名
+ */
+function getLocalName () {
+  var userInfo = getLocalUserInfo()
+  if (userInfo && userInfo.name) {
+    return userInfo.name
+  }
+  return null
+}
+
 export {
   getUserInfo,
   updateUserInfoCache,
@@ -295,5 +306,6 @@ export {
   getLocalUserId,
   getLocalUuid,
   getLocalUserLevel,
-  getLocalPhone
+  getLocalPhone,
+  getLocalName
 }
