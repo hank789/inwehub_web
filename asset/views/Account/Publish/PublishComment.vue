@@ -12,7 +12,7 @@
         <span @tap.stop.prevent="$router.replace('/my/publishAnswers/' + uuid)">回答</span>
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions/' + uuid)">提问</span>
         <span @tap.stop.prevent="$router.replace('/my/publishArticle/' + uuid)">分享</span>
-        <span @tap.stop.prevent="">评论 <i></i></span>
+        <span class="font-family-medium" @tap.stop.prevent="">评论 <i></i></span>
         <span @tap.stop.prevent="$router.replace('/dianping/my/publishComments/' + uuid)">点评</span>
         <i class="bot"></i>
       </div>
@@ -29,7 +29,7 @@
         class="listWrapper">
 
         <div class="container-publishComment">
-          <div class="container-commentWrapper" v-for="(ask, index) in list" :key="index">
+          <div class="container-commentWrapper" v-for="(ask, index) in list" :key="index"  @tap.stop.prevent="goToCommentPage(ask.type, ask.comment_url)">
             <div class="container-commentList">
               <div class="title text-line-1" v-html="textToLink(ask.content)"></div>
               <div class="content text-line-1" v-html="textToLink(ask.origin_title)"></div>
@@ -41,10 +41,7 @@
 
       </RefreshList>
 
-      <!---->
     </div>
-    <!---->
-
   </div>
 </template>
 
@@ -126,6 +123,9 @@
     height: 0.026rem;
     transform: scaleY(0.5);
     background-color: #dcdcdc;
+  }
+  .container-searchMenu {
+    margin-top: 0;
   }
   .container-publishComment {
     .container-commentWrapper {
