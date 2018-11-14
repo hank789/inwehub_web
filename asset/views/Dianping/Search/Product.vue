@@ -70,7 +70,7 @@
 
         <div class="productList">
           <div class="comment-product" v-for="(item, index) in list" :key="index">
-            <div class="product-info">
+            <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
               <div class="product-img border-football">
                 <ImageView :src="item.logo" width="44" height="44"></ImageView>
                 <!--<img src="../../../statics/images/uicon.jpg" alt="">-->

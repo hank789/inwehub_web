@@ -10,10 +10,11 @@
 
 
     <div class="mui-content">
-      <!--导航栏-->
-      <div class="menu" v-if="!type">
+
+      <div class="container-searchMenu">
         <span class="font-family-medium" @tap.stop.prevent="">用户<i></i></span>
-        <span class="font-family-medium" @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
+        <span @tap.stop.prevent="$router.replace('/collectQuestion')">问答</span>
+        <span @tap.stop.prevent="$router.replace('/dianping/my/followProducts')">产品服务</span>
         <i class="bot"></i>
       </div>
 
@@ -177,34 +178,10 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-  /*导航栏的样式*/
-  .menu{
-    width:100%;
-    height:1.04rem;
-    font-size:0.373rem;
-    color: #444444;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    position: relative;
-  }
-  .menu span:nth-of-type(1){
-    position:relative;
-    color: #03aef9;
-  }
-  .menu span:nth-of-type(1) i{
-    position:absolute;
-    width:0.72rem;
-    height:0.04rem;
-    border-radius: 1.333rem;
-    background:#03aef9;
-    top: 0.746rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
 
+  .container-searchMenu {
+    margin-top: 0;
+  }
   /**/
 
   .bot {
