@@ -7,38 +7,38 @@
     <div class="mui-content">
 
       <div class="feedBackWrapper">
-        <div class="title">
+        <div class="title active">
           <span>信息勘误</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-gengduo1"></use>
+            <use xlink:href="#icon-gou1"></use>
           </svg>
           <div class="bot"></div>
         </div>
         <div class="title">
           <span>功能建议</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-gengduo1"></use>
+            <use xlink:href="#icon-gou1"></use>
           </svg>
           <div class="bot"></div>
         </div>
         <div class="title">
           <span>BUG反馈</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-gengduo1"></use>
+            <use xlink:href="#icon-gou1"></use>
           </svg>
           <div class="bot"></div>
         </div>
         <div class="title">
           <span>不良举报</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-gengduo1"></use>
+            <use xlink:href="#icon-gou1"></use>
           </svg>
           <div class="bot"></div>
         </div>
         <div class="title">
           <span>其他</span>
           <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-gengduo1"></use>
+            <use xlink:href="#icon-gou1"></use>
           </svg>
         </div>
       </div>
@@ -106,6 +106,14 @@
       padding: 12px 0;
       position: relative;
       overflow: hidden;
+      &.active {
+        span {
+          color: #C8C8C8;
+        }
+        .icon {
+          display: block;
+        }
+      }
       span {
         color: #444444;
         font-size: 14px;
@@ -114,6 +122,9 @@
       }
       .icon {
         float: right;
+        font-size: 17px;
+        color: #03AEF9;
+        display: none;
       }
     }
   }
