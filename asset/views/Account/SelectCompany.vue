@@ -157,7 +157,7 @@
             this.loading = 0
           })
         } else {
-          localEvent.setLocalItem(this.$route.query.from + '_company' + this.id, {value: this.value})
+          localEvent.setLocalItem(this.$route.query.from + '_company' + this.id, this.value)
           this.$router.go(-1)
         }
       },
