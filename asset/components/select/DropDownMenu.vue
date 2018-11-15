@@ -88,16 +88,16 @@
         }
 
         var status = curEle.classList.contains('active')
-        window.mui.each(curEle.parentElement.parentElement.children, function (index, children) {
-          var listTitle = children.querySelector('.ListTitle')
-          if (listTitle) {
-            listTitle.classList.remove('active')
-          }
-          var listChildren = children.querySelector('.listChildren')
-          if (listChildren) {
-            listChildren.classList.remove('active')
-          }
-        })
+//        window.mui.each(curEle.parentElement.parentElement.children, function (index, children) {
+//          var listTitle = children.querySelector('.ListTitle')
+//          if (listTitle) {
+//            listTitle.classList.remove('active')
+//          }
+//          var listChildren = children.querySelector('.listChildren')
+//          if (listChildren) {
+//            listChildren.classList.remove('active')
+//          }
+//        })
 
         if (!status) {
           curEle.classList.add('active')
@@ -114,6 +114,10 @@
               }
             }, 100)
           }
+
+//          if (curEle && curEle.offsetTop) {
+//            document.querySelector('.dropDownScrollWrapper > .mui-scroll').style.transform = 'translate3d(0rem, -' + curEle.offsetTop + 'px, 0rem) translateZ(0rem)'
+//          }
         } else {
           curEle.classList.remove('active')
           if (curEle.nextElementSibling) {
@@ -134,8 +138,6 @@
         document.querySelector('.dropDownScrollWrapper').style.height = height + 'px'
         document.querySelector('#dropDownMenuWrapper').style.height = height + 'px'
         document.querySelector('.container-select').style.height = height + 'px'
-
-        document.querySelector('.dropDownScrollWrapper > .mui-scroll').style.transform = 'translate3d(0rem, 0, 0rem) translateZ(0rem)'
       },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
