@@ -2,6 +2,10 @@ import { postRequest } from './request'
 import { saveImageByBase64 } from '../utils/plus'
 
 function getImageSuffix (src, width, height) {
+  if (/\.svg$/.test(src)) {
+    return src
+  }
+
   var suffix = '?x-oss-process=image/resize,m_lfit'
   if (width) {
     suffix += ',w_' + width
