@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="dianPingProductAdd">
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
       <h1 class="mui-title">创建产品</h1>
@@ -9,11 +9,10 @@
       <div class="container-addProduct">
         <div class="headPhotowrapper">
           <div class="headImages">
-            <svg class="icon logoImg" aria-hidden="true">
+            <svg class="icon logoImg" aria-hidden="true" v-if="!images.length">
               <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
             </svg>
-            <!--<img src="../../../statics/images/uicon.jpg" alt="">-->
-            <!--<img v-if="images.length" :id="'image_0'" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>-->
+            <img v-if="images.length" :id="'image_0'" :src="images[0].base64" :data-preview-src="images[0].base64" :data-preview-group="1"/>
             <div class="headPhotograph" @tap.stop.prevent="uploadImage('small')">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-xiangji1"></use>
@@ -29,13 +28,13 @@
         <div class="productType">
           <div class="title">产品类型</div>
           <div class="typeListWrappre">
-            <div class="typeList" v-for="(item, index) in 3" :key="index">
-              <span>Business Services</span>
-              <svg class="icon" aria-hidden="true">
+            <div class="typeList" v-for="(item, index) in categorytags" :key="index">
+              <span>{{ item.name }}</span>
+              <svg class="icon" aria-hidden="true" @tap.stop.prevent="deleteTags(index)">
                 <use xlink:href="#icon-times--"></use>
               </svg>
             </div>
-            <div class="typeList add border-football">
+            <div class="typeList add border-football" @tap.stop.prevent="addTags">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-plus--"></use>
               </svg>
@@ -45,10 +44,10 @@
         </div>
 
         <div class="companyWrapper">
-          <div class="title">
+          <div class="title" @tap.stop.prevent="$router.pushPlus('/selectCompany?from=product')">
             <div>归属公司</div>
             <div class="company">
-              <span>归属公司</span>
+              <span v-if="companyName.length">{{ companyName }}</span>
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-jinru"></use>
               </svg>
@@ -64,20 +63,114 @@
           </div>
         </div>
 
-        <div class="sureButton">确认创建</div>
+        <div class="sureButton" @tap.stop.prevent="submit">确认创建</div>
 
       </div>
 
     </div>
+
+    <uploadImage ref="uploadImage"
+                 :isMultiple="true"
+                 @success="uploadImageSuccess"
+                 :ImageMaximum="maxImageCount - this.images.length"
+    ></uploadImage>
+
+    <DropDownMenu
+      ref="dropdownMenu"
+      :tree="categories"
+      :showSelectTop="false"
+      :showProductAddBack="true"
+      v-model="categorytags"
+    ></DropDownMenu>
   </div>
 </template>
 
 <script>
+  import uploadImage from '../../../components/uploadImage'
+  import { postRequest } from '../../../utils/request'
+  import localEvent from '../../../stores/localStorage'
+  import DropDownMenu from '../../../components/select/DropDownMenu.vue'
+  import { getCategories } from '../../../utils/dianping'
+
   export default {
     data () {
       return {
         name: '',
-        description: ''
+        description: '',
+        maxImageCount: 1,
+        images: [],
+        companyName: '',
+        categorytags: [],
+        categories: []
+      }
+    },
+    components: {
+      uploadImage,
+      DropDownMenu
+    },
+    computed: {
+    },
+    mounted () {
+      this.refreshPageData()
+    },
+    methods: {
+      deleteTags (index) {
+        this.categorytags.splice(index, 1)
+      },
+      refreshPageData () {
+        getCategories(this, (categories) => {
+          this.categories = categories
+        })
+
+        this.companyName = localEvent.getLocalItem('product_company102')
+        localEvent.clearLocalItem('product_company102')
+      },
+      addTags () {
+        this.$refs.dropdownMenu.show()
+      },
+      uploadImageSuccess (images) {
+        this.images = images
+      },
+      uploadImage: function () {
+        this.$refs.uploadImage.uploadImage()
+      },
+      submit () {
+        if (!this.images.length) {
+          window.mui.toast('请选择图片')
+          return
+        }
+
+        if (!this.name.length) {
+          window.mui.toast('请输入产品名称')
+          return
+        }
+
+        if (!this.categorytags.length) {
+          window.mui.toast('请选择产品类型')
+        }
+
+        if (!this.description.length) {
+          window.mui.toast('请输入产品具体介绍')
+          return
+        }
+
+        var data = {
+          name: this.name,
+          logo: this.images[0].base64,
+          category_ids: this.categorytags,
+          company: this.companyName,
+          summary: this.description
+        }
+
+        postRequest(`tags/submitProduct`, data).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.$router.replace('/dianping/product/' + response.data.data.id)
+        })
       }
     }
   }
@@ -245,6 +338,35 @@
         }
       }
     }
+  }
+  .openAppH5 #dropDownMenuWrapper {
+    top: auto !important;
+    bottom: 0 !important;
+    border-top-right-radius: 0.48rem;
+    border-top-left-radius: 0.48rem;
+    overflow: hidden;
+  }
+</style>
 
+<style>
+  .dianPingProductAdd .mui-scroll-wrapper {
+    top: 0 !important;
+  }
+  .dianPingProductAdd .mui-popover {
+    border-radius: 0;
+  }
+  .dianPingProductAdd .mui-popover .mui-scroll-wrapper {
+    margin: 0;
+    border-radius: 0.48rem 0.48rem 0 0 !important;
+  }
+
+  .dianPingProductAdd .dropDownMenuRoot .shareWrapper {
+    border-top-right-radius: 0.48rem !important;
+    border-top-left-radius: 0.48rem !important;
+  }
+  .dianPingProductAdd .container-select .listWrapper > .list:last-child {
+   border-top-right-radius: 0.48rem;
+   border-top-left-radius: 0.48rem;
+   overflow: hidden;
   }
 </style>

@@ -2,7 +2,7 @@
   <div id="dropDownMenuWrapper" class="immersed-top shareWrapper mui-popover mui-popover-top">
     <slot name="dropDownMenuHeader"></slot>
     <div class="container-select">
-      <div class="select-top">
+      <div class="select-top" v-if="showSelectTop">
         <div class="type" @tap.stop.prevent="show">
           <span>选择类型</span>
           <div class="jianTou">
@@ -29,8 +29,13 @@
                 @selectItem="selectItem"
               ></DropDownMenuChild>
             </div>
+
+            <div class="font-family-medium productAddBack" v-if="showProductAddBack" @tap.stop.prevent="ProductAddBack">取消
+              <div class="bot"></div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -52,6 +57,14 @@
         default: function () {
           return []
         }
+      },
+      showSelectTop: {
+        type: Boolean,
+        default: true
+      },
+      showProductAddBack: {
+        type: Boolean,
+        default: false
       }
     },
     mounted () {
@@ -65,6 +78,9 @@
       }, 100)
     },
     methods: {
+      ProductAddBack () {
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+      },
       selectItem (event, item) {
         var curEle = event.target
         if (curEle.tagName === 'SPAN') {
@@ -91,7 +107,11 @@
           } else {
             window.mui('#dropDownMenuWrapper').popover('toggle')
             setTimeout(() => {
-              this.$emit('input', {id: item.id, name: item.name})
+              if (!this.showSelectTop) {
+                this.$emit('input', [{id: item.id, name: item.name}])
+              } else {
+                this.$emit('input', {id: item.id, name: item.name})
+              }
             }, 100)
           }
         } else {
@@ -120,10 +140,12 @@
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
         this.autoScrollWrapperHeight()
-        var backdrop = document.querySelector('.mui-backdrop')
-        if (backdrop) {
-          var offsetTop = document.querySelector('#dropDownMenuWrapper').offsetTop
-          document.querySelector('.mui-backdrop').style.top = offsetTop + 'px'
+        if (this.showSelectTop) {
+          var backdrop = document.querySelector('.mui-backdrop')
+          if (backdrop) {
+            var offsetTop = document.querySelector('#dropDownMenuWrapper').offsetTop
+            document.querySelector('.mui-backdrop').style.top = offsetTop + 'px'
+          }
         }
       }
     }
@@ -143,6 +165,15 @@
       border-bottom-left-radius: 0.48rem;
       overflow: hidden;
     }
+  }
+  .bot {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 0.026rem;
+    transform: scaleY(0.5);
+    background-color: #dcdcdc;
   }
 
   .container-select {
@@ -172,6 +203,14 @@
         }
       }
     }
+  }
+  .productAddBack {
+    color: #444444;
+    font-size: 16px;
+    padding: 15px 0;
+    text-align: center;
+    position: relative;
+    background: #FFF;
   }
   .mui-popover .mui-scroll-wrapper {
     overflow: hidden;
@@ -207,9 +246,6 @@
 </style>
 
 <style>
-  .dropDownScrollWrapper  .list {
-    background: #F9F9FB;
-  }
 
   .dropDownScrollWrapper .list .listChildren {
     display: none;
@@ -223,6 +259,14 @@
     color: #03AEF9;
     background: #F9F9FB;
   }
+
+  .dropDownScrollWrapper  .list {
+    background: #FFF;
+  }
+
+  .dropDownScrollWrapper  .list .list {
+     background: #F9F9FB;
+   }
 
   .dropDownScrollWrapper .list .list .list {
     background: #F3F4F6;
