@@ -41,7 +41,7 @@
                 </svg>
                 <span>搜索点评、产品、分类、公司</span>
               </div>
-              <div class="searchRight">
+              <div class="searchRight" @tap.stop.prevent="cooperation">
                 <i class="line-wall"></i>
                 <span>合作</span>
               </div>
@@ -192,7 +192,7 @@
     <Options
       ref="itemOptions"
       :id="'itemOptions'"
-      :options="['评分', '热度']"
+      :options="iconOptions"
       @selectedItem="selectedItem"
     ></Options>
 
@@ -208,6 +208,7 @@
   import { scrollPage } from '../../utils/dom.js'
   import { getImageSuffix } from '../../utils/image'
   import StarView from '../../components/star-rating/starView.vue'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -236,7 +237,8 @@
           pagination: {
             el: '.swiper-pagination'
           }
-        }
+        },
+        iconOptions: []
       }
     },
     computed: {
@@ -245,16 +247,6 @@
       },
       nextOtherData () {
         return {category_id: this.category.id, orderBy: this.orderBy}
-      },
-      orderByName () {
-        switch (this.orderBy) {
-          case 0:
-            return '排序'
-          case 1:
-            return '评分'
-          case 2:
-            return '热度'
-        }
       }
     },
     components: {
@@ -277,9 +269,9 @@
         window.mui('#dropDownMenuWrapper').popover('toggle')
         this.$router.replace('/ask/offers')
       },
-      selectedItem (text) {
+      selectedItem (item) {
         this.$refs.itemOptions.toggle()
-        switch (text) {
+        switch (item.text) {
           case '评分':
             this.orderBy = 1
             this.sortOrderByName = '评分'
@@ -288,10 +280,47 @@
             this.orderBy = 2
             this.sortOrderByName = '热度'
             break
+          case '我是企业，需要产品服务':
+            this.goCustomer()
+            break
+          case '我有产品，需要入驻展示':
+            this.$router.pushPlus('/dianping/product/add')
+            break
         }
       },
       selectSort () {
+        this.iconOptions = []
+        this.iconOptions.push(
+          {
+            text: '评分'
+          },
+          {
+            text: '热度'
+          }
+        )
         this.$refs.itemOptions.toggle()
+      },
+      cooperation () {
+        this.iconOptions = []
+        this.iconOptions.push(
+          {
+            text: '我有产品，需要入驻展示'
+          },
+          {
+            text: '我是企业，需要产品服务'
+          }
+        )
+        this.$refs.itemOptions.toggle()
+      },
+      goCustomer () {
+        var information = ''
+
+        localEvent.setLocalItem('needRefresh', {value: true})
+        information = '我是产品服务方，需要合作入驻'
+
+        localEvent.setLocalItem('information', information)
+        window.trackMixpanelEvent('service-chat', '/chat/79', 'service-chat', information, this.$router.fullPath)
+        this.$router.pushPlus('/chat/79')
       },
       showDropdownMenu () {
         var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
