@@ -146,8 +146,12 @@
               <div>探索更多资讯/人脉/服务</div>
             </div>
           </div>
-          <div class="river openAppReadRiver"></div>
         </div>
+
+        <div class="feedBack">
+          <div class="text">如果您有任何关于该产品服务相关问题或信息反馈，<span @tap.stop.prevent="$router.pushPlus('/dianping/productsfeedback')">请点击</span></div>
+        </div>
+
       </vue-pull-refresh>
     </div>
 
@@ -634,6 +638,20 @@
             display: inline-block;
           }
         }
+      }
+    }
+  }
+  .feedBack {
+    padding: 15px 0 30px;
+    text-align: center;
+    .text {
+      color: #B4B4B6;
+      font-size: 12px;
+      line-height: 16.5px;
+      span {
+        color: #03AEF9;
+        font-size: 12px;
+        font-family:PingFangSC-Medium;
       }
     }
   }

@@ -203,7 +203,6 @@ import DianpingProductList from '../../../views/Dianping/Product/List.vue'
 import DianpingProductDetail from '../../../views/Dianping/Product/Detail.vue'
 import DianpingCommentList from '../../../views/Dianping/Comment/List.vue'
 import DianpingCommentDetail from '../../../views/Dianping/Comment/Detail.vue'
-import DianpingTanchuang from '../../../components/select/DropDownMenu.vue'
 import DianpingMyPublishComment from '../../../views/Dianping/My/PublishComment.vue'
 import DianpingMyCollectProduct from '../../../views/Dianping/My/CollectProduct.vue'
 import DianpingMyFollowProduct from '../../../views/Dianping/My/FollowProduct.vue'
@@ -420,7 +419,6 @@ export {
   DianpingProductDetail,
   DianpingCommentList,
   DianpingCommentDetail,
-  DianpingTanchuang,
   DianpingMyPublishComment,
   DianpingMyCollectProduct,
   DianpingMyFollowProduct,
