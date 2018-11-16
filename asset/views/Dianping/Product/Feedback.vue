@@ -132,8 +132,12 @@
         var data = {
           type: this.type,
           content: this.description,
-          images: this.images.base64,
+          images: [],
           product: this.name
+        }
+        for (var i in this.images) {
+          var compressBase64 = this.images[i].base64
+          data['images'].push(compressBase64)  // this.images[i].base64;
         }
         feedBackProduct(this, data, () => {
           window.mui.toast('我们已收到您提交的产品，请耐心等候')
