@@ -234,7 +234,7 @@
     }
   }
   .sureButton {
-    margin: 10px auto 15px;
+    margin: 0.266rem auto 0.4rem;
     width: 9.146rem;
     height: 1.173rem;
     color: #FFFFFF;
