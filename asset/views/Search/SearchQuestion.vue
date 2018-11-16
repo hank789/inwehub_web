@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <div class="searchList" v-if="getCurrentMode === 'match' && !searchAdviceList.length">
+    <div class="searchList" v-if="getCurrentMode === 'match'">
       <div class="listOne" @tap.stop.prevent="selectConfirmSearchText(searchText)">
         查看“{{searchText}}”的搜索结果
         <i class="bot"></i>
