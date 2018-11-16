@@ -79,7 +79,7 @@
 
     <DropDownMenu
       ref="dropdownMenu"
-      :positionClass="'mui-popover-bottom'"
+      :positionClass="'dropdownMenuBottom mui-popover-bottom'"
       :tree="categories"
       :showSelectTop="false"
       :showProductAddBack="true"
@@ -134,7 +134,6 @@
         this.description = ''
         this.images = []
         this.categorytags = []
-        this.categories = []
       },
       deleteTags (index) {
         this.categorytags.splice(index, 1)
@@ -367,7 +366,7 @@
       }
     }
   }
-  .openAppH5 #dropDownMenuWrapper {
+  #dropDownMenuWrapper.dropdownMenuBottom {
     top: auto !important;
     bottom: 0 !important;
     border-top-right-radius: 0.48rem;
