@@ -327,7 +327,7 @@
     position: relative;
     width: 100%; }
   .container-footer .menu .followIcon .icon {
-    font-size: 19px; /* px不转换 */
+    font-size: 20px; /* px不转换 */
   }
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
