@@ -305,9 +305,6 @@
         this.iconOptions.push(
           {
             text: '我有产品，需要入驻展示'
-          },
-          {
-            text: '我是企业，需要产品服务'
           }
         )
         this.$refs.itemOptions.toggle()
