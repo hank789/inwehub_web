@@ -20,6 +20,23 @@
         <div class="desc">首页</div>
       </div>
 
+      <div class="menu active" v-if="isFeed">
+        <div class="iconWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanzhudilan"></use>
+          </svg>
+        </div>
+        <div class="desc">关注</div>
+      </div>
+      <div class="menu" @tap.stop.prevent="$router.replace('/discover')" v-else>
+        <div class="iconWrapper">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanzhudilan"></use>
+          </svg>
+        </div>
+        <div class="desc">关注</div>
+      </div>
+
       <div class="menu active" v-if="isDiscover">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
@@ -37,9 +54,9 @@
         <div class="desc">社区</div>
       </div>
 
-      <div class="menu" @tap.stop.prevent="show()">
-        <div class="imgWrapper"></div>
-      </div>
+      <!--<div class="menu" @tap.stop.prevent="show()">-->
+        <!--<div class="imgWrapper"></div>-->
+      <!--</div>-->
 
       <div class="menu active" v-if="isAsk">
         <div class="iconWrapper">
@@ -108,6 +125,7 @@
         isMy: false,
         showBottom: true,
         isDiscover: false,
+        isFeed: false,
         isSocketListened: false,
         taskCount: 0,
         message_total_count: 0,
@@ -205,7 +223,7 @@
         })
       },
       changeNav (path, fullPath) {
-        this.isHome = this.isAsk = this.isMy = this.isDiscover = false
+        this.isHome = this.isAsk = this.isMy = this.isDiscover = this.isFeed = false
         this.showBottom = true
         window.mui.each(window.mui('.mui-tab-item'), function (index, item) {
           item.className = 'mui-tab-item'
@@ -215,8 +233,10 @@
           case '/home':
           case '/home?refresh=1':
           case '/domain':
-          case '/discover':
             this.isHome = true
+            break
+          case '/discover':
+            this.isFeed = true
             break
           case '/my':
             this.isMy = true
