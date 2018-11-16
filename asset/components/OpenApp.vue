@@ -147,7 +147,7 @@
         </div>
       </div>
     </div>
-    <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank"
+    <div class="right" v-if="isWeixin || isH5"><a class="downloadApp AppFour1" :href="url" target="_blank"
                           @tap.stop.prevent="downloadApp">下载APP</a></div>
   </div>
 </template>
