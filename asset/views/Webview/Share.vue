@@ -67,10 +67,8 @@
               opacity: 0.97
             })
 
-//            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_footer')
-//            footerWebview.setStyle({
-//              opacity: 0
-//            })
+            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_body')
+            footerWebview.setVisible(false)
           })
         }
 
@@ -90,10 +88,8 @@
               opacity: 1
             })
 
-//            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_footer')
-//            footerWebview.setStyle({
-//              opacity: 1
-//            })
+            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_body')
+            footerWebview.setVisible(true)
           })
         }
       },

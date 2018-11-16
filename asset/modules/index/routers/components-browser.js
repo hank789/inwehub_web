@@ -209,7 +209,15 @@ const DianpingProductList = () => import(/* webpackChunkName: "DianpingProductLi
 const DianpingProductDetail = () => import(/* webpackChunkName: "DianpingProductDetail" */ '../../../views/Dianping/Product/Detail.vue')
 const DianpingCommentList = () => import(/* webpackChunkName: "DianpingCommentList" */ '../../../views/Dianping/Comment/List.vue')
 const DianpingCommentDetail = () => import(/* webpackChunkName: "DianpingCommentDetail" */ '../../../views/Dianping/Comment/Detail.vue')
-const DianpingTanchuang = () => import(/* webpackChunkName: "DianpingCommentDetail" */ '../../../components/select/DropDownMenu.vue')
+const DianpingMyPublishComment = () => import(/* webpackChunkName: "DianpingMyPublishComment" */ '../../../views/Dianping/My/PublishComment.vue')
+const DianpingMyCollectProduct = () => import(/* webpackChunkName: "DianpingMyCollectProduct" */ '../../../views/Dianping/My/CollectProduct.vue')
+const DianpingMyFollowProduct = () => import(/* webpackChunkName: "DianpingMyFollowProduct" */ '../../../views/Dianping/My/FollowProduct.vue')
+const DianpingProductAdd = () => import(/* webpackChunkName: "DianpingProductAdd" */ '../../../views/Dianping/Product/Add.vue')
+const DianpingSearchComment = () => import(/* webpackChunkName: "DianpingSearchComment" */ '../../../views/Dianping/Search/Comment.vue')
+const DianpingSearchProduct = () => import(/* webpackChunkName: "DianpingSearchProduct" */ '../../../views/Dianping/Search/Product.vue')
+const DianpingSearchCategory = () => import(/* webpackChunkName: "DianpingSearchCategory" */ '../../../views/Dianping/Search/Category.vue')
+const DianpingSearchCompany = () => import(/* webpackChunkName: "DianpingSearchCompany" */ '../../../views/Dianping/Search/Company.vue')
+const DianpingProductFeedback = () => import(/* webpackChunkName: "DianpingProductFeedback" */ '../../../views/Dianping/Product/Feedback.vue')
 
 export {
   Login,
@@ -417,5 +425,13 @@ export {
   DianpingProductDetail,
   DianpingCommentList,
   DianpingCommentDetail,
-  DianpingTanchuang
+  DianpingMyPublishComment,
+  DianpingMyCollectProduct,
+  DianpingMyFollowProduct,
+  DianpingProductAdd,
+  DianpingSearchComment,
+  DianpingSearchProduct,
+  DianpingSearchCategory,
+  DianpingSearchCompany,
+  DianpingProductFeedback
 }

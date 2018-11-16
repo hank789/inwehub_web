@@ -364,7 +364,7 @@
         beforeback: goBack,
         pullRefresh: {
           container: this.$el,
-          deceleration: 0.001,
+          deceleration: 0.0006,  // 默认值 0.0006, 系数越小滑动越灵敏
           down: {
             auto: true,   // 可选,默认false.首次加载自动下拉刷新一次
             contentdown: this.contentdown ? this.contentdown : '下拉可以刷新',  // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容

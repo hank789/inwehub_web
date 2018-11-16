@@ -1,8 +1,8 @@
 <template>
-  <div id="dropDownMenuWrapper" class="immersed-top shareWrapper mui-popover mui-popover-top">
+  <div id="dropDownMenuWrapper" :class="positionClass" class="shareWrapper mui-popover">
     <slot name="dropDownMenuHeader"></slot>
     <div class="container-select">
-      <div class="select-top">
+      <div class="select-top" v-if="showSelectTop">
         <div class="type" @tap.stop.prevent="show">
           <span>选择类型</span>
           <div class="jianTou">
@@ -29,9 +29,15 @@
                 @selectItem="selectItem"
               ></DropDownMenuChild>
             </div>
+
           </div>
         </div>
+
       </div>
+
+    </div>
+    <div id="productAddBack" class="font-family-medium productAddBack" v-if="showProductAddBack" @tap.stop.prevent="ProductAddBack">取消
+      <div class="bot"></div>
     </div>
   </div>
 </template>
@@ -41,17 +47,31 @@
 
   export default {
     data () {
-      return {}
+      return {
+        selectedIterms: []
+      }
     },
     components: {
       DropDownMenuChild
     },
     props: {
+      positionClass: {
+        type: String,
+        default: 'mui-popover-top immersed-top'
+      },
       tree: {
         type: Array,
         default: function () {
           return []
         }
+      },
+      showSelectTop: {
+        type: Boolean,
+        default: true
+      },
+      showProductAddBack: {
+        type: Boolean,
+        default: false
       }
     },
     mounted () {
@@ -65,6 +85,9 @@
       }, 100)
     },
     methods: {
+      ProductAddBack () {
+        window.mui('#dropDownMenuWrapper').popover('toggle')
+      },
       selectItem (event, item) {
         var curEle = event.target
         if (curEle.tagName === 'SPAN') {
@@ -72,16 +95,16 @@
         }
 
         var status = curEle.classList.contains('active')
-        window.mui.each(curEle.parentElement.parentElement.children, function (index, children) {
-          var listTitle = children.querySelector('.ListTitle')
-          if (listTitle) {
-            listTitle.classList.remove('active')
-          }
-          var listChildren = children.querySelector('.listChildren')
-          if (listChildren) {
-            listChildren.classList.remove('active')
-          }
-        })
+//        window.mui.each(curEle.parentElement.parentElement.children, function (index, children) {
+//          var listTitle = children.querySelector('.ListTitle')
+//          if (listTitle) {
+//            listTitle.classList.remove('active')
+//          }
+//          var listChildren = children.querySelector('.listChildren')
+//          if (listChildren) {
+//            listChildren.classList.remove('active')
+//          }
+//        })
 
         if (!status) {
           curEle.classList.add('active')
@@ -91,9 +114,18 @@
           } else {
             window.mui('#dropDownMenuWrapper').popover('toggle')
             setTimeout(() => {
-              this.$emit('input', {id: item.id, name: item.name})
+              this.selectedIterms.push({id: item.id, name: item.name})
+              if (!this.showSelectTop) {
+                this.$emit('input', this.selectedIterms)
+              } else {
+                this.$emit('input', {id: item.id, name: item.name})
+              }
             }, 100)
           }
+
+//          if (curEle && curEle.offsetTop) {
+//            document.querySelector('.dropDownScrollWrapper > .mui-scroll').style.transform = 'translate3d(0rem, -' + curEle.offsetTop + 'px, 0rem) translateZ(0rem)'
+//          }
         } else {
           curEle.classList.remove('active')
           if (curEle.nextElementSibling) {
@@ -112,18 +144,23 @@
         }
 
         document.querySelector('.dropDownScrollWrapper').style.height = height + 'px'
-        document.querySelector('#dropDownMenuWrapper').style.height = height + 'px'
+        if (!this.showProductAddBack) {
+          document.querySelector('#dropDownMenuWrapper').style.height = height + 'px'
+        } else {
+          var backHeight = document.querySelector('#productAddBack').clientHeight
+          document.querySelector('#dropDownMenuWrapper').style.height = height + backHeight + 'px'
+        }
         document.querySelector('.container-select').style.height = height + 'px'
-
-        document.querySelector('.dropDownScrollWrapper > .mui-scroll').style.transform = 'translate3d(0rem, 0, 0rem) translateZ(0rem)'
       },
       show () {
         window.mui('#dropDownMenuWrapper').popover('toggle')
         this.autoScrollWrapperHeight()
-        var backdrop = document.querySelector('.mui-backdrop')
-        if (backdrop) {
-          var offsetTop = document.querySelector('#dropDownMenuWrapper').offsetTop
-          document.querySelector('.mui-backdrop').style.top = offsetTop + 'px'
+        if (this.showSelectTop) {
+          var backdrop = document.querySelector('.mui-backdrop')
+          if (backdrop) {
+            var offsetTop = document.querySelector('#dropDownMenuWrapper').offsetTop
+            document.querySelector('.mui-backdrop').style.top = offsetTop + 'px'
+          }
         }
       }
     }
@@ -143,6 +180,15 @@
       border-bottom-left-radius: 0.48rem;
       overflow: hidden;
     }
+  }
+  .bot {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 0.026rem;
+    transform: scaleY(0.5);
+    background-color: #dcdcdc;
   }
 
   .container-select {
@@ -172,6 +218,17 @@
         }
       }
     }
+  }
+  .productAddBack {
+    color: #444444;
+    font-size: 0.426rem;
+    padding: 0.4rem 0;
+    text-align: center;
+    position: absolute;
+    background: #FFFFFF;
+    z-index: 9;
+    bottom: 0;
+    width: 100%;
   }
   .mui-popover .mui-scroll-wrapper {
     overflow: hidden;
@@ -207,9 +264,6 @@
 </style>
 
 <style>
-  .dropDownScrollWrapper  .list {
-    background: #F9F9FB;
-  }
 
   .dropDownScrollWrapper .list .listChildren {
     display: none;
@@ -223,6 +277,14 @@
     color: #03AEF9;
     background: #F9F9FB;
   }
+
+  .dropDownScrollWrapper  .list {
+    background: #FFF;
+  }
+
+  .dropDownScrollWrapper  .list .list {
+     background: #F9F9FB;
+   }
 
   .dropDownScrollWrapper .list .list .list {
     background: #F3F4F6;

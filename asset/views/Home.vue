@@ -5,13 +5,15 @@
         <svg class="icon logoIcon" aria-hidden="true">
           <use xlink:href="#icon-logowenzi"></use>
         </svg><span class="splitCircle"></span>
-        <div class="logoAndTabsAndSearchTabs">
-          <div class="tab active">热点</div>
-          <div class="tab" @tap.stop.prevent="toDiscover()">关注</div>
+
+        <div class="topSearchWrapper" @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
+          <div class="searchFrame">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-sousuo"></use>
+            </svg>
+            <span>搜内容、问答、圈子</span>
+          </div>
         </div>
-        <svg class="icon searchIcon" aria-hidden="true" @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
-          <use xlink:href="#icon-sousuo"></use>
-        </svg>
       </div>
 
       <RefreshList
@@ -30,14 +32,14 @@
           <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
             <div class="mui-slider-group  mui-slider-loop">
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-                <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><img class="lazyImg" v-lazy="getImageSuffix(data.banners[data.banners.length-1].img_url, 1029)"></a>
+                <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" :isLazyload="false"></ImageView></a>
               </div>
               <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-                <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><img class="lazyImg" v-lazy="getImageSuffix(notice.img_url, 1029)"></a>
+                <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" :isLazyload="false"></ImageView></a>
               </div>
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
                 <a @tap.stop.prexvent="goLink(data.banners[0].url)">
-                  <img class="lazyImg" v-lazy="getImageSuffix(data.banners[0].img_url, 1029)" />
+                  <ImageView :src="data.banners[0].img_url" width="343" :isLazyload="false"></ImageView>
                 </a>
               </div>
             </div>
@@ -84,7 +86,7 @@
                 </timeago>
                 </div>
               </div>
-              <div class="itemArticleRight"><img class="lazyImg" v-lazy="getImageSuffix(item.data.img, 333)"></div>
+              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="false"></ImageView></div>
             </div>
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
 

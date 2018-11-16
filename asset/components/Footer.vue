@@ -20,6 +20,23 @@
         <div class="desc">首页</div>
       </div>
 
+      <div class="menu active" v-if="isFeed">
+        <div class="iconWrapper followIcon">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanzhudilan"></use>
+          </svg>
+        </div>
+        <div class="desc">关注</div>
+      </div>
+      <div class="menu" @tap.stop.prevent="$router.replace('/discover')" v-else>
+        <div class="iconWrapper followIcon">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanzhudilan"></use>
+          </svg>
+        </div>
+        <div class="desc">关注</div>
+      </div>
+
       <div class="menu active" v-if="isDiscover">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
@@ -37,9 +54,9 @@
         <div class="desc">社区</div>
       </div>
 
-      <div class="menu" @tap.stop.prevent="show()">
-        <div class="imgWrapper"></div>
-      </div>
+      <!--<div class="menu" @tap.stop.prevent="show()">-->
+        <!--<div class="imgWrapper"></div>-->
+      <!--</div>-->
 
       <div class="menu active" v-if="isAsk">
         <div class="iconWrapper">
@@ -108,6 +125,7 @@
         isMy: false,
         showBottom: true,
         isDiscover: false,
+        isFeed: false,
         isSocketListened: false,
         taskCount: 0,
         message_total_count: 0,
@@ -183,7 +201,7 @@
           return
         }
 
-        postRequest(`notification/count`, {}, false).then(response => {
+        postRequest(`notification/count`, {}, false, {}, 0, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -205,7 +223,7 @@
         })
       },
       changeNav (path, fullPath) {
-        this.isHome = this.isAsk = this.isMy = this.isDiscover = false
+        this.isHome = this.isAsk = this.isMy = this.isDiscover = this.isFeed = false
         this.showBottom = true
         window.mui.each(window.mui('.mui-tab-item'), function (index, item) {
           item.className = 'mui-tab-item'
@@ -215,8 +233,10 @@
           case '/home':
           case '/home?refresh=1':
           case '/domain':
-          case '/discover':
             this.isHome = true
+            break
+          case '/discover':
+            this.isFeed = true
             break
           case '/my':
             this.isMy = true
@@ -306,6 +326,9 @@
     flex-direction: column;
     position: relative;
     width: 100%; }
+  .container-footer .menu .followIcon .icon {
+    font-size: 19px; /* px不转换 */
+  }
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
     color: #B4B4B6;
@@ -325,7 +348,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
-  .container-footer .menu:nth-child(2) .iconWrapper {
+  .container-footer .menu:nth-child(3) .iconWrapper {
     font-size: 21px; /* px不转换 */
     top: 6px; /* px不转换 */
     left: 50%;

@@ -123,7 +123,7 @@
       total: '',
       mode: '最新',
       order_by: 1,
-      info: []
+      info: {name: '游客', is_expert: 0, avatar_url: 'https://cdn.inwehub.com/system/user_default_avatar.png'}
     }),
     props: {
       listApi: {
@@ -396,14 +396,10 @@
         })
       },
       getInfo () {
-        postRequest(`profile/info`, {}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-          this.info = response.data.data.info
-        })
+        var info = getLocalUserInfo()
+        if (info.uuid) {
+          this.info = info
+        }
       }
     },
     mounted () {

@@ -8,11 +8,14 @@
 
     <!--组件-->
     <div class="mui-content">
-      <div class="menu">
+
+      <div class="container-searchMenu">
         <span @tap.stop.prevent="$router.replace('/collectUser')">用户</span>
-        <span @tap.stop.prevent="$router.replace('')">问答<i></i></span>
+        <span class="font-family-medium" @tap.stop.prevent="$router.replace('')">问答<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/dianping/my/followProducts')">产品服务</span>
         <i class="bot"></i>
       </div>
+
       <!--内容区域-->
       <RefreshList
         ref="RefreshList"
@@ -77,45 +80,12 @@
 </script>
 
 <style scoped="scoped">
-  .mui-wechat .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-    top: 0;
-  }
 
   .mui-content {
     background: #FFFFFF;
   }
-
-  /*导航栏的样式*/
-  .menu{
-    width:100%;
-    height:1.04rem;
-    font-size:0.373rem;
-    color: #444444;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    position: relative;
-  }
-  .menu span:nth-of-type(2){
-    position:relative;
-    color: #03aef9;
-  }
-  .menu span:nth-of-type(2) i{
-    position:absolute;
-    width:0.72rem;
-    height:0.04rem;
-    border-radius: 1.333rem;
-    background:#03aef9;
-    top: 0.746rem;
-    left: 0;
-    right: 0;
-    margin: auto;
+  .container-searchMenu {
+    margin-top: 0;
   }
 
   .bot {
@@ -129,9 +99,6 @@
     background-color: rgb(220, 220, 220);
   }
 
-  /*清掉自带样式*/
-
-  div,
   p,
   span,
   i,

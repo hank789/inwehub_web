@@ -12,7 +12,7 @@
           <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true"
-             @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
+             @tap.stop.prevent="$router.pushPlus('/dianping/search/comments','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>
@@ -30,7 +30,24 @@
         :autoShowEmpty="false"
         class="listWrapper"
       >
+
         <template slot="listHeader">
+
+          <div id="searchWrapper" class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/comments')">
+            <div class="searchInput">
+              <div class="searchLeft">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-sousuo"></use>
+                </svg>
+                <span>搜索点评、产品、分类、公司</span>
+              </div>
+              <div class="searchRight" @tap.stop.prevent="cooperation">
+                <i class="line-wall"></i>
+                <span>合作</span>
+              </div>
+            </div>
+          </div>
+
           <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
             <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="'recommandProductList_' + index">
@@ -38,7 +55,7 @@
                    @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
                 <div class="comment-info">
                   <div class="avatarImg">
-                    <img :src="getImageSuffix(recommandProduct.user.avatar, 102)">
+                    <ImageView :isLazyload="false" :src="recommandProduct.user.avatar" width="34" height="34"></ImageView>
                   </div>
                   <div class="comment-name">
                     <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
@@ -52,7 +69,7 @@
                 <div class="comment-product">
                   <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(recommandProduct.tag.name))">
                     <div class="product-img border-football">
-                      <img :src="getImageSuffix(recommandProduct.tag.logo, 132)">
+                      <ImageView :src="recommandProduct.tag.logo" :isLazyload="false" width="44" height="44"></ImageView>
                     </div>
                     <div class="product-detail">
                       <div class="productName font-family-medium text-line-1">{{ recommandProduct.tag.name }}</div>
@@ -96,7 +113,7 @@
             <div class="comment-product" v-for="(item, index) in list" :key="'comment-product_' + index">
               <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
                 <div class="product-img border-football">
-                  <img class="lazyImg" v-lazy="getImageSuffix(item.logo, 132)" alt="">
+                  <ImageView :src="item.logo" :isLazyload="false" width="44" height="44"></ImageView>
                 </div>
                 <div class="product-detail">
                   <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
@@ -118,7 +135,7 @@
 
           <div class="noData" v-if="!list.length">
             <div class="DataImg">
-              <img src="../../statics/images/empty@3x.png" alt="">
+              <ImageView src="../../statics/images/empty@3x.png"></ImageView>
             </div>
             <div class="noDataText">暂时没有数据～</div>
           </div>
@@ -175,7 +192,7 @@
     <Options
       ref="itemOptions"
       :id="'itemOptions'"
-      :options="['评分', '热度']"
+      :options="iconOptions"
       @selectedItem="selectedItem"
     ></Options>
 
@@ -191,6 +208,7 @@
   import { scrollPage } from '../../utils/dom.js'
   import { getImageSuffix } from '../../utils/image'
   import StarView from '../../components/star-rating/starView.vue'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -219,7 +237,8 @@
           pagination: {
             el: '.swiper-pagination'
           }
-        }
+        },
+        iconOptions: []
       }
     },
     computed: {
@@ -228,16 +247,6 @@
       },
       nextOtherData () {
         return {category_id: this.category.id, orderBy: this.orderBy}
-      },
-      orderByName () {
-        switch (this.orderBy) {
-          case 0:
-            return '排序'
-          case 1:
-            return '评分'
-          case 2:
-            return '热度'
-        }
       }
     },
     components: {
@@ -260,9 +269,9 @@
         window.mui('#dropDownMenuWrapper').popover('toggle')
         this.$router.replace('/ask/offers')
       },
-      selectedItem (text) {
+      selectedItem (item) {
         this.$refs.itemOptions.toggle()
-        switch (text) {
+        switch (item.text) {
           case '评分':
             this.orderBy = 1
             this.sortOrderByName = '评分'
@@ -271,13 +280,51 @@
             this.orderBy = 2
             this.sortOrderByName = '热度'
             break
+          case '我是企业，需要产品服务':
+            this.goCustomer()
+            break
+          case '我有产品，需要入驻展示':
+            this.$router.pushPlus('/dianping/product/add')
+            break
         }
       },
       selectSort () {
+        this.iconOptions = []
+        this.iconOptions.push(
+          {
+            text: '评分'
+          },
+          {
+            text: '热度'
+          }
+        )
         this.$refs.itemOptions.toggle()
       },
+      cooperation () {
+        this.iconOptions = []
+        this.iconOptions.push(
+          {
+            text: '我有产品，需要入驻展示'
+          },
+          {
+            text: '我是企业，需要产品服务'
+          }
+        )
+        this.$refs.itemOptions.toggle()
+      },
+      goCustomer () {
+        var information = ''
+
+        localEvent.setLocalItem('needRefresh', {value: true})
+        information = '我是产品服务方，需要合作入驻'
+
+        localEvent.setLocalItem('information', information)
+        window.trackMixpanelEvent('service-chat', '/chat/79', 'service-chat', information, this.$router.fullPath)
+        this.$router.pushPlus('/chat/79')
+      },
       showDropdownMenu () {
-        var height = document.querySelector('.dianpingBanners').clientHeight - 20
+        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
+        var height = document.querySelector('.dianpingBanners').clientHeight + searchInputHeight - 20
         this.$refs.RefreshList.scrollTo(0, -height, 800)
         this.$refs.dropdownMenu.show()
       },
@@ -301,13 +348,15 @@
     },
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
+        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y > height) {
+        if (y > height + searchInputHeight) {
           document.querySelector('.dianpingBannersHide').classList.add('showTagsHome')
         }
       }, null, (container, y) => {
+        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y < height) {
+        if (y < height + searchInputHeight) {
           document.querySelector('.dianpingBannersHide').classList.remove('showTagsHome')
         }
       })
@@ -364,6 +413,40 @@
     background: linear-gradient(180deg, rgba(220, 220, 220, 1) 0%, rgba(243, 244, 246, 1) 100%);
     .swiper-slide {
       width: auto !important;
+    }
+  }
+
+  .searchWrapper {
+    padding-top: 0.24rem;
+    background: #DCDCDC;
+    .searchInput {
+      width: 9.146rem;
+      height: 0.906rem;
+      margin: 0 auto;
+      line-height: 0.906rem;
+      border-radius: 2.666rem;
+      background: #FFFFFF;
+      display: flex;
+      padding: 0 0.266rem;
+      justify-content: space-between;
+      .searchLeft {
+        color: #C8C8C8;
+        .icon {
+          font-size: 0.453rem;
+        }
+        span {
+          font-size: 0.373rem;
+        }
+      }
+      .searchRight {
+        color: #444444;
+        font-size: 0.346rem;
+        .line-wall {
+          height: 0.373rem;
+          top: 0.053rem;
+          right: 0.16rem;
+        }
+      }
     }
   }
 
@@ -434,7 +517,7 @@
           width: 100%;
           height: 100%;
           border-radius: 0.106rem;
-          object-fit: cover;
+          object-fit: contain;
         }
       }
       .product-detail {

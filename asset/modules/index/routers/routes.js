@@ -2524,6 +2524,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/dianping/product/add',
+    name: 'dianping_product_add',
+    meta: {
+      title: '创建产品',
+      wechatHideHeader: false,
+      keepAlive: true
+    },
+    component: componets.DianpingProductAdd,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 产品详情
     path: '/dianping/product/:id',
     name: 'dianping-product-detail',
@@ -2563,15 +2576,106 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // 点评弹窗
-    path: '/dianping/tanchuang',
-    name: 'dianping-tanchuang',
+  { // 发布的点评
+    path: '/dianping/my/publishComments/:uuid',
+    name: 'my-publish-comment',
     meta: {
-      title: '点评详情',
+      title: '我的发布-点评',
       wechatHideHeader: false,
       keepAlive: false
     },
-    component: componets.DianpingTanchuang,
+    component: componets.DianpingMyPublishComment,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我收藏的产品
+    path: '/dianping/my/collectProducts',
+    name: 'collect-product',
+    meta: {
+      title: '我的收藏-产品',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingMyCollectProduct,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 我关注的产品
+    path: '/dianping/my/followProducts',
+    name: 'follow-product',
+    meta: {
+      title: '我的关注-产品服务',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingMyFollowProduct,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/search/comments',
+    name: 'dianping_search_comment',
+    meta: {
+      title: '搜索点评',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchComment,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/search/products',
+    name: 'dianping_search_product',
+    meta: {
+      title: '搜索产品',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchProduct,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/search/categories',
+    name: 'dianping_search_category',
+    meta: {
+      title: '搜索分类',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchCategory,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/search/companys',
+    name: 'dianping_search_company',
+    meta: {
+      title: '搜索公司',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingSearchCompany,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/dianping/product/feedback/:name',
+    name: 'dianping_product_feedback',
+    meta: {
+      title: '产品问题反馈',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingProductFeedback,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

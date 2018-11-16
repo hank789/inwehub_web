@@ -6,34 +6,32 @@
       <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
-    <!--组件-->
     <div class="mui-content">
       <div class="container-searchMenu">
         <span @tap.stop.prevent="$router.replace('/my/publishAnswers/' + uuid)">回答</span>
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions/' + uuid)">提问</span>
         <span @tap.stop.prevent="$router.replace('/my/publishArticle/' + uuid)">分享</span>
-        <span class="font-family-medium" @tap.stop.prevent="">评论 <i></i></span>
-        <span @tap.stop.prevent="$router.replace('/dianping/my/publishComments/' + uuid)">点评</span>
+        <span @tap.stop.prevent="$router.replace('/my/publishComment/' + uuid)">评论</span>
+        <span class="font-family-medium">点评<i></i></span>
         <i class="bot"></i>
       </div>
 
-      <!--内容区域-->
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :api="'comment/myList'"
-        :prevOtherData="{type:0,uuid: this.uuid}"
-        :nextOtherData="{type:0,uuid: this.uuid}"
+        :api="'readhub/mySubmission'"
+        :prevOtherData="{type:2,uuid: this.uuid}"
+        :nextOtherData="{type:2,uuid: this.uuid}"
         :pageMode="true"
         :list="list"
         class="listWrapper">
 
         <div class="container-publishComment">
-          <div class="container-commentWrapper" v-for="(ask, index) in list" :key="index"  @tap.stop.prevent="goToCommentPage(ask.type, ask.comment_url)">
+          <div class="container-commentWrapper" v-for="(item, index) in list" :key="index" @tap.stop.prevent="goToCommentPage(item.type, item.comment_url)">
             <div class="container-commentList">
-              <div class="title text-line-1" v-html="textToLink(ask.content)"></div>
-              <div class="content text-line-1" v-html="textToLink(ask.origin_title)"></div>
-              <div class="time"><timeago :since="timeago(ask.created_at)" :auto-update="60"></timeago></div>
+              <div class="title text-line-2" v-html="textToLink(item.title)"></div>
+              <div class="content text-line-1" v-html="textToLink(item.category_name)"></div>
+              <div class="time"><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></div>
               <i class="bot"></i>
             </div>
           </div>
@@ -42,19 +40,25 @@
       </RefreshList>
 
     </div>
+
   </div>
 </template>
 
 <script>
+  import { getLocalUuid } from '../../../utils/user'
   import RefreshList from '../../../components/refresh/List.vue'
   import { textToLinkHtml, secureHtml } from '../../../utils/dom'
-  import { getLocalUuid } from '../../../utils/user'
 
-  const PublishAnswers = {
-    data: () => ({
-      list: [],
-      uuid: getLocalUuid()
-    }),
+  export default {
+    data () {
+      return {
+        list: [],
+        uuid: getLocalUuid()
+      }
+    },
+    components: {
+      RefreshList
+    },
     activated: function () {
       this.refreshPageData()
     },
@@ -72,9 +76,6 @@
         }
         return false
       }
-    },
-    components: {
-      RefreshList
     },
     methods: {
       refreshPageData () {
@@ -98,23 +99,18 @@
           this.$router.pushPlus(url)
         }
       }
-    },
-    mounted () {
-    },
-    updated () {
-//    console.error(this.list);
     }
   }
-  export default PublishAnswers
 </script>
 
-<style scoped="scoped" lang="less">
+<style scoped lang="less">
   .mui-content {
     background: #FFFFFF;
   }
- .listWrapper{
+  .listWrapper {
     top: 1.04rem;
   }
+
   .bot {
     position: absolute;
     right: 0;
@@ -124,6 +120,7 @@
     transform: scaleY(0.5);
     background-color: #dcdcdc;
   }
+
   .container-searchMenu {
     margin-top: 0;
   }

@@ -46,9 +46,18 @@
         </template>
 
       </RefreshList>
+
+      <div class="goEditWrapper askoffers" @tap.stop.prevent="$router.pushPlus('/ask')">
+        <div class="editIcon">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fabu"></use>
+          </svg>
+        </div>
+      </div>
+
       <div class="switch"  @tap.stop.prevent="orderBy()">
         {{sort === 2 ? '最新' : '最热'}}
-         </div>
+      </div>
     </div>
   </div>
 

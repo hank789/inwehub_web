@@ -1,24 +1,24 @@
 <template>
-  <div>
+  <div class="openAppTop">
     <!--手机端-->
     <!--<div class="suspend" v-if="isH5">-->
-      <!--<p>-->
-        <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">-->
-          <!--<use xlink:href="#icon-guanbi"></use>-->
-        <!--</svg>-->
-      <!--</p>-->
-      <!--<p>-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-logotuxing"></use>-->
-        <!--</svg>-->
-      <!--</p>-->
-      <!--<p>-->
-        <!--<span>下载APP</span>-->
-        <!--<span>查看更多专家信息</span>-->
-      <!--</p>-->
-      <!--<p>-->
-        <!--<a id="btnOpenAppH5" :href="url" target="_blank">立即打开</a>-->
-      <!--</p>-->
+    <!--<p>-->
+    <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">-->
+    <!--<use xlink:href="#icon-guanbi"></use>-->
+    <!--</svg>-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<svg class="icon" aria-hidden="true">-->
+    <!--<use xlink:href="#icon-logotuxing"></use>-->
+    <!--</svg>-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<span>下载APP</span>-->
+    <!--<span>查看更多专家信息</span>-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<a id="btnOpenAppH5" :href="url" target="_blank">立即打开</a>-->
+    <!--</p>-->
     <!--</div>-->
 
     <!--微信端-->
@@ -27,7 +27,7 @@
       <div class="mui-slider-group  mui-slider-loop">
         <div class="mui-slider-item mui-slider-item-duplicate">
 
-          <div class="suspension backgroundGrey" v-if="shareUuid">
+          <div class="suspension" v-if="shareUuid">
             <div class="component-wechat-top">
               <div class="left">
                 <div class="userImg">
@@ -36,7 +36,6 @@
                 <div class="userName font-family-medium">{{shareInfo.name}}</div>
                 <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
               </div>
-              <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
 
@@ -44,15 +43,16 @@
             <div class="suspension">
               <div class="component-wechat-top">
                 <div class="left" @tap.stop.prevent="$router.push('/home')">
+                  <div class="iconBorder">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-logotuxing"></use>
+                    </svg>
+                  </div>
                   <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-logotuxing"></use>
-                  </svg>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-logowenzi"></use>
+                    <use xlink:href="#icon-logowenzi1"></use>
                   </svg>
                   <div class="desc">聚焦行业解决方案，共筑人脉圈子</div>
                 </div>
-                <div class="right"><a class="downloadApp AppThree" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
               </div>
             </div>
           </div>
@@ -62,31 +62,33 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="iconBorder">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-logotuxing"></use>
+                  </svg>
+                </div>
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-logotuxing"></use>
-                </svg>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-logowenzi"></use>
+                  <use xlink:href="#icon-logowenzi1"></use>
                 </svg>
                 <div class="desc">企业级应用＆服务广场</div>
               </div>
-              <div class="right"><a class="downloadApp AppOne" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
         <div class="mui-slider-item">
-          <div class="suspension backgroundGrey">
+          <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="iconBorder">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-logotuxing"></use>
+                  </svg>
+                </div>
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-logotuxing"></use>
-                </svg>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-logowenzi"></use>
+                  <use xlink:href="#icon-logowenzi1"></use>
                 </svg>
                 <div class="desc">追踪每日企服行业新热点</div>
               </div>
-              <div class="right"><a class="downloadApp AppTwo" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
@@ -95,30 +97,30 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="iconBorder">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-logotuxing"></use>
+                  </svg>
+                </div>
                 <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-logotuxing"></use>
-                </svg>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-logowenzi"></use>
+                  <use xlink:href="#icon-logowenzi1"></use>
                 </svg>
                 <div class="desc">聚焦行业解决方案，共筑人脉圈子</div>
               </div>
-              <div class="right"><a class="downloadApp AppThree" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
 
         <div class="mui-slider-item" v-if="shareUuid">
-          <div class="suspension backgroundGrey">
+          <div class="suspension">
             <div class="component-wechat-top">
               <div class="left">
                 <div class="userImg">
-                  <img :src="shareInfo.avatar_url" alt="">
+                  <img :src="shareInfo.avatar_url">
                 </div>
                 <div class="userName font-family-medium">{{shareInfo.name}}</div>
                 <div class="desc userSlogen">我觉得InweHub不错，推荐你试试</div>
               </div>
-              <div class="right"><a class="downloadApp AppFour" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
             </div>
           </div>
         </div>
@@ -128,15 +130,16 @@
             <div class="suspension">
               <div class="component-wechat-top">
                 <div class="left" @tap.stop.prevent="$router.push('/home')">
+                  <div class="iconBorder">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-logotuxing"></use>
+                    </svg>
+                  </div>
                   <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-logotuxing"></use>
-                  </svg>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-logowenzi"></use>
+                    <use xlink:href="#icon-logowenzi1"></use>
                   </svg>
                   <div class="desc">企业级应用＆服务广场</div>
                 </div>
-                <div class="right"><a class="downloadApp AppOne1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
               </div>
             </div>
 
@@ -144,7 +147,8 @@
         </div>
       </div>
     </div>
-
+    <div class="right" v-if="isWeixin || isH5"><a class="downloadApp AppFour1" :href="url" target="_blank"
+                          @tap.stop.prevent="downloadApp">下载APP</a></div>
   </div>
 </template>
 
@@ -180,41 +184,7 @@
         // 深度链接
         Mlink = new window.Mlink({
           mlink: mlink + '?name=1', // 短链地址
-          button: document.querySelector('.AppOne'),
-          params: {url: 'test'},
-          cparams: {path: 'my'}
-        })
-
-        Mlink = new window.Mlink({
-          mlink: mlink + '?name=1', // 短链地址
-          button: document.querySelector('.AppTwo'),
-          params: {url: 'test'},
-          cparams: {path: 'my'}
-        })
-
-        Mlink = new window.Mlink({
-          mlink: mlink + '?name=1', // 短链地址
-          button: document.querySelector('.AppThree'),
-          params: {url: 'test'},
-          cparams: {path: 'my'}
-        })
-        if (this.shareUuid) {
-          Mlink = new window.Mlink({
-            mlink: mlink + '?name=1', // 短链地址
-            button: document.querySelector('.AppFour'),
-            params: {url: 'test'},
-            cparams: {path: 'my'}
-          })
-          Mlink = new window.Mlink({
-            mlink: mlink + '?name=1', // 短链地址
-            button: document.querySelector('.AppFour1'),
-            params: {url: 'test'},
-            cparams: {path: 'my'}
-          })
-        }
-        Mlink = new window.Mlink({
-          mlink: mlink + '?name=1', // 短链地址
-          button: document.querySelector('.AppOne1'),
+          button: document.querySelector('.AppFour1'),
           params: {url: 'test'},
           cparams: {path: 'my'}
         })
@@ -358,7 +328,7 @@
     /* border-radius:0.106rem;*/
     background: #252525;
     position: fixed;
-    opacity: 0.9;
+    /*opacity: 0.9;*/
     top: 0;
     z-index: 999;
   }
@@ -432,41 +402,41 @@
   }
 
   /*微信端*/
-  .mui-wechat .suspension.backgroundGrey {
-    background: #F3F4F6;
-    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-  }
-  .openAppH5 .suspension.backgroundGrey {
-    background: #F3F4F6;
-    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-  }
-  .suspension.backgroundGrey {
-    background: #F3F4F6;
-    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-  }
+  /*.mui-wechat .suspension.backgroundGrey {*/
+  /*background: #F3F4F6;*/
+  /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+  /*}*/
+  /*.openAppH5 .suspension.backgroundGrey {*/
+  /*background: #F3F4F6;*/
+  /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+  /*}*/
+  /*.suspension.backgroundGrey {*/
+  /*background: #F3F4F6;*/
+  /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+  /*}*/
   .mui-wechat .suspension {
     width: 100%;
     height: 1.306rem;
     position: fixed;
-    opacity: 0.9;
+    /*opacity: 0.9;*/
     top: 0rem;
-    background: #FFFFFF;
     z-index: 997;
-    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-    -webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-    -moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+    /*-webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+    /*-moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
   }
+
   .openAppH5 .suspension {
     width: 100%;
     height: 1.306rem;
     position: fixed;
-    opacity: 0.9;
+    /*opacity: 0.9;*/
     top: 0rem;
-    background: #FFFFFF;
+    background: #03AEF9;
     z-index: 997;
-    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-    -webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-    -moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+    /*-webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+    /*-moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
   }
 
   .suspension {
@@ -474,11 +444,11 @@
     height: 1.306rem;
     position: absolute;
     top: 1.173rem;
-    background: #FFFFFF;
+    background: #03AEF9;
     z-index: 997;
-    box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-    -webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
-    -moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;
+    /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+    /*-webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+    /*-moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
   }
 
   .component-wechat-top {
@@ -488,80 +458,132 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    height: 1.306rem; }
+    height: 1.306rem;
+  }
+
   .component-wechat-top .left {
-    position: relative;}
+    width: 7.266rem;
+    position: relative;
+  }
+
   .component-wechat-top .left .userImg {
     position: absolute;
     left: 0.293rem;
     top: 0.213rem;
     width: 0.88rem;
-    height: 0.88rem;}
+    height: 0.88rem;
+  }
+
   .component-wechat-top .left .userImg img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;}
+    border-radius: 50%;
+  }
+
   .component-wechat-top .left .userName {
     width: 100%;
     position: absolute;
     top: 0.213rem;
     left: 1.493rem;
-    color: #444444;
+    color: #FFFFFF;
     font-size: 0.346rem;
   }
-  .component-wechat-top .left .icon:nth-child(1) {
+
+  .component-wechat-top .left .iconBorder {
+    width: 0.906rem;
+    height: 0.906rem;
     position: absolute;
-    left: 0.293rem;
-    top: 0.133rem;
-    font-size: 1.08rem; }
+    top: 0.2rem;
+    left: 0.426rem;
+    background: #ffffff;
+    border-radius: 0.2rem;
+  }
+
+  .component-wechat-top .left .iconBorder .icon {
+    position: relative;
+    left: 0.026rem;
+    top: 0;
+    font-size: 0.866rem;
+  }
+
   .component-wechat-top .left .icon:nth-child(2) {
     position: absolute;
-    left: 1.44rem;
-    top: -0.533rem;
-    font-size: 2.186rem; }
-  .component-wechat-top .left .desc {
-    color: #808080;
-    font-size: 0.266rem;
-    position: relative;
-    top: 0.666rem;
-    left: 1.546rem; }
-  .component-wechat-top .left .desc.userSlogen {
-    left: 1.493rem ;
+    left: 1.573rem;
+    top: -0.65rem;
+    font-size: 2.186rem;
+    color: #FFFFFF;
   }
-  .component-wechat-top .right {
+
+  .component-wechat-top .left .desc {
+    color: #FFFFFF;
+    font-size: 0.266rem;
+    position: absolute;
+    top: 0.666rem;
+    left: 1.546rem;
+  }
+
+  .component-wechat-top .left .desc.userSlogen {
+    left: 1.493rem;
+  }
+
+  .openAppTop {
+    background: #03AEF9;
+  }
+
+  #OpenAppSlider.homeMuiSlider {
+    width: 70%;
+  }
+
+  .openAppTop .right {
     height: 1.306rem;
+    width: 30%;
     line-height: 1.306rem;
     padding-right: 0.426rem;
     color: #03AEF9;
-    font-size: 0.373rem; }
-  .component-wechat-top .right .downloadApp {
-    width: 1.893rem;
-    height: 0.693rem;
-    text-align: center;
-    line-height: 0.693rem;
-    color: #FFFFFF;
-    font-size: 0.346rem;
-    background: #03AEF9;
-    border-radius: 0.213rem;
-    display: inline-block;
+    font-size: 0.373rem;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
-  .component-wechat-top .right a {
-    color: #03AEF9; }
-  .component-wechat-top .right .line-wall {
+
+  .openAppTop .right .downloadApp {
+    width: 100%;
+    height: 0.773rem;
+    text-align: center;
+    line-height: 0.773rem;
+    color: #03AEF9;
+    font-size: 0.346rem;
+    background: #FFFFFF;
+    border-radius: 0.106rem;
+    display: inline-block;
+    font-family: PingFangSC-Medium;
+  }
+
+  .openAppTop .right a {
+    color: #03AEF9;
+  }
+
+  .openAppTop .right .line-wall {
     margin: 0 0.266rem;
     position: relative;
-    width:0.026rem;
+    width: 0.026rem;
     top: 0.026rem;
-    height: 0.346rem; }
+    height: 0.346rem;
+  }
 
-  .line-wall{
+  .line-wall {
     display: inline-block;
     position: relative;
     width: 0.026rem;
     height: 0.266rem;
     background-color: #dcdcdc;
   }
+
   .mui-slider .mui-slider-group .mui-slider-item {
     height: 1.306rem !important;
+  }
+
+  .mui-slider {
+    background: #03AEF9;
   }
 </style>

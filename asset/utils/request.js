@@ -7,7 +7,7 @@ import Raven from 'raven-js'
 
 const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
-axios.defaults.retry = 4
+axios.defaults.retry = 3
 axios.defaults.retryDelay = 1000
 axios.defaults.timeout = 8000
 
@@ -148,7 +148,7 @@ export function apiRequest (url, data, showWaiting = true) {
 }
 
 // 对后端数据进行请求；（showWaiting = true 加载gif）
-export function postRequest (url, data, showWaiting = true, options = {}, timeout = 0) {
+export function postRequest (url, data, showWaiting = true, options = {}, timeout = 0, showError = true) {
   if (showWaiting) {
     window.mui.waiting()
   }
@@ -222,12 +222,14 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
         console.error(errorMsg)
-        if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
-          errorMsg = '网络异常'
-          router.push('/exception')
-        }
-        if (errorMsg) {
-          window.mui.toast(errorMsg)
+        if (showError) {
+          if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
+            errorMsg = '网络异常'
+            router.push('/exception')
+          }
+          if (errorMsg) {
+            window.mui.toast(errorMsg)
+          }
         }
       }
     }

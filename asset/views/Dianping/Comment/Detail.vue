@@ -20,23 +20,11 @@
             :time="detail.created_at"
             @setFollowStatus="setFollowStatus"
           ></UserInfo>
-          <div class="line-river lineMargin"></div>
+          <!--<div class="line-river lineMargin"></div>-->
 
           <div class="mark">
             <div class="stars">
-              <star-rating
-                :increment="0.1"
-                :padding="3"
-                :activeColor="'#fcc816'"
-                :star-size="11"
-                :show-rating="false"
-                :border-color="'#fcc816'"
-                :border-width="1"
-                :inactive-color="'#FFFFFF'"
-                :rating="detail.rate_star"
-                :read-only="true"
-                :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
-              ></star-rating>
+              <StarView :rating="detail.rate_star"></StarView>
             </div>
             <div class="text">{{ detail.rate_star }}分</div>
           </div>
@@ -69,19 +57,7 @@
                 <span v-else class="seat"></span>
                 <div class="mark">
                   <div class="stars">
-                    <star-rating
-                      :increment="0.1"
-                      :padding="3"
-                      :activeColor="'#fcc816'"
-                      :star-size="11"
-                      :show-rating="false"
-                      :border-color="'#fcc816'"
-                      :border-width="1"
-                      :inactive-color="'#F7F8FA'"
-                      :rating="detail.tags[0].review_average_rate"
-                      :read-only="true"
-                      :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
-                    ></star-rating>
+                    <StarView :rating="detail.tags[0].review_average_rate"></StarView>
                   </div>
                   <div class="text">{{ detail.tags[0].review_average_rate }}分</div><i></i>
                   <div class="comment">{{detail.tags[0].reviews}}条评论</div>
@@ -108,6 +84,7 @@
           @delCommentSuccess="delCommentSuccess"
           ref="discuss"
         ></ArticleDiscuss>
+        <div class="seeAll" v-if="detail.comments_number > 3" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">查看全部{{detail.comments_number}}条评论</div>
         <div class="river"></div>
 
         <div class="allDianPing font-family-medium">大家都在评</div>
@@ -124,19 +101,7 @@
                 <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
                 <div class="productMark">
                   <div class="stars">
-                    <star-rating
-                      :increment="0.1"
-                      :padding="3"
-                      :activeColor="'#fcc816'"
-                      :star-size="11"
-                      :show-rating="false"
-                      :border-color="'#fcc816'"
-                      :border-width="1"
-                      :inactive-color="'#FFFFFF'"
-                      :rating="item.review_average_rate"
-                      :read-only="true"
-                      :starPoints="[48.3,190.9,46.5,190.8,43.2,189.7,41.6,188.7,40.4,187.7,38.4,185.2,37.2,182.3,36.9,179.1,37.1,177.5,46,125.9,8.5,89.4,7.4,88.2,5.9,85.4,5.1,82.4,5.2,79.3,5.6,77.7,6.2,76.2,8,73.6,10.4,71.6,13.2,70.3,14.8,69.9,66.6,62.4,89.8,15.4,90.6,14,92.7,11.7,95.4,10,98.4,9.1,100,9,101.6,9.1,104.7,10,107.3,11.6,109.4,14,110.2,15.4,133.4,62.4,185.2,69.9,186.8,70.2,189.7,71.5,192.1,73.5,193.8,76.2,194.4,77.7,194.8,79.3,194.9,82.4,194.1,85.4,192.6,88.2,191.5,89.4,154,125.9,162.9,177.5,163.1,179.1,162.7,182.2,161.5,185.1,159.6,187.6,158.4,188.7,157,189.6,154.1,190.7,151,190.9,147.9,190.2,146.4,189.6,100,165.2,53.7,189.6,51,190.6,48.3,190.9,48.3,190.9]"
-                    ></star-rating>
+                    <StarView :rating="item.review_average_rate"></StarView>
                   </div>
                   <div class="starsText">
                     <span>{{ item.review_average_rate }}分</span>
@@ -171,39 +136,19 @@
     </div>
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer">
-      <div class="footerLeft">
-        <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
-        <div class="footerMenuTwo" v-else>
-          <div class="noBullish containerBtn" @tap.stop.prevent="detailDownVote()">{{detail.downvote_tip}}</div>
-          <div class="bullish containerBtn" @tap.stop.prevent="upVote()">{{detail.support_tip}}</div>
-        </div>
-      </div>
-      <div class="footerRight">
-        <div class="collectionComment" @tap.stop.prevent="collect()">
-          <div>
-            <svg class="icon" aria-hidden="true" :class="{active: detail.is_bookmark}">
-              <use xlink:href="#icon-shoucangdilantongyi"></use>
-            </svg>
-          </div>
-          <span>收藏<i v-if="detail.bookmarks">{{detail.bookmarks}}</i></span>
-        </div>
-        <div class="collectionComment" @tap.stop.prevent="goComment()">
-          <div>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-pinglun"></use>
-            </svg>
-          </div>
-          <span>评论<i v-if="detail.comments_number">{{detail.comments_number}}</i></span>
-        </div>
-      </div>
-    </div>
+    <Detail
+      :detail="this.detail"
+      :iconOptions="iconOptions"
+      @detailMenuIcon="detailMenuIcon"
+      @WriteComment="goComment"
+    ></Detail>
 
     <PageMore
       ref="share"
       :shareOption="shareOption"
       :hideShareBtn="false"
       :iconMenu="iconMenus"
+      @clickedItem="iconMenusClickedItem"
     ></PageMore>
 
   </div>
@@ -225,6 +170,8 @@
   import hljs from 'highlight.js'
   import PageMore from '../../../components/PageMore.vue'
   import {getDianpingCommentDetail} from '../../../utils/shareTemplate'
+  import StarView from '../../../components/star-rating/starView.vue'
+  import Detail from '../../../components/menu/Detail.vue'
 
   export default {
     data () {
@@ -271,7 +218,9 @@
       commentTextarea,
       quillEditor,
       PageMore,
-      'vue-pull-refresh': VuePullRefresh
+      'vue-pull-refresh': VuePullRefresh,
+      StarView,
+      Detail
     },
     computed: {
       discussStoreParams () {
@@ -279,9 +228,51 @@
       },
       discussListParams () {
         return {'submission_slug': this.detail.slug, sort: 'hot'}
+      },
+      iconOptions () {
+        return [
+          {
+            icon: '#icon-pinglun',
+            text: '评论',
+            number: this.detail.comments_number
+          },
+          {
+            icon: '#icon-cai',
+            text: '踩',
+            number: this.detail.downvotes,
+            showClass: this.detail.is_downvoted
+          },
+          {
+            icon: '#icon-zan',
+            text: '赞',
+            number: this.detail.upvotes,
+            showClass: this.detail.is_upvoted
+          },
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享',
+            number: 0
+          }
+        ]
       }
     },
     methods: {
+      detailMenuIcon (item) {
+        switch (item.text) {
+          case '评论':
+            this.$router.pushPlus('/comment/' + this.detail.category_id + '/' + this.detail.slug + '/' + this.detail.id)
+            break
+          case '踩':
+            this.detailDownVote()
+            break
+          case '赞':
+            this.upVote()
+            break
+          case '分享':
+            this.$refs.share.share()
+            break
+        }
+      },
       goProductDetail () {
         this.$router.pushPlus('/dianping/product/' + encodeURIComponent(this.detail.tags[0].name))
       },
@@ -292,6 +283,42 @@
       },
       openApp () {
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
+      iconMenusClickedItem (item) {
+        switch (item.text) {
+          case '删除':
+            this.deleterow()
+            break
+          case '收藏':
+            this.collect()
+            break
+          case '已收藏':
+            this.collect()
+            break
+        }
+      },
+      showItemOptions () {
+        this.iconMenus = []
+
+        if (this.uuid === this.detail.owner.uuid) {
+          this.iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
+        }
+        if (this.detail.is_bookmark) {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '已收藏',
+            isBookMark: 1
+          })
+        } else {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            isBookMark: 0
+          })
+        }
       },
       collect () {
         var data = {
@@ -310,9 +337,11 @@
           if (response.data.data.type === 'unbookmarked') {
             this.detail.bookmarks--
             this.detail.is_bookmark = 0
+            window.mui.toast('已取消收藏')
           } else {
             this.detail.bookmarks++
             this.detail.is_bookmark = 1
+            window.mui.toast('收藏成功')
           }
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
@@ -328,10 +357,38 @@
               }
             )
           }
+          window.mui('#shareWrapper').popover('toggle')
+          this.showItemOptions()
+        })
+      },
+      // 删除
+      deleterow () {
+        window.mui('#shareWrapper').popover('toggle')
+        var btnArray = ['取消', '确定']
+        window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
+          if (e.index === 1) {
+            // 进行删除
+            postRequest(`article/destroy-submission`, {
+              id: this.detail.id
+            }).then(response => {
+              var code = response.data.code
+              // 如果请求不成功提示信息 并且返回上一页；
+              if (code !== 1000) {
+                window.mui.alert(response.data.message)
+                window.mui.back()
+                return
+              }
+              if (response.data.data) {
+                window.mui.back()
+                window.mui.toast('删除成功')
+              }
+            })
+          }
         })
       },
       detailDownVote () {
         downVote(this, this.detail.id, (response) => {
+          this.detail.downvotes++
           this.detail.is_downvoted = 1
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
@@ -351,6 +408,7 @@
             )
           }
         }, (response) => {
+          this.detail.downvotes--
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.detail.is_downvoted = 0
@@ -454,6 +512,7 @@
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
+          this.showItemOptions()
           var shareOption = getDianpingCommentDetail(this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
           this.shareOption = Object.assign(this.shareOption, shareOption)
           this.loading = 0
@@ -529,7 +588,7 @@
 <style scoped lang="less">
   .mui-content {
     background: #ffffff;
-    bottom: 1.333rem;
+    bottom: 44px; /* px不转换 */
   }
   .mark {
     display: flex;
@@ -548,6 +607,13 @@
       margin-top: 0.053rem;
       margin-left: 0.08rem;
     }
+  }
+  .seeAll {
+    padding: 0.32rem 0;
+    font-size: 0.373rem;
+    color: #808080;
+    line-height: 0.533rem;
+    text-align: center;
   }
   .allDianPing {
     padding: 0 0.426rem;
@@ -774,97 +840,21 @@
     margin-top: -0.426rem;
     margin-bottom: 0.373rem;
   }
-
-  .container-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 1.333rem;
-    overflow: hidden;
-    /*padding: 0.36rem 0.426rem;*/
-    background: #FFFFFF;
-    &:before {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: .02667rem;
-      content: '';
-      -webkit-transform: scaleY(.5);
-      transform: scaleY(.5);
-      background-color: #dcdcdc;
-    }
-    .footerLeft {
-      display: flex;
-      font-size: 0.373rem;
-      float: left;
-      padding: 0.186rem 0 0.186rem 0.426rem;
-      .footerMenuTwo {
-        display: flex;
-        .containerBtn {
-          display: flex;
-          width: 2.96rem;
-          height: 0.96rem;
-          color: #ffffff;
-          margin-right: 0.133rem;
-          line-height: 0.96rem;
-          text-align: center;
-          border-radius: 0.213rem;
-          justify-content: center;
-        }
-        .noBullish {
-          background: #FA4975;
-        }
-        .bullish {
-          background: #03AEF9;
-        }
-      }
-      .footerMenuOne {
-        width: 5.933rem;
-        height: 0.96rem;
-        display: flex;
-        color: #03AEF9;
-        line-height: 0.96rem;
-        border-radius: 0.213rem;
-        background: #F3F4F6;
-        text-align: center;
-        justify-content: center;
-        &.activeRed {
-          color: #FA4975;
-        }
-        &.activeBlue {
-          color: #03AEF9;
-        }
-      }
-    }
-    .footerRight {
-      color: #B4B4B6;
-      font-size: 0.266rem;
-      text-align: center;
-      display: flex;
-      float: right;
-      margin-top: 0.186rem;
-      margin-right: 0.426rem;
-      .collectionComment {
-        width: 1.333rem;
-        height: 1.306rem;
-        flex-grow:1;
-        color: #808080;
-        span {
-          color: #B4B4B6;
-          display: block;
-          margin-top: -0.106rem;
-          i {
-            font-style: normal;
-          }
-        }
-      }
-      .icon {
-        font-size: 0.586rem;
-        /*margin-top: -0.106rem;*/
-      }
-    }
-  }
   .active {
     color: #d4d4d4;
+  }
+</style>
+
+<style type="text/css">
+  .detail-discover .followWrapper {
+    margin-top: 0.213rem;
+  }
+  .detail-discover .followWrapper .followButton {
+    min-width: 1.173rem;
+    height: 0.56rem;
+    line-height: 0.56rem;
+    font-size: 0.32rem;
+    width: auto;
+    padding: 0 0.266rem;
   }
 </style>

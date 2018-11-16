@@ -28,7 +28,7 @@
 
           <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
-          <div class="line-river lineMargin"></div>
+          <!--<div class="line-river lineMargin"></div>-->
 
           <div class="discoverContentWrapper">
             <div class="contentWrapper quillDetailWrapper container-editor container-editor-app" id="contentWrapper">
@@ -218,33 +218,13 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <div class="container-footer" v-if="isShow" @tap.capture="onTap($event)">
-      <div class="footerLeft">
-        <div class="footerMenuOne" :class="detail.is_upvoted ? 'activeBlue':'activeRed'" v-if="detail.is_downvoted || detail.is_upvoted">{{detail.support_description}}</div>
-        <div class="footerMenuTwo" v-else>
-          <div class="noBullish containerBtn" @tap.stop.prevent="detailDownVote()">{{detail.downvote_tip}}</div>
-          <div class="bullish containerBtn" @tap.stop.prevent="upVote()">{{detail.support_tip}}</div>
-        </div>
-      </div>
-      <div class="footerRight">
-        <div class="collectionComment" @tap.stop.prevent="collection()">
-          <div>
-            <svg class="icon" aria-hidden="true" :class="{active: detail.is_bookmark}">
-              <use xlink:href="#icon-shoucangdilantongyi"></use>
-            </svg>
-          </div>
-          <span>收藏<i v-if="detail.bookmarks">{{detail.bookmarks}}</i></span>
-        </div>
-        <div class="collectionComment" @tap.stop.prevent="goComment()">
-          <div>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-pinglun"></use>
-            </svg>
-          </div>
-          <span>评论<i v-if="detail.comments_number">{{detail.comments_number}}</i></span>
-        </div>
-      </div>
-    </div>
+    <DetailMenu
+      :detail="this.detail"
+      :iconOptions="iconOptions"
+      @detailMenuIcon="detailMenuIcon"
+      @WriteComment="goComment"
+    ></DetailMenu>
+
   </div>
 </template>
 
@@ -270,6 +250,7 @@
   import { quillEditor } from '../../components/vue-quill'
   import { upvote, downVote } from '../../utils/discover'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
+  import DetailMenu from '../../components/menu/Detail.vue'
 
   export default {
     data () {
@@ -324,7 +305,8 @@
           targetId: ''
         },
         isFollow: true,
-        loading: 1
+        loading: 1,
+        iconMenus: []
       }
     },
     computed: {
@@ -354,24 +336,30 @@
         }
         return this.description.length
       },
-      iconMenus () {
-        if (this.userId === this.detail.owner.id) {
-          return [
-            {
-              icon: '#icon-shanchu1',
-              text: '删除'
-            }
-            // {
-            //   icon: '#icon-jubao',
-            //   text: '举报'
-            // },
-          ]
-        }
+      iconOptions () {
         return [
-          // {
-          //   icon: '#icon-jubao',
-          //   text: '举报'
-          // }
+          {
+            icon: '#icon-pinglun',
+            text: '评论',
+            number: this.detail.comments_number
+          },
+          {
+            icon: '#icon-cai',
+            text: '踩',
+            number: this.detail.downvotes,
+            showClass: this.detail.is_downvoted
+          },
+          {
+            icon: '#icon-zan',
+            text: '赞',
+            number: this.detail.upvotes,
+            showClass: this.detail.is_upvoted
+          },
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享',
+            number: 0
+          }
         ]
       }
     },
@@ -384,9 +372,26 @@
       commentTextarea,
       groupsList,
       quillEditor,
-      'vue-pull-refresh': VuePullRefresh
+      'vue-pull-refresh': VuePullRefresh,
+      DetailMenu
     },
     methods: {
+      detailMenuIcon (item) {
+        switch (item.text) {
+          case '评论':
+            this.$router.pushPlus('/comment/' + this.detail.category_id + '/' + this.detail.slug + '/' + this.detail.id)
+            break
+          case '踩':
+            this.detailDownVote()
+            break
+          case '赞':
+            this.upVote()
+            break
+          case '分享':
+            this.$refs.ShareBtn.share()
+            break
+        }
+      },
       openApp () {
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
       },
@@ -407,6 +412,12 @@
             break
           case '举报':
             this.report()
+            break
+          case '收藏':
+            this.collect()
+            break
+          case '已收藏':
+            this.collect()
             break
         }
       },
@@ -628,6 +639,29 @@
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
+      showItemOptions () {
+        this.iconMenus = []
+
+        if (this.userId === this.detail.owner.id) {
+          this.iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
+        }
+        if (this.detail.is_bookmark) {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '已收藏',
+            isBookMark: 1
+          })
+        } else {
+          this.iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            isBookMark: 0
+          })
+        }
+      },
       getDetail: function () {
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
@@ -650,7 +684,7 @@
 
           var shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
           this.shareOption = Object.assign(this.shareOption, shareOption)
-
+          this.showItemOptions()
           if (this.detail.type === 'article') {
             this.title = this.detail.title
             var objs = JSON.parse(this.detail.data.description)
@@ -706,9 +740,11 @@
           if (response.data.data.type === 'unbookmarked') {
             this.detail.bookmarks--
             this.detail.is_bookmark = 0
+            window.mui.toast('已取消收藏')
           } else {
             this.detail.bookmarks++
             this.detail.is_bookmark = 1
+            window.mui.toast('收藏成功')
           }
           if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
             // mixpanel
@@ -724,6 +760,8 @@
               }
             )
           }
+          window.mui('#shareWrapper').popover('toggle')
+          this.showItemOptions()
         })
       },
       upVote () {
@@ -783,6 +821,7 @@
       },
       detailDownVote () {
         downVote(this, this.detail.id, (response) => {
+          this.detail.downvotes++
           this.detail.is_downvoted = 1
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
@@ -802,6 +841,7 @@
             )
           }
         }, (response) => {
+          this.detail.downvotes--
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.detail.is_downvoted = 0
@@ -984,6 +1024,7 @@
   }
   .mui-table-view-cell {
     padding-top: 0.133rem;
+    padding-bottom: 0.373rem;
   }
 
   .detail-discover:before {
@@ -1401,6 +1442,18 @@
 </style>
 
 <style type="text/css">
+  .detail-discover .followWrapper {
+    margin-top: 0.213rem;
+  }
+  .detail-discover .followWrapper .followButton {
+    min-width: 1.173rem;
+    height: 0.56rem;
+    line-height: 0.56rem;
+    font-size: 0.32rem;
+    width: auto;
+    padding: 0 0.266rem;
+  }
+
 
 </style>
 

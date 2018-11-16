@@ -21,7 +21,7 @@
         </div>
         <div class="professor">
           <div class="my-img"  @tap.stop.prevent="$router.pushPlus('/my/resume')">
-            <img :src="avatar" class="avatar" />
+            <ImageView :src="avatar" width="59" height="59" class="avatar"></ImageView>
             <div class="expert" v-if="expert_apply_status =='2'">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-zhuanjiabiaozhishixin"></use>
@@ -46,7 +46,7 @@
 
       <!--part2 $router.pushPlus('/my/publishAnswers')-->
       <ul class="part2">
-        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
+        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + uuid)">
           <span class="font-family-medium">{{publishes}}</span>
           <span>发布</span>
         </li>

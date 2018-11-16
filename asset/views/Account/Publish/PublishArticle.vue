@@ -6,18 +6,16 @@
       <h1 class="mui-title" v-else>Ta的发布</h1>
     </header>
 
-
-    <!--组件-->
     <div class="mui-content">
-      <!--导航栏-->
-      <div class="menu">
-        <span @tap.stop.prevent="$router.replace('/my/publishAnswers/' + uuid)">回答 </span>
+      <div class="container-searchMenu">
+        <span @tap.stop.prevent="$router.replace('/my/publishAnswers/' + uuid)">回答</span>
         <span @tap.stop.prevent="$router.replace('/my/publishQuestions/' + uuid)">提问</span>
-        <span @tap.stop.prevent="">分享  <i></i></span>
+        <span class="font-family-medium">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/my/publishComment/' + uuid)">评论</span>
-
+        <span @tap.stop.prevent="$router.replace('/dianping/my/publishComments/' + uuid)">点评</span>
+        <i class="bot"></i>
       </div>
-      <!--内容区域-->
+
       <RefreshList
         ref="RefreshList"
         :pageMode="true"
@@ -25,11 +23,11 @@
         :api="'readhub/mySubmission'"
         :prevOtherData="{type:0,uuid: this.uuid}"
         :nextOtherData="{type:0,uuid: this.uuid}"
-
         class="listWrapper">
+
         <ul class="answer">
           <li  v-for="(ask, index) in list" @tap.stop.prevent="toDetail(ask)">
-            <div class="margin-10-0-0" v-if="ask.img && ask.type === 'text'">
+            <div class="margin-10-0-0" v-if="ask.img.length && ask.type === 'text'">
               <Images :images="ask.img" class="newestList"></Images>
             </div>
             <div class="container-image margin-10-0-0" v-if="ask.img && ask.type !== 'text'" >
@@ -45,6 +43,7 @@
             <i class="bot"></i>
           </li>
         </ul>
+
       </RefreshList>
 
       <!---->
@@ -116,57 +115,13 @@
 </script>
 
 <style scoped="scoped">
-  .mui-wechat .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
-    top: 0;
-  }
 
   .mui-content {
     background: #FFFFFF;
   }
-  /*导航栏的样式*/
-
-  .menu {
-    width: 100%;
-    height: 1.2rem;
-    position: absolute;
-    z-index: 10;
-    background: #f3f4f6;
+  .listWrapper {
+    top: 1.04rem;
   }
-
-  .menu span {
-    display: block;
-    width: 25%;
-    height: 100%;
-    float: left;
-    font-size: 0.373rem;
-    color: #444444;
-    text-align: center;
-    line-height: 1.2rem;
-    font-weight: 600;
-  }
-
-  .menu span:nth-of-type(3) {
-    color: #3c95f9;
-    position: relative;
-  }
-
-  .menu i {
-    display: block;
-    position: absolute;
-    width: 0.72rem;
-    height: 0.04rem;
-    left:0;
-    right:0;
-    bottom: 0.013rem;
-    margin:auto;
-    background: #3c95f9;
-  }
-
   .bot {
     position: absolute;
     right: 0rem;
@@ -177,9 +132,14 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
-  /*清掉自带样式*/
-
-  div,
+  /*滚动区域*/
+  .margin-10-0-0 {
+    margin-top: 0;
+  }
+  .margin-10-0-0 .newestList {
+    margin: 0;
+    padding: 0;
+  }
   p,
   span,
   i,
@@ -192,7 +152,6 @@
     list-style: none;
     font-style: normal;
   }
-  /*滚动区域*/
 
   .answer {
     width: 92%;
@@ -242,5 +201,8 @@
   .listWrapper{
     top: 1.2rem;
   }
-  /*container-image margin-10-0-0*/
+
+  .container-searchMenu {
+    margin-top: 0;
+  }
 </style>

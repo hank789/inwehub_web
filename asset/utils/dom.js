@@ -169,6 +169,11 @@ function setRemUnit () {
   document.body.classList.add('w' + docEl.clientWidth + '-' + dpr)
 }
 
+function getDpi () {
+  var dpr = window.devicePixelRatio || 1
+  return dpr
+}
+
 /**
  * 设置rem
  */
@@ -295,6 +300,7 @@ export {
   doSometing,
   ainimationProgress,
   scrollDetailPage,
-  scrollToElement
+  scrollToElement,
+  getDpi
 }
 
