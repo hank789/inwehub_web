@@ -6,14 +6,24 @@
         <svg class="icon logoIcon" aria-hidden="true">
           <use xlink:href="#icon-logowenzi"></use>
         </svg><span class="splitCircle"></span>
-        <div class="logoAndTabsAndSearchTabs">
-          <!--<div class="tab active">关注</div>-->
-          <div class="tab" @tap.stop.prevent="toHome()">热点</div>
-          <div class="tab active" @tap.stop.prevent="toDiscover()">关注</div>
+
+        <div class="topSearchWrapper" @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
+          <div class="searchFrame">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-sousuo"></use>
+            </svg>
+            <span>搜内容、问答、圈子</span>
+          </div>
         </div>
-        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
-          <use xlink:href="#icon-sousuo"></use>
-        </svg>
+
+        <!--<div class="logoAndTabsAndSearchTabs">-->
+          <!--&lt;!&ndash;<div class="tab active">关注</div>&ndash;&gt;-->
+          <!--<div class="tab" @tap.stop.prevent="toHome()">热点</div>-->
+          <!--<div class="tab active" @tap.stop.prevent="toDiscover()">关注</div>-->
+        <!--</div>-->
+        <!--<svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">-->
+          <!--<use xlink:href="#icon-sousuo"></use>-->
+        <!--</svg>-->
       </div>
 
       <div class="line-river-after line-river-after-top"></div>
@@ -61,6 +71,14 @@
         </template>
 
       </RefreshList>
+
+      <div class="goEditWrapper" @tap.stop.prevent="$router.pushPlus('/discover/add')">
+        <div class="editIcon">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-fabu"></use>
+          </svg>
+        </div>
+      </div>
 
     </div>
 

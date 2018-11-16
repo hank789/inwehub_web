@@ -2937,6 +2937,41 @@ a {
   position: absolute;
   right: 0.453rem;
   top: 0.373rem; }
+.container-control-logoAndTabsAndSearch .topSearchWrapper {
+  margin-top: 5px;
+  margin-left: 20px;}
+.container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
+  width: 227.5px;
+  height: 34px;
+  padding-left: 10px;
+  line-height: 34px;
+  background: #F3F4F6;
+  color: #C8C8C8;
+  border-radius: 100px;}
+.container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame .icon {
+  font-size: 17px;}
+
+.goEditWrapper {
+  position: absolute;
+  bottom: 70px;
+  z-index: 9;
+  right: 16px;}
+.goEditWrapper.askoffers{
+  bottom: 110px;}
+.goEditWrapper .editIcon {
+  width: 44px;
+  height: 44px;
+  position: relative;
+  color: #FFFFFF;
+  border-radius: 50%;
+  background: #03AEF9;
+  box-shadow:0px 1px 6px 0px rgba(168,223,247,1);}
+.goEditWrapper .editIcon .icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;}
 
 
 .component-item-article {
