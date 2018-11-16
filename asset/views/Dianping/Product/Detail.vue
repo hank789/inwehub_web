@@ -60,7 +60,7 @@
                   <div class="name">
                     <span class="font-family-medium">{{ advisers.name }}</span>
                   </div>
-                  <div class="good text-line-1">擅长“{{ advisers.skill }}”</div>
+                  <div class="good text-line-1">熟悉“{{ advisers.skill }}”</div>
                 </div>
                 <div class="speak" @tap.stop.prevent="goChat(advisers.id)"><span class="border-football">沟通</span></div>
               </div>
@@ -185,6 +185,7 @@
   import VuePullRefresh from 'vue-awesome-pull-refresh'
   import starRating from '../../../components/star-rating/star-rating.vue'
   import StarView from '../../../components/star-rating/starView.vue'
+  import { getLocalName } from '../../../utils/user.js'
 
   export default {
     data () {
@@ -198,7 +199,7 @@
           followers: 0
         },
         swiperOption: {
-          loop: true,
+          loop: false,
           effect: 'coverflow',
           centeredSlides: true,
           slidesPerView: 'auto',
@@ -278,14 +279,7 @@
         this.$refs.share.share()
       },
       joinShare () {
-        this.iconMenus = []
-        var shareOption = getDianpingProductDetail(
-          this.userName,
-          this.detail.name,
-          this.detail.summary,
-          this.detail.logo
-        )
-        this.shareOption = Object.assign(this.shareOption, shareOption)
+        this.getShareOption()
         this.$refs.share.share()
       },
       goChat (uid) {
@@ -305,12 +299,24 @@
           this.detail = data
           this.loading = 0
           this.title = '产品服务'
+          this.getShareOption()
           scrollToElement(this, '.product-introduce', '.pull-down-container')
         })
 
         getProductComments(this, id, 3, (productComments) => {
           this.productComments = productComments
         })
+      },
+      getShareOption () {
+        this.iconMenus = []
+        var getUserName = getLocalName()
+        var shareOption = getDianpingProductDetail(
+          getUserName,
+          this.detail.name,
+          this.detail.summary,
+          this.detail.logo
+        )
+        this.shareOption = Object.assign(this.shareOption, shareOption)
       },
       goDianping () {
         this.$router.pushPlus('/dianping/add/' + urlencode(this.detail.name))
