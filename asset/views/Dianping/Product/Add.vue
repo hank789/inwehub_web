@@ -114,8 +114,27 @@
     },
     mounted () {
       this.refreshPageData()
+      this.initData()
+    },
+    activated: function () {
+      this.initData()
     },
     methods: {
+      initData  () {
+        var companyName = localEvent.getLocalItem('product_company' + this.id)
+        if (companyName) {
+          this.companyName = companyName
+          localEvent.clearLocalItem('product_company' + this.id)
+        }
+      },
+      resetData () {
+        this.companyName = ''
+        this.name = ''
+        this.description = ''
+        this.images = []
+        this.categorytags = []
+        this.categories = []
+      },
       deleteTags (index) {
         this.categorytags.splice(index, 1)
       },
@@ -123,9 +142,6 @@
         getCategories(this, (categories) => {
           this.categories = categories
         })
-
-        this.companyName = localEvent.getLocalItem('product_company' + this.id)
-        localEvent.clearLocalItem('product_company' + this.id)
       },
       addTags () {
         this.$refs.dropdownMenu.show()
@@ -165,9 +181,10 @@
           company: this.companyName,
           summary: this.description
         }
-        addProduct(this, data, () => {
+        addProduct(this, data, (res) => {
           window.mui.toast('我们已收到您提交的产品，请耐心等候')
-          this.$router.replace('/dianping/product/' + this.name)
+          this.resetData()
+          this.$router.replace('/dianping/product/' + encodeURIComponent(res.name))
         })
       }
     }
