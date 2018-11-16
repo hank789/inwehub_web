@@ -70,7 +70,7 @@
 
         <div class="container-searchResult">
           <div class="container-resultList">
-            <div class="container-result" v-for="(item, index) in list" :key="index">
+            <div class="container-result" v-for="(item, index) in list" :key="index"@tap.stop.prevent="$router.pushPlus('/dianping/products/' + item.id + '/' + encodeURIComponent(item.name))">
               <span v-html="getHighlight(item.name)"></span>
               <i class="bot"></i>
             </div>

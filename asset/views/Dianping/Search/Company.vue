@@ -70,7 +70,7 @@
 
         <div class="container-searchCompony">
           <div class="container-searchComponyList">
-            <div class="container-componyList" v-for="(item, index) in list" :key="index">
+            <div class="container-componyList" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)">
               <div class="componyImg border-football">
                 <img src="../../../statics/images/uicon.jpg">
               </div>
