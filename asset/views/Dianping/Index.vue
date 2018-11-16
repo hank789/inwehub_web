@@ -417,34 +417,34 @@
   }
 
   .searchWrapper {
-    padding-top: 9px;
+    padding-top: 0.24rem;
     background: #DCDCDC;
     .searchInput {
-      width: 343px;
-      height: 34px;
+      width: 9.146rem;
+      height: 0.906rem;
       margin: 0 auto;
-      line-height: 34px;
-      border-radius: 100px;
+      line-height: 0.906rem;
+      border-radius: 2.666rem;
       background: #FFFFFF;
       display: flex;
-      padding: 0 10px;
+      padding: 0 0.266rem;
       justify-content: space-between;
       .searchLeft {
         color: #C8C8C8;
         .icon {
-          font-size: 17px;
+          font-size: 0.453rem;
         }
         span {
-          font-size: 14px;
+          font-size: 0.373rem;
         }
       }
       .searchRight {
         color: #444444;
-        font-size: 13px;
+        font-size: 0.346rem;
         .line-wall {
-          height: 14px;
-          top: 2px;
-          right: 6px;
+          height: 0.373rem;
+          top: 0.053rem;
+          right: 0.16rem;
         }
       }
     }

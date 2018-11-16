@@ -183,9 +183,9 @@
 
   .bot {
     position: absolute;
-    right: 16px;
+    right: 0.426rem;
     bottom: 0;
-    left: 16px;
+    left: 0.426rem;
     height: 0.026rem;
     transform: scaleY(0.5);
     background-color: #dcdcdc;
@@ -194,9 +194,9 @@
     position: relative;
     .title {
       color: #808080;
-      font-size: 14px;
-      padding: 0 16px;
-      line-height: 20px;
+      font-size: 0.373rem;
+      padding: 0 0.426rem;
+      line-height: 0.533rem;
     }
     .productName {
       input[type='text'] {
@@ -204,7 +204,7 @@
         border: none;
         color: #444444;
         font-size: 0.533rem;
-        margin-top: 1px;
+        margin-top: 0.026rem;
         text-align: center;
         font-family: PingFangSC-Medium;
         &::-webkit-input-placeholder {
@@ -230,28 +230,28 @@
       }
     }
     .productType {
-      margin-top: 24px;
+      margin-top: 0.64rem;
       .typeListWrappre {
-        padding: 7px 11px 0;
+        padding: 0.186rem 0.293rem 0;
         .typeList {
-          padding: 0 10px;
-          height: 27px;
-          line-height: 23px;
+          padding: 0 0.266rem;
+          height: 0.72rem;
+          line-height: 0.613rem;
           background: #F3F4F6;
-          border-radius: 100px;
+          border-radius: 2.666rem;
           display: inline-block;
-          margin: 5px;
+          margin: 0.133rem;
           span {
             color: #444444;
-            font-size: 12px;
+            font-size: 0.32rem;
           }
           .icon {
-            font-size: 8px;
+            font-size: 0.213rem;
             color: #B4B4B6;
           }
           &.add {
             background: none;
-            line-height: 25px;
+            line-height: 0.666rem;
             span {
               color: #03AEF9;
             }
@@ -261,7 +261,7 @@
     }
     .companyWrapper {
       position: relative;
-      padding: 10px 0 12px;
+      padding: 0.266rem 0 0.32rem;
       .title {
         display: flex;
         justify-content: space-between;
@@ -273,66 +273,66 @@
       }
     }
     .productSummary {
-      padding-top: 11px;
+      padding-top: 0.293rem;
       .textareaWrapper {
-        padding: 13px 16px 0;
+        padding: 0.346rem 0.426rem 0;
         textarea {
-          padding: 12px 15px;
-          height: 164px;
+          padding: 0.32rem 0.4rem;
+          height: 4.373rem;
           color: #444444;
-          font-size: 14px;
-          line-height: 20px;
+          font-size: 0.373rem;
+          line-height: 0.533rem;
         }
       }
     }
     .sureButton {
-      width: 343px;
-      height: 44px;
-      margin: 10px auto 0;
+      width: 9.146rem;
+      height: 1.173rem;
+      margin: 0.266rem auto 0;
       color: #FFFFFF;
-      font-size: 16px;
-      line-height: 44px;
+      font-size: 0.426rem;
+      line-height: 1.173rem;
       text-align: center;
       background: #03AEF9;
-      border-radius: 100px;
+      border-radius: 2.666rem;
       font-family:PingFangSC-Medium;
     }
   }
   .headPhotowrapper {
-    margin-top: 5px;
+    margin-top: 0.133rem;
     .headImages {
-      width: 59px;
-      height: 59px;
+      width: 1.573rem;
+      height: 1.573rem;
       margin: 0 auto;
       position: relative;
       background: #E3E3E3;
-      border-radius: 4px;
+      border-radius: 0.106rem;
       img {
         width: 100%;
         height: 100%;
-        border-radius: 4px;
+        border-radius: 0.106rem;
       }
       .logoImg {
         position: absolute;
-        top: 15px;
+        top: 0.4rem;
         left: 50%;
-        font-size: 28px;
+        font-size: 0.746rem;
         color: #8B8B8B;
         transform: translateX(-50%);
       }
       .headPhotograph {
-        width: 59px;
-        height: 59px;
-        border-radius: 4px;
+        width: 1.573rem;
+        height: 1.573rem;
+        border-radius: 0.106rem;
         position: absolute;
         top: 0;
         left: 0;
         background:rgba(0,0,0,.3);
         .icon {
           color: #FFFFFF;
-          font-size: 21px;
+          font-size: 0.56rem;
           position: absolute;
-          top: 19px;
+          top: 0.506rem;
           left: 50%;
           transform: translateX(-50%);
         }

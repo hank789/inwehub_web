@@ -51,7 +51,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     overflow: hidden;
     background: #FFFFFF;
     &:before {
@@ -68,7 +68,7 @@
       display: flex;
       font-size: 0.373rem;
       float: left;
-      padding: 5px 0 5px 0.426rem;
+      padding: 0.133rem 0 0.133rem 0.426rem;
       .footerMenuTwo {
         display: flex;
         .containerBtn {
@@ -90,13 +90,13 @@
         }
       }
       .footerMenuOne {
-        width: 185px;
-        height: 34px;
+        width: 4.933rem;
+        height: 0.906rem;
         color: #C8C8C8;
-        line-height: 34px;
-        border-radius: 4px;
+        line-height: 0.906rem;
+        border-radius: 0.106rem;
         background: #F3F4F6;
-        padding-left: 10px;
+        padding-left: 0.266rem;
         &.activeRed {
           color: #FA4975;
         }
@@ -115,19 +115,19 @@
         height: 1.306rem;
         flex-grow:1;
         color: #808080;
-        padding-top: 14px;
+        padding-top: 0.373rem;
         position: relative;
         span {
           position: absolute;
-          top: 11px;
-          left: 31px;
+          top: 0.293rem;
+          left: 0.826rem;
           color: #FA4975;
-          font-size: 10px;
+          font-size: 0.266rem;
           margin-top: -0.106rem;
         }
       }
       .icon {
-        font-size: 16px;
+        font-size: 0.426rem;
         &.active {
           color: #C8C8C8;
         }

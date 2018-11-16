@@ -3462,9 +3462,9 @@ a {
   margin: auto;}
 
 .container-noMore {
-  padding: 12.5px 0 28px;
+  padding: 0.333rem 0 0.746rem;
   color: #C8C8C8;
-  font-size: 12px;
+  font-size: 0.32rem;
   text-align: center;}
 
 .container-hotSearch {
@@ -3502,7 +3502,7 @@ a {
 .container-searchList .listOne {
   color: #03AEF9;}
 .dianping-search {
-  margin-top: 80px;}
+  margin-top: 2.133rem;}
 .dianping-search .empty-Img {
-  width: 61px;
-  height: 89px;}
+  width: 1.626rem;
+  height: 2.373rem;}

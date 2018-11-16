@@ -866,7 +866,7 @@
     }
   }
   .link {
-    padding: 10px 0.426rem 0;
+    padding: 0.266rem 0.426rem 0;
     /*margin-bottom: 0.466rem;*/
     .linkBox {
       padding: 0.266rem;

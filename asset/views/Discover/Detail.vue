@@ -1024,7 +1024,7 @@
   }
   .mui-table-view-cell {
     padding-top: 0.133rem;
-    padding-bottom: 14px;
+    padding-bottom: 0.373rem;
   }
 
   .detail-discover:before {
@@ -1443,15 +1443,15 @@
 
 <style type="text/css">
   .detail-discover .followWrapper {
-    margin-top: 8px;
+    margin-top: 0.213rem;
   }
   .detail-discover .followWrapper .followButton {
-    min-width: 44px;
-    height: 21px;
-    line-height: 21px;
-    font-size: 12px;
+    min-width: 1.173rem;
+    height: 0.56rem;
+    line-height: 0.56rem;
+    font-size: 0.32rem;
     width: auto;
-    padding: 0 10px;
+    padding: 0 0.266rem;
   }
 
 
