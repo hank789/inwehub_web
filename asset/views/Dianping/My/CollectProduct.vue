@@ -27,6 +27,13 @@
           <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
         </template>
 
+        <div class="noResult increase dianping-search" v-if="!list.length">
+          <div class="empty-Img">
+            <img src="../../../statics/images/empty@3x.png">
+          </div>
+          <div class="noResultText">暂时还没有数据呀~</div>
+        </div>
+
       </RefreshList>
 
     </div>
