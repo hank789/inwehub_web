@@ -21,7 +21,7 @@
       </div>
 
       <div class="menu active" v-if="isFeed">
-        <div class="iconWrapper">
+        <div class="iconWrapper followIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-guanzhudilan"></use>
           </svg>
@@ -29,7 +29,7 @@
         <div class="desc">关注</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.replace('/discover')" v-else>
-        <div class="iconWrapper">
+        <div class="iconWrapper followIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-guanzhudilan"></use>
           </svg>
@@ -326,6 +326,9 @@
     flex-direction: column;
     position: relative;
     width: 100%; }
+  .container-footer .menu .followIcon .icon {
+    font-size: 19px; /* px不转换 */
+  }
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
     color: #B4B4B6;
@@ -345,7 +348,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center; }
-  .container-footer .menu:nth-child(2) .iconWrapper {
+  .container-footer .menu:nth-child(3) .iconWrapper {
     font-size: 21px; /* px不转换 */
     top: 6px; /* px不转换 */
     left: 50%;
