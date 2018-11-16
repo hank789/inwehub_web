@@ -2938,40 +2938,40 @@ a {
   right: 0.453rem;
   top: 0.373rem; }
 .container-control-logoAndTabsAndSearch .topSearchWrapper {
-  margin-top: 5px;
-  margin-left: 20px;}
+  margin-top: 0.133rem;
+  margin-left: 0.533rem;}
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
-  width: 227.5px;
-  height: 34px;
-  padding-left: 10px;
-  line-height: 34px;
+  width: 6.066rem;
+  height: 0.906rem;
+  padding-left: 0.266rem;
+  line-height: 0.906rem;
   background: #F3F4F6;
   color: #C8C8C8;
-  border-radius: 100px;}
+  border-radius: 2.666rem;}
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame .icon {
-  font-size: 17px;}
+  font-size: 0.453rem;}
 
 .goEditWrapper {
   position: absolute;
-  bottom: 70px;
+  bottom: 1.866rem;
   z-index: 9;
-  right: 16px;}
+  right: 0.426rem;}
 .goEditWrapper.askoffers{
-  bottom: 110px;}
+  bottom: 2.933rem;}
 .goEditWrapper .editIcon {
-  width: 44px;
-  height: 44px;
+  width: 1.173rem;
+  height: 1.173rem;
   position: relative;
   color: #FFFFFF;
   border-radius: 50%;
   background: #03AEF9;
-  box-shadow:0px 1px 6px 0px rgba(168,223,247,1);}
+  box-shadow:0rem 0.026rem 0.16rem 0rem rgba(168,223,247,1);}
 .goEditWrapper .editIcon .icon {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 22px;}
+  font-size: 0.586rem;}
 
 
 .component-item-article {
