@@ -47,7 +47,9 @@
 
   export default {
     data () {
-      return {}
+      return {
+        selectedIterms: []
+      }
     },
     components: {
       DropDownMenuChild
@@ -108,8 +110,9 @@
           } else {
             window.mui('#dropDownMenuWrapper').popover('toggle')
             setTimeout(() => {
+              this.selectedIterms.push({id: item.id, name: item.name})
               if (!this.showSelectTop) {
-                this.$emit('input', [{id: item.id, name: item.name}])
+                this.$emit('input', this.selectedIterms)
               } else {
                 this.$emit('input', {id: item.id, name: item.name})
               }
