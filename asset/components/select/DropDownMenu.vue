@@ -1,5 +1,5 @@
 <template>
-  <div id="dropDownMenuWrapper" class="immersed-top shareWrapper mui-popover mui-popover-top">
+  <div id="dropDownMenuWrapper" :class="positionClass" class="immersed-top shareWrapper mui-popover">
     <slot name="dropDownMenuHeader"></slot>
     <div class="container-select">
       <div class="select-top" v-if="showSelectTop">
@@ -55,6 +55,10 @@
       DropDownMenuChild
     },
     props: {
+      positionClass: {
+        type: String,
+        default: 'mui-popover-top'
+      },
       tree: {
         type: Array,
         default: function () {

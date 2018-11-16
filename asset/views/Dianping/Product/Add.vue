@@ -77,6 +77,7 @@
 
     <DropDownMenu
       ref="dropdownMenu"
+      :positionClass="'mui-popover-bottom'"
       :tree="categories"
       :showSelectTop="false"
       :showProductAddBack="true"
