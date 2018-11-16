@@ -165,6 +165,9 @@
       }
     },
     methods: {
+      empty () {
+        this.searchText = ''
+      },
       showItemMore (shareOption) {
         this.shareOption = shareOption
         this.$refs.share.share()

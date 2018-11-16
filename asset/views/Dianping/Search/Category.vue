@@ -94,6 +94,7 @@
 <script>
   import RefreshList from '../../../components/refresh/List.vue'
   import { postRequest } from '../../../utils/request'
+  import { searchText as searchTextFilter } from '../../../utils/search'
 
   export default {
     data () {
@@ -129,6 +130,20 @@
         return 'result'
       }
     },
+    watch: {
+      searchText: function (newValue, oldValue) {
+        searchTextFilter(newValue, (text) => {
+          if (newValue) {
+            this.isShowCancelButton = true
+            this.searchAdvice(newValue)
+
+            if (newValue !== this.confirmSearchText) {
+              this.list = []
+            }
+          }
+        })
+      }
+    },
     created () {
       this.refreshPageData()
     },
@@ -136,6 +151,9 @@
       this.refreshPageData()
     },
     methods: {
+      empty () {
+        this.searchText = ''
+      },
       back () {
         window.mui.back()
         return
