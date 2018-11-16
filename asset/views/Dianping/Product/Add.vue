@@ -132,7 +132,6 @@
         this.description = ''
         this.images = []
         this.categorytags = []
-        this.categories = []
       },
       deleteTags (index) {
         this.categorytags.splice(index, 1)
