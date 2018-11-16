@@ -72,7 +72,7 @@
           <div class="container-searchComponyList">
             <div class="container-componyList" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)">
               <div class="componyImg border-football">
-                <img src="../../../statics/images/uicon.jpg">
+                <ImageView :src="item.logo" width="43" height="43" :isLazyload="false"></ImageView>
               </div>
               <div class="componyInfo">
                 <div class="componyName text-line-1" v-html="getHighlight(item.name)"></div>

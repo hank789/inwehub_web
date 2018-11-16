@@ -2948,6 +2948,9 @@ a {
   background: #F3F4F6;
   color: #C8C8C8;
   border-radius: 2.666rem;}
+.container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame span {
+  font-size: 0.373rem;
+}
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame .icon {
   font-size: 0.453rem;}
 
