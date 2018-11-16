@@ -149,7 +149,7 @@
         </div>
 
         <div class="feedBack">
-          <div class="text">如果您有任何关于该产品服务相关问题或信息反馈，<span @tap.stop.prevent="$router.pushPlus('/dianping/productsfeedback')">请点击</span></div>
+          <div class="text">如果您有任何关于该产品服务相关问题或信息反馈，<span @tap.stop.prevent="$router.pushPlus('/dianping/product/feedback/' + encodeURIComponent(detail.name))">请点击</span></div>
         </div>
 
       </vue-pull-refresh>
