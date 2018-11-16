@@ -82,7 +82,7 @@
         images: [],
         type: '',
         maxImageCount: 9,
-        name: this.$route.params.name
+        name: ''
       }
     },
     components: {
@@ -96,7 +96,27 @@
         return true
       }
     },
+    watch: {
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
+    },
+    created () {
+      this.refreshPageData()
+    },
     methods: {
+      refreshPageData () {
+        let name = this.$route.params.name
+        if (!name) {
+          window.mui.toast('请求异常')
+          window.mui.back()
+          return
+        }
+
+        this.name = name
+      },
       resetData () {
         this.type = ''
         this.description = ''
