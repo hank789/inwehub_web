@@ -2,23 +2,23 @@
   <div class="openAppTop">
     <!--手机端-->
     <!--<div class="suspend" v-if="isH5">-->
-      <!--<p>-->
-        <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">-->
-          <!--<use xlink:href="#icon-guanbi"></use>-->
-        <!--</svg>-->
-      <!--</p>-->
-      <!--<p>-->
-        <!--<svg class="icon" aria-hidden="true">-->
-          <!--<use xlink:href="#icon-logotuxing"></use>-->
-        <!--</svg>-->
-      <!--</p>-->
-      <!--<p>-->
-        <!--<span>下载APP</span>-->
-        <!--<span>查看更多专家信息</span>-->
-      <!--</p>-->
-      <!--<p>-->
-        <!--<a id="btnOpenAppH5" :href="url" target="_blank">立即打开</a>-->
-      <!--</p>-->
+    <!--<p>-->
+    <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="close('isH5')">-->
+    <!--<use xlink:href="#icon-guanbi"></use>-->
+    <!--</svg>-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<svg class="icon" aria-hidden="true">-->
+    <!--<use xlink:href="#icon-logotuxing"></use>-->
+    <!--</svg>-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<span>下载APP</span>-->
+    <!--<span>查看更多专家信息</span>-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<a id="btnOpenAppH5" :href="url" target="_blank">立即打开</a>-->
+    <!--</p>-->
     <!--</div>-->
 
     <!--微信端-->
@@ -147,7 +147,8 @@
         </div>
       </div>
     </div>
-    <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
+    <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank"
+                          @tap.stop.prevent="downloadApp">下载APP</a></div>
   </div>
 </template>
 
@@ -402,16 +403,16 @@
 
   /*微信端*/
   /*.mui-wechat .suspension.backgroundGrey {*/
-    /*background: #F3F4F6;*/
-    /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+  /*background: #F3F4F6;*/
+  /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
   /*}*/
   /*.openAppH5 .suspension.backgroundGrey {*/
-    /*background: #F3F4F6;*/
-    /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+  /*background: #F3F4F6;*/
+  /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
   /*}*/
   /*.suspension.backgroundGrey {*/
-    /*background: #F3F4F6;*/
-    /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
+  /*background: #F3F4F6;*/
+  /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
   /*}*/
   .mui-wechat .suspension {
     width: 100%;
@@ -424,6 +425,7 @@
     /*-webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
     /*-moz-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
   }
+
   .openAppH5 .suspension {
     width: 100%;
     height: 1.306rem;
@@ -456,20 +458,28 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    height: 1.306rem; }
+    height: 1.306rem;
+  }
+
   .component-wechat-top .left {
     width: 7.266rem;
-    position: relative;}
+    position: relative;
+  }
+
   .component-wechat-top .left .userImg {
     position: absolute;
     left: 0.293rem;
     top: 0.213rem;
     width: 0.88rem;
-    height: 0.88rem;}
+    height: 0.88rem;
+  }
+
   .component-wechat-top .left .userImg img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;}
+    border-radius: 50%;
+  }
+
   .component-wechat-top .left .userName {
     width: 100%;
     position: absolute;
@@ -478,6 +488,7 @@
     color: #FFFFFF;
     font-size: 0.346rem;
   }
+
   .component-wechat-top .left .iconBorder {
     width: 0.906rem;
     height: 0.906rem;
@@ -487,44 +498,56 @@
     background: #ffffff;
     border-radius: 0.2rem;
   }
+
   .component-wechat-top .left .iconBorder .icon {
     position: relative;
     left: 0.026rem;
     top: 0;
     font-size: 0.866rem;
   }
+
   .component-wechat-top .left .icon:nth-child(2) {
     position: absolute;
     left: 1.573rem;
     top: -0.65rem;
     font-size: 2.186rem;
-    color: #FFFFFF;}
+    color: #FFFFFF;
+  }
+
   .component-wechat-top .left .desc {
     color: #FFFFFF;
     font-size: 0.266rem;
     position: absolute;
     top: 0.666rem;
-    left: 1.546rem; }
-  .component-wechat-top .left .desc.userSlogen {
-    left: 1.493rem ;
+    left: 1.546rem;
   }
+
+  .component-wechat-top .left .desc.userSlogen {
+    left: 1.493rem;
+  }
+
   .openAppTop {
     background: #03AEF9;
   }
+
   #OpenAppSlider.homeMuiSlider {
-    width: 7.266rem;
+    width: 70%;
   }
+
   .openAppTop .right {
     height: 1.306rem;
+    width: 30%;
     line-height: 1.306rem;
     padding-right: 0.426rem;
     color: #03AEF9;
     font-size: 0.373rem;
     position: absolute;
     top: 0;
-    right: 0;}
+    right: 0;
+  }
+
   .openAppTop .right .downloadApp {
-    width: 1.893rem;
+    width: 100%;
     height: 0.773rem;
     text-align: center;
     line-height: 0.773rem;
@@ -533,27 +556,33 @@
     background: #FFFFFF;
     border-radius: 0.106rem;
     display: inline-block;
-    font-family:PingFangSC-Medium;
+    font-family: PingFangSC-Medium;
   }
+
   .openAppTop .right a {
-    color: #03AEF9; }
+    color: #03AEF9;
+  }
+
   .openAppTop .right .line-wall {
     margin: 0 0.266rem;
     position: relative;
-    width:0.026rem;
+    width: 0.026rem;
     top: 0.026rem;
-    height: 0.346rem; }
+    height: 0.346rem;
+  }
 
-  .line-wall{
+  .line-wall {
     display: inline-block;
     position: relative;
     width: 0.026rem;
     height: 0.266rem;
     background-color: #dcdcdc;
   }
+
   .mui-slider .mui-slider-group .mui-slider-item {
     height: 1.306rem !important;
   }
+
   .mui-slider {
     background: #03AEF9;
   }
