@@ -114,7 +114,6 @@
     },
     mounted () {
       this.refreshPageData()
-      this.initData()
     },
     activated: function () {
       this.initData()
@@ -142,6 +141,7 @@
         getCategories(this, (categories) => {
           this.categories = categories
         })
+        this.initData()
       },
       addTags () {
         this.$refs.dropdownMenu.show()
