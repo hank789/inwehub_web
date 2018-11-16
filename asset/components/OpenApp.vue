@@ -531,7 +531,7 @@
   }
 
   #OpenAppSlider.homeMuiSlider {
-    width: 70%;
+    width: 66%;
   }
 
   .openAppTop .right {
