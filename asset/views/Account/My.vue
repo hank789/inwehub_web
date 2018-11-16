@@ -46,7 +46,7 @@
 
       <!--part2 $router.pushPlus('/my/publishAnswers')-->
       <ul class="part2">
-        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers')">
+        <li @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/' + uuid)">
           <span class="font-family-medium">{{publishes}}</span>
           <span>发布</span>
         </li>
