@@ -30,13 +30,14 @@
               ></DropDownMenuChild>
             </div>
 
-            <div class="font-family-medium productAddBack" v-if="showProductAddBack" @tap.stop.prevent="ProductAddBack">取消
-              <div class="bot"></div>
-            </div>
           </div>
         </div>
 
       </div>
+
+    </div>
+    <div id="productAddBack" class="font-family-medium productAddBack" v-if="showProductAddBack" @tap.stop.prevent="ProductAddBack">取消
+      <div class="bot"></div>
     </div>
   </div>
 </template>
@@ -46,7 +47,9 @@
 
   export default {
     data () {
-      return {}
+      return {
+        selectedIterms: []
+      }
     },
     components: {
       DropDownMenuChild
@@ -107,8 +110,9 @@
           } else {
             window.mui('#dropDownMenuWrapper').popover('toggle')
             setTimeout(() => {
+              this.selectedIterms.push({id: item.id, name: item.name})
               if (!this.showSelectTop) {
-                this.$emit('input', [{id: item.id, name: item.name}])
+                this.$emit('input', this.selectedIterms)
               } else {
                 this.$emit('input', {id: item.id, name: item.name})
               }
@@ -136,7 +140,12 @@
         }
 
         document.querySelector('.dropDownScrollWrapper').style.height = height + 'px'
-        document.querySelector('#dropDownMenuWrapper').style.height = height + 'px'
+        if (!this.showProductAddBack) {
+          document.querySelector('#dropDownMenuWrapper').style.height = height + 'px'
+        } else {
+          var backHeight = document.querySelector('#productAddBack').clientHeight
+          document.querySelector('#dropDownMenuWrapper').style.height = height + backHeight + 'px'
+        }
         document.querySelector('.container-select').style.height = height + 'px'
       },
       show () {
@@ -211,8 +220,11 @@
     font-size: 16px;
     padding: 15px 0;
     text-align: center;
-    position: relative;
-    background: #FFF;
+    position: absolute;
+    background: #FFFFFF;
+    z-index: 9;
+    bottom: 0;
+    width: 100%;
   }
   .mui-popover .mui-scroll-wrapper {
     overflow: hidden;

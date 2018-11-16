@@ -364,9 +364,12 @@
     border-top-right-radius: 0.48rem !important;
     border-top-left-radius: 0.48rem !important;
   }
-  .dianPingProductAdd .container-select .listWrapper > .list:last-child {
+  .dianPingProductAdd .container-select .listWrapper > .list:first-child {
    border-top-right-radius: 0.48rem;
    border-top-left-radius: 0.48rem;
    overflow: hidden;
+  }
+  .dianPingProductAdd .listWrapper {
+    background: #FFF;
   }
 </style>
