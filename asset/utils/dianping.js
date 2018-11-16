@@ -134,6 +134,42 @@ function getTags (context, callback) {
   })
 }
 
+/* 创建新产品 */
+function addProduct (context, data, callback) {
+  postRequest(`tags/submitProduct`, {
+    name: data.name,
+    logo: data.logo,
+    category_ids: data.category_ids,
+    company: data.company,
+    summary: data.summary
+  }).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+    callback(response.data.data.data)
+  })
+}
+
+/* 产品问题反馈 */
+
+function feedBackProduct (context, data, callback) {
+  postRequest(`tags/feedbackProduct`, {
+    type: data.type,
+    content: data.content,
+    images: data.images,
+    product: data.product
+  }).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+    callback(response.data.data.data)
+  })
+}
+
 export {
   add,
   getCommentDetail,
@@ -142,6 +178,8 @@ export {
   getCategories,
   collectProduct,
   getProductComments,
-  getTags
+  getTags,
+  addProduct,
+  feedBackProduct
 }
 

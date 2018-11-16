@@ -2668,7 +2668,7 @@ const routes = [
     }
   },
   {
-    path: '/dianping/productsfeedback',
+    path: '/dianping/product/feedback/:name',
     name: 'dianping_product_feedback',
     meta: {
       title: '产品问题反馈',

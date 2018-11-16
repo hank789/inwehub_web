@@ -44,7 +44,7 @@
         </div>
 
         <div class="companyWrapper">
-          <div class="title" @tap.stop.prevent="$router.pushPlus('/selectCompany?from=product')">
+          <div class="title" @tap.stop.prevent="$router.push('/selectCompany?from=product')">
             <div>归属公司</div>
             <div class="company">
               <span v-if="companyName.length">{{ companyName }}</span>
@@ -87,14 +87,15 @@
 
 <script>
   import uploadImage from '../../../components/uploadImage'
-  import { postRequest } from '../../../utils/request'
   import localEvent from '../../../stores/localStorage'
   import DropDownMenu from '../../../components/select/DropDownMenu.vue'
-  import { getCategories } from '../../../utils/dianping'
+  import { getCategories, addProduct } from '../../../utils/dianping'
+  const currentUser = localEvent.getLocalItem('UserInfo')
 
   export default {
     data () {
       return {
+        id: currentUser.user_id,
         name: '',
         description: '',
         maxImageCount: 1,
@@ -122,8 +123,8 @@
           this.categories = categories
         })
 
-        this.companyName = localEvent.getLocalItem('product_company102')
-        localEvent.clearLocalItem('product_company102')
+        this.companyName = localEvent.getLocalItem('product_company' + this.id)
+        localEvent.clearLocalItem('product_company' + this.id)
       },
       addTags () {
         this.$refs.dropdownMenu.show()
@@ -147,6 +148,7 @@
 
         if (!this.categorytags.length) {
           window.mui.toast('请选择产品类型')
+          return
         }
 
         if (!this.description.length) {
@@ -162,16 +164,8 @@
           company: this.companyName,
           summary: this.description
         }
-
-        postRequest(`tags/submitProduct`, data).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-
+        addProduct(this, data, () => {
           window.mui.toast('我们已收到您提交的产品，请耐心等候')
-
           this.$router.replace('/dianping/product/' + this.name)
         })
       }
