@@ -2530,7 +2530,7 @@ const routes = [
     meta: {
       title: '创建产品',
       wechatHideHeader: false,
-      keepAlive: false
+      keepAlive: true
     },
     component: componets.DianpingProductAdd,
     beforeEnter: (to, from, next) => {
