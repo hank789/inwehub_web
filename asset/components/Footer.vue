@@ -326,9 +326,7 @@
     flex-direction: column;
     position: relative;
     width: 100%; }
-  .container-footer .menu .followIcon .icon {
-    font-size: 19px; /* px不转换 */
-  }
+  
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
     color: #B4B4B6;
