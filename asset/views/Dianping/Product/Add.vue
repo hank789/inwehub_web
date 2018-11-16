@@ -58,8 +58,10 @@
 
         <div class="productSummary">
           <div class="title">产品简介</div>
-          <div class="textareaWrapper">
-            <textarea v-model.trim="description" placeholder="产品具体介绍"></textarea>
+          <div class="textareaPadding">
+            <div class="textareaWrapper border-football">
+              <textarea v-model.trim="description" placeholder="产品具体介绍"></textarea>
+            </div>
           </div>
         </div>
 
@@ -289,21 +291,32 @@
     }
     .productSummary {
       padding-top: 0.293rem;
+      .textareaPadding {
+        padding: 13px 16px 0;
+      }
+      .border-football {
+        &:after {
+          border-radius: 10px;
+        }
+      }
       .textareaWrapper {
-        padding: 0.346rem 0.426rem 0;
+        padding: 2px;
         textarea {
-          padding: 0.32rem 0.4rem;
+          /*padding: 0.32rem 0.4rem;*/
           height: 4.373rem;
           color: #444444;
           font-size: 0.373rem;
           line-height: 0.533rem;
+          border: none;
+          position: relative;
+          z-index: 99;
         }
       }
     }
     .sureButton {
       width: 9.146rem;
       height: 1.173rem;
-      margin: 0.266rem auto 0;
+      margin: 0.666rem auto 0;
       color: #FFFFFF;
       font-size: 0.426rem;
       line-height: 1.173rem;
