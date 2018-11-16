@@ -42,15 +42,15 @@
       </div>
 
       <div class="container-searchList" v-if="getCurrentMode === 'match'">
-        <div v-for="(item, index) in searchAdviceList" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">
-          {{item}}
+        <div class="listOne" @tap.stop.prevent="selectConfirmSearchText(searchText)">
+          查看“{{searchText}}”的搜索结果
           <i class="bot"></i>
         </div>
       </div>
 
-      <div class="container-searchList" v-if="getCurrentMode === 'match' && !searchAdviceList.length">
-        <div class="listOne" @tap.stop.prevent="selectConfirmSearchText(searchText)">
-          查看“{{searchText}}”的搜索结果
+      <div class="container-searchList" v-if="getCurrentMode === 'match'">
+        <div v-for="(item, index) in searchAdviceList" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">
+          {{item}}
           <i class="bot"></i>
         </div>
       </div>
