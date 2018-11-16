@@ -2,7 +2,7 @@
   <div class="mui-table-view-cell userInfoWrapper">
     <div class="avatar">
       <div class="avatarInner" @tap.stop.prevent="toResume()">
-        <img :src="avatar">
+        <ImageView :src="avatar" width="34" height="34"></ImageView>
 
         <svg class="icon" aria-hidden="true" v-show="isExpert">
           <use xlink:href="#icon-zhuanjiabiaojishixin"></use>

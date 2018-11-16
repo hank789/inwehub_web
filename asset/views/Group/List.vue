@@ -38,7 +38,7 @@
 
         <div class="component-group" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/group/detail/' + item.id)">
           <div class="groupLogo">
-            <img class="lazyImg" v-lazy="item.logo" />
+            <ImageView :src="item.logo" width="44" height="44"></ImageView>
           </div>
           <div class="groupContent">
             <div class="groupName">

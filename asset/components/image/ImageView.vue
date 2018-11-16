@@ -1,5 +1,5 @@
 <template>
-    <img class="lazyImg" v-lazy="getImage(src)" v-if="isLazyload"/>
+    <img class="lazyImg" v-lazy="getImage(src)" v-if="isLazyload" :rsrc="getImage(src)"/>
     <img :src="getImage(src)" v-else/>
 </template>
 
