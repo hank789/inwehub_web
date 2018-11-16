@@ -2,7 +2,7 @@
   <div class="dianPingProductAdd">
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
-      <h1 class="mui-title">创建产品</h1>
+      <h1 class="mui-title">提交产品</h1>
     </header>
     <div class="mui-content">
 
@@ -63,7 +63,7 @@
           </div>
         </div>
 
-        <div class="sureButton" @tap.stop.prevent="submit">确认创建</div>
+        <div class="sureButton" @tap.stop.prevent="submit">确认提交</div>
 
       </div>
 
@@ -154,10 +154,11 @@
           return
         }
 
+        var categorytagsId = this.categorytags.map(categorytags => { return categorytags.id })
         var data = {
           name: this.name,
           logo: this.images[0].base64,
-          category_ids: this.categorytags,
+          category_ids: categorytagsId,
           company: this.companyName,
           summary: this.description
         }
@@ -169,7 +170,9 @@
             return
           }
 
-          this.$router.replace('/dianping/product/' + response.data.data.id)
+          window.mui.toast('我们已收到您提交的产品，请耐心等候')
+
+          this.$router.replace('/dianping/product/' + this.name)
         })
       }
     }
