@@ -164,12 +164,21 @@ function addProduct (context, data, callback) {
 /* 产品问题反馈 */
 
 function feedBackProduct (context, data, callback) {
+  var options = {
+    onUploadProgress: function (progressEvent) {
+      var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+      window.mui.uploadWaitingValue(percentCompleted)
+    }
+  }
+
+  window.mui.showUploadWaiting()
+
   postRequest(`tags/feedbackProduct`, {
     type: data.type,
     content: data.content,
     images: data.images,
     product: data.product
-  }).then(response => {
+  }, false, options).then(response => {
     var code = response.data.code
     if (code !== 1000) {
       window.mui.toast(response.data.message)

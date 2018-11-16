@@ -7,7 +7,7 @@
     <div class="mui-content">
 
       <div class="feedBackWrapper">
-        <div class="title" v-for="(item, feedindex) in feedBackInfo" :class="item.showActive ? 'active' : ''" :key="feedindex" @tap.stop.prevent="feedBack(item)">
+        <div class="title" v-for="(item, feedindex) in feedBackInfo" :class="item.text === type ? 'active' : ''" :key="feedindex" @tap.stop.prevent="feedBack(item)">
           <span>{{ item.text }}</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-gou1"></use>
@@ -97,6 +97,11 @@
       }
     },
     methods: {
+      resetData () {
+        this.type = ''
+        this.description = ''
+        this.images = []
+      },
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
@@ -112,16 +117,11 @@
         this.images.splice(index, 1)
       },
       feedBack (item) {
-        this.$set(item, 'showActive', item.showActive ? !item.showActive : true)
-        if (item.showActive) {
-          this.type = item.text
-        } else {
-          this.type = ''
-        }
+        this.type = item.text
       },
       subimt () {
         if (!this.type.length) {
-          window.mui.toast('请选择反馈信息')
+          window.mui.toast('请选择反馈类型')
           return
         }
         if (!this.description.length) {
@@ -137,9 +137,10 @@
         }
         for (var i in this.images) {
           var compressBase64 = this.images[i].base64
-          data['images'].push(compressBase64)  // this.images[i].base64;
+          data['images'].push(compressBase64)
         }
         feedBackProduct(this, data, () => {
+          this.resetData()
           window.mui.toast('我们已收到您提交的产品，请耐心等候')
         })
       }
