@@ -305,15 +305,15 @@
       prevSuccessCallback () {
         scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
           console.log(y + ':y上滑高度')
-          var headerBackHeader = document.querySelector('.headerBack').clientHeight
-          if (y > headerBackHeader) {
+          // var headerBackHeader = document.querySelector('.headerBack').clientHeight
+          if (y > 150) {
             document.querySelector('.content-header-hide').classList.add('showHeader')
             document.querySelector('.content-header-hide').style.opacity = y / 250
           }
         }, null, (container, y) => {
           console.log(y + ':y下滑高度')
-          var headerBackHeader = document.querySelector('.headerBack').clientHeight
-          if (y < headerBackHeader) {
+          // var headerBackHeader = document.querySelector('.headerBack').clientHeight
+          if (y < 150) {
             document.querySelector('.content-header-hide').classList.remove('showHeader')
           }
           document.querySelector('.content-header-hide').style.opacity = y / 250

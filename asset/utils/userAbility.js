@@ -205,7 +205,7 @@ var UserAbility = () => {
     var mobile = userInfo.phone
     var num = parseInt(localEvent.getLocalItem('num' + mobile).value)
     if (num !== 1) {
-      if (userInfo.newbie_unfinish_tasks.show_guide) {
+      if (userInfo.newbie_unfinish_tasks && userInfo.newbie_unfinish_tasks.show_guide) {
         context.$router.pushPlus('/userGuide/interst')
       }
     }
