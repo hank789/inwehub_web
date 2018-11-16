@@ -113,7 +113,7 @@
     background: #FFFFFF;
   }
  .listWrapper{
-    top: 39px;
+    top: 1.04rem;
   }
   .bot {
     position: absolute;
@@ -129,26 +129,26 @@
   }
   .container-publishComment {
     .container-commentWrapper {
-      padding: 0 16px;
+      padding: 0 0.426rem;
       .container-commentList {
         position: relative;
-        padding: 10.5px 0 11.5px;
+        padding: 0.28rem 0 0.306rem;
         .text {
           color: #444444;
-          font-size: 16px;
-          line-height: 24px;
+          font-size: 0.426rem;
+          line-height: 0.64rem;
         }
         .content {
           color: #808080;
-          font-size: 13px;
-          line-height: 24px;
-          margin-top: 4px;
+          font-size: 0.346rem;
+          line-height: 0.64rem;
+          margin-top: 0.106rem;
         }
         .time {
           color: #B4B4B6;
-          font-size: 12px;
-          line-height: 16.5px;
-          margin-top: 6px;
+          font-size: 0.32rem;
+          line-height: 0.44rem;
+          margin-top: 0.16rem;
         }
       }
     }

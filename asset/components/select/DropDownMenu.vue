@@ -217,8 +217,8 @@
   }
   .productAddBack {
     color: #444444;
-    font-size: 16px;
-    padding: 15px 0;
+    font-size: 0.426rem;
+    padding: 0.4rem 0;
     text-align: center;
     position: absolute;
     background: #FFFFFF;

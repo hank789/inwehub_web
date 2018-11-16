@@ -158,14 +158,14 @@
   }
   .titleText {
     color: #808080;
-    font-size: 14px;
-    padding: 0 16px;
-    line-height: 20px;
+    font-size: 0.373rem;
+    padding: 0 0.426rem;
+    line-height: 0.533rem;
   }
   .feedBackWrapper {
-    padding: 0 16px;
+    padding: 0 0.426rem;
     .title {
-      padding: 12px 0;
+      padding: 0.32rem 0;
       position: relative;
       overflow: hidden;
       &.active {
@@ -178,46 +178,46 @@
       }
       span {
         color: #444444;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: 0.373rem;
+        line-height: 0.533rem;
         float: left;
       }
       .icon {
         float: right;
-        font-size: 17px;
+        font-size: 0.453rem;
         color: #03AEF9;
         display: none;
       }
     }
   }
   .productSummary {
-    padding-top: 11px;
+    padding-top: 0.293rem;
     .textareaWrapper {
-      padding: 13px 16px 0;
+      padding: 0.346rem 0.426rem 0;
       textarea {
-        padding: 12px 15px;
-        height: 164px;
+        padding: 0.32rem 0.4rem;
+        height: 4.373rem;
         color: #444444;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: 0.373rem;
+        line-height: 0.533rem;
       }
     }
   }
   .pictureCaption {
     .container-images {
-      margin-top: 12px;
+      margin-top: 0.32rem;
     }
   }
   .sureButton {
-    width: 343px;
-    height: 44px;
     margin: 10px auto 15px;
+    width: 9.146rem;
+    height: 1.173rem;
     color: #FFFFFF;
-    font-size: 16px;
-    line-height: 44px;
+    font-size: 0.426rem;
+    line-height: 1.173rem;
     text-align: center;
     background: #03AEF9;
-    border-radius: 100px;
+    border-radius: 2.666rem;
     font-family:PingFangSC-Medium;
   }
 

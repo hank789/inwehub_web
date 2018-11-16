@@ -32,22 +32,22 @@
 <style scoped="scoped" lang="less">
   .starViewWrapper{
     position: relative;
-    width:76px;
-    height:21px;
+    width:2.026rem;
+    height:0.56rem;
   }
   .starViewWrapper .icon{
-    font-size: 76px;
+    font-size: 2.026rem;
   }
   .upStar{
     position: absolute;
     color: #fcc816;
-    top:-27px;
+    top:-0.72rem;
     overflow: hidden;
   }
   .downStar{
     position: absolute;
     color: #fcc816;
-    top:-27px;
+    top:-0.72rem;
     overflow: hidden;
   }
 </style>

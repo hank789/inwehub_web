@@ -459,7 +459,7 @@
     justify-content: space-between;
     height: 1.306rem; }
   .component-wechat-top .left {
-    width: 272.5px;
+    width: 7.266rem;
     position: relative;}
   .component-wechat-top .left .userImg {
     position: absolute;
@@ -480,23 +480,23 @@
     font-size: 0.346rem;
   }
   .component-wechat-top .left .iconBorder {
-    width: 34px;
-    height: 34px;
+    width: 0.906rem;
+    height: 0.906rem;
     position: absolute;
-    top: 7.5px;
-    left: 16px;
+    top: 0.2rem;
+    left: 0.426rem;
     background: #ffffff;
-    border-radius: 7.5px;
+    border-radius: 0.2rem;
   }
   .component-wechat-top .left .iconBorder .icon {
     position: relative;
-    left: 1px;
+    left: 0.026rem;
     top: 0;
-    font-size: 32.5px;
+    font-size: 0.866rem;
   }
   .component-wechat-top .left .icon:nth-child(2) {
     position: absolute;
-    left: 59px;
+    left: 1.573rem;
     top: -0.65rem;
     font-size: 2.186rem;
     color: #FFFFFF;}
@@ -520,13 +520,13 @@
     right: 0;}
   .homeMuiSlider .right .downloadApp {
     width: 1.893rem;
-    height: 29px;
+    height: 0.773rem;
     text-align: center;
-    line-height: 29px;
+    line-height: 0.773rem;
     color: #03AEF9;
-    font-size: 13px;
+    font-size: 0.346rem;
     background: #FFFFFF;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     display: inline-block;
     font-family:PingFangSC-Medium;
   }

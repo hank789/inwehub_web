@@ -77,7 +77,7 @@
     background: #ffffff;
   }
   .listWrapper {
-    top: 39px;
+    top: 1.04rem;
   }
 
   .bot {

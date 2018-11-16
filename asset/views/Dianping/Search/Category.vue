@@ -230,14 +230,14 @@
 
   .container-searchResult {
     .container-resultList {
-      padding: 0 16px;
+      padding: 0 0.426rem;
       .container-result {
-        padding: 11px 0 12px;
+        padding: 0.293rem 0 0.32rem;
         position: relative;
         span {
           color: #444444;
-          font-size: 15px;
-          line-height: 21px;
+          font-size: 0.4rem;
+          line-height: 0.56rem;
         }
       }
     }

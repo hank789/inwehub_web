@@ -406,7 +406,7 @@
         display: inline-block;
       }
       .starViewWrapper {
-        top:4px;
+        top:0.106rem;
       }
       .starsText {
         display: inline-block;
@@ -642,15 +642,15 @@
     }
   }
   .feedBack {
-    padding: 15px 0 30px;
+    padding: 0.4rem 0 0.8rem;
     text-align: center;
     .text {
       color: #B4B4B6;
-      font-size: 12px;
-      line-height: 16.5px;
+      font-size: 0.32rem;
+      line-height: 0.44rem;
       span {
         color: #03AEF9;
-        font-size: 12px;
+        font-size: 0.32rem;
         font-family:PingFangSC-Medium;
       }
     }

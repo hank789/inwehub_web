@@ -247,65 +247,65 @@
 
   .container-searchCompony {
     .container-searchComponyList {
-      padding: 0 16px;
+      padding: 0 0.426rem;
       .container-componyList {
         position: relative;
-        padding: 15px 0 12.5px;
+        padding: 0.4rem 0 0.333rem;
         display: flex;
         .componyImg {
-          width: 42px;
-          height: 42px;
-          border-radius: 4px;
+          width: 1.12rem;
+          height: 1.12rem;
+          border-radius: 0.106rem;
           img {
             width: 100%;
             height: 100%;
-            border-radius: 4px;
+            border-radius: 0.106rem;
           }
           &.border-football {
             &:after {
-              border-radius: 8px;
+              border-radius: 0.213rem;
             }
           }
         }
         .componyInfo {
-          margin-left: 13px;
+          margin-left: 0.346rem;
           .componyName {
-            width: 283px;
+            width: 7.546rem;
             color: #444444;
-            font-size: 16px;
-            line-height: 22.5px;
+            font-size: 0.426rem;
+            line-height: 0.6rem;
           }
           .componyTags {
             color: #808080;
-            font-size: 13px;
-            line-height: 18.5px;
-            margin-top: 4px;
-            margin-bottom: 5px;
+            font-size: 0.346rem;
+            line-height: 0.493rem;
+            margin-top: 0.106rem;
+            margin-bottom: 0.133rem;
             span {
               i {
-                width: 2px;
-                height: 2px;
+                width: 0.053rem;
+                height: 0.053rem;
                 background: #B4B4B6;
-                border-radius: 100px;
+                border-radius: 2.666rem;
                 display: inline-block;
                 vertical-align: middle;
-                margin: -3px 5px 0;
+                margin: -0.08rem 0.133rem 0;
               }
             }
           }
           .componyAddress {
-            width: 286.5px;
+            width: 7.64rem;
             display: flex;
             justify-content: space-between;
             .address {
               color: #B4B4B6;
               .icon {
-                font-size: 14px;
+                font-size: 0.373rem;
               }
               span {
-                font-size: 11px;
-                line-height: 15px;
-                margin-left: -4px;
+                font-size: 0.293rem;
+                line-height: 0.4rem;
+                margin-left: -0.106rem;
               }
             }
           }
