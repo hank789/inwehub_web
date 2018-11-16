@@ -291,15 +291,15 @@
     .productSummary {
       padding-top: 0.293rem;
       .textareaPadding {
-        padding: 13px 16px 0;
+        padding: 0.346rem 0.426rem 0;
       }
       .border-football {
         &:after {
-          border-radius: 10px;
+          border-radius: 0.266rem;
         }
       }
       .textareaWrapper {
-        padding: 2px;
+        padding: 0.053rem;
         textarea {
           /*padding: 0.32rem 0.4rem;*/
           height: 4.373rem;
