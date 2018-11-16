@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="openAppTop">
     <!--手机端-->
     <!--<div class="suspend" v-if="isH5">-->
       <!--<p>-->
@@ -146,9 +146,8 @@
           </div>
         </div>
       </div>
-      <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
     </div>
-
+    <div class="right"><a class="downloadApp AppFour1" :href="url" target="_blank" @tap.stop.prevent="downloadApp">下载APP</a></div>
   </div>
 </template>
 
@@ -443,7 +442,7 @@
     height: 1.306rem;
     position: absolute;
     top: 1.173rem;
-    background: #FFFFFF;
+    background: #03AEF9;
     z-index: 997;
     /*box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
     /*-webkit-box-shadow:0rem 0.053rem 0.693rem 0rem #F0F2F5;*/
@@ -509,7 +508,13 @@
   .component-wechat-top .left .desc.userSlogen {
     left: 1.493rem ;
   }
-  .homeMuiSlider .right {
+  .openAppTop {
+    background: #03AEF9;
+  }
+  #OpenAppSlider.homeMuiSlider {
+    width: 7.266rem;
+  }
+  .openAppTop .right {
     height: 1.306rem;
     line-height: 1.306rem;
     padding-right: 0.426rem;
@@ -518,7 +523,7 @@
     position: absolute;
     top: 0;
     right: 0;}
-  .homeMuiSlider .right .downloadApp {
+  .openAppTop .right .downloadApp {
     width: 1.893rem;
     height: 0.773rem;
     text-align: center;
@@ -530,9 +535,9 @@
     display: inline-block;
     font-family:PingFangSC-Medium;
   }
-  .homeMuiSlider .right a {
+  .openAppTop .right a {
     color: #03AEF9; }
-  .homeMuiSlider .right .line-wall {
+  .openAppTop .right .line-wall {
     margin: 0 0.266rem;
     position: relative;
     width:0.026rem;
