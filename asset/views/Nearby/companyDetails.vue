@@ -6,64 +6,78 @@
     </header>
 
   <div class="mui-content">
-      <RefreshList
-        v-model="list"
-        :api="'company/dataPeople'"
-        :pageMode="true"
-        :prevOtherData="{page: 1,id:this.id}"
-        :nextOtherData="{id:this.id}"
-        :autoShowEmpty="false"
-        class="listWrapper">
-        <div class="companyDetail" >
-          <div class="gray"></div>
-          <div class="company_image">
-            <img :src="datailList.logo" />
-          </div>
-          <ul class="information">
-            <li>距离我< {{datailList.distance_format}}</li>
-            <li>{{datailList.name}}</li>
-            <li>
-              <span v-for="(item, index) in datailList.tags" @tap.stop.prevent="toTagDetail(item)">{{item}} <i></i></span>
-            </li>
-            <li>{{datailList.address_detail}}</li>
-          </ul>
+    <RefreshList
+      v-model="list"
+      :api="api"
+      :prevOtherData="{id:this.id}"
+      :nextOtherData="{id:this.id}"
+      :autoShowEmpty="false"
+      class="listWrapper">
+      <div class="companyInfo">
+        <div class="companyLogo">
+          <ImageView :src="datailList.logo" width="92" height="92" :isLazyload="false"></ImageView>
         </div>
-        <div class="Relevant_title">
-          相关人员
-          <i class="bott"></i>
+        <div class="interval">距离我<{{ datailList.distance_format }}</div>
+        <div class="companyName">{{ datailList.name }}</div>
+        <div class="tags" v-for="(tags, tagsindex) in datailList.tags" :key="tagsindex"><span>{{ tags }}</span><i class="line-wall" v-if="tagsindex !==datailList.tags - 1"></i></div>
+        <div class="address">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dingwei"></use>
+          </svg>
+          <span>{{ datailList.address_province }}{{ datailList.address_detail }}</span>
         </div>
-          <!-- 相关人员-->
-          <div class="Relevant">
-            <ul class="Relevant_list">
-              <li  v-for="(item, index) in list">
-                <div class="Relevant_avatar">
-                  <img  :src="item.avatar" @tap.stop.prevent="toAvatar(item.uuid)"/>
-                  <svg class="icon" aria-hidden="true" v-if="item.is_expert">
-                    <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-                  </svg>
-                </div>
-                <div class="Relevant_detail">
-                  <p class="mui-ellipsis">
-                     {{item.name}}
-                     <span>{{item.level}}</span>
-                    （{{item.status_info}}）
-                  </p>
-                  <p class="mui-ellipsis">{{item.description}}</p>
-                </div>
-                <div class="Relevant_follow" v-if="item.is_followed" @tap.stop.prevent="collectProfessor(item)">
-                  已关注
-                </div>
-                <div class="Relevant_empty" v-else @tap.stop.prevent="collectProfessor(item)">
-                  关注Ta
-                </div>
-                <i class="bot"></i>
-              </li>
+      </div>
+      <div class="switchMenu">
+        <span @tap.stop.prevent="Switch(1)" :class="type === 1 ? 'font-family-medium' : ''">产品服务<i v-if="type === 1"></i></span>
+        <span @tap.stop.prevent="Switch(2)" :class="type === 2 ? 'font-family-medium' : ''">相关人员<i v-if="type === 2"></i></span>
+        <i class="bot"></i>
+      </div>
 
-            </ul>
+      <div class="productList" v-if="type === 1">
+        <div class="comment-product" v-for="(item, index) in 3" :key="index">
+          <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
+            <div class="product-img border-football">
+              <!--<ImageView :src="item.logo" width="44" height="44"></ImageView>-->
+              <img src="../../statics/images/uicon.jpg" alt="">
+            </div>
+            <div class="product-detail">
+              <div class="productName font-family-medium text-line-1">AMETRAS Manual</div>
+              <div class="productMark">
+                <div class="stars">
+                  <StarView :rating="4"></StarView>
+                </div>
+                <div class="starsText">
+                  <span>1分</span>
+                  <i></i><span>3条评论</span>
+                </div>
+              </div>
+            </div>
           </div>
-      </RefreshList>
-  <!--/my/info-->
-    <button @tap.stop.prevent="$router.pushPlus('/my/info')">我也是相关人员</button>
+          <div class="line-river-after line-river-after-top"></div>
+        </div>
+      </div>
+
+      <div class="relevantPepole" v-if="type === 2">
+        <div class="pepoleList">
+          <div class="userLogo">
+            <img src="../../statics/images/uicon.jpg" alt="">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+            </svg>
+          </div>
+          <div class="userInfo">
+            <div class="name">
+              <span>大姐姐</span>
+              <span>3</span>
+              <span>(离职)</span>
+            </div>
+            <div class="describe">我是描述</div>
+          </div>
+          <div class="follow">关注Ta</div>
+        </div>
+      </div>
+
+    </RefreshList>
   </div>
   </div>
 </template>
@@ -74,6 +88,7 @@
   import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
+  import StarView from '../../components/star-rating/starView.vue'
 
   const currentUser = getLocalUserInfo()
   export default {
@@ -85,11 +100,14 @@
         lat: '',
         id: '',
         list: [],
-        distance: ''
+        distance: '',
+        type: 1,
+        api: ''
       }
     },
     components: {
-      RefreshList
+      RefreshList,
+      StarView
     },
     created () {
       this.id = this.$route.params.id
@@ -100,8 +118,16 @@
       }, () => {
         window.mui.toast('获取当前位置失败')
       })
+      if (this.type === 1) {
+        this.api = 'company/dataProduct'
+      } else {
+        this.api = 'company/dataPeople'
+      }
     },
     methods: {
+      Switch (type) {
+        this.type = type
+      },
       toTagDetail (name) {
         userAbility.jumpToTagDetail(name)
       },
@@ -174,256 +200,210 @@
       '$route': 'refreshPageData'
     },
     mounted () {
-//      this.companyInfo()
+      this.refreshPageData()
     }
   }
 </script>
 
-<style scoped>
-  ul,
-  li,
-  p,
-  span,
-  a,
-  i,
-  input{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+<style scoped lang="less">
   .mui-content{
     background: #ffffff;
   }
-
   .bot {
     position: absolute;
-    right:  0;
+    right: 0;
     bottom: 0;
-    left:  0;
+    left: 0;
     height: 0.026rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
+    transform: scaleY(0.5);
+    background-color: #dcdcdc;
   }
-  .bott {
-    position: absolute;
-    right: 4%;
-    bottom: 0;
-    left: 4%;
-    height: 0.026rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
-  }
-  /*公司的详情部分*/
-.companyDetail{
-  width:100%;
-  overflow: hidden;
-  background:#ececee;
-  position: relative;
-  padding-bottom: 0.64rem;
-}
-.gray{
-  width:100%;
-  height:0.373rem;
-  background:#ececee;
-}
-.companyDetail .company_image{
-  width:2.453rem;
-  height:2.453rem;
-  position: absolute;
-  left:0;
-  right:0;
-  top:0rem;
-  margin: auto;
-}
-.companyDetail .company_image img{
-  width:100%;
-  height:100%;
-  border-radius: 0.106rem;
-}
-.information{
-  width:100%;
-  overflow: hidden;
-  padding-top: 0.346rem;
-}
-.information li:nth-of-type(1){
-  text-align: right;
-  font-size:0.32rem;
-  color:#808080;
-  margin-right: 0.4rem;
-}
-.information li:nth-of-type(2){
-  text-align: center;
-  font-size:0.426rem;
-  color:#444444;
-  margin-top:1.626rem;
-}
-.information li:nth-of-type(3){
-  text-align: center;
-  font-size:0.373rem;
-  color:#808080;
-  margin-top:0.213rem;
-  padding: 0 0.4rem;
-  display: flex;
-  flex-direction: row;
-  align-items:center;
-  justify-content: center;
-  flex-wrap:wrap;
-}
-.information li:nth-of-type(3) span {
-  height:0.56rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap:wrap;
-}
-.information li:nth-of-type(3) span i{
-  display: inline-block;
-  width:0.026rem;
-  height:0.346rem;
-  background: #dcdcdc;
-  margin: 0 0.16rem;
-}
-  .information li:nth-of-type(3) span:nth-last-child(1) i{
-    display: none;
-  }
-.information li:nth-of-type(4){
-  text-align: center;
-  font-size:0.32rem;
-  color:#808080;
-  margin-top:0.053rem;
-}
-  /*相关人员*/
-  .Relevant{
-    width:100%;
-    padding: 0 4%;
-    overflow: hidden;
-  }
-  .Relevant_title{
-    width:100%;
-    height:1.2rem;
+  .companyInfo {
     position: relative;
-    font-size:0.426rem;
-    color:#444444;
-    line-height: 1.2rem;
-    padding: 0 4%;
-  }
-  .Relevant_list{
-    width:100%;
-    overflow: hidden;
-  }
-  .Relevant_list li{
-    width:100%;
-    height:1.706rem;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items:center;
-    flex-wrap:nowrap;
-  }
-  .Relevant_avatar{
-    width:1.173rem;
-    height:1.173rem;
-    border-radius: 50%;
-    float: left;
-    position: relative;
-  }
-  .Relevant_avatar img{
-    width:100%;
-    height:100%;
-    border-radius: 50%;
-  }
-  .Relevant_avatar svg{
-   position: absolute;
-    font-size:0.453rem;
-    bottom: 0;
-    right:-0.053rem;
-  }
-  /*详细的信息*/
-  .Relevant_detail{
-    /*width:65%;*/
-    height:100%;
-    margin-left: 0.186rem;
-  }
-  .Relevant_detail p:nth-of-type(1){
-    font-size:0.373rem;
-    color:#565656;
-    margin-top: 0.32rem;
-    display: flex;
-    flex-direction: row;
-    align-items:center;
-  }
-  .Relevant_detail p:nth-of-type(1) span{
-      width:0.426rem;
-      height:0.4rem;
-      background: url("../../statics/images/rank.png") no-repeat;
-      background-size: 100% 100%;
-      color:#FFFFFF;
-      font-size:0.266rem;
-      line-height: 0.346rem;
-      margin-left: 0.08rem;
-      display: flex;
-      flex-direction: row;
-      justify-content:center;
-  }
-  .Relevant_detail p:nth-of-type(2){
-    font-size:0.346rem;
-    color:#b4b4b6;
-    width:90%;
-  }
-  /*关注*/
-  .Relevant_follow{
-    width: 1.706rem;
-    height: 0.72rem;
-    background: #dcdcdc;
-    color: #b4b4b6;
-    line-height:0.72rem;
-    border-radius: 1.333rem;
+    background: #ECECEE;
     text-align: center;
-    font-size: 0.373rem;
-  }
-  .Relevant_empty{
-    width: 1.706rem;
-    height: 0.72rem;
-    background: #03aef9;
-    color:#ffffff;
-    line-height:0.72rem;
-    border-radius: 1.333rem;
-    text-align: center;
-    font-size: 0.373rem;
-  }
-  button{
-    width:100%;
-    height:1.226rem;
-    font-size:0.453rem;
-    color: #FFFFFF;
-    text-align: center;
-    background:#03aef9;
-    border-radius: 0;
-    position: fixed;
-    bottom: 0;
-    z-index: 999;
-    border:none;
-  }
-  .listWrapper{
-    bottom: 1.226rem;
-  }
-  /*适配*/
-  @media (min-width:320px) {
-    .Relevant_detail {
-      width:57%;
+    padding: 10px 0 13.5px;
+    .companyLogo {
+      width: 92px;
+      height: 92px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+    }
+    .interval {
+      position: absolute;
+      right: 15px;
+      top: 14px;
+      color: #808080;
+      font-size: 12px;
+    }
+    .companyName {
+      color: #444444;
+      font-size: 16px;
+      line-height: 22.5px;
+      margin: 12px 0 8px;
+    }
+    .tags {
+      color: #808080;
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 8px;
+      .line-wall {
+        height: 13px;
+        margin: 0 11px;
+        top: 2px;
+      }
+    }
+    .address {
+      color: #808080;
+      font-size: 12px;
+      .icon {
+        color: #B4B4B6;
+        font-size: 13px;
+      }
     }
   }
-  @media (min-width:375px) {
-    .Relevant_detail {
-      width:66%;
+  .switchMenu {
+    width: 100%;
+    height: 39px;
+    position: relative;
+    line-height: 39px;
+    background: #ffffff;
+    display: flex;
+    flex-direction: row;
+    span {
+      width: 50%;
+      color: #444444;
+      font-size: 14px;
+      position: relative;
+      text-align: center;
+      i {
+        position: absolute;
+        width: 56px;
+        height: 0.053rem;
+        border-radius: 1.333rem;
+        background: #03aef9;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
     }
   }
-  @media (min-width:414px) {
-    .Relevant_detail {
-      width:70%;
+
+  .comment-product {
+    padding: 0.346rem 0.4rem 0;
+    .product-info {
+      overflow: hidden;
+      border-radius: 0.106rem;
+      padding: 0 0 0.4rem;
+      background: none;
+      .product-img {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.106rem;
+          object-fit: cover;
+        }
+      }
+      .product-detail {
+        float: left;
+        margin-left: 0.266rem;
+        .productName {
+          width: 7.573rem;
+          color: #444444;
+          font-size: 0.426rem;
+          line-height: 0.6rem;
+        }
+        .productMark {
+          display: flex;
+          .icon {
+            color: #FCC816;
+            font-size: 0.32rem;
+          }
+          span {
+            color: #B4B4B6;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
+            &:nth-of-type(1) {
+              color: #FCC816;
+              margin-left: 0.08rem;
+            }
+          }
+          i {
+            width: 0.053rem;
+            height: 0.053rem;
+            margin-right: 0.133rem;
+            vertical-align: middle;
+            border-radius: 50%;
+            background: #B4B4B6;
+            display: inline-block;
+          }
+          .stars {
+            display: flex;
+            div {
+              margin-right: 0.08rem;
+            }
+          }
+          .starsText {
+          }
+        }
+      }
+    }
+  }
+
+  .relevantPepole {
+    .pepoleList {
+      .userLogo {
+        width: 1.173rem;
+        height: 1.173rem;
+        position: relative;
+        float: left;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 50%;
+        }
+        .icon {
+          position: absolute;
+          font-size: 0.453rem;
+          bottom: 0;
+          right: -0.053rem;
+        }
+      }
+      .userInfo {
+        float: left;
+        .name {
+          display: flex;
+          span {
+            &:nth-of-type(1) {
+              margin-top: 1px;
+            }
+            &:nth-of-type(2) {
+              width:0.426rem;
+              height:0.4rem;
+              background: url("../../statics/images/rank.png") no-repeat;
+              background-size: 100% 100%;
+              color:#FFFFFF;
+              font-size:0.266rem;
+              line-height: 0.346rem;
+              padding-left: 3px;
+              margin-top: 2px;
+            }
+          }
+        }
+      }
+      .follow {
+        float: right;
+      }
     }
   }
 
