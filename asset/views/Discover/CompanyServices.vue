@@ -9,7 +9,7 @@
         v-model="list"
         :api="'company/services'"
         :pageMode="true"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"
         class="listWrapper">

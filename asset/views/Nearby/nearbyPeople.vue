@@ -21,7 +21,7 @@
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         class="listWrapper">
           <ul class="cions-list">
             <li v-for="(item, index) in list">

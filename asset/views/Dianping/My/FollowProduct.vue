@@ -21,7 +21,7 @@
         :prevOtherData="{}"
         :nextOtherData="{}"
         :autoShowEmpty="false"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         class="listWrapper">
 
         <div class="productList">

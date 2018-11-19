@@ -44,7 +44,7 @@
             <i class="bot"></i>
         </div>
       </div>
-      
+
       <div class="searchList" v-if="getCurrentMode === 'match'">
         <div v-for="(item, index) in searchAdviceList" :key="index" @tap.stop.prevent="selectConfirmSearchText(item)">
           {{item}}
@@ -63,7 +63,7 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :autoShowEmpty="false"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
         <div>

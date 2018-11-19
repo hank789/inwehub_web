@@ -20,7 +20,7 @@
             :api="'notification/count'"
             :prevOtherData="{need_report: 1}"
             :nextOtherData="{}"
-            :isShowUpToRefreshDescription="false"
+            :isShowUpToRefreshDescription="true"
             :autoShowEmpty="false"
             class="listWrapper">
 

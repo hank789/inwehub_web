@@ -13,7 +13,7 @@
         :pageMode="true"
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         class="listWrapper">
         <!--类别-->
         <div class="discover-container">
