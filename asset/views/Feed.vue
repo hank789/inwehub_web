@@ -53,7 +53,7 @@
 
         <template v-for="(item, index) in list">
 
-          <div class="component-feed-item-guide" v-if="index === 3 && search_type === 2">
+         <!-- <div class="component-feed-item-guide" v-if="index === 3 && search_type === 2">
             <div class="feed-IconImg">
               <img src="../statics/images/feed@3x.png" alt="">
             </div>
@@ -61,6 +61,41 @@
             <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
               <button>去看看</button>
             </div>
+            <div class="line-river-after line-river-after-top"></div>
+          </div> -->
+
+          <div class="component-recommendFollow" v-if="index === 3 && search_type === 2">
+            <div class="recommendFollowWrapper">
+              <div class="title font-family-medium">值得关注的人</div>
+              <swiper ref="inTags" :options="swiperOption">
+                <swiper-slide v-for="(recommendFollow, recommendFollowIndex) in 3" :key="recommendFollowIndex" :tagId="recommendFollow.value">
+
+                  <div class="recommendFollowList">
+                    <div class="recommendListWrapper" v-if="recommendFollowIndex == 2">
+                      <div class="feed-IconImg">
+                        <img src="../statics/images/feed@3x.png" alt="">
+                      </div>
+                      <div class="desc" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">看看更多<br>相关的人和圈子</div>
+                    </div>
+                    <div class="recommendListWrapper" v-else>
+                      <div class="delRecommend">
+                        <svg class="icon" aria-hidden="true">
+                          <use xlink:href="#icon-times--"></use>
+                        </svg>
+                      </div>
+                      <div class="avatar">
+                        <img src="../../static/images/uicon.jpg" >
+                      </div>
+                      <div class="userName font-family-medium">郭大红</div>
+                      <div class="commonFriend">你们有共同好友：<span>麦克基尼</span></div>
+                      <div class="follow">关注</div>
+                    </div>
+                  </div>
+
+                </swiper-slide>
+              </swiper>
+
+              </div>
             <div class="line-river-after line-river-after-top"></div>
           </div>
 
@@ -101,6 +136,7 @@
   import { getLocalUserId } from '../utils/user'
   import { postRequest } from '../utils/request'
   import { getIndexByIdArray } from '../utils/array'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   const Feed = {
     data: () => ({
@@ -111,7 +147,12 @@
       list: [],
       shareOption: {},
       itemOptionsObj: {},
-      iconMenus: []
+      iconMenus: [],
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 0,
+        freeMode: true
+      }
     }),
     created () {
 
@@ -122,7 +163,9 @@
       RefreshList,
       HomeSearch,
       FeedItem,
-      PageMore
+      PageMore,
+      swiperSlide,
+      swiper
     },
     activated: function () {
       this.refreshPageData()
@@ -233,6 +276,95 @@
   .listWrapper {
     top: 1.173rem;
     bottom: 50px; /* px不转换 */
+  }
+  .component-recommendFollow {
+    padding: 11px 0 0px;
+    .line-river-after:after {
+      left: 0.426rem;
+      right: 0.426rem;
+    }
+    .swiper-slide {
+      width: auto !important;
+    }
+    .recommendFollowWrapper {
+      padding: 0 16px;
+      .title {
+        color: #444444;
+        font-size: 16px;
+        padding-bottom: 11px;
+        line-height: 22.5px;
+      }
+      .recommendFollowListWrapper {
+      }
+      .recommendFollowList {
+        width: 128px;
+        padding: 0 9px;
+        text-align: center;
+        background: #FFFFFF;
+        margin: 0 5px 15px;
+        box-shadow:0px 6.5px 13px 0px #F2F4F7;
+        .recommendListWrapper {
+          padding: 15px 0;
+          position: relative;
+          .delRecommend {
+            position: absolute;
+            right: 0;
+            top: 10px;
+            .icon {
+              font-size: 8px;
+              color: #DCDCDC;
+            }
+          }
+          .feed-IconImg {
+            width: 71px;
+            height: 44px;
+            margin: 25px auto 8px;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .desc {
+            color: #03AEF9;
+            font-size: 10px;
+            line-height: 14px;
+            margin-bottom: 33px;
+          }
+          .avatar {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
+          }
+          .userName {
+            color: #444444;
+            font-size: 14px;
+            line-height: 20px;
+            padding: 7px 0 2px;
+          }
+          .commonFriend {
+            color: #B4B4B6;
+            font-size: 10px;
+            line-height: 14px;
+          }
+          .follow {
+            width: 54px;
+            height: 27px;
+            margin: 4px auto 0;
+            color: #FFFFFF;
+            font-size: 12px;
+            padding: 0 15px;
+            line-height: 27px;
+            background: #03AEF9;
+            border-radius: 100px;
+          }
+        }
+      }
+    }
   }
   .component-feed-item-guide {
     padding-top: 0.8rem;

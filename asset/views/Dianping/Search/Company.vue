@@ -86,7 +86,7 @@
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-dingwei"></use>
                     </svg>
-                    <span><!--{{ item.address_province }}--> 上海市黄浦区哈哈哈</span>
+                    <span>{{ item.address_province }}</span>
                   </div>
                   <div class="interval">< {{ item.distance_format }}</div>
                 </div>
