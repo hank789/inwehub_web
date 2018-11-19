@@ -23,10 +23,11 @@
           v-on:keydown.enter="sendMessage"
         ></Jeditor>
 
-        <svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">
-          <use xlink:href="#icon-fasong"></use>
-        </svg>
+        <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">-->
+          <!--<use xlink:href="#icon-fasong"></use>-->
+        <!--</svg>-->
     </div>
+    <div class="send font-family-medium" :class="text.length - 2 ? 'active' : ''" @tap.stop.prevent="sendMessage">发送</div>
   </div>
 </template>
 
@@ -371,6 +372,17 @@
     background: #fff;
     border-radius: 0.133rem;
     min-height: 0.933rem;
+    width: 88%;
+  }
+  .commentWrapper .send {
+    position: absolute;
+    right: 16px;
+    bottom: 12px;
+    color: #B4B4B6;
+    font-size: 15px;
+  }
+  .commentWrapper .send.active {
+    color: #03AEF9;
   }
 
   .commentWrapper textarea {
