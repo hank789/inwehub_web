@@ -72,7 +72,7 @@
 
         <div class="container-searchCompony">
           <div class="container-searchComponyList">
-            <div class="container-componyList" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)">
+            <div class="container-componyList" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/companyDetailProduct/' + item.id)">
               <div class="componyImg border-football">
                 <ImageView :src="item.logo" width="43" height="43" :isLazyload="false"></ImageView>
               </div>
