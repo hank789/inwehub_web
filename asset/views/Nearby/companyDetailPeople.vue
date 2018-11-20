@@ -159,7 +159,6 @@
             }
             item.is_followed = !item.is_followed
             window.mui.toast(response.data.data.tip)
-            this.loading = 0
           })
         }
       }

@@ -68,27 +68,27 @@
             <div class="recommendFollowWrapper">
               <div class="title font-family-medium">值得关注的人</div>
               <swiper ref="inTags" :options="swiperOption">
-                <swiper-slide v-for="(recommendFollow, recommendFollowIndex) in 3" :key="recommendFollowIndex" :tagId="recommendFollow.value">
+                <swiper-slide v-for="(recommendFollow, recommendFollowIndex) in recommendFollowList" :key="recommendFollowIndex" :tagId="recommendFollow.value">
 
                   <div class="recommendFollowList">
-                    <div class="recommendListWrapper" v-if="recommendFollowIndex == 2">
+                    <div class="recommendListWrapper" v-if="recommendFollowIndex === recommendFollowList.length - 1 ">
                       <div class="feed-IconImg">
                         <img src="../statics/images/feed@3x.png" alt="">
                       </div>
                       <div class="desc" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">看看更多<br>相关的人和圈子</div>
                     </div>
                     <div class="recommendListWrapper" v-else>
-                      <div class="delRecommend">
+                      <div class="delRecommend" @tap.stop.prevent="delRecommend(recommendFollow)">
                         <svg class="icon" aria-hidden="true">
                           <use xlink:href="#icon-times--"></use>
                         </svg>
                       </div>
                       <div class="avatar">
-                        <img src="../../static/images/uicon.jpg" >
+                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="false" ></ImageView>
                       </div>
-                      <div class="userName font-family-medium">郭大红</div>
-                      <div class="commonFriend">你们有共同好友：<span>麦克基尼</span></div>
-                      <div class="follow">关注</div>
+                      <div class="userName font-family-medium">{{ recommendFollow.name }}</div>
+                      <div class="commonFriend">{{ recommendFollow.description }}</div>
+                      <div class="follow" :class="recommendFollow.is_followed ? 'active' : ''" @tap.stop.prevent="collectProfessor(recommendFollow)">{{ recommendFollow.is_followed ? '已关注' : '关注' }}</div>
                     </div>
                   </div>
 
@@ -152,7 +152,8 @@
         slidesPerView: 'auto',
         spaceBetween: 0,
         freeMode: true
-      }
+      },
+      recommendFollowList: []
     }),
     created () {
 
@@ -185,6 +186,8 @@
           this.$router.replace('/home')
         }
       })
+
+      this.getRecommendFollow()
     },
     computed: {
       prevOtherData () {
@@ -195,6 +198,39 @@
       }
     },
     methods: {
+      delRecommend (item) {
+        postRequest(`follow/ignoreRecommendUser`, {user_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          window.mui.toast('操作成功！')
+        })
+      },
+      collectProfessor (item) {
+        postRequest('follow/user',
+          {id: item.id}
+        ).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          item.is_followed = !item.is_followed
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      getRecommendFollow () {
+        postRequest(`follow/getRecommendUsers`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.recommendFollowList = response.data.data
+        })
+      },
       toHome () {
         this.$router.replace('home')
       },
@@ -294,10 +330,9 @@
         padding-bottom: 11px;
         line-height: 22.5px;
       }
-      .recommendFollowListWrapper {
-      }
       .recommendFollowList {
         width: 128px;
+        height: 168px;
         padding: 0 9px;
         text-align: center;
         background: #FFFFFF;
@@ -352,7 +387,7 @@
             line-height: 14px;
           }
           .follow {
-            width: 54px;
+            /*width: 54px;*/
             height: 27px;
             margin: 4px auto 0;
             color: #FFFFFF;
@@ -361,6 +396,11 @@
             line-height: 27px;
             background: #03AEF9;
             border-radius: 100px;
+            display: inline-block;
+            &.active {
+              background: #DCDCDC;
+              color: #B4B4B6;
+            }
           }
         }
       }
