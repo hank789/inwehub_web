@@ -132,7 +132,8 @@ import NearbynearbyPeople from '../../../views/Nearby/nearbyPeople.vue'
 import NearbynearbyCompany from '../../../views/Nearby/nearbyCompany.vue'
 import NearbynearbyPeopleMapDetail from '../../../views/Nearby/nearbyPeopleMapDetail.vue'
 import NearbynearbyCompanyMapDetail from '../../../views/Nearby/nearbyCompanyMapDetail.vue'
-import NearbycompanyDetails from '../../../views/Nearby/companyDetails.vue'
+import NearbycompanyDetailProduct from '../../../views/Nearby/companyDetailProduct.vue'
+import NearbycompanyDetailPeople from '../../../views/Nearby/companyDetailPeople.vue'
 import UnansweredQuestions from '../../../views/UnansweredQuestions.vue'
 import SelectionRecommend from '../../../views/Recommend.vue'
 import DiscoverAdd4 from '../../../views/Discover/Add4.vue'
@@ -346,7 +347,8 @@ export {
   NearbynearbyCompany,
   NearbynearbyPeopleMapDetail,
   NearbynearbyCompanyMapDetail,
-  NearbycompanyDetails,
+  NearbycompanyDetailProduct,
+  NearbycompanyDetailPeople,
   UnansweredQuestions,
   SelectionRecommend,
   DiscoverAdd4,

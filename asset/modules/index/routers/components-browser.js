@@ -142,7 +142,8 @@ const NearbynearbyPeople = () => import(/* webpackChunkName: "NearbynearbyPeople
 const NearbynearbyCompany = () => import(/* webpackChunkName: "NearbynearbyCompany" */ '../../../views/Nearby/nearbyCompany.vue')
 const NearbynearbyPeopleMapDetail = () => import(/* webpackChunkName: "NearbynearbyPeopleMapDetail" */ '../../../views/Nearby/nearbyPeopleMapDetail.vue')
 const NearbynearbyCompanyMapDetail = () => import(/* webpackChunkName: "NearbynearbyCompanyMapDetail" */ '../../../views/Nearby/nearbyCompanyMapDetail.vue')
-const NearbycompanyDetails = () => import(/* webpackChunkName: "NearbycompanyDetails" */ '../../../views/Nearby/companyDetails.vue')
+const NearbycompanyDetailPeople = () => import(/* webpackChunkName: "NearbycompanyDetailPeople" */ '../../../views/Nearby/companyDetailPeople.vue')
+const NearbycompanyDetailProduct = () => import(/* webpackChunkName: "NearbycompanyDetailProduct" */ '../../../views/Nearby/companyDetailProduct.vue')
 const UnansweredQuestions = () => import(/* webpackChunkName: "UnansweredQuestions" */ '../../../views/UnansweredQuestions.vue')
 const SelectionRecommend = () => import(/* webpackChunkName: "SelectionRecommend" */ '../../../views/Recommend.vue')
 const DiscoverAdd4 = () => import(/* webpackChunkName: "DiscoverAdd4" */ '../../../views/Discover/Add4.vue')
@@ -353,7 +354,8 @@ export {
   NearbynearbyCompany,
   NearbynearbyPeopleMapDetail,
   NearbynearbyCompanyMapDetail,
-  NearbycompanyDetails,
+  NearbycompanyDetailPeople,
+  NearbycompanyDetailProduct,
   UnansweredQuestions,
   SelectionRecommend,
   DiscoverAdd4,

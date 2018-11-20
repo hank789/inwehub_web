@@ -3544,3 +3544,68 @@ a {
 .dianping-search .empty-Img {
   width: 1.626rem;
   height: 2.373rem;}
+
+.companyInfo {
+  position: relative;
+  background: #ECECEE;
+  text-align: center;
+  padding: 10px 0 13.5px;}
+.companyInfo .companyLogo {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto;}
+.companyInfo .companyLogo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  object-fit: cover;}
+.companyInfo .interval {
+  position: absolute;
+  right: 15px;
+  top: 14px;
+  color: #808080;
+  font-size: 12px;}
+.companyInfo .companyName {
+  color: #444444;
+  font-size: 16px;
+  line-height: 22.5px;
+  margin: 12px 0 8px;}
+.companyInfo .tags {
+  color: #808080;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 8px;}
+.companyInfo .tags .line-wall {
+  height: 13px;
+  margin: 0 11px;
+  top: 2px;}
+.companyInfo .address {
+  color: #808080;
+  font-size: 12px;}
+.companyInfo .address .icon {
+  color: #B4B4B6;
+  font-size: 13px;}
+.switchMenu {
+  width: 100%;
+  height: 39px;
+  position: relative;
+  line-height: 39px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: row;}
+.switchMenu span {
+  width: 50%;
+  color: #444444;
+  font-size: 14px;
+  position: relative;
+  text-align: center;}
+.switchMenu span i {
+  position: absolute;
+  width: 56px;
+  height: 0.053rem;
+  border-radius: 1.333rem;
+  background: #03aef9;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;}

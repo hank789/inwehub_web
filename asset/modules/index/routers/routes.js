@@ -1914,13 +1914,25 @@ const routes = [
     }
   },
   { // 附近企业
-    path: '/companyDetails/:id',
+    path: '/companyDetailProduct/:id',
     name: 'companyDetails',
     meta: {
       title: '企业详情',
       wechatHideHeader: true
     },
-    component: componets.NearbycompanyDetails,
+    component: componets.NearbycompanyDetailProduct,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 附近企业
+    path: '/companyDetailPeople/:id',
+    name: 'companyDetails',
+    meta: {
+      title: '企业详情',
+      wechatHideHeader: true
+    },
+    component: componets.NearbycompanyDetailPeople,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
