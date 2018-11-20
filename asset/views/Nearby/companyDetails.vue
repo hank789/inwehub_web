@@ -8,7 +8,8 @@
   <div class="mui-content">
     <RefreshList
       v-model="list"
-      :api="api"
+      :pageMode="true"
+      :api="'company/dataProduct'"
       :prevOtherData="{id:this.id}"
       :nextOtherData="{id:this.id}"
       :autoShowEmpty="false"
@@ -19,7 +20,7 @@
         </div>
         <div class="interval">距离我<{{ datailList.distance_format }}</div>
         <div class="companyName">{{ datailList.name }}</div>
-        <div class="tags" v-for="(tags, tagsindex) in datailList.tags" :key="tagsindex"><span>{{ tags }}</span><i class="line-wall" v-if="tagsindex !==datailList.tags - 1"></i></div>
+        <div class="tags"><span v-for="(tags, tagsindex) in datailList.tags" :key="tagsindex">{{ tags }}<i class="line-wall" v-if="tagsindex !== datailList.tags.length - 1"></i></span></div>
         <div class="address">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-dingwei"></use>
@@ -34,50 +35,74 @@
       </div>
 
       <div class="productList" v-if="type === 1">
-        <div class="comment-product" v-for="(item, index) in 3" :key="index">
+        <div class="comment-product" v-for="(item, index) in list" :key="index">
           <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
             <div class="product-img border-football">
-              <!--<ImageView :src="item.logo" width="44" height="44"></ImageView>-->
-              <img src="../../statics/images/uicon.jpg" alt="">
+              <ImageView :src="item.logo" width="44" height="44"></ImageView>
+              <!--<img src="../../statics/images/uicon.jpg" alt="">-->
             </div>
             <div class="product-detail">
-              <div class="productName font-family-medium text-line-1">AMETRAS Manual</div>
+              <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
               <div class="productMark">
                 <div class="stars">
-                  <StarView :rating="4"></StarView>
+                  <StarView :rating="item.review_average_rate"></StarView>
                 </div>
                 <div class="starsText">
-                  <span>1分</span>
-                  <i></i><span>3条评论</span>
+                  <span>{{ item.review_average_rate }}分</span>
+                  <i></i><span>{{ item.review_count }}条评论</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="line-river-after line-river-after-top"></div>
         </div>
+
+        <div class="noResult increase dianping-search" v-if="list.length === 0">
+          <div class="empty-Img">
+            <img src="../../statics/images/empty@3x.png">
+          </div>
+          <div class="noResultText">暂无结果~</div>
+        </div>
+
       </div>
 
       <div class="relevantPepole" v-if="type === 2">
-        <div class="pepoleList">
-          <div class="userLogo">
-            <img src="../../statics/images/uicon.jpg" alt="">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
-            </svg>
-          </div>
-          <div class="userInfo">
-            <div class="name">
-              <span>大姐姐</span>
-              <span>3</span>
-              <span>(离职)</span>
+        <div class="pepoleList" v-for="(info, infoIndex) in DataPeopleList" :key="infoIndex">
+          <div class="pepoleWrapper">
+            <div class="userLogo" @tap.stop.prevent="toAvatar(info.uuid)">
+              <ImageView :src="info.avatar" width="44" height="44"></ImageView>
+              <!--<img src="../../statics/images/uicon.jpg" alt="">-->
+              <svg class="icon" aria-hidden="true" v-if="info.is_expert">
+                <use xlink:href="#icon-zhuanjiabiaojishixin"></use>
+              </svg>
             </div>
-            <div class="describe">我是描述</div>
+            <div class="userInfo">
+              <div class="name">
+                <span class="font-family-medium">{{ info.name }}</span>
+                <span>{{ info.level }}</span>
+                <span>({{ info.status_info }})</span>
+              </div>
+              <div class="describe">{{ info.description }}</div>
+            </div>
+            <div class="follow" :class="info.is_followed ? 'active' : ''" @tap.stop.prevent="collectProfessor(info)"> {{ !info.is_followed ? '关注Ta' : '已关注' }}</div>
           </div>
-          <div class="follow">关注Ta</div>
+          <div class="line-river-after line-river-after-top"></div>
         </div>
+
+        <div class="noResult increase dianping-search" v-if="DataPeopleList.length === 0">
+          <div class="empty-Img">
+            <img src="../../statics/images/empty@3x.png">
+          </div>
+          <div class="noResultText">暂无相关人员~</div>
+        </div>
+
       </div>
 
     </RefreshList>
+    <div class="meTo" v-if="type === 2">
+      <div class="bot"></div>
+      <div class="text" @tap.stop.prevent="$router.pushPlus('/my/info')">我也是相关人员</div>
+    </div>
   </div>
   </div>
 </template>
@@ -102,7 +127,7 @@
         list: [],
         distance: '',
         type: 1,
-        api: ''
+        DataPeopleList: []
       }
     },
     components: {
@@ -118,11 +143,6 @@
       }, () => {
         window.mui.toast('获取当前位置失败')
       })
-      if (this.type === 1) {
-        this.api = 'company/dataProduct'
-      } else {
-        this.api = 'company/dataPeople'
-      }
     },
     methods: {
       Switch (type) {
@@ -134,6 +154,7 @@
       refreshPageData () {
         this.id = this.$route.params.id
         this.companyInfo()
+        this.getDataPeople()
       },
       toAvatar (uuid) {
         if (!uuid) {
@@ -174,6 +195,17 @@
           }
 //          console.error(response.data.data)
           this.loading = 0
+        })
+      },
+      getDataPeople () {
+        postRequest('company/dataPeople', {id: this.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            window.mui.back()
+            return
+          }
+          this.DataPeopleList = response.data.data.data
         })
       },
       collectProfessor (item) {
@@ -217,6 +249,9 @@
     height: 0.026rem;
     transform: scaleY(0.5);
     background-color: #dcdcdc;
+  }
+  .listWrapper{
+    bottom: 44px;
   }
   .companyInfo {
     position: relative;
@@ -361,6 +396,12 @@
 
   .relevantPepole {
     .pepoleList {
+      position: relative;
+      padding: 10px 16px;
+      .pepoleWrapper {
+        overflow: hidden;
+        padding-bottom: 10px;
+      }
       .userLogo {
         width: 1.173rem;
         height: 1.173rem;
@@ -380,12 +421,17 @@
         }
       }
       .userInfo {
+        width: 6rem;
         float: left;
+        margin-top: 3px;
+        margin-left: 7.5px;
         .name {
           display: flex;
+          line-height: 20px;
           span {
             &:nth-of-type(1) {
-              margin-top: 1px;
+              color: #565656;
+              font-size: 14px;
             }
             &:nth-of-type(2) {
               width:0.426rem;
@@ -396,14 +442,55 @@
               font-size:0.266rem;
               line-height: 0.346rem;
               padding-left: 3px;
-              margin-top: 2px;
+              margin: 3px 5px 0;
+            }
+            &:nth-of-type(3) {
+              font-size: 14px;
             }
           }
         }
+        .describe {
+          color: #B4B4B6;
+          font-size: 11px;
+          line-height: 15px;
+          margin-top: 3px;
+        }
       }
       .follow {
+        height: 27px;
         float: right;
+        color: #FEFEFE;
+        font-size: 14px;
+        line-height: 27px;
+        padding: 0 10px;
+        background: #03AEF9;
+        border-radius: 100px;
+        margin-top: 8.5px;
+        &.active {
+          color: #B4B4B6;
+          background: #DCDCDC;
+        }
       }
+    }
+  }
+  .meTo {
+    width: 100%;
+    height: 44px;
+    position: absolute;
+    bottom: 0;
+    .bot {
+      top: 0;
+    }
+    .text {
+      width: 343px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      color: #ffffff;
+      font-size: 16px;
+      background: #03AEF9;
+      margin: 4px auto 0;
+      border-radius: 8px;
     }
   }
 
