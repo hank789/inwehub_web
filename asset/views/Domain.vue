@@ -35,7 +35,7 @@
         :api="'recommendRead'"
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :list="list"
         :pageMode="true"
         :autoShowEmpty="false"

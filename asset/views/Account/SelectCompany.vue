@@ -28,7 +28,7 @@
         :pageMode="true"
         :prevOtherData="dataList"
         :nextOtherData="dataList"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         class="listWrapper">
         <ul>
           <li  v-for="(item, index) in list" @tap.stop.prevent="submit(item.name)">

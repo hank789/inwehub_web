@@ -64,7 +64,7 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :autoShowEmpty="false"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
           <div class="group-container" v-for="(item, index) in list" v-if="list.length">

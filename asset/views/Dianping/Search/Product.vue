@@ -66,7 +66,7 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :autoShowEmpty="false"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
 

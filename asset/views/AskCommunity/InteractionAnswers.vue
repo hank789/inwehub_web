@@ -15,7 +15,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :prevSuccessCallback="prevSuccessCallback"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :list="answers"
         :pageMode="true"
         :autoShowEmpty="false"
