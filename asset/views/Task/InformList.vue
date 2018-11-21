@@ -462,9 +462,6 @@
     border-radius: 0.4rem;
     line-height: 0.4rem;
   }
-  .headerLogo {
-    overflow: hidden;
-  }
   .radius {
     border-radius: 50%;
   }
