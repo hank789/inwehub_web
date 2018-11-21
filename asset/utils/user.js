@@ -137,9 +137,11 @@ function updateUserInfoCache (user) {
 }
 
 function getUserInfo (userId, cb, needReport = false) {
-  addAccessToken().post(createAPI('profile/info'), {
-    user_ids: [userId],
-    need_report: needReport},
+  addAccessToken().get(createAPI('profile/info'), {
+    params: {
+      need_report: needReport
+    }
+  }
   )
     .then(response => {
       var code = response.data.code
