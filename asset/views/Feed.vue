@@ -77,7 +77,7 @@
                           <use xlink:href="#icon-times--"></use>
                         </svg>
                       </div>
-                      <div class="avatar">
+                      <div class="avatar" @tap.stop.prevent="toResume(recommendFollow.uuid)">
                         <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="false" ></ImageView>
                       </div>
                       <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
@@ -202,6 +202,9 @@
       }
     },
     methods: {
+      toResume (uuid) {
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       delRecommend (item) {
         postRequest(`follow/ignoreRecommendUser`, {user_id: item.id}).then(response => {
           var code = response.data.code
