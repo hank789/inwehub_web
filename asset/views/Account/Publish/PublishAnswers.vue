@@ -51,7 +51,8 @@
   const PublishAnswers = {
     data: () => ({
       list: [],
-      uuid: getLocalUuid()
+      uuid: '',
+      userUuid: getLocalUuid()
     }),
     created () {},
     computed: {
