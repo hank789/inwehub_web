@@ -71,13 +71,7 @@
                 <swiper-slide v-for="(recommendFollow, recommendFollowIndex) in recommendFollowList" :key="recommendFollowIndex" :tagId="recommendFollow.value">
 
                   <div class="recommendFollowList">
-                    <div class="recommendListWrapper" v-if="recommendFollowIndex === recommendFollowList.length - 1 ">
-                      <div class="feed-IconImg">
-                        <img src="../statics/images/feed@3x.png" alt="">
-                      </div>
-                      <div class="desc" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">看看更多<br>相关的人和圈子</div>
-                    </div>
-                    <div class="recommendListWrapper" v-else>
+                    <div class="recommendListWrapper">
                       <div class="delRecommend" @tap.stop.prevent="delRecommend(recommendFollow)">
                         <svg class="icon" aria-hidden="true">
                           <use xlink:href="#icon-times--"></use>
@@ -86,12 +80,22 @@
                       <div class="avatar">
                         <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="false" ></ImageView>
                       </div>
-                      <div class="userName font-family-medium">{{ recommendFollow.name }}</div>
+                      <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
                       <div class="commonFriend">{{ recommendFollow.description }}</div>
                       <div class="follow" :class="recommendFollow.is_followed ? 'active' : ''" @tap.stop.prevent="collectProfessor(recommendFollow)">{{ recommendFollow.is_followed ? '已关注' : '关注' }}</div>
                     </div>
                   </div>
 
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="recommendFollowList">
+                    <div class="recommendListWrapper">
+                      <div class="feed-IconImg">
+                        <img src="../statics/images/feed@3x.png" alt="">
+                      </div>
+                      <div class="desc" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">看看更多<br>相关的人和圈子</div>
+                    </div>
+                  </div>
                 </swiper-slide>
               </swiper>
 
@@ -205,6 +209,7 @@
             window.mui.alert(response.data.message)
             return
           }
+          this.recommendFollowList.splice(item, 1)
           window.mui.toast('操作成功！')
         })
       },
