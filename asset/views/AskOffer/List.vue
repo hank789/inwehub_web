@@ -65,7 +65,7 @@
                   <!--<img src="../../../statics/images/uicon.jpg" alt="">-->
                 </div>
                 <div class="product-detail">
-                  <div class="productName font-family-medium text-line-1" v-html="getHighlight(item.name)"></div>
+                  <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
                   <div class="productMark">
                     <div class="stars">
                       <StarView :rating="item.review_average_rate"></StarView>
