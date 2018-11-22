@@ -9,7 +9,7 @@ const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
 axios.defaults.retry = 3
 axios.defaults.retryDelay = 1000
-axios.defaults.timeout = 8000
+axios.defaults.timeout = 10000
 
 axios.interceptors.response.use(undefined, function axiosRetryInterceptor (err) {
   var config = err.config
