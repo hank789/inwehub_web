@@ -1273,7 +1273,7 @@
         float: left;
         margin-right: 0.266rem;
         border-radius: 0.106rem;
-        object-fit: cover;
+        object-fit: contain;
       }
       .linkContent {
         font-size: 0.373rem;
@@ -1479,7 +1479,7 @@
             width: 100%;
             height: 100%;
             border-radius: 0.106rem;
-            object-fit: cover;
+            object-fit: contain;
           }
         }
         .product-detail {

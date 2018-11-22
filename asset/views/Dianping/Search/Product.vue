@@ -7,7 +7,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="搜索点评、产品、分类、公司" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
+          <input type="text" placeholder="搜索产品、点评、分类、公司" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
@@ -16,8 +16,8 @@
       </div>
       <!-- 导航栏 -->
       <div class="container-searchMenu">
-        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)">点评</span>
         <span class="font-family-medium">产品<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)">点评</span>
         <span @tap.stop.prevent="$router.replace('/dianping/search/categories?text=' + searchText)">分类</span>
         <span @tap.stop.prevent="$router.replace('/dianping/search/companys?text=' + searchText)">公司</span>
         <i class="bot"></i>
@@ -280,7 +280,7 @@
           width: 100%;
           height: 100%;
           border-radius: 0.106rem;
-          object-fit: cover;
+          object-fit: contain;
         }
       }
       .product-detail {
