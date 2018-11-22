@@ -334,12 +334,12 @@
       padding: 0.293rem 0 0.426rem;
       &:first-child {
         .recommendFollowList {
-          margin-left: 16px;
+          margin-left: 0.426rem;
         }
       }
       &:last-child {
          .recommendFollowList {
-           margin-right: 16px;
+           margin-right: 0.426rem;
          }
        }
     }
@@ -410,7 +410,7 @@
           }
         }
         .follow {
-          width: 110px;
+          width: 2.933rem;
           position: absolute;
           bottom: 0.4rem;
           text-align: center;
