@@ -512,7 +512,7 @@ function AppPageInit (context) {
       // 预加载页面
       var listPageWebview = window.mui.preload({
         url: process.env.NODE_ENV === 'development' ? 'index.html#/home' : '/public/index.html#/home',
-        id: 'list-page',
+        id: 'list-detail-page',
         styles: {
           popGesture: 'hide'
         },

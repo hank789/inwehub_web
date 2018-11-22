@@ -35,7 +35,7 @@
         :api="'recommendRead'"
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :list="list"
         :pageMode="true"
         :autoShowEmpty="false"
@@ -67,7 +67,7 @@
 
   import RefreshList from '../components/refresh/List.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { postRequest } from '../utils/request'
+  import { getRequest } from '../utils/request'
 
   const Domain = {
     data () {
@@ -122,7 +122,7 @@
         return newDate
       },
       refreshPageData () {
-        postRequest('profile/info', {}).then(response => {
+        getRequest('profile/info', {}).then(response => {
           var tags = response.data.data.info.region_tags
           this.tags = tags
           if (!this.tags.length) {

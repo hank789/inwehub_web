@@ -12,7 +12,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="nextOtherData"
         :pageMode = "true"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         v-model="list"
         :autoShowEmpty="true"
         class="listWrapper"

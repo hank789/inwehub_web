@@ -28,7 +28,7 @@
           </div>
           <div class="companyDescribe">{{ detail.summary }}</div>
           <div class="supply" v-if="detail.vendor"
-               @tap.stop.prevent="$router.pushPlus('/companyDetails/' + detail.vendor.id)"><span>供应商</span><span
+               @tap.stop.prevent="$router.pushPlus('/companyDetailProduct/' + detail.vendor.id)"><span>供应商</span><span
             class="font-family-medium">{{ detail.vendor.name }}</span></div>
         </div>
         <div class="optionlList">
@@ -43,7 +43,7 @@
             <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
           </template>
         </div>
-        <div class="line-river-big" v-if="detail.recommend_users && detail.recommend_users.length"></div>
+        <!-- <div class="line-river-big" v-if="detail.recommend_users && detail.recommend_users.length"></div>
 
         <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
           <div class="recommendTitle">
@@ -68,7 +68,7 @@
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
 
-        </div>
+        </div> -->
         <div v-if="detail.review_count">
           <div class="line-river-big"></div>
           <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}</div>
@@ -287,7 +287,7 @@
       },
       refreshPageData () {
         let id = this.$route.params.id
-
+        this.loading = 1
         if (!id) {
           window.mui.toast('请求异常')
           window.mui.back()

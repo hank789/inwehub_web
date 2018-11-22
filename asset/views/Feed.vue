@@ -35,7 +35,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="nextOtherData"
         :pageMode = "true"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :list="list"
         :emptyDescription="emptyDescription"
         :autoShowEmpty="false"
@@ -53,7 +53,7 @@
 
         <template v-for="(item, index) in list">
 
-          <div class="component-feed-item-guide" v-if="index === 3 && search_type === 2">
+         <!-- <div class="component-feed-item-guide" v-if="index === 3 && search_type === 2">
             <div class="feed-IconImg">
               <img src="../statics/images/feed@3x.png" alt="">
             </div>
@@ -61,6 +61,47 @@
             <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
               <button>去看看</button>
             </div>
+            <div class="line-river-after line-river-after-top"></div>
+          </div> -->
+
+          <div class="component-recommendFollow" v-if="index === 3 && search_type === 2">
+            <div class="recommendFollowWrapper">
+              <div class="title font-family-medium">值得关注的人</div>
+              <swiper ref="inTags" :options="swiperOption">
+                <swiper-slide v-for="(recommendFollow, recommendFollowIndex) in recommendFollowList" :key="recommendFollowIndex" :tagId="recommendFollow.value">
+
+                  <div class="recommendFollowList">
+                    <div class="recommendListWrapper">
+                      <div class="delRecommend" @tap.stop.prevent="delRecommend(recommendFollow)">
+                        <svg class="icon" aria-hidden="true">
+                          <use xlink:href="#icon-times--"></use>
+                        </svg>
+                      </div>
+                      <div class="avatar" @tap.stop.prevent="toResume(recommendFollow.uuid)">
+                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="false" ></ImageView>
+                      </div>
+                      <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
+                      <div class="commonFriend">{{ recommendFollow.description }}</div>
+                    </div>
+                    <div class="follow" @tap.stop.prevent="collectProfessor(recommendFollow)">
+                      <div class="text" :class="recommendFollow.is_followed ? 'active' : ''">{{ recommendFollow.is_followed ? '已关注' : '关注' }}</div>
+                    </div>
+                  </div>
+
+                </swiper-slide>
+                <swiper-slide>
+                  <div class="recommendFollowList">
+                    <div class="recommendListWrapper">
+                      <div class="feed-IconImg">
+                        <img src="../statics/images/feed@3x.png" alt="">
+                      </div>
+                      <div class="desc" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">看看更多<br>相关的人和圈子</div>
+                    </div>
+                  </div>
+                </swiper-slide>
+              </swiper>
+
+              </div>
             <div class="line-river-after line-river-after-top"></div>
           </div>
 
@@ -101,6 +142,7 @@
   import { getLocalUserId } from '../utils/user'
   import { postRequest } from '../utils/request'
   import { getIndexByIdArray } from '../utils/array'
+  import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
   const Feed = {
     data: () => ({
@@ -111,7 +153,13 @@
       list: [],
       shareOption: {},
       itemOptionsObj: {},
-      iconMenus: []
+      iconMenus: [],
+      swiperOption: {
+        slidesPerView: 'auto',
+        spaceBetween: 0,
+        freeMode: true
+      },
+      recommendFollowList: []
     }),
     created () {
 
@@ -122,7 +170,9 @@
       RefreshList,
       HomeSearch,
       FeedItem,
-      PageMore
+      PageMore,
+      swiperSlide,
+      swiper
     },
     activated: function () {
       this.refreshPageData()
@@ -142,6 +192,8 @@
           this.$router.replace('/home')
         }
       })
+
+      this.getRecommendFollow()
     },
     computed: {
       prevOtherData () {
@@ -152,6 +204,43 @@
       }
     },
     methods: {
+      toResume (uuid) {
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
+      delRecommend (item) {
+        postRequest(`follow/ignoreRecommendUser`, {user_id: item.id}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.recommendFollowList.splice(item, 1)
+          window.mui.toast('操作成功！')
+        })
+      },
+      collectProfessor (item) {
+        postRequest('follow/user',
+          {id: item.id}
+        ).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          item.is_followed = !item.is_followed
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      getRecommendFollow () {
+        postRequest(`follow/getRecommendUsers`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.recommendFollowList = response.data.data
+        })
+      },
       toHome () {
         this.$router.replace('home')
       },
@@ -233,6 +322,115 @@
   .listWrapper {
     top: 1.173rem;
     bottom: 50px; /* px不转换 */
+  }
+  .component-recommendFollow {
+    padding: 0.293rem 0 0rem;
+    .line-river-after:after {
+      left: 0.426rem;
+      right: 0.426rem;
+    }
+    .swiper-slide {
+      width: auto !important;
+      padding: 0.293rem 0 0.426rem;
+      &:first-child {
+        .recommendFollowList {
+          margin-left: 0.426rem;
+        }
+      }
+      &:last-child {
+         .recommendFollowList {
+           margin-right: 0.426rem;
+         }
+       }
+    }
+    .recommendFollowWrapper {
+      /*padding: 0 0.426rem;*/
+      .title {
+        color: #444444;
+        font-size: 0.426rem;
+        line-height: 0.6rem;
+        padding: 0 0.426rem;
+      }
+      .recommendFollowList {
+        width: 3.413rem;
+        height: 4.546rem;
+        padding: 0 0.24rem;
+        position: relative;
+        background: #FFFFFF;
+        margin: 0 0.133rem;
+        box-shadow:0rem 0rem 0.346rem 0rem #F2F4F7;
+        .recommendListWrapper {
+          padding: 0.4rem 0 0;
+          position: relative;
+          text-align: center;
+          .delRecommend {
+            position: absolute;
+            right: 0;
+            top: 0.266rem;
+            .icon {
+              font-size: 0.213rem;
+              color: #DCDCDC;
+            }
+          }
+          .feed-IconImg {
+            width: 1.893rem;
+            height: 1.173rem;
+            margin: 0.666rem auto 0.186rem;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .desc {
+            color: #03AEF9;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
+            margin-bottom: 0.88rem;
+          }
+          .avatar {
+            width: 1.333rem;
+            height: 1.333rem;
+            margin: 0 auto;
+            img {
+              width: 100%;
+              height: 100%;
+              border-radius: 50%;
+            }
+          }
+          .userName {
+            color: #444444;
+            font-size: 0.373rem;
+            line-height: 0.533rem;
+            padding: 0.186rem 0 0.04rem;
+          }
+          .commonFriend {
+            color: #B4B4B6;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
+          }
+        }
+        .follow {
+          width: 2.933rem;
+          position: absolute;
+          bottom: 0.4rem;
+          text-align: center;
+          .text {
+            height: 0.72rem;
+            font-size: 0.32rem;
+            padding: 0 0.4rem;
+            line-height: 0.72rem;
+            background: #03AEF9;
+            color: #FFFFFF;
+            border-radius: 2.666rem;
+            display: inline-block;
+            &.active {
+              background: #DCDCDC;
+              color: #B4B4B6;
+            }
+          }
+        }
+      }
+    }
   }
   .component-feed-item-guide {
     padding-top: 0.8rem;

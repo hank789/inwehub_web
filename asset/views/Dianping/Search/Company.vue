@@ -66,13 +66,13 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :autoShowEmpty="false"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
 
         <div class="container-searchCompony">
           <div class="container-searchComponyList">
-            <div class="container-componyList" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/companyDetails/' + item.id)">
+            <div class="container-componyList" v-for="(item, index) in list" :key="index" @tap.stop.prevent="$router.pushPlus('/companyDetailProduct/' + item.id)">
               <div class="componyImg border-football">
                 <ImageView :src="item.logo" width="43" height="43" :isLazyload="false"></ImageView>
               </div>
@@ -86,7 +86,7 @@
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-dingwei"></use>
                     </svg>
-                    <span><!--{{ item.address_province }}--> 上海市黄浦区哈哈哈</span>
+                    <span>{{ item.address_province }}</span>
                   </div>
                   <div class="interval">< {{ item.distance_format }}</div>
                 </div>

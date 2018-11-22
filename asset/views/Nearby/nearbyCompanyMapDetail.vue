@@ -79,7 +79,7 @@
           }
           if (response.data.data) {
             if (response.data.data.is_valid) {
-              this.$router.pushPlus('/companyDetails/' + item.id)
+              this.$router.pushPlus('/companyDetailProduct/' + item.id)
             } else {
               userAbility.jumpJudgeGrade(this)
             }

@@ -15,7 +15,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :prevSuccessCallback="prevSuccessCallback"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :list="answers"
         :pageMode="true"
         :autoShowEmpty="false"
@@ -48,6 +48,39 @@
           :defaultShow="false"
         ></Answers>
         <div class="robAnswer" v-if="answers.length === 0 && ask.question.status !== 9 && !isAsker" @tap.stop.prevent="goRobAnswer">抢个沙发</div>
+
+        <div class="container-recommentProduct" v-if="ask.related_products">
+          <div class="line-river-big"></div>
+          <div class="title">
+            <div class="text font-family-medium">相关产品</div>
+            <div class="line-river line-river-full"></div>
+          </div>
+
+          <div class="productList">
+            <div class="comment-product" v-for="(item, index) in ask.related_products" :key="index">
+              <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
+                <div class="product-img border-football">
+                  <ImageView :src="item.logo" width="44" height="44"></ImageView>
+                  <!--<img src="../../../statics/images/uicon.jpg" alt="">-->
+                </div>
+                <div class="product-detail">
+                  <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
+                  <div class="productMark">
+                    <div class="stars">
+                      <StarView :rating="item.review_average_rate"></StarView>
+                    </div>
+                    <div class="starsText">
+                      <span>{{ item.review_average_rate }}分</span>
+                      <i></i><span>{{ item.review_count }}条评论</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="line-river-after line-river-after-top" v-if="index !== ask.related_products.length - 1"></div>
+            </div>
+          </div>
+
+        </div>
 
         <div class="line-river-big"></div>
         <RecommentList
@@ -133,6 +166,7 @@
   import { toContact, toAnswer, toSeeSelfAnswer, collectQuestion } from '../../utils/ask'
   import { getAnswerCache } from '../../utils/allPlatform'
   import { getLocalUuid } from '../../utils/user'
+  import StarView from '../../components/star-rating/starView.vue'
 
   const AskDetail = {
     data: () => ({
@@ -168,7 +202,8 @@
       Share,
       InvitationList,
       RecommentList,
-      FooterMenu
+      FooterMenu,
+      StarView
     },
     computed: {
       isAsker () {
@@ -446,26 +481,99 @@
 </script>
 
 
-<style scoped>
+<style scoped lang="less">
   .container-label{
     padding:0 0.4rem;
   }
-
   .refreshListWrapper{
     bottom:1.333rem;
   }
-
   .mui-content {
     background: #fff;
   }
-
   .border-football{
     border:none;
   }
-
   .mui-android .container-label .border-football {
     padding-top: 0.08rem;
   }
+
+  .container-recommentProduct {
+    .title {
+      height: 1.173rem;
+      line-height: 1.173rem;
+      .text {
+        color: #444444;
+        font-size: 0.426rem;
+        padding: 0 0.426rem;
+      }
+    }
+
+    .comment-product {
+      padding: 0.346rem 0.4rem 0;
+      .product-info {
+        overflow: hidden;
+        border-radius: 0.106rem;
+        padding: 0 0 0.4rem;
+        background: none;
+        .product-img {
+          width: 1.173rem;
+          height: 1.173rem;
+          float: left;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.106rem;
+            object-fit: cover;
+          }
+        }
+        .product-detail {
+          float: left;
+          margin-left: 0.266rem;
+          .productName {
+            width: 7.573rem;
+            color: #444444;
+            font-size: 0.426rem;
+            line-height: 0.6rem;
+          }
+          .productMark {
+            display: flex;
+            .icon {
+              color: #FCC816;
+              font-size: 0.32rem;
+            }
+            span {
+              color: #B4B4B6;
+              font-size: 0.293rem;
+              line-height: 0.4rem;
+              &:nth-of-type(1) {
+                color: #FCC816;
+                margin-left: 0.08rem;
+              }
+            }
+            i {
+              width: 0.053rem;
+              height: 0.053rem;
+              margin-right: 0.133rem;
+              vertical-align: middle;
+              border-radius: 50%;
+              background: #B4B4B6;
+              display: inline-block;
+            }
+            .stars {
+              display: flex;
+              div {
+                margin-right: 0.08rem;
+              }
+            }
+            .starsText {
+            }
+          }
+        }
+      }
+    }
+  }
+
   .robAnswer {
     width: 2.48rem;
     height: 0.96rem;

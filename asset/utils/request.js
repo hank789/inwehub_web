@@ -9,7 +9,7 @@ const baseURL = process.env.API_ROOT
 const api = process.env.API_ROOT + `api`
 axios.defaults.retry = 3
 axios.defaults.retryDelay = 1000
-axios.defaults.timeout = 8000
+axios.defaults.timeout = 10000
 
 axios.interceptors.response.use(undefined, function axiosRetryInterceptor (err) {
   var config = err.config
@@ -59,6 +59,94 @@ export const addAccessToken = (timeout) => {
 }
 
 export default axios
+
+export function getRequest (url, data = [], showWaiting = true) {
+  if (showWaiting) {
+    window.mui.waiting()
+  }
+  var appVersion = localEvent.getLocalItem('app_version')
+  if (appVersion) {
+    data.current_version = appVersion.version
+  }
+  data.inwehub_user_device = window.getUserAppDevice()
+
+  var proObj = addAccessToken(0).get(createAPI(url), {params: data},
+    {
+      validateStatus: status => status === 200
+    }
+  )
+    .then(response => {
+      if (showWaiting) {
+        window.mui.closeWaiting()
+      }
+
+      var code = response.data.code
+      // 参数错误
+      if (code === 1008) {
+        var errMsg = ''
+        for (var i in response.data.data) {
+          errMsg = errMsg + response.data.data[i] + '\n'
+        }
+        var s = errMsg.substring(0, errMsg.lastIndexOf('\n'))
+        return Promise.reject(s)
+      }
+
+      if (code === 1129) {
+        bindPhone()
+        return Promise.reject(response.data.message)
+      }
+
+      if (!window.mui.os.wechat) {
+        if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          window.mui.toast(response.data.message)
+          logout()
+          return Promise.reject(response.data.message)
+        }
+      } else {
+        if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
+          rebootAuth()
+          return Promise.reject(response.data.message)
+        }
+      }
+
+      if (code !== 1000) {
+        return Promise.reject(response.data.message)
+      }
+      if (response.data.needRefresh === true) {
+        localEvent.setLocalItem('needRefresh', {value: true})
+      }
+      return response
+    })
+    .catch(e => {
+      if (showWaiting) {
+        window.mui.closeWaiting()
+      }
+
+      console.log(JSON.stringify(e))
+      Raven.captureException(JSON.stringify(e))
+      return Promise.reject(e)
+    })
+
+  proObj.oldThen = proObj.then
+  proObj.then = function (success, fail) {
+    if (!fail) {
+      fail = function (errorMsg) {
+        errorMsg = errorMsg.toString()
+        console.error(errorMsg)
+        if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
+          errorMsg = '网络异常'
+          router.push('/exception')
+        }
+        if (errorMsg) {
+          window.mui.toast(errorMsg)
+        }
+      }
+    }
+    proObj.oldThen(success, fail)
+    return proObj
+  }
+  return proObj
+}
 
 export function apiRequest (url, data, showWaiting = true) {
   if (showWaiting) {

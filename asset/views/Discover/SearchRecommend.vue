@@ -18,7 +18,7 @@
         :prevOtherData="{search_type: 6}"
         :nextOtherData="{search_type: 6}"
         :pageMode = "true"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :list="list"
         :emptyDescription="emptyDescription"
         class="listWrapper"

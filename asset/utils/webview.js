@@ -88,7 +88,7 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
         },
         extras: {preload: preloadBackClose},
         waiting: {
-          autoShow: true
+          autoShow: false
         }
       })
       console.log('openWindow url:' + url + ', popGesture: ' + popGesture + ',aniShow:' + aniShow)

@@ -25,7 +25,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="nextOtherData"
         :pageMode = "true"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :list="list"
         :emptyDescription="emptyDescription"
         :autoShowEmpty="false"

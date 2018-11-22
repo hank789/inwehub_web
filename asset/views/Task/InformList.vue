@@ -20,7 +20,7 @@
             :api="'notification/count'"
             :prevOtherData="{need_report: 1}"
             :nextOtherData="{}"
-            :isShowUpToRefreshDescription="false"
+            :isShowUpToRefreshDescription="true"
             :autoShowEmpty="false"
             class="listWrapper">
 
@@ -97,7 +97,9 @@
                 </li>
                 <!--消息通知-->
                 <li v-for="(item, index) in list.im_messages" :class="'type_' + item.room_type">
-                  <ImageView class="radius" width="42" height="42" :src="item.avatar" @tap.stop.prevent="toAvatar(item.contact_uuid)"></ImageView>
+                  <div class="headerLogo" @tap.stop.prevent="toAvatar(item.contact_uuid)">
+                    <ImageView class="radius" width="42" height="42" :src="item.avatar"></ImageView>
+                  </div>
                   <div class="message" v-if="item.unread_count != 0">{{item.unread_count}}</div>
                   <p @tap.stop.prevent="gochat(item)">
                     <span class="mui-ellipsis">{{item.name}}</span>
@@ -460,7 +462,6 @@
     border-radius: 0.4rem;
     line-height: 0.4rem;
   }
-
   .radius {
     border-radius: 50%;
   }

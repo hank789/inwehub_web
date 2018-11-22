@@ -161,6 +161,39 @@
         <!--</div>-->
       </div>
 
+        <div class="container-recommentProduct" v-if="isShow && detail.related_tags.length !== 0">
+          <div class="river"></div>
+          <div class="title">
+            <div class="text font-family-medium">相关产品</div>
+            <div class="line-river line-river-full"></div>
+          </div>
+
+          <div class="productList">
+            <div class="comment-product" v-for="(item, index) in detail.related_tags" :key="index">
+              <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
+                <div class="product-img border-football">
+                  <ImageView :src="item.logo" width="44" height="44"></ImageView>
+                  <!--<img src="../../../statics/images/uicon.jpg" alt="">-->
+                </div>
+                <div class="product-detail">
+                  <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
+                  <div class="productMark">
+                    <div class="stars">
+                      <StarView :rating="item.review_average_rate"></StarView>
+                    </div>
+                    <div class="starsText">
+                      <span>{{ item.review_average_rate }}分</span>
+                      <i></i><span>{{ item.review_count }}条评论</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="line-river-after line-river-after-top" v-if="index !== detail.related_tags.length - 1"></div>
+            </div>
+          </div>
+
+        </div>
+
         <div class="river" v-if="isShow"></div>
         <div class="guessLike" v-if="isShow">
           <div class="component-block-title">
@@ -251,6 +284,7 @@
   import { upvote, downVote } from '../../utils/discover'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
   import DetailMenu from '../../components/menu/Detail.vue'
+  import StarView from '../../components/star-rating/starView.vue'
 
   export default {
     data () {
@@ -373,7 +407,8 @@
       groupsList,
       quillEditor,
       'vue-pull-refresh': VuePullRefresh,
-      DetailMenu
+      DetailMenu,
+      StarView
     },
     methods: {
       detailMenuIcon (item) {
@@ -663,6 +698,7 @@
         }
       },
       getDetail: function () {
+        this.loading = 1
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
         this.noback = !!this.$route.query.noback
@@ -892,8 +928,6 @@
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>
-
-
   .active {
     color: #d4d4d4;
   }
@@ -1403,7 +1437,6 @@
     text-align: center;
     margin: auto;
   }
-
   .shortContentWrapper {
     max-height: 8rem;
     overflow: hidden;
@@ -1417,6 +1450,82 @@
       height:1.666rem;
       width:100%;
       background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,1));
+    }
+  }
+
+  .container-recommentProduct {
+    .title {
+      height: 1.173rem;
+      line-height: 1.173rem;
+      .text {
+        color: #444444;
+        font-size: 0.426rem;
+        padding: 0 0.426rem;
+      }
+    }
+
+    .comment-product {
+      padding: 0.346rem 0.4rem 0;
+      .product-info {
+        overflow: hidden;
+        border-radius: 0.106rem;
+        padding: 0 0 0.4rem;
+        background: none;
+        .product-img {
+          width: 1.173rem;
+          height: 1.173rem;
+          float: left;
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.106rem;
+            object-fit: cover;
+          }
+        }
+        .product-detail {
+          float: left;
+          margin-left: 0.266rem;
+          .productName {
+            width: 7.573rem;
+            color: #444444;
+            font-size: 0.426rem;
+            line-height: 0.6rem;
+          }
+          .productMark {
+            display: flex;
+            .icon {
+              color: #FCC816;
+              font-size: 0.32rem;
+            }
+            span {
+              color: #B4B4B6;
+              font-size: 0.293rem;
+              line-height: 0.4rem;
+              &:nth-of-type(1) {
+                color: #FCC816;
+                margin-left: 0.08rem;
+              }
+            }
+            i {
+              width: 0.053rem;
+              height: 0.053rem;
+              margin-right: 0.133rem;
+              vertical-align: middle;
+              border-radius: 50%;
+              background: #B4B4B6;
+              display: inline-block;
+            }
+            .stars {
+              display: flex;
+              div {
+                margin-right: 0.08rem;
+              }
+            }
+            .starsText {
+            }
+          }
+        }
+      }
     }
   }
 

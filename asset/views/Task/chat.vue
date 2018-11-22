@@ -15,7 +15,7 @@
         :autoShowEmpty="false"
         :pageMode="true"
         :downLoadMoreMode="true"
-        :isShowUpToRefreshDescription="false"
+        :isShowUpToRefreshDescription="true"
         :prevOtherData="{room_id: this.chatRoomId}"
         :nextOtherData="{room_id: this.chatRoomId}"
         :prevSuccessCallback="prevSuccessCallback"

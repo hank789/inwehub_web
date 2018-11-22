@@ -94,7 +94,7 @@
           :prevOtherData="prevOtherData"
           :nextOtherData="nextOtherData"
           :pageMode="true"
-          :isShowUpToRefreshDescription="false"
+          :isShowUpToRefreshDescription="true"
           :autoShowEmpty="false"
           :isLoadingByRefresh="false"
           :list="list"

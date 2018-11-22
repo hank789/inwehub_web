@@ -110,7 +110,7 @@
 </template>
 
 <script type="text/javascript">
-  import { postRequest } from '../utils/request'
+  import { getRequest } from '../utils/request'
   import localEvent from '../stores/localStorage'
   import { setAppBadgeNumber } from '../utils/notice'
   import { socketResponseManage } from '../utils/socketResponeManage'
@@ -201,7 +201,7 @@
           return
         }
 
-        postRequest(`notification/count`, {}, false, {}, 0, false).then(response => {
+        getRequest(`notification/count`, {}, false, {}, 0, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -326,7 +326,7 @@
     flex-direction: column;
     position: relative;
     width: 100%; }
-  
+
   .container-footer .menu .desc {
     font-size: 11px; /* px不转换 */
     color: #B4B4B6;

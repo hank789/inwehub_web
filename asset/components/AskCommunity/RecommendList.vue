@@ -22,6 +22,7 @@
   import AskCommunityListItem from './AskCommunityListItem.vue'
   import { textToLinkHtml } from '../../utils/dom'
   import { getQuestionStateClass } from '../../utils/ask'
+  import userAbility from '../../utils/userAbility'
 
   const RecommentsList = {
     name: 'RecommentsList',
@@ -39,6 +40,9 @@
       }
     },
     methods: {
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
       toDetail (id, type) {
         if (!window.mui.os.plus) {
           window.mui.trigger(document.querySelector('.AppOne'), 'tap')
