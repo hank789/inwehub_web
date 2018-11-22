@@ -1484,13 +1484,18 @@ a {
 
 .lazyImg[lazy=loading] {
   background-color: #f6f6f6;
-  background-image: url("../statics/images/loading.gif");
+  background-image: url("../statics/images/loading_new@3x.png");
   background-position: center center;
   background-repeat: no-repeat;
+  background-size: 50%;
 }
 
 .lazyImg[lazy=error] {
   background-color: #f6f6f6;
+  background-image: url("../statics/images/loading_new@3x.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 50%;
 }
 
 
