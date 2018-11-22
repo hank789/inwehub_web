@@ -160,9 +160,9 @@
           <!--&gt;</groups-list>-->
         <!--</div>-->
       </div>
-        <div class="river" v-if="isShow"></div>
 
-        <div class="container-recommentProduct" v-if="isShow">
+        <div class="container-recommentProduct" v-if="isShow && detail.related_tags.length !== 0">
+          <div class="river"></div>
           <div class="title">
             <div class="text font-family-medium">相关产品</div>
             <div class="line-river line-river-full"></div>
@@ -188,7 +188,7 @@
                   </div>
                 </div>
               </div>
-              <div class="line-river-after line-river-after-top"></div>
+              <div class="line-river-after line-river-after-top" v-if="index !== detail.related_tags.length - 1"></div>
             </div>
           </div>
 
