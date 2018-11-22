@@ -82,8 +82,8 @@
                       </div>
                       <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
                       <div class="commonFriend">{{ recommendFollow.description }}</div>
-                      <div class="follow" :class="recommendFollow.is_followed ? 'active' : ''" @tap.stop.prevent="collectProfessor(recommendFollow)">{{ recommendFollow.is_followed ? '已关注' : '关注' }}</div>
                     </div>
+                    <div class="follow" :class="recommendFollow.is_followed ? 'active' : ''" @tap.stop.prevent="collectProfessor(recommendFollow)">{{ recommendFollow.is_followed ? '已关注' : '关注' }}</div>
                   </div>
 
                 </swiper-slide>
@@ -329,25 +329,26 @@
     }
     .swiper-slide {
       width: auto !important;
+      padding: 11px 0 16px;
     }
     .recommendFollowWrapper {
       padding: 0 16px;
       .title {
         color: #444444;
         font-size: 16px;
-        padding-bottom: 11px;
         line-height: 22.5px;
       }
       .recommendFollowList {
         width: 128px;
-        height: 168px;
+        height: 170.5px;
         padding: 0 9px;
+        position: relative;
         text-align: center;
         background: #FFFFFF;
-        margin: 0 5px 15px;
-        box-shadow:0px 6.5px 13px 0px #F2F4F7;
+        margin: 0 5px;
+        box-shadow:0px 0px 13px 0px #F2F4F7;
         .recommendListWrapper {
-          padding: 15px 0;
+          padding: 15px 0 0;
           position: relative;
           .delRecommend {
             position: absolute;
@@ -361,7 +362,7 @@
           .feed-IconImg {
             width: 71px;
             height: 44px;
-            margin: 25px auto 8px;
+            margin: 25px auto 7px;
             img {
               width: 100%;
               height: 100%;
@@ -369,8 +370,8 @@
           }
           .desc {
             color: #03AEF9;
-            font-size: 10px;
-            line-height: 14px;
+            font-size: 11px;
+            line-height: 15px;
             margin-bottom: 33px;
           }
           .avatar {
@@ -387,28 +388,31 @@
             color: #444444;
             font-size: 14px;
             line-height: 20px;
-            padding: 7px 0 2px;
+            padding: 7px 0 1.5px;
           }
           .commonFriend {
             color: #B4B4B6;
-            font-size: 10px;
-            line-height: 14px;
+            font-size: 11px;
+            line-height: 15px;
           }
-          .follow {
-            /*width: 54px;*/
-            height: 27px;
-            margin: 4px auto 0;
-            color: #FFFFFF;
-            font-size: 12px;
-            padding: 0 15px;
-            line-height: 27px;
-            background: #03AEF9;
-            border-radius: 100px;
-            display: inline-block;
-            &.active {
-              background: #DCDCDC;
-              color: #B4B4B6;
-            }
+        }
+        .follow {
+          /*width: 54px;*/
+          height: 27px;
+          margin: 0 auto;
+          color: #FFFFFF;
+          font-size: 12px;
+          padding: 0 15px;
+          line-height: 27px;
+          background: #03AEF9;
+          border-radius: 100px;
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+          &.active {
+            background: #DCDCDC;
+            color: #B4B4B6;
           }
         }
       }
