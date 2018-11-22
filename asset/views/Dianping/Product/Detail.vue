@@ -43,9 +43,9 @@
             <div class="line-river-after line-river-after-top" v-if="index !== detail.categories.length-1"></div>
           </template>
         </div>
-        <div class="line-river-big" v-if="detail.recommend_users && detail.recommend_users.length"></div>
+        <!-- <div class="line-river-big" v-if="detail.recommend_users && detail.recommend_users.length"></div>
 
-        <!-- <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
+        <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
           <div class="recommendTitle">
             <span class="font-family-medium">推荐顾问</span>
           </div>
