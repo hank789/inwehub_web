@@ -337,6 +337,11 @@
           margin-left: 16px;
         }
       }
+      &:last-child {
+         .recommendFollowList {
+           margin-right: 16px;
+         }
+       }
     }
     .recommendFollowWrapper {
       /*padding: 0 0.426rem;*/
