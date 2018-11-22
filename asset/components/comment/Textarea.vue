@@ -376,10 +376,10 @@
   }
   .commentWrapper .send {
     position: absolute;
-    right: 16px;
-    bottom: 12px;
+    right: 0.426rem;
+    bottom: 0.32rem;
     color: #B4B4B6;
-    font-size: 15px;
+    font-size: 0.4rem;
   }
   .commentWrapper .send.active {
     color: #03AEF9;

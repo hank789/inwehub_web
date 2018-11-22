@@ -500,12 +500,12 @@
 
   .container-recommentProduct {
     .title {
-      height: 44px;
-      line-height: 44px;
+      height: 1.173rem;
+      line-height: 1.173rem;
       .text {
         color: #444444;
-        font-size: 16px;
-        padding: 0 16px;
+        font-size: 0.426rem;
+        padding: 0 0.426rem;
       }
     }
 

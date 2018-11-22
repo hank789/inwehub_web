@@ -3549,59 +3549,59 @@ a {
   position: relative;
   background: #ECECEE;
   text-align: center;
-  padding: 10px 0 13.5px;}
+  padding: 0.266rem 0 0.36rem;}
 .companyInfo .companyLogo {
-  width: 92px;
-  height: 92px;
+  width: 2.453rem;
+  height: 2.453rem;
   margin: 0 auto;}
 .companyInfo .companyLogo img {
   width: 100%;
   height: 100%;
-  border-radius: 4px;
+  border-radius: 0.106rem;
   object-fit: cover;}
 .companyInfo .interval {
   position: absolute;
-  right: 15px;
-  top: 14px;
+  right: 0.4rem;
+  top: 0.373rem;
   color: #808080;
-  font-size: 12px;}
+  font-size: 0.32rem;}
 .companyInfo .companyName {
   color: #444444;
-  font-size: 16px;
-  line-height: 22.5px;
-  margin: 12px 0 8px;}
+  font-size: 0.426rem;
+  line-height: 0.6rem;
+  margin: 0.32rem 0 0.213rem;}
 .companyInfo .tags {
   color: #808080;
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 8px;}
+  font-size: 0.373rem;
+  line-height: 0.533rem;
+  margin-bottom: 0.213rem;}
 .companyInfo .tags .line-wall {
-  height: 13px;
-  margin: 0 11px;
-  top: 2px;}
+  height: 0.346rem;
+  margin: 0 0.293rem;
+  top: 0.053rem;}
 .companyInfo .address {
   color: #808080;
-  font-size: 12px;}
+  font-size: 0.32rem;}
 .companyInfo .address .icon {
   color: #B4B4B6;
-  font-size: 13px;}
+  font-size: 0.346rem;}
 .switchMenu {
   width: 100%;
-  height: 39px;
+  height: 1.04rem;
   position: relative;
-  line-height: 39px;
+  line-height: 1.04rem;
   background: #ffffff;
   display: flex;
   flex-direction: row;}
 .switchMenu span {
   width: 50%;
   color: #444444;
-  font-size: 14px;
+  font-size: 0.373rem;
   position: relative;
   text-align: center;}
 .switchMenu span i {
   position: absolute;
-  width: 56px;
+  width: 1.493rem;
   height: 0.053rem;
   border-radius: 1.333rem;
   background: #03aef9;

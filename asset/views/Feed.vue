@@ -322,47 +322,47 @@
     bottom: 50px; /* px不转换 */
   }
   .component-recommendFollow {
-    padding: 11px 0 0px;
+    padding: 0.293rem 0 0rem;
     .line-river-after:after {
       left: 0.426rem;
       right: 0.426rem;
     }
     .swiper-slide {
       width: auto !important;
-      padding: 11px 0 16px;
+      padding: 0.293rem 0 0.426rem;
     }
     .recommendFollowWrapper {
-      padding: 0 16px;
+      padding: 0 0.426rem;
       .title {
         color: #444444;
-        font-size: 16px;
-        line-height: 22.5px;
+        font-size: 0.426rem;
+        line-height: 0.6rem;
       }
       .recommendFollowList {
-        width: 128px;
-        height: 170.5px;
-        padding: 0 9px;
+        width: 3.413rem;
+        height: 4.546rem;
+        padding: 0 0.24rem;
         position: relative;
         text-align: center;
         background: #FFFFFF;
-        margin: 0 5px;
-        box-shadow:0px 0px 13px 0px #F2F4F7;
+        margin: 0 0.133rem;
+        box-shadow:0rem 0rem 0.346rem 0rem #F2F4F7;
         .recommendListWrapper {
-          padding: 15px 0 0;
+          padding: 0.4rem 0 0;
           position: relative;
           .delRecommend {
             position: absolute;
             right: 0;
-            top: 10px;
+            top: 0.266rem;
             .icon {
-              font-size: 8px;
+              font-size: 0.213rem;
               color: #DCDCDC;
             }
           }
           .feed-IconImg {
-            width: 71px;
-            height: 44px;
-            margin: 25px auto 7px;
+            width: 1.893rem;
+            height: 1.173rem;
+            margin: 0.666rem auto 0.186rem;
             img {
               width: 100%;
               height: 100%;
@@ -370,13 +370,13 @@
           }
           .desc {
             color: #03AEF9;
-            font-size: 11px;
-            line-height: 15px;
-            margin-bottom: 33px;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
+            margin-bottom: 0.88rem;
           }
           .avatar {
-            width: 50px;
-            height: 50px;
+            width: 1.333rem;
+            height: 1.333rem;
             margin: 0 auto;
             img {
               width: 100%;
@@ -386,28 +386,28 @@
           }
           .userName {
             color: #444444;
-            font-size: 14px;
-            line-height: 20px;
-            padding: 7px 0 1.5px;
+            font-size: 0.373rem;
+            line-height: 0.533rem;
+            padding: 0.186rem 0 0.04rem;
           }
           .commonFriend {
             color: #B4B4B6;
-            font-size: 11px;
-            line-height: 15px;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
           }
         }
         .follow {
-          /*width: 54px;*/
-          height: 27px;
+          /*width: 1.44rem;*/
+          height: 0.72rem;
           margin: 0 auto;
           color: #FFFFFF;
-          font-size: 12px;
-          padding: 0 15px;
-          line-height: 27px;
+          font-size: 0.32rem;
+          padding: 0 0.4rem;
+          line-height: 0.72rem;
           background: #03AEF9;
-          border-radius: 100px;
+          border-radius: 2.666rem;
           position: absolute;
-          bottom: 15px;
+          bottom: 0.4rem;
           left: 50%;
           transform: translateX(-50%);
           &.active {

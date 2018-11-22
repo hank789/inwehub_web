@@ -186,16 +186,16 @@
     background-color: #dcdcdc;
   }
   .listWrapper{
-    bottom: 44px;
+    bottom: 1.173rem;
   }
 
   .relevantPepole {
     .pepoleList {
       position: relative;
-      padding: 10px 16px;
+      padding: 0.266rem 0.426rem;
       .pepoleWrapper {
         overflow: hidden;
-        padding-bottom: 10px;
+        padding-bottom: 0.266rem;
       }
       .userLogo {
         width: 1.173rem;
@@ -218,15 +218,15 @@
       .userInfo {
         width: 6rem;
         float: left;
-        margin-top: 3px;
-        margin-left: 7.5px;
+        margin-top: 0.08rem;
+        margin-left: 0.2rem;
         .name {
           display: flex;
-          line-height: 20px;
+          line-height: 0.533rem;
           span {
             &:nth-of-type(1) {
               color: #565656;
-              font-size: 14px;
+              font-size: 0.373rem;
             }
             &:nth-of-type(2) {
               width:0.426rem;
@@ -236,31 +236,31 @@
               color:#FFFFFF;
               font-size:0.266rem;
               line-height: 0.346rem;
-              padding-left: 3px;
-              margin: 3px 5px 0;
+              padding-left: 0.08rem;
+              margin: 0.08rem 0.133rem 0;
             }
             &:nth-of-type(3) {
-              font-size: 14px;
+              font-size: 0.373rem;
             }
           }
         }
         .describe {
           color: #B4B4B6;
-          font-size: 11px;
-          line-height: 15px;
-          margin-top: 3px;
+          font-size: 0.293rem;
+          line-height: 0.4rem;
+          margin-top: 0.08rem;
         }
       }
       .follow {
-        height: 27px;
+        height: 0.72rem;
         float: right;
         color: #FEFEFE;
-        font-size: 14px;
-        line-height: 27px;
-        padding: 0 10px;
+        font-size: 0.373rem;
+        line-height: 0.72rem;
+        padding: 0 0.266rem;
         background: #03AEF9;
-        border-radius: 100px;
-        margin-top: 8.5px;
+        border-radius: 2.666rem;
+        margin-top: 0.226rem;
         &.active {
           color: #B4B4B6;
           background: #DCDCDC;
@@ -270,22 +270,22 @@
   }
   .meTo {
     width: 100%;
-    height: 44px;
+    height: 1.173rem;
     position: absolute;
     bottom: 0;
     .bot {
       top: 0;
     }
     .text {
-      width: 343px;
-      height: 36px;
-      line-height: 36px;
+      width: 9.146rem;
+      height: 0.96rem;
+      line-height: 0.96rem;
       text-align: center;
       color: #ffffff;
-      font-size: 16px;
+      font-size: 0.426rem;
       background: #03AEF9;
-      margin: 4px auto 0;
-      border-radius: 8px;
+      margin: 0.106rem auto 0;
+      border-radius: 0.213rem;
     }
   }
 
