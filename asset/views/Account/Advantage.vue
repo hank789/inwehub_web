@@ -60,7 +60,7 @@
 
 <script>
   import { searchText } from '../../utils/search'
-  import { postRequest } from '../../utils/request'
+  import { postRequest, getRequest } from '../../utils/request'
   import {getIndexByIdArray} from '../../utils/array'
   import localEvent from '../../stores/localStorage'
   import userAbility from '../../utils/userAbility'
@@ -138,7 +138,7 @@
           url = 'profile/info'
           data = {}
         }
-        postRequest(url, data).then(response => {
+        getRequest(url, data).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)

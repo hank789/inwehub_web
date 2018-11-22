@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-  import { postRequest } from '../../utils/request'
+  import { getRequest } from '../../utils/request'
   import Vue from 'vue'
   export default {
     data: () => ({
@@ -118,7 +118,7 @@
           }
           var list = response.data.data.tags
 
-          postRequest('profile/info', {}).then(response => {
+          getRequest('profile/info', {}).then(response => {
             var tags = response.data.data.info.region_tags
             for (var j in list) {
               list[j].checked = false

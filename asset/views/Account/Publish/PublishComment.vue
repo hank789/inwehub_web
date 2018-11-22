@@ -53,7 +53,8 @@
   const PublishAnswers = {
     data: () => ({
       list: [],
-      uuid: getLocalUuid()
+      uuid: '',
+      userUuid: getLocalUuid()
     }),
     activated: function () {
       this.refreshPageData()

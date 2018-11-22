@@ -509,6 +509,7 @@
         this.$refs.ctextarea.comment(commentTargetName)
       },
       getDetail () {
+        this.loading = 1
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail

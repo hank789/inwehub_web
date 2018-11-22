@@ -87,7 +87,7 @@
 </template>
 
 <script>
-  import { postRequest } from '../../utils/request'
+  import { getRequest } from '../../utils/request'
   import localEvent from '../../stores/localStorage'
 
   export default {
@@ -140,7 +140,7 @@
         }
       },
       initData () {
-        postRequest(`profile/info`, {}).then(response => {
+        getRequest(`profile/info`, {}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)

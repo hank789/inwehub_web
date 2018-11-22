@@ -53,13 +53,14 @@
     data () {
       return {
         list: [],
-        uuid: getLocalUuid()
+        uuid: '',
+        userUuid: getLocalUuid()
       }
     },
     components: {
       RefreshList
     },
-    activated: function () {
+    activated () {
       this.refreshPageData()
     },
     watch: {
@@ -99,6 +100,9 @@
           this.$router.pushPlus(url)
         }
       }
+    },
+    mounted () {
+      this.refreshPageData()
     }
   }
 </script>

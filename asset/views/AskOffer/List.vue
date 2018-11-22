@@ -49,16 +49,15 @@
         ></Answers>
         <div class="robAnswer" v-if="answers.length === 0 && ask.question.status !== 9 && !isAsker" @tap.stop.prevent="goRobAnswer">抢个沙发</div>
 
-        <div class="line-river-big"></div>
-
-        <div class="container-recommentProduct">
+        <div class="container-recommentProduct" v-if="ask.related_products">
+          <div class="line-river-big"></div>
           <div class="title">
             <div class="text font-family-medium">相关产品</div>
             <div class="line-river line-river-full"></div>
           </div>
 
           <div class="productList">
-            <div class="comment-product" v-for="(item, index) in ask.question.related_products" :key="index">
+            <div class="comment-product" v-for="(item, index) in ask.related_products" :key="index">
               <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
                 <div class="product-img border-football">
                   <ImageView :src="item.logo" width="44" height="44"></ImageView>
@@ -77,7 +76,7 @@
                   </div>
                 </div>
               </div>
-              <div class="line-river-after line-river-after-top"></div>
+              <div class="line-river-after line-river-after-top" v-if="index !== ask.related_products.length - 1"></div>
             </div>
           </div>
 
