@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-  import { getRequest } from '../../utils/request'
+  import { getRequest, postRequest } from '../../utils/request'
   import Vue from 'vue'
   export default {
     data: () => ({
