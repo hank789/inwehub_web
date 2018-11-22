@@ -2,7 +2,7 @@ import { postRequest } from './request'
 import { saveImageByBase64 } from '../utils/plus'
 
 function getImageSuffix (src, width, height) {
-  if (/\.svg$/.test(src)) {
+  if (/\.svg$/.test(src) || /\.gif$/.test(src) || /\.ico$/.test(src)) {
     return src
   }
 
