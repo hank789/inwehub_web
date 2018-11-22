@@ -502,7 +502,7 @@
   .component-wechat-top .left .iconBorder .icon {
     position: relative;
     left: 0.026rem;
-    top: 1px;
+    top: 0.026rem;
     font-size: 0.866rem;
   }
 
