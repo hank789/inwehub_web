@@ -83,7 +83,9 @@
                       <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
                       <div class="commonFriend">{{ recommendFollow.description }}</div>
                     </div>
-                    <div class="follow" :class="recommendFollow.is_followed ? 'active' : ''" @tap.stop.prevent="collectProfessor(recommendFollow)">{{ recommendFollow.is_followed ? '已关注' : '关注' }}</div>
+                    <div class="follow" @tap.stop.prevent="collectProfessor(recommendFollow)">
+                      <div class="text" :class="recommendFollow.is_followed ? 'active' : ''">{{ recommendFollow.is_followed ? '已关注' : '关注' }}</div>
+                    </div>
                   </div>
 
                 </swiper-slide>
@@ -330,26 +332,32 @@
     .swiper-slide {
       width: auto !important;
       padding: 0.293rem 0 0.426rem;
+      &:first-child {
+        .recommendFollowList {
+          margin-left: 16px;
+        }
+      }
     }
     .recommendFollowWrapper {
-      padding: 0 0.426rem;
+      /*padding: 0 0.426rem;*/
       .title {
         color: #444444;
         font-size: 0.426rem;
         line-height: 0.6rem;
+        padding: 0 0.426rem;
       }
       .recommendFollowList {
         width: 3.413rem;
         height: 4.546rem;
         padding: 0 0.24rem;
         position: relative;
-        text-align: center;
         background: #FFFFFF;
         margin: 0 0.133rem;
         box-shadow:0rem 0rem 0.346rem 0rem #F2F4F7;
         .recommendListWrapper {
           padding: 0.4rem 0 0;
           position: relative;
+          text-align: center;
           .delRecommend {
             position: absolute;
             right: 0;
@@ -397,22 +405,23 @@
           }
         }
         .follow {
-          /*width: 1.44rem;*/
-          height: 0.72rem;
-          margin: 0 auto;
-          color: #FFFFFF;
-          font-size: 0.32rem;
-          padding: 0 0.4rem;
-          line-height: 0.72rem;
-          background: #03AEF9;
-          border-radius: 2.666rem;
+          width: 110px;
           position: absolute;
           bottom: 0.4rem;
-          left: 50%;
-          transform: translateX(-50%);
-          &.active {
-            background: #DCDCDC;
-            color: #B4B4B6;
+          text-align: center;
+          .text {
+            height: 0.72rem;
+            font-size: 0.32rem;
+            padding: 0 0.4rem;
+            line-height: 0.72rem;
+            background: #03AEF9;
+            color: #FFFFFF;
+            border-radius: 2.666rem;
+            display: inline-block;
+            &.active {
+              background: #DCDCDC;
+              color: #B4B4B6;
+            }
           }
         }
       }
