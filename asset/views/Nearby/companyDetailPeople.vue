@@ -216,7 +216,7 @@
         }
       }
       .userInfo {
-        width: 6rem;
+        width: 5.5rem;
         float: left;
         margin-top: 0.08rem;
         margin-left: 0.2rem;
