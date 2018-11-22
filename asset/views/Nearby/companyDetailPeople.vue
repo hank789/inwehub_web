@@ -236,7 +236,7 @@
               color:#FFFFFF;
               font-size:0.266rem;
               line-height: 0.346rem;
-              padding-left: 0.08rem;
+              padding-left: 0.12rem;
               margin: 0.08rem 0.133rem 0;
             }
             &:nth-of-type(3) {
