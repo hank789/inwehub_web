@@ -12,7 +12,7 @@
           <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true"
-             @tap.stop.prevent="$router.pushPlus('/dianping/search/comments','list-detail-page-three')">
+             @tap.stop.prevent="$router.pushPlus('/dianping/search/products','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>
@@ -33,13 +33,13 @@
 
         <template slot="listHeader">
 
-          <div id="searchWrapper" class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/comments')">
+          <div id="searchWrapper" class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/products')">
             <div class="searchInput">
               <div class="searchLeft">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-sousuo"></use>
                 </svg>
-                <span>搜索点评、产品、分类、公司</span>
+                <span>搜索产品、点评、分类、公司</span>
               </div>
               <div class="searchRight" @tap.stop.prevent="cooperation">
                 <i class="line-wall"></i>
