@@ -40,8 +40,12 @@
   </div>
 </template>
 <script>
-  import { getRequest, postRequest } from '../../utils/request'
+  import { postRequest } from '../../utils/request'
   import Vue from 'vue'
+  import localEvent from '../../stores/localStorage'
+  import { USERS_APPEND } from '../../stores/types'
+  import { getUserInfo } from '../../utils/user'
+
   export default {
     data: () => ({
       list: [],
@@ -78,12 +82,15 @@
             window.mui.toast(response.data.message)
             return
           }
-
-          if (this.$route.query.from === 'home') {
-            this.$router.replace('/home')
-          } else {
-            this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
-          }
+          // 更新用户信息
+          this.$store.dispatch(USERS_APPEND, cb => getUserInfo(null, user => {
+            cb(user)
+            if (this.$route.query.from === 'home') {
+              this.$router.replace('/home')
+            } else {
+              this.$router.replace('/userGuide/stepone?from=' + this.$route.query.from)
+            }
+          }))
         })
       },
       // 下一步按钮
@@ -118,23 +125,20 @@
           }
           var list = response.data.data.tags
 
-          getRequest('profile/info', {}).then(response => {
-            var tags = response.data.data.info.region_tags
-            for (var j in list) {
-              list[j].checked = false
+          var currentUser = localEvent.getLocalItem('UserInfo')
+          var tags = currentUser.region_tags
+          for (var j in list) {
+            list[j].checked = false
 
-              for (var i in tags) {
-                if (list[j].value === tags[i].value) {
-                  list[j].checked = true
-                  break
-                }
+            for (var i in tags) {
+              if (list[j].value === tags[i].value) {
+                list[j].checked = true
+                break
               }
             }
-
-            this.list = list
-
-            this.loading = 0
-          })
+          }
+          this.list = list
+          this.loading = 0
         })
       }
     },
