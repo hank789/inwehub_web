@@ -698,6 +698,7 @@
         }
       },
       getDetail: function () {
+        this.loading = 1
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
         this.noback = !!this.$route.query.noback

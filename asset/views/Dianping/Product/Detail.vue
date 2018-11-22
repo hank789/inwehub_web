@@ -287,7 +287,7 @@
       },
       refreshPageData () {
         let id = this.$route.params.id
-
+        this.loading = 1
         if (!id) {
           window.mui.toast('请求异常')
           window.mui.back()

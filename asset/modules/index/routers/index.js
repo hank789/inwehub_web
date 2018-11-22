@@ -41,12 +41,12 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
   autoBlur()
   console.log('pushPlus 准备打开:' + url)
   var footerTab = ['/ask/offers', '/home', '/inform', '/my', '/discover', '/groups', '/dianping']
-
+  var detailUrlName = ['discover_detail', 'dianping-comment-detail', 'dianping-product-detail']
   var nextUrl = ''
   if (window.mui.os.plus && window.mui.os.ios) {
+    var matchedRoute = this.resolve(url)
     if (process.env.NODE_ENV !== 'development') {
       if (window.mixpanel.track) {
-        var matchedRoute = this.resolve(url)
         var mixpanelEvent = 'inwehub:'
         if (matchedRoute.route.name) {
           mixpanelEvent += matchedRoute.route.name
@@ -110,7 +110,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
     } else if (id === nextUrl) {
       urlSplit = url.split('/')
       // 判断是否是详情页面, 详情页面id为list-detail-page
-      if (urlSplit[urlSplit.length - 1] > 0) {
+      if (urlSplit[urlSplit.length - 1] > 0 || (matchedRoute.route.name && detailUrlName.indexOf(matchedRoute.route.name) >= 0)) {
         id = 'list-detail-page'
       } else if (id.includes('/resume') || id.includes('?from')) {
         id = 'resume-page'
