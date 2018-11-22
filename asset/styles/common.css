@@ -3405,7 +3405,9 @@ a {
 
 .comment-product .border-football:after, .product-introduce .border-football:after {
   border-radius: 0.213rem;
-  border-color: #DCDCDC;}
+  border-color: #DCDCDC;
+  box-sizing: border-box;
+}
 
 .container-addComment {
   position: absolute;
