@@ -45,7 +45,7 @@
         </div>
         <div class="line-river-big" v-if="detail.recommend_users && detail.recommend_users.length"></div>
 
-        <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
+        <!-- <div class="recommend" v-if="detail.recommend_users && detail.recommend_users.length">
           <div class="recommendTitle">
             <span class="font-family-medium">推荐顾问</span>
           </div>
@@ -68,7 +68,7 @@
             <div class="swiper-pagination" slot="pagination"></div>
           </swiper>
 
-        </div>
+        </div> -->
         <div v-if="detail.review_count">
           <div class="line-river-big"></div>
           <div class="allDianPing font-family-medium">点评 {{ detail.review_count ? '(' + detail.review_count + ')' : '' }}</div>
