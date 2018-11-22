@@ -2630,7 +2630,8 @@ a {
 .container-list-discuss .list-item-discuss .lidR .lidR2 {
   color: #444444;
   font-size: 0.373rem;
-  line-height: 0.506rem; }
+  line-height: 0.506rem;
+  word-break: break-all;}
 .container-list-discuss .list-item-discuss .lidR .lidR3 {
   display: -webkit-box;
   display: -ms-flexbox;
