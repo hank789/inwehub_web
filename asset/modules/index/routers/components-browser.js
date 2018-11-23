@@ -194,6 +194,7 @@ const Hongbao = () => import(/* webpackChunkName: "Hongbao" */ '../../../views/H
 const Ad = () => import(/* webpackChunkName: "Ad" */ '../../../views/Ad.vue')
 const componentsShortTcut = () => import(/* webpackChunkName: "componentsShortTcut" */ '../../../components/ShortTcut.vue')
 const Page404 = () => import(/* webpackChunkName: "Page404" */ '../../../views/404.vue')
+const PageEmpty = () => import(/* webpackChunkName: "PageEmpty" */ '../../../views/empty.vue')
 const Visitor = () => import(/* webpackChunkName: "Visitor" */ '../../../views/Account/VisitorList.vue')
 const AddressBooks = () => import(/* webpackChunkName: "AddressBooks" */ '../../../views/Account/AddressBooks.vue')
 const AskOfferIndex = () => import(/* webpackChunkName: "AskOffer" */ '../../../views/AskOffer/Index.vue')
@@ -406,6 +407,7 @@ export {
   Ad,
   componentsShortTcut,
   Page404,
+  PageEmpty,
   Visitor,
   AddressBooks,
   AskOfferIndex,

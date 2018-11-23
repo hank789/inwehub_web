@@ -511,7 +511,7 @@ function AppPageInit (context) {
     if (window.mui.os.plus && window.mui.os.ios) {
       // 预加载页面
       var listPageWebview = window.mui.preload({
-        url: process.env.NODE_ENV === 'development' ? 'index.html#/home' : '/public/index.html#/home',
+        url: process.env.NODE_ENV === 'development' ? 'index.html#/empty' : '/public/index.html#/empty',
         id: 'list-detail-page',
         styles: {
           popGesture: 'hide'

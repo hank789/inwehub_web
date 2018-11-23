@@ -40,7 +40,7 @@ router.pushReadHubPage = function (url) {
 router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', forceWebView = false, reload = false) {
   autoBlur()
   console.log('pushPlus 准备打开:' + url)
-  var footerTab = ['/ask/offers', '/home', '/inform', '/my', '/discover', '/groups', '/dianping']
+  var footerTab = ['ask-offer-list', 'home', 'inform-list', 'my', 'discover', 'group-list', 'dianping', 'userGuide-interst']
   var detailUrlName = ['discover_detail', 'dianping-comment-detail', 'dianping-product-detail']
   var nextUrl = ''
   if (window.mui.os.plus && window.mui.os.ios) {
@@ -105,7 +105,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
     // 底部4个tab的页面默认为主页
     var urlSplit = url.split('?', 1)
     var currentWebview = window.plus.webview.currentWebview()
-    if (footerTab.indexOf(urlSplit[0]) >= 0) {
+    if (footerTab.indexOf(urlSplit[0]) >= 0 || (matchedRoute.route.name && footerTab.indexOf(matchedRoute.route.name) >= 0)) {
       id = window.plus.runtime.appid
     } else if (id === nextUrl) {
       urlSplit = url.split('/')

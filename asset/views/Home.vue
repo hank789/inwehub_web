@@ -133,6 +133,7 @@
   import { getRequest } from '../utils/request'
   import { scrollPage } from '../utils/dom'
   import { getImageSuffix } from '../utils/image'
+  import localEvent from '../stores/localStorage'
 
   const Home = {
     data () {
@@ -163,9 +164,7 @@
         tags: []
       }
     },
-    created () {
-      this.refreshPageData()
-    },
+    created () {},
     components: {
       RefreshList,
       swiper,
@@ -217,17 +216,9 @@
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
-      getTags () {
-        getRequest('profile/info', {}).then(response => {
-          var tags = response.data.data.info.region_tags
-          this.tags = tags
-          if (!this.tags.length) {
-            this.$router.pushPlus('/userGuide/interst?from=home')
-          }
-        })
-      },
       refreshPageData () {
-        this.getTags()
+        var currentUser = localEvent.getLocalItem('UserInfo')
+        this.tags = currentUser.region_tags
         userAbility.newbieTask(this)
         autoTextArea()
 

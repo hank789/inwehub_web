@@ -69,7 +69,8 @@ function updateUserInfoCache (user) {
     is_company: 0,
     show_my_wallet: false,
     show_ios_resume: false,
-    realname: ''
+    realname: '',
+    region_tags: ''
   }
   userLocal.user_id = user.id
   userLocal.name = user.name
@@ -110,6 +111,7 @@ function updateUserInfoCache (user) {
   userLocal.rc_code = user.rc_code
   userLocal.skill_tags = user.skill_tags
   userLocal.realname = user.realname
+  userLocal.region_tags = user.region_tags
 
   /*
    user.counts.map(function (count, index) {
