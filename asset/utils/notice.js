@@ -90,15 +90,15 @@ function noticeHandler (context, payload) {
     case 'readhub_new_submission':
     case 'readhub_comment_replied':
       // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-      router.pushReadHubPage(payload.object_id, 'list-page')
+      router.pushPlus(payload.object_id, 'list-page')
       break
     case 'readhub_submission_replied':
       // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-      router.pushReadHubPage(payload.object_id, 'list-page')
+      router.pushPlus(payload.object_id, 'list-page')
       break
     case 'readhub_username_mentioned':
       // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-      router.pushReadHubPage(payload.object_id, 'list-page')
+      router.pushPlus(payload.object_id, 'list-page')
       break
     case 'push_notice_readhub':
       // 推送阅读发现的文章
