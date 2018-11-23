@@ -6,13 +6,13 @@ function getImageSuffix (src, width, height) {
     return src
   }
 
-  var suffix = '?x-oss-process=image/resize,m_lfit'
+  var suffix = '?x-oss-process=image%2Fresize%2Cm_lfit'
   if (width) {
-    suffix += ',w_' + width
+    suffix += '%2Cw_' + width
   }
 
   if (height) {
-    suffix += ',h_' + height
+    suffix += '%2Ch_' + height
   }
   return src + suffix
 }
