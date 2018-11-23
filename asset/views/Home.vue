@@ -164,9 +164,7 @@
         tags: []
       }
     },
-    created () {
-      this.refreshPageData()
-    },
+    created () {},
     components: {
       RefreshList,
       swiper,
