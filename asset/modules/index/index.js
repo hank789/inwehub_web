@@ -62,7 +62,9 @@ import ImageView from './../../components/image/ImageView.vue'
 Vue.component('ImageView', ImageView)
 
 window.loading_gif = loadingGif
-
+if (window.plus) {
+  window.appUserAgent = window.plus.navigator.getUserAgent()
+}
 // mui的插件；
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'

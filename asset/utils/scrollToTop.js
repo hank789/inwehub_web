@@ -2,11 +2,11 @@ window.scrollEventContext = null
 
 var eventCallback = function () {
   var context = window.scrollEventContext
-  if (context.querySelector('#refreshContainer')) {
+  if (context.querySelector('#refreshContainer') && window.mui(context.querySelector('#refreshContainer')).pullRefresh()) {
     console.log('底部菜单选项双击后找到 #refreshContainer')
     window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
     window.mui(context.querySelector('#refreshContainer')).pullRefresh().pulldownLoading()
-  } else if (context.querySelector('#pullrefresh')) {
+  } else if (context.querySelector('#pullrefresh') && window.mui(context.querySelector('#pullrefresh')).pullRefresh()) {
     console.log('底部菜单选项双击后找到 #pullrefresh')
     window.mui(context.querySelector('#pullrefresh')).pullRefresh().endPulldownToRefresh()
     window.mui(context.querySelector('#pullrefresh')).pullRefresh().pulldownLoading()
@@ -33,12 +33,12 @@ function scrollToTop (context) {
     context = document.getElementById('router-view')
   }
 
-  if (context.querySelector('#refreshContainer')) {
+  if (context.querySelector('#refreshContainer') && window.mui(context.querySelector('#refreshContainer')).pullRefresh()) {
     console.log('found #refreshContainer')
     setTimeout(() => {
       window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
     }, 500)
-  } else if (context.querySelector('#pullrefresh')) {
+  } else if (context.querySelector('#pullrefresh') && window.mui(context.querySelector('#pullrefresh')).pullRefresh()) {
     console.log('found #pullrefresh')
     setTimeout(() => {
       window.mui(context.querySelector('#pullrefresh')).pullRefresh().endPulldownToRefresh()

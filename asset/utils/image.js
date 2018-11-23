@@ -2,8 +2,14 @@ import { postRequest } from './request'
 import { saveImageByBase64 } from '../utils/plus'
 
 function getImageSuffix (src, width, height) {
-  if (/\.svg$/.test(src) || /\.gif$/.test(src) || /\.ico$/.test(src)) {
+  if (/\.svg$/.test(src) || /\.ico$/.test(src)) {
     return src
+  }
+  // 小米mix不压缩
+  if (window.plus) {
+    if (window.appUserAgent.indexOf('; MIX') > 0) {
+      return src
+    }
   }
 
   var suffix = '?x-oss-process=image/resize,m_lfit'
