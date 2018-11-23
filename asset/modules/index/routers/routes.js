@@ -2693,6 +2693,14 @@ const routes = [
     }
   },
   { // message
+    path: '/empty',
+    name: 'empty',
+    meta: {
+      title: '加载中'
+    },
+    component: componets.PageEmpty
+  },
+  { // message
     path: '/*',
     name: '404',
     meta: {

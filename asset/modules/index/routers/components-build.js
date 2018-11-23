@@ -188,6 +188,7 @@ import Hongbao from '../../../views/Hongbao.vue'
 import Ad from '../../../views/Ad.vue'
 import componentsShortTcut from '../../../components/ShortTcut.vue'
 import Page404 from '../../../views/404.vue'
+import PageEmpty from '../../../views/empty.vue'
 import Visitor from '../../../views/Account/VisitorList.vue'
 import AddressBooks from '../../../views/Account/AddressBooks.vue'
 import AskOfferIndex from '../../../views/AskOffer/Index.vue'
@@ -399,6 +400,7 @@ export {
   Ad,
   componentsShortTcut,
   Page404,
+  PageEmpty,
   Visitor,
   AddressBooks,
   AskOfferIndex,
