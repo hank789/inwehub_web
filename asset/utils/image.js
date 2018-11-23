@@ -7,7 +7,7 @@ function getImageSuffix (src, width, height) {
   }
   // 小米mix不压缩
   if (window.plus) {
-    if (window.appUserAgent.indexOf(';MIX') > 0) {
+    if (window.appUserAgent.indexOf('; MIX') > 0) {
       return src
     }
   }
