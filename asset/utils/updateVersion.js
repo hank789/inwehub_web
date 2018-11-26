@@ -1,4 +1,4 @@
-import { apiRequest } from '../utils/request'
+import { getRequest } from '../utils/request'
 import localEvent from '../stores/localStorage'
 import Raven from 'raven-js'
 
@@ -7,29 +7,29 @@ function checkUpdate () {
     // 获取本地应用资源版本号
     window.plus.runtime.getProperty(window.plus.runtime.appid, function (inf) {
       var wgtVer = inf.version
-      var app_install_version = localEvent.getLocalItem('app_install_version')
-      if (!app_install_version.version) {
-        app_install_version.version = wgtVer
+      var appInstallVersion = localEvent.getLocalItem('app_install_version')
+      if (!appInstallVersion.version) {
+        appInstallVersion.version = wgtVer
       }
       console.log('当前应用版本：' + wgtVer)
-      console.log('当前安装版本：' + app_install_version.version)
+      console.log('当前安装版本：' + appInstallVersion.version)
       localEvent.setLocalItem('app_version', {version: wgtVer})
-      apiRequest(`system/version`, {app_uuid: window.plus.device.uuid + wgtVer}, false).then(responseData => {
-        if (responseData !== false) {
-          var appVersion = responseData.app_version
-          if (appVersion && app_install_version.version < appVersion) {
-            var packageUrl = responseData.package_url
-            var isIosForce = responseData.is_ios_force
-            var isAndroidForce = responseData.is_android_force
+      getRequest(`system/version`, {app_uuid: window.plus.device.uuid + wgtVer}, false).then(responseData => {
+        if (responseData.data.data !== false) {
+          var appVersion = responseData.data.data.app_version
+          if (appVersion && appInstallVersion.version < appVersion) {
+            var packageUrl = responseData.data.data.package_url
+            var isIosForce = responseData.data.data.is_ios_force
+            var isAndroidForce = responseData.data.data.is_android_force
             // 如果是强更
             if (isIosForce === 1 && window.mui.os.ios) {
               window.mui.alert('有新的版本升级')
-              window.plus.runtime.openURL(responseData.ios_force_update_url)
+              window.plus.runtime.openURL(responseData.data.data.ios_force_update_url)
             } else if (isAndroidForce === 1 && window.mui.os.android) {
               window.mui.alert('有新的版本升级')
               // market://details?id=io.dcloud.HelloMUI
               // 'com.tencent.android.qqdownloader'
-              window.plus.runtime.openURL(responseData.android_force_update_url, function (e) {
+              window.plus.runtime.openURL(responseData.data.data.android_force_update_url, function (e) {
                 window.plus.nativeUI.confirm('很抱歉，您未安装腾讯应用宝，请安装后再更新', function (i) {
                   if (i.index === 0) {
                     window.plus.runtime.openURL('market://details?id=com.tencent.android.qqdownloader')
@@ -43,7 +43,7 @@ function checkUpdate () {
             } else if ((isIosForce === 2 && window.mui.os.ios) || (isAndroidForce === 2 && window.mui.os.android)) {
               // 什么都不做
             } else {
-              localEvent.setLocalItem('app_update_msg', {msg: responseData.update_msg})
+              localEvent.setLocalItem('app_update_msg', {msg: responseData.data.data.update_msg})
               // 下载升级包
               downWgt(packageUrl, appVersion)
             }

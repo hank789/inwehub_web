@@ -368,6 +368,7 @@
           this.$refs.shareComponent.share()
         },
         getData: function () {
+          this.loading = 1
           // 获取本地的百分比
           const currentUser = getLocalUserInfo()
           this.percent = currentUser.account_info_complete_percent
