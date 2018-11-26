@@ -404,7 +404,8 @@
             this.item.feed.slug,
             this.item.feed.title,
             this.item.user.avatar,
-            this.item.user.name
+            this.item.user.name,
+            this.item.feed.rate_star
           )
         }
 
