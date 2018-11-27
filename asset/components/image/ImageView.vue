@@ -1,6 +1,6 @@
 <template>
-    <img class="lazyImg" v-lazy="getImage(src)" v-if="isLazyload" :rsrc="getImage(src)"/>
-    <img :src="getImage(src)" v-else/>
+    <img class="lazyImg" v-lazy="getImage(src)" v-if="isLazyload" :key="src" :rsrc="getImage(src)"/>
+    <img :src="getImage(src)" :key="src" v-else/>
 </template>
 
 <script type="text/javascript">
