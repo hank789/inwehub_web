@@ -78,7 +78,7 @@
                         </svg>
                       </div>
                       <div class="avatar" @tap.stop.prevent="toResume(recommendFollow.uuid)">
-                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="false" ></ImageView>
+                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="true" ></ImageView>
                       </div>
                       <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
                       <div class="commonFriend">{{ recommendFollow.description }}</div>
