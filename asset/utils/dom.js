@@ -170,7 +170,7 @@ function setRemUnit () {
 }
 
 function getDpi () {
-  var dpr = window.devicePixelRatio || 1
+  var dpr = Math.round(window.devicePixelRatio) || 1
   return dpr
 }
 

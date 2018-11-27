@@ -514,7 +514,7 @@
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
           this.showItemOptions()
-          var shareOption = getDianpingCommentDetail(this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name)
+          var shareOption = getDianpingCommentDetail(this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.rate_star)
           this.shareOption = Object.assign(this.shareOption, shareOption)
           this.loading = 0
         })
