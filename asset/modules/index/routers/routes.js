@@ -1927,7 +1927,7 @@ const routes = [
   },
   { // 附近企业
     path: '/companyDetailPeople/:id',
-    name: 'companyDetails',
+    name: 'companyDetailPeople',
     meta: {
       title: '企业详情',
       wechatHideHeader: true
