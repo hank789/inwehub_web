@@ -287,7 +287,10 @@ const routes = [
       title: '问答社区-悬赏问答-回答列表页',
       wechatHideHeader: false
     },
-    component: componets.AskOfferList
+    component: componets.AskOfferList,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // 问答社区-悬赏问答-问答详情；
     path: '/ask/offer/:id',
@@ -296,7 +299,10 @@ const routes = [
       title: '问答社区-悬赏问答-详情页',
       wechatHideHeader: false
     },
-    component: componets.AskOfferDetail
+    component: componets.AskOfferDetail,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
   },
   { // 问答社区-互动回答-回答列表；
     path: '/askCommunity/interaction/answers/:id',
@@ -1148,9 +1154,8 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      next()
+      requestAuth(to, from, next)
     }
-
   },
   { // 共享个人名片
     path: '/share/resume/:id',
@@ -1161,7 +1166,7 @@ const routes = [
       wechatHideHeader: true
     },
     beforeEnter: (to, from, next) => {
-      next()
+      requestAuth(to, from, next)
     }
 
   },
