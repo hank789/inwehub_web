@@ -290,7 +290,7 @@
           if (!autoBlur) {
             setTimeout(() => {
               this.editorObj.focus()
-            }, 1000)
+            }, 500)
           }
         } else {
           this.editorObj.blur()

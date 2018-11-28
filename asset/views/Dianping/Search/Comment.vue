@@ -107,6 +107,7 @@
   import { searchText as searchTextFilter } from '../../../utils/search'
   import DianPingFeed from '../../../components/Feed.vue'
   import PageMore from '../../../components/PageMore.vue'
+  import { autoBlur } from '../../../utils/dom'
 
   export default {
     data () {
@@ -142,6 +143,10 @@
         if (this.searchText !== this.confirmSearchText) {
           return 'match'
         }
+
+        setTimeout(() => {
+          autoBlur()
+        }, 100)
 
         return 'result'
       }

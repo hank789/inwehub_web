@@ -113,6 +113,7 @@
   import StarView from '../../../components/star-rating/starView.vue'
   import { postRequest } from '../../../utils/request'
   import { searchText as searchTextFilter } from '../../../utils/search'
+  import { autoBlur } from '../../../utils/dom'
 
   export default {
     data () {
@@ -145,6 +146,10 @@
         if (this.searchText !== this.confirmSearchText) {
           return 'match'
         }
+
+        setTimeout(() => {
+          autoBlur()
+        }, 100)
 
         return 'result'
       }
