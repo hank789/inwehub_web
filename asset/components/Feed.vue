@@ -48,7 +48,7 @@
         <!--图片-->
         <div v-if="itemObj.feed.img.length && item.feed.submission_type !== 'link'"
              class="container-images container-images-discover" :class="'container-images-' + (itemObj.feed.img.length)">
-          <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
+          <div v-for="img in itemObj.feed.img" class="container-image"><ImageView :src="img" :isLazyload="true" width="108" height="108"></ImageView></div>
         </div>
         <!--链接-->
         <div class="container-feed-link-box" v-if="item.feed.submission_type === 'link'" @tap.stop.prevent="goArticle()">
