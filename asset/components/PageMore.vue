@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn">
+    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn && localShowShareBtn">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-gengduo1"></use>
       </svg>
@@ -66,6 +66,7 @@
   export default {
     data () {
       return {
+        localShowShareBtn: true
       }
     },
     components: {},
@@ -164,7 +165,7 @@
       },
       bindShare () {
         if (this.$router.currentRoute.meta.wechatHideHeader && window.mui.os.wechat) {
-          this.hideShareBtn = true
+          this.localShowShareBtn = false
         }
         var currentUser = localEvent.getLocalItem('UserInfo')
         var fromUser = 0
