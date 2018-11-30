@@ -255,6 +255,7 @@
     import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
     import FeedItem from '../../components/Feed.vue'
     import PageMore from '../../components/PageMore.vue'
+    import { getIconMenus, iconMenusClickedItem } from '../../utils/feed'
 
     export default {
       data: () => ({
@@ -269,6 +270,7 @@
           thumbUrl: ''
         },
         shareItemOption: {},
+        itemOptionsObj: {},
         im_tokenMsg: '',
         percent: 0,
         uuid: '',
@@ -342,7 +344,9 @@
         })
       },
       methods: {
-        showItemOptions (shareOption) {
+        showItemOptions (shareOption, item) {
+          this.itemOptionsObj = item
+          this.iconMenus = getIconMenus(item)
           this.shareItemOption = shareOption
           this.$refs.share.share()
         },
@@ -350,7 +354,8 @@
         },
         shareFail () {
         },
-        iconMenusClickedItem () {
+        iconMenusClickedItem (item) {
+          iconMenusClickedItem(this, this.itemOptionsObj, item)
         },
         toDetail (item) {
           this.$router.pushPlus(item.url, 'list-detail-page')
