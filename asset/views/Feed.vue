@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <template v-for="(item, index) in list">
+        <div v-for="(item, index) in list" :key="item.id">
 
          <!-- <div class="component-feed-item-guide" v-if="index === 3 && search_type === 2">
             <div class="feed-IconImg">
@@ -109,7 +109,7 @@
             :item="item"
             @showItemMore="showItemMore"
           ></FeedItem>
-        </template>
+        </div>
 
       </RefreshList>
 
