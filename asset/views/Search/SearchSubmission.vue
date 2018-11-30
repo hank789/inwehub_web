@@ -116,6 +116,8 @@
   import TextDetail from '../../components/discover/TextDetail'
   import FeedItem from '../../components/Feed.vue'
   import PageMore from '../../components/PageMore.vue'
+  import { autoBlur } from '../../utils/dom'
+  import { getIconMenus, iconMenusClickedItem } from '../../utils/feed'
 
   export default {
     data () {
@@ -127,6 +129,7 @@
         isShowCancelButton: false,
         list: [],
         searchAdviceList: [],
+        itemOptionsObj: {},
         resultLoading: 1,
         hotSearchHistory: {
           history: [],
@@ -174,11 +177,17 @@
           return 'match'
         }
 
+        setTimeout(() => {
+          autoBlur()
+        }, 100)
+
         return 'result'
       }
     },
     methods: {
-      showItemMore (shareOption) {
+      showItemMore (shareOption, item) {
+        this.iconMenus = getIconMenus(item)
+        this.itemOptionsObj = item
         this.shareOption = shareOption
         this.$refs.share.share()
       },
@@ -188,7 +197,8 @@
       shareSuccess () {
 
       },
-      iconMenusClickedItem () {
+      iconMenusClickedItem (item) {
+        iconMenusClickedItem(this, this.itemOptionsObj, item)
       },
       focus: function () {
         this.confirmSearchText = ''

@@ -483,8 +483,10 @@
         }, 'div')
       },
       goComment () {
-        this.$refs.discuss.rootComment()
         scrollToElement(this, '#commentTitle', '.pull-down-container')
+        setTimeout(() => {
+          this.$refs.discuss.rootComment()
+        }, 100)
       },
       collection () {
         this.collect()

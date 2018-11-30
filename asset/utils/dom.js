@@ -170,7 +170,7 @@ function setRemUnit () {
 }
 
 function getDpi () {
-  var dpr = window.devicePixelRatio || 1
+  var dpr = Math.round(window.devicePixelRatio) || 1
   return dpr
 }
 
@@ -206,31 +206,33 @@ function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
     var y = container.scrollTop
     var maxY = container.scrollHeight - container.clientHeight
     if (element === '#refreshContainer > .mui-scroll') {
-      y = Math.abs(refreshContainer.y)
+      y = refreshContainer.y
       maxY = Math.abs(refreshContainer.maxScrollY)
     }
 
     // console.log('top:' + y + ', maxY:' + maxY)
 
-    if (y > prevTop) {
+    if (y < prevTop) {
+      // console.log('手指上滑')
       prevTop = y
 
       // 手指上滑
-      if (y >= maxY) {
+      if (Math.abs(y) >= maxY) {
         // 页面已到底部
-        if (toUpEnd) { toUpEnd(container, y) }
+        if (toUpEnd) { toUpEnd(container, Math.abs(y)) }
       } else {
-        if (toUp) { toUp(container, y) }
+        if (toUp) { toUp(container, Math.abs(y)) }
       }
-    } else if (y < prevTop) {
+    } else if (y > prevTop) {
+      // console.log('手指下滑')
       prevTop = y
 
       // 手指下滑
       if (y === 0) {
         // 页面已到顶部
-        if (toDownEnd) { toDownEnd(container, y) }
+        if (toDownEnd) { toDownEnd(container, Math.abs(y)) }
       } else {
-        if (toDown) { toDown(container, y) }
+        if (toDown) { toDown(container, Math.abs(y)) }
       }
     }
   })

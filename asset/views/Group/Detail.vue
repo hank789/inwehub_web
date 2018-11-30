@@ -228,6 +228,7 @@
   import { alertGroups } from '../../utils/dialogList'
   import FeedItem from '../../components/Feed.vue'
   import { scrollPage } from '../../utils/dom'
+  import { getIconMenus, iconMenusClickedItem } from '../../utils/feed'
 
   export default {
     data () {
@@ -341,24 +342,14 @@
             this.cancelTop(this.itemOptionsObj, () => {
             })
             break
+          default:
+            iconMenusClickedItem(this, this.itemOptionsObj, item)
+            break
         }
       },
       showItemOptions (shareOption, item) {
-        this.iconMenus = []
+        this.iconMenus = getIconMenus(item)
         this.itemOptionsObj = item
-
-        if (getLocalUserId() === item.user.id) {
-          this.iconMenus.push({
-            icon: '#icon-shanchu1',
-            text: '删除'
-          })
-        }
-        this.iconMenus.push(
-          // {
-          //   icon: '#icon-jubao',
-          //   text: '举报'
-          // }
-        )
 
         if (this.detail.is_joined === 3) {
           if (item.feed.is_recommend) {
