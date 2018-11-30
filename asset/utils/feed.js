@@ -48,7 +48,7 @@ function getIconMenus (item) {
       })
     }
 
-    if (item.is_bookmark) {
+    if (item.feed.is_bookmark) {
       iconMenus.push({
         icon: '#icon-shoucangdilantongyi',
         text: '已收藏',
@@ -78,18 +78,18 @@ function iconMenusClickedItem (context, item, iconItemClicked) {
         break
       case '收藏':
         context.$refs.share.share()
-        collect(context, item.id, () => {
-          item.is_bookmark = true
+        collect(context, item.feed.submission_id, () => {
+          item.feed.is_bookmark = true
         }, () => {
-          item.is_bookmark = false
+          item.feed.is_bookmark = false
         })
         break
       case '已收藏':
         context.$refs.share.share()
-        collect(context, item.id, () => {
-          item.is_bookmark = true
+        collect(context, item.feed.submission_id, () => {
+          item.feed.is_bookmark = true
         }, () => {
-          item.is_bookmark = false
+          item.feed.is_bookmark = false
         })
         break
     }
