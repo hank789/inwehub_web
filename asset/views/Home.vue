@@ -74,7 +74,7 @@
 
         <div id="home-content" class="container-list-article">
 
-          <template v-for="(item, index) in list">
+          <div v-for="(item, index) in list" :key="item.id">
             <!--<div class="line-river-big" v-if="index === 5"></div>-->
             <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
               <div class="itemArticleLeft">
@@ -86,7 +86,7 @@
                 </timeago>
                 </div>
               </div>
-              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="false"></ImageView></div>
+              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="true"></ImageView></div>
             </div>
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
 
@@ -96,7 +96,7 @@
                 <span class="hotSpotTop">推荐</span>
               </div>
             </div>
-          </template>
+          </div>
           <div class="line-river-big" v-if="list.length-1"></div>
         </div>
       </RefreshList>
@@ -164,9 +164,7 @@
         tags: []
       }
     },
-    created () {
-      this.refreshPageData()
-    },
+    created () {},
     components: {
       RefreshList,
       swiper,

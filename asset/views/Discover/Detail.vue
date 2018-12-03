@@ -362,7 +362,7 @@
         return {'submission_id': this.detail.id}
       },
       discussListParams () {
-        return {'submission_slug': this.detail.slug, sort: 'hot'}
+        return {'submission_slug': this.detail.slug, order_by: 2, perPage: 3}
       },
       descLength () {
         if (this.description === this.descPlaceholder) {
@@ -483,8 +483,10 @@
         }, 'div')
       },
       goComment () {
-        this.$refs.discuss.rootComment()
         scrollToElement(this, '#commentTitle', '.pull-down-container')
+        setTimeout(() => {
+          this.$refs.discuss.rootComment()
+        }, 100)
       },
       collection () {
         this.collect()

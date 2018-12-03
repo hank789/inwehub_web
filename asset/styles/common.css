@@ -3566,7 +3566,7 @@ a {
   width: 100%;
   height: 100%;
   border-radius: 0.106rem;
-  object-fit: cover;}
+  object-fit: contain;}
 .companyInfo .interval {
   position: absolute;
   right: 0.4rem;

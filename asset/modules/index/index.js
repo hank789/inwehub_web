@@ -62,7 +62,9 @@ import ImageView from './../../components/image/ImageView.vue'
 Vue.component('ImageView', ImageView)
 
 window.loading_gif = loadingGif
-
+if (window.plus) {
+  window.appUserAgent = window.plus.navigator.getUserAgent()
+}
 // mui的插件；
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -86,15 +88,16 @@ Vue.use(VueLazyload, {
   preLoad: 1.3, // 预加载的高度比例
   loading: '',
   attempt: 30, // 尝试次数
-  filter: {
-    progressive (listener, options) {
+  listenEvents: [ 'scroll' ]
+  // filter: {
+    // progressive (listener, options) {
       // getCacheImage(listener.src, (imgUrl) => {
       //   if (listener.src !== imgUrl) {
       //     listener.src = imgUrl
       //   }
       // })
-    }
-  }
+      // }
+  // }
 })
 
 import { bindWaitting } from '../../utils/waiting'

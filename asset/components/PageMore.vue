@@ -1,12 +1,12 @@
 <template>
   <div>
-    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn">
+    <a class="mui-icon shareBtn mui-pull-right" @tap.stop.prevent="shareBtnClick()" v-if="!hideShareBtn && localShowShareBtn">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-gengduo1"></use>
       </svg>
     </a>
 
-    <div id="shareWrapper" class="shareWrapper mui-popover mui-popover-action mui-popover-bottom">
+    <div id="sharePageMoreWrapper" class="sharePageMoreWrapper mui-popover mui-popover-action mui-popover-bottom">
       <div class="title">
         分享到
       </div>
@@ -66,6 +66,7 @@
   export default {
     data () {
       return {
+        localShowShareBtn: true
       }
     },
     components: {},
@@ -108,7 +109,7 @@
         this.$emit('clickedItem', item)
       },
       cancelShare () {
-        window.mui('#shareWrapper').popover('toggle')
+        window.mui('#sharePageMoreWrapper').popover('toggle')
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel
           window.mixpanel.track(
@@ -142,7 +143,7 @@
         }
       },
       shareToChat () {
-        window.mui('#shareWrapper').popover('toggle')
+        window.mui('#sharePageMoreWrapper').popover('toggle')
         this.hide()
         this.$router.pushPlus('/collectUser?from=all')
         // 保存链接
@@ -164,7 +165,7 @@
       },
       bindShare () {
         if (this.$router.currentRoute.meta.wechatHideHeader && window.mui.os.wechat) {
-          this.hideShareBtn = true
+          this.localShowShareBtn = false
         }
         var currentUser = localEvent.getLocalItem('UserInfo')
         var fromUser = 0
@@ -200,9 +201,9 @@
         }
 
         if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('hide')
+          window.mui('#sharePageMoreWrapper').popover('hide')
         } else {
-          window.mui('#shareWrapper').popover('hide')
+          window.mui('#sharePageMoreWrapper').popover('hide')
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
@@ -226,9 +227,9 @@
           this.sendPengYouQuan()
         }
         if (window.mui.os.plus) {
-          window.mui('#shareWrapper').popover('hide')
+          window.mui('#sharePageMoreWrapper').popover('hide')
         } else {
-          window.mui('#shareWrapper').popover('hide')
+          window.mui('#sharePageMoreWrapper').popover('hide')
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
@@ -287,7 +288,7 @@
         }
 
         setTimeout(() => {
-          window.mui('#shareWrapper').popover('toggle')
+          window.mui('#sharePageMoreWrapper').popover('toggle')
           window.mui('body').on('tap', '.mui-backdrop', () => {
             this.hide()
           })
@@ -346,7 +347,7 @@
     text-align: center;
   }
 
-  .shareWrapper {
+  .sharePageMoreWrapper {
     text-align: left;
     .title {
       background: #FFF;

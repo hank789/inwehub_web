@@ -161,7 +161,9 @@
         }
         feedBackProduct(this, data, () => {
           this.resetData()
-          window.mui.toast('我们已收到您提交的产品，请耐心等候')
+          window.mui.alert('我们已收到您提交的产品，请耐心等候', () => {
+            window.mui.back()
+          })
         })
       }
     }

@@ -198,7 +198,7 @@ function getRecommends (count) {
  * @param username
  * @returns {{title: string, link: string, content: *, imageUrl: *, thumbUrl: string}}
  */
-function getDianpingCommentDetail (slug, title, imgUrl, username) {
+function getDianpingCommentDetail (slug, title, imgUrl, username, rateStar) {
   // var link = process.env.API_ROOT + 'wechat/oauth?redirect=' + pathUrl + encodeURIComponent('?noback=1')
   var link = process.env.H5_ROOT + '/#' + '/dianping/comment/' + slug + '?noback=1&uuid=' + getLocalUuid()
 
@@ -209,7 +209,7 @@ function getDianpingCommentDetail (slug, title, imgUrl, username) {
   return {
     title: title, // '分享 ' + username + ' 的InweHub动态',
     link: link,
-    content: '来自InweHub-' + username + '的点评',
+    content: rateStar + '星-来自' + username + '的点评',
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '点评'
@@ -234,7 +234,7 @@ function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
 
   return {
     title: username + '邀请您点评',
-    pyqTitle: username + '邀请您点评:' + productName,
+    pyqTitle: username + '邀请您点评' + productName,
     link: link,
     content: productName,
     imageUrl: imgUrl,

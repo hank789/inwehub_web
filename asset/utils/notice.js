@@ -43,62 +43,62 @@ function noticeHandler (context, payload) {
     case 'question_answer_confirmed':
       // mui.alert('/ask/' + payload.object_id + '?time=' + Date.parse(new Date()));
       // router.go(-1);
-      router.pushPlus('/ask/detail/' + payload.object_id + '?time=' + Date.parse(new Date()))
+      router.pushPlus('/ask/detail/' + payload.object_id + '?time=' + Date.parse(new Date()), 'list-page')
       break
     case 'pay_question_answered_askCommunity':
-      router.pushPlus('/askCommunity/major/' + payload.object_id)
+      router.pushPlus('/askCommunity/major/' + payload.object_id, 'list-page')
       break
     case 'free_question_answered':
-      router.pushPlus('/ask/offer/' + payload.object_id)
+      router.pushPlus('/ask/offer/' + payload.object_id, 'list-page')
       break
     case 'pay_answer_awake':
     case 'pay_answer':
     case 'answer':
       // router.go(-1);
       // mui.alert('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
-      router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()))
+      router.pushPlus('/answer/' + payload.object_id + '?time=' + Date.parse(new Date()), 'list-page')
       break
     case 'free_answer_awake':
     case 'free_answer':
-      router.pushPlus('/ask/offer/answers/' + payload.object_id)
+      router.pushPlus('/ask/offer/answers/' + payload.object_id, 'list-page')
       break
     case 'authentication_success':
       // 专家认证成功
-      router.pushPlus('/my?needalert=1')
+      router.pushPlus('/my?needalert=1', 'list-page')
       break
     case 'authentication_fail':
       // 专家认证失败
-      router.pushPlus('/my/pilot')
+      router.pushPlus('/my/pilot', 'list-page')
       break
     case 'company_auth_success':
       // 企业认证成功
-      router.pushPlus('/company/my')
+      router.pushPlus('/company/my', 'list-page')
       break
     case 'company_auth_fail':
       // 企业认证失败
-      router.pushPlus('/company/my')
+      router.pushPlus('/company/my', 'list-page')
       break
     case 'notification_money':
       // 资金变动通知
-      router.pushPlus('/my/Finance')
+      router.pushPlus('/my/Finance', 'list-page')
       break
     case 'user_following':
       // 用户关注通知
-      router.pushPlus('/share/resume/' + payload.object_id + '?goback=1')
+      router.pushPlus('/share/resume/' + payload.object_id + '?goback=1', 'list-page')
       break
     case 'readhub_submission_upvoted':
     case 'readhub_new_submission':
     case 'readhub_comment_replied':
       // 阅读发现评论回复,payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-      router.pushReadHubPage(payload.object_id)
+      router.pushPlus(payload.object_id, 'list-page')
       break
     case 'readhub_submission_replied':
       // 阅读发现文章回复，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-      router.pushReadHubPage(payload.object_id)
+      router.pushPlus(payload.object_id, 'list-page')
       break
     case 'readhub_username_mentioned':
       // 阅读发现@某人，payload.object_id即为url，例如：/c/来吐槽/cszxnrfdf
-      router.pushReadHubPage(payload.object_id)
+      router.pushPlus(payload.object_id, 'list-page')
       break
     case 'push_notice_readhub':
       // 推送阅读发现的文章
@@ -114,7 +114,7 @@ function noticeHandler (context, payload) {
       break
     case 'push_notice_app_self':
       // 推送app内页
-      router.push(payload.object_id)
+      router.push(payload.object_id, 'list-page')
       break
     case 'push_notice_article':
       // 推送公告文章
@@ -142,47 +142,47 @@ function noticeHandler (context, payload) {
     case 'activity_enroll_fail':
     case 'activity_enroll_success':
       // 活动报名事件
-      router.pushPlus('/EnrollmentStatus/' + payload.object_id)
+      router.pushPlus('/EnrollmentStatus/' + payload.object_id, 'list-page')
       break
     case 'pay_answer_new_comment':
       // 专业回答新的回复
-      router.pushPlus('/askCommunity/major/' + payload.object_id)
+      router.pushPlus('/askCommunity/major/' + payload.object_id, 'list-page')
       break
     case 'free_answer_new_comment':
       // 互动问答新的回复
-      router.pushPlus('/ask/offer/' + payload.object_id)
+      router.pushPlus('/ask/offer/' + payload.object_id, 'list-page')
       break
     case 'pay_answer_new_support':
       // 专业回答赞
-      router.pushPlus('/askCommunity/major/' + payload.object_id)
+      router.pushPlus('/askCommunity/major/' + payload.object_id, 'list-page')
       break
     case 'free_answer_new_support':
       // 专业回答赞
-      router.pushPlus('/ask/offer/' + payload.object_id)
+      router.pushPlus('/ask/offer/' + payload.object_id, 'list-page')
       break
     case 'im_message':
       // 聊天信息
-      router.pushPlus('/chat/' + payload.object_id)
+      router.pushPlus('/chat/' + payload.object_id, 'list-page')
       break
     case 'im_group_message':
       // 群聊信息
-      router.pushPlus('/group/chat/' + payload.object_id)
+      router.pushPlus('/group/chat/' + payload.object_id, 'list-page')
       break
     case 'invite_user_register':
       // 邀请用户注册成功
-      router.pushPlus('/invitation/friends')
+      router.pushPlus('/invitation/friends', 'list-page')
       break
     case 'group_member_apply':
       // 申请加入圈子通知
-      router.pushPlus('/group/setting/' + payload.object_id)
+      router.pushPlus('/group/setting/' + payload.object_id, 'list-page')
       break
     case 'group_member_join':
       // 成功加入圈子
-      router.pushPlus('/group/detail/' + payload.object_id)
+      router.pushPlus('/group/detail/' + payload.object_id, 'list-page')
       break
     case 'group_audit_result':
       // 圈子审核结果
-      router.pushPlus('/group/detail/' + payload.object_id)
+      router.pushPlus('/group/detail/' + payload.object_id, 'list-page')
       break
   }
 }

@@ -50,12 +50,12 @@
 
           <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
-            <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="'recommandProductList_' + index">
+            <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="'recommandProductList_' + recommandProduct.id">
               <div class="container-product-comment"
                    @tap.stop.prevent="$router.pushPlus('/dianping/comment/' + recommandProduct.slug)">
                 <div class="comment-info">
                   <div class="avatarImg">
-                    <ImageView :isLazyload="false" :src="recommandProduct.user.avatar" width="34" height="34"></ImageView>
+                    <ImageView :isLazyload="true" :src="recommandProduct.user.avatar" width="34" height="34"></ImageView>
                   </div>
                   <div class="comment-name">
                     <div class="font-family-medium">{{ recommandProduct.user.name }}</div>
@@ -69,7 +69,7 @@
                 <div class="comment-product">
                   <div class="product-info"  @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(recommandProduct.tag.name))">
                     <div class="product-img border-football">
-                      <ImageView :src="recommandProduct.tag.logo" :isLazyload="false" width="44" height="44"></ImageView>
+                      <ImageView :src="recommandProduct.tag.logo" :isLazyload="true" width="44" height="44"></ImageView>
                     </div>
                     <div class="product-detail">
                       <div class="productName font-family-medium text-line-1">{{ recommandProduct.tag.name }}</div>
@@ -110,16 +110,16 @@
           </div>
 
           <div class="productList">
-            <div class="comment-product" v-for="(item, index) in list" :key="'comment-product_' + index">
+            <div class="comment-product" v-for="(item, index) in list" :key="'comment-product_' + item.id">
               <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
                 <div class="product-img border-football">
-                  <ImageView :src="item.logo" :isLazyload="false" width="44" height="44"></ImageView>
+                  <ImageView :src="item.logo" :isLazyload="true" :key="'product_logo_' + item.id" width="44" height="44"></ImageView>
                 </div>
                 <div class="product-detail">
                   <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
                   <div class="productMark">
                     <div class="stars">
-                      <StarView :rating="item.review_average_rate"></StarView>
+                      <StarView :rating="item.review_average_rate" :key="'product_rate_' + item.id"></StarView>
                     </div>
                     <div class="starsText">
                       <span>{{ item.review_average_rate }}分</span>
