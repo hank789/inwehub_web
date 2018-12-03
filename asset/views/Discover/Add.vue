@@ -140,6 +140,7 @@
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { fetchArticle } from '../../utils/url'
+  import userAbilityCheck from '../../utils/userAbilityCheck'
 
   export default {
     data () {
@@ -467,6 +468,10 @@
         }
       },
       initData () {
+        var isValid = userAbilityCheck.checkPhoneCertification(this)
+        if (!isValid) {
+          return
+        }
         console.log('initData() fired')
         this.syncSelectUser()
         this.syncSelectTags()

@@ -10,6 +10,7 @@
 import { getLocalUserInfo } from '../utils/user'
 import router from '../modules/index/routers/index'
 import { alertSimple, getDialogObj } from '../utils/dialog'
+import { alertRealNameAuthentication } from './dialogList'
 
 var UserAbilityCheck = () => {
   /**
@@ -91,10 +92,26 @@ var UserAbilityCheck = () => {
     return true
   }
 
+  /**
+   * 实名认证检查
+   */
+  var checkPhoneCertification = (context) => {
+    var userInfo = getLocalUserInfo()
+    if (userInfo.phone) {
+      return true
+    }
+
+    alertRealNameAuthentication(() => {
+      router.push('/wechat/bindPhone')
+    })
+
+    return false
+  }
+
   return {
     applyProfessor: applyProfessor,
-    moreProfessor: moreProfessor
-
+    moreProfessor: moreProfessor,
+    checkPhoneCertification
   }
 }
 

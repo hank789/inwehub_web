@@ -85,6 +85,7 @@
   import { autoTextArea } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
+  import userAbilityCheck from '../../utils/userAbilityCheck'
 
   const Ask = {
     data: () => ({
@@ -157,6 +158,11 @@
         }
       },
       initData () {
+        var isValid = userAbilityCheck.checkPhoneCertification(this)
+        if (!isValid) {
+          return
+        }
+
         if (this.$route.params.uuid) {
           this.uid = this.$route.params.uuid
         } else {
