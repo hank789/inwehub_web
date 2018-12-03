@@ -78,7 +78,7 @@
                         </svg>
                       </div>
                       <div class="avatar" @tap.stop.prevent="toResume(recommendFollow.uuid)">
-                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="true" ></ImageView>
+                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="true" :key="'feed_avatar_' + recommendFollow.uuid" ></ImageView>
                       </div>
                       <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
                       <div class="commonFriend">{{ recommendFollow.description }}</div>
@@ -107,6 +107,7 @@
 
           <FeedItem
             :item="item"
+            :key="'feedItem_' + item.id"
             @showItemMore="showItemMore"
           ></FeedItem>
         </div>
