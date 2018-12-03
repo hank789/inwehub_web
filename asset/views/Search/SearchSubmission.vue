@@ -263,6 +263,7 @@
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
       back () {
+        this.empty()
         window.mui.back()
         return
       },
