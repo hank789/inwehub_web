@@ -497,7 +497,7 @@
         if (this.$route.query.from) {
           window.mui.back()
         } else {
-          this.$router.pushPlus('/home')
+          this.$router.pushPlus('/discover')
         }
       },
       totags () {

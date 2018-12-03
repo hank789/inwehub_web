@@ -319,7 +319,7 @@
         this.shareOption = Object.assign(this.shareOption, shareOption)
       },
       goDianping () {
-        this.$router.pushPlus('/dianping/add/' + urlencode(this.detail.name))
+        userAbility.jumpToDianpingAdd(this, urlencode(this.detail.name))
       },
       footerMenuClickedItem (item) {
         switch (item.text) {
