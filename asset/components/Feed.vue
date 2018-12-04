@@ -121,7 +121,7 @@
               <div class="border-football" v-if="item.feed.is_recommend">优质</div>
             </div>
 
-            <div class="time"><timeago :since="timeago(item.created_at)" :auto-update="60"></timeago></div>
+            <div class="time">{{ item.created_at }}</div>
           </div>
         </div>
         <div class="mark font-family-medium">{{ item.feed.rate_star }}分</div>
@@ -136,11 +136,11 @@
 
       <div class="link" v-if="item.feed.tags && isShowLink">
         <div class="linkBox" @tap.stop.prevent="goProductDetail()">
-              <span class="linkIimg" v-if="!item.feed.tags[0].logo">
-                <svg class="icon" aria-hidden="true" >
-                  <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
-                </svg>
-              </span>
+          <span class="linkIimg" v-if="!item.feed.tags[0].logo">
+            <svg class="icon" aria-hidden="true" >
+              <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
+            </svg>
+          </span>
           <div class="productLogo border-football" v-else>
             <img class="lazyImg" v-lazy="item.feed.tags[0].logo">
           </div>
