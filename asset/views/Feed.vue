@@ -143,7 +143,7 @@
   import { postRequest } from '../utils/request'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { getIconMenus, iconMenusClickedItem } from '../utils/feed'
-  import { jumpToDiscoverAdd } from '../utils/userAbility'
+  import userAbility from '../utils/userAbility'
 
   const Feed = {
     data: () => ({
@@ -206,7 +206,7 @@
     },
     methods: {
       toDiscoverAdd () {
-        jumpToDiscoverAdd()
+        userAbility.jumpToDiscoverAdd()
       },
       toResume (uuid) {
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))

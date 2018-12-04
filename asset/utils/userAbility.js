@@ -18,7 +18,7 @@ import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stor
 import { getContacts, toSettingSystem } from '../utils/plus'
 import { isLogined } from '../utils/auth'
 import { joinIn } from '../utils/group'
-import { userAbilityCheck } from '../utils/userAbilityCheck'
+import userAbilityCheck from '../utils/userAbilityCheck'
 
 var UserAbility = () => {
   /**
