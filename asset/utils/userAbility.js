@@ -467,8 +467,8 @@ var UserAbility = () => {
   }
 
   /* 邀请用户加入圈子 */
-  var inviteJoinInGroup = (context, groupId, callback) => {
-    alertGroups(context, (num) => {
+  var inviteJoinInGroup = (context, groupInfo, groupId, callback) => {
+    alertGroups(context, groupInfo, (num) => {
       joinIn(groupId, callback)
     })
   }

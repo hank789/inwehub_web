@@ -3,8 +3,18 @@
     <!--点击时间添加class -> alertConfirm-->
     <div id="groups">
       <div class="groups">
-         <p>请先加入圈子！</p>
-         <p>即可点赞、收藏、评论、看更多圈子内容</p>
+        <p class="groupTitle font-family-medium">入圈即可看内容、互动</p>
+        <p class="smallTitle">并可在关注页或推送中接收内容更新</p>
+        <div class="groupInfo">
+          <div class="groupLogo">
+            <img :src="options.groupInfo.logo">
+          </div>
+          <div class="detailInfo">
+            <div class="groupName font-family-medium">{{ options.groupInfo.name }}</div>
+            <div class="groupDescribe text-line-1">{{ options.groupInfo.description }}</div>
+            <div class="sharPeople"><span>{{ options.groupInfo.subscribers }}人气</span> <span>{{ options.groupInfo.articles }}分享</span></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -576,6 +586,12 @@
             avatar: '',
             name: '',
             isVip: false
+          },
+          groupInfo: {
+            name: '',
+            description: '',
+            logo: '',
+            subscribers: ''
           }
         }
       }
@@ -662,16 +678,56 @@
     margin-left: -2%;
     text-align: center;
   }
-  .groups p:nth-of-type(1){
-    font-size:0.426rem;
-    color:rgba(68,68,68,1);
-    margin-top: 0.826rem;
+  .groups .groupTitle {
+    color: #444444;
+    font-size: 18px;
   }
-  .groups p:nth-of-type(2){
-    font-size:0.373rem;
-    color:rgba(128,128,128,1);
-    padding-top:0.133rem;
+  .groups .smallTitle {
+    color: #808080;
+    font-size: 14px;
+    padding-top: 5px;
   }
+  .groups .groupInfo {
+    background: #F3F4F6;
+    border-radius: 4px;
+    display: flex;
+    text-align: left;
+    padding: 15px;
+    margin-top: 20px;
+  }
+  .groupInfo .groupLogo {
+    width: 44px;
+    height: 44px;
+  }
+  .groupInfo .groupLogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  .groupInfo .detailInfo {
+    width: 181px;
+    padding-left: 10px;
+  }
+  .groupInfo .detailInfo .groupName {
+    font-size: 16px;
+    color: #444444;
+    line-height: 22.5px;
+  }
+  .groupInfo .detailInfo .groupDescribe {
+    color: #808080;
+    font-size: 13px;
+    line-height: 16.5px;
+    margin-top: 3.5px;
+    margin-bottom: 5.5px;
+  }
+  .groupInfo .detailInfo .sharPeople {
+    color: #B4B4B6;
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+
   #test {
     width: 6.4rem;
     height: 2.933rem;
@@ -1884,5 +1940,6 @@
     font-weight: 500;
     color: #444444;
     line-height: 0.4rem; }
+
 
 </style>
