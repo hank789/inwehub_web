@@ -208,6 +208,7 @@
         })
       },
       back () {
+        this.empty()
         window.mui.back()
         return
       },

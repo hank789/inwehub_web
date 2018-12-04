@@ -114,6 +114,7 @@
   import Vue from 'vue'
   import starRating from '../../components/star-rating/star-rating.vue'
   import localEvent from '../../stores/localStorage'
+  import userAbilityCheck from '../../utils/userAbilityCheck'
 
   export default {
     data () {
@@ -215,6 +216,11 @@
         Vue.set(item, 'selected', !item.selected)
       },
       refreshPageData () {
+        var isValid = userAbilityCheck.checkPhoneCertification(this)
+        if (!isValid) {
+          return
+        }
+
         var dianpingRating = localEvent.getLocalItem('dianping_rating')
         if (dianpingRating && dianpingRating.rating) {
           this.star = dianpingRating.rating

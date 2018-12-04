@@ -49,7 +49,7 @@
         ></Answers>
         <div class="robAnswer" v-if="answers.length === 0 && ask.question.status !== 9 && !isAsker" @tap.stop.prevent="goRobAnswer">抢个沙发</div>
 
-        <div class="container-recommentProduct" v-if="ask.related_products">
+        <div class="container-recommentProduct" v-if="ask.related_products && ask.related_products.length">
           <div class="line-river-big"></div>
           <div class="title">
             <div class="text font-family-medium">相关产品</div>

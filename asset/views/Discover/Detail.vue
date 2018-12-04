@@ -362,7 +362,7 @@
         return {'submission_id': this.detail.id}
       },
       discussListParams () {
-        return {'submission_slug': this.detail.slug, sort: 'hot'}
+        return {'submission_slug': this.detail.slug, order_by: 2, perPage: 3}
       },
       descLength () {
         if (this.description === this.descPlaceholder) {
@@ -437,7 +437,7 @@
 
           userAbility.inviteJoinInGroup(this, this.detail.group.id, () => {
             this.refreshPageData()
-          })
+          }, this.detail.group)
         }
       },
       iconMenusClickedItem (item) {

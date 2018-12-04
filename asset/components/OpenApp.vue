@@ -43,12 +43,19 @@
             <div class="suspension">
               <div class="component-wechat-top">
                 <div class="left" @tap.stop.prevent="$router.push('/home')">
+                  <div class="backHome">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shouye"></use>
+                    </svg>
+                    <div class="homeText">首页</div>
+                    <div class="fenLine"></div>
+                  </div>
                   <div class="iconBorder">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-logotuxing"></use>
                     </svg>
                   </div>
-                  <svg class="icon" aria-hidden="true">
+                  <svg class="icon textLogo" aria-hidden="true">
                     <use xlink:href="#icon-logowenzi1"></use>
                   </svg>
                   <div class="desc">聚焦行业解决方案，共筑人脉圈子</div>
@@ -62,12 +69,19 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="backHome">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shouye"></use>
+                  </svg>
+                  <div class="homeText">首页</div>
+                  <div class="fenLine"></div>
+                </div>
                 <div class="iconBorder">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-logotuxing"></use>
                   </svg>
                 </div>
-                <svg class="icon" aria-hidden="true">
+                <svg class="icon textLogo" aria-hidden="true">
                   <use xlink:href="#icon-logowenzi1"></use>
                 </svg>
                 <div class="desc">企业级应用＆服务广场</div>
@@ -79,12 +93,19 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="backHome">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shouye"></use>
+                  </svg>
+                  <div class="homeText">首页</div>
+                  <div class="fenLine"></div>
+                </div>
                 <div class="iconBorder">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-logotuxing"></use>
                   </svg>
                 </div>
-                <svg class="icon" aria-hidden="true">
+                <svg class="icon textLogo" aria-hidden="true">
                   <use xlink:href="#icon-logowenzi1"></use>
                 </svg>
                 <div class="desc">追踪每日企服行业新热点</div>
@@ -97,12 +118,19 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
+                <div class="backHome">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shouye"></use>
+                  </svg>
+                  <div class="homeText">首页</div>
+                  <div class="fenLine"></div>
+                </div>
                 <div class="iconBorder">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-logotuxing"></use>
                   </svg>
                 </div>
-                <svg class="icon" aria-hidden="true">
+                <svg class="icon textLogo" aria-hidden="true">
                   <use xlink:href="#icon-logowenzi1"></use>
                 </svg>
                 <div class="desc">聚焦行业解决方案，共筑人脉圈子</div>
@@ -115,6 +143,13 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left">
+                <div class="backHome">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shouye"></use>
+                  </svg>
+                  <div class="homeText">首页</div>
+                  <div class="fenLine"></div>
+                </div>
                 <div class="userImg">
                   <img :src="shareInfo.avatar_url">
                 </div>
@@ -130,12 +165,19 @@
             <div class="suspension">
               <div class="component-wechat-top">
                 <div class="left" @tap.stop.prevent="$router.push('/home')">
+                  <div class="backHome">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shouye"></use>
+                    </svg>
+                    <div class="homeText">首页</div>
+                    <div class="fenLine"></div>
+                  </div>
                   <div class="iconBorder">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-logotuxing"></use>
                     </svg>
                   </div>
-                  <svg class="icon" aria-hidden="true">
+                  <svg class="icon textLogo" aria-hidden="true">
                     <use xlink:href="#icon-logowenzi1"></use>
                   </svg>
                   <div class="desc">企业级应用＆服务广场</div>
@@ -321,6 +363,33 @@
 </script>
 
 <style scoped="scoped">
+
+  .backHome {
+    width: 1.333rem;
+    margin-top: 0.213rem;
+    padding-left: 0.426rem;
+    position: relative;
+  }
+  .backHome .icon {
+    color: #FFFFFF;
+    font-size: 0.453rem;
+    margin-left: 0.08rem;
+  }
+  .backHome .homeText {
+    color: #FFFFFF;
+    font-size: 0.266rem;
+    line-height: 0.373rem;
+    /*margin-top: 0.04rem;*/
+  }
+  .backHome .fenLine {
+    width: 0.026rem;
+    height: 0.773rem;
+    background: #68CEFB;
+    position: absolute;
+    top: 0.106rem;
+    right: 0;
+  }
+
   /*手机端*/
   .suspend {
     width: 100%;
@@ -494,7 +563,7 @@
     height: 0.906rem;
     position: absolute;
     top: 0.2rem;
-    left: 0.426rem;
+    left: 1.573rem;
     background: #ffffff;
     border-radius: 0.2rem;
   }
@@ -506,9 +575,9 @@
     font-size: 0.866rem;
   }
 
-  .component-wechat-top .left .icon:nth-child(2) {
+  .component-wechat-top .left .textLogo {
     position: absolute;
-    left: 1.573rem;
+    left: 2.64rem;
     top: -0.65rem;
     font-size: 2.186rem;
     color: #FFFFFF;
@@ -519,7 +588,7 @@
     font-size: 0.266rem;
     position: absolute;
     top: 0.666rem;
-    left: 1.546rem;
+    left: 2.64rem;
   }
 
   .component-wechat-top .left .desc.userSlogen {

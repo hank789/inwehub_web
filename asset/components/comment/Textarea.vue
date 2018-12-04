@@ -7,7 +7,7 @@
           v-model.trim="description"
           :rows="1"
           :content="description"
-          :isMonitorAddressAppear="false"
+          :isMonitorAddressAppear="true"
           :isMonitorSmallSpan="false"
           :descMaxLength="descMaxLength"
           :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
@@ -69,7 +69,7 @@
     mounted () {
       var referer = localEvent.getLocalItem('referer')
       if (!(referer && referer.path === '/selectUser')) {
-        localEvent.clearLocalItem('comment_selectUser' + this.id)
+        localEvent.clearLocalItem('selected_comment_user' + this.id)
       }
 
       this.init()
@@ -91,12 +91,12 @@
         this.textarea = ''
         this.noticeUsers = []
         this.delCurrentHistoryDescription()
-        localEvent.clearLocalItem('comment_selectUser' + this.id)
+        localEvent.clearLocalItem('selected_comment_user' + this.id)
         this.$refs.myAddEditor.resetContent()
         this.showTextarea = false
       },
       addressAppearDelete (text) {
-        var users = localEvent.getLocalItem('comment_selectUser' + this.id)
+        var users = localEvent.getLocalItem('selected_comment_user' + this.id)
         for (var i in users) {
           var name = '@' + users[i].name + ' '
           if (name === text) {
@@ -104,10 +104,10 @@
             users.splice(i, 1)
           }
         }
-        localEvent.setLocalItem('comment_selectUser' + this.id, users)
+        localEvent.setLocalItem('selected_comment_user' + this.id, users)
       },
       getSelectUser () {
-        var users = localEvent.getLocalItem('comment_selectUser' + this.id)
+        var users = localEvent.getLocalItem('selected_comment_user' + this.id)
         var spanUserNameAndIds = []
         var spanUserNames = []
         for (var i in users) {
@@ -129,7 +129,7 @@
         var users = this.getSelectUser()
         var spanUserNameAndIds = users.nameAndIds
         var smallSpanArr = this.$refs.myAddEditor.getSmallSpanArr()
-        console.log('comment_selectUser:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
+        console.log('selected_comment_user:' + JSON.stringify(users) + ', 文本框里的人数:' + JSON.stringify(smallSpanArr))
 
         // 已选的用户都要添加上
         var waitAddArr = []
@@ -170,7 +170,6 @@
       },
       //  监听@事件
       addressAppearFound () {
-        console.debug(this.$data)
         onceSave(this, this.cacheKey, {
           showTextarea: this.showTextarea,
           description: this.description,
@@ -191,11 +190,11 @@
         var result = onceGet(this, this.cacheKey)
         if (result) {
           setTimeout(() => {
+            this.initEditorData()
             this.commentData.commentList = this.oldList
-            this.commentData.list = null  // 临时解决方案，强制discuss刷新列表, 等待删除
+            // this.commentData.list = null  // 临时解决方案，强制discuss刷新列表, 等待删除
             this.focusCallback = () => {
               this.focusCallback = null
-              this.initEditorData()
             }
             this.editorObj.setContents(this.description)
             this.editorObj.focus()

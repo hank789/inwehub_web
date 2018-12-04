@@ -26,6 +26,9 @@
     },
     components: {},
     methods: {
+      setBindType (type) {
+        this.bindType = type
+      },
       isInstalled (id) {
         if (id === 'qihoo' && window.mui.os.plus) {
           return true

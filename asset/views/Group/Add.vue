@@ -68,6 +68,7 @@
 <script>
   import uploadImage from '../../components/uploadImage'
   import { postRequest } from '../../utils/request'
+  import userAbilityCheck from '../../utils/userAbilityCheck'
 
   export default {
     data () {
@@ -104,6 +105,11 @@
     },
     methods: {
       refreshPageData () {
+        var isValid = userAbilityCheck.checkPhoneCertification(this)
+        if (!isValid) {
+          return
+        }
+
         this.id = this.$route.params.id
         if (this.id) {
           this.getData()

@@ -129,6 +129,8 @@
 
     <div id="statusBarStyle" background="#fff" bgColor="#fff" mode="dark"></div>
 
+    <oauth ref="oauth" :isShowBtn="false" @success="wechatLoginSuccess" @fail="wechatLoginFail"
+           style="display:none"></oauth>
   </div>
 </template>
 <script>
@@ -137,7 +139,8 @@
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
   import userAbility from '../../utils/userAbility'
-  // import { alertshi } from '../../utils/dialogList'
+  import oauth from '../../components/oauth/oauth'
+  import { bindWechat } from '../../utils/systemAbility'
 
   export default {
     data () {
@@ -165,14 +168,23 @@
         current_day_signed: ''
       }
     },
+    components: {
+      oauth
+    },
     methods: {
-      // publishAnswers () {
-      //   if (this.publishes) {
-      //     this.$router.pushPlus('/my/publishAnswers')
-      //   } else {
-      //     alertshi(this)
-      //   }
-      // },
+      wechatLoginSuccess (token, openid, nickname = '', isNewUser = '') {
+        console.log(token)
+        console.log(openid)
+        if (token) {
+          this.$router.pushPlus('/wechat/register?newUser=' + isNewUser + '&token=' + token + '&openid=' + openid)
+        } else {
+          this.$router.pushPlus('/wechat/register?openid=' + openid)
+        }
+      },
+      wechatLoginFail (errorMessage) {
+        console.log(errorMessage)
+        window.mui.toast(errorMessage)
+      },
       recommendRead () {
         postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}, false).then(response => {
           this.list = response.data.data.data
@@ -293,6 +305,7 @@
             this.show_my_wallet = true
           }
           userAbility.newbieTask(this)
+          // bindWechat(this)
           this.recommendRead()
         }, true))
       }

@@ -393,10 +393,24 @@ function alertRealNameAuthentication (callback) {
 }
 
 // 圈子弹窗
-var alertGroups = (context, callback) => {
+var alertGroups = (context, groupInfo, callback) => {
   var dialog = getDialogObj(context)
   if (dialog) {
-    dialog.getHtml('groups', {}, (html) => {
+    dialog.getHtml('groups', { groupInfo: groupInfo }, (html) => {
+      alertSimple(html, '立刻加入', (num) => {
+        if (num.index === 0) {
+          callback()
+        }
+      }, true)
+    })
+  }
+}
+
+// 圈子弹窗-旧版
+var alertGroupsOld = (context, callback) => {
+  var dialog = getDialogObj(context)
+  if (dialog) {
+    dialog.getHtml('groupsOld', {}, (html) => {
       alertSimple(html, '加入圈子', (num) => {
         if (num.index === 0) {
           callback()
@@ -444,6 +458,7 @@ export {
   alertFreeAskGuide,
   alertPhoneBindWarning,
   alertRealNameAuthentication,
-  alertGroups
+  alertGroups,
+  alertGroupsOld
   // alertshi
 }

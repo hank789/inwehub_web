@@ -160,6 +160,7 @@
         this.searchText = ''
       },
       back () {
+        this.empty()
         window.mui.back()
         return
       },

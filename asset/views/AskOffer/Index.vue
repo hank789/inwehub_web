@@ -47,7 +47,7 @@
 
       </RefreshList>
 
-      <div class="goEditWrapper askoffers" @tap.stop.prevent="$router.pushPlus('/ask')">
+      <div class="goEditWrapper askoffers" @tap.stop.prevent="toAsk()">
         <div class="editIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-fabu"></use>
@@ -91,6 +91,9 @@
       AskCommunityListItem
     },
     methods: {
+      toAsk () {
+        userAbility.jumpToAddAsk()
+      },
       toSearch () {
         this.$router.pushPlus('/searchQuestion', 'list-detail-page-three')
       },

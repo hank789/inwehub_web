@@ -78,7 +78,7 @@
                         </svg>
                       </div>
                       <div class="avatar" @tap.stop.prevent="toResume(recommendFollow.uuid)">
-                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="true" ></ImageView>
+                        <ImageView :src="recommendFollow.avatar_url" width="50" height="50" :isLazyload="true" :key="'feed_avatar_' + recommendFollow.uuid" ></ImageView>
                       </div>
                       <div class="userName font-family-medium text-line-1">{{ recommendFollow.name }}</div>
                       <div class="commonFriend">{{ recommendFollow.description }}</div>
@@ -107,13 +107,15 @@
 
           <FeedItem
             :item="item"
+            :isShowLink="true"
+            :key="'feedItem_' + item.id"
             @showItemMore="showItemMore"
           ></FeedItem>
         </div>
 
       </RefreshList>
 
-      <div class="goEditWrapper" @tap.stop.prevent="$router.pushPlus('/discover/add')">
+      <div class="goEditWrapper" @tap.stop.prevent="toDiscoverAdd">
         <div class="editIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-fabu"></use>
@@ -142,6 +144,7 @@
   import { postRequest } from '../utils/request'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { getIconMenus, iconMenusClickedItem } from '../utils/feed'
+  import userAbility from '../utils/userAbility'
 
   const Feed = {
     data: () => ({
@@ -203,6 +206,9 @@
       }
     },
     methods: {
+      toDiscoverAdd () {
+        userAbility.jumpToDiscoverAdd(this)
+      },
       toResume (uuid) {
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },

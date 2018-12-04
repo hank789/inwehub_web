@@ -58,7 +58,7 @@
           </div>
           <i class="bot"></i>
         </div>
-        <div class="foundGroup" @tap.stop.prevent="$router.pushPlus('/group/add')">
+        <div class="foundGroup" @tap.stop.prevent="toGroupAdd()">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-tianjia"></use>
           </svg>
@@ -73,6 +73,7 @@
 
   import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
+  import userAbility from '../../utils/userAbility'
 
   export default {
     data () {
@@ -89,6 +90,9 @@
     props: {},
     watch: {},
     methods: {
+      toGroupAdd () {
+        userAbility.jumpToGroupAdd()
+      },
       refreshPageData () {},
       goJoin (id) {
         postRequest(`group/join`, {id: id}).then(response => {
