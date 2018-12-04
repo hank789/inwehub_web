@@ -207,7 +207,7 @@
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.inviteJoinInGroup(this, response.data.data.group_id)
+            userAbility.inviteJoinInGroup(this, hot.group, response.data.data.group_id)
             return
           }
 
@@ -242,14 +242,14 @@
         })
       },
       // 赞文章
-      bookmarkuBmission (hot) {
+      bookmarkuBmission: function (hot) {
         postRequest(`article/bookmark-submission`, {
           id: hot.id
         }).then(response => {
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.inviteJoinInGroup(this, response.data.data.group_id)
+            userAbility.inviteJoinInGroup(this, hot.group, response.data.data.group_id)
             return
           }
 

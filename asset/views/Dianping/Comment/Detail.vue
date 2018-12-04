@@ -157,7 +157,6 @@
   import { getCommentDetail } from '../../../utils/dianping.js'
   import { textToLinkHtml, transferTagToLink, addPreviewAttrForImg, scrollToElement } from '../../../utils/dom'
   import {postRequest} from '../../../utils/request'
-  import userAbility from '../../../utils/userAbility'
   import UserInfo from '../../../components/question-detail/UserInfo.vue'
   import { openVendorUrl, openAppUrl } from '../../../utils/plus'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
@@ -328,7 +327,6 @@
         postRequest(`article/bookmark-submission`, data).then(response => {
           var code = response.data.code
           if (code === 6108) {
-            userAbility.inviteJoinInGroup(this, response.data.data.group_id)
             return
           } else if (code !== 1000) {
             window.mui.alert(response.data.message)

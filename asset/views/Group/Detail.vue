@@ -381,7 +381,7 @@
       },
       goMoreSetup () {
         if (!this.isInGroup) {
-          alertGroups(this, this.joinIn)
+          alertGroups(this, this.detail, this.joinIn)
         } else {
           this.$router.pushPlus('/group/moreSetup/' + this.detail.id)
         }
