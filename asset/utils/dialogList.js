@@ -406,6 +406,7 @@ var alertGroups = (context, groupInfo, callback) => {
   }
 }
 
+
 // 引导补全头像和昵称
 function alertHeadAndNickname (context, callback) {
   var dialogObj = getDialogObj(context)
@@ -419,6 +420,21 @@ function alertHeadAndNickname (context, callback) {
     })
   }
 }
+
+// 圈子弹窗-旧版
+function alertGroupsOld (context, callback) {
+  var dialog = getDialogObj(context)
+  if (dialog) {
+    dialog.getHtml('groupsOld', {}, (html) => {
+      alertSimple(html, '加入圈子', (num) => {
+        if (num.index === 0) {
+          callback()
+        }
+      }, true)
+    })
+  }
+}
+
 
 // 我的 页面 弹窗
 // function alertshi (context) {
@@ -459,6 +475,7 @@ export {
   alertPhoneBindWarning,
   alertRealNameAuthentication,
   alertGroups,
-  alertHeadAndNickname
+  alertHeadAndNickname,
+  alertGroupsOld
   // alertshi
 }

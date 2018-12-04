@@ -207,7 +207,7 @@
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.inviteJoinInGroup(this, hot.group, response.data.data.group_id)
+            userAbility.inviteJoinInGroup(this, response.data.data.group_id, hot.group)
             return
           }
 
@@ -249,7 +249,7 @@
           var code = response.data.code
 
           if (code === 6108) {
-            userAbility.inviteJoinInGroup(this, hot.group, response.data.data.group_id)
+            userAbility.inviteJoinInGroup(this, response.data.data.group_id, hot.group)
             return
           }
 

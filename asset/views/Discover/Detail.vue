@@ -435,9 +435,9 @@
           event.stopPropagation()
           event.preventDefault()
 
-          userAbility.inviteJoinInGroup(this, this.detail.group, this.detail.group.id, () => {
+          userAbility.inviteJoinInGroup(this, this.detail.group.id, () => {
             this.refreshPageData()
-          })
+          }, this.detail.group)
         }
       },
       iconMenusClickedItem (item) {

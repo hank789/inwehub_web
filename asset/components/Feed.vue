@@ -363,10 +363,10 @@
             var data = response.data.data
 
             if (data.is_joined !== 1 && data.is_joined !== 3) {
-              userAbility.inviteJoinInGroup(this.$parent, this.item.feed.group, groupId, () => {
+              userAbility.inviteJoinInGroup(this.$parent, groupId, () => {
                 this.item.isPass = true
                 window.mui.trigger(event.target, 'tap')
-              })
+              }, this.item.feed.group)
             } else {
               this.item.isPass = true
               window.mui.trigger(event.target, 'tap')
