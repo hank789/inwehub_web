@@ -107,6 +107,7 @@
 
           <FeedItem
             :item="item"
+            :isShowLink="true"
             :key="'feedItem_' + item.id"
             @showItemMore="showItemMore"
           ></FeedItem>
