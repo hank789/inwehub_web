@@ -18,6 +18,13 @@
       </div>
     </div>
 
+    <div id="groupsOld">
+      <div class="groups">
+        <p class="groupTitle font-family-medium">请先加入圈子！</p>
+        <p class="smallTitle">即可点赞、收藏、评论、看更多圈子内容</p>
+      </div>
+    </div>
+
     <!-- 引导补全头像和昵称 -->
     <div id="headAndNickname">
       <div class="headAndNickname">

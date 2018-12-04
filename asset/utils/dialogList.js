@@ -406,6 +406,20 @@ var alertGroups = (context, groupInfo, callback) => {
   }
 }
 
+// 圈子弹窗-旧版
+var alertGroupsOld = (context, callback) => {
+  var dialog = getDialogObj(context)
+  if (dialog) {
+    dialog.getHtml('groupsOld', {}, (html) => {
+      alertSimple(html, '加入圈子', (num) => {
+        if (num.index === 0) {
+          callback()
+        }
+      }, true)
+    })
+  }
+}
+
 // 我的 页面 弹窗
 // function alertshi (context) {
 //   var dialogObj = getDialogObj(context)
@@ -444,6 +458,7 @@ export {
   alertFreeAskGuide,
   alertPhoneBindWarning,
   alertRealNameAuthentication,
-  alertGroups
+  alertGroups,
+  alertGroupsOld
   // alertshi
 }
