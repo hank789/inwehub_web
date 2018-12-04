@@ -47,6 +47,7 @@
   import feedDianping from '../../../components/Feed.vue'
   import RefreshList from '../../../components/refresh/List.vue'
   import PageMore from '../../../components/PageMore.vue'
+  import userAbility from '../../../utils/userAbility'
 
   export default {
     data () {
@@ -95,7 +96,7 @@
       },
       goAddComment () {
         this.id = this.$route.params.id
-        this.$router.pushPlus('/dianping/add/' + this.id)
+        userAbility.jumpToDianpingAdd(this, this.id)
       },
       showItemMore (shareOption, item) {
         this.iconMenus = []

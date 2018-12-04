@@ -18,6 +18,7 @@ import { TASK_LIST_APPEND, ANSWERS_LIST_APPEND, ASKS_LIST_APPEND } from '../stor
 import { getContacts, toSettingSystem } from '../utils/plus'
 import { isLogined } from '../utils/auth'
 import { joinIn } from '../utils/group'
+import userAbilityCheck from '../utils/userAbilityCheck'
 
 var UserAbility = () => {
   /**
@@ -83,7 +84,10 @@ var UserAbility = () => {
     if (id) {
       url = '/ask/' + id
     }
-    router.pushPlus(url)
+    var isValid = userAbilityCheck.checkPhoneCertification(context)
+    if (isValid) {
+      router.pushPlus(url)
+    }
   }
 
   /**
@@ -466,11 +470,32 @@ var UserAbility = () => {
     }
   }
 
+  function jumpToDiscoverAdd (context) {
+    var isValid = userAbilityCheck.checkPhoneCertification(context)
+    if (isValid) {
+      context.$router.pushPlus('/discover/add')
+    }
+  }
+
   /* 邀请用户加入圈子 */
   var inviteJoinInGroup = (context, groupInfo, groupId, callback) => {
     alertGroups(context, groupInfo, (num) => {
       joinIn(groupId, callback)
     })
+  }
+
+  var jumpToGroupAdd = (context) => {
+    var isValid = userAbilityCheck.checkPhoneCertification(context)
+    if (isValid) {
+      context.$router.pushPlus('/group/add')
+    }
+  }
+
+  var jumpToDianpingAdd = (context, productName) => {
+    var isValid = userAbilityCheck.checkPhoneCertification(context)
+    if (isValid) {
+      context.$router.pushPlus('/dianping/add/' + productName)
+    }
   }
 
   return {
@@ -495,7 +520,10 @@ var UserAbility = () => {
     jumpToResume: jumpToResume,
     getLocalContact: getLocalContact,
     showFreeAskGuide: showFreeAskGuide,
-    inviteJoinInGroup: inviteJoinInGroup
+    inviteJoinInGroup: inviteJoinInGroup,
+    jumpToDiscoverAdd: jumpToDiscoverAdd,
+    jumpToGroupAdd: jumpToGroupAdd,
+    jumpToDianpingAdd: jumpToDianpingAdd
   }
 }
 

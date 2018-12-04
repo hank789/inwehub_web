@@ -25,6 +25,7 @@
   import { postRequest } from '../../utils/request'
   import Meditor from '../../components/vue-quill/Meditor.vue'
   import { delAnswerCache } from '../../utils/allPlatform'
+  import userAbilityCheck from '../../utils/userAbilityCheck'
 
   const Answer = {
     data: () => ({
@@ -53,6 +54,11 @@
         this.getId()
       },
       getId () {
+        var isValid = userAbilityCheck.checkPhoneCertification(this)
+        if (!isValid) {
+          return
+        }
+
         let id = parseInt(this.$route.params.id)
         this.id = id
 

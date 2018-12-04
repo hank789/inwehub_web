@@ -114,7 +114,7 @@
 
       </RefreshList>
 
-      <div class="goEditWrapper" @tap.stop.prevent="$router.pushPlus('/discover/add')">
+      <div class="goEditWrapper" @tap.stop.prevent="toDiscoverAdd">
         <div class="editIcon">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-fabu"></use>
@@ -143,6 +143,7 @@
   import { postRequest } from '../utils/request'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { getIconMenus, iconMenusClickedItem } from '../utils/feed'
+  import userAbility from '../utils/userAbility'
 
   const Feed = {
     data: () => ({
@@ -204,6 +205,9 @@
       }
     },
     methods: {
+      toDiscoverAdd () {
+        userAbility.jumpToDiscoverAdd()
+      },
       toResume (uuid) {
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
       },
