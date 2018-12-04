@@ -680,51 +680,51 @@
   }
   .groups .groupTitle {
     color: #444444;
-    font-size: 18px;
+    font-size: 0.48rem;
   }
   .groups .smallTitle {
     color: #808080;
-    font-size: 14px;
-    padding-top: 5px;
+    font-size: 0.373rem;
+    padding-top: 0.133rem;
   }
   .groups .groupInfo {
     background: #F3F4F6;
-    border-radius: 4px;
+    border-radius: 0.106rem;
     display: flex;
     text-align: left;
-    padding: 15px;
-    margin-top: 20px;
+    padding: 0.4rem;
+    margin-top: 0.533rem;
   }
   .groupInfo .groupLogo {
-    width: 44px;
-    height: 44px;
+    width: 1.173rem;
+    height: 1.173rem;
   }
   .groupInfo .groupLogo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 4px;
+    border-radius: 0.106rem;
   }
   .groupInfo .detailInfo {
-    width: 181px;
-    padding-left: 10px;
+    width: 4.826rem;
+    padding-left: 0.266rem;
   }
   .groupInfo .detailInfo .groupName {
-    font-size: 16px;
+    font-size: 0.426rem;
     color: #444444;
-    line-height: 22.5px;
+    line-height: 0.6rem;
   }
   .groupInfo .detailInfo .groupDescribe {
     color: #808080;
-    font-size: 13px;
-    line-height: 16.5px;
-    margin-top: 3.5px;
-    margin-bottom: 5.5px;
+    font-size: 0.346rem;
+    line-height: 0.44rem;
+    margin-top: 0.093rem;
+    margin-bottom: 0.146rem;
   }
   .groupInfo .detailInfo .sharPeople {
     color: #B4B4B6;
-    font-size: 11px;
-    line-height: 15px;
+    font-size: 0.293rem;
+    line-height: 0.4rem;
   }
 
 
