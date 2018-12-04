@@ -305,7 +305,7 @@
             this.show_my_wallet = true
           }
           userAbility.newbieTask(this)
-          bindWechat(this)
+          // bindWechat(this)
           this.recommendRead()
         }, true))
       }
