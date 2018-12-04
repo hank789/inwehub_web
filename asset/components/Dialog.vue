@@ -18,6 +18,21 @@
       </div>
     </div>
 
+    <!-- 引导补全头像和昵称 -->
+    <div id="headAndNickname">
+      <div class="headAndNickname">
+        <div class="iconImg">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-wanshantouxiangnicheng"></use>
+          </svg>
+        </div>
+        <div class="titleText">
+          <p>补全头像和昵称</p>
+          <p>做一个有身份的人</p>
+        </div>
+      </div>
+    </div>
+
     <!--级别限制提示的弹窗-->
     <div id="test">
       <div class="p-level">
@@ -725,6 +740,21 @@
     color: #B4B4B6;
     font-size: 0.293rem;
     line-height: 0.4rem;
+  }
+
+  .headAndNickname {
+    text-align: center;
+  }
+  .headAndNickname .iconImg .icon {
+    font-size: 110px;
+  }
+  .headAndNickname .titleText {
+    margin-top: 16px;
+  }
+  .headAndNickname .titleText p {
+    color: #444444;
+    font-size: 16px;
+    line-height: 22.5px;
   }
 
 
