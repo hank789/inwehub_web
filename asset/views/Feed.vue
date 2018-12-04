@@ -207,7 +207,7 @@
     },
     methods: {
       toDiscoverAdd () {
-        userAbility.jumpToDiscoverAdd()
+        userAbility.jumpToDiscoverAdd(this)
       },
       toResume (uuid) {
         this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
