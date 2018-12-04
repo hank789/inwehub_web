@@ -110,7 +110,7 @@
 
     <!--点评-->
     <div class="commentList" v-if="isComment" @tap.stop.prevent="toDetail(item)">
-      <div class="commentUser">
+      <div class="commentUser" @tap.stop.prevent="toResume()">
         <div class="userInfo">
           <div class="avatar">
             <ImageView :src="item.user.avatar" :isLazyload="true" width="34" height="34"></ImageView>
@@ -313,6 +313,18 @@
       })
     },
     methods: {
+      toResume () {
+        var uuid = this.item.user.uuid
+        if (!uuid) {
+          return false
+        }
+
+        if (this.isNiming) {
+          return false
+        }
+
+        this.$router.pushPlus('/share/resume?id=' + uuid + '&goback=1' + '&time=' + (new Date().getTime()))
+      },
       goProductDetail () {
         this.$router.pushPlus('/dianping/product/' + encodeURIComponent(this.item.feed.tags[0].name))
       },
