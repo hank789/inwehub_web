@@ -113,11 +113,11 @@
       <div class="commentUser">
         <div class="userInfo">
           <div class="avatar">
-            <img class="lazyImg" v-lazy="item.user.avatar" alt="">
+            <ImageView :src="item.user.avatar" :isLazyload="true" width="34" height="34"></ImageView>
           </div>
           <div class="userName">
             <div class="userNameTop">
-              <span class="font-family-medium">{{ item.user.name }}</span>
+              <span class="font-family-medium">{{ item.title }}</span>
               <div class="border-football" v-if="item.feed.is_recommend">优质</div>
             </div>
 
@@ -131,7 +131,7 @@
 
       <div v-if="itemObj.feed.img.length && item.feed.submission_type === 'review'"
            class="container-images container-images-discover" :class="'container-images-' + (itemObj.feed.img.length)">
-        <div v-for="img in itemObj.feed.img" class="container-image"><img :src="img"></div>
+        <div v-for="img in itemObj.feed.img" class="container-image"><ImageView :src="img" :isLazyload="true" width="108" height="108"></ImageView></div>
       </div>
 
       <div class="link" v-if="item.feed.tags && isShowLink">
@@ -142,7 +142,7 @@
             </svg>
           </span>
           <div class="productLogo border-football" v-else>
-            <img class="lazyImg" v-lazy="item.feed.tags[0].logo">
+            <ImageView :src="item.feed.tags[0].logo" :isLazyload="true" width="45" height="45"></ImageView>
           </div>
           <div class="linkContent">
             <div v-if="item.feed.tags[0].name" class="text-line-1">{{item.feed.tags[0].name}}</div>
