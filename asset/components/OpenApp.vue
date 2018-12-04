@@ -365,28 +365,28 @@
 <style scoped="scoped">
 
   .backHome {
-    width: 50px;
-    margin-top: 8px;
-    padding-left: 16px;
+    width: 1.333rem;
+    margin-top: 0.213rem;
+    padding-left: 0.426rem;
     position: relative;
   }
   .backHome .icon {
     color: #FFFFFF;
-    font-size: 17px;
-    margin-left: 3px;
+    font-size: 0.453rem;
+    margin-left: 0.08rem;
   }
   .backHome .homeText {
     color: #FFFFFF;
-    font-size: 10px;
-    line-height: 14px;
-    /*margin-top: 1.5px;*/
+    font-size: 0.266rem;
+    line-height: 0.373rem;
+    /*margin-top: 0.04rem;*/
   }
   .backHome .fenLine {
-    width: 1px;
-    height: 29px;
+    width: 0.026rem;
+    height: 0.773rem;
     background: #68CEFB;
     position: absolute;
-    top: 4px;
+    top: 0.106rem;
     right: 0;
   }
 
@@ -563,7 +563,7 @@
     height: 0.906rem;
     position: absolute;
     top: 0.2rem;
-    left: 59px;
+    left: 1.573rem;
     background: #ffffff;
     border-radius: 0.2rem;
   }
@@ -577,7 +577,7 @@
 
   .component-wechat-top .left .textLogo {
     position: absolute;
-    left: 99px;
+    left: 2.64rem;
     top: -0.65rem;
     font-size: 2.186rem;
     color: #FFFFFF;
@@ -588,7 +588,7 @@
     font-size: 0.266rem;
     position: absolute;
     top: 0.666rem;
-    left: 99px;
+    left: 2.64rem;
   }
 
   .component-wechat-top .left .desc.userSlogen {
