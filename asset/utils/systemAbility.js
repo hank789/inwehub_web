@@ -1,4 +1,5 @@
 import { getLocalName } from './user'
+import { alertHeadAndNickname } from '../utils/dialogList'
 
 /* 手机注册用户引导保定微信 */
 var bindWechat = (context) => {
@@ -8,7 +9,7 @@ var bindWechat = (context) => {
 
   var name = getLocalName()
   if (/^手机用户/.test(name)) {
-    window.mui.alert('补全头像和昵称', () => {
+    alertHeadAndNickname(context, () => {
       if (!context.$refs.oauth) {
         window.mui.toast('缺少oauth组件')
         return

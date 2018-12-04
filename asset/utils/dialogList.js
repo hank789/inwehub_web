@@ -406,6 +406,20 @@ var alertGroups = (context, groupInfo, callback) => {
   }
 }
 
+// 引导补全头像和昵称
+function alertHeadAndNickname (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('headAndNickname', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === 0) {
+          callback()
+        }
+      })
+    })
+  }
+}
+
 // 我的 页面 弹窗
 // function alertshi (context) {
 //   var dialogObj = getDialogObj(context)
@@ -444,6 +458,7 @@ export {
   alertFreeAskGuide,
   alertPhoneBindWarning,
   alertRealNameAuthentication,
-  alertGroups
+  alertGroups,
+  alertHeadAndNickname
   // alertshi
 }
