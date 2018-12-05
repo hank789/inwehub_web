@@ -198,7 +198,9 @@
 
       },
       iconMenusClickedItem (item) {
-        iconMenusClickedItem(this, this.itemOptionsObj, item)
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
+          this.iconMenus = getIconMenus(this.itemOptionsObj)
+        })
       },
       focus: function () {
         this.confirmSearchText = ''

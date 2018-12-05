@@ -2,6 +2,7 @@
 import { postRequest } from './request'
 import userAbility from './userAbility'
 
+/* 点赞 */
 function upvote (context, submissionId, increaseCallback, decreaseCallback) {
   postRequest(`article/upvote-submission`, {
     submission_id: submissionId
@@ -28,6 +29,7 @@ function upvote (context, submissionId, increaseCallback, decreaseCallback) {
   })
 }
 
+/* 点踩 */
 function downVote (context, submissionId, increaseCallback, decreaseCallback) {
   postRequest(`article/downvote-submission`, {
     submission_id: submissionId
@@ -54,6 +56,7 @@ function downVote (context, submissionId, increaseCallback, decreaseCallback) {
   })
 }
 
+/* 收藏，取消收藏 */
 function collect (context, submissionId, increaseCallback, decreaseCallback) {
   var data = {
     id: submissionId
@@ -95,6 +98,7 @@ function collect (context, submissionId, increaseCallback, decreaseCallback) {
   })
 }
 
+/* 删除 */
 function deleteItem (id, successCallback) {
   var btnArray = ['取消', '确定']
   window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
@@ -116,9 +120,66 @@ function deleteItem (id, successCallback) {
   })
 }
 
+/* 设置为精选 */
+function addGood (submissionId, callback) {
+  postRequest(`group/setSubmissionRecommend`, {submission_id: submissionId}).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+    window.mui.toast('操作成功')
+    callback()
+  })
+}
+
+/* 取消精选 */
+function cancelGood (submissionId, callback) {
+  postRequest(`group/cancelSubmissionRecommend`, {submission_id: submissionId}).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    window.mui.toast('操作成功')
+    callback()
+  })
+}
+
+/* 设为置顶 */
+function setTop (submissionId, callback) {
+  postRequest(`group/setSubmissionTop`, {submission_id: submissionId}).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+    window.mui.toast('操作成功')
+    callback()
+  })
+}
+
+/* 取消置顶 */
+function cancelTop (submissionId, callback) {
+  postRequest(`group/cancelSubmissionTop`, {submission_id: submissionId}).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      window.mui.toast(response.data.message)
+      return
+    }
+    window.mui.toast('操作成功')
+    callback()
+  })
+}
+
 export {
   upvote,
   downVote,
   deleteItem,
-  collect
+  collect,
+  addGood,
+  cancelGood,
+  cancelTop,
+  setTop
 }
