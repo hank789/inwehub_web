@@ -130,7 +130,6 @@
   import { autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
   import userAbility from '../utils/userAbility'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { getRequest } from '../utils/request'
   import { scrollPage } from '../utils/dom'
   import { getImageSuffix } from '../utils/image'
   import localEvent from '../stores/localStorage'
