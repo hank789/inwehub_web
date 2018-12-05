@@ -127,6 +127,7 @@
         <div class="river"></div>
 
         <ArticleDiscuss
+          class="commentTitle"
           id="commentTitle"
           v-if="detail.slug"
           :listApi="'article/comments'"
@@ -1549,6 +1550,9 @@
   .component-upAndDown{
     margin-top: 0.48rem;
     margin-bottom: 0.48rem;
+  }
+  .commentTitle {
+    padding-bottom: 0.266rem;
   }
 </style>
 
