@@ -282,6 +282,9 @@
         this.$emit('shareBtnClick')
         this.share()
       },
+      toggle () {
+        window.mui('#sharePageMoreWrapper').popover('toggle')
+      },
       share () {
         if (this.shareOption.link) {
           this.bindShare()
