@@ -24,7 +24,7 @@
     <!--微信端-->
 
 
-    <div class="backHome" v-if="isWeixin || isH5">
+    <div class="backHome" v-if="isWeixin || isH5" @tap.stop.prevent="$router.push('/home')">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-shouye"></use>
       </svg>
