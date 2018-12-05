@@ -458,7 +458,7 @@
         }
       },
       report () {
-        window.mui('#shareWrapper').popover('toggle')
+        this.$refs.ShareBtn.toggle()
         window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
           if (e.index === 1) {
             if (e.value) {
@@ -604,7 +604,7 @@
       },
       // 删除
       deleterow () {
-        window.mui('#shareWrapper').popover('toggle')
+        this.$refs.ShareBtn.toggle()
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
@@ -799,7 +799,7 @@
               }
             )
           }
-          window.mui('#shareWrapper').popover('toggle')
+          this.$refs.ShareBtn.toggle()
           this.showItemOptions()
         })
       },

@@ -138,6 +138,9 @@
       }
     },
     methods: {
+      refreshPageData () {
+        this.$refs.ctextarea.refreshPageData()
+      },
       newAddcomment () {
         this.commentfoucs()
       },
