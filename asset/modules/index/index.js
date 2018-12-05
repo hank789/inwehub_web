@@ -87,7 +87,7 @@ Vue.use(VueWechatTitle)
 Vue.use(VueLazyload, {
   preLoad: 1.3, // 预加载的高度比例
   loading: '',
-  attempt: 30, // 尝试次数
+  attempt: 8, // 尝试次数
   listenEvents: [ 'scroll' ]
   // filter: {
     // progressive (listener, options) {
