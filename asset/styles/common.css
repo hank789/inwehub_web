@@ -3617,3 +3617,7 @@ a {
   right: 0;
   bottom: 0;
   margin: auto;}
+
+img.mui-zoom{
+  width:auto !important;
+}
