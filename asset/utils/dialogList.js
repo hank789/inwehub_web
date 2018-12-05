@@ -406,8 +406,22 @@ var alertGroups = (context, groupInfo, callback) => {
   }
 }
 
+// 引导补全头像和昵称
+function alertHeadAndNickname (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('headAndNickname', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === 0) {
+          callback()
+        }
+      })
+    })
+  }
+}
+
 // 圈子弹窗-旧版
-var alertGroupsOld = (context, callback) => {
+function alertGroupsOld (context, callback) {
   var dialog = getDialogObj(context)
   if (dialog) {
     dialog.getHtml('groupsOld', {}, (html) => {
@@ -459,6 +473,7 @@ export {
   alertPhoneBindWarning,
   alertRealNameAuthentication,
   alertGroups,
+  alertHeadAndNickname,
   alertGroupsOld
   // alertshi
 }

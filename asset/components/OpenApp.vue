@@ -23,6 +23,15 @@
 
     <!--微信端-->
 
+
+    <div class="backHome" v-if="isWeixin || isH5" @tap.stop.prevent="$router.push('/home')">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-shouye"></use>
+      </svg>
+      <div class="homeText">首页</div>
+      <div class="fenLine"></div>
+    </div>
+
     <div id="OpenAppSlider" class="homeMuiSlider mui-slider" v-if="isWeixin || isH5">
       <div class="mui-slider-group  mui-slider-loop">
         <div class="mui-slider-item mui-slider-item-duplicate">
@@ -43,13 +52,6 @@
             <div class="suspension">
               <div class="component-wechat-top">
                 <div class="left" @tap.stop.prevent="$router.push('/home')">
-                  <div class="backHome">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-shouye"></use>
-                    </svg>
-                    <div class="homeText">首页</div>
-                    <div class="fenLine"></div>
-                  </div>
                   <div class="iconBorder">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-logotuxing"></use>
@@ -69,13 +71,6 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
-                <div class="backHome">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shouye"></use>
-                  </svg>
-                  <div class="homeText">首页</div>
-                  <div class="fenLine"></div>
-                </div>
                 <div class="iconBorder">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-logotuxing"></use>
@@ -93,13 +88,6 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
-                <div class="backHome">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shouye"></use>
-                  </svg>
-                  <div class="homeText">首页</div>
-                  <div class="fenLine"></div>
-                </div>
                 <div class="iconBorder">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-logotuxing"></use>
@@ -118,13 +106,6 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left" @tap.stop.prevent="$router.push('/home')">
-                <div class="backHome">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shouye"></use>
-                  </svg>
-                  <div class="homeText">首页</div>
-                  <div class="fenLine"></div>
-                </div>
                 <div class="iconBorder">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-logotuxing"></use>
@@ -143,13 +124,6 @@
           <div class="suspension">
             <div class="component-wechat-top">
               <div class="left">
-                <div class="backHome">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shouye"></use>
-                  </svg>
-                  <div class="homeText">首页</div>
-                  <div class="fenLine"></div>
-                </div>
                 <div class="userImg">
                   <img :src="shareInfo.avatar_url">
                 </div>
@@ -165,13 +139,6 @@
             <div class="suspension">
               <div class="component-wechat-top">
                 <div class="left" @tap.stop.prevent="$router.push('/home')">
-                  <div class="backHome">
-                    <svg class="icon" aria-hidden="true">
-                      <use xlink:href="#icon-shouye"></use>
-                    </svg>
-                    <div class="homeText">首页</div>
-                    <div class="fenLine"></div>
-                  </div>
                   <div class="iconBorder">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-logotuxing"></use>
@@ -368,7 +335,10 @@
     width: 1.333rem;
     margin-top: 0.213rem;
     padding-left: 0.426rem;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9;
   }
   .backHome .icon {
     color: #FFFFFF;
@@ -533,11 +503,12 @@
   .component-wechat-top .left {
     width: 7.266rem;
     position: relative;
+    /*left: 1.573rem;*/
   }
 
   .component-wechat-top .left .userImg {
     position: absolute;
-    left: 0.293rem;
+    left: 0.1rem;
     top: 0.213rem;
     width: 0.88rem;
     height: 0.88rem;
@@ -553,7 +524,7 @@
     width: 100%;
     position: absolute;
     top: 0.213rem;
-    left: 1.493rem;
+    left: 1.3rem;
     color: #FFFFFF;
     font-size: 0.346rem;
   }
@@ -563,7 +534,7 @@
     height: 0.906rem;
     position: absolute;
     top: 0.2rem;
-    left: 1.573rem;
+    /*left: 1.573rem;*/
     background: #ffffff;
     border-radius: 0.2rem;
   }
@@ -577,7 +548,7 @@
 
   .component-wechat-top .left .textLogo {
     position: absolute;
-    left: 2.64rem;
+    left: 1.13rem;
     top: -0.65rem;
     font-size: 2.186rem;
     color: #FFFFFF;
@@ -588,11 +559,11 @@
     font-size: 0.266rem;
     position: absolute;
     top: 0.666rem;
-    left: 2.64rem;
+    left: 1.13rem;
   }
 
   .component-wechat-top .left .desc.userSlogen {
-    left: 1.493rem;
+    left: 1.3rem;
   }
 
   .openAppTop {
@@ -601,11 +572,12 @@
 
   #OpenAppSlider.homeMuiSlider {
     width: 66%;
+    left: 1.6rem;
   }
 
   .openAppTop .right {
     height: 1.306rem;
-    width: 30%;
+    width: 21%;
     line-height: 1.306rem;
     padding-right: 0.426rem;
     color: #03AEF9;
@@ -613,6 +585,7 @@
     position: absolute;
     top: 0;
     right: 0;
+    z-index: 99;
   }
 
   .openAppTop .right .downloadApp {
