@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content" v-if="!loading">
-      <vue-pull-refresh :on-refresh="refreshPageData">
+      <vue-pull-refresh :on-refresh="refreshPageDataNoLoading">
 
         <div class="mui-table-view detail-discover">
           <UserInfo
@@ -483,8 +483,11 @@
           }
         })
       },
-      refreshPageData () {
-        this.getDetail()
+      refreshPageDataNoLoading () {
+        this.refreshPageData(0)
+      },
+      refreshPageData (loading = 1) {
+        this.getDetail(loading)
       },
       goComment () {
         this.$refs.discuss.rootComment()
@@ -506,8 +509,8 @@
       comment (commentTargetName) {
         this.$refs.ctextarea.comment(commentTargetName)
       },
-      getDetail () {
-        this.loading = 1
+      getDetail (loading = 1) {
+        this.loading = loading
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
