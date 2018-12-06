@@ -387,7 +387,7 @@
     display: none !important;
   }
   .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item{
-    margin:0 0.08rem;
+    margin:0 0.026rem;
   }
   .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item img{
     height:3.626rem !important;
