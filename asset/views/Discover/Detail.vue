@@ -6,7 +6,7 @@
     </header>
 
     <div class="mui-content" v-show="!loading" @tap.capture="onTap($event)">
-      <vue-pull-refresh :on-refresh="refreshPageData">
+      <vue-pull-refresh :on-refresh="refreshPageDataNoLoading">
       <div v-if="isShow">
 
         <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
@@ -490,7 +490,7 @@
           event.preventDefault()
 
           userAbility.inviteJoinInGroup(this, this.detail.group.id, () => {
-            this.refreshPageData()
+            this.refreshPageData(0)
           }, this.detail.group)
         }
       },
@@ -727,9 +727,12 @@
           )
         }
       },
-      refreshPageData () {
+      refreshPageDataNoLoading () {
+        this.refreshPageData(0)
+      },
+      refreshPageData (loading = 1) {
         this.detail.data.img = []
-        this.getDetail()
+        this.getDetail(loading)
         this.$refs.ctextarea.refreshPageData()
       },
       shareSuccess () {
@@ -741,8 +744,8 @@
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
-      getDetail: function () {
-        this.loading = 1
+      getDetail: function (loading = 1) {
+        this.loading = loading
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
         this.noback = !!this.$route.query.noback
