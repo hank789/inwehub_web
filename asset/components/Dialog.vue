@@ -762,28 +762,28 @@
     background: #ffffff;
   }
   .headAndNickname {
-    width: 300px !important;
+    width: 8rem !important;
   }
   .headAndNickname .iconImg .icon {
-    margin-top: 30px;
-    font-size: 110px;
+    margin-top: 0.8rem;
+    font-size: 2.933rem;
   }
   .headAndNickname .titleText {
-    margin-top: 11px;
+    margin-top: 0.293rem;
   }
   .headAndNickname .titleText p {
     color: #444444;
-    font-size: 16px;
-    line-height: 22.5px;
+    font-size: 0.426rem;
+    line-height: 0.6rem;
   }
   .headAndNickname .buttonText {
-    line-height: 52px;
+    line-height: 1.386rem;
   }
   .headAndNickname .buttonText span {
-    font-size: 16px;
+    font-size: 0.426rem;
   }
   .headAndNickname .weChat {
-    margin-top: 37px;
+    margin-top: 0.986rem;
     color: #03AEF9;
   }
   .headAndNickname .close {
