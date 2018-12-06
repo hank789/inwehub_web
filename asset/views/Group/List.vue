@@ -44,7 +44,7 @@
             <img src="../../statics/images/feed@3x.png" alt="">
           </div>
           <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
-          <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
+          <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=group')">
             <button>去看看</button>
           </div>
         </div>
@@ -106,7 +106,11 @@
       toGroupAdd () {
         userAbility.jumpToGroupAdd()
       },
-      refreshPageData () {},
+      refreshPageData () {
+        if (this.$route.query.refresh) {
+          this.$refs.RefreshList.refreshPageData(this.prevOtherData)
+        }
+      },
       goJoin (id) {
         postRequest(`group/join`, {id: id}).then(response => {
           var code = response.data.code
