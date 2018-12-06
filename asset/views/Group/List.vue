@@ -25,14 +25,27 @@
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"
         :pageMode = true
+        :autoShowEmpty="false"
         class="listWrapper"
       >
-        <div class="groupSearchWrapper" @tap.stop.prevent="$router.pushPlus('/group/search','list-detail-page-three')">
+        <div class="groupSearchWrapper" v-if="list.length" @tap.stop.prevent="$router.pushPlus('/group/search','list-detail-page-three')">
           <div class="groupSearch border-football">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-sousuo"></use>
             </svg>
             <span>搜索您感兴趣的其他圈子</span>
+          </div>
+        </div>
+
+
+
+        <div class="component-feed-item-guide" v-if="!list.length">
+          <div class="feed-IconImg">
+            <img src="../../statics/images/feed@3x.png" alt="">
+          </div>
+          <div class="desc">关注你感兴趣的人和圈子，了解他们的最新动态</div>
+          <div class="buttonWrapper" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
+            <button>去看看</button>
           </div>
         </div>
 
@@ -58,7 +71,7 @@
           </div>
           <i class="bot"></i>
         </div>
-        <div class="foundGroup" @tap.stop.prevent="toGroupAdd()">
+        <div class="foundGroup" v-if="list.length" @tap.stop.prevent="toGroupAdd()">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-tianjia"></use>
           </svg>
@@ -156,6 +169,31 @@
       color: #B4B4B6;
       font-size: 0.293rem;
       vertical-align: inherit;
+    }
+  }
+  .component-feed-item-guide {
+    padding-top: 2.8rem;
+    &.feedListNo {
+      margin-top: 2.666rem;
+      button {
+        margin-top: 0.453rem;
+      }
+    }
+    .line-river-after {
+      margin-top: 0.8rem;
+      &:after {
+        left: 0.426rem;
+        right: 0.426rem;
+      }
+    }
+    .feed-IconImg {
+      width: 3.2rem;
+      height: 1.973rem;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 </style>
