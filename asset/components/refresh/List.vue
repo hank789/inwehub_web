@@ -70,23 +70,23 @@
       },
       contentdown: {
         type: String,
-        default: '下拉可以刷新'
+        default: '下拉刷新'
       },
       contentover: {
         type: String,
-        default: '释放立即刷新'
+        default: '释放刷新'
       },
       downcontentrefresh: {
         type: String,
-        default: '正在刷新...'
+        default: '刷新中'
       },
       upcontentrefresh: {
         type: String,
-        default: '正在加载...'
+        default: '正在载入'
       },
       upcontentnomore: {
         type: String,
-        default: '没有更多数据了'
+        default: '无更多数据'
       },
       pageMode: {
         type: Boolean,
@@ -367,14 +367,14 @@
           deceleration: 0.001,  // 默认值 0.0006, 系数越小滑动越灵敏
           down: {
             auto: true,   // 可选,默认false.首次加载自动下拉刷新一次
-            contentdown: this.contentdown ? this.contentdown : '下拉可以刷新',  // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-            contentover: this.contentover ? this.contentover : '释放立即刷新',  // 可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+            contentdown: this.contentdown ? this.contentdown : '下拉刷新',  // 可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+            contentover: this.contentover ? this.contentover : '释放刷新',  // 可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
             contentrefresh: this.downcontentrefresh ? this.downcontentrefresh : '正在刷新...',  // 可选，正在刷新状态时，下拉刷新控件上显示的标题内容
             callback: this.downLoadMoreMode ? this.getDownLoadMoreModePrevList : this.getPrevList   // 必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
           },
           up: {
-            contentrefresh: this.upcontentrefresh ? this.upcontentrefresh : '正在加载...',
-            contentnomore: this.upcontentnomore ? this.upcontentnomore : '没有更多数据了',   // 可选，请求完毕若没有更多数据时显示的提醒内容；
+            contentrefresh: this.upcontentrefresh ? this.upcontentrefresh : '正在载入',
+            contentnomore: this.upcontentnomore ? this.upcontentnomore : '无更多数据',   // 可选，请求完毕若没有更多数据时显示的提醒内容；
             callback: this.downLoadMoreMode ? this.getDownLoadMoreModeNextList : this.getNextList
           }
         }

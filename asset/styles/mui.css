@@ -4838,8 +4838,6 @@ body > .mui-progressbar
 
 .mui-pull
 {
-    font-weight: bold;
-
     position: absolute;
     right: 0;
     bottom: 0.32rem;
@@ -4847,7 +4845,7 @@ body > .mui-progressbar
 
     text-align: center;
 
-    color: #777;
+    color: #B4B4B6;
 }
 
 .mui-pull-loading
@@ -4869,8 +4867,8 @@ body > .mui-progressbar
 
 .mui-pull-caption
 {
-    font-size: 0.4rem;
-    line-height: 0.64rem;
+    font-size: 0.2rem;
+    line-height: 0.32rem;
 
     position: relative;
 
