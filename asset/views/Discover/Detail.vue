@@ -220,7 +220,7 @@
         </div>
         <div class="river" v-if="isShow"></div>
 
-        <div class="openAppReadBox">
+        <div class="openAppReadBox" v-if="isShow">
           <div class="openAppRead" @tap.stop.prevent="openApp()">
             <span class="font-family-medium">打开APP</span>
             <span>阅读更多推荐</span>
