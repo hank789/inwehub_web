@@ -225,10 +225,6 @@
           this.data = data
 
           setTimeout(() => {
-            window.mui.plusReady(function () {
-              closeSplashscreen()
-            })
-
             window.mui('#home_banner_slider').slider({
               interval: 5000
             })
@@ -293,6 +289,13 @@
         if (angle <= 20) {
           this.$router.replace('/discover')
         }
+      })
+      this.$nextTick(function () {
+        // Code that will run only after the
+        // entire view has been rendered
+        window.mui.plusReady(function () {
+          closeSplashscreen()
+        })
       })
     }
   }
