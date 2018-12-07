@@ -127,7 +127,7 @@
   import { getHomeData } from '../utils/home'
   import RefreshList from '../components/refresh/List.vue'
   import { saveLocationInfo } from '../utils/allPlatform'
-  import { autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
+  import { autoTextArea, openUrlByUrl} from '../utils/plus'
   import userAbility from '../utils/userAbility'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { scrollPage } from '../utils/dom'
@@ -289,13 +289,6 @@
         if (angle <= 20) {
           this.$router.replace('/discover')
         }
-      })
-      this.$nextTick(function () {
-        // Code that will run only after the
-        // entire view has been rendered
-        window.mui.plusReady(function () {
-          closeSplashscreen()
-        })
       })
     }
   }

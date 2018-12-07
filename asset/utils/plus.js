@@ -494,11 +494,9 @@ function openWebviewRefresh (callback) {
 /**
  * app,webview新打开的页面都运行一次的代码
  * @param context
- * @constructor
  */
 function AppPageInit (context) {
   console.log('AppPageInit(context) fired')
-  AppInit(context)
 
   window.mui.plusReady(function () {
     window.mui.init({
@@ -566,11 +564,11 @@ function AppPageInit (context) {
       })
     }
   })
+  AppInit(context)
 }
 
 /**
  * 打开app运行一次的代码
- * @constructor
  */
 function AppInit (context) {
   window.mui.plusReady(function () {
@@ -709,6 +707,12 @@ function AppInit (context) {
             })
           }
         }, false)
+
+        context.$nextTick(function () {
+          // Code that will run only after the
+          // entire view has been rendered
+          closeSplashscreen()
+        })
       }
     }
   })

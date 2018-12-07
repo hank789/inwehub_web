@@ -31,7 +31,6 @@ const routes = [
         if (!lauch.showGuide) {
           window.mui.plusReady(function () {
             openFullscreen()
-            closeSplashscreen()
             next({
               path: '/guide'
             })
