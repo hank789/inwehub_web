@@ -41,7 +41,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
   autoBlur()
   console.log('pushPlus 准备打开:' + url)
   var footerTab = ['ask-offer-list', 'home', 'inform-list', 'my', 'discover', 'group-list', 'dianping', 'userGuide-interst']
-  var detailUrlName = ['discover_detail', 'dianping-comment-detail', 'dianping-product-detail']
+  var detailUrlName = ['discover_detail', 'dianping-comment-detail', 'dianping-product-detail', 'passwordlogin']
   var nextUrl = ''
   if (window.mui.os.plus && window.mui.os.ios) {
     var matchedRoute = this.resolve(url)
