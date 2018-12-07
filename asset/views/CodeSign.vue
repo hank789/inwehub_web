@@ -333,8 +333,9 @@
           })
       },
       loginSuccessCallback (newUser = 0) {
-        this.$parent.$refs.OpenAppComponent.refreshData()
-
+        if (!window.mui.os.plus) {
+          this.$parent.$refs.OpenAppComponent.refreshData()
+        }
         // 存储设备信息
         window.mui.plusReady(function () {
           if (window.mui.os.plus) {
