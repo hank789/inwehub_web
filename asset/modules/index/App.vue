@@ -17,7 +17,7 @@
                      @chat="chat"
     ></FooterComponent>
     <div id="toast"></div>
-    <OpenAppComponent ref="OpenAppComponent" v-if="!window.mui.os.plus"></OpenAppComponent>
+    <OpenAppComponent ref="OpenAppComponent" v-if="!isApp"></OpenAppComponent>
     <inwehubDialog ref="inwehubDialog"></inwehubDialog>
     <MessageComponent ref="MessageComponent"></MessageComponent>
   </div>
@@ -34,7 +34,8 @@
   export default {
     data () {
       return {
-        wechatTitle: this.$route.meta.title
+        wechatTitle: this.$route.meta.title,
+        isApp: window.mui.os.plus
       }
     },
     methods: {
