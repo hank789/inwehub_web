@@ -40,7 +40,7 @@ router.pushReadHubPage = function (url) {
 router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-right', popGesture = 'hide', forceWebView = false, reload = false) {
   autoBlur()
   console.log('pushPlus 准备打开:' + url)
-  var footerTab = ['ask-offer-list', 'home', 'inform-list', 'my', 'discover', 'group-list', 'dianping', 'userGuide-interst']
+  var footerTab = ['ask-offer-list', 'home', 'inform-list', 'my', 'discover', 'group-list', 'dianping', 'userGuide-interst', 'login']
   var detailUrlName = ['discover_detail', 'dianping-comment-detail', 'dianping-product-detail', 'passwordlogin', 'setting']
   var nextUrl = ''
   if (window.mui.os.plus && window.mui.os.ios) {
