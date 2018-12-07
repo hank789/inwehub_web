@@ -32,15 +32,15 @@
           <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
             <div class="mui-slider-group  mui-slider-loop">
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-                <a @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" :isLazyload="false"></ImageView></a>
+                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136" :isLazyload="false"></ImageView></div>
               </div>
               <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-                <a  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" :isLazyload="false"></ImageView></a>
+                <div  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false"></ImageView></div>
               </div>
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
-                <a @tap.stop.prexvent="goLink(data.banners[0].url)">
-                  <ImageView :src="data.banners[0].img_url" width="343" :isLazyload="false"></ImageView>
-                </a>
+                <div @tap.stop.prexvent="goLink(data.banners[0].url)">
+                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false"></ImageView>
+                </div>
               </div>
             </div>
             <div class="home mui-slider-indicator">
@@ -127,10 +127,9 @@
   import { getHomeData } from '../utils/home'
   import RefreshList from '../components/refresh/List.vue'
   import { saveLocationInfo } from '../utils/allPlatform'
-  import { autoTextArea, openUrlByUrl, closeSplashscreen } from '../utils/plus'
+  import { autoTextArea, openUrlByUrl } from '../utils/plus'
   import userAbility from '../utils/userAbility'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { getRequest } from '../utils/request'
   import { scrollPage } from '../utils/dom'
   import { getImageSuffix } from '../utils/image'
   import localEvent from '../stores/localStorage'
@@ -226,10 +225,6 @@
           this.data = data
 
           setTimeout(() => {
-            window.mui.plusReady(function () {
-              closeSplashscreen()
-            })
-
             window.mui('#home_banner_slider').slider({
               interval: 5000
             })
@@ -387,7 +382,9 @@
   .mui-scrollbar-vertical{
     display: none !important;
   }
-
+  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item{
+    margin:0 0.026rem;
+  }
   .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item img{
     height:3.626rem !important;
     object-fit: cover;

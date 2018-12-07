@@ -41,6 +41,9 @@
         if (this.$route.query.from === 'feed') {
           needRefresh()
           this.$router.pushPlus('/discover?refresh=1')
+        } else if (this.$route.query.from === 'group') {
+          needRefresh()
+          this.$router.pushPlus('/groups?refresh=1')
         } else {
           this.$router.pushPlus('/my')
         }

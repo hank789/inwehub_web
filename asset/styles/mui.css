@@ -738,9 +738,6 @@ p
     z-index: 1;
 
     width: 100%;
-
-    -webkit-transform: translateZ(0);
-            transform: translateZ(0);
 }
 
 .mui-scrollbar
@@ -4841,8 +4838,6 @@ body > .mui-progressbar
 
 .mui-pull
 {
-    font-weight: bold;
-
     position: absolute;
     right: 0;
     bottom: 0.32rem;
@@ -4850,7 +4845,7 @@ body > .mui-progressbar
 
     text-align: center;
 
-    color: #777;
+    color: #B4B4B6;
 }
 
 .mui-pull-loading

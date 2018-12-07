@@ -1,5 +1,5 @@
 
-import { deleteItem as deleteDiscoverItem, collect } from './discover'
+import { deleteItem as deleteDiscoverItem, collect, setTop, addGood, cancelGood, cancelTop } from './discover'
 import { getLocalUserId } from './user'
 import { getIndexByIdArray } from './array'
 
@@ -61,12 +61,37 @@ function getIconMenus (item) {
         isBookMark: 0
       })
     }
-  }
 
+    if (item.feed.is_group_owner) {
+      if (item.feed.is_recommend) {
+        iconMenus.push({
+          icon: '#icon-sheweijingxuan',
+          text: '取消加精'
+        })
+      } else {
+        iconMenus.push({
+          icon: '#icon-sheweijingxuan',
+          text: '设为精选'
+        })
+      }
+
+      if (item.feed.top) {
+        iconMenus.push({
+          icon: '#icon-zhiding',
+          text: '取消置顶'
+        })
+      } else {
+        iconMenus.push({
+          icon: '#icon-zhiding',
+          text: '置顶'
+        })
+      }
+    }
+  }
   return iconMenus
 }
 
-function iconMenusClickedItem (context, item, iconItemClicked) {
+function iconMenusClickedItem (context, item, iconItemClicked, callback) {
   if (isDiscover(item)) {
     switch (iconItemClicked.text) {
       case '删除':
@@ -77,19 +102,47 @@ function iconMenusClickedItem (context, item, iconItemClicked) {
         })
         break
       case '收藏':
-        context.$refs.share.share()
         collect(context, item.feed.submission_id, () => {
           item.feed.is_bookmark = true
+          callback()
         }, () => {
           item.feed.is_bookmark = false
+          callback()
         })
         break
       case '已收藏':
-        context.$refs.share.share()
         collect(context, item.feed.submission_id, () => {
-          item.feed.is_bookmark = true
+          item.is_recommend = 1
+          var index = getIndexByIdArray(context.list, item.id)
+          context.list[index].feed.is_recommend = 1
+          callback()
         }, () => {
           item.feed.is_bookmark = false
+          callback()
+        })
+        break
+      case '设为精选':
+        addGood(item.feed.submission_id, () => {
+          item.feed.is_recommend = true
+          callback()
+        })
+        break
+      case '取消加精':
+        cancelGood(item.feed.submission_id, () => {
+          item.feed.is_recommend = false
+          callback()
+        })
+        break
+      case '置顶':
+        setTop(item.feed.submission_id, () => {
+          item.feed.top = true
+          callback()
+        })
+        break
+      case '取消置顶':
+        cancelTop(item.feed.submission_id, () => {
+          item.feed.top = false
+          callback()
         })
         break
     }

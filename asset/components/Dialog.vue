@@ -37,6 +37,14 @@
           <p>补全头像和昵称</p>
           <p>做一个有身份的人</p>
         </div>
+        <div class="buttonText weChat alertConfirm">
+          <div class="line-river-after line-river-after-top"></div>
+          <span class="font-family-medium">导入微信头像和昵称</span>
+        </div>
+        <div class="buttonText close alertClose">
+          <div class="line-river-after line-river-after-top"></div>
+          <span>不用了</span>
+        </div>
       </div>
     </div>
 
@@ -751,17 +759,35 @@
 
   .headAndNickname {
     text-align: center;
+    background: #ffffff;
+  }
+  .headAndNickname {
+    width: 8rem !important;
   }
   .headAndNickname .iconImg .icon {
-    font-size: 110px;
+    margin-top: 0.8rem;
+    font-size: 2.933rem;
   }
   .headAndNickname .titleText {
-    margin-top: 16px;
+    margin-top: 0.293rem;
   }
   .headAndNickname .titleText p {
     color: #444444;
-    font-size: 16px;
-    line-height: 22.5px;
+    font-size: 0.426rem;
+    line-height: 0.6rem;
+  }
+  .headAndNickname .buttonText {
+    line-height: 1.386rem;
+  }
+  .headAndNickname .buttonText span {
+    font-size: 0.426rem;
+  }
+  .headAndNickname .weChat {
+    margin-top: 0.986rem;
+    color: #03AEF9;
+  }
+  .headAndNickname .close {
+    color: #444444;
   }
 
 

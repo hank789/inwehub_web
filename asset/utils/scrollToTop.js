@@ -4,6 +4,12 @@ var eventCallback = function () {
   var context = window.scrollEventContext
   if (context.querySelector('#refreshContainer') && window.mui(context.querySelector('#refreshContainer')).pullRefresh()) {
     console.log('底部菜单选项双击后找到 #refreshContainer')
+    var tagsHomeHide = document.querySelector('.container-tags-home-hide')
+    if (tagsHomeHide) {
+      tagsHomeHide.classList.remove('showTagsHome')
+      window.mui('#refreshContainer').scroll().y = 0
+    }
+
     window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
     window.mui(context.querySelector('#refreshContainer')).pullRefresh().pulldownLoading()
   } else if (context.querySelector('#pullrefresh') && window.mui(context.querySelector('#pullrefresh')).pullRefresh()) {

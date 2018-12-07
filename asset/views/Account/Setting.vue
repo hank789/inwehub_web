@@ -184,7 +184,9 @@
         this.$store.dispatch(ASKS_LIST_APPEND, {})
         this.$store.dispatch(ANSWERS_LIST_APPEND, {})
         this.$store.dispatch(TASK_LIST_APPEND, {})
-        this.$parent.$refs.OpenAppComponent.refreshData()
+        if (!window.mui.os.plus) {
+          this.$parent.$refs.OpenAppComponent.refreshData()
+        }
         this.$router.pushPlus('/login', '', true, 'none', 'none')
       },
       logOut () {

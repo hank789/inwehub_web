@@ -219,7 +219,6 @@
   import DiscoverShare from '../../components/feed/DiscoverShare.vue'
   import { postRequest } from '../../utils/request'
   import { getLocalUserId } from '../../utils/user'
-  import { getIndexByIdArray } from '../../utils/array'
   import PageMore from '../../components/PageMore.vue'
   import { getGroupDetail } from '../../utils/shareTemplate'
   import localEvent from '../../stores/localStorage'
@@ -305,14 +304,12 @@
     methods: {
       prevSuccessCallback () {
         scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-          console.log(y + ':y上滑高度')
           // var headerBackHeader = document.querySelector('.headerBack').clientHeight
           if (y > 150) {
             document.querySelector('.content-header-hide').classList.add('showHeader')
             document.querySelector('.content-header-hide').style.opacity = y / 250
           }
         }, null, (container, y) => {
-          console.log(y + ':y下滑高度')
           // var headerBackHeader = document.querySelector('.headerBack').clientHeight
           if (y < 150) {
             document.querySelector('.content-header-hide').classList.remove('showHeader')
@@ -321,61 +318,13 @@
         })
       },
       iconMenusClickedItem (item) {
-        switch (item.text) {
-          case '删除':
-            this.del(this.itemOptionsObj, () => {
-            })
-            break
-          case '设为精选':
-            this.addGood(this.itemOptionsObj, () => {
-            })
-            break
-          case '取消加精':
-            this.cancelGood(this.itemOptionsObj, () => {
-            })
-            break
-          case '置顶':
-            this.setTop(this.itemOptionsObj, () => {
-            })
-            break
-          case '取消置顶':
-            this.cancelTop(this.itemOptionsObj, () => {
-            })
-            break
-          default:
-            iconMenusClickedItem(this, this.itemOptionsObj, item)
-            break
-        }
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
+          this.iconMenus = getIconMenus(this.itemOptionsObj)
+        })
       },
       showItemOptions (shareOption, item) {
         this.iconMenus = getIconMenus(item)
         this.itemOptionsObj = item
-
-        if (this.detail.is_joined === 3) {
-          if (item.feed.is_recommend) {
-            this.iconMenus.push({
-              icon: '#icon-sheweijingxuan',
-              text: '取消加精'
-            })
-          } else {
-            this.iconMenus.push({
-              icon: '#icon-sheweijingxuan',
-              text: '设为精选'
-            })
-          }
-
-          if (item.top) {
-            this.iconMenus.push({
-              icon: '#icon-zhiding',
-              text: '取消置顶'
-            })
-          } else {
-            this.iconMenus.push({
-              icon: '#icon-zhiding',
-              text: '置顶'
-            })
-          }
-        }
         this.shareOption = Object.assign(this.shareOption, shareOption)
         this.$refs.share.share()
       },
@@ -505,7 +454,7 @@
         return true
       },
       report () {
-        window.mui('#shareWrapper').popover('toggle')
+        this.$refs.share.toggle()
         window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
           if (e.index === 1) {
             if (e.value) {
@@ -529,62 +478,6 @@
             }
           }
         }, 'div')
-      },
-      setTop (item, callback) {
-        window.mui('#shareWrapper').popover('toggle')
-        postRequest(`group/setSubmissionTop`, {submission_id: item.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-          window.mui.toast('操作成功')
-          this.list[this.itemOptionsIndex].top = 1
-          callback()
-        })
-      },
-      cancelTop (item, callback) {
-        window.mui('#shareWrapper').popover('toggle')
-        postRequest(`group/cancelSubmissionTop`, {submission_id: item.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-          window.mui.toast('操作成功')
-          this.list[this.itemOptionsIndex].top = 0
-          callback()
-        })
-      },
-      addGood (item, callback) {
-        window.mui('#shareWrapper').popover('toggle')
-        postRequest(`group/setSubmissionRecommend`, {submission_id: item.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-
-          item.is_recommend = 1
-          this.list[this.itemOptionsIndex].feed.is_recommend = 1
-          window.mui.toast('操作成功')
-          callback()
-        })
-      },
-      cancelGood (item, callback) {
-        window.mui('#shareWrapper').popover('toggle')
-        postRequest(`group/cancelSubmissionRecommend`, {submission_id: item.id}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-
-          item.is_recommend = 0
-          this.list[this.itemOptionsIndex].feed.is_recommend = 0
-          window.mui.toast('操作成功')
-          callback()
-        })
       },
       getData () {
         this.id = parseInt(this.$route.params.id)
@@ -624,32 +517,6 @@
           this.shareOption = Object.assign(this.shareOption, shareOption)
 
           this.loading = 0
-        })
-      },
-      del (item, callback) {
-        window.mui('#shareWrapper').popover('toggle')
-        var btnArray = ['取消', '确定']
-        var list = this.list
-        window.mui.confirm('确定删除吗？', ' ', btnArray, function (e) {
-          if (e.index === 1) {
-            // 进行删除
-            postRequest(`article/destroy-submission`, {
-              id: item.id
-            }).then(response => {
-              var code = response.data.code
-              // 如果请求不成功提示信息 并且返回上一页；
-              if (code !== 1000) {
-                window.mui.toast(response.data.message)
-                return
-              }
-              if (response.data.data) {
-                var index = getIndexByIdArray(list, item.id)
-                list.splice(index, 1)
-                callback()
-                window.mui.toast('删除成功')
-              }
-            })
-          }
         })
       },
       chooseType (type) {

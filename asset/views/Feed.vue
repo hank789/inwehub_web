@@ -90,12 +90,12 @@
 
                 </swiper-slide>
                 <swiper-slide>
-                  <div class="recommendFollowList">
+                  <div class="recommendFollowList" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">
                     <div class="recommendListWrapper">
                       <div class="feed-IconImg">
                         <img src="../statics/images/feed@3x.png" alt="">
                       </div>
-                      <div class="desc" @tap.stop.prevent="$router.pushPlus('/userGuide/stepone?from=feed')">看看更多<br>相关的人和圈子</div>
+                      <div class="desc">看看更多<br>相关的人和圈子</div>
                     </div>
                   </div>
                 </swiper-slide>
@@ -262,7 +262,9 @@
 
       },
       iconMenusClickedItem (item) {
-        iconMenusClickedItem(this, this.itemOptionsObj, item)
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
+          this.iconMenus = getIconMenus(this.itemOptionsObj)
+        })
       },
       refreshPageData () {
         if (this.$route.query.refresh) {
