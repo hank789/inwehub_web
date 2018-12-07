@@ -835,10 +835,6 @@ function getCacheImage (imgUrl, callback) {
   let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
   let localImageUrl = '_doc/cache/image/' + imageCode + '.jpg'
 
-  if (window.mui.os.android) {
-    localImageUrl = window.plus.io.convertLocalFileSystemURL(localImageUrl)
-  }
-
   console.log('localImageUrl:' + localImageUrl)
 
   // 判断本地是否存在该文件，存在就就直接使用，否则就下载
@@ -855,7 +851,7 @@ function getCacheImage (imgUrl, callback) {
     console.log('图片不存在, 去下载2...')
     downloadImg(imgUrl, localImageUrl, callback)
   })
-  return window.plus.io.convertLocalFileSystemURL('_doc/cache/image/' + imageCode + '.jpg')
+  return window.plus.io.convertLocalFileSystemURL(localImageUrl)
 }
 
 /**

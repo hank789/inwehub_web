@@ -32,14 +32,14 @@
           <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
             <div class="mui-slider-group  mui-slider-loop">
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView></div>
+                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136" :isLazyload="false"></ImageView></div>
               </div>
               <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-                <div  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView></div>
+                <div  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false"></ImageView></div>
               </div>
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
                 <div @tap.stop.prexvent="goLink(data.banners[0].url)">
-                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView>
+                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false"></ImageView>
                 </div>
               </div>
             </div>
