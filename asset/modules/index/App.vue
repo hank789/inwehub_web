@@ -17,7 +17,7 @@
                      @chat="chat"
     ></FooterComponent>
     <div id="toast"></div>
-    <OpenAppComponent ref="OpenAppComponent"></OpenAppComponent>
+    <OpenAppComponent ref="OpenAppComponent" v-if="!window.mui.os.plus"></OpenAppComponent>
     <inwehubDialog ref="inwehubDialog"></inwehubDialog>
     <MessageComponent ref="MessageComponent"></MessageComponent>
   </div>
