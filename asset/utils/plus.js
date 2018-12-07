@@ -580,10 +580,6 @@ function AppInit (context) {
             }
           }
         }, false)
-        /* 应用从前台切换回后台事件 */
-        EventObj.addIntervalOnceEventListener('pause', () => {
-          clearHomeData()
-        })
         /* 应用从后台切换回前台事件 */
         EventObj.addIntervalOnceEventListener('resume', () => {
           // 剪贴板
