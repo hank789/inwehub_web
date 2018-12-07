@@ -7,6 +7,7 @@
 
   import { getImageSuffix } from '../../utils/image'
   import { getDpi } from '../../utils/dom'
+  import { getCacheImage } from '../../utils/plus'
 
   export default {
     data () {
@@ -21,6 +22,10 @@
       isLazyload: {
         type: Boolean,
         default: true
+      },
+      saveToLocal: {
+        type: Boolean,
+        default: false
       },
       width: {
         default: 0
@@ -40,7 +45,12 @@
         if (height) {
           height *= getDpi()
         }
-        return getImageSuffix(src, width, height)
+        var formatSrc = getImageSuffix(src, width, height)
+        if (this.saveToLocal) {
+          // 存储到本地
+          formatSrc = getCacheImage(formatSrc, (imgUrl) => {})
+        }
+        return formatSrc
       }
     }
   }

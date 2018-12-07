@@ -6,6 +6,7 @@ import localEvent from '../stores/localStorage'
 import EventObj from './event'
 import { apiRequest } from './request'
 import { checkUpdate } from './updateVersion'
+import { clearHomeData, getHomeData } from './home'
 
 function dowloadFile (uri, path, callback) {
   window.mui.plusReady(() => {
@@ -507,36 +508,6 @@ function AppPageInit (context) {
     lockOrientation('portrait-primary')
 
     if (window.mui.os.plus && window.mui.os.ios) {
-      // 预加载页面
-      var listPageWebview = window.mui.preload({
-        url: process.env.NODE_ENV === 'development' ? 'index.html#/empty' : '/public/index.html#/empty',
-        id: 'list-detail-page',
-        styles: {
-          popGesture: 'hide'
-        },
-        extras: {preload: true, custom_preload: true}
-      })
-      listPageWebview.addEventListener('popGesture', (e) => {
-        console.log('run in event popGesture')
-        if (e.type === 'end' && e.result === true) {
-          var parentWebview = getPrevWebview() // self.opener()
-          if (parentWebview) {
-            console.log('calledEvent: popGesture：' + parentWebview.id)
-
-            // 触发父页面的自定义事件(refresh),从而进行刷新
-            window.mui.fire(parentWebview, 'refreshData', {childId: 'list-page'})
-            // 刷新当前页数据
-            // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
-
-            // 触发父页面的自定义事件(refresh),从而进行刷新
-            window.mui.fire(parentWebview, 'refreshPageData', {childId: 'list-page', type: 'back'})
-            // 刷新当前页数据
-            // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
-
-            window.mui.fire(parentWebview, 'autoHeight', {childId: 'list-page'})
-          }
-        }
-      }, false)
       // 监听自定义事件，前往页面
       document.addEventListener('go_to_target_page', (event) => {
         var url = event.detail.url
@@ -579,11 +550,45 @@ function AppInit (context) {
 
       /* 只在主页面监听一次 */
       if (ws.id === window.plus.runtime.appid) {
+        // 预加载页面
+        var listPageWebview = window.mui.preload({
+          url: process.env.NODE_ENV === 'development' ? 'index.html#/empty' : '/public/index.html#/empty',
+          id: 'list-detail-page',
+          styles: {
+            popGesture: 'hide'
+          },
+          extras: {preload: true, custom_preload: true}
+        })
+        listPageWebview.addEventListener('popGesture', (e) => {
+          console.log('run in event popGesture')
+          if (e.type === 'end' && e.result === true) {
+            var parentWebview = getPrevWebview() // self.opener()
+            if (parentWebview) {
+              console.log('calledEvent: popGesture：' + parentWebview.id)
+
+              // 触发父页面的自定义事件(refresh),从而进行刷新
+              window.mui.fire(parentWebview, 'refreshData', {childId: 'list-page'})
+              // 刷新当前页数据
+              // window.mui.fire(self, 'refreshData', {parentId: parentWebview.id})
+
+              // 触发父页面的自定义事件(refresh),从而进行刷新
+              window.mui.fire(parentWebview, 'refreshPageData', {childId: 'list-page', type: 'back'})
+              // 刷新当前页数据
+              // window.mui.fire(self, 'refreshPageData', {parentId: parentWebview.id})
+
+              window.mui.fire(parentWebview, 'autoHeight', {childId: 'list-page'})
+            }
+          }
+        }, false)
+        /* 应用从前台切换回后台事件 */
+        EventObj.addIntervalOnceEventListener('pause', () => {
+          clearHomeData()
+        })
         /* 应用从后台切换回前台事件 */
         EventObj.addIntervalOnceEventListener('resume', () => {
           // 剪贴板
           checkClipbord()
-
+          clearHomeData()
           // 存储用户位置信息
           var currentUser = localEvent.getLocalItem('UserInfo')
           if (currentUser.user_id) {
@@ -711,7 +716,9 @@ function AppInit (context) {
         context.$nextTick(function () {
           // Code that will run only after the
           // entire view has been rendered
-          closeSplashscreen()
+          getHomeData((data) => {
+            closeSplashscreen()
+          })
         })
       }
     }
@@ -768,6 +775,7 @@ function getContacts (successCallback, failCallback) {
  * @param callback
  */
 function downloadImg (imgUrl, savePath, callback) {
+  imgUrl = encodeURIComponent(imgUrl)
   window.mui.plusReady(function () {
     var downloadTask = window.plus.downloader.createDownload(imgUrl, {
       filename: savePath
@@ -824,29 +832,30 @@ function getCacheImage (imgUrl, callback) {
   if (!window.plus) {
     return imgUrl
   }
-  window.mui.plusReady(function () {
-    let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
-    let localImageUrl = '_doc/cache/image/' + imageCode + '.jpg'
+  let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
+  let localImageUrl = '_doc/cache/image/' + imageCode + '.jpg'
 
-    if (window.mui.os.android) {
-      localImageUrl = window.plus.io.convertLocalFileSystemURL(localImageUrl)
-    }
+  if (window.mui.os.android) {
+    localImageUrl = window.plus.io.convertLocalFileSystemURL(localImageUrl)
+  }
 
-    // 判断本地是否存在该文件，存在就就直接使用，否则就下载
-    window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
-      if (entry) {
-        var image = entry.toRemoteURL()
-        console.log('图片已存在:' + image)
-        callback(image)
-      } else {
-        console.log('图片不存在, 去下载...')
-        downloadImg(imgUrl, localImageUrl, callback)
-      }
-    }, function (e) {
-      console.log('图片不存在, 去下载2...')
+  console.log('localImageUrl:' + localImageUrl)
+
+  // 判断本地是否存在该文件，存在就就直接使用，否则就下载
+  window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
+    if (entry) {
+      var image = entry.toLocalURL()
+      console.log('图片已存在:' + image)
+      callback(image)
+    } else {
+      console.log('图片不存在, 去下载...')
       downloadImg(imgUrl, localImageUrl, callback)
-    })
+    }
+  }, function (e) {
+    console.log('图片不存在, 去下载2...')
+    downloadImg(imgUrl, localImageUrl, callback)
   })
+  return window.plus.io.convertLocalFileSystemURL('_doc/cache/image/' + imageCode + '.jpg')
 }
 
 /**
