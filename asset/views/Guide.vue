@@ -55,13 +55,14 @@
 <script>
 
   import localEvent from '../stores/localStorage'
-  import { openFullscreen, closeFullscreen } from '../utils/plus'
+  import { openFullscreen, closeFullscreen, closeSplashscreen } from '../utils/plus'
   export default {
     data: () => ({}),
     created () {
       openFullscreen()
     },
     mounted () {
+      closeSplashscreen()
       window.mui('.mui-slider').slider()
 
       var t = this
