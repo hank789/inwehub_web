@@ -99,11 +99,11 @@
           <div class="river openAppReadRiver"></div>
           <div class="followCode">
             <div class="CodeImg">
-              <img src="../../statics/images/group_3@3x 2.png" alt="">
+              <img src="../../statics/images/xiaohaWeChat@3x.png" alt="">
             </div>
             <div class="codeText">
-              <div>长按识别二维码，关注InweHub服务号</div>
-              <div>探索更多资讯/人脉/服务</div>
+              <div>长按添加平台联络官“小哈”微信</div>
+              <div>加行业群/互动交流/探索更多</div>
             </div>
           </div>
         </div>
