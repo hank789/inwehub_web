@@ -149,9 +149,9 @@
 		var scaleY = from.height / to.height;
 		var scale = 1;
 		if (scaleX <= scaleY) {
-			scale = from.height / (to.height * scaleX);
+			scale = from.height * 20 / (to.height * scaleX);
 		} else {
-			scale = from.width / (to.width * scaleY);
+			scale = from.width * 20 / (to.width * scaleY);
 		}
 		return scale;
 	};
