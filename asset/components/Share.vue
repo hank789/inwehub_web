@@ -516,8 +516,8 @@
       saveImage () {
         if (this.showPreviewApiImage) {
           window.mui.plusReady(() => {
-            window.plus.gallery.save('_www/question_share.png', () => {
-              console.log('保存图片到相册成功:_www/question_share.png')
+            window.plus.gallery.save(this.apiImageUrl, () => {
+              console.log('保存图片到相册成功:' + this.apiImageUrl)
               window.mui.toast('保存成功')
             }, function () {
               console.log('保存图片到相册失败')
