@@ -27,7 +27,7 @@ const router = new VueRouter({
   routes
 })
 
-if (process.env.NODE_ENV !== 'development') {
+if (process.env.NODE_ENV !== 'development' && !window.mui.os.plus) {
   const gaCode = process.env.GA_CODE
   ga(router, gaCode)
 }
