@@ -576,9 +576,7 @@
       },
       goComment () {
         scrollToElement(this, '#commentTitle', '.pull-down-container')
-        setTimeout(() => {
-          this.$refs.discuss.rootComment()
-        }, 100)
+        this.$refs.discuss.rootComment()
       },
       goDetail (item) {
         if (!window.mui.os.plus) {
