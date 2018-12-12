@@ -6,7 +6,7 @@ import localEvent from '../stores/localStorage'
 import EventObj from './event'
 import { apiRequest } from './request'
 import { checkUpdate } from './updateVersion'
-import { clearHomeData } from './home'
+import { clearHomeData, getHomeData } from './home'
 
 function dowloadFile (uri, path, callback) {
   window.mui.plusReady(() => {
@@ -708,6 +708,14 @@ function AppInit (context) {
             })
           }
         }, false)
+
+        context.$nextTick(function () {
+          // Code that will run only after the
+          // entire view has been rendered
+          getHomeData((data) => {
+            closeSplashscreen()
+          })
+        })
       }
     }
   })
