@@ -34,6 +34,9 @@ vue: https://cn.vuejs.org/index.html
 mui: http://www.dcloud.io/mui.html
 5+sdk: http://ask.dcloud.net.cn/docs/
 
+## 附件的企业和人需要在index.html引入
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YC6A8W3HV3y6Xox8rFRkdThj8VGKk8Dt"></script>
+
 #规范
 ##git提交规范
 1.每次提交需写清楚本次提交的变更
