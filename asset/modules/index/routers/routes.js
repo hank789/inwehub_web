@@ -2696,6 +2696,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 搜索全部
+    path: '/searchAll',
+    name: 'search-all',
+    meta: {
+      title: '搜索',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: componets.SearchSearchAll,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/empty',
     name: 'empty',
