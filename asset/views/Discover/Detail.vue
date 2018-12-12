@@ -259,6 +259,7 @@
       @WriteComment="goComment"
     ></DetailMenu>
 
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 
@@ -277,6 +278,7 @@
 
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import AlertTextarea from '../../components/comment/AlertTextarea.vue'
   import groupsList from '../../components/groups/GroupsList.vue'
   import userAbility from '../../utils/userAbility'
   import hljs from 'highlight.js'
@@ -462,7 +464,8 @@
       quillEditor,
       'vue-pull-refresh': VuePullRefresh,
       DetailMenu,
-      StarView
+      StarView,
+      AlertTextarea
     },
     methods: {
       detailMenuIcon (item) {
@@ -704,7 +707,11 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        this.$refs.ctextarea.comment(commentTargetName)
+        if (window.mui.os.plus) {
+          this.$refs.ctextarea.comment(commentTargetName)
+        } else {
+          this.$refs.AlertTextarea.show()
+        }
       },
       commentFinish () {
         this.commentNumAdd()
