@@ -16,10 +16,14 @@
       </div>
       <!-- 导航栏 -->
       <div class="container-searchMenu">
+
+        <span @tap.stop.prevent="$router.replace('/searchAll?text=' + searchText)">综合</span>
+        <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
+        <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
+        <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
         <span class="font-family-medium">产品<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)">点评</span>
-        <span @tap.stop.prevent="$router.replace('/dianping/search/categories?text=' + searchText)">分类</span>
-        <span @tap.stop.prevent="$router.replace('/dianping/search/companys?text=' + searchText)">公司</span>
+        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)" class="">点评</span>
+
         <i class="bot"></i>
       </div>
 

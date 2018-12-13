@@ -73,7 +73,7 @@
           <div class="" v-for="(submission, index) in list.submission.list" :key="index">
             <FeedItem :item="submission"></FeedItem>
           </div>
-          <div class="checkAll" v-if="this.list.submission.total > 3">
+          <div class="checkAll" v-if="this.list.submission.total > 3"  @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">
             <span class="font-family-medium">查看全部{{ this.list.submission.total }}个分享</span>
           </div>
         </div>
@@ -95,7 +95,7 @@
             </template>
 
           </div>
-          <div class="checkAll" v-if="this.list.question.total > 3">
+          <div class="checkAll" v-if="this.list.question.total > 3"  @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">
             <span class="font-family-medium">查看全部{{ this.list.question.total }}个问答</span>
           </div>
         </div>
@@ -126,7 +126,7 @@
               <i class="bot"></i>
             </div>
           </div>
-          <div class="checkAll" v-if="this.list.group.total > 3">
+          <div class="checkAll" v-if="this.list.group.total > 3" @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">
             <span class="font-family-medium">查看全部{{ this.list.group.total }}个圈子</span>
           </div>
         </div>
@@ -136,7 +136,7 @@
           <div class="" v-for="(submission, index) in list.review.list" :key="index">
             <FeedItem :item="submission"></FeedItem>
           </div>
-          <div class="checkAll" v-if="this.list.review.total > 3">
+          <div class="checkAll" v-if="this.list.review.total > 3" @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)">
             <span class="font-family-medium">查看全部{{ this.list.review.total }}个点评</span>
           </div>
         </div>
@@ -167,7 +167,7 @@
               </div>
             </div>
           </div>
-          <div class="checkAll" v-if="this.list.product.total > 3">
+          <div class="checkAll" v-if="this.list.product.total > 3" @tap.stop.prevent="$router.replace('/dianping/search/products?text=' + searchText)">
             <span class="font-family-medium">查看全部{{ this.list.product.total }}个产品</span>
           </div>
         </div>
