@@ -84,7 +84,7 @@
 
         <div class="noResult increase dianping-search" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
           <div class="empty-Img">
-            <img src="../../../statics/images/empty@3x.png">
+            <img src="../../../statics/images/commentwait@3x.png">
           </div>
           <div class="noResultText">暂无结果，换个关键词试试~</div>
         </div>

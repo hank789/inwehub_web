@@ -85,7 +85,7 @@
 
         <div class="noResult" v-if="list.length">
           <div class="empty-Img">
-            <img src="../../statics/images/feed@3x.png" alt="">
+            <img src="../../statics/images/commentwait@3x.png" alt="">
           </div>
           <div class="noResultText" v-if="list.length">无更多结果，快来发布相关分享~</div>
           <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
@@ -96,7 +96,7 @@
 
     <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
       <div class="empty-Img">
-        <img src="../../statics/images/feed@3x.png" alt="">
+        <img src="../../statics/images/commentwait@3x.png" alt="">
       </div>
       <div class="noResultText">暂无结果，快来发布相关分享~</div>
       <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>

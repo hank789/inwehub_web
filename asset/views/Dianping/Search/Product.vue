@@ -101,14 +101,22 @@
 
         <div class="noResult increase dianping-search" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
           <div class="empty-Img">
-            <img src="../../../statics/images/empty@3x.png">
+            <img src="../../../statics/images/commentwait@3x.png">
           </div>
-          <div class="noResultText">暂无结果，换个关键词试试~</div>
+          <div class="noResultText">暂无结果，您可 <span  @tap.stop.prevent="cooperation">提交产品，开展合作</span></div>
         </div>
 
       </RefreshList>
 
     </div>
+
+    <Options
+      ref="itemOptions"
+      :id="'itemOptions'"
+      :options="iconOptions"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
@@ -118,6 +126,7 @@
   import { postRequest } from '../../../utils/request'
   import { searchText as searchTextFilter } from '../../../utils/search'
   import { autoBlur } from '../../../utils/dom'
+  import Options from '../../../components/Options.vue'
 
   export default {
     data () {
@@ -131,12 +140,14 @@
         hotSearchHistory: {
           history: [],
           top: []
-        }
+        },
+        iconOptions: []
       }
     },
     components: {
       RefreshList,
-      StarView
+      StarView,
+      Options
     },
     computed: {
       dataList () {
@@ -179,6 +190,26 @@
       this.refreshPageData()
     },
     methods: {
+      cooperation () {
+        this.iconOptions = []
+        this.iconOptions.push(
+          {
+            text: '我有产品，需要入驻展示'
+          }
+        )
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (item) {
+        this.$refs.itemOptions.toggle()
+        switch (item.text) {
+          case '我是企业，需要产品服务':
+            this.goCustomer()
+            break
+          case '我有产品，需要入驻展示':
+            this.$router.pushPlus('/dianping/product/add')
+            break
+        }
+      },
       empty () {
         this.searchText = ''
       },
@@ -336,6 +367,12 @@
           }
         }
       }
+    }
+  }
+
+  .noResultText {
+    span {
+      color: #03AEF9;
     }
   }
 
