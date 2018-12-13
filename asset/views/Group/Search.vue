@@ -98,18 +98,18 @@
         <div class="line-river-big" v-if="list.length"></div>
         <div class="noResult" v-if="list.length">
           <div class="empty-Img">
-            <img src="../../statics/images/commentwait@3x.png" alt="">
+            <img src="../../statics/images/empty@3x.png">
           </div>
           <div class="noResultText" v-if="list.length">无更多结果，快来创建新的圈子~</div>
           <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
         </div>
-        <div class="line-river-big" v-if="list.length"></div>
+        <!--<div class="line-river-big" v-if="list.length"></div>-->
       </RefreshList>
     </div>
 
     <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
       <div class="empty-Img">
-        <img src="../../statics/images/commentwait@3x.png" alt="">
+        <img src="../../statics/images/empty@3x.png">
       </div>
       <div class="noResultText">暂无结果，快来创建新的圈子~</div>
       <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>

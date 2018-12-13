@@ -96,14 +96,14 @@
             </div>
             <div class="line-river-after line-river-after-top"></div>
           </div>
-          <div class="container-noMore" v-if="list.length">暂无更多</div>
+          <div class="container-noMore noResultText" v-if="list.length">暂无结果，您可<span @tap.stop.prevent="cooperation">提交产品，开展合作</span></div>
         </div>
 
         <div class="noResult increase dianping-search" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
           <div class="empty-Img">
-            <img src="../../../statics/images/commentwait@3x.png">
+            <img src="../../../statics/images/empty@3x.png">
           </div>
-          <div class="noResultText">暂无结果，您可 <span  @tap.stop.prevent="cooperation">提交产品，开展合作</span></div>
+          <div class="noResultText">暂无结果，您可 <span @tap.stop.prevent="cooperation">提交产品，开展合作</span></div>
         </div>
 
       </RefreshList>
