@@ -188,10 +188,9 @@
   import { postRequest } from '../../utils/request'
   import RefreshList from '../../components/refresh/List.vue'
   import TextDetail from '../../components/discover/TextDetail'
-  import { autoBlur } from '../../utils/dom'
-  import FeedItem from '../../components/feed.vue'
+  import { autoBlur, textToLinkHtml } from '../../utils/dom'
+  import FeedItem from '../../components/Feed.vue'
   import StarView from '../../components/star-rating/starView.vue'
-  import { textToLinkHtml } from '../../utils/dom'
   import { getQuestionStateClass } from '../../utils/ask'
 
   export default {
