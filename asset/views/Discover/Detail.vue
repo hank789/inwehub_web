@@ -708,7 +708,21 @@
         if (window.mui.os.plus) {
           this.$refs.ctextarea.comment(commentTargetName)
         } else {
-          this.$refs.AlertTextarea.show()
+          console.log(commentTargetName)
+          var id = commentTargetName.commentData.parentId
+          var placeholder = commentTargetName.targetUsername ? '回复' + commentTargetName.targetUsername : ''
+          if (placeholder) {
+            this.$refs.AlertTextarea.setPlaceholder(placeholder)
+          }
+          this.$refs.AlertTextarea.cacheShow(id, '', () => {}, (value) => {
+            var message = {
+              content: value,
+              noticeUsers: [],
+              commentData: commentTargetName.commentData
+            }
+            this.$refs.discuss.sendMessage(message)
+            return true
+          })
         }
       },
       commentFinish () {
