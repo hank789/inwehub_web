@@ -14,7 +14,7 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!--导航栏-->
-      <div class="menu" v-if="list.length || getCurrentMode === 'result' && searchText !== ''">
+      <div class="menu" v-if="getCurrentMode === 'result' && searchText !== ''">
         <span class="font-family-medium">综合<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
@@ -64,57 +64,111 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :autoShowEmpty="false"
-        :isShowUpToRefreshDescription="true"
+        :isShowUpToRefreshDescription="false"
         :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
 
         <div class="searchSubmission">
           <div class="searchTitle">分享</div>
-          <div class="" v-for="(submission, index) in list" :key="index">
+          <div class="" v-for="(submission, index) in list.submission.list" :key="index">
             <FeedItem :item="submission"></FeedItem>
           </div>
-          <div class="checkAll">
-            <span class="font-family-medium">查看全部6个产品</span>
+          <div class="checkAll" v-if="this.list.submission.total > 3">
+            <span class="font-family-medium">查看全部{{ this.list.submission.total }}个分享</span>
           </div>
         </div>
 
         <div class="searchQuestion">
           <div class="searchTitle">问答</div>
-          <div class="" v-for="(submission, index) in list" :key="index">
-            <FeedItem :item="submission"></FeedItem>
+          <div class="">
+
+            <template  v-for="(item, index) in list.question.list">
+              <div class="container-list-question" @tap.stop.prevent="toDetail(item.id,item.question_type)">
+                <div class="question text-line-3">
+                  <label v-if="item.price>0" class="component-label" :class="getStateClass(item.status)">{{item.status_description}}</label><span v-html="textToLink(item.description)"></span>
+                </div>
+                <div v-if="item.question_type == 2" class="statistics">{{item.answer_number}}回答<span class="line-wall"></span>{{item.follow_number}}关注</div>
+                <div v-if="item.question_type == 1" class="statistics">{{item.comment_number}}评论<span class="line-wall"></span>{{item.support_number}}点赞<span v-if="item.average_rate" class="line-wall"></span>{{item.average_rate?item.average_rate:''}}</div>
+              </div>
+              <div class="line-river-after line-river-after-top" v-if="index === 2 && index === list.question.list.length-1"></div>
+              <div class="line-river-big" v-if="index !== 3 && index !== list.question.list.length-1"></div>
+            </template>
+
           </div>
-          <div class="checkAll">
-            <span class="font-family-medium">查看全部6个产品</span>
+          <div class="checkAll" v-if="this.list.question.total > 3">
+            <span class="font-family-medium">查看全部{{ this.list.question.total }}个问答</span>
           </div>
         </div>
 
         <div class="searchGroup">
           <div class="searchTitle">圈子</div>
-          <div class="" v-for="(submission, index) in list" :key="index">
-            <FeedItem :item="submission"></FeedItem>
+          <div class="" v-for="(submission, index) in list.group.list" :key="index">
+            <div class="component-group" @tap.stop.prevent="$router.pushPlus('/group/detail/' + submission.id)">
+              <div class="groupLogo">
+                <ImageView :src="submission.logo" width="44" height="44"></ImageView>
+              </div>
+              <div class="groupContent">
+                <div class="groupName">
+                  <div class="font-family-medium groupOwnerWrapper">
+                    <span class="text-line-1">{{submission.name}}</span><span class="border-football" v-if="submission.is_joined === 3">圈主</span>
+                  </div>
+                </div>
+                <span class="groupDescribe text-line-1">{{submission.description}}</span>
+                <span class="groupText">{{submission.subscribers}}人气</span>
+                <span class="groupText">{{submission.articles}}分享</span>
+                <span class="groupText" v-if="!submission.public">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-simi"></use>
+                  </svg>
+                  私密
+                </span>
+              </div>
+              <i class="bot"></i>
+            </div>
           </div>
-          <div class="checkAll">
-            <span class="font-family-medium">查看全部6个产品</span>
+          <div class="checkAll" v-if="this.list.group.total > 3">
+            <span class="font-family-medium">查看全部{{ this.list.group.total }}个圈子</span>
           </div>
         </div>
 
         <div class="searchComment">
           <div class="searchTitle">点评</div>
-          <div class="" v-for="(submission, index) in list" :key="index">
+          <div class="" v-for="(submission, index) in list.review.list" :key="index">
             <FeedItem :item="submission"></FeedItem>
           </div>
-          <div class="checkAll">
-            <span class="font-family-medium">查看全部6个产品</span>
+          <div class="checkAll" v-if="this.list.review.total > 3">
+            <span class="font-family-medium">查看全部{{ this.list.review.total }}个点评</span>
           </div>
         </div>
 
         <div class="searchProduct">
           <div class="searchTitle">产品</div>
-          <div class="" v-for="(submission, index) in list" :key="index">
-            <FeedItem :item="submission"></FeedItem>
+          <div class="" >
+            <div class="productList">
+              <div class="comment-product" v-for="(tag, index) in list.product.list" :key="index">
+                <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(tag.name))">
+                  <div class="product-img border-football">
+                    <img class="lazyImg" v-lazy="tag.logo" alt="">
+                  </div>
+                  <div class="product-detail">
+                    <div class="productName font-family-medium text-line-1">{{ tag.name }}</div>
+                    <div class="productMark">
+                      <div class="stars">
+                        <StarView :rating="tag.review_average_rate"></StarView>
+                      </div>
+                      <div class="starsText">
+                        <span>{{ tag.review_average_rate }}分</span>
+                        <i></i><span>{{ tag.review_count }}条评论</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="line-river-after line-river-after-top"></div>
+              </div>
+            </div>
           </div>
-          <div class="checkAll">
-            <span class="font-family-medium">查看全部6个产品</span>
+          <div class="checkAll" v-if="this.list.product.total > 3">
+            <span class="font-family-medium">查看全部{{ this.list.product.total }}个产品</span>
           </div>
         </div>
 
@@ -136,6 +190,9 @@
   import TextDetail from '../../components/discover/TextDetail'
   import { autoBlur } from '../../utils/dom'
   import FeedItem from '../../components/feed.vue'
+  import StarView from '../../components/star-rating/starView.vue'
+  import { textToLinkHtml } from '../../utils/dom'
+  import { getQuestionStateClass } from '../../utils/ask'
 
   export default {
     data () {
@@ -143,7 +200,23 @@
         searchText: '',
         confirmSearchText: '',
         isShowCancelButton: false,
-        list: {},
+        list: {
+          submission: {
+            list: []
+          },
+          question: {
+            list: []
+          },
+          group: {
+            list: []
+          },
+          review: {
+            list: []
+          },
+          product: {
+            list: []
+          }
+        },
         searchAdviceList: [],
         resultLoading: 1,
         hotSearchHistory: {
@@ -175,7 +248,8 @@
     components: {
       RefreshList,
       TextDetail,
-      FeedItem
+      FeedItem,
+      StarView
     },
     created () {
       this.refreshPageData()
@@ -191,7 +265,7 @@
             this.searchAdvice(newValue)
 
             if (newValue !== this.confirmSearchText) {
-              this.list = []
+              this.initList()
             }
           }
         })
@@ -200,10 +274,39 @@
     mounted () {
     },
     methods: {
+      initList () {
+        this.list = {
+          submission: {
+            list: []
+          },
+          question: {
+            list: []
+          },
+          group: {
+            list: []
+          },
+          review: {
+            list: []
+          },
+          product: {
+            list: []
+          }
+        }
+      },
+      enterKeyCode: function (ev) {
+        if (ev.keyCode === 13) {
+          this.selectConfirmSearchText(this.searchText)
+        }
+      },
+      getStateClass (state) {
+        return getQuestionStateClass(state)
+      },
+      textToLink (text) {
+        return textToLinkHtml(' ' + text)
+      },
       prevSuccessCallback: function () {
         this.resultLoading = 0
-        this.list = this.$refs.refreshlist.getResponse().data.submission.list
-        console.log(this.list, '分享的')
+        this.list = this.$refs.refreshlist.getResponse().data
       },
       refreshPageData: function () {
         var text = this.$route.query.text
@@ -215,11 +318,10 @@
           }, 200)
         }
         this.hotSearch()
-        console.log(this.list, ':数据')
       },
       focus: function () {
         this.confirmSearchText = ''
-        this.list = []
+        // this.list = []
         if (this.searchText) {
           this.searchAdvice(this.searchText)
         }
@@ -473,6 +575,78 @@
       color: #C8C8C8;
       font-size: 12px;
     }
+  }
+
+  .productList {
+    .comment-product {
+      padding: 0.346rem 0.4rem 0;
+      .product-info {
+        padding: 0 0 0.4rem;
+        background: none;
+      }
+    }
+  }
+
+  .comment-product {
+    padding: 0.293rem 0.4rem 0.4rem;
+    .product-info {
+      overflow: hidden;
+      background: #F7F8FA;
+      padding: 0.266rem;
+      .product-img {
+        width: 1.173rem;
+        height: 1.173rem;
+        float: left;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 0.106rem;
+          object-fit: contain;
+        }
+      }
+      .product-detail {
+        float: left;
+        margin-left: 0.266rem;
+        width: 7.5rem;
+        .productName {
+          color: #444444;
+          font-size: 0.426rem;
+          line-height: 0.6rem;
+        }
+        .productMark {
+          display: flex;
+          .stars {
+            margin-top: 0.026rem;
+          }
+          .icon {
+            color: #FCC816;
+            font-size: 0.32rem;
+          }
+          span {
+            color: #B4B4B6;
+            font-size: 0.293rem;
+            line-height: 0.4rem;
+            &:nth-of-type(1) {
+              color: #FCC816;
+              margin-left: 0.08rem;
+            }
+          }
+          i {
+            width: 0.053rem;
+            height: 0.053rem;
+            margin-right: 0.133rem;
+            vertical-align: middle;
+            border-radius: 50%;
+            background: #B4B4B6;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+
+  .container-list-question .question {
+    margin-top: 0 !important;
   }
 
 </style>
