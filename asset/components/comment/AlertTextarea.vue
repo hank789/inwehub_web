@@ -91,7 +91,7 @@
   .global-comment-shadow{
     z-index:998;
     display: none;
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -105,7 +105,7 @@
   }
 
   .global-comment-wrapper{
-    position: fixed;
+    position: absolute;
     z-index:999;
     width: 100%;
     height: 100%;

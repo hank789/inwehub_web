@@ -355,6 +355,10 @@
             }
           })
 
+          self.quill.on('focus', () => {
+            self.$emit('focus', self.quill)
+          })
+
           self.quill.on('selection-change', (range, oldRange, source) => {
             console.log('selection-change fired range:' + JSON.stringify(range) + ', oldRange:' + JSON.stringify(oldRange) + ', source:' + source)
           })
