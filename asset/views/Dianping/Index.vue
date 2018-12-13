@@ -12,7 +12,7 @@
           <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true"
-             @tap.stop.prevent="$router.pushPlus('/dianping/search/products','list-detail-page-three')">
+             @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>
@@ -33,20 +33,20 @@
 
         <template slot="listHeader">
 
-          <div id="searchWrapper" class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/products')">
-            <div class="searchInput">
-              <div class="searchLeft">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-sousuo"></use>
-                </svg>
-                <span>搜索产品、点评、分类、公司</span>
-              </div>
-              <div class="searchRight" @tap.stop.prevent="cooperation">
-                <i class="line-wall"></i>
-                <span>合作</span>
-              </div>
-            </div>
-          </div>
+          <!--<div id="searchWrapper" class="searchWrapper" @tap.stop.prevent="$router.pushPlus('/dianping/search/products')">-->
+            <!--<div class="searchInput">-->
+              <!--<div class="searchLeft">-->
+                <!--<svg class="icon" aria-hidden="true">-->
+                  <!--<use xlink:href="#icon-sousuo"></use>-->
+                <!--</svg>-->
+                <!--<span>搜索产品、点评、分类、公司</span>-->
+              <!--</div>-->
+              <!--<div class="searchRight" @tap.stop.prevent="cooperation">-->
+                <!--<i class="line-wall"></i>-->
+                <!--<span>合作</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
 
           <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
@@ -320,8 +320,8 @@
         this.$router.pushPlus('/chat/79')
       },
       showDropdownMenu () {
-        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
-        var height = document.querySelector('.dianpingBanners').clientHeight + searchInputHeight - 20
+        // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
+        var height = document.querySelector('.dianpingBanners').clientHeight - 20
         this.$refs.RefreshList.scrollTo(0, -height, 800)
         this.$refs.dropdownMenu.show()
       },
@@ -345,15 +345,15 @@
     },
     mounted () {
       scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
+        // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y > height + searchInputHeight) {
+        if (y > height) {
           document.querySelector('.dianpingBannersHide').classList.add('showTagsHome')
         }
       }, null, (container, y) => {
-        var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
+        // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y < height + searchInputHeight) {
+        if (y < height) {
           document.querySelector('.dianpingBannersHide').classList.remove('showTagsHome')
         }
       })
