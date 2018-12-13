@@ -15,9 +15,14 @@
      </div>
     <!--导航栏-->
     <div class="menu" v-if="list.length || getCurrentMode === 'result' && searchText !== ''">
+
+      <span @tap.stop.prevent="$router.replace('/searchAll?text=' + searchText)">综合</span>
       <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
-      <span @tap.stop.prevent="" class="font-family-medium">问答<i></i></span>
+      <span  class="font-family-medium">问答<i></i></span>
       <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
+      <span @tap.stop.prevent="$router.replace('/dianping/search/products?text=' + searchText)">产品</span>
+      <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)" class="">点评</span>
+
       <i class="bot"></i>
     </div>
 
@@ -350,15 +355,14 @@
       margin-top: -0.106rem;
       span{
         display: flex;
-        width:33%;
+        width: 13.5%;
         height:100%;
         justify-content: center;
         align-items: center;
-        &:nth-of-type(2){
+        &:nth-of-type(3){
           font-size: 0.373rem;
           position:relative;
           color: #444444;
-          font-weight: 500;
           i{
             position:absolute;
             width:0.72rem;
