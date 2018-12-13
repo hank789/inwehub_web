@@ -98,9 +98,10 @@ var UserAbilityCheck = () => {
   var checkPhoneCertification = (context) => {
     var userInfo = getLocalUserInfo()
     if (userInfo.phone) {
+      console.log('实名认证检查：pass')
       return true
     }
-
+    console.log('实名认证检查：no-pass')
     alertRealNameAuthentication(() => {
       router.push('/wechat/bindPhone')
     })

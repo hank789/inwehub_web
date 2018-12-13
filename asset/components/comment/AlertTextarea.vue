@@ -5,10 +5,10 @@
 
       <div class="formWrapper">
         <form>
-          <textarea :placeholder="placeholder" ref="alertTextarea"></textarea>
+          <textarea :placeholder="placeholder" ref="alertTextarea" v-model="value"></textarea>
           <footer>
-            <div class="btnCancel" @tap.stop.prevent="close">取消</div>
-            <div class="btnSubmit" @tap.stop.prevent="submit">提交</div>
+            <div class="btnCancel" @tap.stop.prevent="_cancel">取消</div>
+            <div class="btnSubmit" @tap.stop.prevent="_submit">发送</div>
           </footer>
         </form>
       </div>
@@ -17,25 +17,70 @@
 </template>
 
 <script>
+  import localEvent from '../../stores/localStorage'
+
   const AlertCommentTextarea = {
     data: () => ({
-      isShow: false
+      isShow: false,
+      placeholder: '在此留言',
+      value: '',
+      submitCallback: null,
+      cancelCallback: null,
+      isCache: false,
+      cacheId: ''
     }),
-    props: {
-      placeholder: {
-        type: String,
-        default: '说说你的看法'
-      }
-    },
     methods: {
-      show () {
+      _show (cancelCallback, submitCallback) {
+        this.cancelCallback = cancelCallback
+        this.submitCallback = submitCallback
         this.isShow = true
         this.$refs.alertTextarea.focus()
+      },
+      show (value, cancelCallback, submitCallback) {
+        this.isCache = false
+        this._show()
+      },
+      cacheShow (id, value, cancelCallback, submitCallback) {
+        this.isCache = true
+        this.cacheId = this.$route.name + '_' + id
+        this.value = value
+        var cache = localEvent.getLocalItem(this.cacheId)
+        if (cache.value) {
+          this.setValue(cache.value)
+          localEvent.clearLocalItem(this.cacheId)
+        }
+        this._show(cancelCallback, submitCallback)
       },
       close () {
         this.isShow = false
       },
-      submit () {}
+      _cancel () {
+        if (this.isCache && this.value) {
+          localEvent.setLocalItem(this.cacheId, {value: this.value})
+        }
+
+        if (this.cancelCallback) {
+          this.cancelCallback(this.value)
+        }
+        this.close()
+      },
+      setPlaceholder (placeholder) {
+        this.placeholder = placeholder
+      },
+      setValue (value) {
+        this.value = value
+      },
+      _submit () {
+        if (this.submitCallback) {
+          var rs = this.submitCallback(this.value)
+          if (rs) {
+            this.value = ''
+            this.close()
+          }
+        } else {
+          this.close()
+        }
+      }
     }
   }
   export default AlertCommentTextarea

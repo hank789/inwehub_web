@@ -288,6 +288,7 @@
   import VuePullRefresh from 'vue-awesome-pull-refresh'
   import DetailMenu from '../../components/menu/Detail.vue'
   import StarView from '../../components/star-rating/starView.vue'
+  import { showComment } from '../../utils/comment'
 
   export default {
     data () {
@@ -705,11 +706,13 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        if (window.mui.os.plus) {
-          this.$refs.ctextarea.comment(commentTargetName)
-        } else {
-          this.$refs.AlertTextarea.show()
-        }
+        showComment(
+          this,
+          commentTargetName,
+          this.$refs.ctextarea,
+          this.$refs.AlertTextarea,
+          this.$refs.discuss
+        )
       },
       commentFinish () {
         this.commentNumAdd()
