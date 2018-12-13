@@ -252,12 +252,14 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <DetailMenu
-      :detail="this.detail"
-      :iconOptions="iconOptions"
-      @detailMenuIcon="detailMenuIcon"
-      @WriteComment="goComment"
-    ></DetailMenu>
+    <div @tap.capture="onTap($event)">
+      <DetailMenu
+        :detail="this.detail"
+        :iconOptions="iconOptions"
+        @detailMenuIcon="detailMenuIcon"
+        @WriteComment="goComment"
+      ></DetailMenu>
+    </div>
 
     <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
