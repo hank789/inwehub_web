@@ -103,7 +103,7 @@
       addressAppearDelete (text) {
         var users = localEvent.getLocalItem('selected_comment_user' + this.id)
         for (var i in users) {
-          var name = '@' + users[i].name + ' '
+          var name = '@' + users[i].name + ''
           if (name === text) {
             this.delNoticeUser(users[i].id)
             users.splice(i, 1)
@@ -118,7 +118,7 @@
         for (var i in users) {
           this.noticeUser(users[i].id)
           var data = {
-            name: '@' + users[i].name + ' ',
+            name: '@' + users[i].name + '',
             id: users[i].uuid
           }
           spanUserNameAndIds.push(data)
@@ -243,7 +243,7 @@
       },
       onEditorFocus (editor) {
         if (!this.textarea.replace('<p> </p>', '').trim()) {
-          this.editorObj.setContents([{insert: ' '}])
+          this.editorObj.setContents([{insert: ''}])
           var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
           this.$refs.myAddEditor.setPlaceholder(targetUsername)
         }
@@ -270,7 +270,7 @@
 
         this.targetUsername = targetUsername
 
-        this.editorObj.setContents([{insert: ' '}])
+        this.editorObj.setContents([{insert: ''}])
 
         this.getHistoryDescription()
 
