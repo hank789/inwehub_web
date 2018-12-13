@@ -8,7 +8,7 @@ function showComment (context, commentTargetName, plusTextareaComponent, wechatT
       plusTextareaComponent.comment(commentTargetName)
     } else {
       var id = commentTargetName.commentData.parentId
-      var placeholder = commentTargetName.targetUsername ? '回复' + commentTargetName.targetUsername : ''
+      var placeholder = commentTargetName.targetUsername ? '回复' + commentTargetName.targetUsername : '在此留言'
       if (placeholder) {
         wechatTextareaComponent.setPlaceholder(placeholder)
       }

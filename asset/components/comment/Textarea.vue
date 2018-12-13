@@ -1,5 +1,5 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.stop.prevent="">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.stop.prevent="onTap">
     <div class="textareaWrapper">
         <Jeditor
           ref="myAddEditor"
@@ -79,6 +79,11 @@
       this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
+      onTap () {
+        if (this.alwaysshow) {
+          this.$emit('onTap')
+        }
+      },
       refreshPageData () {
         this.init()
       },
