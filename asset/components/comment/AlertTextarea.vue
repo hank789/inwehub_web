@@ -8,7 +8,7 @@
           <textarea :placeholder="placeholder" ref="alertTextarea" v-model="value"></textarea>
           <footer>
             <div class="btnCancel" @tap.stop.prevent="_cancel">取消</div>
-            <div class="btnSubmit" @tap.stop.prevent="_submit">提交</div>
+            <div class="btnSubmit" @tap.stop.prevent="_submit">发送</div>
           </footer>
         </form>
       </div>

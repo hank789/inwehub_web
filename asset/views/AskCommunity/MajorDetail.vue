@@ -133,6 +133,7 @@
       @clickedItem="footerMenuClickedItem"
     ></FooterMenu>
 
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 
@@ -156,6 +157,8 @@
   import Vue from 'vue'
   import FooterMenu from '../../components/FooterMenu.vue'
   import RecommentList from '../../components/AskCommunity/RecommendList.vue'
+  import AlertTextarea from '../../components/comment/AlertTextarea.vue'
+  import { showComment } from '../../utils/comment'
 
   const currentUser = getLocalUserInfo()
 
@@ -202,7 +205,8 @@
       StarRating,
       pay,
       FooterMenu,
-      RecommentList
+      RecommentList,
+      AlertTextarea
     },
     computed: {
       answer () {
@@ -251,7 +255,13 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        this.$refs.ctextarea.comment(commentTargetName)
+        showComment(
+          this,
+          commentTargetName,
+          this.$refs.ctextarea,
+          this.$refs.AlertTextarea,
+          this.$refs.discuss
+        )
       },
       commentFinish () {
         this.commentNumAdd()

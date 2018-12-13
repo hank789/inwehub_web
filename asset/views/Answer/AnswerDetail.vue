@@ -106,6 +106,7 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 
@@ -122,8 +123,9 @@
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
   import popPickerComponent from '../../components/picker/poppicker.vue'
-
   import CountDown from 'vue2-countdown'
+  import AlertTextarea from '../../components/comment/AlertTextarea.vue'
+  import { showComment } from '../../utils/comment'
 
   const AnswerDetail = {
     data: () => ({
@@ -162,7 +164,8 @@
       Discuss,
       Share,
       commentTextarea,
-      popPickerComponent
+      popPickerComponent,
+      AlertTextarea
     },
     computed: {},
     mounted () {
@@ -178,7 +181,13 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        this.$refs.ctextarea.comment(commentTargetName)
+        showComment(
+          this,
+          commentTargetName,
+          this.$refs.ctextarea,
+          this.$refs.AlertTextarea,
+          this.$refs.discuss
+        )
       },
       commentFinish () {
         this.commentNumAdd()
