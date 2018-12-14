@@ -15,7 +15,7 @@
         <p @tap.stop.prevent="back()">取消</p>
       </div>
       <!-- 导航栏 -->
-      <div class="container-searchMenu">
+      <div class="container-searchMenu searchSearchMenu">
 
         <span @tap.stop.prevent="$router.replace('/searchAll?text=' + searchText)">综合</span>
         <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
