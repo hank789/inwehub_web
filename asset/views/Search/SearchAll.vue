@@ -273,6 +273,9 @@
     mounted () {
     },
     methods: {
+      toDetail (id, type) {
+        this.$router.pushPlus('/ask/offer/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
+      },
       initList () {
         this.list = {
           submission: {
