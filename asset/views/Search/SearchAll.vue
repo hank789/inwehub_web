@@ -139,7 +139,12 @@
         <div class="searchComment" v-if="list.review.list.length">
           <div class="searchTitle">点评</div>
           <div class="" v-for="(submission, index) in list.review.list" :key="index">
-            <FeedItem :item="submission"></FeedItem>
+            <FeedItem
+              :item="submission"
+              :isShowLink="true"
+              :key="'feedItem_' + submission.id"
+              @showItemMore="showItemMore"
+            ></FeedItem>
           </div>
           <div class="checkAll" v-if="this.list.review.total > 3" @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)">
             <span class="font-family-medium">查看全部{{ this.list.review.total }}个点评</span>
