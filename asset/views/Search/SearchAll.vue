@@ -71,7 +71,12 @@
         <div class="searchSubmission" v-if="list.submission.list.length">
           <div class="searchTitle">分享</div>
           <div class="" v-for="(submission, index) in list.submission.list" :key="index">
-            <FeedItem :item="submission"></FeedItem>
+            <FeedItem
+              :item="submission"
+              :isShowLink="true"
+              :key="'feedItem_' + submission.id"
+              @showItemMore="showItemMore"
+            ></FeedItem>
           </div>
           <div class="checkAll" v-if="this.list.submission.total > 3"  @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">
             <span class="font-family-medium">查看全部{{ this.list.submission.total }}个分享</span>
@@ -180,6 +185,17 @@
       </RefreshList>
 
     </div>
+
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
+
   </div>
 </template>
 
@@ -192,6 +208,8 @@
   import FeedItem from '../../components/Feed.vue'
   import StarView from '../../components/star-rating/starView.vue'
   import { getQuestionStateClass } from '../../utils/ask'
+  import PageMore from '../../components/PageMore.vue'
+  import { getIconMenus, iconMenusClickedItem } from '../../utils/feed'
 
   export default {
     data () {
@@ -199,6 +217,8 @@
         searchText: '',
         confirmSearchText: '',
         isShowCancelButton: false,
+        shareOption: {},
+        iconMenus: [],
         list: {
           submission: {
             list: []
@@ -248,7 +268,8 @@
       RefreshList,
       TextDetail,
       FeedItem,
-      StarView
+      StarView,
+      PageMore
     },
     created () {
       this.refreshPageData()
@@ -273,6 +294,23 @@
     mounted () {
     },
     methods: {
+      iconMenusClickedItem (item) {
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
+          this.iconMenus = getIconMenus(this.itemOptionsObj)
+        })
+      },
+      shareFail () {
+
+      },
+      shareSuccess () {
+
+      },
+      showItemMore (shareOption, item) {
+        this.iconMenus = getIconMenus(item)
+        this.itemOptionsObj = item
+        this.shareOption = shareOption
+        this.$refs.share.share()
+      },
       toDetail (id, type) {
         this.$router.pushPlus('/ask/offer/answers/' + id, 'list-detail-page', true, 'pop-in', 'hide', true)
       },
@@ -443,7 +481,7 @@
               margin-left: 0.266rem;
               font-size: 0.533rem;
               position: relative;
-              z-index: 10000;
+              z-index: 980;
             }
           }
           input {
