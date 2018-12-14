@@ -68,7 +68,7 @@
         :prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
 
-        <div class="searchSubmission">
+        <div class="searchSubmission" v-if="list.submission.list.length">
           <div class="searchTitle">分享</div>
           <div class="" v-for="(submission, index) in list.submission.list" :key="index">
             <FeedItem :item="submission"></FeedItem>
@@ -78,7 +78,7 @@
           </div>
         </div>
 
-        <div class="searchQuestion">
+        <div class="searchQuestion" v-if="list.question.list.length">
           <div class="searchTitle">问答</div>
           <div class="">
 
@@ -100,7 +100,7 @@
           </div>
         </div>
 
-        <div class="searchGroup">
+        <div class="searchGroup" v-if="list.group.list.length">
           <div class="searchTitle">圈子</div>
           <div class="" v-for="(submission, index) in list.group.list" :key="index">
             <div class="component-group" @tap.stop.prevent="$router.pushPlus('/group/detail/' + submission.id)">
@@ -131,7 +131,7 @@
           </div>
         </div>
 
-        <div class="searchComment">
+        <div class="searchComment" v-if="list.review.list.length">
           <div class="searchTitle">点评</div>
           <div class="" v-for="(submission, index) in list.review.list" :key="index">
             <FeedItem :item="submission"></FeedItem>
@@ -141,7 +141,7 @@
           </div>
         </div>
 
-        <div class="searchProduct">
+        <div class="searchProduct" v-if="list.product.list.length">
           <div class="searchTitle">产品</div>
           <div class="" >
             <div class="productList">
