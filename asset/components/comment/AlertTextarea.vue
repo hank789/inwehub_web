@@ -52,6 +52,7 @@
         this._show(cancelCallback, submitCallback)
       },
       close () {
+        this.$refs.alertTextarea.blur()
         this.isShow = false
       },
       _cancel () {
