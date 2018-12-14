@@ -6,7 +6,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="搜内容、问答、圈子" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
+          <input type="text" placeholder="搜产品、问答、圈子、内容" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
@@ -15,9 +15,12 @@
       </div>
       <!--导航栏-->
       <div class="menu" v-if="list.length || getCurrentMode === 'result' && searchText !== ''">
+        <span @tap.stop.prevent="$router.replace('/searchAll?text=' + searchText)">综合</span>
         <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
-        <span class="font-family-medium">圈子<i></i></span>
+        <span class="font-family-medium" @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子<i></i></span>
+        <span @tap.stop.prevent="$router.replace('/dianping/search/products?text=' + searchText)">产品</span>
+        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)" class="">点评</span>
         <i class="bot"></i>
       </div>
 
@@ -95,18 +98,18 @@
         <div class="line-river-big" v-if="list.length"></div>
         <div class="noResult" v-if="list.length">
           <div class="empty-Img">
-            <img src="../../statics/images/feed@3x.png" alt="">
+            <img src="../../statics/images/empty@3x.png">
           </div>
           <div class="noResultText" v-if="list.length">无更多结果，快来创建新的圈子~</div>
           <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
         </div>
-        <div class="line-river-big" v-if="list.length"></div>
+        <!--<div class="line-river-big" v-if="list.length"></div>-->
       </RefreshList>
     </div>
 
     <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
       <div class="empty-Img">
-        <img src="../../statics/images/feed@3x.png" alt="">
+        <img src="../../statics/images/empty@3x.png">
       </div>
       <div class="noResultText">暂无结果，快来创建新的圈子~</div>
       <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/group/add')">建圈子</div>
@@ -365,15 +368,14 @@
       margin-top: -0.106rem;
       span{
         display: flex;
-        width:33%;
+        width: 13.5%;
         height:100%;
         justify-content: center;
         align-items: center;
-        &:nth-of-type(3){
+        &:nth-of-type(4){
           font-size: 0.373rem;
           position:relative;
           color: #444444;
-          font-weight: 500;
           i{
             position:absolute;
             width:0.72rem;

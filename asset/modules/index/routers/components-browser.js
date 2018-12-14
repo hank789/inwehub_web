@@ -155,6 +155,7 @@ const ReadhubDetailH5 = () => import(/* webpackChunkName: "ReadhubDetailH5" */ '
 const AccountSetting = () => import(/* webpackChunkName: "AccountSetting" */ '../../../views/Account/Setting.vue')
 const Guide = () => import(/* webpackChunkName: "Guide" */ '../../../views/Guide.vue')
 const Feedback = () => import(/* webpackChunkName: "Feedback" */ '../../../views/Feedback.vue')
+const ContactUs = () => import(/* webpackChunkName: "ContactUs" */ '../../../views/Account/ContactUs.vue')
 const About = () => import(/* webpackChunkName: "About" */ '../../../views/About.vue')
 const SettingpushSetting = () => import(/* webpackChunkName: "SettingpushSetting" */ '../../../views/Setting/pushSetting.vue')
 const SettingpushSettingFollow = () => import(/* webpackChunkName: "SettingpushSettingFollow" */ '../../../views/Setting/pushSettingFollow.vue')
@@ -220,6 +221,7 @@ const DianpingSearchProduct = () => import(/* webpackChunkName: "DianpingSearchP
 const DianpingSearchCategory = () => import(/* webpackChunkName: "DianpingSearchCategory" */ '../../../views/Dianping/Search/Category.vue')
 const DianpingSearchCompany = () => import(/* webpackChunkName: "DianpingSearchCompany" */ '../../../views/Dianping/Search/Company.vue')
 const DianpingProductFeedback = () => import(/* webpackChunkName: "DianpingProductFeedback" */ '../../../views/Dianping/Product/Feedback.vue')
+const SearchSearchAll = () => import(/* webpackChunkName: "SearchSearchAll" */ '../../../views/Search/SearchAll.vue')
 
 export {
   Login,
@@ -368,6 +370,7 @@ export {
   AccountSetting,
   Guide,
   Feedback,
+  ContactUs,
   About,
   SettingpushSetting,
   SettingpushSettingFollow,
@@ -437,5 +440,6 @@ export {
   DianpingSearchProduct,
   DianpingSearchCategory,
   DianpingSearchCompany,
-  DianpingProductFeedback
+  DianpingProductFeedback,
+  SearchSearchAll
 }

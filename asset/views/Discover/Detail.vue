@@ -252,13 +252,16 @@
 
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
-    <DetailMenu
-      :detail="this.detail"
-      :iconOptions="iconOptions"
-      @detailMenuIcon="detailMenuIcon"
-      @WriteComment="goComment"
-    ></DetailMenu>
+    <div @tap.capture="onTap($event)">
+      <DetailMenu
+        :detail="this.detail"
+        :iconOptions="iconOptions"
+        @detailMenuIcon="detailMenuIcon"
+        @WriteComment="goComment"
+      ></DetailMenu>
+    </div>
 
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 
@@ -277,6 +280,7 @@
 
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
+  import AlertTextarea from '../../components/comment/AlertTextarea.vue'
   import groupsList from '../../components/groups/GroupsList.vue'
   import userAbility from '../../utils/userAbility'
   import hljs from 'highlight.js'
@@ -286,6 +290,7 @@
   import VuePullRefresh from 'vue-awesome-pull-refresh'
   import DetailMenu from '../../components/menu/Detail.vue'
   import StarView from '../../components/star-rating/starView.vue'
+  import { showComment } from '../../utils/comment'
 
   export default {
     data () {
@@ -462,7 +467,8 @@
       quillEditor,
       'vue-pull-refresh': VuePullRefresh,
       DetailMenu,
-      StarView
+      StarView,
+      AlertTextarea
     },
     methods: {
       detailMenuIcon (item) {
@@ -573,9 +579,7 @@
       },
       goComment () {
         scrollToElement(this, '#commentTitle', '.pull-down-container')
-        setTimeout(() => {
-          this.$refs.discuss.rootComment()
-        }, 100)
+        this.$refs.discuss.rootComment()
       },
       goDetail (item) {
         if (!window.mui.os.plus) {
@@ -704,7 +708,13 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        this.$refs.ctextarea.comment(commentTargetName)
+        showComment(
+          this,
+          commentTargetName,
+          this.$refs.ctextarea,
+          this.$refs.AlertTextarea,
+          this.$refs.discuss
+        )
       },
       commentFinish () {
         this.commentNumAdd()

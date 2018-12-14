@@ -10,7 +10,7 @@
           <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
           <div class="tab" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
         </div>
-        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
+        <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>
         </svg>
       </div>
@@ -28,14 +28,14 @@
         :autoShowEmpty="false"
         class="listWrapper"
       >
-        <div class="groupSearchWrapper" v-if="list.length" @tap.stop.prevent="$router.pushPlus('/group/search','list-detail-page-three')">
-          <div class="groupSearch border-football">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-sousuo"></use>
-            </svg>
-            <span>搜索您感兴趣的其他圈子</span>
-          </div>
-        </div>
+        <!--<div class="groupSearchWrapper" v-if="list.length" @tap.stop.prevent="$router.pushPlus('/group/search','list-detail-page-three')">-->
+          <!--<div class="groupSearch border-football">-->
+            <!--<svg class="icon" aria-hidden="true">-->
+              <!--<use xlink:href="#icon-sousuo"></use>-->
+            <!--</svg>-->
+            <!--<span>搜索您感兴趣的其他圈子</span>-->
+          <!--</div>-->
+        <!--</div>-->
 
 
 

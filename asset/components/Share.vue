@@ -516,8 +516,8 @@
       saveImage () {
         if (this.showPreviewApiImage) {
           window.mui.plusReady(() => {
-            window.plus.gallery.save(this.apiImageUrl, function () {
-              console.log('保存图片到相册成功')
+            window.plus.gallery.save(this.apiImageUrl, () => {
+              console.log('保存图片到相册成功:' + this.apiImageUrl)
               window.mui.toast('保存成功')
             }, function () {
               console.log('保存图片到相册失败')
@@ -527,8 +527,8 @@
         } else {
           this.createImage(() => {
             window.mui.plusReady(() => {
-              window.plus.gallery.save(this.imagePath, function () {
-                console.log('保存图片到相册成功')
+              window.plus.gallery.save(this.imagePath, () => {
+                console.log('保存图片到相册成功' + this.imagePath)
                 window.mui.toast('保存成功')
               }, function () {
                 console.log('保存图片到相册失败')

@@ -75,7 +75,9 @@
         </div>
       </RefreshList>
     </div>
-    <commentTextarea ref="ctextarea" @sendMessage="sendMessage" :alwaysshow="true"></commentTextarea>
+    <commentTextarea ref="ctextarea" @sendMessage="sendMessage" :alwaysshow="true"
+      @onTap="onCommentTap"
+    ></commentTextarea>
 
 
     <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action">
@@ -93,6 +95,7 @@
       </ul>
     </div>
 
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 
@@ -106,6 +109,8 @@
   import { textToLinkHtml, transferTagToLink } from '../utils/dom'
   import DiscussReplay from '../components/discover/DiscussReply.vue'
   import userAbility from '../utils/userAbility'
+  import AlertTextarea from '../components/comment/AlertTextarea.vue'
+  import { showComment } from '../utils/comment'
 
   export default {
     data () {
@@ -118,6 +123,7 @@
         list: [],
         commentTarget: null,
         delCommentId: 0,
+        delList: null,
         totalNumber: [],
         totalData: ''
       }
@@ -125,7 +131,8 @@
     components: {
       DiscussReplay,
       commentTextarea,
-      RefreshList
+      RefreshList,
+      AlertTextarea
     },
     computed: {
       prevOtherData () {
@@ -138,6 +145,9 @@
       }
     },
     methods: {
+      onCommentTap () {
+        this.newAddcomment()
+      },
       refreshPageData () {
         this.$refs.ctextarea.refreshPageData()
       },
@@ -344,7 +354,17 @@
 
         console.log('回复 data:' + JSON.stringify(data))
 
-        this.$refs.ctextarea.comment(data, autoBlur)
+        if (autoBlur) {
+          this.$refs.ctextarea.comment(data, autoBlur)
+        } else {
+          showComment(
+            this,
+            data,
+            this.$refs.ctextarea,
+            this.$refs.AlertTextarea,
+            this
+          )
+        }
       },
       commentfoucs () {
         this.comment(0, '', this.list)

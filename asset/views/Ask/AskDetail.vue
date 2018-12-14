@@ -78,6 +78,8 @@
              @finish="getDetail()"
              ref="commentReal"
     ></Comment>
+
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 
@@ -97,6 +99,8 @@
   import { getAskCommunityMajorDetail } from '../../utils/shareTemplate'
   import commentTextarea from '../../components/comment/Textarea.vue'
   import userAbility from '../../utils/userAbility'
+  import AlertTextarea from '../../components/comment/AlertTextarea.vue'
+  import { showComment } from '../../utils/comment'
 
   const AskDetail = {
     data: () => ({
@@ -137,7 +141,8 @@
       Answer,
       Comment,
       Share,
-      commentTextarea
+      commentTextarea,
+      AlertTextarea
     },
     computed: {
       title () {
@@ -164,7 +169,13 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        this.$refs.ctextarea.comment(commentTargetName)
+        showComment(
+          this,
+          commentTargetName,
+          this.$refs.ctextarea,
+          this.$refs.AlertTextarea,
+          this.$refs.discuss
+        )
       },
       commentFinish () {
         this.commentNumAdd()

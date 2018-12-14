@@ -1,16 +1,16 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.stop.prevent="onTap">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.stop.prevent="">
     <div class="textareaWrapper">
         <Jeditor
           ref="myAddEditor"
           id="commentJeditor"
           v-model.trim="description"
-          :rows="1"
           :content="description"
+          :rows="1"
           :isMonitorAddressAppear="true"
           :isMonitorSmallSpan="false"
           :descMaxLength="descMaxLength"
-          :placeholder="targetUsername?'回复' + targetUsername:'在此留言'"
+          :placeholder="placeholder"
           :allowBr="false"
           :allowRichStyle="false"
           @ready="onEditorReady($event)"
@@ -20,21 +20,16 @@
           @onEditorChange="onEditorChange"
           @addressAppearFound="addressAppearFound"
           @addressAppearDelete="addressAppearDelete"
-          v-on:keydown.enter="sendMessage"
+          v-on:keydown.enter="_submit"
         ></Jeditor>
-
-        <!--<svg class="icon" aria-hidden="true" @tap.stop.prevent="sendMessage">-->
-          <!--<use xlink:href="#icon-fasong"></use>-->
-        <!--</svg>-->
     </div>
-    <div class="send font-family-medium" :class="text.length - 2 ? 'active' : ''" @tap.stop.prevent="sendMessage">发送</div>
+    <div class="send font-family-medium" :class="value.length - 2 ? 'active' : ''" @tap.stop.prevent="_submit">发送</div>
   </div>
 </template>
 
 <script>
   import { softInput } from '../../utils/plus'
   import Jeditor from '../../components/vue-quill/Jeditor.vue'
-  import { onceGet, onceSave } from '../../utils/cache'
   import localEvent from '../../stores/localStorage'
   import { getLocalUserInfo } from '../../utils/user'
   const currentUser = getLocalUserInfo()
@@ -43,19 +38,15 @@
     data: () => ({
       id: currentUser.user_id,
       showTextarea: false,
-      description: {},
-      cacheKey: '',
-      textarea: '',
-      text: '',
       descMaxLength: 5000,
-      targetUsername: '',
       noticeUsers: [],
+      description: {},
       editorObj: null,
-      oldList: [],
-      commentData: [], // 评论时需要的参数
-      historyDescription: [], // 历史内容
-      focusCallback: null,  // 获取焦点时的回调
-      allowBr: false
+      isCache: false,
+      placeholder: '在此留言',
+      value: '',
+      cacheValue: '',
+      editorReadyCallback: ''
     }),
     props: {
       alwaysshow: false
@@ -75,15 +66,7 @@
       this.init()
       softInput()
     },
-    created () {
-      this.cacheKey = this.$route.name + '_comment_textarea'
-    },
     methods: {
-      onTap () {
-        if (this.alwaysshow) {
-          this.$emit('onTap')
-        }
-      },
       refreshPageData () {
         this.init()
       },
@@ -92,10 +75,15 @@
           this.syncSelectUser()
         }, 500)
       },
+      isShow () {
+        return this.showTextarea
+      },
+      hide () {
+        this.showTextarea = false
+      },
       resetData () {
-        this.textarea = ''
+        this.value = ''
         this.noticeUsers = []
-        this.delCurrentHistoryDescription()
         localEvent.clearLocalItem('selected_comment_user' + this.id)
         this.$refs.myAddEditor.resetContent()
         this.showTextarea = false
@@ -103,7 +91,7 @@
       addressAppearDelete (text) {
         var users = localEvent.getLocalItem('selected_comment_user' + this.id)
         for (var i in users) {
-          var name = '@' + users[i].name + ''
+          var name = '@' + users[i].name + ' '
           if (name === text) {
             this.delNoticeUser(users[i].id)
             users.splice(i, 1)
@@ -118,7 +106,7 @@
         for (var i in users) {
           this.noticeUser(users[i].id)
           var data = {
-            name: '@' + users[i].name + '',
+            name: '@' + users[i].name + ' ',
             id: users[i].uuid
           }
           spanUserNameAndIds.push(data)
@@ -175,15 +163,6 @@
       },
       //  监听@事件
       addressAppearFound () {
-        onceSave(this, this.cacheKey, {
-          showTextarea: this.showTextarea,
-          description: this.description,
-          cacheKey: this.cacheKey,
-          targetUsername: this.targetUsername,
-          noticeUsers: this.noticeUsers,
-          commentData: this.commentData,
-          currentUser: this.currentUser
-        })
         setTimeout(() => {
           this.editorObj.blur()
         }, 200)
@@ -191,117 +170,55 @@
       },
       init () {
         console.log('init() fired')
-        this.oldList = this.commentData.commentList
-        var result = onceGet(this, this.cacheKey)
-        if (result) {
-          setTimeout(() => {
-            this.initEditorData()
-            this.commentData.commentList = this.oldList
-            // this.commentData.list = null  // 临时解决方案，强制discuss刷新列表, 等待删除
-            this.focusCallback = () => {
-              this.focusCallback = null
-            }
-            this.editorObj.setContents(this.description)
-            this.editorObj.focus()
-          }, 100)
-        }
       },
       onEditorChange (editor) {
-        this.textarea = editor.html
-        this.text = editor.text
+        this.value = editor.html
       },
       onEditorBlur (editor) {
         window.mui.closeWaitingBlank()
         console.log('comment blur')
         this.showTextarea = false
-
-        this.setHistoryDescription()
-      },
-      delCurrentHistoryDescription () {
-        for (var i in this.historyDescription) {
-          if (this.historyDescription[i].targetUsername === this.targetUsername) {
-            this.historyDescription.splice(i, 1)
-          }
-        }
-      },
-      setHistoryDescription () {
-        this.delCurrentHistoryDescription()
-
-        this.historyDescription.push({
-          targetUsername: this.targetUsername,
-          description: this.description
-        })
-      },
-      getHistoryDescription () {
-        for (var i in this.historyDescription) {
-          if (this.historyDescription[i].targetUsername === this.targetUsername) {
-            this.editorObj.setContents(this.historyDescription[i].description)
-            this.historyDescription.splice(i, 1)
-            break
-          }
-        }
       },
       onEditorFocus (editor) {
-        if (!this.textarea.replace('<p> </p>', '').trim()) {
-          this.editorObj.setContents([{insert: ''}])
-          var targetUsername = this.targetUsername ? '回复' + this.targetUsername : '在此留言'
-          this.$refs.myAddEditor.setPlaceholder(targetUsername)
-        }
-
-        if (this.focusCallback) {
-          this.focusCallback()
-        }
-
+        alert('ok')
         window.mui.waitingBlank()
         console.log('comment focus')
       },
+      setPlaceholder (placeholder) {
+        this.placeholder = placeholder
+        this.$refs.myAddEditor.setPlaceholder(this.placeholder)
+      },
       onEditorReady (editor) {
         this.editorObj = editor
-      },
-      comment (data, autoBlur) {
-        var targetUsername = data.targetUsername
-        console.log('comment targetUsername:' + targetUsername)
-        this.commentData = data.commentData
-        if (targetUsername === '') {
-          this.showTextarea = !this.showTextarea
-        } else {
-          this.showTextarea = true
-        }
-
-        this.targetUsername = targetUsername
-
-        this.editorObj.setContents([{insert: ''}])
-
-        this.getHistoryDescription()
-
-        var textarea = this.textarea
-        textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
-        textarea = textarea.replace(/(<p> <\/p>)*$/, '')
-
-        console.log('comment-textarea:' + textarea)
-        if (!textarea.trim()) {
-          targetUsername = targetUsername ? '回复' + targetUsername : '在此留言'
-          this.$refs.myAddEditor.setPlaceholder(targetUsername)
-        }
-
-        if (this.showTextarea) {
-          console.log('bind comment事件')
-          window.document.addEventListener('tap', (e) => {
-            console.log('document tap 事件被触发')
-            this.editorObj.blur()
-          }, false)
-          console.log('autoBlur:' + autoBlur)
-          if (!autoBlur) {
-            setTimeout(() => {
-              this.editorObj.focus()
-            }, 500)
-          }
-        } else {
-          this.editorObj.blur()
+        if (this.editorReadyCallback) {
+          this.editorReadyCallback()
         }
       },
-      finish () {
-        this.resetData()
+      setValue (value) {},
+      setDescription (description) {
+        this.editorObj.setContents(description)
+      },
+      cacheShow (id, value, cancelCallback, submitCallback) {
+        this.isCache = true
+        this.setValue(value)
+        this.setDescription({})
+        this.cacheId = this.$route.name + '_' + id
+        var cache = localEvent.getLocalItem(this.cacheId)
+        if (cache.value) {
+          this.cacheValue = cache.value
+          this.setPlaceholder('')
+          this.setDescription(cache.value)
+          localEvent.clearLocalItem(this.cacheId)
+        }
+        this._show(cancelCallback, submitCallback)
+      },
+      _show (cancelCallback, submitCallback) {
+        this.cancelCallback = cancelCallback
+        this.submitCallback = submitCallback
+        this.showTextarea = true
+        setTimeout(() => {
+          this.editorObj.focus()
+        }, 500)
       },
       noticeUser (id) {
         this.delNoticeUser(id)
@@ -313,45 +230,31 @@
           this.noticeUsers.splice(noticeIndex, 1)
         }
       },
-      sendMessage (event) {
+      close () {
+        this.showTextarea = false
+      },
+      _submit (event) {
         event.preventDefault()
         event.stopPropagation()
 
-        var textarea = this.textarea
+        var textarea = this.value
         textarea = textarea.replace(/(<p><br><\/p>)*$/, '')
 
         if (!textarea.trim()) {
           return false
         }
 
-        var text = this.text.replace(/\s/g, '').trim()
-        if (!text) {
-          return
-        }
-
         textarea = textarea.replace(/target="_blank" class="ql-size-small"/g, 'target="_self" class="ql-size-small appUrl"')
 
-        var data = {
-          content: textarea,
-          noticeUsers: this.noticeUsers,
-          commentData: this.commentData
+        if (this.submitCallback) {
+          var rs = this.submitCallback(this.value)
+          if (rs) {
+            this.value = ''
+            this.close()
+          }
+        } else {
+          this.close()
         }
-        this.$emit('sendMessage', data)
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-          // mixpanel
-          window.mixpanel.track(
-            'inwehub:comment:success',
-            {
-              'app': 'inwehub',
-              'user_device': window.getUserAppDevice(),
-              'page': this.$route.fullPath,
-              'page_name': this.$route.name,
-              'page_title': this.$route.meta.title,
-              'referrer_page': ''
-            }
-          )
-        }
-        this.editorObj.blur()
       }
     }
   }

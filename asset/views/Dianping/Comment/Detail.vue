@@ -151,6 +151,7 @@
       @clickedItem="iconMenusClickedItem"
     ></PageMore>
 
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 <script>
@@ -171,6 +172,8 @@
   import {getDianpingCommentDetail} from '../../../utils/shareTemplate'
   import StarView from '../../../components/star-rating/starView.vue'
   import Detail from '../../../components/menu/Detail.vue'
+  import AlertTextarea from '../../../components/comment/AlertTextarea.vue'
+  import { showComment } from '../../../utils/comment'
 
   export default {
     data () {
@@ -219,7 +222,8 @@
       PageMore,
       'vue-pull-refresh': VuePullRefresh,
       StarView,
-      Detail
+      Detail,
+      AlertTextarea
     },
     computed: {
       discussStoreParams () {
@@ -507,7 +511,13 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        this.$refs.ctextarea.comment(commentTargetName)
+        showComment(
+          this,
+          commentTargetName,
+          this.$refs.ctextarea,
+          this.$refs.AlertTextarea,
+          this.$refs.discuss
+        )
       },
       getDetail (loading = 1) {
         this.loading = loading

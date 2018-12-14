@@ -2076,6 +2076,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 联系我们
+    path: '/contactUs',
+    name: 'about',
+    meta: {
+      title: '联系我们',
+      wechatHideHeader: true
+    },
+    component: componets.ContactUs,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 推送设置
     path: '/push/setting',
     name: 'push-setting',
@@ -2692,6 +2704,19 @@ const routes = [
       keepAlive: false
     },
     component: componets.DianpingProductFeedback,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  { // 搜索全部
+    path: '/searchAll',
+    name: 'search-all',
+    meta: {
+      title: '搜索',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: componets.SearchSearchAll,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

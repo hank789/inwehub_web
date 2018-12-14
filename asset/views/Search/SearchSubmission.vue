@@ -6,7 +6,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="搜内容、问答、圈子" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @focus="focus"/>
+          <input type="text" placeholder="搜产品、问答、圈子、内容" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)" @focus="focus"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
@@ -14,9 +14,15 @@
         <p class="font-family-medium" @tap.stop.prevent="back()">取消</p>
       </div>
       <div class="menu" v-if="list.length || getCurrentMode === 'result' && searchText !== ''">
-        <span @tap.stop.prevent="" class="font-family-medium">分享<i></i></span>
+
+
+        <span @tap.stop.prevent="$router.replace('/searchAll?text=' + searchText)">综合</span>
+        <span class="font-family-medium">分享<i></i></span>
         <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
         <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
+        <span @tap.stop.prevent="$router.replace('/dianping/search/products?text=' + searchText)">产品</span>
+        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)" class="">点评</span>
+
         <i class="bot"></i>
       </div>
 
@@ -79,7 +85,7 @@
 
         <div class="noResult" v-if="list.length">
           <div class="empty-Img">
-            <img src="../../statics/images/feed@3x.png" alt="">
+            <img src="../../statics/images/empty@3x.png">
           </div>
           <div class="noResultText" v-if="list.length">无更多结果，快来发布相关分享~</div>
           <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
@@ -90,7 +96,7 @@
 
     <div class="noResult increase" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
       <div class="empty-Img">
-        <img src="../../statics/images/feed@3x.png" alt="">
+        <img src="../../statics/images/empty@3x.png">
       </div>
       <div class="noResultText">暂无结果，快来发布相关分享~</div>
       <div class="goRelease" @tap.stop.prevent="$router.pushPlus('/discover/add')">发分享</div>
@@ -415,11 +421,11 @@
       margin-top: -0.106rem;
       span{
         display: flex;
-        width:33%;
+        width: 13.5%;
         height:100%;
         justify-content: center;
         align-items: center;
-        &:nth-of-type(1){
+        &:nth-of-type(2){
           font-size: 0.373rem;
           position:relative;
           color: #444444;

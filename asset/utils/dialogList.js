@@ -434,6 +434,19 @@ function alertGroupsOld (context, callback) {
   }
 }
 
+function alertAddWeHub (context, callback) {
+  var dialog = getDialogObj(context)
+  if (dialog) {
+    dialog.getHtml('addInweHub', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num.index === 0) {
+          callback()
+        }
+      })
+    })
+  }
+}
+
 // 我的 页面 弹窗
 // function alertshi (context) {
 //   var dialogObj = getDialogObj(context)
@@ -474,6 +487,7 @@ export {
   alertRealNameAuthentication,
   alertGroups,
   alertHeadAndNickname,
-  alertGroupsOld
+  alertGroupsOld,
+  alertAddWeHub
   // alertshi
 }

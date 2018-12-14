@@ -7,7 +7,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-sousuo"></use>
           </svg>
-          <input type="text" placeholder="搜索产品、点评、分类、公司" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
+          <input type="text" placeholder="搜产品、问答、圈子、内容" v-model.trim="searchText" v-on:keydown.enter="enterKeyCode($event)"/>
           <svg class="icon" aria-hidden="true" @tap.stop.prevent="empty()" v-if="isShowCancelButton">
             <use xlink:href="#icon-times1"></use>
           </svg>
@@ -16,10 +16,14 @@
       </div>
       <!-- 导航栏 -->
       <div class="container-searchMenu">
+
+        <span @tap.stop.prevent="$router.replace('/searchAll?text=' + searchText)">综合</span>
+        <span @tap.stop.prevent="$router.replace('/searchSubmission?text=' + searchText)">分享</span>
+        <span @tap.stop.prevent="$router.replace('/searchQuestion?text=' + searchText)">问答</span>
+        <span @tap.stop.prevent="$router.replace('/group/search?text=' + searchText)">圈子</span>
         <span class="font-family-medium">产品<i></i></span>
-        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)">点评</span>
-        <span @tap.stop.prevent="$router.replace('/dianping/search/categories?text=' + searchText)">分类</span>
-        <span @tap.stop.prevent="$router.replace('/dianping/search/companys?text=' + searchText)">公司</span>
+        <span @tap.stop.prevent="$router.replace('/dianping/search/comments?text=' + searchText)" class="">点评</span>
+
         <i class="bot"></i>
       </div>
 
@@ -92,19 +96,27 @@
             </div>
             <div class="line-river-after line-river-after-top"></div>
           </div>
-          <div class="container-noMore" v-if="list.length">暂无更多</div>
+          <div class="container-noMore noResultText" v-if="list.length">暂无结果，您可<span @tap.stop.prevent="cooperation">提交产品，开展合作</span></div>
         </div>
 
         <div class="noResult increase dianping-search" v-if="getCurrentMode === 'result' && !list.length && !resultLoading">
           <div class="empty-Img">
             <img src="../../../statics/images/empty@3x.png">
           </div>
-          <div class="noResultText">暂无结果，换个关键词试试~</div>
+          <div class="noResultText">暂无结果，您可 <span @tap.stop.prevent="cooperation">提交产品，开展合作</span></div>
         </div>
 
       </RefreshList>
 
     </div>
+
+    <Options
+      ref="itemOptions"
+      :id="'itemOptions'"
+      :options="iconOptions"
+      @selectedItem="selectedItem"
+    ></Options>
+
   </div>
 </template>
 
@@ -114,6 +126,7 @@
   import { postRequest } from '../../../utils/request'
   import { searchText as searchTextFilter } from '../../../utils/search'
   import { autoBlur } from '../../../utils/dom'
+  import Options from '../../../components/Options.vue'
 
   export default {
     data () {
@@ -127,12 +140,14 @@
         hotSearchHistory: {
           history: [],
           top: []
-        }
+        },
+        iconOptions: []
       }
     },
     components: {
       RefreshList,
-      StarView
+      StarView,
+      Options
     },
     computed: {
       dataList () {
@@ -175,6 +190,26 @@
       this.refreshPageData()
     },
     methods: {
+      cooperation () {
+        this.iconOptions = []
+        this.iconOptions.push(
+          {
+            text: '我有产品，需要入驻展示'
+          }
+        )
+        this.$refs.itemOptions.toggle()
+      },
+      selectedItem (item) {
+        this.$refs.itemOptions.toggle()
+        switch (item.text) {
+          case '我是企业，需要产品服务':
+            this.goCustomer()
+            break
+          case '我有产品，需要入驻展示':
+            this.$router.pushPlus('/dianping/product/add')
+            break
+        }
+      },
       empty () {
         this.searchText = ''
       },
@@ -332,6 +367,12 @@
           }
         }
       }
+    }
+  }
+
+  .noResultText {
+    span {
+      color: #03AEF9;
     }
   }
 

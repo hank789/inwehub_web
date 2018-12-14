@@ -149,6 +149,7 @@ import AccountService from '../../../views/Account/Service.vue'
 import AccountDetailInfo from '../../../views/Account/DetailInfo.vue'
 import Guide from '../../../views/Guide.vue'
 import Feedback from '../../../views/Feedback.vue'
+import ContactUs from '../../../views/Account/ContactUs.vue'
 import About from '../../../views/About.vue'
 import SettingpushSetting from '../../../views/Setting/pushSetting.vue'
 import SettingpushSettingFollow from '../../../views/Setting/pushSettingFollow.vue'
@@ -214,6 +215,7 @@ import DianpingSearchProduct from '../../../views/Dianping/Search/Product.vue'
 import DianpingSearchCategory from '../../../views/Dianping/Search/Category.vue'
 import DianpingSearchCompany from '../../../views/Dianping/Search/Company.vue'
 import DianpingProductFeedback from '../../../views/Dianping/Product/Feedback.vue'
+import SearchSearchAll from '../../../views/Search/SearchAll.vue'
 
 export {
   Login,
@@ -361,6 +363,7 @@ export {
   AccountSetting,
   Guide,
   Feedback,
+  ContactUs,
   About,
   SettingpushSetting,
   SettingpushSettingFollow,
@@ -431,5 +434,6 @@ export {
   DianpingSearchProduct,
   DianpingSearchCategory,
   DianpingSearchCompany,
-  DianpingProductFeedback
+  DianpingProductFeedback,
+  SearchSearchAll
 }

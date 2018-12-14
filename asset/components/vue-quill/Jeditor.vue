@@ -168,7 +168,7 @@
         this.$emit('onEditorBlur', editor)
       },
       onEditorFocus (editor) {
-        // console.log('editor focus!', editor)
+        console.log('editor focus!', editor)
         this.$emit('onEditorFocus', editor)
       },
       refreshPageData () {

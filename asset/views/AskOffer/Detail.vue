@@ -155,6 +155,7 @@
              ref="commentReal"
     ></Comment>
 
+    <AlertTextarea ref="AlertTextarea"></AlertTextarea>
   </div>
 </template>
 
@@ -180,6 +181,8 @@
   import Vue from 'vue'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
   import {scrollToElement} from '../../utils/dom'
+  import AlertTextarea from '../../components/comment/AlertTextarea.vue'
+  import { showComment } from '../../utils/comment'
 
   const AskDetail = {
     data: () => ({
@@ -229,7 +232,8 @@
       pay,
       Comment,
       StarRating,
-      'vue-pull-refresh': VuePullRefresh
+      'vue-pull-refresh': VuePullRefresh,
+      AlertTextarea
     },
     computed: {
       isNeedComment () {
@@ -470,7 +474,13 @@
         this.$refs.discuss.sendMessage(message)
       },
       comment (commentTargetName) {
-        this.$refs.ctextarea.comment(commentTargetName)
+        showComment(
+          this,
+          commentTargetName,
+          this.$refs.ctextarea,
+          this.$refs.AlertTextarea,
+          this.$refs.discuss
+        )
       },
       commentFinish () {
         this.answer.comment_number++

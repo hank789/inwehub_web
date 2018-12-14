@@ -82,8 +82,8 @@
           }
           this.url = response.data.data.url
           // var localFileName = this.url.match(/[^\\/]+?$/)
-          var localFileName = 'question_share.png'
-          dowloadFile(this.url, '_www/' + localFileName, (url) => {
+          var localFileName = 'question_share'
+          dowloadFile(this.url, '_www/' + localFileName + '_' + this.id + '.png', (url) => {
             this.url = url
           })
         })

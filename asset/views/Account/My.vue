@@ -91,10 +91,18 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
-          <i class="bot"></i>
+          <!--<i class="bot"></i>-->
         </div>
+        <div class="gray"></div>
         <div class="optionList" @tap.stop.prevent="$router.pushPlus('/feedback/advise')">
           <span>意见反馈</span>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-jinru"></use>
+          </svg>
+          <i class="bot"></i>
+        </div>
+        <div class="optionList" @tap.stop.prevent="$router.pushPlus('/contactUs')">
+          <span>联系我们</span>
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-jinru"></use>
           </svg>
@@ -102,28 +110,6 @@
         <div class="gray"></div>
       </div>
 
-      <div class="guessLike">
-        <div class="component-block-title">
-          <div class="left">猜您喜欢</div>
-        </div>
-        <div class="line-river-after line-river-after-short"></div>
-        <template  v-for="(item, index) in list">
-          <div class="line-river-big" v-if="index === 5"></div>
-          <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
-            <div class="itemArticleLeft">
-              <div class="titleWrapper">
-                <div class="title text-line-2 text-content"><!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}</div>
-              </div>
-              <div class="explain">
-                <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
-              </timeago>
-              </div>
-            </div>
-            <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
-          </div>
-          <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
-        </template>
-      </div>
 
     </div>
 
@@ -134,7 +120,6 @@
   </div>
 </template>
 <script>
-  import {postRequest} from '../../utils/request'
   import localEvent from '../../stores/localStorage'
   import { USERS_APPEND } from '../../stores/types'
   import { getUserInfo } from '../../utils/user'
@@ -164,7 +149,6 @@
         answers: currentUser.answers,
         show_my_wallet: currentUser.show_my_wallet,
         my: '',
-        list: [],
         current_day_signed: ''
       }
     },
@@ -184,11 +168,6 @@
       wechatLoginFail (errorMessage) {
         console.log(errorMessage)
         window.mui.toast(errorMessage)
-      },
-      recommendRead () {
-        postRequest(`getRelatedRecommend`, {source_id: 0, source_type: 0}, false).then(response => {
-          this.list = response.data.data.data
-        })
       },
       goDetail (item) {
         switch (item.read_type) {
@@ -678,18 +657,6 @@
       .bot {
         right: 0.48rem;
         left: 0.426rem;
-      }
-    }
-  }
-
-  .guessLike {
-    .component-block-title {
-      height: 0.906rem;
-      line-height: 0.906rem;
-      .left {
-        font-size: 0.346rem;
-        color: #808080;
-        font-family: PingFangSC-Regular;
       }
     }
   }

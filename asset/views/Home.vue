@@ -6,12 +6,12 @@
           <use xlink:href="#icon-logowenzi"></use>
         </svg><span class="splitCircle"></span>
 
-        <div class="topSearchWrapper" @tap.stop.prevent="$router.pushPlus('/searchSubmission','list-detail-page-three')">
+        <div class="topSearchWrapper" @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
           <div class="searchFrame">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-sousuo"></use>
             </svg>
-            <span>搜内容、问答、圈子</span>
+            <span>搜产品、问答、圈子、内容</span>
           </div>
         </div>
       </div>

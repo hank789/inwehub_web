@@ -18,6 +18,22 @@
       </div>
     </div>
 
+
+
+    <div id="addInweHub">
+      <div class="component-addWeChat">
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-guanbi"></use>
+          </svg>
+        </div>
+        <div class="weChatText">截图保存后扫描 添加客服小哈微信</div>
+        <div class="weChatImg">
+          <img src="../statics/images/xhWeChat@3x.png" alt="">
+        </div>
+      </div>
+    </div>
+
     <div id="groupsOld">
       <div class="groups">
         <p class="groupTitle font-family-medium">请先加入圈子！</p>
@@ -2003,6 +2019,36 @@
     font-weight: 500;
     color: #444444;
     line-height: 0.4rem; }
+
+  .component-addWeChat {
+    width: 8rem;
+    background: #FFFFFF;
+    padding-bottom: 0.826rem;
+  }
+  .component-addWeChat .close {
+    color: #808080;
+    text-align: right;
+    padding-top: 0.4rem;
+    padding-right: 0.4rem;
+  }
+  .component-addWeChat .close .icon {
+    font-size: 0.506rem;
+  }
+  .component-addWeChat .weChatText {
+    color: #808080;
+    font-size: 0.346rem;
+    line-height: 0.48rem;
+    text-align: center;
+  }
+  .component-addWeChat .weChatImg {
+    width: 4rem;
+    height: 4rem;
+    margin: 0.346rem auto 0;
+  }
+  .component-addWeChat .weChatImg img {
+    width: 100%;
+    height: 100%;
+  }
 
 
 </style>
