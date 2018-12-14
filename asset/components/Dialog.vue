@@ -2021,29 +2021,29 @@
     line-height: 0.4rem; }
 
   .component-addWeChat {
-    width: 300px;
+    width: 8rem;
     background: #FFFFFF;
-    padding-bottom: 31px;
+    padding-bottom: 0.826rem;
   }
   .component-addWeChat .close {
     color: #808080;
     text-align: right;
-    padding-top: 15px;
-    padding-right: 15px;
+    padding-top: 0.4rem;
+    padding-right: 0.4rem;
   }
   .component-addWeChat .close .icon {
-    font-size: 19px;
+    font-size: 0.506rem;
   }
   .component-addWeChat .weChatText {
     color: #808080;
-    font-size: 13px;
-    line-height: 18px;
+    font-size: 0.346rem;
+    line-height: 0.48rem;
     text-align: center;
   }
   .component-addWeChat .weChatImg {
-    width: 150px;
-    height: 150px;
-    margin: 13px auto 0;
+    width: 4rem;
+    height: 4rem;
+    margin: 0.346rem auto 0;
   }
   .component-addWeChat .weChatImg img {
     width: 100%;

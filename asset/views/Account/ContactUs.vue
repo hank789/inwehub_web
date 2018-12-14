@@ -107,30 +107,30 @@
 
   .contactusWrapper {
     position: relative;
-    padding: 0 16px;
-    margin-top: 17px;
+    padding: 0 0.426rem;
+    margin-top: 0.453rem;
     .bot {
       right: 0.48rem;
       left: 0.426rem;
     }
     .title {
       color: #444444;
-      font-size: 15px;
-      line-height: 21px;
+      font-size: 0.4rem;
+      line-height: 0.56rem;
     }
     .textWrapper {
-      padding-bottom: 16px;
+      padding-bottom: 0.426rem;
       .textBottom {
-        margin-bottom: 14px !important;
+        margin-bottom: 0.373rem !important;
       }
       .text {
         display: flex;
         justify-content: space-between;
         color: #808080;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: 0.373rem;
+        line-height: 0.533rem;
         &:nth-of-type(1) {
-          margin: 9px 0 0px;
+          margin: 0.24rem 0 0rem;
         }
         span {
           &:nth-of-type(2) {

@@ -551,28 +551,28 @@
 
   .searchTitle {
     color: #808080;
-    font-size: 13px;
-    padding-left: 16px;
-    line-height: 29px;
+    font-size: 0.346rem;
+    padding-left: 0.426rem;
+    line-height: 0.773rem;
     background: #F3F4F6;
   }
   .checkAll {
-    height: 44px;
-    line-height: 44px;
+    height: 1.173rem;
+    line-height: 1.173rem;
     text-align: center;
     span {
       color: #808080;
-      font-size: 13px;
+      font-size: 0.346rem;
     }
   }
 
   .noTime {
-    height: 57px;
-    padding-top: 12.5px;
+    height: 1.52rem;
+    padding-top: 0.333rem;
     text-align: center;
     span {
       color: #C8C8C8;
-      font-size: 12px;
+      font-size: 0.32rem;
     }
   }
 
