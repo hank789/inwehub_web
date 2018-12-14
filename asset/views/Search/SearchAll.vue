@@ -110,7 +110,7 @@
               <div class="groupContent">
                 <div class="groupName">
                   <div class="font-family-medium groupOwnerWrapper">
-                    <span class="text-line-1">{{submission.name}}</span><span class="border-football" v-if="submission.is_joined === 3">圈主</span>
+                    <span class="text-line-1" v-html="getHighlight(submission.name)"></span><span class="border-football" v-if="submission.is_joined === 3">圈主</span>
                   </div>
                 </div>
                 <span class="groupDescribe text-line-1">{{submission.description}}</span>
@@ -151,7 +151,7 @@
                     <img class="lazyImg" v-lazy="tag.logo" alt="">
                   </div>
                   <div class="product-detail">
-                    <div class="productName font-family-medium text-line-1">{{ tag.name }}</div>
+                    <div class="productName font-family-medium text-line-1" v-html="getHighlight(tag.name)"></div>
                     <div class="productMark">
                       <div class="stars">
                         <StarView :rating="tag.review_average_rate"></StarView>
