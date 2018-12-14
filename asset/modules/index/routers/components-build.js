@@ -149,6 +149,7 @@ import AccountService from '../../../views/Account/Service.vue'
 import AccountDetailInfo from '../../../views/Account/DetailInfo.vue'
 import Guide from '../../../views/Guide.vue'
 import Feedback from '../../../views/Feedback.vue'
+import ContactUs from '../../../views/Account/ContactUs.vue'
 import About from '../../../views/About.vue'
 import SettingpushSetting from '../../../views/Setting/pushSetting.vue'
 import SettingpushSettingFollow from '../../../views/Setting/pushSettingFollow.vue'
@@ -362,6 +363,7 @@ export {
   AccountSetting,
   Guide,
   Feedback,
+  ContactUs,
   About,
   SettingpushSetting,
   SettingpushSettingFollow,

@@ -155,6 +155,7 @@ const ReadhubDetailH5 = () => import(/* webpackChunkName: "ReadhubDetailH5" */ '
 const AccountSetting = () => import(/* webpackChunkName: "AccountSetting" */ '../../../views/Account/Setting.vue')
 const Guide = () => import(/* webpackChunkName: "Guide" */ '../../../views/Guide.vue')
 const Feedback = () => import(/* webpackChunkName: "Feedback" */ '../../../views/Feedback.vue')
+const ContactUs = () => import(/* webpackChunkName: "ContactUs" */ '../../../views/Account/ContactUs.vue')
 const About = () => import(/* webpackChunkName: "About" */ '../../../views/About.vue')
 const SettingpushSetting = () => import(/* webpackChunkName: "SettingpushSetting" */ '../../../views/Setting/pushSetting.vue')
 const SettingpushSettingFollow = () => import(/* webpackChunkName: "SettingpushSettingFollow" */ '../../../views/Setting/pushSettingFollow.vue')
@@ -369,6 +370,7 @@ export {
   AccountSetting,
   Guide,
   Feedback,
+  ContactUs,
   About,
   SettingpushSetting,
   SettingpushSettingFollow,

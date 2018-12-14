@@ -2076,6 +2076,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 联系我们
+    path: '/contactUs',
+    name: 'about',
+    meta: {
+      title: '联系我们',
+      wechatHideHeader: true
+    },
+    component: componets.ContactUs,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 推送设置
     path: '/push/setting',
     name: 'push-setting',
