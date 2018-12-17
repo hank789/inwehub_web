@@ -11,6 +11,7 @@ import { getLocalUserInfo } from '../utils/user'
 import router from '../modules/index/routers/index'
 import { alertSimple, getDialogObj } from '../utils/dialog'
 import { alertRealNameAuthentication } from './dialogList'
+import { needLogin } from './auth'
 
 var UserAbilityCheck = () => {
   /**
@@ -96,6 +97,11 @@ var UserAbilityCheck = () => {
    * 实名认证检查
    */
   var checkPhoneCertification = (context) => {
+    var rs = needLogin(context)
+    if (rs) {
+      return false
+    }
+
     var userInfo = getLocalUserInfo()
     if (userInfo.phone) {
       console.log('实名认证检查：pass')

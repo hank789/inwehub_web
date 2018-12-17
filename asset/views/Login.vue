@@ -74,7 +74,8 @@
       isLoading: false, // 登录loading
       showPhoneLabel: true,
       showPasswordLabel: true,
-      errorMsg: ''
+      errorMsg: '',
+      redirect: ''
     }),
     created () {},
     components: {
@@ -89,6 +90,7 @@
       }
     },
     mounted () {
+      this.redirect = this.$route.query.redirect ? this.$route.query.redirect : '/home'
       window.addEventListener('refreshData', (e) => {
         // 执行刷新
         console.log('refresh-login')
@@ -196,7 +198,7 @@
           }
           // 存储用户位置信息
           saveLocationInfo()
-          this.$router.pushPlus('/home', '', true, 'none', 'none', true, true)
+          this.$router.pushPlus(this.redirect, '', true, 'none', 'none', true, true)
         }))
       },
       submit () {
