@@ -29,7 +29,7 @@
         </div>
         <div class="weChatText">截图保存后扫描 添加客服小哈微信</div>
         <div class="weChatImg">
-          <img src="../statics/images/CodeImg@3x.png" alt="">
+          <img src="../statics/images/xhWeChat@3x.png" alt="">
         </div>
       </div>
     </div>
