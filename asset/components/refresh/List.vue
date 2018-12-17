@@ -22,7 +22,7 @@
   export default {
     data () {
       return {
-        loading: true,
+        loading: this.isLoading,
         currentPage: 0,
         perPage: 10,
         response: null,
@@ -32,6 +32,10 @@
       }
     },
     props: {
+      isLoading: {
+        type: Boolean,
+        default: true
+      },
       emptyDescription: {  // 空描述
         type: String,
         default: '暂时还没有数据呀～'
@@ -219,7 +223,7 @@
           }
 
           if (this.prevSuccessCallback) {
-            this.prevSuccessCallback()
+            this.prevSuccessCallback(this.list)
           }
         })
       },
@@ -237,7 +241,7 @@
 
         console.log('getPrevList 额外的参数:' + JSON.stringify(param))
 
-        postRequest(this.api, param, false).then(response => {
+        postRequest(this.api, param, false, {}, 0, false).then(response => {
           var code = response.data.code
 
           if (code !== 1000) {
@@ -279,7 +283,19 @@
           }
 
           if (this.prevSuccessCallback) {
-            this.prevSuccessCallback()
+            this.prevSuccessCallback(this.list)
+          }
+        }).finally(() => {
+          this.loading = false
+          if (window.mui('#refreshContainer').length) {
+            setTimeout(() => {
+              if (window.mui('#refreshContainer').pullRefresh()) {
+                window.mui('#refreshContainer').pullRefresh().endPulldownToRefresh()
+              }
+              if (window.mui('#refreshContainer').length && window.mui('#refreshContainer').pullRefresh()) {
+                window.mui('#refreshContainer').pullRefresh().refresh(true)
+              }
+            }, 1000)
           }
         })
       },
@@ -309,7 +325,7 @@
 
         param = Object.assign(param, this.nextOtherData)
 
-        postRequest(this.api, param, false).then(response => {
+        postRequest(this.api, param, false, {}, 0, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -355,6 +371,10 @@
 
           if (this.nextSuccessCallback) {
             this.nextSuccessCallback()
+          }
+        }).finally(() => {
+          if (window.mui('#refreshContainer').length) {
+            window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
           }
         })
       }

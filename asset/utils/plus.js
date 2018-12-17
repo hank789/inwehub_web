@@ -777,6 +777,7 @@ function downloadImg (imgUrl, savePath, callback) {
     }, function (download, status) {
       if (status !== 200) {
         console.log('下载失败,status' + status)
+        localEvent.setLocalItem(imgUrl, {localName: imgUrl})
         if (savePath !== null) {
           window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
             entry.remove(function (entry) {
