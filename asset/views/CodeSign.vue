@@ -31,7 +31,7 @@
         </button>
         <div class="registerPassword">
           <span>未注册验证即自动创建账号</span>
-          <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/passwordlogin')">密码登录</span>
+          <span class="font-family-medium" @tap.stop.prevent="passwordLogin()">密码登录</span>
         </div>
 
         <div class="weChat" @tap.stop.prevent="wechatLogin()">
@@ -85,7 +85,8 @@
       disableRegister: true,
       errorMsg: '',
       isRegisterSuccess: false,
-      isLoading: false // 登录loading
+      isLoading: false, // 登录loading
+      redirect: ''
     }),
     computed: {
       getCodeText () {
@@ -97,6 +98,7 @@
       oauth
     },
     mounted () {
+      this.redirect = this.$route.query.redirect ? this.$route.query.redirect : '/home'
       window.mui('.login').on('focusout', 'input', (e) => {
         switch (e.target.name) {
           case 'code':
@@ -156,6 +158,9 @@
       next()
     },
     methods: {
+      passwordLogin () {
+        this.$router.pushPlus('/passwordlogin?redirect=' + this.redirect)
+      },
       wechatLoginSuccess (token, openid, nickname = '', isNewUser = '') {
         console.log(token)
         console.log(openid)

@@ -47,9 +47,22 @@ function isLogined () {
   return false
 }
 
+/* 判断是否登录状态，没登录进入登录页面 */
+function needLogin (context) {
+  var fullPath = context.$route.fullPath
+  console.log('fullPath' + fullPath)
+  let UserLoginInfo = localEvent.getLocalItem('UserLoginInfo')
+  if (!UserLoginInfo.token) {
+    context.$router.pushPlus('/login?redirect=' + fullPath, '', true, 'none', 'none')
+    return true
+  }
+  return false
+}
+
 export {
   requestAuth,
   CanNotGetInWhenLogged,
   logout,
-  isLogined
+  isLogined,
+  needLogin
 }
