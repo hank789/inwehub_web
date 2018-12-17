@@ -374,7 +374,7 @@
           }
         }).finally(() => {
           if (window.mui('#refreshContainer').length) {
-            window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(true)
+            window.mui('#refreshContainer').pullRefresh().endPullupToRefresh(false)
           }
         })
       }
