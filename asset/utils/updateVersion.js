@@ -78,7 +78,9 @@ function installWgt (path, appVersion) {
     var updateMsg = localEvent.getLocalItem('app_update_msg')
     window.mui.confirm(updateMsg.msg, '新版本更新', ['取消', '确定'], (e) => {
       if (e.index === 1) {
+        // 再次过一遍引导页，避免直接到首页造成本地图片加载空白问题
         localEvent.setLocalItem('lauchFlag', {showGuide: false})
+        localEvent.setLocalItem('useLocalImg', {local: false})
         window.plus.runtime.restart()
       }
     }, 'div')
