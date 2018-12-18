@@ -78,6 +78,8 @@ function installWgt (path, appVersion) {
     var updateMsg = localEvent.getLocalItem('app_update_msg')
     window.mui.confirm(updateMsg.msg, '新版本更新', ['取消', '确定'], (e) => {
       if (e.index === 1) {
+        localEvent.setLocalItem('HomeDataList', [])
+        localEvent.setLocalItem('HomeDataBanners', {})
         window.plus.runtime.restart()
       }
     }, 'div')
