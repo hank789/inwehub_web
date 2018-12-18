@@ -78,15 +78,14 @@ function installWgt (path, appVersion) {
     var updateMsg = localEvent.getLocalItem('app_update_msg')
     window.mui.confirm(updateMsg.msg, '新版本更新', ['取消', '确定'], (e) => {
       if (e.index === 1) {
-        localEvent.setLocalItem('HomeDataList', [])
-        localEvent.setLocalItem('HomeDataBanners', {})
+        localEvent.setLocalItem('lauchFlag', {showGuide: false})
         window.plus.runtime.restart()
       }
     }, 'div')
   }, function (e) {
     window.plus.nativeUI.closeWaiting()
+    console.log('安装wgt文件失败[' + e.code + ']:' + e.message)
     removeFile(path)
-    // console.log("安装wgt文件失败["+e.code+"]："+e.message);
     Raven.captureException(JSON.stringify(e))
     // plus.nativeUI.alert("失败["+e.code+"]："+e.message);
   })
