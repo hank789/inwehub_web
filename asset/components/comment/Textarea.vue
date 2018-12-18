@@ -80,7 +80,7 @@
     },
     methods: {
       onTap (event) {
-        if (this.alwaysshow) {
+        if (this.alwaysshow && !window.mui.os.plus) {
           event.preventDefault()
           event.stopPropagation()
           this.$emit('onTap')
