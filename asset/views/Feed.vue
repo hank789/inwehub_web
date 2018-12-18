@@ -137,7 +137,7 @@
   </div>
 </template>
 <script>
-  import RefreshList from '../components/refresh/List.vue'
+  import RefreshList from '../components/refresh/MescrollList.vue'
   import HomeSearch from '../components/search/Home'
   import FeedItem from '../components/Feed.vue'
   import PageMore from '../components/PageMore.vue'
