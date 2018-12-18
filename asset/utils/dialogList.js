@@ -461,6 +461,25 @@ function alertAddWeHub (context, callback) {
 //   }
 // }
 
+function alertReport (context, callback) {
+  var rs = ''
+  var dialog = getDialogObj(context)
+  if (dialog) {
+    dialog.getHtml('report', {}, (html) => {
+      alertHtml(html, (num) => {
+        // console.log(num, '进来了')
+        if (num < 5 && num >= 0) {
+          rs = num
+          document.querySelector('.true .component-report .reportxxx .active_' + num).classList.add('addActive')
+        }
+        if (num === 5) {
+          callback(rs)
+        }
+      }, true)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -488,6 +507,7 @@ export {
   alertGroups,
   alertHeadAndNickname,
   alertGroupsOld,
-  alertAddWeHub
+  alertAddWeHub,
+  alertReport
   // alertshi
 }
