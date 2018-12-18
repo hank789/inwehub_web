@@ -60,7 +60,7 @@ export const addAccessToken = (timeout) => {
 
 export default axios
 
-export function getRequest (url, data = [], showWaiting = true) {
+export function getRequest (url, data = [], showWaiting = true, options = {}, timeout = 0, showError = true) {
   if (showWaiting) {
     window.mui.waiting()
   }
@@ -133,12 +133,14 @@ export function getRequest (url, data = [], showWaiting = true) {
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
         console.error(errorMsg)
-        if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
-          errorMsg = '网络异常'
-          router.push('/exception')
-        }
-        if (errorMsg) {
-          window.mui.toast(errorMsg)
+        if (showError) {
+          if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
+            errorMsg = '网络异常'
+            router.push('/exception')
+          }
+          if (errorMsg) {
+            window.mui.toast(errorMsg)
+          }
         }
       }
     }
@@ -310,14 +312,14 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
       fail = function (errorMsg) {
         errorMsg = errorMsg.toString()
         console.error(errorMsg)
+        if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
+          errorMsg = '网络不给力'
+        }
+        if (errorMsg) {
+          window.mui.toast(errorMsg)
+        }
         if (showError) {
-          if (errorMsg === 'Error: Network Error' || errorMsg.includes('Error: timeout')) {
-            errorMsg = '网络异常'
-            router.push('/exception')
-          }
-          if (errorMsg) {
-            window.mui.toast(errorMsg)
-          }
+          router.push('/exception')
         }
       }
     }

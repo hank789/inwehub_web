@@ -771,13 +771,13 @@ function getContacts (successCallback, failCallback) {
  * @param callback
  */
 function downloadImg (imgUrl, savePath, callback) {
-  imgUrl = encodeURIComponent(imgUrl)
   window.mui.plusReady(function () {
     var downloadTask = window.plus.downloader.createDownload(imgUrl, {
       filename: savePath
     }, function (download, status) {
       if (status !== 200) {
         console.log('下载失败,status' + status)
+        localEvent.setLocalItem(imgUrl, {localName: imgUrl})
         if (savePath !== null) {
           window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
             entry.remove(function (entry) {
@@ -795,13 +795,10 @@ function downloadImg (imgUrl, savePath, callback) {
         // 将本地URL路径转换成平台绝对路径
         console.log('下载成功:' + savePath)
 
-        if (window.mui.os.android) {
-          savePath = window.plus.io.convertLocalFileSystemURL(savePath)
-        }
-
         window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
-          var newurl = entry.toRemoteURL()
+          var newurl = entry.toLocalURL()
           console.log('已下载到:' + newurl)
+          localEvent.setLocalItem(imgUrl, {localName: newurl})
           callback(newurl)
         }, function (e) {
           console.log('解析已下载的图片失败:' + JSON.stringify(e))
@@ -829,7 +826,8 @@ function getCacheImage (imgUrl, callback) {
     return imgUrl
   }
   let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
-  let localImageUrl = '_doc/cache/image/' + imageCode + '.jpg'
+  imageCode = imageCode.replace(/\//g, '_')
+  let localImageUrl = '_doc/cache/image/' + imageCode + '.png'
 
   console.log('localImageUrl:' + localImageUrl)
 
@@ -838,6 +836,7 @@ function getCacheImage (imgUrl, callback) {
     if (entry) {
       var image = entry.toLocalURL()
       console.log('图片已存在:' + image)
+      localEvent.setLocalItem(imgUrl, {localName: image})
       callback(image)
     } else {
       console.log('图片不存在, 去下载...')
@@ -847,7 +846,8 @@ function getCacheImage (imgUrl, callback) {
     console.log('图片不存在, 去下载2...')
     downloadImg(imgUrl, localImageUrl, callback)
   })
-  return window.plus.io.convertLocalFileSystemURL(localImageUrl)
+  let localName = localEvent.getLocalItem(imgUrl)
+  return localName.localName ? localName.localName : imgUrl
 }
 
 /**

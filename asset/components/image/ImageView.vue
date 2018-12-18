@@ -46,7 +46,7 @@
           height *= getDpi()
         }
         var formatSrc = getImageSuffix(src, width, height)
-        if (this.saveToLocal && window.mui.os.ios) {
+        if (this.saveToLocal) {
           // 存储到本地
           formatSrc = getCacheImage(formatSrc, (imgUrl) => {})
         }

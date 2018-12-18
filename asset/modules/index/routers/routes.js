@@ -2078,7 +2078,7 @@ const routes = [
   },
   { // 联系我们
     path: '/contactUs',
-    name: 'about',
+    name: 'contactUs',
     meta: {
       title: '联系我们',
       wechatHideHeader: true

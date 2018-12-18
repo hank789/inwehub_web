@@ -14,7 +14,7 @@ function checkUpdate () {
       console.log('当前应用版本：' + wgtVer)
       console.log('当前安装版本：' + appInstallVersion.version)
       localEvent.setLocalItem('app_version', {version: wgtVer})
-      getRequest(`system/version`, {app_uuid: window.plus.device.uuid + wgtVer}, false).then(responseData => {
+      getRequest(`system/version`, {app_uuid: window.plus.device.uuid + wgtVer}, false, {}, 0, false).then(responseData => {
         if (responseData.data.data !== false) {
           var appVersion = responseData.data.data.app_version
           if (appVersion && appInstallVersion.version < appVersion) {
@@ -78,6 +78,8 @@ function installWgt (path, appVersion) {
     var updateMsg = localEvent.getLocalItem('app_update_msg')
     window.mui.confirm(updateMsg.msg, '新版本更新', ['取消', '确定'], (e) => {
       if (e.index === 1) {
+        localEvent.setLocalItem('HomeDataList', [])
+        localEvent.setLocalItem('HomeDataBanners', {})
         window.plus.runtime.restart()
       }
     }, 'div')

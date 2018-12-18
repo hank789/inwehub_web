@@ -24,7 +24,9 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :isShowUpToRefreshDescription="true"
+        :prevSuccessCallback = "prevSuccessCallback"
         :list="list"
+        :isLoading="loading"
         :pageMode="true"
         :autoShowEmpty="false"
       >
@@ -32,14 +34,14 @@
           <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
             <div class="mui-slider-group  mui-slider-loop">
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136" :isLazyload="false"></ImageView></div>
+                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView></div>
               </div>
               <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-                <div  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false"></ImageView></div>
+                <div  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView></div>
               </div>
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
                 <div @tap.stop.prexvent="goLink(data.banners[0].url)">
-                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false"></ImageView>
+                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView>
                 </div>
               </div>
             </div>
@@ -86,7 +88,7 @@
                 </timeago>
                 </div>
               </div>
-              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="true"></ImageView></div>
+              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="true" :saveToLocal="true"></ImageView></div>
             </div>
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
 
@@ -137,7 +139,7 @@
   const Home = {
     data () {
       return {
-        loading: 1,
+        loading: true,
         list: [],
         swiperOption: {
           slidesPerView: 'auto',
@@ -163,7 +165,13 @@
         tags: []
       }
     },
-    created () {},
+    created () {
+      var dataList = localEvent.getLocalItem('HomeDataList')
+      if (dataList.length > 0 && this.list.length === 0) {
+        this.list = dataList
+        this.loading = false
+      }
+    },
     components: {
       RefreshList,
       swiper,
@@ -190,6 +198,9 @@
     methods: {
       getImageSuffix (img, width, height) {
         return getImageSuffix(img, width, height)
+      },
+      prevSuccessCallback (data) {
+        localEvent.setLocalItem('HomeDataList', data)
       },
       getAllRecommend () {
         this.selectTagValue = null
