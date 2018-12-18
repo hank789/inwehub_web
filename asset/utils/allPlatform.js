@@ -1,6 +1,6 @@
 import { getGeoPosition as getGeoPositionByPlus, getClipbordText, checkPermission, toSettingSystem, setClipboardText as setClipboardTextByPlus } from './plus'
 import { getGeoPositionByWechat, setClipboardText as setClipboardTextByWechat } from './wechat'
-import { apiRequest } from './request'
+import { postRequest } from './request'
 import localEvent from '../stores/localStorage'
 import { alertNoticeOpenNotifitionPermission } from './dialogList'
 import router from '../modules/index/routers/index'
@@ -60,7 +60,7 @@ function saveLocationInfo () {
 
     localEvent.setLocalItem('location', position)
 
-    apiRequest(`system/location`, {
+    postRequest(`system/location`, {
       device_name: deviceName,
       device_system: deviceSystem,
       device_model: deviceModel,
@@ -69,7 +69,7 @@ function saveLocationInfo () {
       current_address_longitude: position.longt,
       current_address_latitude: position.lat,
       ios_push_notify: iosPushNoticeOpen
-    }, false).then(res => {
+    }, false, {}, 0, false).then(res => {
 
     })
   })
