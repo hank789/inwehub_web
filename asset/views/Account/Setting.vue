@@ -172,7 +172,8 @@
       },
       // 清除缓存；
       clearCache () {
-        clearImageCache()
+        // 目前不能清除本地图片，会造成图片显示问题
+        // clearImageCache()
         localEvent.setLocalItem('lauchFlag', {showGuide: false})
         // 调用系统toast;
         window.mui.toast('清除成功')

@@ -777,6 +777,7 @@ function downloadImg (imgUrl, savePath, callback) {
     }, function (download, status) {
       if (status !== 200) {
         console.log('下载失败,status' + status)
+        localEvent.setLocalItem(imgUrl, {localName: imgUrl})
         if (savePath !== null) {
           window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
             entry.remove(function (entry) {
@@ -846,7 +847,8 @@ function getCacheImage (imgUrl, callback) {
     downloadImg(imgUrl, localImageUrl, callback)
   })
   let localName = localEvent.getLocalItem(imgUrl)
-  return localName.localName ? localName.localName : imgUrl
+  let useLocal = localEvent.getLocalItem('useLocalImg')
+  return (localName.localName && useLocal.local) ? localName.localName : imgUrl
 }
 
 /**

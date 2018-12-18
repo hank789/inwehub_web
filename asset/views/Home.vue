@@ -24,7 +24,9 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :isShowUpToRefreshDescription="true"
+        :prevSuccessCallback = "prevSuccessCallback"
         :list="list"
+        :isLoading="loading"
         :pageMode="true"
         :autoShowEmpty="false"
       >
@@ -86,7 +88,7 @@
                 </timeago>
                 </div>
               </div>
-              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="true"></ImageView></div>
+              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="true" :saveToLocal="true"></ImageView></div>
             </div>
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
 
@@ -137,7 +139,7 @@
   const Home = {
     data () {
       return {
-        loading: 1,
+        loading: true,
         list: [],
         swiperOption: {
           slidesPerView: 'auto',
@@ -163,7 +165,13 @@
         tags: []
       }
     },
-    created () {},
+    created () {
+      var dataList = localEvent.getLocalItem('HomeDataList')
+      if (dataList.length > 0 && this.list.length === 0) {
+        this.list = dataList
+        this.loading = false
+      }
+    },
     components: {
       RefreshList,
       swiper,
@@ -190,6 +198,9 @@
     methods: {
       getImageSuffix (img, width, height) {
         return getImageSuffix(img, width, height)
+      },
+      prevSuccessCallback (data) {
+        localEvent.setLocalItem('HomeDataList', data)
       },
       getAllRecommend () {
         this.selectTagValue = null
@@ -290,6 +301,9 @@
           this.$router.replace('/discover')
         }
       })
+      setTimeout(() => {
+        localEvent.setLocalItem('useLocalImg', {local: true})
+      }, 2000)
     }
   }
   export default Home
