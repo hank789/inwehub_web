@@ -94,6 +94,7 @@
             callback: this.downCallback
           },
           up: {
+            use: false,
             callback: this.upCallback
           }
         },
