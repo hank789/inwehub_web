@@ -4,7 +4,7 @@ import { setIncBadgeNumber, noticeHandler } from './notice'
 import { saveLocationInfo, checkClipbord } from './allPlatform'
 import localEvent from '../stores/localStorage'
 import EventObj from './event'
-import { apiRequest } from './request'
+import { postRequest } from './request'
 import { checkUpdate } from './updateVersion'
 import { clearHomeData, getHomeData } from './home'
 
@@ -636,13 +636,13 @@ function AppInit (context) {
         let currentUserInfo = localEvent.getLocalItem('UserInfo')
         if (currentUserInfo.user_id) {
           var deviceInfo = window.plus.push.getClientInfo()
-          apiRequest(`system/device`, {
+          postRequest(`system/device`, {
             client_id: deviceInfo.clientid,
             device_token: deviceInfo.token,
             appid: deviceInfo.appid,
             appkey: deviceInfo.appkey,
             device_type: window.plus.os.name === 'iOS' ? 2 : 1
-          }, false).then(res => {
+          }, false, {}, 0, false).then(res => {
 
           })
         }
