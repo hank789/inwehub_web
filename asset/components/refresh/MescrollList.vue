@@ -1,23 +1,45 @@
 <template>
-  <div class='mescrollListWrapper'>
-    <div id='downloadTip' class='download-tip'>1条新内容</div>
-    <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
-      <slot></slot>
-    </mescroll-vue>
-  </div>
+    <div class='mescrollListWrapper'>
+      <div id='downloadTip' class='download-tip'>1条新内容</div>
+      <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
+        <slot name="listHeader"></slot>
+
+        <Empty v-if="nothing===1 && autoShowEmpty"
+               :description="emptyDescription"
+        ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
+
+        <slot name="emptyCustom" v-if="nothing === 1"></slot>
+
+        <slot></slot>
+      </mescroll-vue>
+    </div>
 </template>
 
 <script>
   import MescrollVue from 'mescroll.js/mescroll.vue'
   import 'mescroll.js/mescroll.min.css'
   import { postRequest } from '../../utils/request'
+  import Empty from '../../components/Empty.vue'
 
   export default {
     name: 'MescrollList',
     components: {
-      MescrollVue
+      MescrollVue,
+      Empty
     },
     props: {
+      isLoading: {
+        type: Boolean,
+        default: true
+      },
+      emptyDescription: {  // 空描述
+        type: String,
+        default: '暂时还没有数据呀～'
+      },
+      isShowUpToRefreshDescription: {  // 是否显示上拉刷新的提示区域
+        type: Boolean,
+        default: true
+      },
       api: {
         type: String,
         default: ''
@@ -35,8 +57,24 @@
         default: true
       }
     },
+    computed: {
+      bottomId () {
+        var length = this.list.length
+        if (length) {
+          return this.list[length - 1].id
+        }
+        return 0
+      },
+      nothing () {
+        if (this.loading) {
+          return -1
+        }
+        return this.list.length ? 0 : 1
+      }
+    },
     data () {
       return {
+        loading: this.isLoading,
         list: [],
         mescroll: null,
         response: null,
@@ -54,8 +92,33 @@
       }
     },
     methods: {
-      refreshPageData () {
-
+      getResponse () {
+        return this.response
+      },
+      refreshPageData (prevOtherData) {
+        console.log('refreshList-refreshPageData fired')
+        if (this.isLoadingByRefresh) {
+          this.loading = 1
+        }
+        this.localPrevOtherData = prevOtherData
+        this.getPrevList()
+      },
+      setPageData (prevOtherData) {
+        this.loading = 1
+        this.localPrevOtherData = prevOtherData
+        this.getPrevList()
+      },
+      getPrevList () {
+        this.mescroll.resetUpScroll(true)
+      },
+      scrollToTop () {
+        this.mescroll.scrollTo(0)
+      },
+      scrollTo (x, y, time) {
+        this.mescroll.scrollTo(y, time)
+      },
+      scrollToBottom () {
+        this.mescroll.scrollTo(99999)
       },
       mescrollInit (mescroll) {
         this.mescroll = mescroll
@@ -64,6 +127,7 @@
         this.getData(0, 1, (data) => {
           mescroll.endSuccess()
           this.list = data
+          this.$emit('prevSuccessCallback', this.list)
           document.querySelector('#downloadTip').style.top = '0px'
           setTimeout(() => {
             document.querySelector('#downloadTip').style.top = '-24px'
@@ -76,7 +140,8 @@
         console.log('upcALLBACK')
         this.getData(page.num, page.size, (data) => {
           this.list = this.list.concat(data)
-          mescroll.endSuccess(data.length)
+          mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+          this.$emit('nextSuccessCallback', this.list)
         }, () => {
           mescroll.endErr()
         })
@@ -91,12 +156,14 @@
             param = Object.assign(param, this.nextOtherData)
           }
           console.log(param)
+
           postRequest(this.api, param, false).then(response => {
             var code = response.data.code
             if (code !== 1000) {
               window.mui.toast(response.data.message)
               return
             }
+            this.response = response
             var list = response.data.data.data
             this.list = this.list.concat(list)
             successCallback && successCallback(list)
@@ -186,5 +253,7 @@
     position: absolute;
     width:100%;
     overflow: hidden;
+    top: 0;
+    left:0;
   }
 </style>

@@ -41,7 +41,8 @@
         :autoShowEmpty="false"
         class="listWrapper"
       >
-        <div class="component-feed-item-guide feedListNo" v-if="list.length === 0">
+
+        <div class="component-feed-item-guide feedListNo" slot="emptyCustom">
           <div class="feed-IconImg">
             <img src="../statics/images/feed@3x.png" alt="">
           </div>
@@ -290,8 +291,8 @@
     background: #fff;
   }
   .listWrapper {
-    top: 1.173rem;
-    bottom: 50px; /* px不转换 */
+    top: 1.173rem !important;
+    bottom: 50px !important; /* px不转换 */
   }
   .component-recommendFollow {
     padding: 0.293rem 0 0rem;
