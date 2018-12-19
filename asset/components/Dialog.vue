@@ -2095,16 +2095,16 @@
     bottom: 0;
     z-index: 999;
     background: #ffffff;
-    border-top-left-radius: 18px;
-    border-top-right-radius: 18px;
+    border-top-left-radius: 0.48rem;
+    border-top-right-radius: 0.48rem;
   }
   .component-report .report-list {
   }
   .component-report .report-list .title {
     position: relative;
     color: #444444;
-    font-size: 16px;
-    padding: 15px 16px;
+    font-size: 0.426rem;
+    padding: 0.4rem 0.426rem;
     overflow: hidden;
   }
   .reportxxx .active_0 .icon, .reportxxx .active_1 .icon, .reportxxx .active_2 .icon, .reportxxx .active_3 .icon, .reportxxx .active_4 .icon, .reportxxx .active_5 .icon {
@@ -2121,18 +2121,18 @@
   }
   .component-report .report-list .title .icon {
     float: right;
-    font-size: 17px;
+    font-size: 0.453rem;
     color: #03AEF9;
   }
   .component-report .inputWrapper {
-    margin-top: 15px;
-    padding: 0 16px;
+    margin-top: 0.4rem;
+    padding: 0 0.426rem;
     position: relative;
   }
   .component-report .inputWrapper .input {
     border: none;
     background: #F3F4F6;
-    margin-bottom: 15px;
+    margin-bottom: 0.4rem;
   }
   .component-report .buttonWrapper {
     position: relative;
@@ -2140,8 +2140,8 @@
   }
   .component-report .buttonWrapper span {
     color: #444444;
-    font-size: 16px;
-    line-height: 52px;
+    font-size: 0.426rem;
+    line-height: 1.386rem;
   }
   .component-report .buttonWrapper.sure span {
     color: #03AEF9;

@@ -210,10 +210,10 @@ function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
       maxY = Math.abs(refreshContainer.maxScrollY)
     }
 
-    // console.log('top:' + y + ', maxY:' + maxY)
+    console.log('top:' + y + ', maxY:' + maxY)
 
-    if (y < prevTop) {
-      // console.log('手指上滑')
+    if (y > prevTop) {
+      console.log('手指上滑')
       prevTop = y
 
       // 手指上滑
@@ -223,8 +223,8 @@ function scrollPage (element, toUp, toUpEnd, toDown, toDownEnd) {
       } else {
         if (toUp) { toUp(container, Math.abs(y)) }
       }
-    } else if (y > prevTop) {
-      // console.log('手指下滑')
+    } else if (y < prevTop) {
+      console.log('手指下滑')
       prevTop = y
 
       // 手指下滑

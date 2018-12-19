@@ -782,11 +782,8 @@ function downloadImg (imgUrl, savePath, callback) {
           window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
             entry.remove(function (entry) {
               console.log('临时文件删除成功' + savePath)
-              // 重新下载图片
-              downloadImg(imgUrl, savePath, callback)
             }, function (e) {
               console.log('临时文件删除失败' + savePath)
-              downloadImg(imgUrl, savePath, callback)
             })
           })
         }
@@ -827,7 +824,7 @@ function getCacheImage (imgUrl, callback) {
   }
   let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
   imageCode = imageCode.replace(/\//g, '_')
-  let localImageUrl = '_doc/cache/image/' + imageCode + '.png'
+  let localImageUrl = '_downloads/cache/image/' + imageCode + '.png'
 
   console.log('localImageUrl:' + localImageUrl)
 
@@ -847,15 +844,14 @@ function getCacheImage (imgUrl, callback) {
     downloadImg(imgUrl, localImageUrl, callback)
   })
   let localName = localEvent.getLocalItem(imgUrl)
-  let useLocal = localEvent.getLocalItem('useLocalImg')
-  return (localName.localName && useLocal.local) ? localName.localName : imgUrl
+  return (localName.localName) ? localName.localName : imgUrl
 }
 
 /**
  * 清空图片缓存
  */
 function clearImageCache () {
-  let localImageUrl = '_doc/cache/image/'
+  let localImageUrl = '_downloads/cache/image/'
   window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
     entry.removeRecursively(function (entry) {
       window.plus.console.log('图片缓存删除成功:')

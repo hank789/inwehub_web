@@ -36,16 +36,16 @@
         :nextOtherData="nextOtherData"
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
-        :list="list"
         :emptyDescription="emptyDescription"
         :autoShowEmpty="false"
         class="listWrapper"
       >
+        <div class="component-feed-item-guide feedListNo" slot="emptyCustom">
+
         <!-- <div class="container-refreshTips">
           <span>更新了3条新信息</span>
         </div> -->
 
-        <div class="component-feed-item-guide feedListNo" v-if="list.length === 0">
           <div class="feed-IconImg">
             <img src="../statics/images/feed@3x.png" alt="">
           </div>
@@ -294,8 +294,8 @@
     background: #fff;
   }
   .listWrapper {
-    top: 1.173rem;
-    bottom: 50px; /* px不转换 */
+    top: 1.173rem !important;
+    bottom: 50px !important; /* px不转换 */
   }
   .component-recommendFollow {
     padding: 0.293rem 0 0rem;
@@ -472,13 +472,13 @@
   }
 
   .container-refreshTips {
-    height: 31px;
+    height: 0.826rem;
     text-align: center;
-    line-height: 31px;
+    line-height: 0.826rem;
     background: #03AEF9;
     span {
       color: #FFFFFF;
-      font-size: 14px;
+      font-size: 0.373rem;
       text-align: center;
     }
   }
