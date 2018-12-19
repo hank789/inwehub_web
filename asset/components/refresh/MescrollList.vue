@@ -157,7 +157,7 @@
           }
           console.log(param)
 
-          postRequest(this.api, param, false).then(response => {
+          postRequest(this.api, param, false, {}, 0, false).then(response => {
             var code = response.data.code
             if (code !== 1000) {
               window.mui.toast(response.data.message)
