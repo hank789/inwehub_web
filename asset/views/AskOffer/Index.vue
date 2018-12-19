@@ -92,7 +92,7 @@
     },
     methods: {
       toAsk () {
-        userAbility.jumpToAddAsk()
+        userAbility.jumpToAddAsk(this)
       },
       toSearch () {
         this.$router.pushPlus('/searchQuestion', 'list-detail-page-three')

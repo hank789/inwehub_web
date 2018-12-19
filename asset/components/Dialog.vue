@@ -575,7 +575,7 @@
         <div class="report-list reportxxx" id="reportxxx">
 
           <div :class="'active_'+index" class="title alertConfirm" v-for="(item, index) in reportTitle" :key="index">
-            <span>{{ item.text }}</span>
+            <span :id="'span_'+index">{{ item.text }}</span>
             <svg class="icon" :class="'icon_'+index" aria-hidden="true">
               <use xlink:href="#icon-gou1"></use>
             </svg>
@@ -585,7 +585,7 @@
         </div>
 
         <div class="inputWrapper">
-          <textarea class="input" v-model="describe" placeholder="输入具体举报原因"></textarea>
+          <textarea class="input inputText" id="inputText" placeholder="输入具体举报原因"></textarea>
           <div class="bot"></div>
         </div>
 
@@ -609,7 +609,6 @@
     data () {
       return {
         style: 'display:none',
-        describe: '',
         type: '',
         reportTitle: [
           {text: '广告、垃圾信息'},
@@ -2145,7 +2144,7 @@
     line-height: 1.386rem;
   }
   .component-report .buttonWrapper.sure span {
-    color: #C8C8C8;
+    color: #03AEF9;
   }
   .bot {
     position: absolute;
