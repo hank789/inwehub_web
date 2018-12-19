@@ -39,7 +39,7 @@
 
 
 
-        <div class="component-feed-item-guide" v-if="!list.length">
+        <div class="component-feed-item-guide" slot="emptyCustom">
           <div class="feed-IconImg">
             <img src="../../statics/images/feed@3x.png" alt="">
           </div>

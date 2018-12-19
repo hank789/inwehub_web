@@ -139,7 +139,9 @@
           this.$emit('prevSuccessCallback', this.list)
           document.querySelector('#downloadTip').style.top = '0rem'
           setTimeout(() => {
-            document.querySelector('#downloadTip').style.top = '-31px'
+            if (document.querySelector('#downloadTip')) {
+              document.querySelector('#downloadTip').style.top = '-31px'
+            }
           }, 2000)
         }, () => {
           mescroll.endErr()
@@ -191,7 +193,9 @@
             if (pageNum === 0) {
               this.list = list
             } else {
-              this.list = this.list.concat(list)
+              if (this.list.concat) {
+                this.list = this.list.concat(list)
+              }
             }
 
             successCallback && successCallback(list)
