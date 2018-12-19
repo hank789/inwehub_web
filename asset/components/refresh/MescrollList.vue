@@ -128,9 +128,9 @@
           mescroll.endSuccess()
           this.list = data
           this.$emit('prevSuccessCallback', this.list)
-          document.querySelector('#downloadTip').style.top = '0px'
+          document.querySelector('#downloadTip').style.top = '0rem'
           setTimeout(() => {
-            document.querySelector('#downloadTip').style.top = '-24px'
+            document.querySelector('#downloadTip').style.top = '-0.64rem'
           }, 2000)
         }, () => {
           mescroll.endErr()
@@ -192,9 +192,9 @@
   /*旋转进度条*/
   .mescroll-downwarp .downwarp-progress,
   .mescroll-upwarp .upwarp-progress {
-    width: 24px;
-    height: 24px;
-    border: none;
+    width: 0.64rem;
+    height: 0.64rem;
+    border: none !important;
     margin: auto;
     background-image: url(../../statics/images/mescroll-progress.jpg);
     background-size: contain;
@@ -234,12 +234,12 @@
   .download-tip {
     z-index: 9900;
     position: absolute;
-    top: -24px;
+    top: -0.64rem;
     left: 0;
     width: 100%;
-    height: 24px;
-    line-height: 24px;
-    font-size: 12px;
+    height: 0.64rem;
+    line-height: 0.64rem;
+    font-size: 0.32rem;
     text-align: center;
     background-color: rgba(80, 175, 85, .7);
     color: white;

@@ -36,7 +36,6 @@
         :nextOtherData="nextOtherData"
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
-        :list="list"
         :emptyDescription="emptyDescription"
         :autoShowEmpty="false"
         class="listWrapper"
@@ -473,13 +472,13 @@
   }
 
   .container-refreshTips {
-    height: 31px;
+    height: 0.826rem;
     text-align: center;
-    line-height: 31px;
+    line-height: 0.826rem;
     background: #03AEF9;
     span {
       color: #FFFFFF;
-      font-size: 14px;
+      font-size: 0.373rem;
       text-align: center;
     }
   }

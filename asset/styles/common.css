@@ -3626,11 +3626,11 @@ img.mui-zoom{
 }
 
 .container-refreshTips {
-  height: 31px;
+  height: 0.826rem;
   text-align: center;
-  line-height: 31px;
+  line-height: 0.826rem;
   background: #03AEF9;}
 .container-refreshTips span {
   color: #FFFFFF;
-  font-size: 14px;
+  font-size: 0.373rem;
   text-align: center;}
