@@ -84,7 +84,7 @@
 </template>
 <script>
 
-  import RefreshList from '../../components/refresh/List.vue'
+  import RefreshList from '../../components/refresh/MescrollList.vue'
   import { postRequest } from '../../utils/request'
   import userAbility from '../../utils/userAbility'
 

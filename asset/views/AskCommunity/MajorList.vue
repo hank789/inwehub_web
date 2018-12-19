@@ -49,7 +49,7 @@
 </template>
 
 <script>
-  import RefreshList from '../../components/refresh/List.vue'
+  import RefreshList from '../../components/refresh/MescrollList.vue'
   import { textToLinkHtml } from '../../utils/dom'
   import AskCommunityListItem from '../../components/AskCommunity/AskCommunityListItem'
 

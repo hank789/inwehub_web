@@ -24,8 +24,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :isShowUpToRefreshDescription="true"
-        :prevSuccessCallback = "prevSuccessCallback"
-        :list="list"
+        @prevSuccessCallback = "prevSuccessCallback"
         :isLoading="loading"
         :pageMode="true"
         :autoShowEmpty="false"
@@ -127,7 +126,7 @@
 <script>
 
   import { getHomeData } from '../utils/home'
-  import RefreshList from '../components/refresh/List.vue'
+  import RefreshList from '../components/refresh/MescrollList.vue'
   import { saveLocationInfo } from '../utils/allPlatform'
   import { autoTextArea, openUrlByUrl } from '../utils/plus'
   import userAbility from '../utils/userAbility'
