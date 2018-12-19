@@ -129,7 +129,7 @@
 <script type="text/javascript">
   import { postRequest } from '../../utils/request'
   import Options from '../../components/Options.vue'
-  import RefreshList from '../../components/refresh/List.vue'
+  import RefreshList from '../../components/refresh/MescrollList.vue'
   import { checkPermission, toSettingSystem } from '../../utils/plus'
 
   const TaskMain = {
