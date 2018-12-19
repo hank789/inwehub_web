@@ -138,7 +138,9 @@
           mescroll.endSuccess()
           this.list = data
           this.$emit('prevSuccessCallback', this.list)
-          document.querySelector('#downloadTip').style.top = '0rem'
+          if (document.querySelector('#downloadTip')) {
+            document.querySelector('#downloadTip').style.top = '0rem'
+          }
           setTimeout(() => {
             if (document.querySelector('#downloadTip')) {
               document.querySelector('#downloadTip').style.top = '-31px'
