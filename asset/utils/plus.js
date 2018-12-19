@@ -847,7 +847,8 @@ function getCacheImage (imgUrl, callback) {
     downloadImg(imgUrl, localImageUrl, callback)
   })
   let localName = localEvent.getLocalItem(imgUrl)
-  return localName.localName ? localName.localName : imgUrl
+  let useLocal = localEvent.getLocalItem('useLocalImg')
+  return (localName.localName && useLocal.local) ? localName.localName : imgUrl
 }
 
 /**

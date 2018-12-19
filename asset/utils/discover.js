@@ -1,6 +1,7 @@
 
 import { postRequest } from './request'
 import userAbility from './userAbility'
+import { alertReport } from './dialogList'
 
 /* 点赞 */
 function upvote (context, submissionId, increaseCallback, decreaseCallback) {
@@ -173,6 +174,25 @@ function cancelTop (submissionId, callback) {
   })
 }
 
+/* 举报 */
+function report (context, callback) {
+  alertReport(context, (rs) => {
+    console.log('确定')
+    postRequest(`system/feedback`, {
+      title: '举报内容',
+      content: rs
+    }).then(response => {
+      var code = response.data.code
+      if (code !== 1000) {
+        window.mui.toast(response.data.message)
+        return
+      }
+      window.mui.toast('操作成功')
+      callback()
+    })
+  })
+}
+
 export {
   upvote,
   downVote,
@@ -181,5 +201,6 @@ export {
   addGood,
   cancelGood,
   cancelTop,
-  setTop
+  setTop,
+  report
 }
