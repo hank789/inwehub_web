@@ -301,9 +301,6 @@
           this.$router.replace('/discover')
         }
       })
-      setTimeout(() => {
-        localEvent.setLocalItem('useLocalImg', {local: true})
-      }, 2000)
     }
   }
   export default Home

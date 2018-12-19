@@ -9,6 +9,7 @@ function checkUpdate () {
       var wgtVer = inf.version
       var appInstallVersion = localEvent.getLocalItem('app_install_version')
       if (!appInstallVersion.version) {
+        localEvent.setLocalItem('app_install_version', {version: wgtVer})
         appInstallVersion.version = wgtVer
       }
       console.log('当前应用版本：' + wgtVer)
@@ -55,6 +56,7 @@ function checkUpdate () {
 }
 
 function downWgt (wgtUrl, appVersion) {
+  console.log('下载安装包')
   // window.plus.nativeUI.showWaiting('有新版本更新')
   window.plus.downloader.createDownload(wgtUrl, {filename: '_doc/update/'}, function (d, status) {
     if (status === 200) {
@@ -80,7 +82,6 @@ function installWgt (path, appVersion) {
       if (e.index === 1) {
         // 再次过一遍引导页，避免直接到首页造成本地图片加载空白问题
         localEvent.setLocalItem('lauchFlag', {showGuide: false})
-        localEvent.setLocalItem('useLocalImg', {local: false})
         window.plus.runtime.restart()
       }
     }, 'div')
