@@ -176,8 +176,7 @@ function cancelTop (submissionId, callback) {
 
 /* 举报 */
 function report (context, callback) {
-  alertReport(context, (rs) => {
-    console.log('确定')
+  alertReport(context, (rs, describe) => {
     postRequest(`system/feedback`, {
       title: '举报内容',
       content: rs
@@ -186,9 +185,10 @@ function report (context, callback) {
       if (code !== 1000) {
         window.mui.toast(response.data.message)
         return
+      } else {
+        window.mui.toast('操作成功')
+        callback()
       }
-      window.mui.toast('操作成功')
-      callback()
     })
   })
 }

@@ -467,13 +467,17 @@ function alertReport (context, callback) {
   if (dialog) {
     dialog.getHtml('report', {}, (html) => {
       alertHtml(html, (num) => {
-        // console.log(num, '进来了')
         if (num < 5 && num >= 0) {
-          rs = num
-          document.querySelector('.true .component-report .reportxxx .active_' + num).classList.add('addActive')
+          var box = document.querySelectorAll('.true .component-report .reportxxx .title')
+          for (let i = 0; i < box.length; i++) {
+            box[i].classList.remove('addActive')
+          }
+          box[num].classList.add('addActive')
+          rs = document.getElementById('span_' + num).innerHTML
         }
         if (num === 5) {
-          callback(rs)
+          var text = document.getElementsByClassName('inputText')[1].value
+          callback(rs, text)
         }
       }, true)
     })
