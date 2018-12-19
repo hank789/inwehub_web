@@ -270,7 +270,7 @@
     },
     updated () {},
     mounted () {
-      scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
+      scrollPage('.mescrollListWrapper > .mescroll', (container, y) => {
         var height = document.querySelector('#home_banner_slider').clientHeight + 10
         if (y > height) {
           document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
