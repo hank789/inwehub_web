@@ -101,13 +101,6 @@
           </svg>
           <i class="bot"></i>
         </div>
-        <div class="optionList" @tap.stop.prevent="popup">
-          <span>测试弹窗</span>
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-          <i class="bot"></i>
-        </div>
         <div class="optionList" @tap.stop.prevent="$router.pushPlus('/contactUs')">
           <span>联系我们</span>
           <svg class="icon" aria-hidden="true">
@@ -133,7 +126,6 @@
   import userAbility from '../../utils/userAbility'
   import oauth from '../../components/oauth/oauth'
   import { bindWechat } from '../../utils/systemAbility'
-  import { alertReport } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -164,9 +156,6 @@
       oauth
     },
     methods: {
-      popup () {
-        alertReport(this)
-      },
       wechatLoginSuccess (token, openid, nickname = '', isNewUser = '') {
         console.log(token)
         console.log(openid)
