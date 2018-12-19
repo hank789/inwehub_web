@@ -55,6 +55,14 @@
       autoShowEmpty: {
         type: Boolean,
         default: true
+      },
+      pageMode: {
+        type: Boolean,
+        default: false
+      },
+      isLoadingByRefresh: {
+        type: Boolean,
+        default: true
       }
     },
     computed: {
@@ -74,6 +82,7 @@
     },
     data () {
       return {
+        currentPage: 0,
         loading: this.isLoading,
         list: [],
         mescroll: null,
@@ -155,6 +164,11 @@
             param.page = pageNum
             param = Object.assign(param, this.nextOtherData)
           }
+
+          if (!this.pageMode) {
+            param.bottom_id = this.bottomId
+          }
+
           console.log(param)
 
           postRequest(this.api, param, false).then(response => {
@@ -164,8 +178,20 @@
               return
             }
             this.response = response
-            var list = response.data.data.data
-            this.list = this.list.concat(list)
+
+            var list = response.data.data
+
+            if (this.pageMode) {
+              list = response.data.data.data
+              this.currentPage = response.data.data.current_page
+            }
+
+            if (pageNum === 0) {
+              this.list = list
+            } else {
+              this.list = this.list.concat(list)
+            }
+
             successCallback && successCallback(list)
           })
         } catch (e) {
