@@ -175,7 +175,7 @@ function cancelTop (submissionId, callback) {
 }
 
 /* 举报 */
-function report (context, callback) {
+function report (context) {
   alertReport(context, (rs, describe) => {
     if (!rs) {
       window.mui.toast('请选择举报类型')
@@ -190,7 +190,6 @@ function report (context, callback) {
           return
         } else {
           window.mui.toast('举报成功')
-          callback()
         }
       })
     }
