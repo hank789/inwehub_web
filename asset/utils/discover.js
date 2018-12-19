@@ -175,21 +175,24 @@ function cancelTop (submissionId, callback) {
 }
 
 /* 举报 */
-function report (context, callback) {
+function report (context) {
   alertReport(context, (rs, describe) => {
-    postRequest(`system/feedback`, {
-      title: '举报内容',
-      content: rs
-    }).then(response => {
-      var code = response.data.code
-      if (code !== 1000) {
-        window.mui.toast(response.data.message)
-        return
-      } else {
-        window.mui.toast('操作成功')
-        callback()
-      }
-    })
+    if (!rs) {
+      window.mui.toast('请选择举报类型')
+    } else {
+      postRequest(`system/feedback`, {
+        title: '举报内容',
+        content: rs
+      }).then(response => {
+        var code = response.data.code
+        if (code !== 1000) {
+          window.mui.toast(response.data.message)
+          return
+        } else {
+          window.mui.toast('举报成功')
+        }
+      })
+    }
   })
 }
 

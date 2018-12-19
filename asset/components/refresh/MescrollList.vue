@@ -139,7 +139,7 @@
           this.$emit('prevSuccessCallback', this.list)
           document.querySelector('#downloadTip').style.top = '0rem'
           setTimeout(() => {
-            document.querySelector('#downloadTip').style.top = '-0.64rem'
+            document.querySelector('#downloadTip').style.top = '-31px'
           }, 2000)
         }, () => {
           mescroll.endErr()
@@ -260,15 +260,15 @@
   .download-tip {
     z-index: 9900;
     position: absolute;
-    top: -0.64rem;
+    top: -31px;
     left: 0;
     width: 100%;
-    height: 0.64rem;
-    line-height: 0.64rem;
-    font-size: 0.32rem;
+    height: 31px;
+    line-height: 31px;
+    font-size: 14px;
     text-align: center;
-    background-color: rgba(80, 175, 85, .7);
-    color: white;
+    background-color: #03AEF9;
+    color: #FFFFFF;
     -webkit-transition: top 300ms;
     transition: top 300ms;
   }

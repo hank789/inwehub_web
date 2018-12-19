@@ -42,10 +42,6 @@
       >
         <div class="component-feed-item-guide feedListNo" slot="emptyCustom">
 
-        <!-- <div class="container-refreshTips">
-          <span>更新了3条新信息</span>
-        </div> -->
-
           <div class="feed-IconImg">
             <img src="../statics/images/feed@3x.png" alt="">
           </div>
@@ -471,15 +467,4 @@
     }
   }
 
-  .container-refreshTips {
-    height: 0.826rem;
-    text-align: center;
-    line-height: 0.826rem;
-    background: #03AEF9;
-    span {
-      color: #FFFFFF;
-      font-size: 0.373rem;
-      text-align: center;
-    }
-  }
 </style>
