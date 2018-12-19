@@ -21,6 +21,7 @@
             :prevOtherData="{need_report: 1}"
             :nextOtherData="{}"
             :isShowUpToRefreshDescription="true"
+            @prevSuccessCallback="prevSuccessCallback"
             :autoShowEmpty="false"
             class="listWrapper">
 
@@ -198,6 +199,9 @@
       this.checkPermission()
     },
     methods: {
+      prevSuccessCallback () {
+        this.$refs.RefreshList.mescroll.endUpScroll(true)
+      },
       checkPermission () {
         if (!window.mui.os.plus) {
           this.isOpenNotification = 0

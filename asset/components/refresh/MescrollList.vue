@@ -148,8 +148,10 @@
       upCallback (page, mescroll) {
         console.log('upcALLBACK')
         this.getData(page.num, page.size, (data) => {
-          this.list = this.list.concat(data)
-          mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+          if (this.pageMode) {
+            this.list = this.list.concat(data)
+            mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+          }
           this.$emit('nextSuccessCallback', this.list)
         }, () => {
           mescroll.endErr()
