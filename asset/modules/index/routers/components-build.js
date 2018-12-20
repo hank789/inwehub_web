@@ -74,6 +74,7 @@ import AccountArticleList from '../../../views/Account/ArticleList.vue'
 import AccountDynamicList from '../../../views/Account/DynamicList.vue'
 import Accountinfo from '../../../views/Account/Info.vue'
 import AccountResume from '../../../views/Account/Resume.vue'
+import AccountNewResume from '../../../views/Account/NewResume.vue'
 import Accountinfosjob from '../../../views/Account/Infos/Job.vue'
 import Accountinfosproject from '../../../views/Account/Infos/Project.vue'
 import Accountinfosedu from '../../../views/Account/Infos/Edu.vue'
@@ -292,6 +293,7 @@ export {
   AccountDynamicList,
   Accountinfo,
   AccountResume,
+  AccountNewResume,
   Accountinfosjob,
   Accountinfosproject,
   Accountinfosedu,
