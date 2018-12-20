@@ -7,6 +7,11 @@ var eventCallback = function () {
   if (mescrollEle) {
     console.log('底部菜单选项双击后找到 #mescroll')
     mescrollEle.__vue__.mescroll.triggerDownScroll()
+    mescrollEle.__vue__.mescroll.scrollTo(0)
+    var tagsHomeHide = document.querySelector('.container-tags-home-hide')
+    if (tagsHomeHide) {
+      tagsHomeHide.classList.remove('showTagsHome')
+    }
   }
 }
 
