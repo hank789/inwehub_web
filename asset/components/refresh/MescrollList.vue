@@ -80,6 +80,9 @@
         return this.list.length ? 0 : 1
       }
     },
+    activated: function () {
+      this.hideDownloadTip()
+    },
     data () {
       return {
         currentPage: 0,
@@ -102,6 +105,11 @@
       }
     },
     methods: {
+      hideDownloadTip () {
+        if (document.querySelector('#downloadTip')) {
+          document.querySelector('#downloadTip').style.top = '-31px'
+        }
+      },
       getResponse () {
         return this.response
       },
@@ -142,9 +150,7 @@
             document.querySelector('#downloadTip').style.top = '0rem'
           }
           setTimeout(() => {
-            if (document.querySelector('#downloadTip')) {
-              document.querySelector('#downloadTip').style.top = '-31px'
-            }
+            this.hideDownloadTip()
           }, 2000)
         }, () => {
           mescroll.endErr()
