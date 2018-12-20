@@ -1,6 +1,6 @@
 <template>
     <div class='mescrollListWrapper'>
-      <div id='downloadTip' class='download-tip'>1条新内容</div>
+      <div id='downloadTip' class='download-tip'>{{alertMsg}}</div>
       <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
         <slot name="listHeader"></slot>
 
@@ -80,11 +80,15 @@
         return this.list.length ? 0 : 1
       }
     },
+    activated: function () {
+      this.hideDownloadTip()
+    },
     data () {
       return {
         currentPage: 0,
         loading: this.isLoading,
         list: [],
+        alertMsg: '',
         mescroll: null,
         response: null,
         config: {
@@ -94,6 +98,7 @@
             callback: this.downCallback
           },
           up: {
+            auto: false,
             callback: this.upCallback
           }
         },
@@ -101,6 +106,16 @@
       }
     },
     methods: {
+      showDownloadTip () {
+        if (document.querySelector('#downloadTip')) {
+          document.querySelector('#downloadTip').style.top = '0rem'
+        }
+      },
+      hideDownloadTip () {
+        if (document.querySelector('#downloadTip')) {
+          document.querySelector('#downloadTip').style.top = '-31px'
+        }
+      },
       getResponse () {
         return this.response
       },
@@ -137,9 +152,12 @@
           mescroll.endSuccess()
           this.list = data
           this.$emit('prevSuccessCallback', this.list)
-          document.querySelector('#downloadTip').style.top = '0rem'
+          if (this.alertMsg) {
+            this.showDownloadTip()
+          }
+
           setTimeout(() => {
-            document.querySelector('#downloadTip').style.top = '-31px'
+            this.hideDownloadTip()
           }, 2000)
         }, () => {
           mescroll.endErr()
@@ -148,8 +166,10 @@
       upCallback (page, mescroll) {
         console.log('upcALLBACK')
         this.getData(page.num, page.size, (data) => {
-          this.list = this.list.concat(data)
-          mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+          if (this.pageMode) {
+            this.list = this.list.concat(data)
+            mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+          }
           this.$emit('nextSuccessCallback', this.list)
         }, () => {
           mescroll.endErr()
@@ -161,7 +181,7 @@
           if (pageNum === 0) {
             param = Object.assign(param, this.localPrevOtherData)
           } else {
-            param.page = pageNum
+            param.page = pageNum + 1
             param = Object.assign(param, this.nextOtherData)
           }
 
@@ -181,15 +201,20 @@
 
             var list = response.data.data
 
+            var alertMsg = ''
             if (this.pageMode) {
               list = response.data.data.data
               this.currentPage = response.data.data.current_page
+              alertMsg = response.data.data.alert_msg || ''
             }
 
             if (pageNum === 0) {
               this.list = list
+              this.alertMsg = alertMsg
             } else {
-              this.list = this.list.concat(list)
+              if (this.list.concat) {
+                this.list = this.list.concat(list)
+              }
             }
 
             successCallback && successCallback(list)
