@@ -181,7 +181,7 @@
           if (pageNum === 0) {
             param = Object.assign(param, this.localPrevOtherData)
           } else {
-            param.page = pageNum
+            param.page = pageNum + 1
             param = Object.assign(param, this.nextOtherData)
           }
 
