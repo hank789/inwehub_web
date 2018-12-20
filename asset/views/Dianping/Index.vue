@@ -133,7 +133,7 @@
 
           </div>
 
-          <div class="noData" v-if="!list.length">
+          <div class="noData" slot="emptyCustom">
             <div class="DataImg">
               <ImageView src="../../statics/images/empty@3x.png"></ImageView>
             </div>

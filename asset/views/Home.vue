@@ -270,20 +270,6 @@
     },
     updated () {},
     mounted () {
-      scrollPage('.mescrollListWrapper > .mescroll', (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight + 10
-        if (y > height) {
-          document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
-          // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
-        }
-      }, null, (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight + 10
-        if (y < height) {
-          document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
-        }
-        // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
-      })
-
       saveLocationInfo()
 
       // 左滑
