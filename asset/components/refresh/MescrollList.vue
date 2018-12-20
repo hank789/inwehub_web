@@ -1,6 +1,6 @@
 <template>
     <div class='mescrollListWrapper'>
-      <div id='downloadTip' class='download-tip'>1条新内容</div>
+      <div id='downloadTip' class='download-tip'>{{alertMsg}}</div>
       <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
         <slot name="listHeader"></slot>
 
@@ -88,6 +88,7 @@
         currentPage: 0,
         loading: this.isLoading,
         list: [],
+        alertMsg: '',
         mescroll: null,
         response: null,
         config: {
@@ -105,6 +106,11 @@
       }
     },
     methods: {
+      showDownloadTip () {
+        if (document.querySelector('#downloadTip')) {
+          document.querySelector('#downloadTip').style.top = '0rem'
+        }
+      },
       hideDownloadTip () {
         if (document.querySelector('#downloadTip')) {
           document.querySelector('#downloadTip').style.top = '-31px'
@@ -146,9 +152,10 @@
           mescroll.endSuccess()
           this.list = data
           this.$emit('prevSuccessCallback', this.list)
-          if (document.querySelector('#downloadTip')) {
-            document.querySelector('#downloadTip').style.top = '0rem'
+          if (this.alertMsg) {
+            this.showDownloadTip()
           }
+
           setTimeout(() => {
             this.hideDownloadTip()
           }, 2000)
@@ -194,13 +201,16 @@
 
             var list = response.data.data
 
+            var alertMsg = ''
             if (this.pageMode) {
               list = response.data.data.data
               this.currentPage = response.data.data.current_page
+              alertMsg = response.data.data.alert_msg || ''
             }
 
             if (pageNum === 0) {
               this.list = list
+              this.alertMsg = alertMsg
             } else {
               if (this.list.concat) {
                 this.list = this.list.concat(list)
