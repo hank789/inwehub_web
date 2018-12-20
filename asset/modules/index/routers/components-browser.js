@@ -84,6 +84,7 @@ const AccountArticleList = () => import(/* webpackChunkName: "AccountArticleList
 const AccountDynamicList = () => import(/* webpackChunkName: "AccountDynamicList" */ '../../../views/Account/DynamicList.vue')
 const Accountinfo = () => import(/* webpackChunkName: "Accountinfo" */ '../../../views/Account/Info.vue')
 const AccountResume = () => import(/* webpackChunkName: "AccountResume" */ '../../../views/Account/Resume.vue')
+const AccountNewResume = () => import(/* webpackChunkName: "AccountNewResume" */ '../../../views/Account/NewResume.vue')
 const Accountinfosjob = () => import(/* webpackChunkName: "Accountinfosjob" */ '../../../views/Account/Infos/Job.vue')
 const Accountinfosproject = () => import(/* webpackChunkName: "Accountinfosproject" */ '../../../views/Account/Infos/Project.vue')
 const Accountinfosedu = () => import(/* webpackChunkName: "Accountinfosedu" */ '../../../views/Account/Infos/Edu.vue')
@@ -299,6 +300,7 @@ export {
   AccountDynamicList,
   Accountinfo,
   AccountResume,
+  AccountNewResume,
   Accountinfosjob,
   Accountinfosproject,
   Accountinfosedu,
