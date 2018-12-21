@@ -133,6 +133,13 @@
 
           </div>
         </div>
+
+        <div class="noData" slot="emptyCustom">
+          <div class="DataImg">
+            <ImageView src="../../statics/images/empty@3x.png"></ImageView>
+          </div>
+          <div class="noDataText">暂时没有数据～</div>
+        </div>
       </RefreshList>
 
       <div class="container-product-list dianpingBannersHide">
