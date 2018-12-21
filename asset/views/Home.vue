@@ -4,7 +4,8 @@
       <div class="container-control-logoAndTabsAndSearch">
         <svg class="icon logoIcon" aria-hidden="true">
           <use xlink:href="#icon-logowenzi"></use>
-        </svg><span class="splitCircle"></span>
+        </svg>
+        <span class="splitCircle"></span>
 
         <div class="topSearchWrapper" @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
           <div class="searchFrame">
@@ -24,7 +25,7 @@
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
         :isShowUpToRefreshDescription="true"
-        @prevSuccessCallback = "prevSuccessCallback"
+        @prevSuccessCallback="prevSuccessCallback"
         :isLoading="loading"
         :pageMode="true"
         :autoShowEmpty="false"
@@ -33,44 +34,56 @@
           <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
             <div class="mui-slider-group  mui-slider-loop">
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)"><ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView></div>
+                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)">
+                  <ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136"
+                             :isLazyload="false" :saveToLocal="true"></ImageView>
+                </div>
               </div>
               <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-                <div  @tap.stop.prevent="goLink(notice.url)" target="_blank"><ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView></div>
+                <div @tap.stop.prevent="goLink(notice.url)" target="_blank">
+                  <ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false"
+                             :saveToLocal="true"></ImageView>
+                </div>
               </div>
               <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
                 <div @tap.stop.prexvent="goLink(data.banners[0].url)">
-                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false" :saveToLocal="true"></ImageView>
+                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false"
+                             :saveToLocal="true"></ImageView>
                 </div>
               </div>
             </div>
             <div class="home mui-slider-indicator">
-              <div :class="{'mui-indicator':true, 'mui-active':index===0}" v-for="(notice, index) in data.banners"></div>
+              <div :class="{'mui-indicator':true, 'mui-active':index===0}"
+                   v-for="(notice, index) in data.banners"></div>
             </div>
           </div>
 
           <div class="container-tags-home container-tags-home-margin">
-            <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
-            <div class="container-tabLabels">
-              <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
-                <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
-                  <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
-                </swiper-slide>
-              </swiper>
-            </div>
-            <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-gengduoxuanze"></use>
-              </svg>
+            <div id="container-tags-home-content">
+              <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">
+                全部
+              </div>
+              <div class="container-tabLabels">
+                <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
+                  <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
+                  <span class="tab" :class="{active:selectTagValue === tag.value}"
+                        @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+                  </swiper-slide>
+                </swiper>
+              </div>
+              <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-gengduoxuanze"></use>
+                </svg>
+              </div>
             </div>
           </div>
 
 
         </template>
-          <div class="component-title-iconAndText" v-if="!selectTagValue">
-            <span class="hotSpotTop">热点TOP</span>
-          </div>
-
+        <div class="component-title-iconAndText" v-if="!selectTagValue">
+          <span class="hotSpotTop">热点TOP</span>
+        </div>
 
 
         <div id="home-content" class="container-list-article">
@@ -80,14 +93,19 @@
             <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
               <div class="itemArticleLeft">
                 <div class="titleWrapper">
-                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5 && !selectTagValue">{{index+1}}.</span>{{item.data.title}}</div>
+                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5 && !selectTagValue">{{index + 1}}.</span>{{item.data.title}}
+                  </div>
                 </div>
                 <div class="explain">
-                  <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
-                </timeago>
+                  <label v-if="item.tips">{{item.tips}}</label><span
+                  v-if="item.type_description">{{item.type_description}}</span>
+                  <timeago :since="timeago(item.created_at)" :auto-update="60">
+                  </timeago>
                 </div>
               </div>
-              <div class="itemArticleRight"><ImageView :src="item.data.img" width="111" :isLazyload="true" :saveToLocal="true"></ImageView></div>
+              <div class="itemArticleRight">
+                <ImageView :src="item.data.img" width="111" :isLazyload="true" :saveToLocal="true"></ImageView>
+              </div>
             </div>
             <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
 
@@ -101,25 +119,6 @@
           <div class="line-river-big" v-if="list.length-1"></div>
         </div>
       </RefreshList>
-
-
-      <div class="container-tags-home container-tags-home-hide">
-        <div class="line-river-after line-river-after-short"></div>
-        <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">全部</div>
-        <div class="container-tabLabels">
-          <swiper ref="outTags" :options="swiperOption" class="container-upload-images">
-            <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
-              <span class="tab" :class="{active:selectTagValue === tag.value}" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
-            </swiper-slide>
-          </swiper>
-        </div>
-        <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-gengduoxuanze"></use>
-          </svg>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
@@ -133,28 +132,17 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { getImageSuffix } from '../utils/image'
   import localEvent from '../stores/localStorage'
-  import { scrollPage } from '../utils/dom'
 
   const Home = {
     data () {
       return {
         loading: true,
         list: [],
+        dataBannerSliderInit: false,
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
-          freeMode: true,
-          on: {
-            setTranslate: (translate) => {
-              if (this.outTags.translate !== translate) {
-                this.outTags.setTranslate(translate)
-              }
-
-              if (this.inTags.translate !== translate) {
-                this.inTags.setTranslate(translate)
-              }
-            }
-          }
+          freeMode: true
         },
         data: {
           banners: []
@@ -243,15 +231,15 @@
         autoTextArea()
 
         getHomeData((data) => {
-          if (this.data.length === 0) {
-            this.data = data
+          this.data = data
+          if (!this.dataBannerSliderInit) {
+            this.dataBannerSliderInit = true
+
             setTimeout(() => {
               window.mui('#home_banner_slider').slider({
                 interval: 5000
               })
             }, 100)
-          } else {
-            this.data = data
           }
         })
       },
@@ -284,19 +272,20 @@
     },
     updated () {},
     mounted () {
-      scrollPage('.mescrollListWrapper > .mescroll', (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight + 10
-        if (y > height) {
-          document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
-          // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
+      var navWarp = document.querySelector('.container-tags-home')
+      if (this.$refs.RefreshList.mescroll.os.ios) {
+        navWarp.classList.add('nav-sticky')
+      } else {
+        navWarp.style.height = navWarp.offsetHeight + 'px'
+        this.$refs.RefreshList.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          if (y >= navWarp.offsetTop) {
+            navWarp.classList.add('nav-fixed')
+          } else {
+            navWarp.classList.remove('nav-fixed')
+          }
         }
-      }, null, (container, y) => {
-        var height = document.querySelector('#home_banner_slider').clientHeight + 10
-        if (y < height) {
-          document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
-        }
-        // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
-      })
+      }
 
       saveLocationInfo()
 
@@ -320,22 +309,24 @@
 </script>
 
 <style lang="less" scoped>
-  .mui-slider{
-    width:9.145rem;
-    height:3.626rem;
+  .mui-slider {
+    width: 9.145rem;
+    height: 3.626rem;
     border-radius: 0.133rem;
-    margin-left:0.4rem;
+    margin-left: 0.4rem;
     overflow: hidden;
     padding-bottom: 0.266rem;
   }
-  .mui-content{
+
+  .mui-content {
     background: #fff;
   }
 
-  .tagLabel{
-    width:auto !important;
+  .tagLabel {
+    width: auto !important;
   }
-  .component-title-iconAndText{
+
+  .component-title-iconAndText {
     margin-top: 0.266rem;
     .hotSpotTop {
       /*width: 1.76rem;*/
@@ -347,7 +338,7 @@
       line-height: 0.426rem;
       border-top-right-radius: 2.666rem;
       border-bottom-right-radius: 2.666rem;
-      background:linear-gradient(90deg,#03AEF9 0%,#10C6FF 100%);
+      background: linear-gradient(90deg, #03AEF9 0%, #10C6FF 100%);
     }
   }
 
@@ -355,62 +346,86 @@
     line-height: 0.493rem;
   }
 
-  .refreshListWrapper{
+  .refreshListWrapper {
     top: 1.173rem;
-    bottom:50px; /* px不转换 */
+    bottom: 50px; /* px不转换 */
   }
-  .component-title-iconAndText .iconAndTextLeft .icon{
-    color:#FA4975 !important;
+
+  .component-title-iconAndText .iconAndTextLeft .icon {
+    color: #FA4975 !important;
   }
+
   .container-tags-home-margin {
     margin-top: 0.266rem;
   }
-  .container-tags-home-hide{
+
+  .container-tags-home-hide {
     position: absolute;
     background: #fff;
     z-index: 7;
     left: -26.666rem;
     display: block;
   }
-  .showTagsHome{
+
+  .showTagsHome {
     position: absolute;
     background: #fff;
     z-index: 7;
     top: 1.173rem;
-    left:0;
+    left: 0;
     display: block;
+  }
+
+  .nav-sticky {
+    z-index: 9999;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-fixed{
+    z-index: 9999;
+    position: fixed;
+    top: 1.173rem;
+    left: 0;
+    width: 100%;
   }
 </style>
 
 <style>
-  .home.mui-slider-indicator{
+  .home.mui-slider-indicator {
     text-align: right;
     padding-right: 4%;
   }
-  .home.mui-slider-indicator .mui-indicator{
+
+  .home.mui-slider-indicator .mui-indicator {
     width: 0.16rem;
     height: 0.16rem;
     margin: 0.026rem 0.133rem;
-    background: rgba(216,216,216,1);
-    -webkit-box-shadow: 0 0 0 0 rgba(1216,216,216, .7);
-    box-shadow: 0 0 0 0 rgba(216,216,216, .7);
+    background: rgba(216, 216, 216, 1);
+    -webkit-box-shadow: 0 0 0 0 rgba(1216, 216, 216, .7);
+    box-shadow: 0 0 0 0 rgba(216, 216, 216, .7);
   }
-  .home.mui-slider-indicator .mui-active.mui-indicator{
+
+  .home.mui-slider-indicator .mui-active.mui-indicator {
     width: 0.32rem;
-    height:0.16rem;
-    background:rgba(3,174,249,1);
+    height: 0.16rem;
+    background: rgba(3, 174, 249, 1);
     border-radius: 1.333rem;
-    -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(3,174,249, .7);
-    box-shadow: 0 0 0 0 rgba(3,174,249, .7);
+    -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(3, 174, 249, .7);
+    box-shadow: 0 0 0 0 rgba(3, 174, 249, .7);
   }
-  .mui-scrollbar-vertical{
+
+  .mui-scrollbar-vertical {
     display: none !important;
   }
-  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item{
-    margin:0 0.026rem;
+
+  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item {
+    margin: 0 0.026rem;
   }
-  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item img{
-    height:3.626rem !important;
+
+  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item img {
+    height: 3.626rem !important;
     object-fit: cover;
   }
 </style>

@@ -150,7 +150,7 @@
       },
       hideDownloadTip () {
         if (document.querySelector('#downloadTip')) {
-          document.querySelector('#downloadTip').style.top = '-31px'
+          document.querySelector('#downloadTip').style.top = '-0.826rem'
         }
       },
       getResponse () {
@@ -318,12 +318,12 @@
   .download-tip {
     z-index: 9900;
     position: absolute;
-    top: -31px;
+    top: -0.826rem;
     left: 0;
     width: 100%;
-    height: 31px;
-    line-height: 31px;
-    font-size: 14px;
+    height: 0.826rem;
+    line-height: 0.826rem;
+    font-size: 0.373rem;
     text-align: center;
     background-color: #03AEF9;
     color: #FFFFFF;
