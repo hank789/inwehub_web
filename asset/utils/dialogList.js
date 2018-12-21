@@ -478,6 +478,7 @@ function alertReport (context, callback) {
         if (num === 5) {
           var text = document.getElementsByClassName('inputText')[1].value
           callback(rs, text)
+          return true
         }
       }, true)
     })
