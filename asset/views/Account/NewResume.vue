@@ -541,7 +541,7 @@
   .header {
     background: #1C3F6D;
     position: relative;
-    height: 321.5px;
+    height: 8.573rem;
     border-bottom-left-radius: 0.533rem;
     border-bottom-right-radius: 0.533rem;
     img {
@@ -553,9 +553,9 @@
     }
     .title {
       position: absolute;
-      top: 10px;
+      top: 0.266rem;
       left: 50%;
-      font-size: 18px;
+      font-size: 0.48rem;
       color: #FFFFFF;
       transform: translateX(-50%);
     }
@@ -597,16 +597,16 @@
     .headPhotowrapper {
       width: 90%;
       position: absolute;
-      top: 59px;
-      left: 26px;
+      top: 1.573rem;
+      left: 0.693rem;
       z-index: 100;
       .headImages {
-        width: 92px;
-        height: 92px;
+        width: 2.453rem;
+        height: 2.453rem;
         text-align: center;
         background: #E3E3E3;
         border-radius: 50%;
-        border: 1px solid #ffffff;
+        border: 0.026rem solid #ffffff;
         img {
           width: 100%;
           height: 100%;
@@ -616,11 +616,11 @@
       }
       .personalInfo {
         .nameAndLevel {
-          margin-top: 10px;
+          margin-top: 0.266rem;
           .name {
             color: #FFFFFF;
-            font-size: 20px;
-            line-height: 28px;
+            font-size: 0.533rem;
+            line-height: 0.746rem;
           }
           .level {
             padding: 0.026rem 0.133rem;
@@ -636,9 +636,9 @@
           }
         }
         .detailInfo {
-          margin-top: 6px;
-          font-size: 12px;
-          line-height: 16.5px;
+          margin-top: 0.16rem;
+          font-size: 0.32rem;
+          line-height: 0.44rem;
           .text {
             color: #ffffff;
             opacity: 0.7;
@@ -653,57 +653,57 @@
             border-radius: 50%;
             background: #ffffff;
             opacity: 0.7;
-            margin: 0 5px 0.08rem;
+            margin: 0 0.133rem 0.08rem;
           }
         }
         .consultWrapper {
-          margin-top: 18px;
+          margin-top: 0.48rem;
           display: flex;
           justify-content: space-between;
           .leftButton {
             display: flex;
             .letter {
-              margin-right: 8.5px;
+              margin-right: 0.226rem;
             }
             .border-football {
               color: #ffffff;
-              font-size: 13px;
-              padding: 4px 16.5px;
+              font-size: 0.346rem;
+              padding: 0.106rem 0.44rem;
               &:after {
-                border-radius: 8px;
+                border-radius: 0.213rem;
                 border-color: #85A3E4;
               }
             }
           }
           .rightDetailInfo {
-            margin-right: 1px;
-            margin-top: 6.5px;
+            margin-right: 0.026rem;
+            margin-top: 0.173rem;
             span {
               color: #FFFFFF;
-              font-size: 12px;
+              font-size: 0.32rem;
             }
             .icon {
               color: #FFFFFF;
-              font-size: 5px;
+              font-size: 0.133rem;
             }
           }
         }
         .operationWrapper {
           position: absolute;
-          top: 15.5px;
+          top: 0.413rem;
           right: 0;
           display: flex;
           .iconAndText {
-            width: 44px;
+            width: 1.173rem;
             text-align: center;
             .word {
               color: #FFFFFF;
-              font-size: 11px;
+              font-size: 0.293rem;
               opacity: 0.7;
             }
             &.code {
               .icon {
-                font-size: 21px;
+                font-size: 0.56rem;
               }
             }
             &.active {
@@ -713,7 +713,7 @@
             }
             .icon {
               color: #ffffff;
-              font-size: 22px;
+              font-size: 0.586rem;
             }
           }
         }
@@ -722,17 +722,17 @@
   }
 
   .counter {
-    width: 343px;
-    /*height: 65px;*/
-    padding: 9px 0 13.5px;
+    width: 9.146rem;
+    /*height: 1.733rem;*/
+    padding: 0.24rem 0 0.36rem;
     position: relative;
-    top: 26px;
-    left: -10px;
+    top: 0.693rem;
+    left: -0.266rem;
     overflow: hidden;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 0.213rem;
     background: #ffffff;
-    box-shadow: 0px 5px 10px 0px rgba(247,248,250,1);
+    box-shadow: 0rem 0.133rem 0.266rem 0rem rgba(247,248,250,1);
     .counterList {
       width: 25%;
       float: left;
@@ -740,48 +740,48 @@
         display: block;
       }
       .font-family-medium {
-        font-size: 19px;
+        font-size: 0.506rem;
         color: #444444;
-        line-height: 26.5px;
+        line-height: 0.706rem;
       }
       .script {
-        font-size: 11px;
-        line-height: 15px;
+        font-size: 0.293rem;
+        line-height: 0.4rem;
         color: #808080;
-        margin-top: 1px;
+        margin-top: 0.026rem;
       }
     }
   }
 
   .domainWrapper {
-    padding: 0 16px;
+    padding: 0 0.426rem;
     overflow: hidden;
     position: relative;
-    margin-top: 37px;
+    margin-top: 0.986rem;
     .skilledTags {
-      height: 44px;
-      line-height: 44px;
-      margin-bottom: 5px;
+      height: 1.173rem;
+      line-height: 1.173rem;
+      margin-bottom: 0.133rem;
       .icon {
-        font-size: 15px;
-        margin-right: 2px;
+        font-size: 0.4rem;
+        margin-right: 0.053rem;
       }
       span {
         color: #444444;
-        font-size: 16px;
+        font-size: 0.426rem;
       }
     }
     .tags {
       float: left;
       margin-right: 0.213rem;
-      margin-bottom: 15px;
+      margin-bottom: 0.4rem;
       span {
         float: left;
         background: #ececee;
         border-radius: 1.333rem;
         padding: 0rem 0.266rem;
         line-height: 0.64rem;
-        font-size: 12px;
+        font-size: 0.32rem;
         color: #444444;
       }
     }
@@ -792,7 +792,7 @@
       line-height: 0.64rem;
       font-size: 0.32rem;
       vertical-align: sub;
-      margin-bottom: 15px;
+      margin-bottom: 0.4rem;
       border-radius: 1.333rem;
       border: 0.026rem solid #DCDCDC;
       .icon {
@@ -804,23 +804,23 @@
   }
 
   .specialColumn {
-    padding: 0 16px;
+    padding: 0 0.426rem;
     display: flex;
-    height: 44px;
-    line-height: 44px;
+    height: 1.173rem;
+    line-height: 1.173rem;
     justify-content: space-between;
     .titleText {
       .icon {
-        font-size: 15px;
-        margin-right: 2px;
+        font-size: 0.4rem;
+        margin-right: 0.053rem;
       }
       span {
         color: #444444;
-        font-size: 16px;
+        font-size: 0.426rem;
       }
     }
     .iconFont {
-      /*margin-top: 15.5px;*/
+      /*margin-top: 0.413rem;*/
     }
   }
 
@@ -835,8 +835,8 @@
       display: block;
     }
     .empty-IconImg {
-      width: 61.5px;
-      height: 89px;
+      width: 1.64rem;
+      height: 2.373rem;
       margin: 0 auto;
       img {
         width: 100%;
