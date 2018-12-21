@@ -163,7 +163,6 @@
             ></FeedItem>
 
           </template>
-          <div class="line-river-big"></div>
 
           <div class="noDynamic goAddpage" >
             <div class="empty-IconImg">
