@@ -83,11 +83,11 @@
     activated: function () {
       this.hideDownloadTip()
     },
-    deactivated: function () {
-    },
+    deactivated: function () {},
     data () {
       return {
-        scrollTop: 0,
+        lastScrollTop: 0,
+        lastBounce: null,
         currentPage: 0,
         loading: this.isLoading,
         list: [],
@@ -111,6 +111,31 @@
       }
     },
     methods: {
+      beforeRouteEnter () {
+        console.log('mescrollList-beforeRouteEnter')
+        if (this.mescroll) {
+          // 滚动到之前列表的位置
+          if (this.lastScrollTop) {
+            this.mescroll.setScrollTop(this.lastScrollTop)
+            setTimeout(() => { // 需延时,因为setScrollTop内部会触发onScroll,可能会渐显回到顶部按钮
+              this.mescroll.setTopBtnFadeDuration(0) // 设置回到顶部按钮显示时无渐显动画
+            }, 16)
+          }
+          // 恢复到之前设置的isBounce状态
+          if (this.lastBounce != null) this.mescroll.setBounce(this.lastBounce)
+          console.log('enter-lastScrollTop:' + this.lastScrollTop)
+        }
+      },
+      beforeRouteLeave () {
+        console.log('mescrollList-beforeRouteLeave')
+        if (this.mescroll) {
+          this.lastScrollTop = this.mescroll.getScrollTop() // 记录当前滚动条的位置
+          this.mescroll.hideTopBtn(0) // 隐藏回到顶部按钮,无渐隐动画
+          this.lastBounce = this.mescroll.optUp.isBounce // 记录当前是否禁止ios回弹
+          this.mescroll.setBounce(true) // 允许bounce
+          console.log('leave-lastScrollTop:' + this.lastScrollTop)
+        }
+      },
       showDownloadTip () {
         if (document.querySelector('#downloadTip')) {
           document.querySelector('#downloadTip').style.top = '0rem'
