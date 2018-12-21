@@ -170,8 +170,8 @@
     background-color: rgb(220, 220, 220);
   }
   .listWrapper{
-    top: 1.173rem;
-    bottom: 50px; /* px不转换 */
+    top: 1.173rem !important;
+    bottom: 50px !important; /* px不转换 */
   }
   .foundGroup {
     text-align: center;

@@ -486,7 +486,7 @@
   }
 
   .listWrapper{
-    bottom: 1.333rem;
+    bottom: 1.333rem !important;
   }
 
   .w414-3 .listWrapper{
