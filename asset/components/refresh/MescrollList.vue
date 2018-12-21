@@ -167,6 +167,7 @@
             }
             mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
           } else {
+            mescroll.endSuccess()
             this.list = data
           }
           if (page.num === 1) {
