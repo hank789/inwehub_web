@@ -100,6 +100,7 @@
           },
           up: {
             auto: true,
+            isBounce: false,
             callback: this.upCallback
           }
         },
@@ -134,6 +135,7 @@
         this.getPrevList()
       },
       getPrevList () {
+        this.list = []
         this.mescroll.resetUpScroll(true)
       },
       scrollToTop () {
@@ -149,22 +151,8 @@
         this.mescroll = mescroll
       },
       downCallback (mescroll) {
-        this.getData(0, 1, (data) => {
-          mescroll.endSuccess()
-          // this.list = data
-          this.$emit('prevSuccessCallback', this.list)
-          if (this.alertMsg) {
-            this.showDownloadTip()
-          }
-
-          mescroll.resetUpScroll(false)
-
-          setTimeout(() => {
-            this.hideDownloadTip()
-          }, 2000)
-        }, () => {
-          mescroll.endErr()
-        })
+        this.list = []
+        mescroll.resetUpScroll(true)
       },
       upCallback (page, mescroll) {
         console.log('upcALLBACK')
@@ -184,7 +172,7 @@
           if (pageNum === 0) {
             param = Object.assign(param, this.localPrevOtherData)
           } else {
-            param.page = pageNum + 1
+            param.page = pageNum
             param = Object.assign(param, this.nextOtherData)
           }
 
