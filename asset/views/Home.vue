@@ -133,6 +133,7 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { getImageSuffix } from '../utils/image'
   import localEvent from '../stores/localStorage'
+  import { scrollPage } from '../utils/dom'
 
   const Home = {
     data () {
