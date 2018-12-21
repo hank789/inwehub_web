@@ -242,13 +242,15 @@
         autoTextArea()
 
         getHomeData((data) => {
-          this.data = data
+          if (this.data.length === 0) {
+            setTimeout(() => {
+              window.mui('#home_banner_slider').slider({
+                interval: 5000
+              })
+            }, 100)
+          }
 
-          setTimeout(() => {
-            window.mui('#home_banner_slider').slider({
-              interval: 5000
-            })
-          }, 100)
+          this.data = data
         })
       },
       toDetail (item) {
@@ -280,6 +282,20 @@
     },
     updated () {},
     mounted () {
+      scrollPage('.mescrollListWrapper > .mescroll', (container, y) => {
+        var height = document.querySelector('#home_banner_slider').clientHeight + 10
+        if (y > height) {
+          document.querySelector('.container-tags-home-hide').classList.add('showTagsHome')
+          // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
+        }
+      }, null, (container, y) => {
+        var height = document.querySelector('#home_banner_slider').clientHeight + 10
+        if (y < height) {
+          document.querySelector('.container-tags-home-hide').classList.remove('showTagsHome')
+        }
+        // document.querySelector('.container-tags-home-hide').style.top = (y - 10) + 'px'
+      })
+
       saveLocationInfo()
 
       // 左滑
