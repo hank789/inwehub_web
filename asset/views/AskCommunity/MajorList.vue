@@ -176,7 +176,7 @@
       }
     }
     .listWrapper{
-      top:0.906rem
+      top:0.906rem !important;
     }
     .switch{
       position: fixed;
