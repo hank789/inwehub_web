@@ -85,6 +85,7 @@
     },
     data () {
       return {
+        scrollTop: 0,
         currentPage: 0,
         loading: this.isLoading,
         list: [],
@@ -98,7 +99,7 @@
             callback: this.downCallback
           },
           up: {
-            auto: false,
+            auto: true,
             callback: this.upCallback
           }
         },
@@ -150,11 +151,13 @@
       downCallback (mescroll) {
         this.getData(0, 1, (data) => {
           mescroll.endSuccess()
-          this.list = data
+          // this.list = data
           this.$emit('prevSuccessCallback', this.list)
           if (this.alertMsg) {
             this.showDownloadTip()
           }
+
+          mescroll.resetUpScroll(false)
 
           setTimeout(() => {
             this.hideDownloadTip()
