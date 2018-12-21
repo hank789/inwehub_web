@@ -154,17 +154,32 @@
         this.mescroll = mescroll
       },
       downCallback (mescroll) {
-        this.list = []
         mescroll.resetUpScroll(true)
       },
       upCallback (page, mescroll) {
         console.log('upcALLBACK')
         this.getData(page.num, page.size, (data) => {
           if (this.pageMode) {
-            this.list = this.list.concat(data)
+            if (page.num === 1) {
+              this.list = data
+            } else {
+              this.list = this.list.concat(data)
+            }
             mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+          } else {
+            this.list = data
           }
-          this.$emit('nextSuccessCallback', this.list)
+          if (page.num === 1) {
+            if (this.alertMsg) {
+              this.showDownloadTip()
+            }
+            setTimeout(() => {
+              this.hideDownloadTip()
+            }, 2000)
+            this.$emit('prevSuccessCallback', this.list)
+          } else {
+            this.$emit('nextSuccessCallback', this.list)
+          }
         }, () => {
           mescroll.endErr()
         })
@@ -200,11 +215,6 @@
             if (this.pageMode) {
               list = response.data.data.data
               this.currentPage = response.data.data.current_page
-              if (this.list.concat) {
-                this.list = this.list.concat(list)
-              }
-            } else {
-              this.list = list
             }
 
             successCallback && successCallback(list)
