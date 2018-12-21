@@ -138,7 +138,6 @@
       return {
         loading: true,
         list: [],
-        dataBannerSliderInit: false,
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
@@ -232,15 +231,11 @@
 
         getHomeData((data) => {
           this.data = data
-          if (!this.dataBannerSliderInit) {
-            this.dataBannerSliderInit = true
-
-            setTimeout(() => {
-              window.mui('#home_banner_slider').slider({
-                interval: 5000
-              })
-            }, 100)
-          }
+          setTimeout(() => {
+            window.mui('#home_banner_slider').slider({
+              interval: 5000
+            })
+          }, 100)
         })
       },
       toDetail (item) {
