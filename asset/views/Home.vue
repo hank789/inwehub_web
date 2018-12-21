@@ -140,6 +140,7 @@
       return {
         loading: true,
         list: [],
+        dataBannerSliderInit: false,
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
@@ -243,15 +244,15 @@
         autoTextArea()
 
         getHomeData((data) => {
-          if (this.data.length === 0) {
+          this.data = data
+          if (!this.dataBannerSliderInit) {
+            this.dataBannerSliderInit = true
             setTimeout(() => {
               window.mui('#home_banner_slider').slider({
                 interval: 5000
               })
-            }, 300)
+            }, 200)
           }
-
-          this.data = data
         })
       },
       toDetail (item) {
