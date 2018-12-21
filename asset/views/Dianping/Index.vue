@@ -355,7 +355,7 @@
       next()
     },
     mounted () {
-      scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
+      scrollPage('.mescrollListWrapper > .mescroll', (container, y) => {
         // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
         if (y > height) {
