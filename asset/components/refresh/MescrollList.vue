@@ -34,6 +34,10 @@
         type: Boolean,
         default: true
       },
+      upcontentnomore: {
+        type: String,
+        default: '<p class="upwarp-nodata">无更多数据</p>'
+      },
       emptyDescription: {  // 空描述
         type: String,
         default: '暂时还没有数据呀～'
@@ -106,6 +110,7 @@
           up: {
             auto: true,
             isBounce: false,
+            htmlNodata: this.upcontentnomore,
             callback: this.upCallback
           }
         },
