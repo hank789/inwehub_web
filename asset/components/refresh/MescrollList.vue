@@ -83,6 +83,8 @@
     activated: function () {
       this.hideDownloadTip()
     },
+    deactivated: function () {
+    },
     data () {
       return {
         scrollTop: 0,
@@ -193,20 +195,16 @@
 
             var list = response.data.data
 
-            var alertMsg = ''
+            this.alertMsg = response.data.data.alert_msg || ''
+
             if (this.pageMode) {
               list = response.data.data.data
               this.currentPage = response.data.data.current_page
-              alertMsg = response.data.data.alert_msg || ''
-            }
-
-            if (pageNum === 0) {
-              this.list = list
-              this.alertMsg = alertMsg
-            } else {
               if (this.list.concat) {
                 this.list = this.list.concat(list)
               }
+            } else {
+              this.list = list
             }
 
             successCallback && successCallback(list)
