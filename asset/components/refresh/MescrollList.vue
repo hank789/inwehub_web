@@ -251,9 +251,11 @@
             }
 
             successCallback && successCallback(list)
+          }).catch((e) => {
+            errorCallback && errorCallback()
           })
         } catch (e) {
-          console.dir(e)
+          console.log('请求出错')
           errorCallback && errorCallback()
         }
       }
