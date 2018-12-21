@@ -151,9 +151,58 @@
         </div>
 
         <div class="gray"></div>
+
+        <div class="description">
+
+          <template v-for="(item, index) in list">
+
+
+            <FeedItem
+              :item="item"
+              @showItemMore="showItemOptions"
+            ></FeedItem>
+
+          </template>
+          <div class="line-river-big"></div>
+
+          <div class="noDynamic goAddpage" >
+            <div class="empty-IconImg">
+              <img src="../../statics/images/empty@3x.png" alt="">
+            </div>
+            <span>{{ list.length ? '暂无更多，继续发布你的分享吧~' : '快来创建你的第一条分享吧~' }}</span>
+            <div class="releaseButton" @tap.stop.prevent="$router.pushPlus('/discover/add')">
+              <button>发分享</button>
+            </div>
+          </div>
+
+        </div>
+
       </RefreshList>
 
     </div>
+
+    <Share
+      :title="shareOptions.title"
+      :shareName="shareOptions.shareName"
+      :link="shareUrl"
+      :hideShareBtn="true"
+      :content="shareOptions.content"
+      :imageUrl="shareOptions.imageUrl"
+      :thumbUrl="shareOptions.thumbUrl"
+      :targetId="uuid"
+      :targetType="'resume'"
+     ref="shareComponent"
+    ></Share>
+
+    <PageMore
+      ref="share"
+      :shareOption="shareItemOption"
+      :hideShareBtn="true"
+      :iconMenu="iconMenus"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
 
   </div>
 
@@ -260,6 +309,9 @@
       })
     },
     methods: {
+      goBack () {
+        window.mui.back()
+      },
       showItemOptions (shareOption, item) {
         this.itemOptionsObj = item
         this.iconMenus = getIconMenus(item)
@@ -770,6 +822,46 @@
     }
     .iconFont {
       /*margin-top: 15.5px;*/
+    }
+  }
+
+  .noDynamic {
+    text-align: center;
+    font-size: 1.333rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.986rem;
+    span {
+      color: #C8C8C8;
+      font-size: 0.32rem;
+      display: block;
+    }
+    .empty-IconImg {
+      width: 61.5px;
+      height: 89px;
+      margin: 0 auto;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    &.goAddpage {
+      span {
+        margin-top: 0.266rem;
+        line-height: 0.426rem;
+      }
+      .releaseButton {
+        margin-top: 0.453rem;
+        button {
+          width: 2.48rem;
+          height: 0.96rem;
+          border: none;
+          color: #FFFFFF;
+          font-size: 0.373rem;
+          line-height: 0.373rem;
+          background: #03AEF9;
+          border-radius: 2.666rem;
+        }
+      }
     }
   }
 
