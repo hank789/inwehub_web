@@ -300,7 +300,7 @@
       showDropdownMenu () {
         // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        this.$refs.RefreshList.scrollTo(0, -height, 800)
+        this.$refs.RefreshList.scrollTo(0, height)
         this.$refs.dropdownMenu.show()
       },
       timeago (time) {

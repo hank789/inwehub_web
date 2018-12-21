@@ -8,11 +8,11 @@
                :description="emptyDescription"
         ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
 
-        <slot name="emptyCustom" v-if="nothing === 1"></slot>
-
         <div v-show="!loading">
           <slot></slot>
         </div>
+
+        <slot name="emptyCustom" v-if="nothing === 1"></slot>
       </mescroll-vue>
     </div>
 </template>
