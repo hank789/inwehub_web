@@ -150,6 +150,7 @@
       },
       refreshPageData () {
         this.$refs.ctextarea.refreshPageData()
+        this.comment(0, '', this.list)
       },
       newAddcomment () {
         this.commentfoucs()
@@ -371,9 +372,15 @@
       }
     },
     mounted () {
-      this.comment(0, '', this.list, true)
+      this.comment(0, '', this.list)
     },
-    watch: {}
+    watch: {
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
+    }
   }
 
 </script>

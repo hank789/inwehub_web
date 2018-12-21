@@ -569,6 +569,37 @@
       <!--</div>-->
     <!--</div>-->
 
+    <div id="report">
+      <div class="component-report">
+
+        <div class="report-list reportxxx" id="reportxxx">
+
+          <div :class="'active_'+index" class="title alertConfirm" v-for="(item, index) in reportTitle" :key="index">
+            <span :id="'span_'+index">{{ item.text }}</span>
+            <svg class="icon" :class="'icon_'+index" aria-hidden="true">
+              <use xlink:href="#icon-gou1"></use>
+            </svg>
+            <div class="bot"></div>
+          </div>
+
+        </div>
+
+        <div class="inputWrapper">
+          <textarea class="input inputText" id="inputText" placeholder="输入具体举报原因"></textarea>
+          <div class="bot"></div>
+        </div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">确定</span>
+          <div class="bot"></div>
+        </div>
+        <div class="buttonWrapper alertClose">
+          <span class="font-family-medium">取消</span>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -578,6 +609,14 @@
     data () {
       return {
         style: 'display:none',
+        type: '',
+        reportTitle: [
+          {text: '广告、垃圾信息'},
+          {text: '抄袭、未授权转载'},
+          {text: '内容不实、主观判断'},
+          {text: '恶意辱骂、人身攻击'},
+          {text: '其他'}
+        ],
         options: {
           ok: 'test',
           level: 3,
@@ -2048,6 +2087,74 @@
   .component-addWeChat .weChatImg img {
     width: 100%;
     height: 100%;
+  }
+
+  .component-report {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 999;
+    background: #ffffff;
+    border-top-left-radius: 0.48rem;
+    border-top-right-radius: 0.48rem;
+  }
+  .component-report .report-list {
+  }
+  .component-report .report-list .title {
+    position: relative;
+    color: #444444;
+    font-size: 0.426rem;
+    padding: 0.4rem 0.426rem;
+    overflow: hidden;
+  }
+  .reportxxx .active_0 .icon, .reportxxx .active_1 .icon, .reportxxx .active_2 .icon, .reportxxx .active_3 .icon, .reportxxx .active_4 .icon, .reportxxx .active_5 .icon {
+    display: none;
+  }
+  .reportxxx .addActive span {
+    color: #C8C8C8 !important;
+  }
+  .reportxxx .addActive .icon {
+    display: block !important;
+  }
+  .component-report .report-list .title span {
+    float: left;
+  }
+  .component-report .report-list .title .icon {
+    float: right;
+    font-size: 0.453rem;
+    color: #03AEF9;
+  }
+  .component-report .inputWrapper {
+    margin-top: 0.4rem;
+    padding: 0 0.426rem;
+    position: relative;
+  }
+  .component-report .inputWrapper .input {
+    border: none;
+    background: #F3F4F6;
+    margin-bottom: 0.4rem;
+  }
+  .component-report .buttonWrapper {
+    position: relative;
+    text-align: center;
+  }
+  .component-report .buttonWrapper span {
+    color: #444444;
+    font-size: 0.426rem;
+    line-height: 1.386rem;
+  }
+  .component-report .buttonWrapper.sure span {
+    color: #03AEF9;
+  }
+  .bot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0rem;
+    height: 0.026rem;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
   }
 
 

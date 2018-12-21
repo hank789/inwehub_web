@@ -6,7 +6,7 @@ function getHomeData (successCallback) {
   if (homeData.banners) {
     successCallback(homeData)
   } else {
-    postRequest(`home`, {}, false).then(response => {
+    postRequest(`home`, {}, false, {}, 0, false).then(response => {
       var code = response.data.code
       if (code !== 1000) {
         window.mui.toast(response.data.message)

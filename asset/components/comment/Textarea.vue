@@ -1,5 +1,5 @@
 <template>
-  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.stop.prevent="onTap">
+  <div class="commentWrapper" id="commentWrapper" v-show="showTextarea || alwaysshow" @tap.capture="onTap($event)">
     <div class="textareaWrapper">
         <Jeditor
           ref="myAddEditor"
@@ -79,8 +79,10 @@
       this.cacheKey = this.$route.name + '_comment_textarea'
     },
     methods: {
-      onTap () {
-        if (this.alwaysshow) {
+      onTap (event) {
+        if (this.alwaysshow && !window.mui.os.plus) {
+          event.preventDefault()
+          event.stopPropagation()
           this.$emit('onTap')
         }
       },

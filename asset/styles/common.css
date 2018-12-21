@@ -3624,3 +3624,13 @@ a {
 img.mui-zoom{
   width:auto !important;
 }
+
+.container-refreshTips {
+  height: 0.826rem;
+  text-align: center;
+  line-height: 0.826rem;
+  background: #03AEF9;}
+.container-refreshTips span {
+  color: #FFFFFF;
+  font-size: 0.373rem;
+  text-align: center;}

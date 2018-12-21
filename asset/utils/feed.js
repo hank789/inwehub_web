@@ -1,5 +1,5 @@
 
-import { deleteItem as deleteDiscoverItem, collect, setTop, addGood, cancelGood, cancelTop } from './discover'
+import { deleteItem as deleteDiscoverItem, collect, setTop, addGood, cancelGood, cancelTop, report } from './discover'
 import { getLocalUserId } from './user'
 import { getIndexByIdArray } from './array'
 
@@ -87,6 +87,10 @@ function getIconMenus (item) {
         })
       }
     }
+    iconMenus.push({
+      icon: '#icon-jubao',
+      text: '举报'
+    })
   }
   return iconMenus
 }
@@ -143,6 +147,12 @@ function iconMenusClickedItem (context, item, iconItemClicked, callback) {
         cancelTop(item.feed.submission_id, () => {
           item.feed.top = false
           callback()
+        })
+        break
+      case '举报':
+        context.$refs.share.share()
+        setTimeout(() => {
+          report(context, item.url)
         })
         break
     }

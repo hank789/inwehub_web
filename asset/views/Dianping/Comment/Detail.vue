@@ -165,7 +165,7 @@
   import localEvent from '../../../stores/localStorage'
   import ArticleDiscuss from '../../../components/discover/ArticleDiscuss.vue'
   import commentTextarea from '../../../components/comment/Textarea.vue'
-  import { upvote, downVote } from '../../../utils/discover'
+  import { upvote, downVote, report } from '../../../utils/discover'
   import { quillEditor } from '../../../components/vue-quill'
   import hljs from 'highlight.js'
   import PageMore from '../../../components/PageMore.vue'
@@ -201,7 +201,6 @@
           targetType: 'submission',
           targetId: ''
         },
-        iconMenus: [],
         loading: 1,
         isFollow: true,
         editorOptionRead: {
@@ -257,6 +256,34 @@
             number: 0
           }
         ]
+      },
+      iconMenus () {
+        var iconMenus = []
+
+        if (this.uuid === this.detail.owner.uuid) {
+          iconMenus.push({
+            icon: '#icon-shanchu1',
+            text: '删除'
+          })
+        }
+        if (this.detail.is_bookmark) {
+          iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '已收藏',
+            isBookMark: 1
+          })
+        } else {
+          iconMenus.push({
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            isBookMark: 0
+          })
+        }
+        iconMenus.push({
+          icon: '#icon-jubao',
+          text: '举报'
+        })
+        return iconMenus
       }
     },
     methods: {
@@ -298,31 +325,36 @@
           case '已收藏':
             this.collect()
             break
+          case '举报':
+            this.$refs.share.toggle()
+            report(this)
+            break
         }
       },
-      showItemOptions () {
-        this.iconMenus = []
-
-        if (this.uuid === this.detail.owner.uuid) {
-          this.iconMenus.push({
-            icon: '#icon-shanchu1',
-            text: '删除'
-          })
-        }
-        if (this.detail.is_bookmark) {
-          this.iconMenus.push({
-            icon: '#icon-shoucangdilantongyi',
-            text: '已收藏',
-            isBookMark: 1
-          })
-        } else {
-          this.iconMenus.push({
-            icon: '#icon-shoucangdilantongyi',
-            text: '收藏',
-            isBookMark: 0
-          })
-        }
-      },
+      // showItemOptions () {
+      //   this.iconMenus = []
+      //
+      //   if (this.uuid === this.detail.owner.uuid) {
+      //     this.iconMenus.push({
+      //       icon: '#icon-shanchu1',
+      //       text: '删除'
+      //     })
+      //   }
+      //   if (this.detail.is_bookmark) {
+      //     this.iconMenus.push({
+      //       icon: '#icon-shoucangdilantongyi',
+      //       text: '已收藏',
+      //       isBookMark: 1
+      //     })
+      //   } else {
+      //     this.iconMenus.push({
+      //       icon: '#icon-shoucangdilantongyi',
+      //       text: '收藏',
+      //       isBookMark: 0
+      //     })
+      //   }
+      //
+      // },
       collect () {
         var data = {
           id: this.detail.id
@@ -359,13 +391,13 @@
               }
             )
           }
-          window.mui('#shareWrapper').popover('toggle')
-          this.showItemOptions()
+          // window.mui('#shareWrapper').popover('toggle')
+          // this.showItemOptions()
         })
       },
       // 删除
       deleterow () {
-        window.mui('#shareWrapper').popover('toggle')
+        this.$refs.share.toggle()
         var btnArray = ['取消', '确定']
         window.mui.confirm('确定删除吗？', ' ', btnArray, (e) => {
           if (e.index === 1) {
@@ -524,7 +556,7 @@
         this.id = this.$route.params.id
         getCommentDetail(this, this.id, (detail) => {
           this.detail = detail
-          this.showItemOptions()
+          // this.showItemOptions()
           var shareOption = getDianpingCommentDetail(this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.rate_star)
           this.shareOption = Object.assign(this.shareOption, shareOption)
           this.loading = 0

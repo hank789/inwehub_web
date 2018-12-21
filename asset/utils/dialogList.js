@@ -461,6 +461,30 @@ function alertAddWeHub (context, callback) {
 //   }
 // }
 
+function alertReport (context, callback) {
+  var rs = ''
+  var dialog = getDialogObj(context)
+  if (dialog) {
+    dialog.getHtml('report', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num < 5 && num >= 0) {
+          var box = document.querySelectorAll('.true .component-report .reportxxx .title')
+          for (let i = 0; i < box.length; i++) {
+            box[i].classList.remove('addActive')
+          }
+          box[num].classList.add('addActive')
+          rs = document.getElementById('span_' + num).innerHTML
+        }
+        if (num === 5) {
+          var text = document.getElementsByClassName('inputText')[1].value
+          callback(rs, text)
+          return true
+        }
+      }, true)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -488,6 +512,7 @@ export {
   alertGroups,
   alertHeadAndNickname,
   alertGroupsOld,
-  alertAddWeHub
+  alertAddWeHub,
+  alertReport
   // alertshi
 }

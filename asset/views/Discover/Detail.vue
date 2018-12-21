@@ -286,7 +286,7 @@
   import hljs from 'highlight.js'
   import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
-  import { upvote, downVote, deleteItem, setTop, addGood, cancelGood, cancelTop, collect } from '../../utils/discover'
+  import { upvote, downVote, deleteItem, setTop, addGood, cancelGood, cancelTop, collect, report } from '../../utils/discover'
   import VuePullRefresh from 'vue-awesome-pull-refresh'
   import DetailMenu from '../../components/menu/Detail.vue'
   import StarView from '../../components/star-rating/starView.vue'
@@ -312,6 +312,7 @@
         title: '分享',
         isUpvote: String,
         list: [],
+        link: '分享',
         detail: {
           group: {
             is_joined: '',
@@ -427,6 +428,11 @@
             })
           }
         }
+
+        iconMenus.push({
+          icon: '#icon-jubao',
+          text: '举报'
+        })
         return iconMenus
       },
       iconOptions () {
@@ -509,7 +515,8 @@
             })
             break
           case '举报':
-            this.report()
+            this.$refs.ShareBtn.toggle()
+            report(this, this.link)
             break
           case '收藏':
             collect(this, this.detail.id, () => {
@@ -551,7 +558,7 @@
             break
         }
       },
-      report () {
+      reportOld () {
         this.$refs.ShareBtn.toggle()
         window.mui.prompt('举报', '输入举报原因', ' ', ['取消', '提交'], (e) => {
           if (e.index === 1) {
@@ -759,6 +766,7 @@
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
         this.noback = !!this.$route.query.noback
+        this.link = this.$route.path
 
         if (!this.slug) {
           this.$router.back()

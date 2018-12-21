@@ -2,34 +2,27 @@ window.scrollEventContext = null
 
 var eventCallback = function () {
   var context = window.scrollEventContext
-  if (context.querySelector('#refreshContainer') && window.mui(context.querySelector('#refreshContainer')).pullRefresh()) {
-    console.log('底部菜单选项双击后找到 #refreshContainer')
+  var mescrollEle = context.querySelector('.mescroll')
+  // document.querySelector('.mescroll').__vue__
+  if (mescrollEle) {
+    console.log('底部菜单选项双击后找到 #mescroll')
+    mescrollEle.__vue__.mescroll.triggerDownScroll()
+    mescrollEle.__vue__.mescroll.scrollTo(0)
     var tagsHomeHide = document.querySelector('.container-tags-home-hide')
     if (tagsHomeHide) {
       tagsHomeHide.classList.remove('showTagsHome')
-      window.mui('#refreshContainer').scroll().y = 0
     }
-
-    window.mui(context.querySelector('#refreshContainer')).pullRefresh().endPulldownToRefresh()
-    window.mui(context.querySelector('#refreshContainer')).pullRefresh().pulldownLoading()
-  } else if (context.querySelector('#pullrefresh') && window.mui(context.querySelector('#pullrefresh')).pullRefresh()) {
-    console.log('底部菜单选项双击后找到 #pullrefresh')
-    window.mui(context.querySelector('#pullrefresh')).pullRefresh().endPulldownToRefresh()
-    window.mui(context.querySelector('#pullrefresh')).pullRefresh().pulldownLoading()
-  } else {
-    console.log('底部菜单选项双击后未找到 #refreshContainer')
-    context.querySelector('.mui-content').scrollTop = 0
   }
 }
 
 var headerEventCallback = function () {
   var context = window.scrollHeaderEventContext
-  if (context.querySelector('#refreshContainer')) {
-    console.log('headder双击后找到 #refreshContainer')
-    window.mui(context.querySelector('#refreshContainer')).pullRefresh().refresh(true)
-    window.mui(context.querySelector('#refreshContainer')).pullRefresh().scrollTo(0, 0, 100)
+  var mescrollEle = context.querySelector('.mescroll')
+  if (mescrollEle) {
+    console.log('headder双击后找到 #mescroll')
+    mescrollEle.__vue__.mescroll.scrollTo(0)
   } else {
-    console.log('headder双击后未找到 #refreshContainer')
+    console.log('headder双击后未找到 #mescroll')
     context.querySelector('.mui-content').scrollTop = 0
   }
 }

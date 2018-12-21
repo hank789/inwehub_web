@@ -36,12 +36,12 @@
         :nextOtherData="nextOtherData"
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
-        :list="list"
         :emptyDescription="emptyDescription"
         :autoShowEmpty="false"
         class="listWrapper"
       >
-        <div class="component-feed-item-guide feedListNo" v-if="list.length === 0">
+        <div class="component-feed-item-guide feedListNo" slot="emptyCustom">
+
           <div class="feed-IconImg">
             <img src="../statics/images/feed@3x.png" alt="">
           </div>
@@ -137,7 +137,7 @@
   </div>
 </template>
 <script>
-  import RefreshList from '../components/refresh/List.vue'
+  import RefreshList from '../components/refresh/MescrollList.vue'
   import HomeSearch from '../components/search/Home'
   import FeedItem from '../components/Feed.vue'
   import PageMore from '../components/PageMore.vue'
@@ -163,6 +163,17 @@
       },
       recommendFollowList: []
     }),
+    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+      next(vm => {
+        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
+        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+      })
+    },
+    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
+      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      next()
+    },
     created () {
 
     },
@@ -237,7 +248,7 @@
         })
       },
       getRecommendFollow () {
-        postRequest(`follow/getRecommendUsers`, {}).then(response => {
+        postRequest(`follow/getRecommendUsers`, {}, false, {}, 0, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.toast(response.data.message)
@@ -290,8 +301,8 @@
     background: #fff;
   }
   .listWrapper {
-    top: 1.173rem;
-    bottom: 50px; /* px不转换 */
+    top: 1.173rem !important;
+    bottom: 50px !important; /* px不转换 */
   }
   .component-recommendFollow {
     padding: 0.293rem 0 0rem;
@@ -466,4 +477,5 @@
       }
     }
   }
+
 </style>

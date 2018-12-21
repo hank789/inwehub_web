@@ -4,7 +4,7 @@ import { setIncBadgeNumber, noticeHandler } from './notice'
 import { saveLocationInfo, checkClipbord } from './allPlatform'
 import localEvent from '../stores/localStorage'
 import EventObj from './event'
-import { apiRequest } from './request'
+import { postRequest } from './request'
 import { checkUpdate } from './updateVersion'
 import { clearHomeData, getHomeData } from './home'
 
@@ -636,13 +636,13 @@ function AppInit (context) {
         let currentUserInfo = localEvent.getLocalItem('UserInfo')
         if (currentUserInfo.user_id) {
           var deviceInfo = window.plus.push.getClientInfo()
-          apiRequest(`system/device`, {
+          postRequest(`system/device`, {
             client_id: deviceInfo.clientid,
             device_token: deviceInfo.token,
             appid: deviceInfo.appid,
             appkey: deviceInfo.appkey,
             device_type: window.plus.os.name === 'iOS' ? 2 : 1
-          }, false).then(res => {
+          }, false, {}, 0, false).then(res => {
 
           })
         }
@@ -771,22 +771,19 @@ function getContacts (successCallback, failCallback) {
  * @param callback
  */
 function downloadImg (imgUrl, savePath, callback) {
-  imgUrl = encodeURIComponent(imgUrl)
   window.mui.plusReady(function () {
     var downloadTask = window.plus.downloader.createDownload(imgUrl, {
       filename: savePath
     }, function (download, status) {
       if (status !== 200) {
         console.log('下载失败,status' + status)
+        localEvent.setLocalItem(imgUrl, {localName: imgUrl})
         if (savePath !== null) {
           window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
             entry.remove(function (entry) {
               console.log('临时文件删除成功' + savePath)
-              // 重新下载图片
-              downloadImg(imgUrl, savePath, callback)
             }, function (e) {
               console.log('临时文件删除失败' + savePath)
-              downloadImg(imgUrl, savePath, callback)
             })
           })
         }
@@ -795,13 +792,10 @@ function downloadImg (imgUrl, savePath, callback) {
         // 将本地URL路径转换成平台绝对路径
         console.log('下载成功:' + savePath)
 
-        if (window.mui.os.android) {
-          savePath = window.plus.io.convertLocalFileSystemURL(savePath)
-        }
-
         window.plus.io.resolveLocalFileSystemURL(savePath, function (entry) {
-          var newurl = entry.toRemoteURL()
+          var newurl = entry.toLocalURL()
           console.log('已下载到:' + newurl)
+          localEvent.setLocalItem(imgUrl, {localName: newurl})
           callback(newurl)
         }, function (e) {
           console.log('解析已下载的图片失败:' + JSON.stringify(e))
@@ -829,7 +823,8 @@ function getCacheImage (imgUrl, callback) {
     return imgUrl
   }
   let imageCode = window.btoa(unescape(encodeURIComponent(imgUrl)))
-  let localImageUrl = '_doc/cache/image/' + imageCode + '.jpg'
+  imageCode = imageCode.replace(/\//g, '_')
+  let localImageUrl = '_downloads/cache/image/' + imageCode + '.png'
 
   console.log('localImageUrl:' + localImageUrl)
 
@@ -838,6 +833,7 @@ function getCacheImage (imgUrl, callback) {
     if (entry) {
       var image = entry.toLocalURL()
       console.log('图片已存在:' + image)
+      localEvent.setLocalItem(imgUrl, {localName: image})
       callback(image)
     } else {
       console.log('图片不存在, 去下载...')
@@ -847,14 +843,15 @@ function getCacheImage (imgUrl, callback) {
     console.log('图片不存在, 去下载2...')
     downloadImg(imgUrl, localImageUrl, callback)
   })
-  return window.plus.io.convertLocalFileSystemURL(localImageUrl)
+  let localName = localEvent.getLocalItem(imgUrl)
+  return (localName.localName) ? localName.localName : imgUrl
 }
 
 /**
  * 清空图片缓存
  */
 function clearImageCache () {
-  let localImageUrl = '_doc/cache/image/'
+  let localImageUrl = '_downloads/cache/image/'
   window.plus.io.resolveLocalFileSystemURL(localImageUrl, function (entry) {
     entry.removeRecursively(function (entry) {
       window.plus.console.log('图片缓存删除成功:')
