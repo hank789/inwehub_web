@@ -10,7 +10,9 @@
 
         <slot name="emptyCustom" v-if="nothing === 1"></slot>
 
-        <slot></slot>
+        <div v-show="!loading">
+          <slot></slot>
+        </div>
       </mescroll-vue>
     </div>
 </template>
@@ -31,6 +33,10 @@
       isLoading: {
         type: Boolean,
         default: true
+      },
+      upcontentnomore: {
+        type: String,
+        default: '<p class="upwarp-nodata">无更多数据</p>'
       },
       emptyDescription: {  // 空描述
         type: String,
@@ -83,8 +89,11 @@
     activated: function () {
       this.hideDownloadTip()
     },
+    deactivated: function () {},
     data () {
       return {
+        lastScrollTop: 0,
+        lastBounce: null,
         currentPage: 0,
         loading: this.isLoading,
         list: [],
@@ -93,12 +102,15 @@
         response: null,
         config: {
           down: {
+            auto: false,
             offset: 60,
             htmlContent: '<p class="downwarp-progress"><p>',
             callback: this.downCallback
           },
           up: {
-            auto: false,
+            auto: true,
+            isBounce: false,
+            htmlNodata: this.upcontentnomore,
             callback: this.upCallback
           }
         },
@@ -106,6 +118,31 @@
       }
     },
     methods: {
+      beforeRouteEnter () {
+        console.log('mescrollList-beforeRouteEnter')
+        if (this.mescroll) {
+          // 滚动到之前列表的位置
+          if (this.lastScrollTop) {
+            this.mescroll.setScrollTop(this.lastScrollTop)
+            setTimeout(() => { // 需延时,因为setScrollTop内部会触发onScroll,可能会渐显回到顶部按钮
+              this.mescroll.setTopBtnFadeDuration(0) // 设置回到顶部按钮显示时无渐显动画
+            }, 16)
+          }
+          // 恢复到之前设置的isBounce状态
+          if (this.lastBounce != null) this.mescroll.setBounce(this.lastBounce)
+          console.log('enter-lastScrollTop:' + this.lastScrollTop)
+        }
+      },
+      beforeRouteLeave () {
+        console.log('mescrollList-beforeRouteLeave')
+        if (this.mescroll) {
+          this.lastScrollTop = this.mescroll.getScrollTop() // 记录当前滚动条的位置
+          this.mescroll.hideTopBtn(0) // 隐藏回到顶部按钮,无渐隐动画
+          this.lastBounce = this.mescroll.optUp.isBounce // 记录当前是否禁止ios回弹
+          this.mescroll.setBounce(true) // 允许bounce
+          console.log('leave-lastScrollTop:' + this.lastScrollTop)
+        }
+      },
       showDownloadTip () {
         if (document.querySelector('#downloadTip')) {
           document.querySelector('#downloadTip').style.top = '0rem'
@@ -122,13 +159,13 @@
       refreshPageData (prevOtherData) {
         console.log('refreshList-refreshPageData fired')
         if (this.isLoadingByRefresh) {
-          this.loading = 1
+          this.loading = true
         }
         this.localPrevOtherData = prevOtherData
         this.getPrevList()
       },
       setPageData (prevOtherData) {
-        this.loading = 1
+        this.loading = true
         this.localPrevOtherData = prevOtherData
         this.getPrevList()
       },
@@ -148,29 +185,34 @@
         this.mescroll = mescroll
       },
       downCallback (mescroll) {
-        this.getData(0, 1, (data) => {
-          mescroll.endSuccess()
-          this.list = data
-          this.$emit('prevSuccessCallback', this.list)
-          if (this.alertMsg) {
-            this.showDownloadTip()
-          }
-
-          setTimeout(() => {
-            this.hideDownloadTip()
-          }, 2000)
-        }, () => {
-          mescroll.endErr()
-        })
+        mescroll.resetUpScroll(true)
       },
       upCallback (page, mescroll) {
         console.log('upcALLBACK')
         this.getData(page.num, page.size, (data) => {
           if (this.pageMode) {
-            this.list = this.list.concat(data)
+            if (page.num === 1) {
+              this.list = data
+            } else {
+              this.list = this.list.concat(data)
+            }
             mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+          } else {
+            mescroll.endSuccess()
+            this.list = data
           }
-          this.$emit('nextSuccessCallback', this.list)
+          this.loading = false
+          if (page.num === 1) {
+            if (this.alertMsg) {
+              this.showDownloadTip()
+            }
+            setTimeout(() => {
+              this.hideDownloadTip()
+            }, 2000)
+            this.$emit('prevSuccessCallback', this.list)
+          } else {
+            this.$emit('nextSuccessCallback', this.list)
+          }
         }, () => {
           mescroll.endErr()
         })
@@ -181,7 +223,7 @@
           if (pageNum === 0) {
             param = Object.assign(param, this.localPrevOtherData)
           } else {
-            param.page = pageNum + 1
+            param.page = pageNum
             param = Object.assign(param, this.nextOtherData)
           }
 
@@ -201,20 +243,11 @@
 
             var list = response.data.data
 
-            var alertMsg = ''
+            this.alertMsg = response.data.data.alert_msg || ''
+
             if (this.pageMode) {
               list = response.data.data.data
               this.currentPage = response.data.data.current_page
-              alertMsg = response.data.data.alert_msg || ''
-            }
-
-            if (pageNum === 0) {
-              this.list = list
-              this.alertMsg = alertMsg
-            } else {
-              if (this.list.concat) {
-                this.list = this.list.concat(list)
-              }
             }
 
             successCallback && successCallback(list)

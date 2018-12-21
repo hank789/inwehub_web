@@ -17,7 +17,7 @@
       </div>
 
       <RefreshList
-        ref="refreshList"
+        ref="RefreshList"
         class="refreshListWrapper"
         v-model="list"
         :api="'recommendRead'"
@@ -131,9 +131,9 @@
   import { autoTextArea, openUrlByUrl } from '../utils/plus'
   import userAbility from '../utils/userAbility'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { scrollPage } from '../utils/dom'
   import { getImageSuffix } from '../utils/image'
   import localEvent from '../stores/localStorage'
+  import { scrollPage } from '../utils/dom'
 
   const Home = {
     data () {
@@ -194,6 +194,17 @@
         }
       }
     },
+    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+      next(vm => {
+        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
+        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+      })
+    },
+    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
+      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      next()
+    },
     methods: {
       getImageSuffix (img, width, height) {
         return getImageSuffix(img, width, height)
@@ -232,13 +243,16 @@
         autoTextArea()
 
         getHomeData((data) => {
-          this.data = data
-
-          setTimeout(() => {
-            window.mui('#home_banner_slider').slider({
-              interval: 5000
-            })
-          }, 100)
+          if (this.data.length === 0) {
+            this.data = data
+            setTimeout(() => {
+              window.mui('#home_banner_slider').slider({
+                interval: 5000
+              })
+            }, 100)
+          } else {
+            this.data = data
+          }
         })
       },
       toDetail (item) {
