@@ -244,14 +244,15 @@
 
         getHomeData((data) => {
           if (this.data.length === 0) {
+            this.data = data
             setTimeout(() => {
               window.mui('#home_banner_slider').slider({
                 interval: 5000
               })
-            }, 300)
+            }, 100)
+          } else {
+            this.data = data
           }
-
-          this.data = data
         })
       },
       toDetail (item) {
