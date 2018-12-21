@@ -248,7 +248,7 @@
               window.mui('#home_banner_slider').slider({
                 interval: 5000
               })
-            }, 100)
+            }, 300)
           }
 
           this.data = data
