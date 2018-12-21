@@ -1180,7 +1180,6 @@ const routes = [
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
-
   },
 
   { // 个人信息
