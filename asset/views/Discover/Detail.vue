@@ -312,6 +312,7 @@
         title: '分享',
         isUpvote: String,
         list: [],
+        link: '分享',
         detail: {
           group: {
             is_joined: '',
@@ -515,7 +516,7 @@
             break
           case '举报':
             this.$refs.ShareBtn.toggle()
-            report(this)
+            report(this, this.link)
             break
           case '收藏':
             collect(this, this.detail.id, () => {
@@ -765,6 +766,7 @@
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
         this.noback = !!this.$route.query.noback
+        this.link = this.$route.path
 
         if (!this.slug) {
           this.$router.back()

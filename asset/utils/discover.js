@@ -175,14 +175,18 @@ function cancelTop (submissionId, callback) {
 }
 
 /* 举报 */
-function report (context) {
+function report (context, link) {
   alertReport(context, (rs, describe) => {
+    link = process.env.H5_ROOT + link
+
     if (!rs) {
       window.mui.toast('请选择举报类型')
+    } else if (!describe) {
+      window.mui.toast('请输入举报内容')
     } else {
       postRequest(`system/feedback`, {
         title: '举报内容',
-        content: rs
+        content: '举报类型:' + rs + '/举报内容:' + describe + '/链接:' + link
       }).then(response => {
         var code = response.data.code
         if (code !== 1000) {

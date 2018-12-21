@@ -247,11 +247,12 @@
           this.data = data
           if (!this.dataBannerSliderInit) {
             this.dataBannerSliderInit = true
+
             setTimeout(() => {
               window.mui('#home_banner_slider').slider({
                 interval: 5000
               })
-            }, 200)
+            }, 100)
           }
         })
       },

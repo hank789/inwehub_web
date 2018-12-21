@@ -3,140 +3,155 @@
 
     <div class="mui-content">
 
-      <header class="mui-bar mui-bar-nav content-header-hide">
-        <Back></Back>
-        <h1 class="mui-title">个人信息</h1>
-        <div class="openNotice share">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shoucang-xiao"></use>
-          </svg>
-        </div>
-      </header>
 
-      <div class="header">
-        <img class="lazyImg" src="../../statics/images/uicon.jpg">
-        <div class="backMask"></div>
-        <div class="headerBack">
-          <div @tap.stop.prevent="goBack">
+      <RefreshList
+        ref="RefreshList"
+        v-model="list"
+        :api="'feed/list'"
+        :prevOtherData="prevOtherData"
+        :nextOtherData="nextOtherData"
+        :pageMode = "true"
+        :isShowUpToRefreshDescription="true"
+        :autoShowEmpty="false"
+        :list="list"
+        :emptyDescription="emptyDescription"
+        class="listWrapper"
+      >
+
+        <header class="mui-bar mui-bar-nav content-header-hide">
+          <Back></Back>
+          <h1 class="mui-title">个人信息</h1>
+          <div class="openNotice share">
             <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-fanhui"></use>
+              <use xlink:href="#icon-shoucang-xiao"></use>
+            </svg>
+          </div>
+        </header>
+
+        <div class="header">
+          <img :src="resume.info.avatar_url" class="avatar"/>
+          <div class="backMask"></div>
+          <div class="headerBack">
+            <div @tap.stop.prevent="goBack">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-fanhui"></use>
+              </svg>
+            </div>
+          </div>
+          <div class="title font-family-medium">个人名片</div>
+          <div class="openNotice share">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shoucang-xiao"></use>
+            </svg>
+          </div>
+
+          <div class="headPhotowrapper">
+            <div class="headImages">
+              <img :src="resume.info.avatar_url" class="avatar"/>
+            </div>
+            <div class="personalInfo">
+              <div class="nameAndLevel">
+                <span class="name font-family-medium">{{ resume.info.name }}</span>
+                <span class="level">L{{resume.info.user_level}}</span>
+              </div>
+              <div class="detailInfo">
+                <span class="text">被赞</span><span class="number font-family-medium">{{resume.info.supports}}</span> <i></i> <span class="text">{{resume.info.total_score}}</span>
+              </div>
+              <div class="consultWrapper">
+                <div class="leftButton">
+                  <div class="border-football font-family-medium" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</div>
+                  <div class="border-football font-family-medium letter" v-if="uuid !== cuuid" @tap.stop.prevent="goChat()">发私信</div>
+                  <div class="border-football font-family-medium" v-if="uuid !== cuuid" @tap.stop.prevent="goAsk('/ask/'+uuid)">提问题</div>
+                </div>
+                <div class="rightDetailInfo" v-if="uuid !== cuuid">
+                  <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</span>
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-jinru"></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="operationWrapper">
+                <div class="code iconAndText" @tap.stop.prevent="$router.pushPlus('/my/qrcode')">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-erweima"></use>
+                  </svg>
+                  <div class="word">个人码</div>
+                </div>
+                <div class="iconAndText" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shoucang"></use>
+                  </svg>
+                  <div class="word">关注</div>
+                </div>
+                <div class="active iconAndText" @tap.stop.prevent="collectProfessor"
+                     v-show="uuid !== cuuid && resume.is_followed">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-shoucanghover"></use>
+                  </svg>
+                  <div class="word">已关注</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="counter">
+              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">
+                <span class="font-family-medium">{{resume.info.followed_number}}</span>
+                <span class="script">谁关注Ta</span>
+              </div>
+
+              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/followed/'+uuid)">
+                <span class="font-family-medium">{{resume.info.follow_user_number}}</span>
+                <span class="script">Ta关注谁</span>
+              </div>
+
+              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
+                <span class="font-family-medium">{{resume.info.publishes}}</span>
+                <span class="script">发布</span>
+              </div>
+
+              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/group/my/'+uuid)">
+                <span class="font-family-medium">{{resume.info.group_number}}</span>
+                <span class="script">圈子</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="domainWrapper">
+          <div class="skilledTags">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-shanchang"></use>
+            </svg>
+            <span>擅长领域</span>
+          </div>
+          <template v-for="(industry, index) in resume.info.skill_tags">
+            <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
+          </template>
+          <div class="addTags" @tap.stop.prevent="$router.pushPlus('/my/advantage')" v-show="uuid == cuuid">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-plus--"></use>
+            </svg>{{ resume.info.skill_tags.length < 1 ? '添加专业形象，对接更多机遇':'添加' }}
+          </div>
+          <div class="bot"></div>
+        </div>
+
+        <div class="specialColumn" v-if="resume.info.skill_tags.length > 0 || uuid === cuuid" @tap.stop.prevent="$router.pushPlus('/article/list/' + resume.info.uuid )">
+          <div class="titleText">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhuanlan"></use>
+            </svg>
+            <span>文章专栏</span>
+          </div>
+          <div class="iconFont">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-jinru"></use>
             </svg>
           </div>
         </div>
-        <div class="title font-family-medium">个人名片</div>
-        <div class="openNotice share">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shoucang-xiao"></use>
-          </svg>
-        </div>
 
-        <div class="headPhotowrapper">
-          <div class="headImages">
-            <img class="lazyImg" src="../../statics/images/uicon.jpg">
-          </div>
-          <div class="personalInfo">
-            <div class="nameAndLevel">
-              <span class="name font-family-medium">蓝色小白</span>
-              <span class="level">L2</span>
-            </div>
-            <div class="detailInfo">
-              <span class="text">被赞</span><span class="number font-family-medium">23</span> <i></i> <span class="text">综合评分1.4</span>
-            </div>
-            <div class="consultWrapper">
-              <div class="leftButton">
-                <div class="border-football font-family-medium">详细资料</div>
-                <div class="border-football font-family-medium letter">发私信</div>
-                <div class="border-football font-family-medium">提问题</div>
-              </div>
-              <div class="rightDetailInfo">
-                <span class="font-family-medium">详细资料</span>
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-jinru"></use>
-                </svg>
-              </div>
-            </div>
-            <div class="operationWrapper">
-              <div class="code iconAndText">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-erweima"></use>
-                </svg>
-                <div class="word">个人码</div>
-              </div>
-              <div class="iconAndText">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-shoucang"></use>
-                </svg>
-                <div class="word">关注</div>
-              </div>
-              <div class="active iconAndText">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-shoucanghover"></use>
-                </svg>
-                <div class="word">已关注</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="counter">
-            <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">
-              <span class="font-family-medium">12</span>
-              <span class="script">谁关注Ta</span>
-            </div>
-
-            <div class="counterList" @tap.stop.prevent="$router.pushPlus('/followed/'+uuid)">
-              <span class="font-family-medium">34</span>
-              <span class="script">Ta关注谁</span>
-            </div>
-
-            <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
-              <span class="font-family-medium">45</span>
-              <span class="script">发布</span>
-            </div>
-
-            <div class="counterList" @tap.stop.prevent="$router.pushPlus('/group/my/'+uuid)">
-              <span class="font-family-medium">45</span>
-              <span class="script">圈子</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="domainWrapper">
-        <div class="skilledTags">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-shanchang"></use>
-          </svg>
-          <span>擅长领域</span>
-        </div>
-        <template>
-          <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>消费品分析</span></div>
-          <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>消费品分析</span></div>
-          <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>消费品分析</span></div>
-        </template>
-        <div class="addTags" @tap.stop.prevent="$router.pushPlus('/my/advantage')">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-plus--"></use>
-          </svg>添加
-        </div>
-        <div class="bot"></div>
-      </div>
-
-      <div class="specialColumn">
-        <div class="titleText">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zhuanlan"></use>
-          </svg>
-          <span>文章专栏</span>
-        </div>
-        <div class="iconFont">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-jinru"></use>
-          </svg>
-        </div>
-      </div>
-
-      <div class="gray"></div>
+        <div class="gray"></div>
+      </RefreshList>
 
     </div>
 
@@ -145,12 +160,292 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
+  import groups from '../../components/groups/RecommendGroups.vue'
+  import { postRequest } from '../../utils/request'
+  import Share from '../../components/Share.vue'
+  import { getLocalUserInfo } from '../../utils/user'
+  import userAbility from '../../utils/userAbility'
+  import { getResumeDetail } from '../../utils/shareTemplate'
+  import { isLogined } from '../../utils/auth'
+  import RefreshList from '../../components/refresh/List.vue'
+  import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
+  import FeedItem from '../../components/Feed.vue'
+  import PageMore from '../../components/PageMore.vue'
+  import { getIconMenus, iconMenusClickedItem } from '../../utils/feed'
+
+  export default {
+    data: () => ({
+      isLogined: isLogined(),
+      apper: 1,
+      iconMenus: [],
+      shareOptions: {
+        shareName: '',
+        title: '',
+        content: '',
+        imageUrl: '',
+        thumbUrl: ''
+      },
+      shareItemOption: {},
+      itemOptionsObj: {},
+      im_tokenMsg: '',
+      percent: 0,
+      uuid: '',
+      cuuid: '',
+      showQrCode: false,
+      isShare: false,
+      canBack: false,
+      loading: 1,
+      shareUrl: '',
+      wechatConfig: {},
+      downloadHeader: false,
+      isShowProjectMore: false,
+      isShowItemJobMore: false,
+      isShowitemEduMore: false,
+      resume: {
+        groups: [],
+        info: {
+          uuid: '',
+          name: '',
+          avatar_url: '',
+          feed_count: '',
+          article_count: '',
+          article_comment_count: '',
+          article_upvote_count: '',
+          industry_tags: [],
+          skill_tags: [],
+          province: {
+            key: '',
+            name: ''
+          },
+          city: {
+            key: '',
+            name: ''
+          }
+        },
+        edus: [],
+        projects: [],
+        jobs: []
+
+      },
+      qRCodeOptions: {
+        size: 100,
+        padding: 0,
+        level: 'H'
+      },
+      list: [],
+      search_type: 5, // 1:关注,2:全部,3:问答,4:分享,5:他的动态,6:推荐,默认2
+      emptyDescription: '暂无内容',
+      user_uuid: ''
+    }),
+    components: {
+      Share,
+      groups,
+      RefreshList,
+      FeedItem,
+      PageMore
+    },
+    watch: {
+      '$route' (to, from) {
+        this.getData()
+      }
+    },
+    created () {
+      this.getData()
+    },
+    mounted () {
+      window.addEventListener('refreshData', (e) => {
+        // 执行刷新
+        console.log('refresh-resume')
+        this.getData()
+      })
+    },
+    methods: {
+      showItemOptions (shareOption, item) {
+        this.itemOptionsObj = item
+        this.iconMenus = getIconMenus(item)
+        this.shareItemOption = shareOption
+        this.$refs.share.share()
+      },
+      shareSuccess () {
+      },
+      shareFail () {
+      },
+      iconMenusClickedItem (item) {
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
+          this.iconMenus = getIconMenus(this.itemOptionsObj)
+        })
+      },
+      toDetail (item) {
+        this.$router.pushPlus(item.url, 'list-detail-page')
+      },
+      textToLink (text) {
+        return transferTagToLink(secureHtml(textToLinkHtml(text)))
+      },
+      toTagDetail (name) {
+        userAbility.jumpToTagDetail(name)
+      },
+      goChat () {
+        userAbility.jumpToChat(this.resume.info.id, this)
+      },
+      share: function () {
+        this.$refs.shareComponent.share()
+      },
+      getData: function () {
+        this.loading = 1
+        // 获取本地的百分比
+        const currentUser = getLocalUserInfo()
+        this.percent = currentUser.account_info_complete_percent
+        if (this.$route.query.goback) {
+          this.canBack = true
+        }
+
+        if (this.$route.query.id) {
+          this.user_uuid = this.$route.query.id
+        }
+
+        this.uuid = currentUser.uuid
+        this.cuuid = currentUser.uuid
+
+        var from = this.$router.currentRoute.name
+        // var fullUrl = process.env.H5_ROOT
+
+        if (from === 'share-resume' || from === 'share-resume-old') {
+          this.isShare = true
+          this.uuid = this.$route.query.id || this.$route.params.id
+        }
+
+        if (!this.uuid) return
+
+        postRequest(`profile/resumeInfo`, {
+          uuid: this.uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.resume = response.data.data
+          this.apper = this.resume.groups.length
+          this.loading = 0
+          this.bindWechatShare()
+
+          setTimeout(() => {
+            this.$refs.RefreshList.scrollToTop()
+          }, 100)
+        })
+      },
+      collectProfessor: function () {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
+        }
+
+        postRequest(`follow/user`, {
+          id: this.uuid
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.resume.is_followed = !this.resume.is_followed
+          window.mui.toast(response.data.data.tip)
+        })
+      },
+      bindWechatShare () {
+        var shareOptions = getResumeDetail(
+          this.uuid,
+          this.resume.info.name,
+          this.resume.info.company,
+          this.resume.info.avatar_url
+        )
+        this.shareOptions.title = shareOptions.title
+        this.shareOptions.content = shareOptions.content
+        this.shareOptions.imageUrl = shareOptions.imageUrl
+        this.shareOptions.thumbUrl = shareOptions.thumbUrl
+        this.shareOptions.shareName = shareOptions.shareName
+        this.shareUrl = shareOptions.link
+      },
+      showJobMore (event) {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
+        }
+
+        this.isShowItemJobMore = true
+        event.target.style.display = 'none'
+      },
+      showProjectMore (event) {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
+        }
+
+        this.isShowProjectMore = true
+
+        event.target.style.display = 'none'
+      },
+      showEduMore (event) {
+        if (!this.cuuid) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=/home'
+          return
+        }
+
+        this.isShowitemEduMore = true
+        event.target.style.display = 'none'
+      },
+      goAsk (url) {
+        if (!this.resume.info.is_expert) {
+          window.mui.alert('Ta还不是平台专家，暂时还不能向Ta咨询！')
+          return
+        }
+
+        if (this.uuid === this.cuuid) {
+          window.mui.alert('不能向自己提问！')
+          return
+        }
+
+        if (window.mui.os.wechat) {
+          window.location.href = process.env.API_ROOT + 'wechat/oauth?redirect=' + url
+        } else {
+          this.$router.push(url)
+        }
+
+        return
+      },
+      toggleShareNav () {
+        window.mui('#shareShowWrapper').popover('toggle')
+      },
+      toggleDeatil (event) {
+        var Desc = event.target.previousSibling.previousSibling
+        if (/hide/.test(Desc.className)) {
+          Desc.className = Desc.className.replace(' hide', '')
+          Desc.className = Desc.className.replace(' mui-ellipsis-3', '')
+          Desc.className += ' show'
+
+          event.target.className = 'toggle hide'
+          event.target.innerText = '收起'
+        } else {
+          Desc.className = Desc.className.replace(' show', '')
+          Desc.className += ' hide mui-ellipsis-3'
+
+          event.target.className = 'toggle show'
+          event.target.innerText = '查看'
+        }
+      },
+      toggleQrCode () {
+        this.showQrCode = !this.showQrCode
+      }
+    },
+    computed: {
+      prevOtherData () {
+        return {search_type: this.search_type, uuid: this.uuid}
+      },
+      nextOtherData () {
+        return {search_type: this.search_type, uuid: this.uuid}
+      }
     }
   }
-}
 </script>
 
 <style scoped lang="less">
