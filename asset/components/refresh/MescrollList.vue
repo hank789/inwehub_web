@@ -10,7 +10,9 @@
 
         <slot name="emptyCustom" v-if="nothing === 1"></slot>
 
-        <slot></slot>
+        <div v-show="!loading">
+          <slot></slot>
+        </div>
       </mescroll-vue>
     </div>
 </template>
@@ -152,13 +154,13 @@
       refreshPageData (prevOtherData) {
         console.log('refreshList-refreshPageData fired')
         if (this.isLoadingByRefresh) {
-          this.loading = 1
+          this.loading = true
         }
         this.localPrevOtherData = prevOtherData
         this.getPrevList()
       },
       setPageData (prevOtherData) {
-        this.loading = 1
+        this.loading = true
         this.localPrevOtherData = prevOtherData
         this.getPrevList()
       },
@@ -194,6 +196,7 @@
             mescroll.endSuccess()
             this.list = data
           }
+          this.loading = false
           if (page.num === 1) {
             if (this.alertMsg) {
               this.showDownloadTip()
