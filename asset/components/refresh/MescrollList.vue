@@ -163,7 +163,6 @@
         this.getPrevList()
       },
       getPrevList () {
-        this.list = []
         this.mescroll.resetUpScroll(true)
       },
       scrollToTop () {
