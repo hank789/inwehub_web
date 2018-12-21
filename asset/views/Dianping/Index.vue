@@ -48,7 +48,7 @@
             <!--</div>-->
           <!--</div>-->
 
-          <swiper v-if="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
+          <swiper v-show="recommandProductList.length" :options="swiperOption" class="dianpingBanners">
 
             <swiper-slide v-for="(recommandProduct, index) in recommandProductList" :key="'recommandProductList_' + recommandProduct.id">
               <div class="container-product-comment"
@@ -141,27 +141,6 @@
           <div class="noDataText">暂时没有数据～</div>
         </div>
       </RefreshList>
-
-      <div class="container-product-list dianpingBannersHide">
-        <div class="line-river-after line-river-after-top"></div>
-        <div class="productMenu">
-          <div class="productType" @tap.stop.prevent="showDropdownMenu()">
-            <span :class="category.name ? 'active' : ''">{{ !category.name ? '产品类型' : category.name }}</span>
-            <div class="jianTou" :class="category.name ? 'active' : ''">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-xiangxiajiantou"></use>
-              </svg>
-            </div>
-          </div>
-          <div class="productSort" :class="sortOrderByName !== '排序' ? 'active' : ''" @tap.stop.prevent="selectSort()">
-            <span>{{ sortOrderByName }}</span>
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-paixu"></use>
-            </svg>
-          </div>
-        </div>
-      </div>
-
     </div>
 
     <DropDownMenu
@@ -205,7 +184,6 @@
   import { getRecommandProductList, getCategories } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
-  import { scrollPage } from '../../utils/dom.js'
   import { getImageSuffix } from '../../utils/image'
   import StarView from '../../components/star-rating/starView.vue'
   import localEvent from '../../stores/localStorage'
@@ -322,7 +300,7 @@
       showDropdownMenu () {
         // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
         var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        this.$refs.RefreshList.scrollTo(0, -height, 800)
+        this.$refs.RefreshList.scrollTo(0, height)
         this.$refs.dropdownMenu.show()
       },
       timeago (time) {
@@ -355,19 +333,21 @@
       next()
     },
     mounted () {
-      scrollPage('.mescrollListWrapper > .mescroll', (container, y) => {
-        // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
-        var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y > height) {
-          document.querySelector('.dianpingBannersHide').classList.add('showTagsHome')
+      var navWarp = document.querySelector('.productMenu')
+      if (this.$refs.RefreshList.mescroll.os.ios) {
+        navWarp.classList.add('nav-sticky')
+      } else {
+        this.$refs.RefreshList.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
+          var height = document.querySelector('.dianpingBanners').clientHeight - 20
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          if (y >= height) {
+            navWarp.classList.add('nav-fixed')
+          } else {
+            navWarp.classList.remove('nav-fixed')
+          }
         }
-      }, null, (container, y) => {
-        // var searchInputHeight = document.querySelector('#searchWrapper').clientHeight
-        var height = document.querySelector('.dianpingBanners').clientHeight - 20
-        if (y < height) {
-          document.querySelector('.dianpingBannersHide').classList.remove('showTagsHome')
-        }
-      })
+      }
+
       // 左滑
       document.getElementById('home-content').addEventListener('swipeleft', (e) => {
         var angle = Math.abs(e.detail.angle)
@@ -582,6 +562,7 @@
     border-top-left-radius: 0.426rem;
     border-top-right-radius: 0.426rem;
     .productMenu {
+      background:#fff;
       height: 0.906rem;
       display: flex;
       color: #808080;
@@ -670,6 +651,21 @@
 
   .swiper-container-horizontal > .swiper-pagination-bullets {
     bottom: 0.8rem;
+  }
+
+  .nav-sticky {
+    z-index: 9999;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-fixed{
+    z-index: 9999;
+    position: fixed;
+    top: 1.6rem;
+    left: 0;
+    width: 100%;
   }
 </style>
 
