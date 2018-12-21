@@ -94,6 +94,7 @@
         response: null,
         config: {
           down: {
+            auto: false,
             offset: 60,
             htmlContent: '<p class="downwarp-progress"><p>',
             callback: this.downCallback
