@@ -151,9 +151,7 @@ function iconMenusClickedItem (context, item, iconItemClicked, callback) {
         break
       case '举报':
         context.$refs.share.share()
-        setTimeout(() => {
-          report(context, item.url)
-        })
+        report(context, item.url)
         break
     }
   }
