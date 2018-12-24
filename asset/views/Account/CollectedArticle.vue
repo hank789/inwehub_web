@@ -170,7 +170,7 @@
  }
 
   .listWrapper{
-    top: 1.2rem;
+    top: 1.2rem !important;
   }
   /*container-image margin-10-0-0*/
 </style>

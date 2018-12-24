@@ -238,12 +238,12 @@
     }
   }
   .listWrapper{
-    top:4.72rem;
+    top:4.72rem !important;
   }
 
   /*listWrapper*/
   .listWrapper {
-    top: 1.2rem;
+    top:4.72rem !important;
   }
   .superinduce{
     width:3.04rem;

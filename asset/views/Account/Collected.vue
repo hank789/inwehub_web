@@ -228,6 +228,6 @@
   }
 
   .listWrapper{
-    top: 1.2rem;
+    top: 1.2rem !important;
   }
 </style>

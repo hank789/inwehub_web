@@ -175,7 +175,7 @@
 
   /*listWrapper*/
   .listWrapper {
-    top: 1.2rem;
+    top: 1.2rem !important;
   }
   .superinduce{
     width:3.04rem;

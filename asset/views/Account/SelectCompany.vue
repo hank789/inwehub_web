@@ -391,7 +391,7 @@
     font-size: 0.373rem;
   }
   .listWrapper{
-    top:1.44rem;
+    top:1.44rem !important;
   }
 
 </style>

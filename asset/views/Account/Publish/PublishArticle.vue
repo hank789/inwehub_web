@@ -132,7 +132,7 @@
     background: #FFFFFF;
   }
   .listWrapper {
-    top: 1.04rem;
+    top: 1.04rem !important;
   }
   .bot {
     position: absolute;
@@ -211,7 +211,7 @@
  }
 
   .listWrapper{
-    top: 1.2rem;
+    top: 1.04rem !important;
   }
 
   .container-searchMenu {

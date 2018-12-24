@@ -189,7 +189,7 @@
    background: #c8c8c8;
  }
   .listWrapper{
-    top: 1.2rem;
+    top: 1.2rem !important;
   }
   .container-searchMenu {
     margin-top: 0;
