@@ -4,7 +4,6 @@ const CodeSign = () => import(/* webpackChunkName: "CodeSign" */ '../../../views
 const FindPassword = () => import(/* webpackChunkName: "FindPassword" */ '../../../views/FindPassword.vue')
 const Feed = () => import(/* webpackChunkName: "Feed" */ '../../../views/Feed.vue')
 const Home = () => import(/* webpackChunkName: "Home" */ '../../../views/Home.vue')
-const Domain = () => import(/* webpackChunkName: "Domain" */ '../../../views/Domain.vue')
 const SearchSearchQuestion = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchQuestion.vue')
 const SearchSearchSubmission = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchSubmission.vue')
 const SearchSearchTag = () => import(/* webpackChunkName: "ActivityActiveList" */ '../../../views/Search/SearchTag.vue')
@@ -419,7 +418,6 @@ export {
   AskOfferList,
   AskOfferDetail,
   ShareReview,
-  Domain,
   ComponentsComment,
   AccountMyCode,
   AccountChoiceRole,

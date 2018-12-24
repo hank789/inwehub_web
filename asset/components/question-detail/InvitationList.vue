@@ -29,7 +29,6 @@
 </template>
 
 <script>
-  import RefreshList from '../../components/refresh/List.vue'
   import { postRequest } from '../../utils/request'
 
   const IivitationList = {
@@ -47,9 +46,6 @@
         type: Object,
         default: {}
       }
-    },
-    components: {
-      RefreshList
     },
     methods: {
       toInvitation () {
