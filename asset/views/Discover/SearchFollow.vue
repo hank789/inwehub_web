@@ -361,15 +361,17 @@
     left: 0rem;
   }
   .listWrapper{
-    top:1.173rem;
+    top:1.173rem !important;
     bottom: 1.333rem;
   }
   .w414-3 .listWrapper{
-    bottom:50px !important; /* px不转换 */
+    top:1.173rem !important;
+    bottom: 1.333rem;
   }
 
   .activityWrapper.unIsGetted ~ .listWrapper {
-    top: 1.12rem;
+    top:1.173rem !important;
+    bottom: 1.333rem;
   }
   .followGroups{
     width: 100%;

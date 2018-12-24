@@ -352,7 +352,7 @@
   }
 
   .refreshListWrapper {
-    top: 1.173rem;
+    top: 1.173rem !important;
     bottom: 50px; /* px不转换 */
   }
 

@@ -203,7 +203,7 @@
     background: #ffffff;
   }
   .listWrapper {
-    top: 0.986rem;
+    top: 0.986rem !important;
   }
   .listSelect {
     height: 0.906rem;

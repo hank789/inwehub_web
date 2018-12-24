@@ -123,7 +123,7 @@
     background: #FFFFFF;
   }
   .listWrapper {
-    top: 1.04rem;
+    top: 1.04rem !important;
   }
 
   .bot {

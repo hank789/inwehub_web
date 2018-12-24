@@ -397,7 +397,7 @@
     left: 0rem;
   }
   .listWrapper{
-    top:1.173rem;
+    top:1.173rem !important;
     bottom: 1.333rem;
   }
   .followGroups{

@@ -411,12 +411,12 @@
   }
 
   .listWrapper{
-    top:4.584rem;
+    top:4.584rem !important;
   }
 
-  /*.hasFollowers .listWrapper{*/
-    /*top: 6.29rem;*/
-  /*}*/
+  /*.hasFollowers .listWrapper{
+    top:4.584rem !important;
+  }*/
   .mui-table-view-cell:after{
     display: none;
   }
