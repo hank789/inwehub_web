@@ -1132,7 +1132,7 @@ const routes = [
 
   },
   { // 新个人名片
-    path: '/my/newResume',
+    path: '/my/oldResume',
     name: 'my-newResume',
     component: componets.AccountNewResume,
     meta: {
@@ -1142,10 +1142,36 @@ const routes = [
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
-
   },
-  { // 共享个人名片
+
+  { // 新的共享个人名片
     path: '/share/resume',
+    name: 'share-newResume-old',
+    component: componets.AccountNewResume,
+    meta: {
+      title: '分享名片',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+
+  { // 新的共享个人名片
+    path: '/share/resume/:id',
+    name: 'share-newResume',
+    component: componets.AccountNewResume,
+    meta: {
+      title: '分享名片',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+
+  { // 共享个人名片
+    path: '/share/oldResume',
     name: 'share-resume-old',
     component: componets.AccountResume,
     meta: {
@@ -1157,7 +1183,7 @@ const routes = [
     }
   },
   { // 共享个人名片
-    path: '/share/resume/:id',
+    path: '/share/oldResume/:id',
     name: 'share-resume',
     component: componets.AccountResume,
     meta: {

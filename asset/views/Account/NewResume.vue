@@ -22,7 +22,7 @@
           <Back></Back>
           <h1 class="mui-title">个人信息</h1>
           <div class="openNotice share">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon" aria-hidden="true"  @tap.stop.prevent="share">
               <use xlink:href="#icon-shoucang-xiao"></use>
             </svg>
           </div>
@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="title font-family-medium">个人名片</div>
-          <div class="openNotice share">
+          <div class="openNotice share" @tap.stop.prevent="share">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-shoucang-xiao"></use>
             </svg>
@@ -59,7 +59,7 @@
               </div>
               <div class="consultWrapper">
                 <div class="leftButton">
-                  <div class="border-football font-family-medium" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</div>
+                  <div class="border-football font-family-medium" v-show="uuid == cuuid" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</div>
                   <div class="border-football font-family-medium letter" v-if="uuid !== cuuid" @tap.stop.prevent="goChat()">发私信</div>
                   <div class="border-football font-family-medium" v-if="uuid !== cuuid" @tap.stop.prevent="goAsk('/ask/'+uuid)">提问题</div>
                 </div>
@@ -71,7 +71,7 @@
                 </div>
               </div>
               <div class="operationWrapper">
-                <div class="code iconAndText" @tap.stop.prevent="$router.pushPlus('/my/qrcode')">
+                <div class="code iconAndText" @tap.stop.prevent="$router.pushPlus('/my/qrcode?id=' + resume.info.uuid)">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-erweima"></use>
                   </svg>
@@ -118,7 +118,7 @@
 
         </div>
 
-        <div class="domainWrapper">
+        <div class="domainWrapper" v-if="resume.info.skill_tags.length > 0 || uuid === cuuid">
           <div class="skilledTags">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-shanchang"></use>
@@ -128,7 +128,7 @@
           <template v-for="(industry, index) in resume.info.skill_tags">
             <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
           </template>
-          <div class="addTags" @tap.stop.prevent="$router.pushPlus('/my/advantage')" v-show="uuid == cuuid">
+          <div class="addTags" v-show="uuid == cuuid" @tap.stop.prevent="$router.pushPlus('/my/advantage')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-plus--"></use>
             </svg>{{ resume.info.skill_tags.length < 1 ? '添加专业形象，对接更多机遇':'添加' }}
@@ -163,8 +163,16 @@
             ></FeedItem>
 
           </template>
+          <div v-if="uuid !== cuuid" class="container-noMore">暂无更多</div>
 
-          <div class="noDynamic goAddpage" >
+          <div class="noDynamic goAddpage" v-show="uuid !== cuuid && !list.length">
+            <div class="empty-IconImg">
+              <img src="../../statics/images/empty@3x.png" alt="">
+            </div>
+            <span>Ta还没有发布分享哦~</span>
+          </div>
+
+          <div class="noDynamic goAddpage" v-show="uuid === cuuid">
             <div class="empty-IconImg">
               <img src="../../statics/images/empty@3x.png" alt="">
             </div>
@@ -371,7 +379,7 @@
         var from = this.$router.currentRoute.name
         // var fullUrl = process.env.H5_ROOT
 
-        if (from === 'share-resume' || from === 'share-resume-old') {
+        if (from === 'share-newResume' || from === 'share-newResume-old') {
           this.isShare = true
           this.uuid = this.$route.query.id || this.$route.params.id
         }
@@ -523,6 +531,9 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
     /*border: 0.026rem solid #dcdcdc;*/
+  }
+  .marginTop {
+    margin-top: 50px;
   }
 
   .content-header-hide {
