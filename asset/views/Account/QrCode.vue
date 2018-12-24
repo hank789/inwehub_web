@@ -69,7 +69,8 @@
       shareUrl: '',
       loading: 1,
       generateImgIng: 0,
-      resume: {}
+      resume: {},
+      uuid: ''
     }),
     watch: {
       '$route': 'refreshPageData'
@@ -106,12 +107,16 @@
         this.getData()
       },
       getData () {
-        var uuid = getLocalUuid()
+        this.uuid = getLocalUuid()
 
-        if (!uuid) return
+        if (this.$route.query.id) {
+          this.uuid = this.$route.query.id
+        }
+
+        if (!this.uuid) return
 
         postRequest(`profile/resumeInfo`, {
-          uuid: uuid
+          uuid: this.uuid
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -122,7 +127,7 @@
           var resume = response.data.data
 
           var shareOptions = getResumeDetail(
-            uuid,
+            this.uuid,
             resume.info.name,
             resume.info.company,
             resume.info.avatar_url
