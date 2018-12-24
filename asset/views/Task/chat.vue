@@ -96,7 +96,7 @@
 <script>
 //  {contact_id:this.chatUserId}
   import { postRequest } from '../../utils/request'
-  import RefreshList from '../../components/refresh/MescrollList.vue'
+  import RefreshList from '../../components/refresh/List.vue'
   import { getLocalUserInfo } from '../../utils/user'
   import { autoTextArea, openVendorUrl } from '../../utils/plus'
   import uploadImage from '../../components/uploadImage'
