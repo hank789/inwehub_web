@@ -14,7 +14,7 @@
         :nextOtherData="dataList"
         :pageMode= true
         :list="list"
-        :prevSuccessCallback="prevSuccessCallback"
+        @prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
         <ul class="cions-list">
           <li  v-for="(item, index) in list">

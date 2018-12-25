@@ -16,7 +16,7 @@
         v-model="list"
         :autoShowEmpty="true"
         class="listWrapper"
-        :prevSuccessCallback="prevSuccessCallback"
+        @prevSuccessCallback="prevSuccessCallback"
       >
         <template v-for="(comment, index) in list">
           <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>

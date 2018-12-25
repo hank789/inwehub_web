@@ -30,7 +30,7 @@
         :list="list"
         :pageMode="true"
         :autoShowEmpty="false"
-        :prevSuccessCallback="prevSuccessCallback"
+        @prevSuccessCallback="prevSuccessCallback"
       >
         <div class="container-list-discuss container-list-marginTop">
           <div class="message">

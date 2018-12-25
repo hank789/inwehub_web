@@ -12,8 +12,8 @@
         :pageMode="true"
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
-        :prevSuccessCallback="prevSuccessCallback"
-        :nextSuccessCallback="nextSuccessCallback"
+        @prevSuccessCallback="prevSuccessCallback"
+        @nextSuccessCallback="nextSuccessCallback"
         class="listWrapper">
           <div class="component-card">
             <div class="number">

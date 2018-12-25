@@ -6,239 +6,256 @@
     </header>
 
     <div class="mui-content" v-show="!loading" @tap.capture="onTap($event)">
-      <vue-pull-refresh :on-refresh="refreshPageDataNoLoading">
-      <div v-if="isShow">
+      <MescrollDetail
+        ref="mescrollDetail"
+        @refreshPageData="refreshPageDataNoLoading"
+      >
+          <div v-if="isShow">
 
-        <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
-          <img v-lazy="detail.data.img" class="lazyImg">
-        </div>
+            <div class="topImg container-image" v-if="detail.type === 'article' && detail.data.img">
+              <img v-lazy="detail.data.img" class="lazyImg">
+            </div>
 
-        <div class="mui-table-view detail-discover">
-          <UserInfo
-            :uuid="detail.owner.uuid"
-            :avatar="detail.owner.avatar"
-            :realname="detail.owner.name"
-            :isFollow="isFollow"
-            :isFollowed="detail.is_followed_author?true:false"
-            :isShowPositionAndCompany="false"
-            :isExpert="detail.owner.is_expert?1:0"
-            :time="detail.created_at"
-            @setFollowStatus="setFollowStatus"
-          ></UserInfo>
+            <div class="mui-table-view detail-discover">
+              <UserInfo
+                :uuid="detail.owner.uuid"
+                :avatar="detail.owner.avatar"
+                :realname="detail.owner.name"
+                :isFollow="isFollow"
+                :isFollowed="detail.is_followed_author?true:false"
+                :isShowPositionAndCompany="false"
+                :isExpert="detail.owner.is_expert?1:0"
+                :time="detail.created_at"
+                @setFollowStatus="setFollowStatus"
+              ></UserInfo>
 
-          <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
+              <div class="detailTitle" v-if="detail.type === 'article' && detail.title">{{detail.title}}</div>
 
-          <!--<div class="line-river lineMargin"></div>-->
+              <!--<div class="line-river lineMargin"></div>-->
 
-          <div class="discoverContentWrapper">
-            <div class="contentWrapper quillDetailWrapper container-editor container-editor-app" id="contentWrapper">
-              <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
+              <div class="discoverContentWrapper">
+                <div class="contentWrapper quillDetailWrapper container-editor container-editor-app"
+                     id="contentWrapper">
+                  <span v-if="detail.type !== 'article'" v-html="textToLink(detail.title)"></span>
 
-              <div class="richText container-editor container-editor-app" v-show="detail.type === 'article'">
-                <div class="quill-editor">
-                  <div class="ql-container ql-snow">
-                    <div class="ql-editor discoverContent">
+                  <div class="richText container-editor container-editor-app" v-show="detail.type === 'article'">
+                    <div class="quill-editor">
+                      <div class="ql-container ql-snow">
+                        <div class="ql-editor discoverContent">
+                        </div>
+                      </div>
                     </div>
                   </div>
+
+                  <quill-editor
+                    class="hiddenWrapper"
+                    ref="myTextEditorRead"
+                    :options="editorOptionRead"
+                    @ready="onEditorReadyRead($event)"
+                    @change="change"
+                  >
+                  </quill-editor>
+                </div>
+
+                <div class="container-pdf-list"
+                     v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
+                  <div class="pdf" v-for="(pdf, index) in detail.data.files" :key="index"
+                       @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
+                </div>
+
+                <div class="linkWrapper Column"
+                     v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
+                  <template v-for="(image, index) in detail.data.img">
+                    <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
+                         :data-preview-group="1"/>
+                  </template>
                 </div>
               </div>
 
-              <quill-editor
-                class="hiddenWrapper"
-                ref="myTextEditorRead"
-                :options="editorOptionRead"
-                @ready="onEditorReadyRead($event)"
-                @change="change"
-              >
-              </quill-editor>
-            </div>
+              <!--<div class="groups"  v-if="typeDesc(detail.group.is_joined)"-->
+              <!--@tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容-->
+              <!--</div>-->
 
-            <div class="container-pdf-list" v-if="detail.type === 'text' && detail.data.files && detail.data.files.length">
-              <div class="pdf" v-for="(pdf, index) in detail.data.files" :key="index" @tap.stop.prevent="seePdf(pdf)"><span class="text-line-2">{{pdf.name}}</span></div>
-            </div>
-
-            <div class="linkWrapper Column" v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
-              <template v-for="(image, index) in detail.data.img">
-                <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
-                     :data-preview-group="1"/>
-              </template>
-            </div>
-          </div>
-
-          <!--<div class="groups"  v-if="typeDesc(detail.group.is_joined)"-->
-               <!--@tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">加入圈子阅读全部内容-->
-          <!--</div>-->
-
-          <!-- 新增链接样式 -->
-          <div class="link" v-if="detail.type === 'link' && detail.data.url">
-            <div class="linkBox" @tap.stop.prevent="goArticle(detail)">
+              <!-- 新增链接样式 -->
+              <div class="link" v-if="detail.type === 'link' && detail.data.url">
+                <div class="linkBox" @tap.stop.prevent="goArticle(detail)">
               <span class="linkIimg" v-if="!detail.data.img">
-                <svg class="icon" aria-hidden="true" >
+                <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
                 </svg>
               </span>
-              <img class="lazyImg" v-lazy="detail.data.img" v-else>
-              <div class="linkContent">
-                <div v-if="detail.data.title" class="text-line-2">{{detail.data.title}}</div>
-                <span v-else class="seat"></span>
-                <div class="text-line-1">{{detail.data.domain}}</div>
+                  <img class="lazyImg" v-lazy="detail.data.img" v-else>
+                  <div class="linkContent">
+                    <div v-if="detail.data.title" class="text-line-2">{{detail.data.title}}</div>
+                    <span v-else class="seat"></span>
+                    <div class="text-line-1">{{detail.data.domain}}</div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
 
-          <div class="timeContainer">
-            <div class="makingCopy">著作权归作者所有</div>
-            <div class="fromGroup">
-              <span @tap="toDetail(detail.group)"><i>来自圈子</i>{{ detail.group.name }}</span>
-            </div>
-          </div>
+              <div class="timeContainer">
+                <div class="makingCopy">著作权归作者所有</div>
+                <div class="fromGroup">
+                  <span @tap="toDetail(detail.group)"><i>来自圈子</i>{{ detail.group.name }}</span>
+                </div>
+              </div>
 
-          <!-- 关联问答 -->
-          <div class="answer" v-if="detail.related_question" @tap.stop.prevent="toAnswerDetail(detail.related_question)">
-            <div class="answerBox">
-              <div class="answerContent">
+              <!-- 关联问答 -->
+              <div class="answer" v-if="detail.related_question"
+                   @tap.stop.prevent="toAnswerDetail(detail.related_question)">
+                <div class="answerBox">
+                  <div class="answerContent">
                 <span class="price">
                   <span></span>{{detail.related_question.status_description}}
                 </span>
-               {{detail.related_question.title}}
-              </div>
-              <div class="followAnswer">
-                <span class="follow">{{detail.related_question.follow_number}}人关注 </span>
-                <span class="rightLine"></span>
-                <div class="replay">
-                  <img v-for="(answerUser, index) in detail.related_question.answer_users" :src="answerUser.avatar">
-                  <span>等{{detail.related_question.answer_number}}人回答</span>
-                </div>
-              </div>
-            </div>
-          </div>
+                    {{detail.related_question.title}}
 
-          <div class="share">
-            <div class="location" v-show="detail.data.current_address_name">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-dingwei1"></use>
-              </svg>
-              <span>{{detail.data.current_address_name}}</span>
-            </div>
-          </div>
-        </div>
-
-        <!--<div class="river" v-if="detail.supporter_list.length"></div>-->
-        <div class="river"></div>
-
-        <ArticleDiscuss
-          class="commentTitle"
-          id="commentTitle"
-          v-if="detail.slug"
-          :listApi="'article/comments'"
-          :listParams="discussListParams"
-          :storeApi="'article/comment-store'"
-          :storeParams="discussStoreParams"
-          @comment="comment"
-          @commentFinish="commentFinish"
-          @goComment="goComment"
-          @delCommentSuccess="delCommentSuccess"
-          ref="discuss"
-        ></ArticleDiscuss>
-        <div class="seeAll" v-if="detail.comments_number > 3" @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">查看全部{{detail.comments_number}}条评论</div>
-      </div>
-
-      <!--私密的样式-->
-      <!--圈子信息-->
-      <div v-else>
-        <div class="groupsCenter">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zanwushuju"></use>
-          </svg>
-          <p>私密圈子内容加入后可阅读</p>
-          <p @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">去加入</p>
-        </div>
-        <!--<div class="riverBot"></div>-->
-        <!--<div class="groupsBot">-->
-          <!--<groups-list class="small detail"-->
-                       <!--:list="detail.group"-->
-                       <!--:type="'small'"-->
-          <!--&gt;</groups-list>-->
-        <!--</div>-->
-      </div>
-
-        <div class="container-recommentProduct" v-if="isShow && detail.related_tags.length !== 0">
-          <div class="river"></div>
-          <div class="title">
-            <div class="text font-family-medium">相关产品</div>
-            <div class="line-river line-river-full"></div>
-          </div>
-
-          <div class="productList">
-            <div class="comment-product" v-for="(item, index) in detail.related_tags" :key="index">
-              <div class="product-info" @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
-                <div class="product-img border-football">
-                  <ImageView :src="item.logo" width="44" height="44"></ImageView>
-                  <!--<img src="../../../statics/images/uicon.jpg" alt="">-->
-                </div>
-                <div class="product-detail">
-                  <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
-                  <div class="productMark">
-                    <div class="stars">
-                      <StarView :rating="item.review_average_rate"></StarView>
-                    </div>
-                    <div class="starsText">
-                      <span>{{ item.review_average_rate }}分</span>
-                      <i></i><span>{{ item.review_count }}条评论</span>
+                  </div>
+                  <div class="followAnswer">
+                    <span class="follow">{{detail.related_question.follow_number}}人关注 </span>
+                    <span class="rightLine"></span>
+                    <div class="replay">
+                      <img v-for="(answerUser, index) in detail.related_question.answer_users" :src="answerUser.avatar">
+                      <span>等{{detail.related_question.answer_number}}人回答</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="line-river-after line-river-after-top" v-if="index !== detail.related_tags.length - 1"></div>
-            </div>
-          </div>
 
-        </div>
-
-        <div class="river" v-if="isShow"></div>
-        <div class="guessLike" v-if="isShow">
-          <div class="component-block-title">
-            <div class="left">猜您喜欢</div>
-          </div>
-          <div class="line-river-after"></div>
-          <template  v-for="(item, index) in list">
-            <div class="line-river-big" v-if="index === 5"></div>
-            <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
-              <div class="itemArticleLeft">
-                <div class="titleWrapper">
-                  <div class="title text-line-2 text-content"><!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}</div>
-                </div>
-                <div class="explain">
-                  <label v-if="item.tips">{{item.tips}}</label><span v-if="item.type_description">{{item.type_description}}</span><timeago :since="timeago(item.created_at)" :auto-update="60">
-                </timeago>
+              <div class="share">
+                <div class="location" v-show="detail.data.current_address_name">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-dingwei1"></use>
+                  </svg>
+                  <span>{{detail.data.current_address_name}}</span>
                 </div>
               </div>
-              <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
             </div>
-            <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
-          </template>
-        </div>
-        <div class="river" v-if="isShow"></div>
 
-        <div class="openAppReadBox" v-if="isShow">
-          <div class="openAppRead" @tap.stop.prevent="openApp()">
-            <span class="font-family-medium">打开APP</span>
-            <span>阅读更多推荐</span>
-          </div>
-          <div class="river openAppReadRiver"></div>
-          <div class="followCode">
-            <div class="CodeImg">
-              <img src="../../statics/images/xiaohaWeChat@3x.png" alt="">
-            </div>
-            <div class="codeText">
-              <div>长按添加平台联络官“小哈”微信</div>
-              <div>加行业群/互动交流/探索更多</div>
-            </div>
-          </div>
-          <div class="river openAppReadRiver"></div>
-        </div>
+            <!--<div class="river" v-if="detail.supporter_list.length"></div>-->
+            <div class="river"></div>
 
-    </vue-pull-refresh>
+            <ArticleDiscuss
+              class="commentTitle"
+              id="commentTitle"
+              v-if="detail.slug"
+              :listApi="'article/comments'"
+              :listParams="discussListParams"
+              :storeApi="'article/comment-store'"
+              :storeParams="discussStoreParams"
+              @comment="comment"
+              @commentFinish="commentFinish"
+              @goComment="goComment"
+              @delCommentSuccess="delCommentSuccess"
+              ref="discuss"
+            ></ArticleDiscuss>
+            <div class="seeAll" v-if="detail.comments_number > 3"
+                 @tap.stop.prevent="$router.pushPlus('/comment/' + detail.category_id + '/' + detail.slug + '/' + detail.id)">
+              查看全部{{detail.comments_number}}条评论
+            </div>
+          </div>
+
+          <!--私密的样式-->
+          <!--圈子信息-->
+          <div v-else>
+            <div class="groupsCenter">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-zanwushuju"></use>
+              </svg>
+              <p>私密圈子内容加入后可阅读</p>
+              <p @tap.stop.prevent="$router.pushPlus('/group/detail/' + detail.group.id)">去加入</p>
+            </div>
+            <!--<div class="riverBot"></div>-->
+            <!--<div class="groupsBot">-->
+            <!--<groups-list class="small detail"-->
+            <!--:list="detail.group"-->
+            <!--:type="'small'"-->
+            <!--&gt;</groups-list>-->
+            <!--</div>-->
+          </div>
+
+          <div class="container-recommentProduct" v-if="isShow && detail.related_tags.length !== 0">
+            <div class="river"></div>
+            <div class="title">
+              <div class="text font-family-medium">相关产品</div>
+              <div class="line-river line-river-full"></div>
+            </div>
+
+            <div class="productList">
+              <div class="comment-product" v-for="(item, index) in detail.related_tags" :key="index">
+                <div class="product-info"
+                     @tap.stop.prevent="$router.pushPlus('/dianping/product/' + encodeURIComponent(item.name))">
+                  <div class="product-img border-football">
+                    <ImageView :src="item.logo" width="44" height="44"></ImageView>
+                    <!--<img src="../../../statics/images/uicon.jpg" alt="">-->
+                  </div>
+                  <div class="product-detail">
+                    <div class="productName font-family-medium text-line-1">{{ item.name }}</div>
+                    <div class="productMark">
+                      <div class="stars">
+                        <StarView :rating="item.review_average_rate"></StarView>
+                      </div>
+                      <div class="starsText">
+                        <span>{{ item.review_average_rate }}分</span>
+                        <i></i><span>{{ item.review_count }}条评论</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="line-river-after line-river-after-top"
+                     v-if="index !== detail.related_tags.length - 1"></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="river" v-if="isShow"></div>
+          <div class="guessLike" v-if="isShow">
+            <div class="component-block-title">
+              <div class="left">猜您喜欢</div>
+            </div>
+            <div class="line-river-after"></div>
+            <template v-for="(item, index) in list">
+              <div class="line-river-big" v-if="index === 5"></div>
+              <div class="component-item-article" @tap.stop.prevent="goDetail(item)">
+                <div class="itemArticleLeft">
+                  <div class="titleWrapper">
+                    <div class="title text-line-2 text-content">
+                      <!--<span class="number" v-if="index < 5">{{index+1}}.</span>-->{{item.data.title}}
+                    </div>
+                  </div>
+                  <div class="explain">
+                    <label v-if="item.tips">{{item.tips}}</label><span
+                    v-if="item.type_description">{{item.type_description}}</span>
+                    <timeago :since="timeago(item.created_at)" :auto-update="60">
+                    </timeago>
+                  </div>
+                </div>
+                <div class="itemArticleRight"><img class="lazyImg" v-lazy="item.data.img"></div>
+              </div>
+              <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
+            </template>
+          </div>
+          <div class="river" v-if="isShow"></div>
+
+          <div class="openAppReadBox" v-if="isShow">
+            <div class="openAppRead" @tap.stop.prevent="openApp()">
+              <span class="font-family-medium">打开APP</span>
+              <span>阅读更多推荐</span>
+            </div>
+            <div class="river openAppReadRiver"></div>
+            <div class="followCode">
+              <div class="CodeImg">
+                <img src="../../statics/images/xiaohaWeChat@3x.png" alt="">
+              </div>
+              <div class="codeText">
+                <div>长按添加平台联络官“小哈”微信</div>
+                <div>加行业群/互动交流/探索更多</div>
+              </div>
+            </div>
+            <div class="river openAppReadRiver"></div>
+          </div>
+      </MescrollDetail>
     </div>
 
     <PageMore
@@ -266,18 +283,17 @@
 </template>
 
 <script>
-  import {postRequest} from '../../utils/request'
+  import { postRequest } from '../../utils/request'
   import UserInfo from './../../components/question-detail/UserInfo.vue'
   import Images from '../../components/image/Images.vue'
   import Statistics from './../../components/discover/Statistics.vue'
   import ArticleDiscuss from '../../components/discover/ArticleDiscuss.vue'
   import { autoTextArea, openVendorUrl, openAppUrl, openFileUrl, openAppUrlByUrl } from '../../utils/plus'
   import PageMore from '../../components/PageMore.vue'
-  import {getTextDiscoverDetail} from '../../utils/shareTemplate'
-  import {goThirdPartyArticle} from '../../utils/webview'
-  import {textToLinkHtml, transferTagToLink, addPreviewAttrForImg, scrollToElement} from '../../utils/dom'
+  import { getTextDiscoverDetail } from '../../utils/shareTemplate'
+  import { goThirdPartyArticle } from '../../utils/webview'
+  import { textToLinkHtml, transferTagToLink, addPreviewAttrForImg } from '../../utils/dom'
   import localEvent from '../../stores/localStorage'
-
   const currentUser = localEvent.getLocalItem('UserInfo')
   import commentTextarea from '../../components/comment/Textarea.vue'
   import AlertTextarea from '../../components/comment/AlertTextarea.vue'
@@ -286,11 +302,21 @@
   import hljs from 'highlight.js'
   import 'highlight.js/styles/monokai-sublime.css'
   import { quillEditor } from '../../components/vue-quill'
-  import { upvote, downVote, deleteItem, setTop, addGood, cancelGood, cancelTop, collect, report } from '../../utils/discover'
-  import VuePullRefresh from 'vue-awesome-pull-refresh'
+  import {
+    upvote,
+    downVote,
+    deleteItem,
+    setTop,
+    addGood,
+    cancelGood,
+    cancelTop,
+    collect,
+    report
+  } from '../../utils/discover'
   import DetailMenu from '../../components/menu/Detail.vue'
   import StarView from '../../components/star-rating/starView.vue'
   import { showComment } from '../../utils/comment'
+  import MescrollDetail from '../../components/refresh/MescrollDetail.vue'
 
   export default {
     data () {
@@ -471,10 +497,10 @@
       commentTextarea,
       groupsList,
       quillEditor,
-      'vue-pull-refresh': VuePullRefresh,
       DetailMenu,
       StarView,
-      AlertTextarea
+      AlertTextarea,
+      MescrollDetail
     },
     methods: {
       detailMenuIcon (item) {
@@ -585,7 +611,9 @@
         }, 'div')
       },
       goComment () {
-        scrollToElement(this, '#commentTitle', '.pull-down-container')
+        var y = this.$el.querySelector('#commentTitle').offsetTop
+        console.log('y:' + y)
+        this.$refs.mescrollDetail.scrollTo(0, y, 300)
         this.$refs.discuss.rootComment()
       },
       goDetail (item) {
@@ -799,8 +827,10 @@
           this.loading = 0
           this.recommendRead()
 
+          this.$refs.mescrollDetail.finish()
+
           // 滚动到上面
-          scrollToElement(this, '.detail-discover', '.pull-down-container')
+          this.$refs.mescrollDetail.scrollToTop()
         })
       },
       setFollowStatus (status) {
@@ -954,6 +984,7 @@
   .active {
     color: #d4d4d4;
   }
+
   .seeAll {
     padding: 0.32rem 0;
     font-size: 0.373rem;
@@ -961,6 +992,7 @@
     line-height: 0.533rem;
     text-align: center;
   }
+
   .container-footer {
     position: absolute;
     bottom: 0;
@@ -1033,7 +1065,7 @@
       .collectionComment {
         width: 1.333rem;
         height: 1.306rem;
-        flex-grow:1;
+        flex-grow: 1;
         color: #808080;
         span {
           color: #B4B4B6;
@@ -1050,10 +1082,12 @@
       }
     }
   }
+
   .lineMargin {
     margin-top: -0.426rem;
     margin-bottom: 0.373rem;
   }
+
   .container-image {
     height: 5.333rem;
     border-radius: 0;
@@ -1061,6 +1095,7 @@
       border-radius: 0;
     }
   }
+
   .topImg {
     margin-bottom: 0.32rem;
     img {
@@ -1068,6 +1103,7 @@
       height: 5.333rem;
     }
   }
+
   .detailTitle {
     font-size: 0.506rem;
     line-height: 0.8rem;
@@ -1075,10 +1111,12 @@
     padding: 0rem 0.426rem 0.586rem;
     font-family: PingFangSC-Medium;
   }
+
   .detail-discover {
     padding-bottom: 0.133rem;
     margin-top: 0 !important;
   }
+
   .mui-table-view-cell {
     padding-top: 0.133rem;
     padding-bottom: 0.373rem;
@@ -1135,7 +1173,7 @@
       border-radius: 2.666rem;
       span {
         color: #808080;
-        font-family:PingFangSC-Medium;
+        font-family: PingFangSC-Medium;
       }
       i {
         color: #B4B4B6;
@@ -1158,7 +1196,7 @@
   }
 
   .mui-content {
-    bottom:1.333rem;
+    bottom: 1.333rem;
     background: #fff;
   }
 
@@ -1207,6 +1245,7 @@
     right: 0.426rem;
     top: 0.426rem;
   }
+
   .timeData {
     position: absolute;
     top: 0.72rem;
@@ -1215,6 +1254,7 @@
     color: #C8C8C8;
     margin-top: -0.106rem;
   }
+
   .share {
     padding: 0 0.453rem;
     margin: 0.133rem 0 0.72rem 0;
@@ -1244,7 +1284,7 @@
           width: 100%;
           padding: 0;
           display: inline-block;
-          li{
+          li {
             margin: 0 0.346rem;
             display: inline-block;
             &:nth-of-type(1) {
@@ -1268,6 +1308,7 @@
       }
     }
   }
+
   // 新增链接样式
   .link {
     padding: 0 0.426rem;
@@ -1319,6 +1360,7 @@
       }
     }
   }
+
   // 关联问答
   .answer {
     padding: 0 0.426rem;
@@ -1460,19 +1502,20 @@
     text-align: center;
     margin: auto;
   }
+
   .shortContentWrapper {
     max-height: 8rem;
     overflow: hidden;
     position: relative;
     margin-bottom: 0.266rem;
 
-    &:after{
+    &:after {
       position: absolute;
-      bottom:0;
-      content:'';
-      height:1.666rem;
-      width:100%;
-      background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,1));
+      bottom: 0;
+      content: '';
+      height: 1.666rem;
+      width: 100%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
     }
   }
 
@@ -1559,18 +1602,19 @@
     }
   }
 
-  .hiddenWrapper{
+  .hiddenWrapper {
     display: none;
   }
 
-  .discoverContent{
-    padding:0;
+  .discoverContent {
+    padding: 0;
   }
 
-  .component-upAndDown{
+  .component-upAndDown {
     margin-top: 0.48rem;
     margin-bottom: 0.48rem;
   }
+
   .commentTitle {
     padding-bottom: 0.266rem;
   }
@@ -1580,6 +1624,7 @@
   .detail-discover .followWrapper {
     margin-top: 0.213rem;
   }
+
   .detail-discover .followWrapper .followButton {
     min-width: 1.173rem;
     height: 0.56rem;

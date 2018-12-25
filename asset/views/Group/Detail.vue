@@ -98,7 +98,7 @@
           :autoShowEmpty="false"
           :isLoadingByRefresh="false"
           :list="list"
-          :prevSuccessCallback="prevSuccessCallback"
+          @prevSuccessCallback="prevSuccessCallback"
           class="listWrapper"
         >
           <div>

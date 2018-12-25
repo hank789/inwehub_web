@@ -14,7 +14,7 @@
         :api="'question/answerList'"
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
-        :prevSuccessCallback="prevSuccessCallback"
+        @prevSuccessCallback="prevSuccessCallback"
         :isShowUpToRefreshDescription="true"
         :list="answers"
         :pageMode="true"

@@ -12,7 +12,7 @@
           ref="RefreshList"
           v-model="list"
           :api="'group/submissionList'"
-          :prevSuccessCallback="prevSuccessCallback"
+          @prevSuccessCallback="prevSuccessCallback"
           :prevOtherData="prevOtherData"
           :nextOtherData="nextOtherData"
           :pageMode="true"

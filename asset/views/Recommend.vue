@@ -14,7 +14,7 @@
         :prevOtherData="{}"
         :nextOtherData="{}"
         :pageMode = true
-        :prevSuccessCallback="prevSuccessCallback"
+        @prevSuccessCallback="prevSuccessCallback"
         class="listWrapper"
       >
         <ul class="recommend">
