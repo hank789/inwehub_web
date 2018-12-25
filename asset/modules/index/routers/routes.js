@@ -2754,6 +2754,19 @@ const routes = [
     },
     component: componets.PageEmpty
   },
+  {
+    path: '/test',
+    name: 'test',
+    meta: {
+      title: '',
+      keepAlive: true,
+      wechatHideHeader: true
+    },
+    component: componets.Test,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',

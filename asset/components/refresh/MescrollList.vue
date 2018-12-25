@@ -110,6 +110,9 @@
           up: {
             auto: true,
             isBounce: false,
+            scrollbar: {
+              use: false
+            },
             htmlNodata: this.upcontentnomore,
             callback: this.upCallback
           }

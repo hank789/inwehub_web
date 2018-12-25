@@ -22,10 +22,11 @@
         mescroll: null,
         config: {
           down: {
-            auto: false,
+            auto: true,
             offset: 60,
             htmlContent: '<p class="downwarp-progress"><p>',
-            callback: this.downCallback
+            callback: this.downCallback,
+            mustToTop: true
           },
           up: {
             use: false
@@ -60,5 +61,6 @@
   overflow: hidden;
   top: 0;
   left:0;
+  bottom:0;
 }
 </style>
