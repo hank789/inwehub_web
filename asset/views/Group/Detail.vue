@@ -97,7 +97,6 @@
           :isShowUpToRefreshDescription="true"
           :autoShowEmpty="false"
           :isLoadingByRefresh="false"
-          :list="list"
           @prevSuccessCallback="prevSuccessCallback"
           class="listWrapper"
         >
@@ -314,19 +313,16 @@
     },
     methods: {
       prevSuccessCallback () {
-        scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-          // var headerBackHeader = document.querySelector('.headerBack').clientHeight
-          if (y > 150) {
+        this.$refs.RefreshList.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          if (y >= 150) {
             document.querySelector('.content-header-hide').classList.add('showHeader')
             document.querySelector('.content-header-hide').style.opacity = y / 250
-          }
-        }, null, (container, y) => {
-          // var headerBackHeader = document.querySelector('.headerBack').clientHeight
-          if (y < 150) {
+          } else {
             document.querySelector('.content-header-hide').classList.remove('showHeader')
+            document.querySelector('.content-header-hide').style.opacity = y / 250
           }
-          document.querySelector('.content-header-hide').style.opacity = y / 250
-        })
+        }
       },
       iconMenusClickedItem (item) {
         iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
@@ -598,7 +594,7 @@
     flex-direction: row;
     justify-content: space-around;
     line-height: 1.04rem;
-    position: absolute;
+    position: relative;
     span {
       position: relative;
       margin-bottom: -0.293rem;
@@ -622,7 +618,6 @@
     margin-top: 1.306rem;
   }
   .listWrapper{
-    padding-bottom: 2.853rem;
   }
   .Nothing {
     width: 5.626rem;
