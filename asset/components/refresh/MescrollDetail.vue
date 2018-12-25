@@ -47,6 +47,7 @@
       },
       mescrollInit (mescroll) {
         this.mescroll = mescroll
+        this.$emit('init', mescroll)
       },
       finish () {
         this.mescroll.endSuccess()
