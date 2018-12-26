@@ -308,6 +308,10 @@
         }
         this.id = id
 
+        if (this.$refs.mescrollDetail) {
+          this.$refs.mescrollDetail.scrollToTop(50)
+        }
+
         getProductDetail(this, id, (data) => {
           if (this.$refs.mescrollDetail) {
             this.$refs.mescrollDetail.finish()
@@ -316,9 +320,6 @@
           this.loading = 0
           this.title = '产品服务'
           this.getShareOption()
-          if (this.$refs.mescrollDetail) {
-            this.$refs.mescrollDetail.scrollToTop()
-          }
         })
 
         getProductComments(this, id, 3, (productComments) => {

@@ -557,6 +557,11 @@
       getDetail (loading = 1) {
         this.loading = loading
         this.id = this.$route.params.id
+
+        if (this.$refs.mescrollDetail) {
+          this.$refs.mescrollDetail.scrollToTop(50)
+        }
+
         getCommentDetail(this, this.id, (detail) => {
           if (this.$refs.mescrollDetail) {
             this.$refs.mescrollDetail.finish()

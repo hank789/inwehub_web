@@ -534,6 +534,10 @@
 
         this.id = id
 
+        if (this.$refs.mescrollDetail) {
+          this.$refs.mescrollDetail.scrollToTop(50)
+        }
+
         postRequest(`answer/info`, {id: this.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -544,7 +548,9 @@
 
           this.ask = response.data.data
 
-          this.$refs.mescrollDetail.finish()
+          if (this.$refs.mescrollDetail) {
+            this.$refs.mescrollDetail.finish()
+          }
 
           this.loading = 0
 
