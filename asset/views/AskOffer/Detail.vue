@@ -489,10 +489,10 @@
         this.answer.comment_number++
         this.$refs.ctextarea.finish()
       },
-      refreshPageData () {
+      refreshPageData (loading = true) {
         this.$refs.ctextarea.refreshPageData()
         console.log('refreshPageData-zz-detail')
-        this.loading = 1
+        this.loading = loading
         this.getDetail()
       },
       shareSuccess () {},

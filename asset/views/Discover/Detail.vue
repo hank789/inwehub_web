@@ -67,7 +67,7 @@
                 <div class="linkWrapper Column"
                      v-if="detail.type === 'text' && detail.data.img && detail.data.img.length">
                   <template v-for="(image, index) in detail.data.img">
-                    <img class="discover_img lazyImg" :id="'image_' + index" v-lazy="image" :data-preview-src="image"
+                    <img class="discover_img lazyImg" :id="'image_' + index" :key="image" v-lazy="image" :data-preview-src="image"
                          :data-preview-group="1"/>
                   </template>
                 </div>
@@ -85,7 +85,7 @@
                   <use xlink:href="#icon-biaozhunlogoshangxiayise"></use>
                 </svg>
               </span>
-                  <img class="lazyImg" v-lazy="detail.data.img" v-else>
+                  <img class="lazyImg" :key="detail.data.img" v-lazy="detail.data.img" v-else>
                   <div class="linkContent">
                     <div v-if="detail.data.title" class="text-line-2">{{detail.data.title}}</div>
                     <span v-else class="seat"></span>
