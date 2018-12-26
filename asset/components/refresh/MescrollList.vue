@@ -201,7 +201,7 @@
             }
             mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
           } else {
-            mescroll.endSuccess()
+            mescroll.endSuccess(data.length)
             this.list = data
           }
           this.loading = false
