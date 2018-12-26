@@ -40,8 +40,9 @@
       }
     },
     methods: {
-      scrollToTop () {
-        this.mescroll.scrollTo(0)
+      scrollToTop (time) {
+        var curTime = time === undefined ? 300 : time
+        this.mescroll.scrollTo(0, curTime)
       },
       scrollTo (x, y, time) {
         console.log('yy:' + y)

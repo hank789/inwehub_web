@@ -802,6 +802,10 @@
           return
         }
 
+        if (this.$refs.mescrollDetail) {
+          this.$refs.mescrollDetail.scrollToTop(100)
+        }
+
         postRequest(`article/detail-by-slug`, {slug: this.slug}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -828,10 +832,9 @@
           this.loading = false
           this.recommendRead()
 
-          this.$refs.mescrollDetail.finish()
-
-          // 滚动到上面
-          this.$refs.mescrollDetail.scrollToTop()
+          if (this.$refs.mescrollDetail) {
+            this.$refs.mescrollDetail.finish()
+          }
         })
       },
       setFollowStatus (status) {

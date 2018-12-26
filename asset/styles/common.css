@@ -4,7 +4,7 @@ html {
 }
 
 body{
-  font-family: PingFang SC,STHeitiSC-Light,Helvetica-Light,arial,sans-serif;
+  font-family: "Helvetica Neue", "Helvetica", PingFang SC,STHeitiSC-Light,Helvetica-Light,arial,sans-serif;
   -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   font-size: 0.426rem;
