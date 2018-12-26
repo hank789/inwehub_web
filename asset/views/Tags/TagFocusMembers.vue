@@ -13,7 +13,7 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :pageMode= true
-        :list="list"
+        
         @prevSuccessCallback="prevSuccessCallback"
         class="listWrapper">
         <ul class="cions-list">

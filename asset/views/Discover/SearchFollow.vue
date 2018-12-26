@@ -19,7 +19,7 @@
         :nextOtherData="{search_type: 1}"
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
-        :list="list"
+        
         :emptyDescription="emptyDescription"
         class="listWrapper"
       >
@@ -362,16 +362,16 @@
   }
   .listWrapper{
     top:1.173rem !important;
-    bottom: 1.333rem;
+    bottom: 1.333rem !important;
   }
   .w414-3 .listWrapper{
     top:1.173rem !important;
-    bottom: 1.333rem;
+    bottom: 1.333rem !important;
   }
 
   .activityWrapper.unIsGetted ~ .listWrapper {
     top:1.173rem !important;
-    bottom: 1.333rem;
+    bottom: 1.333rem !important;
   }
   .followGroups{
     width: 100%;

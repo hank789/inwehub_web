@@ -27,7 +27,7 @@
         :api="'article/comments'"
         :prevOtherData="prevOtherData"
         :nextOtherData="prevOtherData"
-        :list="list"
+        
         :pageMode="true"
         :autoShowEmpty="false"
         @prevSuccessCallback="prevSuccessCallback"

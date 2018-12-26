@@ -23,7 +23,7 @@
         :api="'question/myList'"
         :prevOtherData="{type:0, uuid: this.uuid}"
         :nextOtherData="{type:0, uuid: this.uuid}"
-        :list="list"
+        
         class="listWrapper">
 
         <ul class="answer">

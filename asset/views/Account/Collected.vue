@@ -21,7 +21,7 @@
         :api="'collected/answers'"
         :prevOtherData="{}"
         :nextOtherData="{}"
-        :list="list"
+        
          class="listWrapper"
       >
         <ul class="hotAnswer_b">

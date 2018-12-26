@@ -13,7 +13,7 @@
         :prevOtherData="dataList"
         :nextOtherData="dataList"
         :pageMode= true
-        :list="list"
+        
         class="listWrapper">
         <ul class="cions-list">
           <li  v-for="(item, index) in list">

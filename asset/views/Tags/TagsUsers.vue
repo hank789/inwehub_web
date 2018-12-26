@@ -24,7 +24,7 @@
         :prevOtherData="{tag_name:tagName}"
         :nextOtherData="{tag_name:tagName}"
         :pageMode= true
-        :list="list"
+        
         class="listWrapper"
       >
         <ul class="cions-list">

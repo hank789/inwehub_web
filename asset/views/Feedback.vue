@@ -19,7 +19,7 @@
           :isShowUpToRefreshDescription="true"
           :autoShowEmpty="false"
           :isLoadingByRefresh="false"
-          :list="list"
+          
           class="listWrapper"
         >
           <div class="gray"></div>

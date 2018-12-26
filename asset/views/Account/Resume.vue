@@ -19,7 +19,7 @@
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
         :autoShowEmpty="false"
-        :list="list"
+        
         :emptyDescription="emptyDescription"
         class="listWrapper"
       >

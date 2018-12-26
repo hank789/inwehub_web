@@ -25,7 +25,7 @@
         :prevOtherData="{type:0,uuid: this.uuid}"
         :nextOtherData="{type:0,uuid: this.uuid}"
         :pageMode="true"
-        :list="list"
+        
         class="listWrapper">
 
         <div class="container-publishComment">

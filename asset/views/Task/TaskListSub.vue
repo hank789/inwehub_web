@@ -22,7 +22,7 @@
         :prevOtherData="{}"
         :nextOtherData="{}"
         :pageMode = "true"
-        :list="list"
+        
         class="listWrapper"
       >
         <ul>
