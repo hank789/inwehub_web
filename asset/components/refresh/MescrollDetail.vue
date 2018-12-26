@@ -1,7 +1,7 @@
 <template>
   <div class='mescrollDetailWrapper'>
     <mescroll-vue ref='mescroll' :down='config.down' :up="config.up" @init='mescrollInit'>
-      <div>
+      <div v-show="!isLoading">
         <slot></slot>
       </div>
     </mescroll-vue>
@@ -16,13 +16,18 @@
     components: {
       MescrollVue
     },
-    props: {},
+    props: {
+      isLoading: {
+        type: Boolean,
+        default: false
+      }
+    },
     data () {
       return {
         mescroll: null,
         config: {
           down: {
-            auto: true,
+            auto: false,
             offset: 60,
             htmlContent: '<p class="downwarp-progress"><p>',
             callback: this.downCallback,

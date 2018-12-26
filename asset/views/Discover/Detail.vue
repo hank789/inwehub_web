@@ -8,6 +8,7 @@
     <div class="mui-content" v-show="!loading" @tap.capture="onTap($event)">
       <MescrollDetail
         ref="mescrollDetail"
+        :isLoading="loading"
         @refreshPageData="refreshPageDataNoLoading"
       >
           <div v-if="isShow">
@@ -372,7 +373,7 @@
           targetId: ''
         },
         isFollow: true,
-        loading: 1
+        loading: true
       }
     },
     computed: {
@@ -528,7 +529,7 @@
           event.preventDefault()
 
           userAbility.inviteJoinInGroup(this, this.detail.group.id, () => {
-            this.refreshPageData(0)
+            this.refreshPageData(false)
           }, this.detail.group)
         }
       },
@@ -773,9 +774,9 @@
         }
       },
       refreshPageDataNoLoading () {
-        this.refreshPageData(0)
+        this.refreshPageData(false)
       },
-      refreshPageData (loading = 1) {
+      refreshPageData (loading = true) {
         this.detail.data.img = []
         this.getDetail(loading)
         this.$refs.ctextarea.refreshPageData()
@@ -789,7 +790,7 @@
         newDate.setTime(Date.parse(time.replace(/-/g, '/')))
         return newDate
       },
-      getDetail: function (loading = 1) {
+      getDetail: function (loading = true) {
         this.loading = loading
         this.slug = this.$route.params.slug
         this.shareOption.targetId = this.slug
@@ -824,7 +825,7 @@
             this.title = '分享'
           }
 
-          this.loading = 0
+          this.loading = false
           this.recommendRead()
 
           this.$refs.mescrollDetail.finish()
