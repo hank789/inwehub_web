@@ -49,7 +49,7 @@
         this.mescroll.scrollTo(y, time)
       },
       downCallback (mescroll) {
-        this.$emit('refreshPageData', mescroll)
+        this.$emit('refreshPageData', false)
       },
       mescrollInit (mescroll) {
         this.mescroll = mescroll

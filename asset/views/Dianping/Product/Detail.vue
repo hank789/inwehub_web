@@ -298,9 +298,9 @@
       goChat (uid) {
         userAbility.jumpToChat(uid, this)
       },
-      refreshPageData () {
+      refreshPageData (loading = true) {
         let id = this.$route.params.id
-        this.loading = 1
+        this.loading = loading
         if (!id) {
           window.mui.toast('请求异常')
           window.mui.back()
