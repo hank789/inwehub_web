@@ -350,8 +350,12 @@
     color: #FA4975 !important;
   }
 
+  .homeMuiSlider{
+    margin-bottom: 0.266rem;
+  }
+
   .container-tags-home-margin {
-    margin-top: 0.266rem;
+    margin-top: 0
   }
 
   .container-tags-home-hide {
