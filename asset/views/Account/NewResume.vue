@@ -13,7 +13,7 @@
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
         :autoShowEmpty="false"
-        
+
         :emptyDescription="emptyDescription"
         class="listWrapper"
       >
@@ -163,7 +163,6 @@
             ></FeedItem>
 
           </template>
-          <div v-if="uuid !== cuuid" class="container-noMore">暂无更多</div>
 
           <div class="noDynamic goAddpage" v-show="uuid !== cuuid && !list.length">
             <div class="empty-IconImg">
