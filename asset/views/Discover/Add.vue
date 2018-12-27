@@ -141,6 +141,7 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { fetchArticle } from '../../utils/url'
   import userAbilityCheck from '../../utils/userAbilityCheck'
+  import { uploadImagesByBase64 } from '../../utils/image'
 
   export default {
     data () {
@@ -274,6 +275,27 @@
       uploadImageSuccess (images) {
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
+        }
+        this.previewUploadImage()
+      },
+      previewUploadImage () {
+        var surplusImages = this.images.splice(1)  // 4
+        if (surplusImages.length) {
+          var base64Images = []
+          for (var i in surplusImages) {
+            base64Images.push(surplusImages[i].base64)
+          }
+          uploadImagesByBase64(base64Images, (list) => {
+            for (var j = 0; j < list.length; j++) {
+              var newObJ = surplusImages[j]
+              newObJ.base64 = list[j]
+              this.images.push(newObJ)
+            }
+          }, () => {
+            for (var i in surplusImages) {
+              this.images.push(surplusImages[i])
+            }
+          })
         }
       },
       refreshPageData () {

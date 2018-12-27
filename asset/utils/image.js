@@ -84,8 +84,28 @@ function getBase64ByImgUrl (url, succssCallback) {
   }
 }
 
+/**
+ * 上传图片到服务器，服务器返回url地址
+*/
+function uploadImagesByBase64 (photos, successCallback, failCallback) {
+  postRequest('article/uploadImage', {id: 0, photos: photos})
+    .then(response => {
+      var code = response.data.code
+      if (code !== 1000) {
+        window.mui.toast(response.data.message)
+        if (failCallback) {
+          failCallback(response.data.message)
+        }
+        return
+      }
+
+      successCallback(response.data.data)
+    })
+}
+
 export {
   getImageSuffix,
   saveHtmlImgToGallery,
-  getBase64ByImgUrl
+  getBase64ByImgUrl,
+  uploadImagesByBase64
 }
