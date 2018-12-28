@@ -318,11 +318,15 @@
       next(vm => {
         // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
         vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+        document.querySelector('.mui-content').classList.add('mui-content-top-0')
+        document.querySelector('#immersedWrapper').classList.add('immersedWrapperNone')
       })
     },
     beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
       // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
       this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      document.querySelector('.mui-content').classList.remove('mui-content-top-0')
+      document.querySelector('#immersedWrapper').classList.remove('immersedWrapperNone')
       next()
     },
     methods: {
@@ -887,3 +891,11 @@
 
 </style>
 
+<style>
+  .mui-content-top-0{
+    top:0 !important;
+  }
+  .immersedWrapperNone{
+    display: none !important;
+  }
+</style>
