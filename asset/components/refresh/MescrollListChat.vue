@@ -304,7 +304,7 @@
 
   .hiddenUp{
     position: absolute;
-    bottom:999px;
+    bottom:999px; /* px不转换 */
   }
 </style>
 

@@ -536,7 +536,7 @@
     /*border: 0.026rem solid #dcdcdc;*/
   }
   .marginTop {
-    margin-top: 50px;
+    margin-top: 1.333rem;
   }
 
   .content-header-hide {
