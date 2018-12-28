@@ -276,27 +276,24 @@
         for (var i = 0; i < images.length; i++) {
           this.images.push(images[i])
         }
-        this.previewUploadImage()
       },
-      previewUploadImage () {
-        var surplusImages = this.images.splice(4)  // 4
-        if (surplusImages.length) {
-          var base64Images = []
-          for (var i in surplusImages) {
-            base64Images.push(surplusImages[i].base64)
-          }
-          uploadImagesByBase64(base64Images, (list) => {
-            for (var j = 0; j < list.length; j++) {
-              var newObJ = surplusImages[j]
-              newObJ.base64 = list[j]
-              this.images.push(newObJ)
-            }
-          }, () => {
-            for (var i in surplusImages) {
-              this.images.push(surplusImages[i])
-            }
-          })
+      lastUploadImage (id, successCallback) {
+        var photos = []
+        for (var i in this.images) {
+          var compressBase64 = this.images[i].base64
+          photos.push(compressBase64)
         }
+
+        if (photos.length < 1) {
+          successCallback()
+          return
+        }
+
+        uploadImagesByBase64(this, id, photos, () => {
+          successCallback()
+        }, (msg) => {
+          window.mui.toast(msg)
+        })
       },
       refreshPageData () {
         this.initData()
@@ -644,14 +641,17 @@
           data['photos'].push(compressBase64)  // this.images[i].base64;
         }
 
-        var options = {
-          onUploadProgress: function (progressEvent) {
-            this.percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            window.mui.uploadWaitingValue(this.percentCompleted)
+        var options = {}
+        if (this.pdfs.length) {
+          options = {
+            onUploadProgress: function (progressEvent) {
+              this.percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+              window.mui.uploadWaitingValue(this.percentCompleted)
+            }
           }
-        }
 
-        window.mui.showUploadWaiting()
+          window.mui.showUploadWaiting()
+        }
 
         postRequest(`article/store`, data, false, options).then(response => {
           var code = response.data.code
@@ -665,23 +665,28 @@
             window.mui.toast(response.data.message)
             return
           }
-          window.mui.toast('发布成功！')
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
-            // mixpanel
-            window.mixpanel.track(
-              'inwehub:discover:publishSuccessfully',
-              {
-                'app': 'inwehub',
-                'user_device': window.getUserAppDevice(),
-                'page': this.$route.fullPath,
-                'page_name': this.$route.name,
-                'page_title': this.$route.meta.title,
-                'referrer_page': ''
-              }
-            )
-          }
-          this.resetData()
-          this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
+
+          var id = response.data.data.id
+
+          this.lastUploadImage(id, () => {
+            window.mui.toast('发布成功！')
+            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+              // mixpanel
+              window.mixpanel.track(
+                'inwehub:discover:publishSuccessfully',
+                {
+                  'app': 'inwehub',
+                  'user_device': window.getUserAppDevice(),
+                  'page': this.$route.fullPath,
+                  'page_name': this.$route.name,
+                  'page_title': this.$route.meta.title,
+                  'referrer_page': ''
+                }
+              )
+            }
+            this.resetData()
+            this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
+          })
         })
       }
     }
