@@ -279,7 +279,7 @@
         this.previewUploadImage()
       },
       previewUploadImage () {
-        var surplusImages = this.images.splice(1)  // 4
+        var surplusImages = this.images.splice(4)  // 4
         if (surplusImages.length) {
           var base64Images = []
           for (var i in surplusImages) {
