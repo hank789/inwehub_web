@@ -315,19 +315,6 @@
     created () {
       this.getData()
     },
-    mounted () {
-      setTimeout(function () {
-        for (var i = 0; i < 5; i++) {
-          document.querySelector('.immersed' + i + ' ' + '.muiContent').style.top = i * 0.0266 - 8.573  + 'rem'
-        }
-      }, 700)
-
-      window.addEventListener('refreshData', (e) => {
-        // 执行刷新
-        console.log('refresh-resume')
-        this.getData()
-      })
-    },
     beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
       next(vm => {
         // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
@@ -348,6 +335,20 @@
       }
       this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave()
       next()
+    },
+    mounted () {
+      console.log(document.querySelector('.immersed0' + ' ' + '.muiContent'), '代码')
+      for (var i = 16; i < 50; i++) {
+        if (document.querySelector('.immersed' + i + ' ' + '.muiContent')) {
+          document.querySelector('.immersed' + i + ' ' + '.muiContent').style.top = i * 0.0266 - 8.573  + 'rem'
+        }
+      }
+
+      window.addEventListener('refreshData', (e) => {
+        // 执行刷新
+        console.log('refresh-resume')
+        this.getData()
+      })
     },
     methods: {
       prevSuccessCallback () {
@@ -626,6 +627,7 @@
   }
   .muiContent {
     position: relative;
+    top: -8.573rem;
   }
   .header-wrapper {
     height: 8.573rem;

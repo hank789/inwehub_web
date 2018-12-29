@@ -1119,7 +1119,7 @@ const routes = [
     }
   },
   { // 个人名片
-    path: '/my/resume',
+    path: '/my/oldResume',
     name: 'my-resume',
     component: componets.AccountResume,
     meta: {
@@ -1132,7 +1132,7 @@ const routes = [
 
   },
   { // 新个人名片
-    path: '/my/oldResume',
+    path: '/my/resume',
     name: 'my-newResume',
     component: componets.AccountNewResume,
     meta: {
