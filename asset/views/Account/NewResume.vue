@@ -339,7 +339,7 @@
     mounted () {
       for (var i = 16; i < 50; i++) {
         if (document.querySelector('.immersed' + i + ' ' + '.muiContent')) {
-          document.querySelector('.immersed' + i + ' ' + '.muiContent').style.top = i * 0.0266 - 8.573  + 'rem'
+          document.querySelector('.immersed' + i + ' ' + '.muiContent').style.top = i * 0.0266  + 'rem'
           document.querySelector('.immersed' + i + ' ' + '.headersWrapperTop').style.top = i * 0.0266 + 'rem'
 
         }
@@ -953,7 +953,7 @@
   .immersedWrapperNone{
     display: none !important;
   }
-  .openAppH5 .mui-bar-nav {
+  .openAppH5 .resume .mui-bar-nav {
     top: 0 !important;
   }
   .mescroll {
