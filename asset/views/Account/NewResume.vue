@@ -340,7 +340,8 @@
       for (var i = 16; i < 50; i++) {
         if (document.querySelector('.immersed' + i + ' ' + '.muiContent')) {
           document.querySelector('.immersed' + i + ' ' + '.muiContent').style.top = i * 0.0266  + 'rem'
-          document.querySelector('.immersed' + i + ' ' + '.headersWrapperTop').style.top = i * 0.0266 + 'rem'
+          document.querySelector('.immersed' + i + ' ' + '.resume' + ' ' + '.mui-bar').style.height = i * 0.0266 + 1.173 + 'rem'
+          document.querySelector('.immersed' + i + ' ' + '.resume' + ' ' + '.mui-bar').style.paddingTop = i * 0.0266 + 'rem'
 
         }
       }
