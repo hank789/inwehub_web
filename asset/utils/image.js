@@ -144,8 +144,7 @@ function _uploadImagesByBase64 (context, id, photos, successCallback, failCallba
 
 function _circleUploadImageByBase64 (context, id, photos, successCallback, failCallback, options) {
   if (photos.length) {
-    var waitUploads = [] // 等待上传容器
-    waitUploads.push(photos.shift())
+    var waitUploads = photos.splice(0, 2)
     _uploadImagesByBase64(context, id, waitUploads, (data) => {
       if (photos.length) {
         _circleUploadImageByBase64(context, id, photos, successCallback, failCallback, options)

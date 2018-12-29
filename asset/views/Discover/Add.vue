@@ -636,11 +636,6 @@
           data.type = 'link'
         }
 
-        for (var i in this.images) {
-          var compressBase64 = this.images[i].base64
-          data['photos'].push(compressBase64)  // this.images[i].base64;
-        }
-
         var options = {}
         if (this.pdfs.length) {
           options = {
