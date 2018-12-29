@@ -1,20 +1,20 @@
 <template>
-    <div class='mescrollListWrapper'>
-      <div id='downloadTip' class='download-tip'>{{alertMsg}}</div>
-      <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
-        <slot name="listHeader"></slot>
+  <div class='mescrollListWrapper'>
+    <div id='downloadTip' class='download-tip'>{{alertMsg}}</div>
+    <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
+      <slot name="listHeader"></slot>
 
-        <Empty v-if="nothing===1 && autoShowEmpty"
-               :description="emptyDescription"
-        ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
+      <Empty v-if="nothing===1 && autoShowEmpty"
+             :description="emptyDescription"
+      ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
 
-        <div v-show="!loading">
-          <slot></slot>
-        </div>
+      <div v-show="!loading">
+        <slot></slot>
+      </div>
 
-        <slot name="emptyCustom" v-if="nothing === 1"></slot>
-      </mescroll-vue>
-    </div>
+      <slot name="emptyCustom" v-if="nothing === 1"></slot>
+    </mescroll-vue>
+  </div>
 </template>
 
 <script>
@@ -36,7 +36,7 @@
       },
       upcontentnomore: {
         type: String,
-        default: '<p class="upwarp-nodata">无更多数据</p>'
+        default: ''
       },
       emptyDescription: {  // 空描述
         type: String,
@@ -62,23 +62,12 @@
         type: Boolean,
         default: true
       },
-      pageMode: {
-        type: Boolean,
-        default: false
-      },
       isLoadingByRefresh: {
         type: Boolean,
         default: true
       }
     },
     computed: {
-      bottomId () {
-        var length = this.list.length
-        if (length) {
-          return this.list[length - 1].id
-        }
-        return 0
-      },
       nothing () {
         if (this.loading) {
           return -1
@@ -94,7 +83,7 @@
       return {
         lastScrollTop: 0,
         lastBounce: null,
-        currentPage: 0,
+        currentPage: 1,
         loading: this.isLoading,
         list: [],
         alertMsg: '',
@@ -110,9 +99,11 @@
           up: {
             auto: true,
             isBounce: false,
+            isLock: true,
             scrollbar: {
               use: false
             },
+            warpClass: 'hiddenUp',
             htmlNodata: this.upcontentnomore,
             callback: this.upCallback
           }
@@ -188,53 +179,33 @@
         this.mescroll = mescroll
       },
       downCallback (mescroll) {
-        mescroll.resetUpScroll(true)
+        mescroll.triggerUpScroll()
       },
       upCallback (page, mescroll) {
-        console.log('upcALLBACK')
         this.getData(page.num, page.size, (data) => {
-          if (this.pageMode) {
-            if (page.num === 1) {
-              this.list = data
-            } else {
-              this.list = this.list.concat(data)
-            }
-            mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
-          } else {
-            mescroll.endSuccess(data.length)
-            this.list = data
-          }
-          this.loading = false
           if (page.num === 1) {
-            if (this.alertMsg) {
-              this.showDownloadTip()
-            }
-            setTimeout(() => {
-              this.hideDownloadTip()
-            }, 2000)
+            this.list = data
             this.$emit('prevSuccessCallback', this.list)
           } else {
+            this.list = data.concat(this.list)
             this.$emit('nextSuccessCallback', this.list)
           }
-        }, () => {
-          mescroll.endErr()
+          mescroll.endSuccess(data.length, !!this.response.data.data.next_page_url)
+
+//          if (!this.response.data.data.next_page_url) {
+//            mescroll.lockDownScroll(true)
+//          }
         })
       },
       getData (pageNum, pageSize, successCallback, errorCallback) {
         try {
           var param = {}
-          if (pageNum === 0) {
+          param.page = pageNum
+          if (pageNum === 1) {
             param = Object.assign(param, this.localPrevOtherData)
           } else {
-            param.page = pageNum
             param = Object.assign(param, this.nextOtherData)
           }
-
-          if (!this.pageMode) {
-            param.bottom_id = this.bottomId
-          }
-
-          console.log(param)
 
           postRequest(this.api, param, false, {}, 0, false).then(response => {
             var code = response.data.code
@@ -242,17 +213,12 @@
               window.mui.toast(response.data.message)
               return
             }
+            this.loading = false
             this.response = response
-
-            var list = response.data.data
-
             this.alertMsg = response.data.data.alert_msg || ''
 
-            if (this.pageMode) {
-              list = response.data.data.data
-              this.currentPage = response.data.data.current_page
-            }
-
+            var list = response.data.data.data
+            this.currentPage = response.data.data.current_page
             successCallback && successCallback(list)
           }).catch((e) => {
             errorCallback && errorCallback()
@@ -335,6 +301,11 @@
     -webkit-transition: top 300ms;
     transition: top 300ms;
   }
+
+  .hiddenUp{
+    position: absolute;
+    bottom:999px; /* px不转换 */
+  }
 </style>
 
 <style scoped="scoped">
@@ -346,4 +317,5 @@
     left:0;
     bottom:0;
   }
+
 </style>

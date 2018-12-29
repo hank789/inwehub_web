@@ -78,7 +78,6 @@
   </div>
 </template>
 <script>
-  import RefreshList from '../components/refresh/List.vue'
   import { postRequest } from '../utils/request'
   import Share from '../components/Share.vue'
   import { getInviteAnswerDetail } from '../utils/shareTemplate'
@@ -117,7 +116,6 @@
 
     },
     components: {
-      RefreshList,
       Share
     },
     methods: {

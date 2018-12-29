@@ -92,42 +92,31 @@
 
         this.images.push(imgInfo)
 
+        var newurl = window.plus.io.convertLocalFileSystemURL(path)
+        if (window.mui.os.ios) {
+          newurl = 'file://' + newurl
+        }
+
+        console.log('上传的图片地址:' + newurl)
         var t = this
-        window.plus.zip.compressImage({
-          src: path,
-          dst: '_doc/image_compressed_' + index + '.jpg',
-          overwrite: true,
-          // width: '27.306rem',
-          quality: 100},
-          function (event) {
-            var newurl = window.plus.io.convertLocalFileSystemURL(event.target)
-            if (window.mui.os.ios) {
-              newurl = 'file://' + newurl
-            }
 
-            console.log('上传的图片地址:' + newurl)
-
-            var bitmap = new window.plus.nativeObj.Bitmap('test')
-            bitmap.load(newurl, function () {
-              var base64 = bitmap.toBase64Data()
-              for (var imgI = 0; imgI < t.images.length; imgI++) {
-                if (t.images[imgI].index === index) {
-                  t.images[imgI].base64 = base64
-                  t.finishImgCount++
-                  break
-                }
-              }
-              if (t.finishImgCount === t.selectImgCount) {
-                t.$emit('success', t.images)
-              }
-            }, function (e) {
+        var bitmap = new window.plus.nativeObj.Bitmap('test')
+        bitmap.load(newurl, function () {
+          var base64 = bitmap.toBase64Data()
+          for (var imgI = 0; imgI < t.images.length; imgI++) {
+            if (t.images[imgI].index === index) {
+              t.images[imgI].base64 = base64
               t.finishImgCount++
-              console.log('加载图片失败：' + JSON.stringify(e))
-            })
-          }, function (error) {
-            t.finishImgCount++
-            console.error(error.message)
-          })
+              break
+            }
+          }
+          if (t.finishImgCount === t.selectImgCount) {
+            t.$emit('success', t.images)
+          }
+        }, function (e) {
+          t.finishImgCount++
+          console.log('加载图片失败：' + JSON.stringify(e))
+        })
       },
       galleryImg: function () {
         window.plus.gallery.pick((a) => {

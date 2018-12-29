@@ -88,7 +88,7 @@
 </template>
 <script>
   import { postRequest } from '../../utils/request'
-  import RefreshList from '../../components/refresh/List.vue'
+  import RefreshList from '../../components/refresh/MescrollList.vue'
   import TagsInfo from '../../components/tags/TagsInfo.vue'
   import localEvent from '../../stores/localStorage'
   const currentUser = localEvent.getLocalItem('UserInfo')
@@ -119,6 +119,17 @@
       nextOtherData () {
         return {tag_name: this.tagName}
       }
+    },
+    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+      next(vm => {
+        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
+        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+      })
+    },
+    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
+      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      next()
     },
     methods: {
       refreshPageData () {
@@ -400,12 +411,12 @@
   }
 
   .listWrapper{
-    top:4.584rem;
+    top:4.584rem !important;
   }
 
-  /*.hasFollowers .listWrapper{*/
-    /*top: 6.29rem;*/
-  /*}*/
+  /*.hasFollowers .listWrapper{
+    top:4.584rem !important;
+  }*/
   .mui-table-view-cell:after{
     display: none;
   }

@@ -1,8 +1,18 @@
+<!--suppress ALL -->
 <template>
   <div class="resume">
 
     <div class="mui-content">
 
+      <header class="mui-bar mui-bar-nav content-header-hide headersWrapperTop">
+        <Back></Back>
+        <h1 class="mui-title">个人名片</h1>
+        <div class="openNotice share">
+          <svg class="icon" aria-hidden="true"  @tap.stop.prevent="share">
+            <use xlink:href="#icon-shoucang-xiao"></use>
+          </svg>
+        </div>
+      </header>
 
       <RefreshList
         ref="RefreshList"
@@ -13,112 +23,109 @@
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
         :autoShowEmpty="false"
-        :list="list"
+        @prevSuccessCallback="prevSuccessCallback"
         :emptyDescription="emptyDescription"
         class="listWrapper"
       >
 
-        <header class="mui-bar mui-bar-nav content-header-hide">
-          <Back></Back>
-          <h1 class="mui-title">个人信息</h1>
-          <div class="openNotice share">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shoucang-xiao"></use>
-            </svg>
-          </div>
-        </header>
-
-        <div class="header">
+        <div class="infoBg">
           <img :src="resume.info.avatar_url" class="avatar"/>
           <div class="backMask"></div>
-          <div class="headerBack">
-            <div @tap.stop.prevent="goBack">
+        </div>
+        <div class="muiContent">
+        <div class="header-wrapper">
+          <div class="headers">
+            <!--<img :src="resume.info.avatar_url" class="avatar"/>-->
+            <!--<div class="backMask"></div>-->
+            <div class="headerBack">
+              <div @tap.stop.prevent="goBack">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-fanhui"></use>
+                </svg>
+              </div>
+            </div>
+            <div class="title font-family-medium">个人名片</div>
+            <div class="openNotice share" @tap.stop.prevent="share">
               <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-fanhui"></use>
+                <use xlink:href="#icon-shoucang-xiao"></use>
               </svg>
             </div>
-          </div>
-          <div class="title font-family-medium">个人名片</div>
-          <div class="openNotice share">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-shoucang-xiao"></use>
-            </svg>
-          </div>
 
-          <div class="headPhotowrapper">
-            <div class="headImages">
-              <img :src="resume.info.avatar_url" class="avatar"/>
-            </div>
-            <div class="personalInfo">
-              <div class="nameAndLevel">
-                <span class="name font-family-medium">{{ resume.info.name }}</span>
-                <span class="level">L{{resume.info.user_level}}</span>
+            <div class="headPhotowrapper">
+              <div class="headImages">
+                <img :src="resume.info.avatar_url" class="avatar"/>
               </div>
-              <div class="detailInfo">
-                <span class="text">被赞</span><span class="number font-family-medium">{{resume.info.supports}}</span> <i></i> <span class="text">{{resume.info.total_score}}</span>
-              </div>
-              <div class="consultWrapper">
-                <div class="leftButton">
-                  <div class="border-football font-family-medium" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</div>
-                  <div class="border-football font-family-medium letter" v-if="uuid !== cuuid" @tap.stop.prevent="goChat()">发私信</div>
-                  <div class="border-football font-family-medium" v-if="uuid !== cuuid" @tap.stop.prevent="goAsk('/ask/'+uuid)">提问题</div>
+              <div class="personalInfo">
+                <div class="nameAndLevel">
+                  <span class="name font-family-medium">{{ resume.info.name }}</span>
+                  <span class="level">L{{resume.info.user_level}}</span>
                 </div>
-                <div class="rightDetailInfo" v-if="uuid !== cuuid">
-                  <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</span>
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-jinru"></use>
-                  </svg>
+                <div class="detailInfo">
+                  <span class="text">被赞</span><span class="number font-family-medium">{{resume.info.supports}}</span> <i></i> <span class="text">{{resume.info.total_score}}</span>
                 </div>
-              </div>
-              <div class="operationWrapper">
-                <div class="code iconAndText" @tap.stop.prevent="$router.pushPlus('/my/qrcode')">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-erweima"></use>
-                  </svg>
-                  <div class="word">个人码</div>
+                <div class="consultWrapper">
+                  <div class="leftButton">
+                    <div class="border-football font-family-medium" v-show="uuid == cuuid" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</div>
+                    <div class="border-football font-family-medium letter" v-if="uuid !== cuuid" @tap.stop.prevent="goChat()">发私信</div>
+                    <div class="border-football font-family-medium" v-if="uuid !== cuuid" @tap.stop.prevent="goAsk('/ask/'+uuid)">提问题</div>
+                  </div>
+                  <div class="rightDetailInfo" v-if="uuid !== cuuid">
+                    <span class="font-family-medium" @tap.stop.prevent="$router.pushPlus('/my/detailInfo/' + resume.info.uuid)">详细资料</span>
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-jinru"></use>
+                    </svg>
+                  </div>
                 </div>
-                <div class="iconAndText" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucang"></use>
-                  </svg>
-                  <div class="word">关注</div>
-                </div>
-                <div class="active iconAndText" @tap.stop.prevent="collectProfessor"
-                     v-show="uuid !== cuuid && resume.is_followed">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-shoucanghover"></use>
-                  </svg>
-                  <div class="word">已关注</div>
+                <div class="operationWrapper">
+                  <div class="code iconAndText" @tap.stop.prevent="$router.pushPlus('/my/qrcode?id=' + resume.info.uuid)">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-erweima"></use>
+                    </svg>
+                    <div class="word">个人码</div>
+                  </div>
+                  <div class="iconAndText" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shoucang"></use>
+                    </svg>
+                    <div class="word">关注</div>
+                  </div>
+                  <div class="active iconAndText" @tap.stop.prevent="collectProfessor"
+                       v-show="uuid !== cuuid && resume.is_followed">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-shoucanghover"></use>
+                    </svg>
+                    <div class="word">已关注</div>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="counter">
-              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">
-                <span class="font-family-medium">{{resume.info.followed_number}}</span>
-                <span class="script">谁关注Ta</span>
-              </div>
+              <div class="counter">
+                <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/focus/'+uuid)">
+                  <span class="font-family-medium">{{resume.info.followed_number}}</span>
+                  <span class="script">谁关注Ta</span>
+                </div>
 
-              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/followed/'+uuid)">
-                <span class="font-family-medium">{{resume.info.follow_user_number}}</span>
-                <span class="script">Ta关注谁</span>
-              </div>
+                <div class="counterList" @tap.stop.prevent="$router.pushPlus('/followed/'+uuid)">
+                  <span class="font-family-medium">{{resume.info.follow_user_number}}</span>
+                  <span class="script">Ta关注谁</span>
+                </div>
 
-              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
-                <span class="font-family-medium">{{resume.info.publishes}}</span>
-                <span class="script">发布</span>
-              </div>
+                <div class="counterList" @tap.stop.prevent="$router.pushPlus('/my/publishAnswers/'+uuid)">
+                  <span class="font-family-medium">{{resume.info.publishes}}</span>
+                  <span class="script">发布</span>
+                </div>
 
-              <div class="counterList" @tap.stop.prevent="$router.pushPlus('/group/my/'+uuid)">
-                <span class="font-family-medium">{{resume.info.group_number}}</span>
-                <span class="script">圈子</span>
+                <div class="counterList" @tap.stop.prevent="$router.pushPlus('/group/my/'+uuid)">
+                  <span class="font-family-medium">{{resume.info.group_number}}</span>
+                  <span class="script">圈子</span>
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
 
-        <div class="domainWrapper">
+        <div class="domainWrapper" v-if="resume.info.skill_tags.length > 0 || uuid === cuuid">
           <div class="skilledTags">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-shanchang"></use>
@@ -128,7 +135,7 @@
           <template v-for="(industry, index) in resume.info.skill_tags">
             <div class="tags" @tap.stop.prevent="toTagDetail(industry.text)"><span>{{industry.text}}</span></div>
           </template>
-          <div class="addTags" @tap.stop.prevent="$router.pushPlus('/my/advantage')" v-show="uuid == cuuid">
+          <div class="addTags" v-show="uuid == cuuid" @tap.stop.prevent="$router.pushPlus('/my/advantage')">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-plus--"></use>
             </svg>{{ resume.info.skill_tags.length < 1 ? '添加专业形象，对接更多机遇':'添加' }}
@@ -164,15 +171,23 @@
 
           </template>
 
-          <div class="noDynamic goAddpage" >
+          <div class="noDynamic goAddpage" v-show="uuid !== cuuid && !list.length">
             <div class="empty-IconImg">
               <img src="../../statics/images/empty@3x.png" alt="">
             </div>
-            <span>{{ list.length ? '暂无更多，继续发布你的分享吧~' : '快来创建你的第一条分享吧~' }}</span>
+            <span>Ta还没有发布分享哦~</span>
+          </div>
+
+          <div class="noDynamic goAddpage" v-show="uuid === cuuid && !list.length" >
+            <div class="empty-IconImg">
+              <img src="../../statics/images/empty@3x.png" alt="">
+            </div>
+            <span>快来创建你的第一条分享吧</span>
             <div class="releaseButton" @tap.stop.prevent="$router.pushPlus('/discover/add')">
               <button>发分享</button>
             </div>
           </div>
+        </div>
 
         </div>
 
@@ -215,7 +230,7 @@
   import userAbility from '../../utils/userAbility'
   import { getResumeDetail } from '../../utils/shareTemplate'
   import { isLogined } from '../../utils/auth'
-  import RefreshList from '../../components/refresh/List.vue'
+  import RefreshList from '../../components/refresh/MescrollList.vue'
   import { textToLinkHtml, secureHtml, transferTagToLink } from '../../utils/dom'
   import FeedItem from '../../components/Feed.vue'
   import PageMore from '../../components/PageMore.vue'
@@ -300,7 +315,37 @@
     created () {
       this.getData()
     },
+    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+      next(vm => {
+        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
+        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+        if (window.mui.os.plus) {
+          document.querySelector('.mui-content').classList.add('mui-content-top-0')
+          document.querySelector('#immersedWrapper').classList.add('immersedWrapperNone')
+        }
+        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter()
+      })
+    },
+    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
+      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      if (window.mui.os.plus) {
+        document.querySelector('.mui-content').classList.remove('mui-content-top-0')
+        document.querySelector('#immersedWrapper').classList.remove('immersedWrapperNone')
+      }
+      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave()
+      next()
+    },
     mounted () {
+      for (var i = 16; i < 50; i++) {
+        if (document.querySelector('.immersed' + i + ' ' + '.muiContent')) {
+          document.querySelector('.immersed' + i + ' ' + '.muiContent').style.top = i * 0.0266  + 'rem'
+          document.querySelector('.immersed' + i + ' ' + '.resume' + ' ' + '.mui-bar').style.height = i * 0.0266 + 1.173 + 'rem'
+          document.querySelector('.immersed' + i + ' ' + '.resume' + ' ' + '.mui-bar').style.paddingTop = i * 0.0266 + 'rem'
+
+        }
+      }
+
       window.addEventListener('refreshData', (e) => {
         // 执行刷新
         console.log('refresh-resume')
@@ -308,6 +353,18 @@
       })
     },
     methods: {
+      prevSuccessCallback () {
+        this.$refs.RefreshList.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          if (y >= 150) {
+            document.querySelector('.content-header-hide').classList.add('showHeader')
+            document.querySelector('.content-header-hide').style.opacity = y / 250
+          } else {
+            document.querySelector('.content-header-hide').classList.remove('showHeader')
+            document.querySelector('.content-header-hide').style.opacity = y / 250
+          }
+        }
+      },
       goBack () {
         window.mui.back()
       },
@@ -360,7 +417,7 @@
         var from = this.$router.currentRoute.name
         // var fullUrl = process.env.H5_ROOT
 
-        if (from === 'share-resume' || from === 'share-resume-old') {
+        if (from === 'share-newResume' || from === 'share-newResume-old') {
           this.isShare = true
           this.uuid = this.$route.query.id || this.$route.params.id
         }
@@ -502,6 +559,12 @@
 <style scoped lang="less">
   .mui-content {
     background: #ffffff;}
+
+  .showHeader {
+    position: relative;
+    z-index: 9999;
+    display: block !important;
+  }
   .bot {
     position: absolute;
     right: 0.373rem;
@@ -513,13 +576,16 @@
     background-color: rgb(220, 220, 220);
     /*border: 0.026rem solid #dcdcdc;*/
   }
+  .marginTop {
+    margin-top: 1.333rem;
+  }
 
   .content-header-hide {
     display: none;
   }
   .mui-bar-nav {
     transition: all ease-out .3s;
-    top: 0 !important;
+    top: 0 ;
     .mui-title {
       /*color: #ffffff;*/
     }
@@ -538,9 +604,10 @@
     }
   }
 
-  .header {
+  .infoBg {
+    width: 100%;
     background: #1C3F6D;
-    position: relative;
+    position: absolute;
     height: 8.573rem;
     border-bottom-left-radius: 0.533rem;
     border-bottom-right-radius: 0.533rem;
@@ -551,14 +618,6 @@
       border-bottom-left-radius: 0.533rem;
       border-bottom-right-radius: 0.533rem;
     }
-    .title {
-      position: absolute;
-      top: 0.266rem;
-      left: 50%;
-      font-size: 0.48rem;
-      color: #FFFFFF;
-      transform: translateX(-50%);
-    }
     .backMask {
       width: 100%;
       height: 100%;
@@ -568,6 +627,29 @@
       border-bottom-right-radius: 0.533rem;
       background:linear-gradient(360deg,rgba(27,68,194,1) 0%,rgba(81,167,254,0.8) 100%);
     }
+  }
+  .muiContent {
+    position: relative;
+    /*top: -8.573rem;*/
+  }
+  .header-wrapper {
+    height: 8.573rem;
+    /*position: absolute;*/
+    /*margin-top: -8.573rem;*/
+    position: relative;
+  }
+  .headers {
+    position: relative;
+    /*height: 8.573rem;*/
+    .title {
+      position: absolute;
+      top: 0.266rem;
+      left: 50%;
+      font-size: 0.48rem;
+      color: #FFFFFF;
+      transform: translateX(-50%);
+    }
+
     .headerBack {
       /*width: 100%;*/
       display: flex;
@@ -863,6 +945,19 @@
       }
     }
   }
-
 </style>
 
+<style>
+  .mui-content-top-0{
+    top:0 !important;
+  }
+  .immersedWrapperNone{
+    display: none !important;
+  }
+  .openAppH5 .resume .mui-bar-nav {
+    top: 0 !important;
+  }
+  .mescroll {
+    position: relative;
+  }
+</style>

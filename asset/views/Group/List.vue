@@ -20,7 +20,7 @@
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        :list="list"
+        
         :api="'group/mine'"
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"

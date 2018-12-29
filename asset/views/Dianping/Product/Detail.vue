@@ -10,8 +10,11 @@
       </div>
     </header>
     <div class="mui-content" v-show="!loading">
-
-      <vue-pull-refresh :on-refresh="refreshPageData" id="pullDownContainer">
+      <MescrollDetail
+        ref="mescrollDetail"
+        @refreshPageData="refreshPageData"
+        @init="init"
+      >
         <div class="product-introduce">
           <div class="companyLogo border-football">
             <img class="lazyImg" v-lazy="detail.logo" alt="">
@@ -152,7 +155,7 @@
           <div class="text">如果您有任何关于该产品服务相关问题或信息反馈，<span @tap.stop.prevent="$router.pushPlus('/dianping/product/feedback/' + encodeURIComponent(detail.name))">请点击</span></div>
         </div>
 
-      </vue-pull-refresh>
+      </MescrollDetail>
     </div>
 
     <FooterMenu
@@ -181,11 +184,11 @@
   const currentUser = localEvent.getLocalItem('UserInfo')
   import localEvent from '../../../stores/localStorage'
   import { urlencode } from '../../../utils/string'
-  import { scrollToElement, scrollPage } from '../../../utils/dom'
-  import VuePullRefresh from 'vue-awesome-pull-refresh'
+  import { scrollPage } from '../../../utils/dom'
   import starRating from '../../../components/star-rating/star-rating.vue'
   import StarView from '../../../components/star-rating/starView.vue'
   import { getLocalName } from '../../../utils/user.js'
+  import MescrollDetail from '../../../components/refresh/MescrollDetail.vue'
 
   export default {
     data () {
@@ -255,11 +258,21 @@
       feedDianping,
       FooterMenu,
       PageMore,
-      'vue-pull-refresh': VuePullRefresh,
       starRating,
-      StarView
+      StarView,
+      MescrollDetail
     },
     methods: {
+      init () {
+        this.$refs.mescrollDetail.mescroll.optDown.onScroll = function (mescroll, y, isUp) {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+//          if (y >= 150) {
+//            this.title = this.detail.name
+//          } else {
+//            this.title = '产品服务'
+//          }
+        }
+      },
       openApp () {
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
       },
@@ -285,9 +298,9 @@
       goChat (uid) {
         userAbility.jumpToChat(uid, this)
       },
-      refreshPageData () {
+      refreshPageData (loading = true) {
         let id = this.$route.params.id
-        this.loading = 1
+        this.loading = loading
         if (!id) {
           window.mui.toast('请求异常')
           window.mui.back()
@@ -295,12 +308,18 @@
         }
         this.id = id
 
+        if (this.$refs.mescrollDetail) {
+          this.$refs.mescrollDetail.scrollToTop(50)
+        }
+
         getProductDetail(this, id, (data) => {
+          if (this.$refs.mescrollDetail) {
+            this.$refs.mescrollDetail.finish()
+          }
           this.detail = data
           this.loading = 0
           this.title = '产品服务'
           this.getShareOption()
-          scrollToElement(this, '.product-introduce', '.pull-down-container')
         })
 
         getProductComments(this, id, 3, (productComments) => {
@@ -340,11 +359,6 @@
       }
     },
     mounted () {
-      scrollPage('.mui-content > #pullDownContainer', () => {
-        this.title = this.detail.name
-      }, null, () => {
-        this.title = '产品服务'
-      })
     },
     created () {
       this.refreshPageData()

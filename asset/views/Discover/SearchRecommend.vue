@@ -19,7 +19,7 @@
         :nextOtherData="{search_type: 6}"
         :pageMode = "true"
         :isShowUpToRefreshDescription="true"
-        :list="list"
+        
         :emptyDescription="emptyDescription"
         class="listWrapper"
       >
@@ -121,7 +121,7 @@
   import DiscoverShare from '../../components/feed/DiscoverShare.vue'
   import { openVendorUrl, openAppUrl } from '../../utils/plus'
 
-  import RefreshList from '../../components/refresh/List.vue'
+  import RefreshList from '../../components/refresh/MescrollList.vue'
   import Swiper from '../../components/home/Swiper.vue'
   import ServiceRecommendation from '../../components/feed/ServiceRecommendation'
   import { goThirdPartyArticle } from '../../utils/webview'
@@ -170,6 +170,17 @@
       if (this.$route.query.refresh) {
         this.$refs.RefreshList.refreshPageData(this.prevOtherData)
       }
+    },
+    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+      next(vm => {
+        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
+        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+      })
+    },
+    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
+      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      next()
     },
     methods: {
       messagecountchange (obj) {
@@ -386,8 +397,8 @@
     left: 0rem;
   }
   .listWrapper{
-    top:1.173rem;
-    bottom: 1.333rem;
+    top:1.173rem !important;
+    bottom: 1.333rem !important;
   }
   .followGroups{
     width: 100%;

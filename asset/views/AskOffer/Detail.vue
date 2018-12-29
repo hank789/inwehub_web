@@ -6,7 +6,10 @@
     </header>
 
     <div class="mui-content" v-show="!loading">
-      <vue-pull-refresh :on-refresh="refreshPageData">
+      <MescrollDetail
+        ref="mescrollDetail"
+        @refreshPageData="refreshPageData"
+      >
 
       <div class="container-label padding-lr-15" v-if="ask.question.tags.length">
         <span class="border-football" v-for="(tag, index) in ask.question.tags" @tap.stop.prevent="toTagDetail(tag.name)">{{tag.name}}</span>
@@ -107,7 +110,7 @@
           <div class="river openAppReadRiver"></div>
         </div>
 
-      </vue-pull-refresh>
+      </MescrollDetail>
     </div>
 
     <Share
@@ -179,10 +182,10 @@
   import Comment from '../../components/question-detail/CommentNew.vue'
   import StarRating from '../../components/question-detail/StarRating.vue'
   import Vue from 'vue'
-  import VuePullRefresh from 'vue-awesome-pull-refresh'
   import {scrollToElement} from '../../utils/dom'
   import AlertTextarea from '../../components/comment/AlertTextarea.vue'
   import { showComment } from '../../utils/comment'
+  import MescrollDetail from '../../components/refresh/MescrollDetail.vue'
 
   const AskDetail = {
     data: () => ({
@@ -232,8 +235,8 @@
       pay,
       Comment,
       StarRating,
-      'vue-pull-refresh': VuePullRefresh,
-      AlertTextarea
+      AlertTextarea,
+      MescrollDetail
     },
     computed: {
       isNeedComment () {
@@ -486,10 +489,10 @@
         this.answer.comment_number++
         this.$refs.ctextarea.finish()
       },
-      refreshPageData () {
+      refreshPageData (loading = true) {
         this.$refs.ctextarea.refreshPageData()
         console.log('refreshPageData-zz-detail')
-        this.loading = 1
+        this.loading = loading
         this.getDetail()
       },
       shareSuccess () {},
@@ -531,6 +534,10 @@
 
         this.id = id
 
+        if (this.$refs.mescrollDetail) {
+          this.$refs.mescrollDetail.scrollToTop(50)
+        }
+
         postRequest(`answer/info`, {id: this.id}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -540,6 +547,10 @@
           }
 
           this.ask = response.data.data
+
+          if (this.$refs.mescrollDetail) {
+            this.$refs.mescrollDetail.finish()
+          }
 
           this.loading = 0
 

@@ -162,19 +162,19 @@
 
     </div>
 
-    <div class="buttonWrapper">
+    <div class="buttonWrapper" v-if="uuid === cuuid" v-show="!loading">
 
-      <div class="edit" @tap.stop.prevent="$router.pushPlus('/my/info')" v-if="uuid === cuuid" v-show="!loading">继续编辑</div>
+      <div class="edit" @tap.stop.prevent="$router.pushPlus('/my/info')">继续编辑</div>
 
-      <div class="consultWrapper" v-else v-show="!loading">
-        <div class="buttonLeft" @tap.stop.prevent="goChat()">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-faxiaoxi"></use>
-          </svg>
-          发私信
-        </div>
-        <div class="buttonRight" @tap.stop.prevent="goAsk('/ask/'+uuid)">向他咨询</div>
-      </div>
+      <!--<div class="consultWrapper" v-else v-show="!loading">-->
+        <!--<div class="buttonLeft" @tap.stop.prevent="goChat()">-->
+          <!--<svg class="icon" aria-hidden="true">-->
+            <!--<use xlink:href="#icon-faxiaoxi"></use>-->
+          <!--</svg>-->
+          <!--发私信-->
+        <!--</div>-->
+        <!--<div class="buttonRight" @tap.stop.prevent="goAsk('/ask/'+uuid)">向他咨询</div>-->
+      <!--</div>-->
     </div>
 
   </div>

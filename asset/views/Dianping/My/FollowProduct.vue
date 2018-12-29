@@ -55,7 +55,7 @@
 </template>
 
 <script>
-  import RefreshList from '../../../components/refresh/List.vue'
+  import RefreshList from '../../../components/refresh/MescrollList.vue'
   import StarView from '../../../components/star-rating/starView.vue'
 
   export default {
@@ -77,7 +77,7 @@
     background: #ffffff;
   }
   .listWrapper {
-    top: 1.04rem;
+    top: 1.04rem !important;
   }
 
   .container-searchMenu {

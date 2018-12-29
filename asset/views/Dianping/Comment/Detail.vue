@@ -6,7 +6,10 @@
     </header>
 
     <div class="mui-content" v-if="!loading">
-      <vue-pull-refresh :on-refresh="refreshPageDataNoLoading">
+        <MescrollDetail
+          ref="mescrollDetail"
+          @refreshPageData="refreshPageDataNoLoading"
+        >
 
         <div class="mui-table-view detail-discover">
           <UserInfo
@@ -132,7 +135,7 @@
           <div class="river openAppReadRiver"></div>
         </div>
 
-      </vue-pull-refresh>
+      </MescrollDetail>
     </div>
     <commentTextarea ref="ctextarea" @sendMessage="sendMessage"></commentTextarea>
 
@@ -160,7 +163,6 @@
   import {postRequest} from '../../../utils/request'
   import UserInfo from '../../../components/question-detail/UserInfo.vue'
   import { openVendorUrl, openAppUrl } from '../../../utils/plus'
-  import VuePullRefresh from 'vue-awesome-pull-refresh'
   const currentUser = localEvent.getLocalItem('UserInfo')
   import localEvent from '../../../stores/localStorage'
   import ArticleDiscuss from '../../../components/discover/ArticleDiscuss.vue'
@@ -174,6 +176,7 @@
   import Detail from '../../../components/menu/Detail.vue'
   import AlertTextarea from '../../../components/comment/AlertTextarea.vue'
   import { showComment } from '../../../utils/comment'
+  import MescrollDetail from '../../../components/refresh/MescrollDetail.vue'
 
   export default {
     data () {
@@ -219,10 +222,10 @@
       commentTextarea,
       quillEditor,
       PageMore,
-      'vue-pull-refresh': VuePullRefresh,
       StarView,
       Detail,
-      AlertTextarea
+      AlertTextarea,
+      MescrollDetail
     },
     computed: {
       discussStoreParams () {
@@ -554,7 +557,15 @@
       getDetail (loading = 1) {
         this.loading = loading
         this.id = this.$route.params.id
+
+        if (this.$refs.mescrollDetail) {
+          this.$refs.mescrollDetail.scrollToTop(50)
+        }
+
         getCommentDetail(this, this.id, (detail) => {
+          if (this.$refs.mescrollDetail) {
+            this.$refs.mescrollDetail.finish()
+          }
           this.detail = detail
           // this.showItemOptions()
           var shareOption = getDianpingCommentDetail(this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.rate_star)

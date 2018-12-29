@@ -64,12 +64,12 @@
                 全部
               </div>
               <div class="container-tabLabels">
-                <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
-                  <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
-                  <span class="tab" :class="{active:selectTagValue === tag.value}"
-                        @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
-                  </swiper-slide>
-                </swiper>
+                <div class="container-upload-images mescroll-touch-x scrollx">
+                  <div class="scrollx-content">
+                    <span v-for="(tag, index) in tags" :key="index" :class="{active:selectTagValue === tag.value}" class="tagLabel tab" :tagId="tag.value" @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
+                  </div>
+
+                </div>
               </div>
               <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
                 <svg class="icon" aria-hidden="true">
@@ -138,10 +138,22 @@
       return {
         loading: true,
         list: [],
+        dataBannerSliderInit: false,
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
-          freeMode: true
+          freeMode: true,
+          on: {
+            setTranslate: (translate) => {
+              if (this.outTags.translate !== translate) {
+                this.outTags.setTranslate(translate)
+              }
+
+              if (this.inTags.translate !== translate) {
+                this.inTags.setTranslate(translate)
+              }
+            }
+          }
         },
         data: {
           banners: []
@@ -231,11 +243,15 @@
 
         getHomeData((data) => {
           this.data = data
-          setTimeout(() => {
-            window.mui('#home_banner_slider').slider({
-              interval: 5000
-            })
-          }, 100)
+          if (!this.dataBannerSliderInit) {
+            this.dataBannerSliderInit = true
+
+            setTimeout(() => {
+              window.mui('#home_banner_slider').slider({
+                interval: 5000
+              })
+            }, 100)
+          }
         })
       },
       toDetail (item) {
@@ -283,27 +299,21 @@
       }
 
       saveLocationInfo()
-
-      // 左滑
-      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
-        var angle = Math.abs(e.detail.angle)
-        if (angle >= 160) {
-          this.$router.replace('/discover')
-        }
-      })
-      // 右滑
-      document.getElementById('home-content').addEventListener('swiperight', (e) => {
-        var angle = Math.abs(e.detail.angle)
-        if (angle <= 20) {
-          this.$router.replace('/discover')
-        }
-      })
     }
   }
   export default Home
 </script>
 
 <style lang="less" scoped>
+  .scrollx{
+    height: 0.96rem;
+    overflow: hidden;
+  }
+  .scrollx-content{
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
   .mui-slider {
     width: 9.145rem;
     height: 3.626rem;
@@ -343,19 +353,15 @@
 
   .refreshListWrapper {
     top: 1.173rem !important;
-    bottom: 50px !important; /* px不转换 */
+    bottom: 50px; /* px不转换 */
   }
 
   .component-title-iconAndText .iconAndTextLeft .icon {
     color: #FA4975 !important;
   }
 
-  .homeMuiSlider{
-    margin-bottom: 0.266rem;
-  }
-
   .container-tags-home-margin {
-    margin-top: 0
+    margin-top: 0.266rem;
   }
 
   .container-tags-home-hide {

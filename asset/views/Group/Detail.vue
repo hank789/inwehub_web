@@ -97,8 +97,7 @@
           :isShowUpToRefreshDescription="true"
           :autoShowEmpty="false"
           :isLoadingByRefresh="false"
-          :list="list"
-          :prevSuccessCallback="prevSuccessCallback"
+          @prevSuccessCallback="prevSuccessCallback"
           class="listWrapper"
         >
           <div>
@@ -213,7 +212,7 @@
 </template>
 
 <script>
-  import RefreshList from '../../components/refresh/List.vue'
+  import RefreshList from '../../components/refresh/MescrollList.vue'
   import GroupsInfo from '../../components/groups/GroupsInfo.vue'
   import SubmitReadhubAriticle from '../../components/feed/SubmitReadhubAriticle'
   import DiscoverShare from '../../components/feed/DiscoverShare.vue'
@@ -301,21 +300,29 @@
         }
       }
     },
+    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+      next(vm => {
+        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
+        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+      })
+    },
+    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
+      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      next()
+    },
     methods: {
       prevSuccessCallback () {
-        scrollPage('#refreshContainer > .mui-scroll', (container, y) => {
-          // var headerBackHeader = document.querySelector('.headerBack').clientHeight
-          if (y > 150) {
+        this.$refs.RefreshList.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          if (y >= 150) {
             document.querySelector('.content-header-hide').classList.add('showHeader')
             document.querySelector('.content-header-hide').style.opacity = y / 250
-          }
-        }, null, (container, y) => {
-          // var headerBackHeader = document.querySelector('.headerBack').clientHeight
-          if (y < 150) {
+          } else {
             document.querySelector('.content-header-hide').classList.remove('showHeader')
+            document.querySelector('.content-header-hide').style.opacity = y / 250
           }
-          document.querySelector('.content-header-hide').style.opacity = y / 250
-        })
+        }
       },
       iconMenusClickedItem (item) {
         iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
@@ -587,7 +594,7 @@
     flex-direction: row;
     justify-content: space-around;
     line-height: 1.04rem;
-    position: absolute;
+    position: relative;
     span {
       position: relative;
       margin-bottom: -0.293rem;
@@ -611,7 +618,6 @@
     margin-top: 1.306rem;
   }
   .listWrapper{
-    padding-bottom: 2.853rem;
   }
   .Nothing {
     width: 5.626rem;

@@ -5,7 +5,6 @@ import FindPassword from '../../../views/FindPassword.vue'
 import ActivityActiveList from '../../../views/Activity/ActiveList.vue'
 import Feed from '../../../views/Feed.vue'
 import Home from '../../../views/Home.vue'
-import Domain from '../../../views/Domain.vue'
 import SearchSearchQuestion from '../../../views/Search/SearchQuestion.vue'
 import SearchSearchSubmission from '../../../views/Search/SearchSubmission.vue'
 import SearchSearchTag from '../../../views/Search/SearchTag.vue'
@@ -413,7 +412,6 @@ export {
   AskOfferDetail,
   NewcomerGuidanceStepGroup,
   ShareReview,
-  Domain,
   ComponentsComment,
   AccountMyCode,
   AccountChoiceRole,

@@ -259,7 +259,7 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
 
   var proObj = addAccessToken(timeout).post(createAPI(url), data, config)
     .then(response => {
-      if (options.onUploadProgress) {
+      if (options.onUploadProgress && !options.disableAutoClose) {
         window.mui.closeUploadWaiting()
       }
 

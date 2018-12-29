@@ -62,19 +62,6 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
-  { // message
-    path: '/domain',
-    name: 'domain',
-    meta: {
-      title: 'InweHub',
-      wechatHideHeader: true,
-      keepAlive: true
-    },
-    component: componets.Domain,
-    beforeEnter: (to, from, next) => {
-      requestAuth(to, from, next)
-    }
-  },
   { // feed
     path: '/feed',
     name: 'feed',
@@ -1132,7 +1119,7 @@ const routes = [
     }
   },
   { // 个人名片
-    path: '/my/resume',
+    path: '/my/oldResume',
     name: 'my-resume',
     component: componets.AccountResume,
     meta: {
@@ -1145,7 +1132,7 @@ const routes = [
 
   },
   { // 新个人名片
-    path: '/my/newResume',
+    path: '/my/resume',
     name: 'my-newResume',
     component: componets.AccountNewResume,
     meta: {
@@ -1155,10 +1142,36 @@ const routes = [
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
-
   },
-  { // 共享个人名片
+
+  { // 新的共享个人名片
     path: '/share/resume',
+    name: 'share-newResume-old',
+    component: componets.AccountNewResume,
+    meta: {
+      title: '分享名片',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+
+  { // 新的共享个人名片
+    path: '/share/resume/:id',
+    name: 'share-newResume',
+    component: componets.AccountNewResume,
+    meta: {
+      title: '分享名片',
+      wechatHideHeader: true
+    },
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+
+  { // 共享个人名片
+    path: '/share/oldResume',
     name: 'share-resume-old',
     component: componets.AccountResume,
     meta: {
@@ -1170,7 +1183,7 @@ const routes = [
     }
   },
   { // 共享个人名片
-    path: '/share/resume/:id',
+    path: '/share/oldResume/:id',
     name: 'share-resume',
     component: componets.AccountResume,
     meta: {
