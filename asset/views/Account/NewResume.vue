@@ -4,7 +4,7 @@
 
     <div class="mui-content">
 
-      <header class="mui-bar mui-bar-nav content-header-hide">
+      <header class="mui-bar mui-bar-nav content-header-hide headersWrapperTop">
         <Back></Back>
         <h1 class="mui-title">个人名片</h1>
         <div class="openNotice share">
@@ -337,10 +337,11 @@
       next()
     },
     mounted () {
-      console.log(document.querySelector('.immersed0' + ' ' + '.muiContent'), '代码')
       for (var i = 16; i < 50; i++) {
         if (document.querySelector('.immersed' + i + ' ' + '.muiContent')) {
           document.querySelector('.immersed' + i + ' ' + '.muiContent').style.top = i * 0.0266 - 8.573  + 'rem'
+          document.querySelector('.immersed' + i + ' ' + '.headersWrapperTop').style.top = i * 0.0266 + 'rem'
+
         }
       }
 
@@ -583,7 +584,7 @@
   }
   .mui-bar-nav {
     transition: all ease-out .3s;
-    top: 0 !important;
+    top: 0 ;
     .mui-title {
       /*color: #ffffff;*/
     }
@@ -603,8 +604,9 @@
   }
 
   .infoBg {
+    width: 100%;
     background: #1C3F6D;
-    position: relative;
+    position: absolute;
     height: 8.573rem;
     border-bottom-left-radius: 0.533rem;
     border-bottom-right-radius: 0.533rem;
@@ -627,7 +629,7 @@
   }
   .muiContent {
     position: relative;
-    top: -8.573rem;
+    /*top: -8.573rem;*/
   }
   .header-wrapper {
     height: 8.573rem;
@@ -950,5 +952,11 @@
   }
   .immersedWrapperNone{
     display: none !important;
+  }
+  .openAppH5 .mui-bar-nav {
+    top: 0 !important;
+  }
+  .mescroll {
+    position: relative;
   }
 </style>
