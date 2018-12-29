@@ -178,11 +178,11 @@
             <span>Ta还没有发布分享哦~</span>
           </div>
 
-          <div class="noDynamic goAddpage" v-show="uuid === cuuid">
+          <div class="noDynamic goAddpage" v-show="uuid === cuuid && !list.length" >
             <div class="empty-IconImg">
               <img src="../../statics/images/empty@3x.png" alt="">
             </div>
-            <span>{{ list.length ? '暂无更多，继续发布你的分享吧~' : '快来创建你的第一条分享吧~' }}</span>
+            <span>快来创建你的第一条分享吧</span>
             <div class="releaseButton" @tap.stop.prevent="$router.pushPlus('/discover/add')">
               <button>发分享</button>
             </div>
