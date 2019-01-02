@@ -2901,6 +2901,11 @@ a {
   display: -ms-flexbox;
   display: flex;
   position: relative; }
+.container-control-logoAndTabsAndSearch .addIcon {
+  font-size: 18px;
+  color: #444444;
+  padding-left: 15px;
+}
 .container-control-logoAndTabsAndSearch .logoIcon {
   font-size: 2.16rem;
   position: relative;
@@ -3347,7 +3352,7 @@ a {
   font-family:PingFangSC-Medium;
   color: #444444;}
 .container-tags-home .container-tabLabels {
-  width: 7.466rem;
+  width: 8.466rem;
   line-height: 0.906rem;
   float: left;}
 .container-tags-home .container-tabLabels .tab {
