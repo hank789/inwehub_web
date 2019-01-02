@@ -350,7 +350,7 @@
             return
           }
 
-          if (this.item.feed.submission_type === 'link') {
+          if (!window.mui.os.plus && this.item.feed.submission_type === 'link') {
             // 某些浏览器在非用户操作时阻止新窗口打开
             return
           }
