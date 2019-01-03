@@ -59,7 +59,7 @@
           <div class="seeMore" @tap.stop.prevent="$router.pushPlus('/login')">查看所有教育经历</div></div>
       </template>
       <template v-else>
-        <template v-if="percent < 90">
+        <template v-if="percent < 90 && !isSelf">
           <h5>工作经历</h5>
           <div class="component-warning">
             <svg class="icon" aria-hidden="true">
