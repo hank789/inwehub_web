@@ -10,6 +10,7 @@
         @listChange="listChange($event, index)"
         :pageMode="true"
         :autoShowEmpty="false"
+        v-if="config.autoShow"
       >
 
         <slot :name="'swiperList-' + index"></slot>
