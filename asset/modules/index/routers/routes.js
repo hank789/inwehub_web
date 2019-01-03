@@ -62,6 +62,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // message
+    path: '/home2',
+    name: 'home2',
+    meta: {
+      title: 'InweHub',
+      wechatHideHeader: true,
+      keepAlive: true
+    },
+    component: componets.Home2,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // feed
     path: '/feed',
     name: 'feed',
