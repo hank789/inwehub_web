@@ -3026,10 +3026,8 @@ a {
   font-size: 0.266rem;
   padding: 0 0.133rem;
   margin-right: 0.266rem; }
-
 .mui-android .component-item-article .itemArticleLeft .explain label {
-  line-height: 0.586rem;
-}
+  line-height: 0.586rem;}
 .component-item-article .itemArticleLeft .explain span {
   color: #03AEF9;
   font-size: 0.293rem;
@@ -3056,8 +3054,6 @@ a {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover; }
-
-
 .container-tabLabels .tab {
   display: inline-block;
   color: #808080;
@@ -3067,7 +3063,6 @@ a {
   border-radius: 0.106rem;
   margin-right: 0.133rem; }
 .container-tabLabels .tab.active {
-  /*background: #F3F4F6;*/
   color: #444;
   border: none;
   font-family:PingFangSC-Medium; }
@@ -3344,6 +3339,7 @@ a {
   justify-content: space-around;
   box-shadow:0rem 0.2rem 0.3rem 0rem rgba(240,242,245,1);}
 .container-tags-home .container-allTags {
+  position: relative;
   line-height: 0.906rem;
   padding-right: 0.24rem;
   padding-left: 0.426rem;
@@ -3351,11 +3347,23 @@ a {
 .container-tags-home .container-allTags.active {
   font-family:PingFangSC-Medium;
   color: #444444;}
+.container-tags-home .activeLine {
+  width: 16px;
+  height: 4px;
+  border-radius: 100px;
+  display: inline-block;
+  background: #03AEF9;
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 .container-tags-home .container-tabLabels {
   width: 8.466rem;
   line-height: 0.906rem;
   float: left;}
 .container-tags-home .container-tabLabels .tab {
+  position: relative;
   border: none;
   padding: 0 0.24rem;
   margin-right: 0;}

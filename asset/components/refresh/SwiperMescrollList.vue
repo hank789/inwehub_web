@@ -4,13 +4,15 @@
       <RefreshList
         :ref="'RefreshList_' + index"
         class="refreshListWrapper"
-        :api="'recommendRead'"
+        :api="config.api"
         :prevOtherData="config.data"
         :nextOtherData="config.data"
         @listChange="listChange($event, index)"
         :pageMode="true"
         :autoShowEmpty="false"
       >
+
+
 
         <slot :name="'swiperList-' + index"></slot>
         <!--<div v-for="(item, itemIndex) in lists[index]" :key="itemIndex">-->
