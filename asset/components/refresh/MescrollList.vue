@@ -266,6 +266,7 @@
     watch: {
       list: function (newValue) {
         this.$emit('input', newValue)
+        this.$emit('listChange', newValue)
       },
       prevOtherData: function (newValue, oldValue) {
         if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
