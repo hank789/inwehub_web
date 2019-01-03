@@ -83,13 +83,13 @@
                     </svg>
                     <div class="word">个人码</div>
                   </div>
-                  <div class="iconAndText" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
+                  <div class="iconAndText isFollowed" v-show="uuid !== cuuid && !resume.is_followed" @tap.stop.prevent="collectProfessor">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-shoucang"></use>
                     </svg>
                     <div class="word">关注</div>
                   </div>
-                  <div class="active iconAndText" @tap.stop.prevent="collectProfessor"
+                  <div class="active iconAndText isFollowed" @tap.stop.prevent="collectProfessor"
                        v-show="uuid !== cuuid && resume.is_followed">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-shoucanghover"></use>
@@ -140,10 +140,10 @@
               <use xlink:href="#icon-plus--"></use>
             </svg>{{ resume.info.skill_tags.length < 1 ? '添加专业形象，对接更多机遇':'添加' }}
           </div>
-          <div class="bot"></div>
+          <div class="bot" v-if="resume.info.article_count || uuid === cuuid"></div>
         </div>
 
-        <div class="specialColumn" v-if="resume.info.skill_tags.length > 0 || uuid === cuuid" @tap.stop.prevent="$router.pushPlus('/article/list/' + resume.info.uuid )">
+        <div class="specialColumn" v-if="resume.info.article_count || uuid === cuuid" @tap.stop.prevent="$router.pushPlus('/article/list/' + resume.info.uuid )">
           <div class="titleText">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-zhuanlan"></use>
@@ -157,7 +157,7 @@
           </div>
         </div>
 
-        <div class="gray"></div>
+        <div class="gray" v-if="resume.info.article_count || resume.info.skill_tags.length > 0 || uuid === cuuid"></div>
 
         <div class="description">
 
@@ -634,9 +634,8 @@
   }
   .header-wrapper {
     height: 8.573rem;
-    /*position: absolute;*/
-    /*margin-top: -8.573rem;*/
     position: relative;
+    margin-bottom: 0.986rem;
   }
   .headers {
     position: relative;
@@ -766,7 +765,7 @@
             }
             .icon {
               color: #FFFFFF;
-              font-size: 0.133rem;
+              font-size: 12px;
             }
           }
         }
@@ -778,6 +777,14 @@
           .iconAndText {
             width: 1.173rem;
             text-align: center;
+            &.isFollowed {
+              position: relative;
+              top: -6px;
+              margin-left: 6px;
+              .icon {
+                font-size: 30px;
+              }
+            }
             .word {
               color: #FFFFFF;
               font-size: 0.293rem;
@@ -785,7 +792,7 @@
             }
             &.code {
               .icon {
-                font-size: 0.56rem;
+                font-size: 23px;
               }
             }
             &.active {
@@ -839,7 +846,7 @@
     padding: 0 0.426rem;
     overflow: hidden;
     position: relative;
-    margin-top: 0.986rem;
+    /*margin-top: 0.986rem;*/
     .skilledTags {
       height: 1.173rem;
       line-height: 1.173rem;
