@@ -12,9 +12,10 @@
         :autoShowEmpty="false"
       >
 
-        <div v-for="(item, itemIndex) in lists[index]" :key="itemIndex">
-            {{ item.id }}
-        </div>
+        <slot :name="'swiperList-' + index"></slot>
+        <!--<div v-for="(item, itemIndex) in lists[index]" :key="itemIndex">-->
+            <!--{{ item.id }}-->
+        <!--</div>-->
 
       </RefreshList>
     </swiper-slide>
