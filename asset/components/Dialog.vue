@@ -604,8 +604,8 @@
       <div class="heat-wrapper">
         <div class="heatTop">
           <div class="left">
-            <div class="fire"><img src="../statics/images/fire@3x.png" alt=""></div>
-            <div class="heat"><img src="../statics/images/heat@2x.png" alt=""></div>
+            <div class="fire"><img src="../statics/images/fire@3x.png"></div>
+            <div class="heat"><img src="../statics/images/heat@2x.png"></div>
           </div>
           <div class="right">
             <div class="oneLine"></div>
@@ -631,7 +631,7 @@
               </span>
               <div class="text">评论<i>2</i></div>
             </div>
-            <div class="iconList">
+            <div class="iconList active">
               <div class="addNumber">
                 <span>+3</span>
               </div>
@@ -661,10 +661,7 @@
           <div class="bot"></div>
           <div class="title">设置精选</div>
           <div class="choiceList">
-            <span class="active">推荐</span>
-            <span>推荐</span>
-            <span>推荐</span>
-            <span>推荐</span>
+            <span class="" v-for="(item, index) in options.regions.region" :key="index">{{ item.text }}</span>
           </div>
         </div>
 
@@ -752,6 +749,9 @@
             description: '',
             logo: '',
             subscribers: ''
+          },
+          regions: {
+            region: []
           }
         }
       }
@@ -2286,6 +2286,10 @@
     margin: 0 15px;
     position: relative;
   }
+  .heat-wrapper .right .iconList.active .iconCircular {
+    color: #FFFFFF;
+    background: #03AEF9;
+  }
   .heat-wrapper .right .iconList .addNumber {
     height: 14px;
     line-height: 14px;
@@ -2396,7 +2400,7 @@
     display: inline-block;
     background: #F3F4F6;
     border-radius: 100px;
-    margin: 10px 5px 10px 0;
+    margin: 10px 10px 0px 0;
   }
   .choiceWrapper .choiceList span.active {
     background: #03AEF9;

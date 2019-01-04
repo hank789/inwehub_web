@@ -486,10 +486,10 @@ function alertReport (context, callback) {
 }
 
 // 首页加热度
-function alertHomeHeat (context) {
+function alertHomeHeat (context, regions) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
-    dialogObj.getHtml('homeHeat', {}, (html) => {
+    dialogObj.getHtml('homeHeat', {regions: {region: regions}}, (html) => {
       alertHtml(html, (num) => {
         if (num > -1) {
           return true
