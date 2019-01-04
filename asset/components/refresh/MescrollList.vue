@@ -263,6 +263,9 @@
         }
       }
     },
+    mounted () {
+      this.$emit('listMounted')
+    },
     watch: {
       list: function (newValue) {
         this.$emit('input', newValue)

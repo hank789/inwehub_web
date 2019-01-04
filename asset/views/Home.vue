@@ -1,23 +1,6 @@
 <template>
   <div>
     <div class="mui-content">
-
-      <!-- <div class="container-tags-home container-tags-home-margin isFiexd">
-        <div id="">
-          <div class="container-allTags" @tap.stop.prevent="getAllRecommend()">
-            全部
-          </div>
-          <div class="container-tabLabels">
-            <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
-              <swiper-slide v-for="(tag, index) in regions" :key="index" class="tagLabel">
-                    <span class="tab"
-                          @tap.stop.prevent="selectTag(tag)">{{ tag.text }}</span>
-              </swiper-slide>
-            </swiper>
-          </div>
-        </div>
-      </div> -->
-
       <div class="container-control-logoAndTabsAndSearch">
         <div class="topSearchWrapper" @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
           <div class="searchFrame">
@@ -27,7 +10,7 @@
             <span>搜产品、问答、圈子、内容</span>
           </div>
         </div>
-        <div class="addIcon">
+        <div class="addIcon" @tap.stop.prevent="jumpToDiscoverAdd">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-tianjia"></use>
           </svg>
@@ -58,13 +41,14 @@
         :listDataConfig="listDataConfig"
         v-model="lists"
         @curNavIndexChange="curNavIndexChange"
+        @listMounted="listMounted"
       >
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
-              <div class="container-wrapper">
+              <div class="container-wrapper" @tap.stop.prevent="toDetail(item)">
                 <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-riliyouse"></use>
@@ -117,16 +101,16 @@
 <script>
   import SwiperMescrollList from '../components/refresh/SwiperMescrollList.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import localEvent from '../stores/localStorage'
   import { postRequest } from '../utils/request'
   import { timeToHumanText, getTimestampByDateStr } from '../utils/time'
   import { alertHomeHeat } from '../utils/dialogList'
+  import { saveLocationInfo } from '../utils/allPlatform'
+  import userAbility from '../utils/userAbility'
 
   export default {
     data () {
       return {
         loading: true,
-        list: [],
         lists: [],
         regions: [],
         swiperOption: {
@@ -163,10 +147,38 @@
         return rs
       }
     },
-    activated: function () {
-      this.refreshPageData()
-    },
+    activated: function () {},
     methods: {
+      listMounted (index) {
+        var navWarp = document.querySelector('.dateWrapper')
+        console.dir(this)
+//        if (this.$refs.RefreshList.$refs.RefreshList_0.mescroll.os.ios) {
+//          navWarp.classList.add('nav-sticky')
+//        } else {
+//          navWarp.style.height = navWarp.offsetHeight + 'px'
+//          this.$refs.RefreshList.$refs.RefreshList_0.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
+//            console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+//            if (y >= navWarp.offsetTop) {
+//              navWarp.classList.add('nav-fixed')
+//            } else {
+//              navWarp.classList.remove('nav-fixed')
+//            }
+//          }
+//        }
+      },
+      toDetail (item) {
+        switch (item.type) {
+          case 'link':
+          case 'text':
+          case 'article':
+            this.$router.pushPlus('/c/' + item.category_id + '/' + item.slug)
+            break
+          default:
+        }
+      },
+      jumpToDiscoverAdd () {
+        userAbility.jumpToDiscoverAdd(this)
+      },
       addHeat () {
         alertHomeHeat(this)
       },
@@ -181,27 +193,17 @@
         }
       },
       selectTag (index) {
+        console.log('indexTAG:' + index)
         this.$refs.RefreshList.slideTo(index)
       },
       getAllRecommend () {
         this.type = 0
-        this.listDataConfig = [
-          {
-            api: 'readList',
-            data: {
-              tagFilter: ''
-            }
-          }
-        ]
+        this.$refs.RefreshList.slideTo(0)
       },
       curNavIndexChange (index) {
         this.type = index
       },
       refreshPageData () {
-        this.getHomeTags()
-        this.showData()
-      },
-      getHomeTags () {
         postRequest(`home`, {}).then(response => {
           var code = response.data.code
           if (code !== 1000) {
@@ -210,21 +212,12 @@
           }
           this.regions = response.data.data.regions
         })
-      },
-      prevSuccessCallback (data) {
-        localEvent.setLocalItem('HomeDataList', data)
-        this.$refs.RefreshList.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
-          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
-          if (y >= 44) {
-            document.querySelector('.isFiexd').classList.add('showTags')
-          } else {
-            document.querySelector('.isFiexd').classList.remove('showTags')
-          }
-        }
       }
     },
     mounted () {
       this.refreshPageData()
+
+      saveLocationInfo()
     }
   }
 </script>
@@ -387,7 +380,22 @@
   }
 
   .refreshListWrapper{
-    top: 3.92rem !important;
+    top: 78px !important;
     bottom: 1.333rem !important;
+  }
+
+  .nav-sticky {
+    z-index: 9999;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+
+  .nav-fixed{
+    z-index: 9999;
+    position: fixed;
+    top: 1.173rem;
+    left: 0;
+    width: 100%;
   }
 </style>

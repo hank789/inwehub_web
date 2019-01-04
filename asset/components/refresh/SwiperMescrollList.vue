@@ -10,6 +10,7 @@
         @listChange="listChange($event, index)"
         :pageMode="true"
         :autoShowEmpty="true"
+        @listMounted="listMounted($event, index)"
         v-if="config.autoShow"
       >
 
@@ -67,6 +68,9 @@
       }
     },
     methods: {
+      listMounted (event, index) {
+        this.$emit('listMounted', index)
+      },
       listChange (list, index) {
         Vue.set(this.lists, index, list)
         this.$emit('input', this.lists)
@@ -107,7 +111,7 @@
 
 <style scoped="scoped">
   .mescrollList-swiper-container{
-    position: fixed;
+    position: absolute;
     top: 2.133rem;
     left: 0;
     right: 0;
