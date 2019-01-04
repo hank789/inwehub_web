@@ -2902,9 +2902,9 @@ a {
   display: flex;
   position: relative; }
 .container-control-logoAndTabsAndSearch .addIcon {
-  font-size: 18px;
+  font-size: 0.48rem;
   color: #444444;
-  padding-left: 15px;
+  padding-left: 0.4rem;
 }
 .container-control-logoAndTabsAndSearch .logoIcon {
   font-size: 2.16rem;
@@ -3348,13 +3348,13 @@ a {
   font-family:PingFangSC-Medium;
   color: #444444;}
 .container-tags-home .activeLine {
-  width: 16px;
-  height: 4px;
-  border-radius: 100px;
+  width: 0.426rem;
+  height: 0.106rem;
+  border-radius: 2.666rem;
   display: inline-block;
   background: #03AEF9;
   position: absolute;
-  bottom: 2px;
+  bottom: 0.053rem;
   left: 50%;
   transform: translateX(-50%);
 }

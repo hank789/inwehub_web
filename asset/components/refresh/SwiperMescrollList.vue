@@ -108,7 +108,7 @@
 <style scoped="scoped">
   .mescrollList-swiper-container{
     position: fixed;
-    top: 80px;
+    top: 2.133rem;
     left: 0;
     right: 0;
     bottom: 0;
