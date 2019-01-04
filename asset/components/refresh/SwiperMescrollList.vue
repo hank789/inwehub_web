@@ -81,6 +81,9 @@
 
         // 定位菜单
         this.$emit('curNavIndexChange', this.curNavIndex)
+      },
+      slideTo (i) {
+        this.swiper.slideTo(i, 1000)
       }
     }
   }
