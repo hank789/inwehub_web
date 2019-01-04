@@ -2256,7 +2256,7 @@
     height: 25px;
     position: relative;
     top: 5.5px;
-    margin-right: 8px;】
+    margin-right: 8px;
   }
   .heat-wrapper .left .fire img {
     width: 100%;
