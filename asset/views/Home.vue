@@ -233,17 +233,17 @@
   .mui-content {
     background: #FFFFFF;}
   .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
-    width: 310px;}
+    width: 8.266rem;}
   .tagLabel {
     width: auto !important;}
 
   .splitCircle {
     display: inline-block;
     position: relative;
-    top: -2px;
+    top: -0.053rem;
     border-radius: 50%;
-    width: 2px;
-    height: 2px;
+    width: 0.053rem;
+    height: 0.053rem;
     background: #B4B4B6;
   }
   .isFiexd {
@@ -255,36 +255,36 @@
     }
   }
   .container-wrapper {
-    /*margin-top: 15px;*/
+    /*margin-top: 0.4rem;*/
     .dateWrapper {
-      padding-left: 16px;
-      height: 21px;
+      padding-left: 0.426rem;
+      height: 0.56rem;
       display: inline-block;
-      line-height: 21px;
-      margin-bottom: 18px;
+      line-height: 0.56rem;
+      margin-bottom: 0.48rem;
       &.active {
-        /*width: 103px;*/
-        padding-right: 10px;
+        /*width: 2.746rem;*/
+        padding-right: 0.266rem;
         background: #03AEF9;
-        border-top-right-radius: 50px;
-        border-bottom-right-radius: 50px;
-        box-shadow:0px 5px 10px -2px rgba(205,215,220,1);
+        border-top-right-radius: 1.333rem;
+        border-bottom-right-radius: 1.333rem;
+        box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
         span {
           color: #FFFFFF;
           position: relative;
-          top: -1px;
+          top: -0.026rem;
         }
       }
       .icon {
-        font-size: 15px;
+        font-size: 0.4rem;
       }
       span {
         color: #444444;
-        font-size: 12px;
+        font-size: 0.32rem;
       }
     }
     .container-list {
-      padding: 0 16px 0 14px;
+      padding: 0 0.426rem 0 0.373rem;
       position: relative;
       .pointLine {
         display: inline-block;
@@ -292,89 +292,89 @@
         top: 0;
         .number {
           color: #444444;
-          font-size: 11px;
+          font-size: 0.293rem;
         }
         .splitCircle {
-          width: 4px;
-          height: 4px;
+          width: 0.106rem;
+          height: 0.106rem;
           z-index: 100;
           background: #444444;
         }
         .splitLine {
-          width: 1px;
-          height: 122px;
+          width: 0.026rem;
+          height: 3.253rem;
           display: inline-block;
           background: #DCDCDC;
           position: absolute;
-          top: 13px;
-          left: 1px;
+          top: 0.346rem;
+          left: 0.026rem;
           -webkit-transform: scaleX(0.5);
           transform: scaleX(0.5);
         }
       }
       .content {
-        width: 330px;
-        margin-left: 17.5px;
+        width: 8.8rem;
+        margin-left: 0.466rem;
         display: inline-block;
       }
       .top-time {
         span {
           color: #B4B4B6;
-          font-size: 11px;
-          line-height: 11px;
+          font-size: 0.293rem;
+          line-height: 0.293rem;
         }
       }
       .middle {
         /*display: flex;*/
         overflow: hidden;
-        margin-bottom: 20px;
+        margin-bottom: 0.533rem;
         .left {
-          width: 192px;
+          width: 5.12rem;
           display: inline-block;
           .title {
             color: #444444;
-            font-size: 16px;
-            line-height: 23px;
+            font-size: 0.426rem;
+            line-height: 0.613rem;
           }
           .heatWrapper {
-            height: 19px;
-            margin-top: 9px;
+            height: 0.506rem;
+            margin-top: 0.24rem;
             width: max-content;
-            padding: 0 5px;
+            padding: 0 0.133rem;
             span {
               color: #C8C8C8;
-              font-size: 11px;
-              margin-right: 4px;
+              font-size: 0.293rem;
+              margin-right: 0.106rem;
               position: relative;
-              top: -1px;
-              left: -2px;
+              top: -0.026rem;
+              left: -0.053rem;
             }
             .icon {
               position: relative;
-              top: -2px;
+              top: -0.053rem;
               &:nth-of-type(1) {
                 color: #FA4975;
-                font-size: 8.5px;
+                font-size: 0.226rem;
               }
               &:nth-of-type(2) {
                 color: #808080;
-                font-size: 9px;
+                font-size: 0.24rem;
               }
             }
           }
           .border-football {
             &:after {
-              border-radius: 8px;
+              border-radius: 0.213rem;
             }
           }
         }
         .right {
           float: right;
-          margin-right: 4px;
+          margin-right: 0.106rem;
           .articleImg {
-            width: 97px;
-            height: 71px;
-            border-radius: 4px;
+            width: 2.586rem;
+            height: 1.893rem;
+            border-radius: 0.106rem;
             overflow: hidden;
             img {
               width: 100%;
@@ -387,7 +387,7 @@
   }
 
   .refreshListWrapper{
-    top: 147px !important;
-    bottom: 50px !important;
+    top: 3.92rem !important;
+    bottom: 1.333rem !important;
   }
 </style>

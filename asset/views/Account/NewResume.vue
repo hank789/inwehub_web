@@ -765,7 +765,7 @@
             }
             .icon {
               color: #FFFFFF;
-              font-size: 12px;
+              font-size: 0.32rem;
             }
           }
         }
@@ -779,10 +779,10 @@
             text-align: center;
             &.isFollowed {
               position: relative;
-              top: -6px;
-              margin-left: 6px;
+              top: -0.16rem;
+              margin-left: 0.16rem;
               .icon {
-                font-size: 30px;
+                font-size: 0.8rem;
               }
             }
             .word {
@@ -792,7 +792,7 @@
             }
             &.code {
               .icon {
-                font-size: 23px;
+                font-size: 0.613rem;
               }
             }
             &.active {

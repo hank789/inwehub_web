@@ -2236,7 +2236,7 @@
     position: absolute;
     bottom: 0;
     z-index: 999;
-    padding-top: 20px;
+    padding-top: 0.533rem;
     background: #ffffff;
     border-top-left-radius: 0.48rem;
     border-top-right-radius: 0.48rem;
@@ -2256,15 +2256,15 @@
     height: 25px;
     position: relative;
     top: 5.5px;
-    margin-right: 8px;
+    margin-right: 8px;】
   }
   .heat-wrapper .left .fire img {
     width: 100%;
     height: 100%;
   }
   .heat-wrapper .left .heat {
-    width: 34px;
-    height: 36px;
+    width: 0.906rem;
+    height: 0.96rem;
   }
   .heat-wrapper .left .heat img {
     width: 100%;

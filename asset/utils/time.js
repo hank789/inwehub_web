@@ -93,7 +93,6 @@ function timeToHumanText (time) {
 
   if (createDate >= todayDate) {
     showDate = '今天' + createHumanDay
-
   } else if (createDate >= todayDate - 60 * 60 * 24) {
     showDate = '昨天' + createHumanDay
   } else if (createDate >= todayDate - 2 * 60 * 60 * 24) {
@@ -120,7 +119,7 @@ function timeToHumanText (time) {
  * 2019-01-04 14:52:00 => 1546584720
 */
 function getTimestampByDateStr (str) {
-  return new Date(str).getTime() / 1000
+  return new Date(str.replace(/-/g, '/')).getTime() / 1000
 }
 
 export {
