@@ -107,6 +107,11 @@
 
         // 定位菜单
         this.$emit('curNavIndexChange', this.curNavIndex)
+
+        setTimeout(() => {
+          var y = this.$refs.RefreshList[this.curNavIndex].mescroll.getScrollTop()
+          this.$emit('listScroll', this.curNavIndex, y, false)
+        }, 500)
       },
       slideTo (i) {
         var listDataConfig = this.localListDataConfig[i]
@@ -114,6 +119,11 @@
         Vue.set(this.localListDataConfig, i, listDataConfig)
 
         this.swiper.slideTo(i, 1000)
+
+        setTimeout(() => {
+          var y = this.$refs.RefreshList[i].mescroll.getScrollTop()
+          this.$emit('listScroll', this.curNavIndex, y, false)
+        }, 500)
       }
     },
     watch: {
