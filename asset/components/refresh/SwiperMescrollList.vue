@@ -71,15 +71,17 @@
     },
     methods: {
       listUpdated (event, index) {
-        var positionValues = []
-        var dateWrappers = this.$refs.RefreshList[index].$el.querySelectorAll('.dateWrapper')
-        for (var i = 0; i < dateWrappers.length; i++) {
-          var offsetTop = dateWrappers[i].offsetTop
-          var text = dateWrappers[i].innerText
-          positionValues.push({offsetTop: offsetTop, text: text})
-        }
+        if (this.$refs.RefreshList[index]) {
+          var positionValues = []
+          var dateWrappers = this.$refs.RefreshList[index].$el.querySelectorAll('.dateWrapper')
+          for (var i = 0; i < dateWrappers.length; i++) {
+            var offsetTop = dateWrappers[i].offsetTop
+            var text = dateWrappers[i].innerText
+            positionValues.push({offsetTop: offsetTop, text: text})
+          }
 
-        Vue.set(this.positionValues, index, positionValues)
+          Vue.set(this.positionValues, index, positionValues)
+        }
       },
       listMounted (event, index) {
         this.$refs.RefreshList[index].mescroll.optUp.onScroll = (mescroll, y, isUp) => {

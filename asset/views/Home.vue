@@ -41,7 +41,6 @@
         :listDataConfig="listDataConfig"
         v-model="lists"
         @curNavIndexChange="curNavIndexChange"
-        @listMounted="listMounted"
         @listScroll="listScroll"
       >
 
@@ -188,6 +187,7 @@
       },
       selectTag (index) {
         console.log('indexTAG:' + index)
+        this.$refs.inTags.swiper.slideTo(index - 1, 1000)
         this.$refs.RefreshList.slideTo(index)
       },
       getAllRecommend () {
@@ -196,6 +196,7 @@
       },
       curNavIndexChange (index) {
         this.type = index
+        this.$refs.inTags.swiper.slideTo(index - 1, 1000)
       },
       refreshPageData () {
         postRequest(`home`, {}).then(response => {
