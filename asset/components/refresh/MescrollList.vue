@@ -266,6 +266,11 @@
     mounted () {
       this.$emit('listMounted')
     },
+    updated () {
+      this.$nextTick(() => {
+        this.$emit('listUpdated')
+      })
+    },
     watch: {
       list: function (newValue) {
         this.$emit('input', newValue)

@@ -42,6 +42,7 @@
         v-model="lists"
         @curNavIndexChange="curNavIndexChange"
         @listMounted="listMounted"
+        @listScroll="listScroll"
       >
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
@@ -149,22 +150,15 @@
     },
     activated: function () {},
     methods: {
-      listMounted (index) {
-        var navWarp = document.querySelector('.dateWrapper')
-        console.dir(this)
-//        if (this.$refs.RefreshList.$refs.RefreshList_0.mescroll.os.ios) {
-//          navWarp.classList.add('nav-sticky')
-//        } else {
-//          navWarp.style.height = navWarp.offsetHeight + 'px'
-//          this.$refs.RefreshList.$refs.RefreshList_0.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
-//            console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
-//            if (y >= navWarp.offsetTop) {
-//              navWarp.classList.add('nav-fixed')
-//            } else {
-//              navWarp.classList.remove('nav-fixed')
-//            }
-//          }
-//        }
+      listScroll (index, y, isUp) {
+        var bmpPosition = ''
+        var positionValues = this.$refs.RefreshList.positionValues[index]
+        for (var i = 0; i < positionValues.length; i++) {
+          if (positionValues[i].offsetTop <= y) {
+            bmpPosition = positionValues[i].text
+          }
+        }
+        console.log(bmpPosition)
       },
       toDetail (item) {
         switch (item.type) {

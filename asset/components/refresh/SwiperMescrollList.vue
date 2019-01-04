@@ -2,7 +2,7 @@
   <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container">
     <swiper-slide v-for="(config, index) in localListDataConfig" :key="index">
       <RefreshList
-        :ref="'RefreshList_' + index"
+        :ref="'RefreshList'"
         class="refreshListWrapper"
         :api="config.api"
         :prevOtherData="config.data"
@@ -11,6 +11,7 @@
         :pageMode="true"
         :autoShowEmpty="true"
         @listMounted="listMounted($event, index)"
+        @listUpdated="listUpdated($event, index)"
         v-if="config.autoShow"
       >
 
@@ -34,6 +35,7 @@
       return {
         localListDataConfig: this.listDataConfig,
         curNavIndex: 0,
+        positionValues: [],
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
@@ -68,7 +70,23 @@
       }
     },
     methods: {
+      listUpdated (event, index) {
+        var positionValues = []
+        var dateWrappers = this.$refs.RefreshList[index].$el.querySelectorAll('.dateWrapper')
+        for (var i = 0; i < dateWrappers.length; i++) {
+          var offsetTop = dateWrappers[i].offsetTop
+          var text = dateWrappers[i].innerText
+          positionValues.push({offsetTop: offsetTop, text: text})
+        }
+
+        Vue.set(this.positionValues, index, positionValues)
+      },
       listMounted (event, index) {
+        this.$refs.RefreshList[index].mescroll.optUp.onScroll = (mescroll, y, isUp) => {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          this.$emit('listScroll', index, y, isUp)
+        }
+
         this.$emit('listMounted', index)
       },
       listChange (list, index) {
