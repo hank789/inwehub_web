@@ -1,6 +1,6 @@
 <template>
   <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container">
-    <swiper-slide v-for="(config, index) in listDataConfig" :key="index">
+    <swiper-slide v-for="(config, index) in localListDataConfig" :key="index">
       <RefreshList
         :ref="'RefreshList_' + index"
         class="refreshListWrapper"
@@ -33,6 +33,7 @@
   const SwiperMescrollList = {
     data () {
       return {
+        localListDataConfig: this.listDataConfig,
         curNavIndex: 0,
         swiperOption: {
           slidesPerView: 'auto',
@@ -70,7 +71,6 @@
     methods: {
       listChange (list, index) {
         Vue.set(this.lists, index, list)
-        this.lists[index] = list
         this.$emit('input', this.lists)
       },
       changePage (i) {
@@ -79,11 +79,26 @@
         }
         this.curNavIndex = i
 
+        var listDataConfig = this.localListDataConfig[i]
+        listDataConfig.autoShow = true
+        Vue.set(this.localListDataConfig, i, listDataConfig)
+
         // 定位菜单
         this.$emit('curNavIndexChange', this.curNavIndex)
       },
       slideTo (i) {
+        var listDataConfig = this.localListDataConfig[i]
+        listDataConfig.autoShow = true
+        Vue.set(this.localListDataConfig, i, listDataConfig)
+
         this.swiper.slideTo(i, 1000)
+      }
+    },
+    watch: {
+      listDataConfig: function (newValue, oldValue) {
+        if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+          this.localListDataConfig = newValue
+        }
       }
     }
   }
