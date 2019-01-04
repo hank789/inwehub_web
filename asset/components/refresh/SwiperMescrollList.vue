@@ -9,11 +9,9 @@
         :nextOtherData="config.data"
         @listChange="listChange($event, index)"
         :pageMode="true"
-        :autoShowEmpty="false"
+        :autoShowEmpty="true"
         v-if="config.autoShow"
       >
-
-
 
         <slot :name="'swiperList-' + index"></slot>
         <!--<div v-for="(item, itemIndex) in lists[index]" :key="itemIndex">-->
@@ -39,7 +37,7 @@
           slidesPerView: 'auto',
           spaceBetween: 0,
           observer: true,
-          freeMode: true,
+          freeMode: false,
           on: {
             transitionEnd: () => {
               var i = this.swiper.activeIndex
