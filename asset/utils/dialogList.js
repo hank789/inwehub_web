@@ -2,6 +2,7 @@
 import { alertSkyTwo, alertSimple, getDialogObj, alertZoom, alertHtml } from '../utils/dialog'
 import { getLocalUserInfo } from './user'
 import { run, select } from '../utils/createjs.js'
+import { upvote, deleteItem } from '../utils/discover'
 
 function alertFenhongxize (context) {
   var dialogObj = getDialogObj(context)
@@ -486,13 +487,21 @@ function alertReport (context, callback) {
 }
 
 // 首页加热度
-function alertHomeHeat (context, regions) {
+function alertHomeHeat (context, regions, item) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('homeHeat', {regions: {region: regions}}, (html) => {
       alertHtml(html, (num) => {
-        if (num > -1) {
-          return true
+        console.log(num + '：数字')
+        if (num === 2) {
+          upvote(this, item.id, () => {
+            setTimeout(() => {
+              return true
+            }, 1000)
+          })
+        }
+        if (num === 3) {
+          deleteItem(item.id)
         }
       }, true)
     })

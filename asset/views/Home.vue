@@ -206,7 +206,7 @@
         userAbility.jumpToDiscoverAdd(this, '?from=home')
       },
       addHeat (item) {
-        alertHomeHeat(this, this.regions)
+        alertHomeHeat(this, this.regions, item)
       },
       timeToHumanText (time) {
         return timeToHumanText(getTimestampByDateStr(time))

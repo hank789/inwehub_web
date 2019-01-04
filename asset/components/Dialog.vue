@@ -609,7 +609,7 @@
           </div>
           <div class="right">
             <div class="oneLine"></div>
-            <div class="iconList">
+            <div class="iconList alertConfirm">
               <div class="addNumber">
                 <span>+3</span>
               </div>
@@ -620,7 +620,7 @@
               </span>
               <div class="text">分享</div>
             </div>
-            <div class="iconList">
+            <div class="iconList alertConfirm">
               <div class="addNumber">
                 <span>+3</span>
               </div>
@@ -631,7 +631,7 @@
               </span>
               <div class="text">评论<i>2</i></div>
             </div>
-            <div class="iconList active">
+            <div class="iconList active alertConfirm">
               <div class="addNumber">
                 <span>+3</span>
               </div>
@@ -647,7 +647,7 @@
 
         <div class="deleteWrapper">
           <div class="bot"></div>
-          <div class="single">
+          <div class="single alertConfirm">
             <span class="iconW">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-shanchu1"></use>
