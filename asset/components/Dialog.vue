@@ -600,6 +600,31 @@
       </div>
     </div>
 
+    <div id="homeHeat">
+      <div class="heat-wrapper">
+        <div class="heatTop">
+          <div class="left">
+            <div class="fire"><img src="../statics/images/fire@3x.png" alt=""></div>
+            <div class="heat"><img src="../statics/images/heat@2x.png" alt=""></div>
+          </div>
+          <div class="right">
+            <div class="iconList">
+            <span class="iconCircular">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shoucang-xiao"></use>
+              </svg>
+            </span>
+              <span>分享</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="alertClose">
+          <span>取消</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -2156,6 +2181,44 @@
     transform: scaleY(.5);
     background-color: rgb(220, 220, 220);
   }
+  .heat-wrapper {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    z-index: 999;
+    padding-top: 20px;
+    background: #ffffff;
+    border-top-left-radius: 0.48rem;
+    border-top-right-radius: 0.48rem;
+  }
+  .heat-wrapper .heatTop {
+    overflow: hidden;
+  }
+  .heat-wrapper .left {
+    display: flex;
+    float: left;
+  }
+  .heat-wrapper .left .fire {
+    width: 22px;
+    height: 25px;
+  }
+  .heat-wrapper .left .fire img {
+    width: 100%;
+    height: 100%;
+  }
+  .heat-wrapper .left .heat {
+    width: 34px;
+    height: 36px;
+  }
+  .heat-wrapper .left .heat img {
+    width: 100%;
+    height: 100%;
+  }
+  .heat-wrapper .right {
+    float: right;
+  }
+
+
 
 
 </style>

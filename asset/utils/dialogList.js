@@ -485,6 +485,20 @@ function alertReport (context, callback) {
   }
 }
 
+// 首页加热度
+function alertHomeHeat (context) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('homeHeat', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num > -1) {
+          return true
+        }
+      }, true)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -513,6 +527,7 @@ export {
   alertHeadAndNickname,
   alertGroupsOld,
   alertAddWeHub,
-  alertReport
+  alertReport,
+  alertHomeHeat
   // alertshi
 }

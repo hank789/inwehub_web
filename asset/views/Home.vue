@@ -1,12 +1,24 @@
 <template>
   <div>
     <div class="mui-content">
-      <div class="container-control-logoAndTabsAndSearch">
-        <svg class="icon logoIcon" aria-hidden="true">
-          <use xlink:href="#icon-logowenzi"></use>
-        </svg>
-        <span class="splitCircle"></span>
 
+      <!-- <div class="container-tags-home container-tags-home-margin isFiexd">
+        <div id="">
+          <div class="container-allTags" @tap.stop.prevent="getAllRecommend()">
+            全部
+          </div>
+          <div class="container-tabLabels">
+            <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
+              <swiper-slide v-for="(tag, index) in regions" :key="index" class="tagLabel">
+                    <span class="tab"
+                          @tap.stop.prevent="selectTag(tag)">{{ tag.text }}</span>
+              </swiper-slide>
+            </swiper>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="container-control-logoAndTabsAndSearch">
         <div class="topSearchWrapper" @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
           <div class="searchFrame">
             <svg class="icon" aria-hidden="true">
@@ -15,416 +27,367 @@
             <span>搜产品、问答、圈子、内容</span>
           </div>
         </div>
+        <div class="addIcon">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-tianjia"></use>
+          </svg>
+        </div>
       </div>
 
-      <RefreshList
+      <div class="container-tags-home container-tags-home-margin" id="container-tags-home-content">
+        <div>
+          <div class="container-allTags " :class="type === 0 ? 'active' : ''" @tap.stop.prevent="getAllRecommend()">
+            全部<i class="" :class="type === 0 ? 'activeLine':''"></i>
+          </div>
+          <div class="container-tabLabels">
+            <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
+              <swiper-slide v-for="(tag, index) in regions" :key="index" class="tagLabel">
+                    <span class="tab" :class="type === index+1 ? 'active' : ''"
+                          @tap.stop.prevent="selectTag(index + 1)">{{ tag.text }}</span>
+                <i class="" :class="type === index+1 ? 'activeLine' : ''" ></i>
+              </swiper-slide>
+            </swiper>
+          </div>
+        </div>
+      </div>
+
+      <SwiperMescrollList
         ref="RefreshList"
         class="refreshListWrapper"
-        v-model="list"
-        :api="'recommendRead'"
-        :prevOtherData="prevOtherData"
-        :nextOtherData="prevOtherData"
-        :isShowUpToRefreshDescription="true"
-        @prevSuccessCallback="prevSuccessCallback"
-        :isLoading="loading"
-        :pageMode="true"
-        :autoShowEmpty="false"
+        :api="'readList'"
+        :listDataConfig="listDataConfig"
+        v-model="lists"
+        @curNavIndexChange="curNavIndexChange"
       >
-        <template slot="listHeader">
-          <div id="home_banner_slider" class="homeMuiSlider mui-slider" v-if="data.banners.length">
-            <div class="mui-slider-group  mui-slider-loop">
-              <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[data.banners.length-1]">
-                <div @tap.stop.prevent="goLink(data.banners[data.banners.length-1].url)">
-                  <ImageView :src="data.banners[data.banners.length-1].img_url" width="343" height="136"
-                             :isLazyload="false" :saveToLocal="true"></ImageView>
+
+        <template v-for="(listData, listDataIndex) in listDataConfig">
+          <div :slot="'swiperList-' + listDataIndex">
+            <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
+
+              <div class="container-wrapper">
+                <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-riliyouse"></use>
+                  </svg>
+                  <span>{{ timeToHumanText(item.created_at) }}</span>
                 </div>
-              </div>
-              <div class="mui-slider-item" v-for="(notice, index) in data.banners">
-                <div @tap.stop.prevent="goLink(notice.url)" target="_blank">
-                  <ImageView :src="notice.img_url" width="343" height="136" :isLazyload="false"
-                             :saveToLocal="true"></ImageView>
-                </div>
-              </div>
-              <div class="mui-slider-item mui-slider-item-duplicate" v-if="data.banners[0]">
-                <div @tap.stop.prexvent="goLink(data.banners[0].url)">
-                  <ImageView :src="data.banners[0].img_url" width="343" height="136" :isLazyload="false"
-                             :saveToLocal="true"></ImageView>
-                </div>
-              </div>
-            </div>
-            <div class="home mui-slider-indicator">
-              <div :class="{'mui-indicator':true, 'mui-active':index===0}"
-                   v-for="(notice, index) in data.banners"></div>
-            </div>
-          </div>
-
-          <div class="container-tags-home container-tags-home-margin">
-            <div id="container-tags-home-content">
-              <div class="container-allTags" :class="selectTagValue? '':'active'" @tap.stop.prevent="getAllRecommend()">
-                全部
-              </div>
-              <div class="container-tabLabels">
-                <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
-                  <swiper-slide v-for="(tag, index) in tags" :key="index" class="tagLabel" :tagId="tag.value">
-                  <span class="tab" :class="{active:selectTagValue === tag.value}"
-                        @tap.stop.prevent="selectTag(tag)">{{tag.text}}</span>
-                  </swiper-slide>
-                </swiper>
-              </div>
-              <div class="container-moreIcon" @tap.stop.prevent="$router.pushPlus('/userGuide/interst?from=home')">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-gengduoxuanze"></use>
-                </svg>
-              </div>
-            </div>
-          </div>
-
-
-        </template>
-        <div class="component-title-iconAndText" v-if="!selectTagValue">
-          <span class="hotSpotTop">热点TOP</span>
-        </div>
-
-
-        <div id="home-content" class="container-list-article">
-
-          <div v-for="(item, index) in list" :key="item.id">
-            <!--<div class="line-river-big" v-if="index === 5"></div>-->
-            <div class="component-item-article" @tap.stop.prevent="toDetail(item)">
-              <div class="itemArticleLeft">
-                <div class="titleWrapper">
-                  <div class="title text-line-2 text-content"><span class="number" v-if="index < 5 && !selectTagValue">{{index + 1}}.</span>{{item.data.title}}
+                <div class="container-list">
+                  <div class="pointLine" v-if="type === 0">
+                    <span class="splitCircle"></span>
+                    <span class="splitLine" v-if="itemIndex !== lists[listDataIndex].length - 1"></span>
+                  </div>
+                  <div class="pointLine" v-if="type !== 0">
+                    <span class="number">{{ itemIndex+1 }}.</span>
+                  </div>
+                  <div class="content">
+                    <div class="top-time">
+                      <span class="time">{{ item.created_at.split(' ')[1] }}</span>
+                      <i class="splitCircle"></i>
+                      <span class="linkURL">{{ item.domain }}</span>
+                    </div>
+                    <div class="middle">
+                      <div class="left">
+                        <div class="title font-family-medium text-line-2">{{ item.title }}</div>
+                        <div class="heatWrapper border-football" @tap.stop.prevent="addHeat">
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-huo"></use>
+                          </svg>
+                          <span>{{ item.rate }}</span>
+                          <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#icon-tianjia"></use>
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="right">
+                        <div class="articleImg"><img :src="item.img" alt=""></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="explain">
-                  <label v-if="item.tips">{{item.tips}}</label><span
-                  v-if="item.type_description">{{item.type_description}}</span>
-                  <timeago :since="timeago(item.created_at)" :auto-update="60">
-                  </timeago>
-                </div>
-              </div>
-              <div class="itemArticleRight">
-                <ImageView :src="item.data.img" width="111" :isLazyload="true" :saveToLocal="true"></ImageView>
-              </div>
-            </div>
-            <div class="line-river-after line-river-after-short" v-if="index !== 4 && index !== list.length-1"></div>
-
-            <div v-if="index === 4 && !selectTagValue">
-              <div class="line-river-big"></div>
-              <div class="component-title-iconAndText">
-                <span class="hotSpotTop">推荐</span>
               </div>
             </div>
           </div>
-          <div class="line-river-big" v-if="list.length-1"></div>
-        </div>
-      </RefreshList>
+        </template>
+      </SwiperMescrollList>
+
     </div>
   </div>
 </template>
+
 <script>
-
-  import { getHomeData } from '../utils/home'
-  import RefreshList from '../components/refresh/MescrollList.vue'
-  import { saveLocationInfo } from '../utils/allPlatform'
-  import { autoTextArea, openUrlByUrl } from '../utils/plus'
-  import userAbility from '../utils/userAbility'
+  import SwiperMescrollList from '../components/refresh/SwiperMescrollList.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { getImageSuffix } from '../utils/image'
   import localEvent from '../stores/localStorage'
+  import { postRequest } from '../utils/request'
+  import { timeToHumanText, getTimestampByDateStr } from '../utils/time'
+  import { alertHomeHeat } from '../utils/dialogList'
 
-  const Home = {
+  export default {
     data () {
       return {
         loading: true,
         list: [],
+        lists: [],
+        regions: [],
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
           freeMode: true
         },
-        data: {
-          banners: []
-        },
-        isRecommendType: 1,
-        selectTagValue: null,
-        tags: []
-      }
-    },
-    created () {
-      var dataList = localEvent.getLocalItem('HomeDataList')
-      if (dataList.length > 0 && this.list.length === 0) {
-        this.list = dataList
-        this.loading = false
+        type: 0
       }
     },
     components: {
-      RefreshList,
+      SwiperMescrollList,
       swiper,
       swiperSlide
+    },
+    computed: {
+      listDataConfig () {
+        var rs = this.regions.map(item => {
+          return {
+            api: 'readList',
+            data: {
+              tagFilter: item.value
+            },
+            autoShow: false
+          }
+        })
+        rs.unshift({
+          api: 'readList',
+          data: {
+            tagFilter: ''
+          },
+          autoShow: true
+        })
+        return rs
+      }
     },
     activated: function () {
       this.refreshPageData()
     },
-    computed: {
-      outTags () {
-        return this.$refs.outTags.swiper
-      },
-      inTags () {
-        return this.$refs.inTags.swiper
-      },
-      prevOtherData () {
-        return {
-          orderBy: 1,
-          recommendType: this.isRecommendType,
-          tagFilter: this.selectTagValue
-        }
-      }
-    },
-    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
-      next(vm => {
-        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
-        vm.$refs.RefreshList && vm.$refs.RefreshList.beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
-      })
-    },
-    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
-      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
-      this.$refs.RefreshList && this.$refs.RefreshList.beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
-      next()
-    },
     methods: {
-      getImageSuffix (img, width, height) {
-        return getImageSuffix(img, width, height)
+      addHeat () {
+        alertHomeHeat(this)
+      },
+      timeToHumanText (time) {
+        return timeToHumanText(getTimestampByDateStr(time))
+      },
+      showData (item, index, listDataIndex) {
+        if (index >= 0) {
+          let currentData = item.created_at.split(' ')[0]
+          let prevData = this.lists[listDataIndex][index - 1] && this.lists[listDataIndex][index - 1].created_at.split(' ')[0]
+          return currentData !== prevData
+        }
+      },
+      selectTag (index) {
+        this.$refs.RefreshList.slideTo(index)
+      },
+      getAllRecommend () {
+        this.type = 0
+        this.listDataConfig = [
+          {
+            api: 'readList',
+            data: {
+              tagFilter: ''
+            }
+          }
+        ]
+      },
+      curNavIndexChange (index) {
+        this.type = index
+      },
+      refreshPageData () {
+        this.getHomeTags()
+        this.showData()
+      },
+      getHomeTags () {
+        postRequest(`home`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+          this.regions = response.data.data.regions
+        })
       },
       prevSuccessCallback (data) {
         localEvent.setLocalItem('HomeDataList', data)
-      },
-      getAllRecommend () {
-        this.selectTagValue = null
-        this.isRecommendType = 1
-      },
-      selectTag (tag) {
-        if (tag.value === this.selectTagValue) {
-          this.selectTagValue = null
-          this.isRecommendType = 1
-        } else {
-          this.selectTagValue = tag.value
-          this.isRecommendType = 2
-        }
-      },
-      goLink: function (url) {
-        openUrlByUrl(url)
-      },
-      toDiscover () {
-        this.$router.replace('/discover')
-      },
-      timeago (time) {
-        let newDate = new Date()
-        newDate.setTime(Date.parse(time.replace(/-/g, '/')))
-        return newDate
-      },
-      refreshPageData () {
-        var currentUser = localEvent.getLocalItem('UserInfo')
-        this.tags = currentUser.region_tags
-        userAbility.newbieTask(this)
-        autoTextArea()
-
-        getHomeData((data) => {
-          this.data = data
-          setTimeout(() => {
-            window.mui('#home_banner_slider').slider({
-              interval: 5000
-            })
-          }, 100)
-        })
-      },
-      toDetail (item) {
-        switch (item.read_type) {
-          case 1:
-            this.$router.pushPlus('/c/' + item.data.category_id + '/' + item.data.slug)
-            break
-          case 2:
-            this.$router.pushPlus('/askCommunity/major/' + item.source_id)
-            break
-          case 3:
-            this.$router.pushPlus('/ask/offer/answers/' + item.source_id)
-            break
-          case 4:
-            this.$router.pushPlus('/EnrollmentStatus/' + item.source_id)
-            break
-          case 5:
-            this.$router.pushPlus('/EnrollmentStatus/' + item.source_id)
-            break
-          case 6:
-            this.$router.pushPlus('/ask/offer/' + item.source_id)
-            break
-          default:
-        }
-      },
-      toDiscoverAdd () {
-        this.$router.pushPlus('/discover/add')
-      }
-    },
-    updated () {},
-    mounted () {
-      var navWarp = document.querySelector('.container-tags-home')
-      if (this.$refs.RefreshList.mescroll.os.ios) {
-        navWarp.classList.add('nav-sticky')
-      } else {
-        navWarp.style.height = navWarp.offsetHeight + 'px'
         this.$refs.RefreshList.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
           console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
-          if (y >= navWarp.offsetTop) {
-            navWarp.classList.add('nav-fixed')
+          if (y >= 44) {
+            document.querySelector('.isFiexd').classList.add('showTags')
           } else {
-            navWarp.classList.remove('nav-fixed')
+            document.querySelector('.isFiexd').classList.remove('showTags')
           }
         }
       }
-
-      saveLocationInfo()
-
-      // 左滑
-      document.getElementById('home-content').addEventListener('swipeleft', (e) => {
-        var angle = Math.abs(e.detail.angle)
-        if (angle >= 160) {
-          this.$router.replace('/discover')
-        }
-      })
-      // 右滑
-      document.getElementById('home-content').addEventListener('swiperight', (e) => {
-        var angle = Math.abs(e.detail.angle)
-        if (angle <= 20) {
-          this.$router.replace('/discover')
-        }
-      })
+    },
+    mounted () {
+      this.refreshPageData()
     }
   }
-  export default Home
 </script>
 
-<style lang="less" scoped>
-  .mui-slider {
-    width: 9.145rem;
-    height: 3.626rem;
-    border-radius: 0.133rem;
-    margin-left: 0.4rem;
-    overflow: hidden;
-    padding-bottom: 0.266rem;
-  }
-
+<style scoped lang="less">
   .mui-content {
-    background: #fff;
-  }
-
+    background: #FFFFFF;}
+  .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
+    width: 310px;}
   .tagLabel {
-    width: auto !important;
-  }
+    width: auto !important;}
 
-  .component-title-iconAndText {
-    margin-top: 0.266rem;
-    .hotSpotTop {
-      /*width: 1.76rem;*/
-      height: 0.426rem;
-      color: #FFFFFF;
-      font-size: 0.266rem;
-      padding: 0 0.266rem 0 0.426rem;
-      text-align: center;
-      line-height: 0.426rem;
-      border-top-right-radius: 2.666rem;
-      border-bottom-right-radius: 2.666rem;
-      background: linear-gradient(90deg, #03AEF9 0%, #10C6FF 100%);
+  .splitCircle {
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    border-radius: 50%;
+    width: 2px;
+    height: 2px;
+    background: #B4B4B6;
+  }
+  .isFiexd {
+    position: relative;
+    z-index: 999;
+    display: none;
+    &.showTags {
+      display: block;
+    }
+  }
+  .container-wrapper {
+    /*margin-top: 15px;*/
+    .dateWrapper {
+      padding-left: 16px;
+      height: 21px;
+      display: inline-block;
+      line-height: 21px;
+      margin-bottom: 18px;
+      &.active {
+        /*width: 103px;*/
+        padding-right: 10px;
+        background: #03AEF9;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        box-shadow:0px 5px 10px -2px rgba(205,215,220,1);
+        span {
+          color: #FFFFFF;
+          position: relative;
+          top: -1px;
+        }
+      }
+      .icon {
+        font-size: 15px;
+      }
+      span {
+        color: #444444;
+        font-size: 12px;
+      }
+    }
+    .container-list {
+      padding: 0 16px 0 14px;
+      position: relative;
+      .pointLine {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        .number {
+          color: #444444;
+          font-size: 11px;
+        }
+        .splitCircle {
+          width: 4px;
+          height: 4px;
+          z-index: 100;
+          background: #444444;
+        }
+        .splitLine {
+          width: 1px;
+          height: 122px;
+          display: inline-block;
+          background: #DCDCDC;
+          position: absolute;
+          top: 13px;
+          left: 1px;
+          -webkit-transform: scaleX(0.5);
+          transform: scaleX(0.5);
+        }
+      }
+      .content {
+        width: 330px;
+        margin-left: 17.5px;
+        display: inline-block;
+      }
+      .top-time {
+        span {
+          color: #B4B4B6;
+          font-size: 11px;
+          line-height: 11px;
+        }
+      }
+      .middle {
+        /*display: flex;*/
+        overflow: hidden;
+        margin-bottom: 20px;
+        .left {
+          width: 192px;
+          display: inline-block;
+          .title {
+            color: #444444;
+            font-size: 16px;
+            line-height: 23px;
+          }
+          .heatWrapper {
+            height: 19px;
+            margin-top: 9px;
+            width: max-content;
+            padding: 0 5px;
+            span {
+              color: #C8C8C8;
+              font-size: 11px;
+              margin-right: 4px;
+              position: relative;
+              top: -1px;
+              left: -2px;
+            }
+            .icon {
+              position: relative;
+              top: -2px;
+              &:nth-of-type(1) {
+                color: #FA4975;
+                font-size: 8.5px;
+              }
+              &:nth-of-type(2) {
+                color: #808080;
+                font-size: 9px;
+              }
+            }
+          }
+          .border-football {
+            &:after {
+              border-radius: 8px;
+            }
+          }
+        }
+        .right {
+          float: right;
+          margin-right: 4px;
+          .articleImg {
+            width: 97px;
+            height: 71px;
+            border-radius: 4px;
+            overflow: hidden;
+            img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
     }
   }
 
-  .mui-android .component-title-iconAndText .hotSpotTop {
-    line-height: 0.493rem;
-  }
-
-  .refreshListWrapper {
-    top: 1.173rem !important;
-    bottom: 50px !important; /* px不转换 */
-  }
-
-  .component-title-iconAndText .iconAndTextLeft .icon {
-    color: #FA4975 !important;
-  }
-
-  .homeMuiSlider{
-    margin-bottom: 0.266rem;
-  }
-
-  .container-tags-home-margin {
-    margin-top: 0
-  }
-
-  .container-tags-home-hide {
-    position: absolute;
-    background: #fff;
-    z-index: 7;
-    left: -26.666rem;
-    display: block;
-  }
-
-  .showTagsHome {
-    position: absolute;
-    background: #fff;
-    z-index: 7;
-    top: 1.173rem;
-    left: 0;
-    display: block;
-  }
-
-  .nav-sticky {
-    z-index: 9999;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-  }
-
-  .nav-fixed{
-    z-index: 9999;
-    position: fixed;
-    top: 1.173rem;
-    left: 0;
-    width: 100%;
-  }
-</style>
-
-<style>
-  .home.mui-slider-indicator {
-    text-align: right;
-    padding-right: 4%;
-  }
-
-  .home.mui-slider-indicator .mui-indicator {
-    width: 0.16rem;
-    height: 0.16rem;
-    margin: 0.026rem 0.133rem;
-    background: rgba(216, 216, 216, 1);
-    -webkit-box-shadow: 0 0 0 0 rgba(1216, 216, 216, .7);
-    box-shadow: 0 0 0 0 rgba(216, 216, 216, .7);
-  }
-
-  .home.mui-slider-indicator .mui-active.mui-indicator {
-    width: 0.32rem;
-    height: 0.16rem;
-    background: rgba(3, 174, 249, 1);
-    border-radius: 1.333rem;
-    -webkit-box-shadow: 0 0 0.026rem 0.026rem rgba(3, 174, 249, .7);
-    box-shadow: 0 0 0 0 rgba(3, 174, 249, .7);
-  }
-
-  .mui-scrollbar-vertical {
-    display: none !important;
-  }
-
-  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item {
-    margin: 0 0.026rem;
-  }
-
-  .homeMuiSlider.mui-slider .mui-slider-group .mui-slider-item img {
-    height: 3.626rem !important;
-    object-fit: cover;
+  .refreshListWrapper{
+    top: 147px !important;
+    bottom: 50px !important;
   }
 </style>
