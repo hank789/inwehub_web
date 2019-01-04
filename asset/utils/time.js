@@ -34,6 +34,89 @@ function TimeEndText (currentTime, endTime) {
   return result
 }
 
+function timeToHumanDay (time) {
+  var showDate = ''
+  var createDay = new Date(time * 1000).getDay()
+  switch (createDay) {
+    case 0:
+      showDate = '星期日'
+      break
+    case 1:
+      showDate = '星期一'
+      break
+    case 2:
+      showDate = '星期二'
+      break
+    case 3:
+      showDate = '星期三'
+      break
+    case 4:
+      showDate = '星期四'
+      break
+    case 5:
+      showDate = '星期五'
+      break
+    case 6:
+      showDate = '星期六'
+      break
+
+  }
+  return showDate
+}
+
+/**
+ * 日期转人类可视化
+ * @param time
+ */
+function timeToHumanText (time) {
+  var dateObj = new Date()
+
+  // 今天0点时间戳
+  dateObj.setHours(0)
+  dateObj.setMinutes(0)
+  dateObj.setSeconds(0)
+  var todayDate = dateObj.getTime() / 1000
+
+  // 创建时间戳
+  var createDateObj = new Date(time * 1000)
+  var createDate = time * 1
+  var createHumanDay = timeToHumanDay(time)
+  var createFullDate = createDateObj.getFullYear() + '-' + (createDateObj.getMonth() + 1) + '-' + createDateObj.getDate()
+
+  // 今年第一天时间戳
+  dateObj.setDate(1)
+  dateObj.setMonth(0)
+  var yearDate = dateObj.getTime() / 1000
+
+  // humen Date
+  var showDate = ''
+
+  if (createDate >= todayDate) {
+    showDate = '今天' + createHumanDay
+
+  } else if (createDate >= todayDate - 60 * 60 * 24) {
+    showDate = '昨天' + createHumanDay
+  } else if (createDate >= todayDate - 2 * 60 * 60 * 24) {
+    showDate = '前天' + createHumanDay
+  } else if (createDate >= todayDate - 3 * 60 * 60 * 24) {
+    showDate = '3天前' + createHumanDay
+  } else if (createDate >= todayDate - 4 * 60 * 60 * 24) {
+    showDate = '4天前' + createHumanDay
+  } else if (createDate >= todayDate - 5 * 60 * 60 * 24) {
+    showDate = '5天前' + createHumanDay
+  } else if (createDate >= todayDate - 6 * 60 * 60 * 24) {
+    showDate = '6天前' + createHumanDay
+  } else if (createDate >= todayDate - 2 * 7 * 60 * 60 * 24) {
+    showDate = '1周前'
+  } else if (createDate >= yearDate) {
+    showDate = createDateObj.getMonth() + '月' + createDateObj.getDay() + '日'
+  } else {
+    showDate = createFullDate
+  }
+  return showDate
+}
+
 export {
-  TimeEndText
+  TimeEndText,
+  timeToHumanText
 }
