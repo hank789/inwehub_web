@@ -46,7 +46,7 @@
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
-            <div class="leftTopFixed"></div>
+            <div class="leftTopFixed fixedData"></div>
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="toDetail(item)">
@@ -170,7 +170,7 @@
             bmpPosition = positionValues[i].text
           }
         }
-        navWarp.innerHTML = bmpPosition
+        navWarp.innerHTML = "<svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>" + bmpPosition
         console.log(bmpPosition)
       },
       toDetail (item) {
@@ -264,19 +264,7 @@
       display: inline-block;
       line-height: 0.56rem;
       margin-bottom: 0.48rem;
-      &.active {
-        /*width: 2.746rem;*/
-        padding-right: 0.266rem;
-        background: #03AEF9;
-        border-top-right-radius: 1.333rem;
-        border-bottom-right-radius: 1.333rem;
-        box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
-        span {
-          color: #FFFFFF;
-          position: relative;
-          top: -0.026rem;
-        }
-      }
+
       .icon {
         font-size: 0.4rem;
       }
@@ -397,7 +385,7 @@
     z-index: 9999;
     position: -webkit-sticky;
     position: sticky;
-    top: 0;
+    top: 14px;
   }
 
   .nav-fixed{
@@ -406,5 +394,19 @@
     top: 1.173rem;
     left: 0;
     width: 100%;
+  }
+  .fixedData {
+    color: #FFFFFF;
+    padding-left: 16px;
+    padding-right: 10px;
+    background: #03AEF9;
+    font-size: 12px;
+    display: inline-block;
+    border-top-right-radius: 1.333rem;
+    border-bottom-right-radius: 1.333rem;
+    box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
+    .icon {
+      font-size: 16px;
+    }
   }
 </style>
