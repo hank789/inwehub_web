@@ -72,7 +72,7 @@
                     <div class="middle">
                       <div class="left">
                         <div class="title font-family-medium text-line-2">{{ item.title }}</div>
-                        <div class="heatWrapper border-football" @tap.stop.prevent="addHeat">
+                        <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item)">
                           <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-huo"></use>
                           </svg>
@@ -106,6 +106,7 @@
   import { alertHomeHeat } from '../utils/dialogList'
   import { saveLocationInfo } from '../utils/allPlatform'
   import userAbility from '../utils/userAbility'
+  import { upvote } from '../utils/discover'
 
   export default {
     data () {
@@ -179,8 +180,8 @@
       jumpToDiscoverAdd () {
         userAbility.jumpToDiscoverAdd(this)
       },
-      addHeat () {
-        alertHomeHeat(this)
+      addHeat (item) {
+        alertHomeHeat(this, this.regions)
       },
       timeToHumanText (time) {
         return timeToHumanText(getTimestampByDateStr(time))
