@@ -34,6 +34,8 @@
         </div>
       </div>
 
+      <div class="leftTopFixed fixedData"></div>
+
       <SwiperMescrollList
         ref="RefreshList"
         class="refreshListWrapper"
@@ -46,7 +48,6 @@
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
-            <div class="leftTopFixed fixedData"></div>
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="goArticle(item)">
@@ -167,13 +168,21 @@
         }
       },
       listScroll (index, y, isUp) {
-        var navWarp = this.$refs.RefreshList.$refs.RefreshList[index].$el.querySelector('.leftTopFixed')
+        var navWarp = document.querySelector('.leftTopFixed')
         if (this.$refs.RefreshList.$refs.RefreshList[index].mescroll.os.ios) {
-          navWarp.classList.add('nav-sticky')
+          if (y < 10) {
+            navWarp.classList.remove('leftTopFixedShow')
+            navWarp.classList.remove('nav-sticky')
+          } else {
+            navWarp.classList.add('leftTopFixedShow')
+            navWarp.classList.add('nav-sticky')
+          }
         } else {
-          if (y >= 0) {
+          if (y >= 10) {
+            navWarp.classList.add('leftTopFixedShow')
             navWarp.classList.add('nav-fixed')
           } else {
+            navWarp.classList.remove('leftTopFixedShow')
             navWarp.classList.remove('nav-fixed')
           }
         }
@@ -392,7 +401,7 @@
   }
 
   .refreshListWrapper{
-    top: 78px !important;
+    top: 2.08rem !important;
     bottom: 1.333rem !important;
   }
 
@@ -400,28 +409,32 @@
     z-index: 9999;
     position: -webkit-sticky;
     position: sticky;
-    top: 14px;
+    top: 0.373rem;
   }
 
   .nav-fixed{
     z-index: 9999;
-    position: fixed;
-    top: 1.173rem;
+    position: absolute;
+    top: 2.08rem !important;
     left: 0;
     width: 100%;
   }
   .fixedData {
     color: #FFFFFF;
-    padding-left: 16px;
-    padding-right: 10px;
+    padding-left: 0.426rem;
+    padding-right: 0.266rem;
     background: #03AEF9;
-    font-size: 12px;
-    display: inline-block;
+    font-size: 0.32rem;
+    display: none;
     border-top-right-radius: 1.333rem;
     border-bottom-right-radius: 1.333rem;
     box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
     .icon {
-      font-size: 16px;
+      font-size: 0.426rem;
     }
   }
+  .leftTopFixedShow{
+    display: inline-block;
+  }
+
 </style>

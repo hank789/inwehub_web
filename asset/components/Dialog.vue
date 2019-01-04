@@ -2243,20 +2243,20 @@
   }
   .heat-wrapper .heatTop {
     overflow: hidden;
-    padding: 0 15px 20px;
+    padding: 0 0.4rem 0.533rem;
   }
   .heat-wrapper .left {
     display: flex;
     float: left;
-    margin-top: 14px;
-    margin-left: 15px;
+    margin-top: 0.373rem;
+    margin-left: 0.4rem;
   }
   .heat-wrapper .left .fire {
-    width: 22px;
-    height: 25px;
+    width: 0.586rem;
+    height: 0.666rem;
     position: relative;
-    top: 5.5px;
-    margin-right: 8px;
+    top: 0.146rem;
+    margin-right: 0.213rem;
   }
   .heat-wrapper .left .fire img {
     width: 100%;
@@ -2275,15 +2275,15 @@
     display: flex;
   }
   .heat-wrapper .right .oneLine {
-    width: 1px;
-    height: 44px;
+    width: 0.026rem;
+    height: 1.173rem;
     background: #DCDCDC;
-    margin-right: 15px;
+    margin-right: 0.4rem;
     position: relative;
-    top: 10px;
+    top: 0.266rem;
   }
   .heat-wrapper .right .iconList {
-    margin: 0 15px;
+    margin: 0 0.4rem;
     position: relative;
   }
   .heat-wrapper .right .iconList.active .iconCircular {
@@ -2291,38 +2291,38 @@
     background: #03AEF9;
   }
   .heat-wrapper .right .iconList .addNumber {
-    height: 14px;
-    line-height: 14px;
+    height: 0.373rem;
+    line-height: 0.373rem;
     position: absolute;
-    top: 3px;
-    right: -10px;
+    top: 0.08rem;
+    right: -0.266rem;
     display: inline-block;
-    padding: 0 5px;
+    padding: 0 0.133rem;
     background: #E5E5E5;
-    border-radius: 100px;
+    border-radius: 2.666rem;
   }
   .heat-wrapper .right .iconList .addNumber span {
     color: #808080;
-    font-size: 10px;
+    font-size: 0.266rem;
     position: relative;
-    top: -2px;
+    top: -0.053rem;
   }
   .heat-wrapper .right .iconList .iconCircular {
-    width: 44px;
-    height: 44px;
+    width: 1.173rem;
+    height: 1.173rem;
     color: #808080;
-    font-size: 16px;
+    font-size: 0.426rem;
     text-align: center;
-    line-height: 44px;
+    line-height: 1.173rem;
     border-radius: 50%;
     display: inline-block;
     background: #F7F8FA;
   }
   .heat-wrapper .right .iconList .text {
     color: #808080;
-    font-size: 11px;
+    font-size: 0.293rem;
     text-align: center;
-    margin-top: 5px;
+    margin-top: 0.133rem;
   }
   .heat-wrapper .right .iconList .text i {
     color: #FA4975;
@@ -2337,14 +2337,14 @@
   .heat-wrapper .cancelW span {
     color: #444444;
     font-family:PingFangSC-Medium;
-    font-size: 16px;
+    font-size: 0.426rem;
     text-align: center;
-    line-height: 52px;
+    line-height: 1.386rem;
   }
 
   .deleteWrapper {
     position: relative;
-    padding: 15px 0 12.5px;
+    padding: 0.4rem 0 0.333rem;
   }
   .deleteWrapper .bot {
     top: 0;
@@ -2352,13 +2352,13 @@
   .deleteWrapper .single {
     height: 1.866rem;
     display: inline-block;
-    margin-left: 30px;
+    margin-left: 0.8rem;
   }
   .deleteWrapper .single .iconW {
     width: 1.173rem;
     height: 1.173rem;
     /*margin: 0 0.32rem;*/
-    /*margin-left: 30px;*/
+    /*margin-left: 0.8rem;*/
     line-height: 1.306rem;
     text-align: center;
     display: inline-block;
@@ -2379,28 +2379,28 @@
   }
   .choiceWrapper {
     position: relative;
-    padding: 12px 30px 15px;
+    padding: 0.32rem 0.8rem 0.4rem;
   }
   .choiceWrapper .bot {
     top: 0;
   }
   .choiceWrapper .title {
-    font-size: 11px;
+    font-size: 0.293rem;
     color: #B4B4B6;
-    line-height: 15px;
-    margin-bottom: 2px;
+    line-height: 0.4rem;
+    margin-bottom: 0.053rem;
   }
   .choiceWrapper .choiceList {}
   .choiceWrapper .choiceList span {
-    height: 27px;
-    padding: 0 10px;
-    line-height: 27px;
+    height: 0.72rem;
+    padding: 0 0.266rem;
+    line-height: 0.72rem;
     color: #444444;
-    font-size: 12px;
+    font-size: 0.32rem;
     display: inline-block;
     background: #F3F4F6;
-    border-radius: 100px;
-    margin: 10px 10px 0px 0;
+    border-radius: 2.666rem;
+    margin: 0.266rem 0.266rem 0rem 0;
   }
   .choiceWrapper .choiceList span.active {
     background: #03AEF9;
