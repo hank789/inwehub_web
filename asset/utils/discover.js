@@ -202,6 +202,8 @@ function report (context, link) {
   }, 500)
 }
 
+
+
 export {
   upvote,
   downVote,

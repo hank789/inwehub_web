@@ -41,11 +41,12 @@
         :listDataConfig="listDataConfig"
         v-model="lists"
         @curNavIndexChange="curNavIndexChange"
-        @listMounted="listMounted"
+        @listScroll="listScroll"
       >
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
+            <div class="leftTopFixed"></div>
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="toDetail(item)">
@@ -150,22 +151,27 @@
     },
     activated: function () {},
     methods: {
-      listMounted (index) {
-        var navWarp = document.querySelector('.dateWrapper')
-        console.dir(this)
-//        if (this.$refs.RefreshList.$refs.RefreshList_0.mescroll.os.ios) {
-//          navWarp.classList.add('nav-sticky')
-//        } else {
-//          navWarp.style.height = navWarp.offsetHeight + 'px'
-//          this.$refs.RefreshList.$refs.RefreshList_0.mescroll.optUp.onScroll = function (mescroll, y, isUp) {
-//            console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
-//            if (y >= navWarp.offsetTop) {
-//              navWarp.classList.add('nav-fixed')
-//            } else {
-//              navWarp.classList.remove('nav-fixed')
-//            }
-//          }
-//        }
+      listScroll (index, y, isUp) {
+        var navWarp = this.$refs.RefreshList.$refs.RefreshList[index].$el.querySelector('.leftTopFixed')
+        if (this.$refs.RefreshList.$refs.RefreshList[index].mescroll.os.ios) {
+          navWarp.classList.add('nav-sticky')
+        } else {
+          if (y >= 0) {
+            navWarp.classList.add('nav-fixed')
+          } else {
+            navWarp.classList.remove('nav-fixed')
+          }
+        }
+
+        var bmpPosition = ''
+        var positionValues = this.$refs.RefreshList.positionValues[index]
+        for (var i = 0; i < positionValues.length; i++) {
+          if (positionValues[i].offsetTop <= y) {
+            bmpPosition = positionValues[i].text
+          }
+        }
+        navWarp.innerHTML = bmpPosition
+        console.log(bmpPosition)
       },
       toDetail (item) {
         switch (item.type) {
@@ -195,6 +201,7 @@
       },
       selectTag (index) {
         console.log('indexTAG:' + index)
+        this.$refs.inTags.swiper.slideTo(index - 1, 1000)
         this.$refs.RefreshList.slideTo(index)
       },
       getAllRecommend () {
@@ -203,6 +210,7 @@
       },
       curNavIndexChange (index) {
         this.type = index
+        this.$refs.inTags.swiper.slideTo(index - 1, 1000)
       },
       refreshPageData () {
         postRequest(`home`, {}).then(response => {
