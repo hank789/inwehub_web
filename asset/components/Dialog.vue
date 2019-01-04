@@ -608,18 +608,68 @@
             <div class="heat"><img src="../statics/images/heat@2x.png" alt=""></div>
           </div>
           <div class="right">
+            <div class="oneLine"></div>
             <div class="iconList">
-            <span class="iconCircular">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shoucang-xiao"></use>
-              </svg>
-            </span>
-              <span>分享</span>
+              <div class="addNumber">
+                <span>+3</span>
+              </div>
+              <span class="iconCircular">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-shoucang-xiao"></use>
+                </svg>
+              </span>
+              <div class="text">分享</div>
+            </div>
+            <div class="iconList">
+              <div class="addNumber">
+                <span>+3</span>
+              </div>
+              <span class="iconCircular">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-pinglun"></use>
+                </svg>
+              </span>
+              <div class="text">评论<i>2</i></div>
+            </div>
+            <div class="iconList">
+              <div class="addNumber">
+                <span>+3</span>
+              </div>
+              <span class="iconCircular">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-zan"></use>
+                </svg>
+              </span>
+              <div class="text">赞</div>
             </div>
           </div>
         </div>
 
-        <div class="alertClose">
+        <div class="deleteWrapper">
+          <div class="bot"></div>
+          <div class="single">
+            <span class="iconW">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-shanchu1"></use>
+              </svg>
+            </span>
+            <span class="text">删除</span>
+          </div>
+        </div>
+
+        <div class="choiceWrapper">
+          <div class="bot"></div>
+          <div class="title">设置精选</div>
+          <div class="choiceList">
+            <span class="active">推荐</span>
+            <span>推荐</span>
+            <span>推荐</span>
+            <span>推荐</span>
+          </div>
+        </div>
+
+        <div class="cancelW alertClose">
+          <div class="bot"></div>
           <span>取消</span>
         </div>
       </div>
@@ -2193,14 +2243,20 @@
   }
   .heat-wrapper .heatTop {
     overflow: hidden;
+    padding: 0 15px 20px;
   }
   .heat-wrapper .left {
     display: flex;
     float: left;
+    margin-top: 14px;
+    margin-left: 15px;
   }
   .heat-wrapper .left .fire {
-    width: 0.586rem;
-    height: 0.666rem;
+    width: 22px;
+    height: 25px;
+    position: relative;
+    top: 5.5px;
+    margin-right: 8px;】
   }
   .heat-wrapper .left .fire img {
     width: 100%;
@@ -2216,6 +2272,135 @@
   }
   .heat-wrapper .right {
     float: right;
+    display: flex;
+  }
+  .heat-wrapper .right .oneLine {
+    width: 1px;
+    height: 44px;
+    background: #DCDCDC;
+    margin-right: 15px;
+    position: relative;
+    top: 10px;
+  }
+  .heat-wrapper .right .iconList {
+    margin: 0 15px;
+    position: relative;
+  }
+  .heat-wrapper .right .iconList .addNumber {
+    height: 14px;
+    line-height: 14px;
+    position: absolute;
+    top: 3px;
+    right: -10px;
+    display: inline-block;
+    padding: 0 5px;
+    background: #E5E5E5;
+    border-radius: 100px;
+  }
+  .heat-wrapper .right .iconList .addNumber span {
+    color: #808080;
+    font-size: 10px;
+    position: relative;
+    top: -2px;
+  }
+  .heat-wrapper .right .iconList .iconCircular {
+    width: 44px;
+    height: 44px;
+    color: #808080;
+    font-size: 16px;
+    text-align: center;
+    line-height: 44px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #F7F8FA;
+  }
+  .heat-wrapper .right .iconList .text {
+    color: #808080;
+    font-size: 11px;
+    text-align: center;
+    margin-top: 5px;
+  }
+  .heat-wrapper .right .iconList .text i {
+    color: #FA4975;
+  }
+  .heat-wrapper .cancelW {
+    position: relative;
+    text-align: center;
+  }
+  .heat-wrapper .cancelW .bot {
+    top: 0 !important;
+  }
+  .heat-wrapper .cancelW span {
+    color: #444444;
+    font-family:PingFangSC-Medium;
+    font-size: 16px;
+    text-align: center;
+    line-height: 52px;
+  }
+
+  .deleteWrapper {
+    position: relative;
+    padding: 15px 0 12.5px;
+  }
+  .deleteWrapper .bot {
+    top: 0;
+  }
+  .deleteWrapper .single {
+    height: 1.866rem;
+    display: inline-block;
+    margin-left: 30px;
+  }
+  .deleteWrapper .single .iconW {
+    width: 1.173rem;
+    height: 1.173rem;
+    /*margin: 0 0.32rem;*/
+    /*margin-left: 30px;*/
+    line-height: 1.306rem;
+    text-align: center;
+    display: inline-block;
+    border-radius: 0.213rem;
+    border: 0.026rem solid #DCDCDC;
+    color: #C8C8C8;
+  }
+  .deleteWrapper .single .iconW .icon {
+    font-size: 0.586rem;
+  }
+  .deleteWrapper .single .text {
+    display: block;
+    font-size: 0.32rem;
+    color: #808080;
+    line-height: 0.426rem;
+    text-align: center;
+    margin-top: 0.213rem;
+  }
+  .choiceWrapper {
+    position: relative;
+    padding: 12px 30px 15px;
+  }
+  .choiceWrapper .bot {
+    top: 0;
+  }
+  .choiceWrapper .title {
+    font-size: 11px;
+    color: #B4B4B6;
+    line-height: 15px;
+    margin-bottom: 2px;
+  }
+  .choiceWrapper .choiceList {}
+  .choiceWrapper .choiceList span {
+    height: 27px;
+    padding: 0 10px;
+    line-height: 27px;
+    color: #444444;
+    font-size: 12px;
+    display: inline-block;
+    background: #F3F4F6;
+    border-radius: 100px;
+    margin: 10px 5px 10px 0;
+  }
+  .choiceWrapper .choiceList span.active {
+    background: #03AEF9;
+    color: #FFFFFF;
   }
 
 
