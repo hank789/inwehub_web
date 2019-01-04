@@ -49,7 +49,7 @@
             <div class="leftTopFixed"></div>
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
-              <div class="container-wrapper" @tap.stop.prevent="toDetail(item)">
+              <div class="container-wrapper" @tap.stop.prevent="goArticle(item)">
                 <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-riliyouse"></use>
@@ -107,6 +107,8 @@
   import { alertHomeHeat } from '../utils/dialogList'
   import { saveLocationInfo } from '../utils/allPlatform'
   import userAbility from '../utils/userAbility'
+  import { goThirdPartyArticle } from '../utils/webview'
+  import { openAppUrlByUrl } from '../utils/plus'
 
   export default {
     data () {
@@ -150,6 +152,19 @@
     },
     activated: function () {},
     methods: {
+      goArticle: function (detail) {
+        if (detail.link_url.indexOf(process.env.H5_ROOT) === 0) {
+          openAppUrlByUrl(detail.link_url)
+        } else {
+          goThirdPartyArticle(
+            detail.link_url,
+            detail.id,
+            detail.title,
+            '/c/' + detail.category_id + '/' + detail.slug,
+            detail.img
+          )
+        }
+      },
       listScroll (index, y, isUp) {
         var navWarp = this.$refs.RefreshList.$refs.RefreshList[index].$el.querySelector('.leftTopFixed')
         if (this.$refs.RefreshList.$refs.RefreshList[index].mescroll.os.ios) {
@@ -183,7 +198,7 @@
         }
       },
       jumpToDiscoverAdd () {
-        userAbility.jumpToDiscoverAdd(this)
+        userAbility.jumpToDiscoverAdd(this, '?from=home')
       },
       addHeat () {
         alertHomeHeat(this)
