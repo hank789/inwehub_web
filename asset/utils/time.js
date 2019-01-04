@@ -116,7 +116,15 @@ function timeToHumanText (time) {
   return showDate
 }
 
+/**
+ * 2019-01-04 14:52:00 => 1546584720
+*/
+function getTimestampByDateStr (str) {
+  return new Date(str).getTime() / 1000
+}
+
 export {
   TimeEndText,
-  timeToHumanText
+  timeToHumanText,
+  getTimestampByDateStr
 }
