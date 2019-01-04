@@ -46,6 +46,7 @@
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
+            <div class="leftTopFixed"></div>
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="toDetail(item)">
@@ -150,6 +151,17 @@
     activated: function () {},
     methods: {
       listScroll (index, y, isUp) {
+        var navWarp = this.$refs.RefreshList.$refs.RefreshList[index].$el.querySelector('.leftTopFixed')
+        if (this.$refs.RefreshList.$refs.RefreshList[index].mescroll.os.ios) {
+          navWarp.classList.add('nav-sticky')
+        } else {
+          if (y >= 0) {
+            navWarp.classList.add('nav-fixed')
+          } else {
+            navWarp.classList.remove('nav-fixed')
+          }
+        }
+
         var bmpPosition = ''
         var positionValues = this.$refs.RefreshList.positionValues[index]
         for (var i = 0; i < positionValues.length; i++) {
@@ -157,6 +169,7 @@
             bmpPosition = positionValues[i].text
           }
         }
+        navWarp.innerHTML = bmpPosition
         console.log(bmpPosition)
       },
       toDetail (item) {
