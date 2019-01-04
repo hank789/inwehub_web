@@ -75,6 +75,10 @@
                       <div class="left">
                         <div class="title font-family-medium text-line-2">{{ item.title }}</div>
                         <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item)">
+                          <div class="addOne">
+                            <i></i>
+                            <span>+1</span>
+                          </div>
                           <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-huo"></use>
                           </svg>
@@ -340,7 +344,8 @@
       }
       .middle {
         /*display: flex;*/
-        overflow: hidden;
+        /*overflow: hidden;*/
+        height: 71px;
         margin-bottom: 0.533rem;
         .left {
           width: 5.12rem;
@@ -355,6 +360,38 @@
             margin-top: 0.24rem;
             width: max-content;
             padding: 0 0.133rem;
+            position: relative;
+            .addOne {
+              height: 21px;
+              position: absolute;
+              top: -28px;
+              left: 16px;
+              animation: addone 3s;
+              -moz-animation: addone 3s; /* Firefox */
+              -webkit-animation: addone 3s; /* Safari and Chrome */
+              -o-animation: addone 3s; /* Opera */
+              i {
+                width: 0;
+                height: 0;
+                border-left: 3px solid transparent;
+                border-right: 3px solid transparent;
+                border-top: 3px solid #FA4975;
+                position: absolute;
+                top: 20px;
+                left: 6px;
+              }
+              span {
+                width: 23px;
+                height: 18px;
+                line-height: 18px;
+                color: #FFFFFF;
+                font-size: 11px;
+                text-align: center;
+                border-radius: 4px;
+                background: #FA4975;
+                display: inline-block;
+              }
+            }
             span {
               color: #C8C8C8;
               font-size: 0.293rem;
@@ -433,8 +470,57 @@
       font-size: 0.426rem;
     }
   }
+
   .leftTopFixedShow{
     display: inline-block;
   }
 
+
+  @keyframes addone
+  {
+    from {
+      top: -28px;
+      opacity: 1;
+    }
+    to {
+      top: -45px;
+      opacity: 0;
+    }
+  }
+
+  @-moz-keyframes addone /* Firefox */
+  {
+    from {
+      top: -28px;
+      opacity: 1;
+    }
+    to {
+      top: -45px;
+      opacity: 0;
+    }
+  }
+
+  @-webkit-keyframes addone /* Safari and Chrome */
+  {
+    from {
+      top: -28px;
+      opacity: 1;
+    }
+    to {
+      top: -45px;
+      opacity: 0;
+    }
+  }
+
+  @-o-keyframes addone /* Opera */
+  {
+    from {
+      top: -28px;
+      opacity: 1;
+    }
+    to {
+      top: -45px;
+      opacity: 0;
+    }
+  }
 </style>
