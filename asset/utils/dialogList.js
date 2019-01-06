@@ -492,13 +492,13 @@ function alertHomeHeat (context, regions, item) {
   if (dialogObj) {
     dialogObj.getHtml('homeHeat', {regions: {region: regions}}, (html) => {
       alertHtml(html, (num) => {
-        console.log(num + '：数字')
         if (num === 2) {
           upvote(this, item.id, () => {
-            setTimeout(() => {
-              return true
-            }, 1000)
           })
+        }
+        if (num === 1) {
+          context.$router.pushPlus('/comment/' + item.category_id + '/' + item.slug + '/' + item.id)
+          return true
         }
         if (num === 3) {
           deleteItem(item.id)
