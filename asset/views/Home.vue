@@ -75,7 +75,7 @@
                       <div class="left">
                         <div class="title font-family-medium text-line-2">{{ item.title }}</div>
                         <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item)">
-                          <div class="addOne">
+                          <div class="addOne" v-if="item.isFollowed">
                             <i></i>
                             <span>+1</span>
                           </div>
@@ -101,6 +101,15 @@
       </SwiperMescrollList>
 
     </div>
+
+    <BottomActions
+      ref="BottomActions"
+      :regions="regions"
+      :iconMenu="iconMenus"
+      @clickedItem="detailMenuIcon"
+      @clickDelete="clickDelete"
+    >
+    </BottomActions>
   </div>
 </template>
 
@@ -109,12 +118,12 @@
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import { postRequest } from '../utils/request'
   import { timeToHumanText, getTimestampByDateStr } from '../utils/time'
-  import { alertHomeHeat } from '../utils/dialogList'
   import { saveLocationInfo } from '../utils/allPlatform'
   import userAbility from '../utils/userAbility'
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
-  import { upvote } from '../utils/discover'
+  import BottomActions from '../components/BottomActions'
+  import { upvote, deleteItem } from '../utils/discover'
 
   export default {
     data () {
@@ -127,13 +136,18 @@
           spaceBetween: 0,
           freeMode: true
         },
-        type: 0
+        type: 0,
+        isShowAddOne: false,
+        isFollowed: 0,
+        isUpvoted: '',
+        item: {}
       }
     },
     components: {
       SwiperMescrollList,
       swiper,
-      swiperSlide
+      swiperSlide,
+      BottomActions
     },
     computed: {
       listDataConfig () {
@@ -154,10 +168,73 @@
           autoShow: true
         })
         return rs
+      },
+      iconMenus () {
+        return [
+          {
+            icon: '#icon-shoucang-xiao',
+            text: '分享'
+          },
+          {
+            icon: '#icon-pinglun',
+            text: '评论'
+          },
+          {
+            icon: '#icon-zan',
+            text: this.isUpvoted ? '已赞' : '赞',
+            isUpvoted: this.isUpvoted
+          }
+        ]
       }
     },
     activated: function () {},
     methods: {
+      clickDelete () {
+        this.$refs.BottomActions.cancelShare()
+        deleteItem(this.item.id)
+      },
+      detailMenuIcon (item) {
+        switch (item.text) {
+          case '评论':
+            this.$router.pushPlus('/comment/' + this.item.category_id + '/' + this.item.slug + '/' + this.item.id)
+            break
+          case '赞':
+            upvote(this, this.item.id, (response) => {
+              this.isUpvoted = 1
+              window.mui.toast(response.data.data.tip)
+              setTimeout(() => {
+                this.$refs.BottomActions.cancelShare()
+                this.$set(this.item, 'isFollowed', this.item.isFollowed ? !this.item.isFollowed : true)
+                this.item.rate ++
+              }, 2000)
+            }, (response) => {
+              this.isUpvoted = 0
+              window.mui.toast(response.data.data.tip)
+              setTimeout(() => {
+                this.$refs.BottomActions.cancelShare()
+              }, 2000)
+            })
+            break
+          case '已赞':
+            upvote(this, this.item.id, (response) => {
+              this.isUpvoted = 1
+              window.mui.toast(response.data.data.tip)
+              setTimeout(() => {
+                this.$refs.BottomActions.cancelShare()
+              }, 2000)
+            }, (response) => {
+              this.isUpvoted = 0
+              window.mui.toast(response.data.data.tip)
+              setTimeout(() => {
+                this.$refs.BottomActions.cancelShare()
+              }, 2000)
+            })
+            break
+          case '分享':
+            this.$refs.ShareBtn.share()
+            break
+        }
+      },
       goArticle: function (detail) {
         if (detail.link_url.indexOf(process.env.H5_ROOT) === 0) {
           openAppUrlByUrl(detail.link_url)
@@ -215,7 +292,10 @@
         userAbility.jumpToDiscoverAdd(this, '?from=home')
       },
       addHeat (item) {
-        alertHomeHeat(this, this.regions, item)
+        this.$refs.BottomActions.show()
+        this.item = item
+        this.isUpvoted = item.is_upvoted
+        console.log(item.title)
       },
       timeToHumanText (time) {
         return timeToHumanText(getTimestampByDateStr(time))
@@ -253,7 +333,6 @@
     },
     mounted () {
       this.refreshPageData()
-
       saveLocationInfo()
     }
   }
@@ -366,6 +445,7 @@
               position: absolute;
               top: -28px;
               left: 16px;
+              opacity: 0;
               animation: addone 3s;
               -moz-animation: addone 3s; /* Firefox */
               -webkit-animation: addone 3s; /* Safari and Chrome */
@@ -480,11 +560,11 @@
   {
     from {
       top: -28px;
-      opacity: 1;
+      opacity: 0;
     }
     to {
       top: -45px;
-      opacity: 0;
+      opacity: 1;
     }
   }
 
@@ -492,11 +572,11 @@
   {
     from {
       top: -28px;
-      opacity: 1;
+      opacity: 0;
     }
     to {
       top: -45px;
-      opacity: 0;
+      opacity: 1;
     }
   }
 
@@ -504,11 +584,11 @@
   {
     from {
       top: -28px;
-      opacity: 1;
+      opacity: 0;
     }
     to {
       top: -45px;
-      opacity: 0;
+      opacity: 1;
     }
   }
 
@@ -516,11 +596,11 @@
   {
     from {
       top: -28px;
-      opacity: 1;
+      opacity: 0;
     }
     to {
       top: -45px;
-      opacity: 0;
+      opacity: 1;
     }
   }
 </style>
