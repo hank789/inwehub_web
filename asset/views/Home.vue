@@ -111,6 +111,16 @@
       @choiceItem="choiceItem"
     >
     </BottomActions>
+
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="shareIconMenus"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
   </div>
 </template>
 
@@ -125,6 +135,9 @@
   import { openAppUrlByUrl } from '../utils/plus'
   import BottomActions from '../components/BottomActions'
   import { upvote, deleteItem } from '../utils/discover'
+  import PageMore from '../components/PageMore.vue'
+  import { getIconMenus, iconMenusClickedItem } from '../utils/feed'
+  import { getTextDiscoverDetail } from '../utils/shareTemplate'
 
   export default {
     data () {
@@ -132,6 +145,19 @@
         loading: true,
         lists: [],
         regions: [],
+        shareOption: {},
+        itemOptionsObj: {},
+        shareIconMenus: [
+          {
+            icon: '#icon-shoucangdilantongyi',
+            text: '收藏',
+            isBookMark: 0
+          },
+          {
+            icon: '#icon-jubao',
+            text: '举报'
+          }
+        ],
         swiperOption: {
           slidesPerView: 'auto',
           spaceBetween: 0,
@@ -148,7 +174,8 @@
       SwiperMescrollList,
       swiper,
       swiperSlide,
-      BottomActions
+      BottomActions,
+      PageMore
     },
     computed: {
       listDataConfig () {
@@ -202,6 +229,45 @@
             return
           }
         })
+      },
+      showItemMore (item) {
+        item.feed_type = 16
+        item.user = {
+          id: 0
+        }
+        item.feed = {
+          is_bookmark: item.is_upvoted,
+          submission_id: item.id
+        }
+        this.shareIconMenus = getIconMenus(item)
+        this.itemOptionsObj = item
+        this.shareOption = getTextDiscoverDetail(
+          '/c/' + item.category_id + '/' + item.slug,
+          item.title,
+          item.img,
+          '',
+          '精选推荐'
+        )
+        this.$refs.share.share()
+      },
+      iconMenusClickedItem (item) {
+        this.itemOptionsObj.feed_type = 16
+        this.itemOptionsObj.user = {
+          id: 0
+        }
+        this.itemOptionsObj.feed = {
+          is_bookmark: this.itemOptionsObj.is_upvoted,
+          submission_id: this.itemOptionsObj.id
+        }
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
+          this.shareIconMenus = getIconMenus(this.itemOptionsObj)
+        })
+      },
+      shareFail () {
+
+      },
+      shareSuccess () {
+
       },
       clickDelete () {
         this.$refs.BottomActions.cancelShare()
