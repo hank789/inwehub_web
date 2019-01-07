@@ -108,6 +108,7 @@
       :iconMenu="iconMenus"
       @clickedItem="detailMenuIcon"
       @clickDelete="clickDelete"
+      @choiceItem="choiceItem"
     >
     </BottomActions>
   </div>
@@ -189,6 +190,19 @@
     },
     activated: function () {},
     methods: {
+      choiceItem (item) {
+        var tags = item.value
+        postRequest(`article/regionOperator`, {
+          id: this.item.id,
+          tags: tags
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+        })
+      },
       clickDelete () {
         this.$refs.BottomActions.cancelShare()
         deleteItem(this.item.id)
@@ -227,6 +241,7 @@
               window.mui.toast(response.data.data.tip)
               setTimeout(() => {
                 this.$refs.BottomActions.cancelShare()
+                this.item.rate --
               }, 2000)
             })
             break

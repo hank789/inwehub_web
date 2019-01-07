@@ -40,7 +40,7 @@
         <div class="bot"></div>
         <div class="title">设置精选</div>
         <div class="choiceList">
-          <span class="" v-for="(item, index) in regions" :key="index">{{ item.text }}</span>
+          <span class="" v-for="(item, index) in regions" :key="index" @tap.stop.prevent="choiceItem(item)">{{ item.text }}</span>
         </div>
       </div>
 
@@ -75,6 +75,9 @@
       }
     },
     methods: {
+      choiceItem (item) {
+        this.$emit('choiceItem', item)
+      },
       deleteItem () {
         this.$emit('clickDelete')
       },
