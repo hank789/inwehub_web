@@ -109,6 +109,7 @@
       @clickedItem="detailMenuIcon"
       @clickDelete="clickDelete"
       @choiceItem="choiceItem"
+      :regionsValue="regionsValue"
     >
     </BottomActions>
 
@@ -138,6 +139,7 @@
   import PageMore from '../components/PageMore.vue'
   import { getIconMenus, iconMenusClickedItem } from '../utils/feed'
   import { getTextDiscoverDetail } from '../utils/shareTemplate'
+  import { getIndexByIdArray } from '../utils/array'
 
   export default {
     data () {
@@ -167,7 +169,8 @@
         isShowAddOne: false,
         isFollowed: 0,
         isUpvoted: '',
-        item: {}
+        item: {},
+        regionsValue: Number
       }
     },
     components: {
@@ -219,6 +222,7 @@
     methods: {
       choiceItem (item) {
         var tags = item.value
+        this.regionsValue = item.value
         postRequest(`article/regionOperator`, {
           id: this.item.id,
           tags: tags
@@ -271,7 +275,10 @@
       },
       clickDelete () {
         this.$refs.BottomActions.cancelShare()
-        deleteItem(this.item.id)
+        deleteItem(this.item.id, (context) => {
+          var index = getIndexByIdArray(this.lists, this.item.id)
+          this.lists.splice(index, 1)
+        })
       },
       detailMenuIcon (item) {
         switch (item.text) {
@@ -312,7 +319,8 @@
             })
             break
           case '分享':
-            this.$refs.ShareBtn.share()
+            this.$refs.BottomActions.cancelShare()
+            this.showItemMore(this.item)
             break
         }
       },

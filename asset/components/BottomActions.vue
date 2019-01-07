@@ -40,8 +40,13 @@
         <div class="bot"></div>
         <div class="title">设置精选</div>
         <div class="choiceList">
-          <span class="" v-for="(item, index) in regions" :key="index" @tap.stop.prevent="choiceItem(item)">{{ item.text }}</span>
+          <span class="" :class="regionsValue === item.value ? 'active' : ''" v-for="(item, index) in regions" :key="index" @tap.stop.prevent="choiceItem(item)">{{ item.text }}</span>
         </div>
+      </div>
+
+      <div class="cancelW" @tap.stop.prevent="cancelShare">
+        <div class="bot"></div>
+        <span>确定</span>
       </div>
 
       <div class="cancelW" @tap.stop.prevent="cancelShare">
@@ -68,6 +73,10 @@
         default: () => {
           return []
         }
+      },
+      regionsValue: {
+        type: Number,
+        default: ''
       },
       regions: {
         type: Array,
