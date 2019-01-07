@@ -11,7 +11,6 @@ import SearchSearchTag from '../../../views/Search/SearchTag.vue'
 import SearchSearchUser from '../../../views/Search/SearchUser.vue'
 import ActivityOpportunityList from '../../../views/Activity/OpportunityList.vue'
 import ActivityEnrollmentStatus from '../../../views/Activity/EnrollmentStatus.vue'
-import NewcomerGuidanceStepOne from '../../../views/NewcomerGuidance/StepOne.vue'
 import NewcomerGuidanceInterest from '../../../views/NewcomerGuidance/Interest.vue'
 import NewcomerGuidanceStepGroup from '../../../views/NewcomerGuidance/StepGroup.vue'
 import NewcomerGuidanceStepTwo from '../../../views/NewcomerGuidance/StepTwo.vue'
@@ -44,8 +43,6 @@ import DiscoverHotTopic from '../../../views/Discover/HotTopic.vue'
 import DiscoverNewest from '../../../views/Discover/Newest.vue'
 import DiscoverPublishArticles from '../../../views/Discover/PublishArticles.vue'
 import DiscoverAddSuccess from '../../../views/Discover/AddSuccess.vue'
-import DiscoverList from '../../../views/Discover/List.vue'
-import DiscoverSearchFollow from '../../../views/Discover/SearchFollow.vue'
 import DiscoverSearchGroup from '../../../views/Group/Discover.vue'
 import DiscoverSearchRecommend from '../../../views/Discover/SearchRecommend.vue'
 import DiscoverDetail from '../../../views/Discover/Detail.vue'
@@ -231,7 +228,6 @@ export {
   ActivityActiveList,
   ActivityOpportunityList,
   ActivityEnrollmentStatus,
-  NewcomerGuidanceStepOne,
   NewcomerGuidanceInterest,
   NewcomerGuidanceStepTwo,
   NewcomerGuidanceStepThree,
@@ -263,8 +259,6 @@ export {
   DiscoverNewest,
   DiscoverPublishArticles,
   DiscoverAddSuccess,
-  DiscoverList,
-  DiscoverSearchFollow,
   DiscoverSearchGroup,
   DiscoverSearchRecommend,
   DiscoverDetail,
