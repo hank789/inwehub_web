@@ -487,13 +487,16 @@ function alertReport (context, callback) {
 }
 
 // 首页加热度
-function alertHomeHeat (context, regions, item) {
+function alertHomeHeat (context, regions, item, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
-    dialogObj.getHtml('homeHeat', {regions: {region: regions}}, (html) => {
+    dialogObj.getHtml('homeHeat', {regions: {region: regions}, readList: item}, (html) => {
       alertHtml(html, (num) => {
         if (num === 2) {
-          upvote(this, item.id, () => {
+          upvote(this, item.id, (rs) => {
+            callback(rs)
+          }, (res) => {
+            callback(res)
           })
         }
         if (num === 1) {
@@ -502,6 +505,10 @@ function alertHomeHeat (context, regions, item) {
         }
         if (num === 3) {
           deleteItem(item.id)
+          return true
+        }
+        if (num > -1) {
+          return true
         }
       }, true)
     })
