@@ -524,6 +524,13 @@
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
       },
       onTap (event) {
+        var target = event.target
+        if (target.attributes.title) {
+          if (target.attributes.title.value === '赞' || target.attributes.title.value === '踩') {
+            return
+          }
+        }
+
         if (this.typeDesc(this.detail.group.is_joined)) {
           event.stopPropagation()
           event.preventDefault()
