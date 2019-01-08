@@ -607,7 +607,7 @@
         localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
-        if (!this.selectedGroup.id) {
+        if (0 && !this.selectedGroup.id) {
           window.mui.toast('别忘了选择圈子后再发布！')
           return
         }
