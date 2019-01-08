@@ -409,7 +409,7 @@
       padding: 0 0.426rem 0 0.373rem;
       position: relative;
       &.container-list-top {
-        margin-top: 20px;
+        margin-top: 0.533rem;
       }
       .pointLine {
         display: inline-block;
@@ -454,7 +454,7 @@
         /*overflow: hidden;*/
         height: 1.893rem;
         margin-bottom: 0.533rem;
-        margin-top: 5px;
+        margin-top: 0.133rem;
         .left {
           width: 5.12rem;
           display: inline-block;
@@ -574,7 +574,7 @@
     background: #03AEF9;
     font-size: 0.32rem;
     display: none;
-    margin-top: 14px;
+    margin-top: 0.373rem;
     border-top-right-radius: 1.333rem;
     border-bottom-right-radius: 1.333rem;
     box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
@@ -589,10 +589,10 @@
   .mui-ios {
     .heatWrapper {
        .icon {
-         top: -3px !important;
+         top: -0.08rem !important;
        }
       span {
-        top: -3px !important;
+        top: -0.08rem !important;
       }
     }
   }

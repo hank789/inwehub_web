@@ -355,18 +355,18 @@
   }
 
   .heat-wrapper .submit {
-    width: 315px;
-    height: 44px;
-    margin: 0 auto 15px;
-    line-height: 44px;
+    width: 8.4rem;
+    height: 1.173rem;
+    margin: 0 auto 0.4rem;
+    line-height: 1.173rem;
     text-align: center;
-    border-radius: 44px;
+    border-radius: 1.173rem;
     background: #03AEF9;
   }
 
   .heat-wrapper .submit span {
     color: #FFFFFF;
-    font-size: 16px;
+    font-size: 0.426rem;
   }
 
   .deleteWrapper {
