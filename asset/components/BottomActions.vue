@@ -47,7 +47,7 @@
         </div>
       </div>
 
-      <div class="deleteWrapper">
+      <div class="deleteWrapper" v-if="isAdmin">
         <div class="bot"></div>
         <div class="single alertConfirm" @tap.stop.prevent="deleteItem">
             <span class="iconW">
@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="choiceWrapper">
+      <div class="choiceWrapper" v-if="isAdmin">
         <div class="bot"></div>
         <div class="title">设置精选</div>
         <div class="choiceList">
@@ -68,7 +68,7 @@
         </div>
       </div>
 
-      <div class="submit" @tap.stop.prevent="submit">
+      <div class="submit" @tap.stop.prevent="submit" v-if="isAdmin">
         <span>确定</span>
       </div>
 
@@ -84,6 +84,7 @@
   import { postRequest } from '../utils/request'
   import { upvote } from '../utils/discover'
   import Vue from 'vue'
+  import { isAdmin } from '../utils/user'
 
   export default {
     data () {
@@ -106,6 +107,9 @@
       }
     },
     computed: {
+      isAdmin () {
+        return isAdmin()
+      }
     },
     created () {},
     watch: {
@@ -184,7 +188,17 @@
         this.hide()
       },
       hide () {},
+      resetRegions () {
+        for (var i = 0; i < this.regions.length; i++) {
+          if (this.regions[i].selected) {
+            var item = this.regions[i]
+            item.selected = 0
+            Vue.set(this.regions, i, item)
+          }
+        }
+      },
       show () {
+        this.resetRegions()
         setTimeout(() => {
           window.mui('#homeHeat').popover('toggle')
           window.mui('body').on('tap', '.mui-backdrop', () => {

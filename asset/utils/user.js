@@ -112,6 +112,7 @@ function updateUserInfoCache (user) {
   userLocal.skill_tags = user.skill_tags
   userLocal.realname = user.realname
   userLocal.region_tags = user.region_tags
+  userLocal.is_admin = user.is_admin ? 1 : 0
 
   /*
    user.counts.map(function (count, index) {
@@ -297,6 +298,14 @@ function getLocalName () {
   return null
 }
 
+function isAdmin () {
+  var userInfo = getLocalUserInfo()
+  if (userInfo && userInfo.is_admin) {
+    return true
+  }
+  return false
+}
+
 export {
   getUserInfo,
   updateUserInfoCache,
@@ -311,5 +320,6 @@ export {
   getLocalUuid,
   getLocalUserLevel,
   getLocalPhone,
-  getLocalName
+  getLocalName,
+  isAdmin
 }
