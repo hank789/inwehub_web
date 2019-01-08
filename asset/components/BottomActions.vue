@@ -42,7 +42,7 @@
                   <use xlink:href="#icon-zan"></use>
                 </svg>
               </span>
-            <div class="text">{{ localItem.isUpvoted ? '已赞' : '赞' }}</div>
+            <div class="text">{{ localItem.is_upvoted ? '已赞' : '赞' }}</div>
           </div>
         </div>
       </div>
