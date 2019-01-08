@@ -2952,7 +2952,7 @@ a {
   margin-top: 0.133rem;
   margin-left: 0.46rem;}
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
-  width: 6.066rem;
+  width: 8.266rem;
   height: 0.906rem;
   padding-left: 0.266rem;
   line-height: 0.906rem;
@@ -2964,6 +2964,9 @@ a {
 }
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame .icon {
   font-size: 0.453rem;}
+.container-control-logoAndTabsAndSearch.searchBoxShadow {
+  box-shadow:0px 2px 26px 0px rgba(240,242,245,1);
+}
 
 .goEditWrapper {
   position: absolute;
