@@ -514,7 +514,7 @@
               top: -0.053rem;
               &:nth-of-type(1) {
                 color: #FA4975;
-                font-size: 0.226rem;
+                font-size: 0.3rem;
               }
               &:nth-of-type(2) {
                 color: #808080;
@@ -565,7 +565,6 @@
     position: absolute;
     top: 2.08rem !important;
     left: 0;
-    width: 100%;
   }
   .fixedData {
     color: #FFFFFF;
@@ -592,7 +591,7 @@
          top: -0.08rem !important;
        }
       span {
-        top: -0.08rem !important;
+        top: -0.05rem !important;
       }
     }
   }
