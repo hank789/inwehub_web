@@ -606,7 +606,7 @@
        .icon {
          top: -0.08rem !important;
          &.heatAddIcon {
-           top: 0.08rem !important;
+           top: 0.15rem !important;
          }
        }
       span {
