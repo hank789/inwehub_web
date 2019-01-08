@@ -3350,7 +3350,7 @@ a {
 .container-tags-home .activeLine {
   width: 0.426rem;
   height: 0.106rem;
-  border-radius: 2.666rem;
+  border-radius: 0.666rem;
   display: inline-block;
   background: #03AEF9;
   position: absolute;

@@ -51,13 +51,13 @@
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="goArticle(item)">
-                <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)">
+                <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)" :class="itemIndex === 0 ? 'hideData' : ''">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-riliyouse"></use>
                   </svg>
                   <span>{{ timeToHumanText(item.created_at) }}</span>
                 </div>
-                <div class="container-list">
+                <div class="container-list" :class="itemIndex === 0 ? 'container-list-top' : ''">
                   <div class="pointLine" v-if="type === 0">
                     <span class="splitCircle"></span>
                     <span class="splitLine" v-if="itemIndex !== lists[listDataIndex].length - 1"></span>
@@ -472,6 +472,9 @@
     .container-list {
       padding: 0 0.426rem 0 0.373rem;
       position: relative;
+      &.container-list-top {
+        margin-top: 20px;
+      }
       .pointLine {
         display: inline-block;
         position: absolute;
@@ -515,6 +518,7 @@
         /*overflow: hidden;*/
         height: 1.893rem;
         margin-bottom: 0.533rem;
+        margin-top: 5px;
         .left {
           width: 5.12rem;
           display: inline-block;
@@ -585,6 +589,7 @@
           .border-football {
             &:after {
               border-radius: 0.213rem;
+              border-color: #DCDCDC;
             }
           }
         }
@@ -619,7 +624,7 @@
   }
 
   .nav-fixed{
-    z-index: 9999;
+    z-index: 99;
     position: absolute;
     top: 2.08rem !important;
     left: 0;
@@ -642,6 +647,19 @@
 
   .leftTopFixedShow{
     display: inline-block;
+  }
+  .mui-ios {
+    .heatWrapper {
+       .icon {
+         top: -3px;
+       }
+      span {
+        top: -3px;
+      }
+    }
+  }
+  .hideData {
+    display: none !important;
   }
 
 
