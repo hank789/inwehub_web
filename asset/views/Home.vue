@@ -75,7 +75,7 @@
                       <div class="left">
                         <div class="title font-family-medium text-line-2">{{ item.title }}</div>
                         <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item)">
-                          <div class="addOne" v-if="item.isFollowed">
+                          <div class="addOne" v-if="item.is_upvoted">
                             <i></i>
                             <span>+1</span>
                           </div>
@@ -104,12 +104,9 @@
 
     <BottomActions
       ref="BottomActions"
+      v-model="activeItem"
       :regions="regions"
-      :iconMenu="iconMenus"
-      @clickedItem="detailMenuIcon"
       @clickDelete="clickDelete"
-      @choiceItem="choiceItem"
-      :regionsValue="regionsValue"
     >
     </BottomActions>
 
@@ -128,18 +125,18 @@
 <script>
   import SwiperMescrollList from '../components/refresh/SwiperMescrollList.vue'
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
-  import { postRequest } from '../utils/request'
   import { timeToHumanText, getTimestampByDateStr } from '../utils/time'
   import { saveLocationInfo } from '../utils/allPlatform'
   import userAbility from '../utils/userAbility'
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import BottomActions from '../components/BottomActions'
-  import { upvote, deleteItem } from '../utils/discover'
+  import { deleteItem } from '../utils/discover'
   import PageMore from '../components/PageMore.vue'
   import { getIconMenus, iconMenusClickedItem } from '../utils/feed'
   import { getTextDiscoverDetail } from '../utils/shareTemplate'
   import { getIndexByIdArray } from '../utils/array'
+  import { postRequest } from '../utils/request'
 
   export default {
     data () {
@@ -167,10 +164,7 @@
         },
         type: 0,
         isShowAddOne: false,
-        isFollowed: 0,
-        isUpvoted: '',
-        item: {},
-        regionsValue: Number
+        activeItem: {}
       }
     },
     components: {
@@ -199,41 +193,10 @@
           autoShow: true
         })
         return rs
-      },
-      iconMenus () {
-        return [
-          {
-            icon: '#icon-shoucang-xiao',
-            text: '分享'
-          },
-          {
-            icon: '#icon-pinglun',
-            text: '评论'
-          },
-          {
-            icon: '#icon-zan',
-            text: this.isUpvoted ? '已赞' : '赞',
-            isUpvoted: this.isUpvoted
-          }
-        ]
       }
     },
     activated: function () {},
     methods: {
-      choiceItem (item) {
-        var tags = item.value
-        this.regionsValue = item.value
-        postRequest(`article/regionOperator`, {
-          id: this.item.id,
-          tags: tags
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-        })
-      },
       showItemMore (item) {
         item.feed_type = 16
         item.user = {
@@ -271,58 +234,14 @@
 
       },
       shareSuccess () {
-
+        this.activeItem.share_number++
       },
       clickDelete () {
         this.$refs.BottomActions.cancelShare()
-        deleteItem(this.item.id, (context) => {
+        deleteItem(this.activeItem.id, (context) => {
           var index = getIndexByIdArray(this.lists, this.item.id)
           this.lists.splice(index, 1)
         })
-      },
-      detailMenuIcon (item) {
-        switch (item.text) {
-          case '评论':
-            this.$router.pushPlus('/comment/' + this.item.category_id + '/' + this.item.slug + '/' + this.item.id)
-            break
-          case '赞':
-            upvote(this, this.item.id, (response) => {
-              this.isUpvoted = 1
-              window.mui.toast(response.data.data.tip)
-              setTimeout(() => {
-                this.$refs.BottomActions.cancelShare()
-                this.$set(this.item, 'isFollowed', this.item.isFollowed ? !this.item.isFollowed : true)
-                this.item.rate ++
-              }, 2000)
-            }, (response) => {
-              this.isUpvoted = 0
-              window.mui.toast(response.data.data.tip)
-              setTimeout(() => {
-                this.$refs.BottomActions.cancelShare()
-              }, 2000)
-            })
-            break
-          case '已赞':
-            upvote(this, this.item.id, (response) => {
-              this.isUpvoted = 1
-              window.mui.toast(response.data.data.tip)
-              setTimeout(() => {
-                this.$refs.BottomActions.cancelShare()
-              }, 2000)
-            }, (response) => {
-              this.isUpvoted = 0
-              window.mui.toast(response.data.data.tip)
-              setTimeout(() => {
-                this.$refs.BottomActions.cancelShare()
-                this.item.rate --
-              }, 2000)
-            })
-            break
-          case '分享':
-            this.$refs.BottomActions.cancelShare()
-            this.showItemMore(this.item)
-            break
-        }
       },
       goArticle: function (detail) {
         if (detail.link_url.indexOf(process.env.H5_ROOT) === 0) {
@@ -381,10 +300,8 @@
         userAbility.jumpToDiscoverAdd(this, '?from=home')
       },
       addHeat (item) {
+        this.activeItem = item
         this.$refs.BottomActions.show()
-        this.item = item
-        this.isUpvoted = item.is_upvoted
-        console.log(item.title)
       },
       timeToHumanText (time) {
         return timeToHumanText(getTimestampByDateStr(time))
