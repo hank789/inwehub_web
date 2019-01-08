@@ -2950,7 +2950,7 @@ a {
   top: 0.373rem; }
 .container-control-logoAndTabsAndSearch .topSearchWrapper {
   margin-top: 0.133rem;
-  margin-left: 0.533rem;}
+  margin-left: 0.46rem;}
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
   width: 6.066rem;
   height: 0.906rem;
@@ -3057,7 +3057,7 @@ a {
 .container-tabLabels .tab {
   display: inline-block;
   color: #808080;
-  font-size: 0.346rem;
+  font-size: 15px;
   border: 0.026rem solid #DCDCDC;
   padding: 0.133rem 0.266rem;
   border-radius: 0.106rem;
@@ -3343,6 +3343,7 @@ a {
   line-height: 0.906rem;
   padding-right: 0.24rem;
   padding-left: 0.426rem;
+  font-size: 15px;
   float: left;}
 .container-tags-home .container-allTags.active {
   font-family:PingFangSC-Medium;
@@ -3356,10 +3357,12 @@ a {
   position: absolute;
   bottom: 0.053rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%);}
+.container-tags-home .container-allTags .allTagsLine {
+  margin-left: 3px;
 }
 .container-tags-home .container-tabLabels {
-  width: 8.466rem;
+  width: 8.4rem;
   line-height: 0.906rem;
   float: left;}
 .container-tags-home .container-tabLabels .tab {

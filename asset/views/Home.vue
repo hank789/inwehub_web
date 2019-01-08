@@ -20,7 +20,7 @@
       <div class="container-tags-home container-tags-home-margin" id="container-tags-home-content">
         <div>
           <div class="container-allTags " :class="type === 0 ? 'active' : ''" @tap.stop.prevent="getAllRecommend()">
-            全部<i class="" :class="type === 0 ? 'activeLine':''"></i>
+            全部<i class="allTagsLine" :class="type === 0 ? 'activeLine':''"></i>
           </div>
           <div class="container-tabLabels">
             <swiper ref="inTags" :options="swiperOption" class="container-upload-images">
@@ -530,7 +530,7 @@
               &:nth-of-type(2) {
                 color: #808080;
                 font-size: 0.24rem;
-                /*top: 0.08rem !important;*/
+                top: 0.133rem;
                 position: absolute !important;
                 right: 0.213rem !important;
               }
@@ -616,7 +616,7 @@
     .heatWrapper {
       .icon {
         &.heatAddIcon {
-          top: 0.133rem !important;
+          top: 0.16rem !important;
         }
       }
     }
