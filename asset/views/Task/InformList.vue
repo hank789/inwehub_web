@@ -352,7 +352,7 @@
 
   .mui-icon {
     .icon {
-      font-size: 0.4rem;
+      font-size: 21px;
     }
   }
 
@@ -601,7 +601,7 @@
     font-size: 0.453rem;
     color:#808080;
     position: relative;
-    top:-0.106rem;
+    /*top:-0.106rem;*/
   }
   .type_2 img{
     border-radius: 0.266rem;
