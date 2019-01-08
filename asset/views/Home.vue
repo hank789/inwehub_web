@@ -63,7 +63,7 @@
                     <span class="splitLine" v-if="isShowSplitLine(itemIndex, listDataIndex)"></span>
                   </div>
                   <div class="pointLine" v-if="type !== 0">
-                    <span class="number">{{ itemIndex+1 }}.</span>
+                    <span class="number font-family-medium">{{ itemIndex+1 }}.</span>
                   </div>
                   <div class="content">
                     <div class="top-time">
