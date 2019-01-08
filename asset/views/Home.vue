@@ -83,7 +83,7 @@
                             <use xlink:href="#icon-huo"></use>
                           </svg>
                           <span>{{ item.rate }}</span>
-                          <svg class="icon" aria-hidden="true">
+                          <svg class="icon heatAddIcon" aria-hidden="true">
                             <use xlink:href="#icon-tianjia"></use>
                           </svg>
                         </div>
@@ -602,6 +602,9 @@
     .heatWrapper {
        .icon {
          top: -0.08rem !important;
+         &.heatAddIcon {
+           top: -0.087rem !important;
+         }
        }
       span {
         top: -0.05rem !important;
