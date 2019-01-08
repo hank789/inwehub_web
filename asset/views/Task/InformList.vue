@@ -352,7 +352,7 @@
 
   .mui-icon {
     .icon {
-      font-size: 21px;
+      font-size: 0.56rem;
     }
   }
 
