@@ -74,8 +74,8 @@
                     <div class="middle">
                       <div class="left">
                         <div class="title font-family-medium text-line-2">{{ item.title }}</div>
-                        <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item)">
-                          <div class="addOne" v-if="startAnimation && item.is_upvoted">
+                        <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item, itemIndex, listDataIndex)">
+                          <div class="addOne" v-if="item.startAnimation">
                             <i></i>
                             <span>+1</span>
                           </div>
@@ -138,6 +138,7 @@
   import { getTextDiscoverDetail } from '../utils/shareTemplate'
   import { getIndexByIdArray } from '../utils/array'
   import { postRequest } from '../utils/request'
+  import Vue from 'vue'
 
   export default {
     data () {
@@ -166,7 +167,9 @@
         },
         type: 0,
         isShowAddOne: false,
-        activeItem: {}
+        activeItem: {},
+        activeItemIndex: 0,
+        activeListIndex: 0
       }
     },
     components: {
@@ -200,7 +203,14 @@
     activated: function () {},
     methods: {
       startAnimationEvent (status) {
-        this.startAnimation = status
+        var list = this.lists[this.activeListIndex]
+        list[this.activeItemIndex].startAnimation = 1
+        Vue.set(this.lists, this.activeListIndex, list)
+
+        setTimeout(() => {
+          list[this.activeItemIndex].startAnimation = 0
+          Vue.set(this.lists, this.activeListIndex, list)
+        }, 4000)
       },
       showItemMore (item) {
         item.feed_type = 16
@@ -304,8 +314,10 @@
       jumpToDiscoverAdd () {
         userAbility.jumpToDiscoverAdd(this, '?from=home')
       },
-      addHeat (item) {
+      addHeat (item, itemIndex, listIndex) {
         this.activeItem = item
+        this.activeItemIndex = itemIndex
+        this.activeListIndex = listIndex
         this.$refs.BottomActions.show()
       },
       timeToHumanText (time) {
