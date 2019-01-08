@@ -94,6 +94,8 @@ function openWebviewByUrl (id, url, autoShow = true, aniShow = 'slide-in-right',
       console.log('openWindow url:' + url + ', popGesture: ' + popGesture + ',aniShow:' + aniShow)
       console.log('bind event popGesture')
       webview.addEventListener('popGesture', (e) => {
+        webview.evalJS('document.activeElement && document.activeElement.blur()')
+
         console.log('run in event popGesture')
         if (e.type === 'end' && e.result === true) {
           var parentWebview = getPrevWebview() // self.opener()

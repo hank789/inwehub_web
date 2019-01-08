@@ -560,6 +560,7 @@ function AppInit (context) {
           extras: {preload: true, custom_preload: true}
         })
         listPageWebview.addEventListener('popGesture', (e) => {
+          listPageWebview.evalJS('document.activeElement && document.activeElement.blur()')
           console.log('run in event popGesture')
           if (e.type === 'end' && e.result === true) {
             var parentWebview = getPrevWebview() // self.opener()
