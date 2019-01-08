@@ -513,7 +513,7 @@
       .middle {
         /*display: flex;*/
         /*overflow: hidden;*/
-        height: 71px;
+        height: 1.893rem;
         margin-bottom: 0.533rem;
         .left {
           width: 5.12rem;
@@ -530,10 +530,10 @@
             padding: 0 0.133rem;
             position: relative;
             .addOne {
-              height: 21px;
+              height: 0.56rem;
               position: absolute;
-              top: -28px;
-              left: 16px;
+              top: -0.746rem;
+              left: 0.426rem;
               opacity: 0;
               animation: addone 3s;
               -moz-animation: addone 3s; /* Firefox */
@@ -542,21 +542,21 @@
               i {
                 width: 0;
                 height: 0;
-                border-left: 3px solid transparent;
-                border-right: 3px solid transparent;
-                border-top: 3px solid #FA4975;
+                border-left: 0.08rem solid transparent;
+                border-right: 0.08rem solid transparent;
+                border-top: 0.08rem solid #FA4975;
                 position: absolute;
-                top: 20px;
-                left: 6px;
+                top: 0.533rem;
+                left: 0.16rem;
               }
               span {
-                width: 23px;
-                height: 18px;
-                line-height: 18px;
+                width: 0.613rem;
+                height: 0.48rem;
+                line-height: 0.48rem;
                 color: #FFFFFF;
-                font-size: 11px;
+                font-size: 0.293rem;
                 text-align: center;
-                border-radius: 4px;
+                border-radius: 0.106rem;
                 background: #FA4975;
                 display: inline-block;
               }
@@ -648,11 +648,11 @@
   @keyframes addone
   {
     from {
-      top: -28px;
+      top: -0.746rem;
       opacity: 0;
     }
     to {
-      top: -45px;
+      top: -1.2rem;
       opacity: 1;
     }
   }
@@ -660,11 +660,11 @@
   @-moz-keyframes addone /* Firefox */
   {
     from {
-      top: -28px;
+      top: -0.746rem;
       opacity: 0;
     }
     to {
-      top: -45px;
+      top: -1.2rem;
       opacity: 1;
     }
   }
@@ -672,11 +672,11 @@
   @-webkit-keyframes addone /* Safari and Chrome */
   {
     from {
-      top: -28px;
+      top: -0.746rem;
       opacity: 0;
     }
     to {
-      top: -45px;
+      top: -1.2rem;
       opacity: 1;
     }
   }
@@ -684,11 +684,11 @@
   @-o-keyframes addone /* Opera */
   {
     from {
-      top: -28px;
+      top: -0.746rem;
       opacity: 0;
     }
     to {
-      top: -45px;
+      top: -1.2rem;
       opacity: 1;
     }
   }
