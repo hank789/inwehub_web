@@ -10,6 +10,7 @@
 
 
     <Share
+      ref="shareComponent"
       :title="shareOption.title"
       :shareName="shareOption.shareName"
       :link="shareOption.link"
@@ -46,7 +47,9 @@
       }
     }),
     created () {
-
+      window.addEventListener('share', (e) => {
+        this.$refs.shareComponent.share()
+      })
     },
     methods: {
       initWebview (pageTile, shareTitle, shareLink, shareContent, shareImageUrl, shareThumbUrl) {

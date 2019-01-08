@@ -259,7 +259,7 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
 
   // 创建评论链接
   var commentUrl = getIndexPath() + '#' + footerPathUrl
-  var view = new window.plus.nativeObj.View('test', {bottom: '0px', left: '0', height: '44px', width: '60%'})
+  var view = new window.plus.nativeObj.View('test', {bottom: '0px', left: '0', height: '44px', width: '70%'})
 
   view.draw([
     {

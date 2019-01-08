@@ -142,35 +142,7 @@
         if (window.mui.os.plus) {
           window.mui.plusReady(function () {
             var currentWebview = window.plus.webview.getWebviewById('inwehub_article_title')
-            currentWebview.setStyle({
-              height: '100%',
-              zindex: 999,
-              opacity: 0.97
-            })
-
-            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_body')
-            footerWebview.setVisible(false)
-          })
-        }
-
-        setTimeout(() => {
-          window.mui('body').on('tap', '.mui-backdrop', () => {
-            this.hideShare()
-          })
-        }, 150)
-      },
-      hideShare () {
-        if (window.mui.os.plus) {
-          window.mui.plusReady(function () {
-            var immersedHeight = getImmersedHeight()
-            var currentWebview = window.plus.webview.getWebviewById('inwehub_article_title')
-            currentWebview.setStyle({
-              height: (immersedHeight + 44) + 'px',
-              opacity: 1
-            })
-
-            var footerWebview = window.plus.webview.getWebviewById('inwehub_article_body')
-            footerWebview.setVisible(true)
+            window.mui.fire(currentWebview, 'share', {childId: currentWebview.id})
           })
         }
       },
