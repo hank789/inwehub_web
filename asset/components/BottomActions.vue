@@ -40,12 +40,11 @@
         <div class="bot"></div>
         <div class="title">设置精选</div>
         <div class="choiceList">
-          <span class="" :class="regionsValue === item.value ? 'active' : ''" v-for="(item, index) in regions" :key="index" @tap.stop.prevent="choiceItem(item)">{{ item.text }}</span>
+          <span class="" :class="item.regionsValue ? 'active' : ''" v-for="(item, index) in regions" :key="index" @tap.stop.prevent="choiceItem(item)">{{ item.text }}</span>
         </div>
       </div>
 
-      <div class="cancelW" @tap.stop.prevent="cancelShare">
-        <div class="bot"></div>
+      <div class="submit" @tap.stop.prevent="submit">
         <span>确定</span>
       </div>
 
@@ -74,16 +73,15 @@
           return []
         }
       },
-      regionsValue: {
-        type: Number,
-        default: ''
-      },
       regions: {
         type: Array,
         default: []
       }
     },
     methods: {
+      submit () {
+        this.$emit('submit')
+      },
       choiceItem (item) {
         this.$emit('choiceItem', item)
       },
@@ -234,6 +232,19 @@
     font-size: 0.426rem;
     text-align: center;
     line-height: 1.386rem;
+  }
+  .heat-wrapper .submit {
+    width: 315px;
+    height: 44px;
+    margin: 0 auto 15px;
+    line-height: 44px;
+    text-align: center;
+    border-radius:44px;
+    background: #03AEF9;
+  }
+  .heat-wrapper .submit span {
+    color: #FFFFFF;
+    font-size: 16px;
   }
 
   .deleteWrapper {
