@@ -82,7 +82,7 @@
 
 <script type="text/javascript">
   import { postRequest } from '../utils/request'
-  import { upvote } from '../utils/discover'
+  import { upvoteOnlyHome } from '../utils/discover'
   import Vue from 'vue'
   import { isAdmin } from '../utils/user'
 
@@ -129,7 +129,7 @@
         this.localItem = item
       },
       vote () {
-        upvote(this, this.localItem.id, (response) => {
+        upvoteOnlyHome(this, this.localItem.id, (response) => {
           this.localItem.is_upvoted = 1
           this.localItem.support_number++
           this.$emit('startAnimation', 1)

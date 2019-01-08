@@ -88,8 +88,10 @@
                           </svg>
                         </div>
                       </div>
-                      <div class="right">
-                        <div class="articleImg"><img :src="item.img" alt=""></div>
+                      <div class="right" v-if="item.img">
+                        <div class="articleImg">
+                          <ImageView :src="item.img" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -406,7 +408,8 @@
       height: 0.56rem;
       display: inline-block;
       line-height: 0.56rem;
-      margin-bottom: 0.48rem;
+      margin-bottom: 20px;
+      margin-top: 10px;
 
       .icon {
         font-size: 0.4rem;
@@ -461,14 +464,15 @@
         }
       }
       .middle {
-        /*display: flex;*/
+        display: flex;
+        justify-content: space-between;
         /*overflow: hidden;*/
         height: 1.893rem;
         margin-bottom: 0.533rem;
         margin-top: 0.133rem;
         .left {
-          width: 5.12rem;
-          display: inline-block;
+          /*width: 5.12rem;*/
+          /*display: inline-block;*/
           .title {
             color: #444444;
             font-size: 0.426rem;
@@ -544,7 +548,8 @@
           }
         }
         .right {
-          float: right;
+          /*float: right;*/
+          margin-left: 18px;
           margin-right: 0.106rem;
           .articleImg {
             width: 2.586rem;

@@ -30,6 +30,33 @@ function upvote (context, submissionId, increaseCallback, decreaseCallback) {
   })
 }
 
+/* 点赞 */
+function upvoteOnlyHome (context, submissionId, increaseCallback, decreaseCallback) {
+  postRequest(`article/upvote-submission`, {
+    submission_id: submissionId
+  }, false).then(response => {
+    var code = response.data.code
+    if (code !== 1000) {
+      if (code === 6108) {
+        userAbility.inviteJoinInGroup(context, response.data.data.group_id)
+        return
+      }
+
+      window.mui.toast(response.data.message)
+      return
+    }
+
+    var isFollowed = response.data.data.type === 'upvote' ? 1 : 0
+
+    // window.mui.toast(response.data.data.tip)
+    if (isFollowed) {
+      increaseCallback(response)
+    } else {
+      decreaseCallback(response)
+    }
+  })
+}
+
 /* 点踩 */
 function downVote (context, submissionId, increaseCallback, decreaseCallback) {
   postRequest(`article/downvote-submission`, {
@@ -213,5 +240,6 @@ export {
   cancelGood,
   cancelTop,
   setTop,
-  report
+  report,
+  upvoteOnlyHome
 }
