@@ -251,6 +251,7 @@
       },
       shareSuccess () {
         this.activeItem.share_number++
+        this.startAnimationEvent(3)
       },
       clickDelete () {
         this.$refs.BottomActions.cancelShare()
