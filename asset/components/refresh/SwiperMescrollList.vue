@@ -42,7 +42,7 @@
           observer: true,
           freeMode: false,
           on: {
-            transitionEnd: () => {
+            slideChange: () => {
               var i = this.swiper.activeIndex
               this.changePage(i)
             }
