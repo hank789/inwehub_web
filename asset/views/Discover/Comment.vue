@@ -255,7 +255,7 @@
         }
       }
       .footerMenuOne {
-        width: 233px;
+        width: 6.213rem;
         height: 0.96rem;
         display: flex;
         color: #03AEF9;
@@ -287,7 +287,7 @@
         position: relative;
         &.shareIcon {
           .icon {
-            font-size: 16px;
+            font-size: 0.426rem;
           }
         }
         span {
@@ -300,7 +300,7 @@
         }
       }
       .icon {
-        font-size: 15px;
+        font-size: 0.4rem;
         /*margin-top: -0.106rem;*/
       }
     }
