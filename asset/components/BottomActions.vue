@@ -128,17 +128,14 @@
         upvote(this, this.localItem.id, (response) => {
           this.localItem.is_upvoted = 1
           this.localItem.support_number++
+          this.$emit('startAnimation', 1)
           window.mui.toast(response.data.data.tip)
-          setTimeout(() => {
-            this.$refs.BottomActions.cancelShare()
-          }, 2000)
+          this.cancelShare()
         }, (response) => {
           this.localItem.is_upvoted = 0
           this.localItem.support_number--
           window.mui.toast(response.data.data.tip)
-          setTimeout(() => {
-            this.$refs.BottomActions.cancelShare()
-          }, 2000)
+          this.cancelShare()
         })
       },
       submit () {
@@ -171,11 +168,14 @@
       clickItem (text) {
         switch (text) {
           case '评论':
-            this.$router.pushPlus('/comment/' + this.localItem.category_id + '/' + this.localItem.slug + '/' + this.localItem.id)
+            this.cancelShare()
+            setTimeout(() => {
+              this.$router.pushPlus('/comment/' + this.localItem.category_id + '/' + this.localItem.slug + '/' + this.localItem.id)
+            }, 300)
             break
           case '分享':
-            this.$refs.BottomActions.cancelShare()
-            this.showItemMore(this.item)
+            this.cancelShare()
+            this.$parent.showItemMore(this.localItem)
             break
         }
       },

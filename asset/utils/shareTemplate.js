@@ -109,10 +109,17 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
     imgUrl = whiteLogo
   }
 
+  var content = ''
+  if (groupName) {
+    content = '来自InweHub「' + groupName + '」' + username + '的发布'
+  } else {
+    content = '来自InweHub的发布'
+  }
+
   return {
     title: title, // '分享 ' + username + ' 的InweHub动态',
     link: link,
-    content: '来自InweHub「' + groupName + '」' + username + '的发布',
+    content: content,
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '动态分享'

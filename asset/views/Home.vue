@@ -75,7 +75,7 @@
                       <div class="left">
                         <div class="title font-family-medium text-line-2">{{ item.title }}</div>
                         <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item)">
-                          <div class="addOne" v-if="item.is_upvoted">
+                          <div class="addOne" v-if="startAnimation && item.is_upvoted">
                             <i></i>
                             <span>+1</span>
                           </div>
@@ -107,6 +107,7 @@
       v-model="activeItem"
       :regions="regions"
       @clickDelete="clickDelete"
+      @startAnimation="startAnimationEvent"
     >
     </BottomActions>
 
@@ -142,6 +143,7 @@
     data () {
       return {
         loading: true,
+        startAnimation: false,
         lists: [],
         regions: [],
         shareOption: {},
@@ -197,6 +199,9 @@
     },
     activated: function () {},
     methods: {
+      startAnimationEvent (status) {
+        this.startAnimation = status
+      },
       showItemMore (item) {
         item.feed_type = 16
         item.user = {
@@ -213,7 +218,7 @@
           item.title,
           item.img,
           '',
-          '精选推荐'
+          null
         )
         this.$refs.share.share()
       },
