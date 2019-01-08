@@ -250,6 +250,27 @@ function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
   }
 }
 
+/**
+ * 首页分享
+ * @param pathUrl
+ * @param title
+ * @param imgUrl
+ */
+function getHomeDetail (pathUrl, title, imgUrl) {
+  if (!imgUrl) {
+    imgUrl = whiteLogo
+  }
+
+  return {
+    title: title,
+    link: pathUrl,
+    content: '来自InweHub的发布',
+    imageUrl: imgUrl,
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '首页分享'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
@@ -262,5 +283,6 @@ export {
   getGroupDetail,
   getRecommends,
   getDianpingCommentDetail,
-  getDianpingProductDetail
+  getDianpingProductDetail,
+  getHomeDetail
 }

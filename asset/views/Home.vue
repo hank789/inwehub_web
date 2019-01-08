@@ -134,8 +134,8 @@
   import BottomActions from '../components/BottomActions'
   import { deleteItem } from '../utils/discover'
   import PageMore from '../components/PageMore.vue'
-  import { getIconMenus, iconMenusClickedItem } from '../utils/feed'
-  import { getTextDiscoverDetail } from '../utils/shareTemplate'
+  import { iconMenusClickedItem } from '../utils/feed'
+  import { getHomeDetail } from '../utils/shareTemplate'
   import { getIndexByIdArray } from '../utils/array'
   import { postRequest } from '../utils/request'
   import Vue from 'vue'
@@ -239,12 +239,10 @@
         }
         this.shareIconMenus = [] // getIconMenus(item)
         this.itemOptionsObj = item
-        this.shareOption = getTextDiscoverDetail(
-          '/c/' + item.category_id + '/' + item.slug,
+        this.shareOption = getHomeDetail(
+          item.link_url,
           item.title,
-          item.img,
-          '',
-          null
+          item.img
         )
         this.$refs.share.share()
       },
