@@ -480,7 +480,7 @@
             height: 0.506rem;
             margin-top: 0.24rem;
             width: max-content;
-            padding: 0 25px 0 8px;
+            padding: 0 0.666rem 0 0.213rem;
             position: relative;
             .addOne {
               height: 0.56rem;
@@ -532,9 +532,9 @@
               &:nth-of-type(2) {
                 color: #808080;
                 font-size: 0.24rem;
-                /*top: 3px !important;*/
+                /*top: 0.08rem !important;*/
                 position: absolute !important;
-                right: 8px !important;
+                right: 0.213rem !important;
               }
             }
           }
@@ -606,7 +606,7 @@
        .icon {
          top: -0.08rem !important;
          &.heatAddIcon {
-           top: 3px !important;
+           top: 0.08rem !important;
          }
        }
       span {
@@ -618,7 +618,7 @@
     .heatWrapper {
       .icon {
         &.heatAddIcon {
-          top: 5px !important;
+          top: 0.133rem !important;
         }
       }
     }
