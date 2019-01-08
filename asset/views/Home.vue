@@ -618,7 +618,7 @@
     .heatWrapper {
       .icon {
         &.heatAddIcon {
-          top: 0.133rem !important;
+          top: 0.16rem !important;
         }
       }
     }
