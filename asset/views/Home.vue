@@ -408,8 +408,8 @@
       height: 0.56rem;
       display: inline-block;
       line-height: 0.56rem;
-      margin-bottom: 20px;
-      margin-top: 10px;
+      margin-bottom: 0.533rem;
+      margin-top: 0.266rem;
 
       .icon {
         font-size: 0.4rem;
@@ -549,7 +549,7 @@
         }
         .right {
           /*float: right;*/
-          margin-left: 18px;
+          margin-left: 0.48rem;
           margin-right: 0.106rem;
           .articleImg {
             width: 2.586rem;

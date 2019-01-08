@@ -2965,7 +2965,7 @@ a {
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame .icon {
   font-size: 0.453rem;}
 .container-control-logoAndTabsAndSearch.searchBoxShadow {
-  box-shadow:0px 2px 26px 0px rgba(240,242,245,1);
+  box-shadow:0rem 0.053rem 0.693rem 0rem rgba(240,242,245,1);
 }
 
 .goEditWrapper {
@@ -3060,7 +3060,7 @@ a {
 .container-tabLabels .tab {
   display: inline-block;
   color: #808080;
-  font-size: 15px;
+  font-size: 0.4rem;
   border: 0.026rem solid #DCDCDC;
   padding: 0.133rem 0.266rem;
   border-radius: 0.106rem;
@@ -3346,7 +3346,7 @@ a {
   line-height: 0.906rem;
   padding-right: 0.24rem;
   padding-left: 0.426rem;
-  font-size: 15px;
+  font-size: 0.4rem;
   float: left;}
 .container-tags-home .container-allTags.active {
   font-family:PingFangSC-Medium;
@@ -3362,7 +3362,7 @@ a {
   left: 50%;
   transform: translateX(-50%);}
 .container-tags-home .container-allTags .allTagsLine {
-  margin-left: 3px;
+  margin-left: 0.08rem;
 }
 .container-tags-home .container-tabLabels {
   width: 8.4rem;
