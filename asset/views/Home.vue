@@ -538,6 +538,7 @@
             img {
               width: 100%;
               height: 100%;
+              object-fit: cover;
             }
           }
         }
@@ -586,10 +587,10 @@
   .mui-ios {
     .heatWrapper {
        .icon {
-         top: -3px;
+         top: -3px !important;
        }
       span {
-        top: -3px;
+        top: -3px !important;
       }
     }
   }
