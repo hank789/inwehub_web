@@ -133,12 +133,12 @@
           this.localItem.is_upvoted = 1
           this.localItem.support_number++
           this.$emit('startAnimation', 1)
-          window.mui.toast(response.data.data.tip)
+          // window.mui.toast(response.data.data.tip)
           this.cancelShare()
         }, (response) => {
           this.localItem.is_upvoted = 0
           this.localItem.support_number--
-          window.mui.toast(response.data.data.tip)
+          // window.mui.toast(response.data.data.tip)
           this.cancelShare()
         })
       },
