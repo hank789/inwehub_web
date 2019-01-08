@@ -70,7 +70,8 @@ function updateUserInfoCache (user) {
     show_my_wallet: false,
     show_ios_resume: false,
     realname: '',
-    region_tags: ''
+    region_tags: '',
+    is_admin: 0
   }
   userLocal.user_id = user.id
   userLocal.name = user.name
