@@ -440,7 +440,7 @@
         }
         .splitLine {
           width: 0.026rem;
-          height: 3.253rem;
+          height: 3.1rem;
           display: inline-block;
           background: #DCDCDC;
           position: absolute;
@@ -499,7 +499,7 @@
                 border-right: 0.08rem solid transparent;
                 border-top: 0.08rem solid #FA4975;
                 position: absolute;
-                top: 0.533rem;
+                top: 0.5rem;
                 left: 0.16rem;
               }
               span {

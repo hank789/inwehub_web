@@ -11,38 +11,38 @@
 
           <div class="iconList " @tap.stop.prevent="clickItem('分享')">
             <div class="addNumber">
-              <span>+{{localItem.share_number}}</span>
+              <span>+3</span>
             </div>
             <span class="iconCircular">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-shoucang-xiao"></use>
                 </svg>
               </span>
-            <div class="text active">分享</div>
+            <div class="text">分享</div>
           </div>
 
           <div class="iconList" @tap.stop.prevent="clickItem('评论')">
             <div class="addNumber">
-              <span>{{localItem.comment_number}}</span>
+              <span>+2</span>
             </div>
             <span class="iconCircular">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-pinglun"></use>
                 </svg>
               </span>
-            <div class="text active">评论</div>
+            <div class="text active">评论<i>{{ localItem.comment_number }}</i></div>
           </div>
 
           <div class="iconList" :class="localItem.is_upvoted ? 'active' : ''" @tap.stop.prevent="vote">
             <div class="addNumber">
-              <span>+{{localItem.support_number}}</span>
+              <span>+1</span>
             </div>
             <span class="iconCircular">
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-zan"></use>
                 </svg>
               </span>
-            <div class="text active">{{ localItem.isUpvoted ? '已赞' : '赞' }}</div>
+            <div class="text">{{ localItem.isUpvoted ? '已赞' : '赞' }}</div>
           </div>
         </div>
       </div>
@@ -335,6 +335,7 @@
 
   .heat-wrapper .right .iconList .text i {
     color: #FA4975;
+    font-style: normal;
   }
 
   .heat-wrapper .cancelW {
