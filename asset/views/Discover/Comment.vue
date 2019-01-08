@@ -1,32 +1,6 @@
 <template>
- <!-- <div class="hideImmersedWrapper">
-    <div class="component-comment">
-      <div class="item btn-1">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-xiugai"></use>
-        </svg><span>评论</span>
-      </div>
-      <div class="item" :class="{active:!!detail.is_commented}">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-        </svg><span>{{detail.comments_number}}</span>
-      </div>
-      <div class="item" :class="{active:!!detail.is_bookmark}" @tap.stop.prevent="collect">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoucangxingxing"></use>
-        </svg><span>{{detail.bookmarks}}</span>
-      </div>
-      <div class="item" :class="{active:!!detail.is_upvoted}" @tap.stop.prevent="support">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-        </svg><span>{{detail.upvotes}}</span>
-      </div>
-    </div>
-  </div> -->
-
-
   <div class="container-footer">
-    <div class="footerLeft" @tap.stop.prevent="WriteComment()">
+    <div class="footerLeft">
       <div class="footerMenuOne">说点什么</div>
     </div>
     <div class="footerRight">
@@ -40,7 +14,7 @@
         <span>{{ detail.comments_number }}</span>
       </div>
 
-      <div class="collectionComment">
+      <div class="collectionComment" @tap.stop.prevent="support">
         <div :class="{active:!!detail.is_bookmark}">
           <svg class="icon" :class="{active:!!detail.is_bookmark}" aria-hidden="true">
             <use xlink:href="#icon-zan"></use>
@@ -49,13 +23,12 @@
         <span>{{ detail.upvotes }}</span>
       </div>
 
-      <div class="collectionComment shareIcon">
+      <div class="collectionComment shareIcon" @tap.stop.prevent="showShare">
         <div >
           <svg class="icon"  aria-hidden="true">
             <use xlink:href="#icon-shoucang-xiao"></use>
           </svg>
         </div>
-        <!--<span v-if="menuItem.number">{{ menuItem.number }}</span>-->
       </div>
 
     </div>
@@ -333,49 +306,5 @@
     }
   }
 
-
-  /*.component-comment {*/
-    /*height: 1.173rem;*/
-    /*line-height: 1.173rem;*/
-    /*overflow: hidden;*/
-    /*background: #f3f4f6;*/
-    /*padding: 0 0.533rem 0 0;*/
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*justify-content: space-between;*/
-  /*}*/
-  /*.component-comment .item {*/
-    /*display: inline-block;*/
-    /*text-align: center;*/
-    /*color: gray;*/
-  /*}*/
-  /*.component-comment .item span {*/
-    /*font-size: 0.32rem;*/
-  /*}*/
-  /*.component-comment .item .icon {*/
-    /*color: gray;*/
-    /*margin-right: 0.133rem;*/
-  /*}*/
-  /*.component-comment .item.active {*/
-    /*color: #03aef9;*/
-  /*}*/
-  /*.component-comment .item.active .icon {*/
-    /*color: #03aef9;*/
-  /*}*/
-  /*.component-comment .item.btn-1 {*/
-    /*background: #03aef9;*/
-    /*color: #fff;*/
-    /*width: 3.893rem;*/
-    /*height: 1.173rem;*/
-    /*font-size: 0.4rem;*/
-  /*}*/
-  /*.component-comment .item.btn-1 span {*/
-    /*font-size: 0.4rem;*/
-  /*}*/
-  /*.component-comment .item.btn-1 .icon {*/
-    /*font-size: 0.453rem;*/
-    /*color: #fff;*/
-    /*margin-right: 0.133rem;*/
-  /*}*/
 
 </style>
