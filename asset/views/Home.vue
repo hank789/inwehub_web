@@ -77,7 +77,7 @@
                         <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item, itemIndex, listDataIndex)">
                           <div class="addOne" v-if="item.startAnimation">
                             <i></i>
-                            <span>+1</span>
+                            <span>+{{startAnimationNum}}</span>
                           </div>
                           <svg class="icon" aria-hidden="true">
                             <use xlink:href="#icon-huo"></use>
@@ -169,7 +169,8 @@
         isShowAddOne: false,
         activeItem: {},
         activeItemIndex: 0,
-        activeListIndex: 0
+        activeListIndex: 0,
+        startAnimationNum: '1'
       }
     },
     components: {
@@ -202,9 +203,11 @@
     },
     activated: function () {},
     methods: {
-      startAnimationEvent (status) {
+      startAnimationEvent (num) {
+        this.startAnimationNum = num
         var list = this.lists[this.activeListIndex]
         list[this.activeItemIndex].startAnimation = 1
+        list[this.activeItemIndex].rate += num
         Vue.set(this.lists, this.activeListIndex, list)
 
         setTimeout(() => {
@@ -221,7 +224,7 @@
           is_bookmark: item.is_upvoted,
           submission_id: item.id
         }
-        this.shareIconMenus = getIconMenus(item)
+        this.shareIconMenus = [] // getIconMenus(item)
         this.itemOptionsObj = item
         this.shareOption = getTextDiscoverDetail(
           '/c/' + item.category_id + '/' + item.slug,
@@ -241,9 +244,7 @@
           is_bookmark: this.itemOptionsObj.is_upvoted,
           submission_id: this.itemOptionsObj.id
         }
-        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {
-          this.shareIconMenus = getIconMenus(this.itemOptionsObj)
-        })
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {})
       },
       shareFail () {
 
