@@ -60,7 +60,7 @@
                 <div class="container-list" :class="itemIndex === 0 ? 'container-list-top' : ''">
                   <div class="pointLine" v-if="type === 0">
                     <span class="splitCircle"></span>
-                    <span class="splitLine" v-if="itemIndex !== lists[listDataIndex].length - 1"></span>
+                    <span class="splitLine" v-if="isShowSplitLine(itemIndex, listDataIndex)"></span>
                   </div>
                   <div class="pointLine" v-if="type !== 0">
                     <span class="number">{{ itemIndex+1 }}.</span>
@@ -203,6 +203,19 @@
     },
     activated: function () {},
     methods: {
+      isShowSplitLine (itemIndex, listDataIndex) {
+        if (itemIndex === this.lists[listDataIndex].length - 1) {
+          return false
+        }
+
+        var nextItemIndex = itemIndex + 1
+        var isNextDate = this.showData(this.lists[listDataIndex][nextItemIndex], nextItemIndex, listDataIndex)
+        if (isNextDate) {
+          return false
+        }
+
+        return true
+      },
       startAnimationEvent (num) {
         this.startAnimationNum = num
         var list = this.lists[this.activeListIndex]
