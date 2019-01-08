@@ -572,6 +572,7 @@
     background: #03AEF9;
     font-size: 0.32rem;
     display: none;
+    margin-top: 14px;
     border-top-right-radius: 1.333rem;
     border-bottom-right-radius: 1.333rem;
     box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
