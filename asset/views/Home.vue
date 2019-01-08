@@ -226,7 +226,7 @@
         setTimeout(() => {
           list[this.activeItemIndex].startAnimation = 0
           Vue.set(this.lists, this.activeListIndex, list)
-        }, 4000)
+        }, 2000)
       },
       showItemMore (item) {
         item.feed_type = 16
@@ -485,13 +485,13 @@
             .addOne {
               height: 0.56rem;
               position: absolute;
-              top: -0.746rem;
+              top: -1.2rem;
               left: 0.426rem;
-              opacity: 0;
-              animation: addone 3s;
-              -moz-animation: addone 3s; /* Firefox */
-              -webkit-animation: addone 3s; /* Safari and Chrome */
-              -o-animation: addone 3s; /* Opera */
+              opacity: 1;
+              animation: addone 1s;
+              -moz-animation: addone 1s; /* Firefox */
+              -webkit-animation: addone 1s; /* Safari and Chrome */
+              -o-animation: addone 1s; /* Opera */
               i {
                 width: 0;
                 height: 0;
@@ -630,49 +630,65 @@
 
   @keyframes addone
   {
-    from {
+    0% {
       top: -0.746rem;
-      opacity: 0;
     }
-    to {
+    25% {
+      top: -1rem;
+    }
+    50% {
       top: -1.2rem;
-      opacity: 1;
+    }
+    100% {
+      display: none;
     }
   }
 
   @-moz-keyframes addone /* Firefox */
   {
-    from {
+    0% {
       top: -0.746rem;
-      opacity: 0;
     }
-    to {
+    25% {
+      top: -1rem;
+    }
+    50% {
       top: -1.2rem;
-      opacity: 1;
+    }
+    100% {
+      display: none;
     }
   }
 
   @-webkit-keyframes addone /* Safari and Chrome */
   {
-    from {
+    0% {
       top: -0.746rem;
-      opacity: 0;
     }
-    to {
+    25% {
+      top: -1rem;
+    }
+    50% {
       top: -1.2rem;
-      opacity: 1;
+    }
+    100% {
+      display: none;
     }
   }
 
   @-o-keyframes addone /* Opera */
   {
-    from {
+    0% {
       top: -0.746rem;
-      opacity: 0;
     }
-    to {
+    25% {
+      top: -1rem;
+    }
+    50% {
       top: -1.2rem;
-      opacity: 1;
+    }
+    100% {
+      display: none;
     }
   }
 </style>
