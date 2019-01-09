@@ -90,7 +90,7 @@
                           </svg>
                         </div>
                       </div>
-                      <div class="right" v-if="item.img || item.img.length">
+                      <div class="right" v-if="item.img.length">
                         <div class="articleImg">
                           <ImageView :src="item.img" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
                         </div>
