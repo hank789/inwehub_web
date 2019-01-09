@@ -566,6 +566,10 @@
             title: data.title,
             img_url: data.img_url
           }]
+          if (!this.html) {
+            this.html = data.title
+            this.text = data.title
+          }
         })
       },
       promptUrl () {
@@ -614,6 +618,10 @@
 
         var html = this.html.replace(/(<p><br><\/p>)*$/, '')
         var text = this.text.replace(/\s/g, '').trim()
+        if (!text) {
+          window.mui.toast('请填写分享内容')
+          return
+        }
 
         html = html.replace(/target="_blank" class="ql-size-small"/g, 'target="_self" class="ql-size-small appUrl"')
 
@@ -640,11 +648,6 @@
         if (this.links.length) {
           data.url = this.links[0].url
           data.type = 'link'
-        }
-
-        if (!text && data.type === 'text') {
-          window.mui.toast('请填写分享内容')
-          return
         }
 
         var options = {}
