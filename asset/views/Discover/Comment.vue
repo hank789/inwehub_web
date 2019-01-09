@@ -276,5 +276,10 @@
     }
   }
 
+  .mui-ios {
+    .container-footer {
+      height: 1.25rem;
+    }
+  }
 
 </style>
