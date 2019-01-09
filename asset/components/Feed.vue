@@ -74,7 +74,7 @@
           </div>
         </div>
         <!--圈子-->
-        <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
+        <div v-if="item.feed.group.name" class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
           <img src="../statics/images/feed-group@3x.png" alt="">
           <span>{{item.feed.group.name}}</span>
         </div>
