@@ -614,7 +614,7 @@
     }
   }
   .groups-list {
-    margin-top: 1.306rem;
+    /*margin-top: 1.306rem;*/
   }
   .listWrapper{
   }
