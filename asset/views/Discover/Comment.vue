@@ -38,7 +38,6 @@
 
 <script>
   import { postRequest } from '../../utils/request'
-  import { getImmersedHeight } from '../../utils/statusBar'
 
   export default {
     data () {

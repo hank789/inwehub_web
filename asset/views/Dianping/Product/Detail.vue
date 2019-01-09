@@ -184,7 +184,6 @@
   const currentUser = localEvent.getLocalItem('UserInfo')
   import localEvent from '../../../stores/localStorage'
   import { urlencode } from '../../../utils/string'
-  import { scrollPage } from '../../../utils/dom'
   import starRating from '../../../components/star-rating/star-rating.vue'
   import StarView from '../../../components/star-rating/starView.vue'
   import { getLocalName } from '../../../utils/user.js'
