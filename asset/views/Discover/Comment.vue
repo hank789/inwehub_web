@@ -278,8 +278,11 @@
 
   .mui-ios {
     .container-footer {
-      height: 1.25rem;
+      .footerMenuOne {
+        height: 0.773rem;
+      }
     }
   }
+
 
 </style>
