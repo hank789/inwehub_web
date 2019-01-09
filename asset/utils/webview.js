@@ -165,6 +165,8 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
   var shareUrl = getIndexPath() + '#/webview/share'
 
   var shareOptions = getDiscoverDetail(pathUrl, title, imgUrl)
+  shareOptions.targetId = id
+  shareOptions.targetType = 'submission'
   console.log('shareOptions:' + JSON.stringify(shareOptions))
 
   var immersedHeight = getImmersedHeight()
@@ -285,7 +287,9 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     link: shareOptions.link,
     content: shareOptions.content,
     imageUrl: shareOptions.imageUrl,
-    thumbUrl: shareOptions.thumbUrl
+    thumbUrl: shareOptions.thumbUrl,
+    targetId: slug,
+    targetType: 'submission'
   }
   console.log('标题栏地址:' + shareUrl)
   var shareView = window.mui.openWindow({

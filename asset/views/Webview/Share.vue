@@ -17,8 +17,8 @@
       :content="shareOption.content"
       :imageUrl="shareOption.imageUrl"
       :thumbUrl="shareOption.thumbUrl"
-      :targetId="id"
-      :targetType="'vendorArticleShare'"
+      :targetId="shareOption.targetId"
+      :targetType="shareOption.targetType"
       @success="shareSuccess"
       @fail="shareFail"
       @share="share"
@@ -43,7 +43,9 @@
         content: '',
         imageUrl: '',
         thumbUrl: '',
-        shareName: ''
+        shareName: '',
+        targetType: '',
+        targetId: ''
       }
     }),
     created () {
@@ -52,13 +54,15 @@
       })
     },
     methods: {
-      initWebview (pageTile, shareTitle, shareLink, shareContent, shareImageUrl, shareThumbUrl) {
+      initWebview (pageTile, shareTitle, shareLink, shareContent, shareImageUrl, shareThumbUrl, targetId, targetType) {
         this.title = pageTile
         this.shareOption.title = shareTitle
         this.shareOption.link = shareLink
         this.shareOption.content = shareContent
         this.shareOption.imageUrl = shareImageUrl
         this.shareOption.thumbUrl = shareThumbUrl
+        this.shareOption.targetType = targetType
+        this.shareOption.targetId = targetId
       },
       share () {
         if (window.mui.os.plus) {
@@ -106,11 +110,11 @@
     watch: {},
     mounted () {
       document.addEventListener('load_inwehub_article_share', (event) => {
-        this.initWebview(event.detail.page_title, event.detail.title, event.detail.link, event.detail.content, event.detail.imageUrl, event.detail.thumbUrl)
+        this.initWebview(event.detail.page_title, event.detail.title, event.detail.link, event.detail.content, event.detail.imageUrl, event.detail.thumbUrl, event.detail.targetId, event.detail.targetType)
       })
       window.mui.plusReady(() => {
         var ws = window.plus.webview.currentWebview()
-        this.initWebview(ws.page_title, ws.title, ws.link, ws.content, ws.imageUrl, ws.thumbUrl)
+        this.initWebview(ws.page_title, ws.title, ws.link, ws.content, ws.imageUrl, ws.thumbUrl, ws.targetId, ws.targetType)
       })
     }
   }
