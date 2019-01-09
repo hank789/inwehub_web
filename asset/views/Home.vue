@@ -303,6 +303,9 @@
       },
       listScroll (index, y, isUp) {
         var navWarp = document.querySelector('.leftTopFixed')
+        if (!navWarp) {
+          return
+        }
         if (this.$refs.RefreshList.$refs.RefreshList[index].mescroll.os.ios) {
           if (y < 10) {
             navWarp.classList.remove('leftTopFixedShow')
