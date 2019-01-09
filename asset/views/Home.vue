@@ -441,7 +441,7 @@
       padding: 0 0.426rem 0 0.373rem;
       position: relative;
       &.container-list-top {
-        margin-top: 14px;
+        margin-top: 0.373rem;
       }
       .pointLine {
         display: inline-block;
