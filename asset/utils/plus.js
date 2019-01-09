@@ -6,7 +6,7 @@ import localEvent from '../stores/localStorage'
 import EventObj from './event'
 import { postRequest } from './request'
 import { checkUpdate } from './updateVersion'
-import { clearHomeData, getHomeData } from './home'
+import { clearHomeData } from './home'
 
 function dowloadFile (uri, path, callback) {
   window.mui.plusReady(() => {
