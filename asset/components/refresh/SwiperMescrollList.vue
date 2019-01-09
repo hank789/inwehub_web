@@ -97,9 +97,6 @@
         this.$emit('listMounted', index)
       },
       listChange (list, index) {
-        var y = this.$refs.RefreshList[index].mescroll.getScrollTop()
-        this.$emit('listScroll', index, y, false)
-
         Vue.set(this.lists, index, list)
         this.$emit('input', this.lists)
       },
