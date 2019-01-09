@@ -228,7 +228,7 @@
         setTimeout(() => {
           list[this.activeItemIndex].startAnimation = 0
           Vue.set(this.lists, this.activeListIndex, list)
-        }, 1000)
+        }, 2500)
       },
       showItemMore (item) {
         item.feed_type = 16
