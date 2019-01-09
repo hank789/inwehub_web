@@ -566,6 +566,10 @@
             title: data.title,
             img_url: data.img_url
           }]
+          if (!this.html) {
+            this.html = data.title
+            this.text = data.title
+          }
         })
       },
       promptUrl () {
