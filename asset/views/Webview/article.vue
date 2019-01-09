@@ -42,7 +42,7 @@
       })
       window.mui.plusReady(() => {
         var ws = window.plus.webview.currentWebview()
-        openWebviewByHome(ws, ws.id, ws.article_url, ws.article_comment_url, ws.article_title, ws.article_img_url)
+        openWebviewByHome(ws, ws.article_id, ws.article_url, ws.article_comment_url, ws.article_title, ws.article_img_url)
       })
     }
   }

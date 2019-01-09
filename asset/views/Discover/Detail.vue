@@ -96,7 +96,7 @@
 
               <div class="timeContainer">
                 <div class="makingCopy">著作权归作者所有</div>
-                <div class="fromGroup">
+                <div class="fromGroup" v-if="detail.group.name">
                   <span @tap="toDetail(detail.group)"><i>来自圈子</i>{{ detail.group.name }}</span>
                 </div>
               </div>
@@ -524,6 +524,13 @@
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
       },
       onTap (event) {
+        var target = event.target
+        if (target.attributes.title) {
+          if (target.attributes.title.value === '赞' || target.attributes.title.value === '踩') {
+            return
+          }
+        }
+
         if (this.typeDesc(this.detail.group.is_joined)) {
           event.stopPropagation()
           event.preventDefault()
@@ -815,6 +822,15 @@
           }
 
           this.detail = response.data.data
+
+          if (!this.detail.group) {
+            this.detail.group = {
+              is_joined: 1,
+              id: null,
+              public: 1,
+              name: ''
+            }
+          }
 
           var shareOption = getTextDiscoverDetail('/c/' + this.detail.category_id + '/' + this.detail.slug, this.detail.title, this.detail.owner.avatar, this.detail.owner.name, this.detail.group.name)
           this.shareOption = Object.assign(this.shareOption, shareOption)

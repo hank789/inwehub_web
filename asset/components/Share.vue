@@ -164,6 +164,7 @@
       },
       cancelShare () {
         window.mui('#shareWrapper').popover('toggle')
+        this.hide()
         if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
           // mixpanel
           window.mixpanel.track(

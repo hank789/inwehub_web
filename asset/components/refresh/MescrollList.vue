@@ -4,13 +4,13 @@
       <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
         <slot name="listHeader"></slot>
 
-        <Empty v-if="nothing===1 && autoShowEmpty"
-               :description="emptyDescription"
-        ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
-
         <div v-show="!loading">
           <slot></slot>
         </div>
+
+        <Empty v-show="nothing===1 && autoShowEmpty"
+               :description="emptyDescription"
+        ><div slot="emptyBottom"><slot name="emptyBottom"></slot></div></Empty>
 
         <slot name="emptyCustom" v-if="nothing === 1"></slot>
       </mescroll-vue>
@@ -186,6 +186,12 @@
       },
       mescrollInit (mescroll) {
         this.mescroll = mescroll
+        this.$emit('listMescrollInit')
+
+        this.mescroll.optUp.onScroll = (mescroll, y, isUp) => {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          this.$emit('listScroll', {y, isUp})
+        }
       },
       downCallback (mescroll) {
         mescroll.resetUpScroll(true)
@@ -263,9 +269,18 @@
         }
       }
     },
+    mounted () {
+      this.$emit('listMounted')
+    },
+    updated () {
+      this.$nextTick(() => {
+        this.$emit('listUpdated')
+      })
+    },
     watch: {
       list: function (newValue) {
         this.$emit('input', newValue)
+        this.$emit('listChange', newValue)
       },
       prevOtherData: function (newValue, oldValue) {
         if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {

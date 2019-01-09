@@ -74,7 +74,7 @@
           </div>
         </div>
         <!--圈子-->
-        <div class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
+        <div v-if="item.feed.group.name" class="feed-group" :class="itemObj.feed.img.length ? 'moveUp':''" @tap.stop.prevent="toGroupDetail(item.feed.group)">
           <img src="../statics/images/feed-group@3x.png" alt="">
           <span>{{item.feed.group.name}}</span>
         </div>
@@ -347,6 +347,11 @@
         if (this.item.feed.group && this.item.feed.group.id) {
           if (this.item.isPass) {
             this.item.isPass = false
+            return
+          }
+
+          if (!window.mui.os.plus && this.item.feed.submission_type === 'link') {
+            // 某些浏览器在非用户操作时阻止新窗口打开
             return
           }
 

@@ -112,6 +112,7 @@
           }
           if (t.finishImgCount === t.selectImgCount) {
             t.$emit('success', t.images)
+            t.$emit('imagePrepareIngChange', false)
           }
         }, function (e) {
           t.finishImgCount++
@@ -121,6 +122,7 @@
       galleryImg: function () {
         window.plus.gallery.pick((a) => {
           window.mui('.info-choose').popover('toggle')
+          this.$emit('imagePrepareIngChange', true)
           if (this.isMultiple) {
             this.selectImgCount = a.files.length
             for (var i = 0; i < a.files.length; i++) {

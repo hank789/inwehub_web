@@ -599,7 +599,6 @@
 
       </div>
     </div>
-
   </div>
 </template>
 <script type="text/javascript">
@@ -2146,16 +2145,5 @@
   .component-report .buttonWrapper.sure span {
     color: #03AEF9;
   }
-  .bot {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0rem;
-    height: 0.026rem;
-    -webkit-transform: scaleY(.5);
-    transform: scaleY(.5);
-    background-color: rgb(220, 220, 220);
-  }
-
 
 </style>

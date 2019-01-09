@@ -123,6 +123,7 @@
       :isMultiple="true"
       @success="uploadImageSuccess"
       :ImageMaximum="maxImageCount - this.images.length"
+      @imagePrepareIngChange="imagePrepareIngChange"
     ></uploadImage>
 
     <uploadFile ref="uploadFile" @success="uploadFileSuccess"></uploadFile>
@@ -175,7 +176,8 @@
         descPlaceholder: '在这里输入您的分享内容' + '\n' + '底部的按钮可以添加：标签、链接、附件',
         selectedGroup: null,
         links: [],
-        showLink: true
+        showLink: true,
+        imagePrepareIng: false // 图片准备中
       }
     },
     computed: {
@@ -251,6 +253,9 @@
       window.mui.previewImage()
     },
     methods: {
+      imagePrepareIngChange (status) {
+        this.imagePrepareIng = status
+      },
       quickUrl () {
         if (this.$route.query.url) {
           var url = this.$route.query.url
@@ -561,6 +566,10 @@
             title: data.title,
             img_url: data.img_url
           }]
+          if (!this.html) {
+            this.html = data.title
+            this.text = data.title
+          }
         })
       },
       promptUrl () {
@@ -602,7 +611,7 @@
         localEvent.clearLocalItem('selectedGroup' + this.id)
       },
       submit () {
-        if (!this.selectedGroup.id) {
+        if (0 && !this.selectedGroup.id) {
           window.mui.toast('别忘了选择圈子后再发布！')
           return
         }
@@ -615,6 +624,11 @@
         }
 
         html = html.replace(/target="_blank" class="ql-size-small"/g, 'target="_self" class="ql-size-small appUrl"')
+
+        if (this.imagePrepareIng) {
+          window.mui.toast('图片处理中，请稍后发布')
+          return
+        }
 
         var data = {
           type: 'text',

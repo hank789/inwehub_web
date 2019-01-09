@@ -210,7 +210,7 @@ var UserAbility = () => {
     var num = parseInt(localEvent.getLocalItem('num' + mobile).value)
     if (num !== 1) {
       if (userInfo.newbie_unfinish_tasks && userInfo.newbie_unfinish_tasks.show_guide) {
-        context.$router.pushPlus('/userGuide/interst')
+        context.$router.pushPlus('/userGuide/stepone')
       }
     }
   }
@@ -470,10 +470,11 @@ var UserAbility = () => {
     }
   }
 
-  function jumpToDiscoverAdd (context) {
+  function jumpToDiscoverAdd (context, from) {
     var isValid = userAbilityCheck.checkPhoneCertification(context)
     if (isValid) {
-      context.$router.pushPlus('/discover/add')
+      var query = from || ''
+      context.$router.pushPlus('/discover/add' + query)
     }
   }
 

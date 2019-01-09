@@ -1,28 +1,39 @@
 <template>
-  <div class="hideImmersedWrapper">
-    <div class="component-comment">
-      <div class="item btn-1">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-xiugai"></use>
-        </svg><span>评论</span>
+  <div class="container-footer">
+    <div class="footerLeft">
+      <div class="footerMenuOne">说点什么</div>
+    </div>
+    <div class="footerRight">
+
+      <div class="collectionComment">
+        <div :class="{active:!!detail.is_commented}">
+          <svg class="icon" :class="{active:!!detail.is_commented}" aria-hidden="true">
+            <use xlink:href="#icon-pinglun"></use>
+          </svg>
+        </div>
+        <span>{{ detail.comments_number }}</span>
       </div>
-      <div class="item" :class="{active:!!detail.is_commented}">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-pinglun1"></use>
-        </svg><span>{{detail.comments_number}}</span>
+
+      <div class="collectionComment" @tap.stop.prevent="support">
+        <div :class="{active:!!detail.is_bookmark}">
+          <svg class="icon" :class="{active:!!detail.is_bookmark}" aria-hidden="true">
+            <use xlink:href="#icon-zan"></use>
+          </svg>
+        </div>
+        <span>{{ detail.upvotes }}</span>
       </div>
-      <div class="item" :class="{active:!!detail.is_bookmark}" @tap.stop.prevent="collect">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-shoucangxingxing"></use>
-        </svg><span>{{detail.bookmarks}}</span>
+
+      <div class="collectionComment shareIcon" @tap.stop.prevent="showShare">
+        <div >
+          <svg class="icon"  aria-hidden="true">
+            <use xlink:href="#icon-shoucang-xiao"></use>
+          </svg>
+        </div>
       </div>
-      <div class="item" :class="{active:!!detail.is_upvoted}" @tap.stop.prevent="support">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-dianzan1"></use>
-        </svg><span>{{detail.upvotes}}</span>
-      </div>
+
     </div>
   </div>
+
 </template>
 
 <script>
@@ -126,6 +137,14 @@
           window.mui.toast(response.data.message)
         })
       },
+      showShare () {
+        if (window.mui.os.plus) {
+          window.mui.plusReady(function () {
+            var currentWebview = window.plus.webview.getWebviewById('inwehub_article_title')
+            window.mui.fire(currentWebview, 'share', {childId: currentWebview.id})
+          })
+        }
+      },
       getDetail () {
         console.log('comment refreshPageData refresh')
         console.log('slug:' + this.$route.params.slug)
@@ -160,50 +179,117 @@
 </script>
 
 
-<style scoped>
+<style scoped lang="less">
 
-  .component-comment {
+
+  .container-footer {
+    position: absolute;
+    bottom: 0;
+    width: 10rem;
+    left: 50%;
     height: 1.173rem;
-    line-height: 1.173rem;
     overflow: hidden;
-    background: #f3f4f6;
-    padding: 0 0.533rem 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin-left: -5rem !important;
+    background: #FFFFFF;
+    &:before {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: .02667rem;
+      content: '';
+      -webkit-transform: scaleY(.5);
+      transform: scaleY(.5);
+      background-color: #dcdcdc;
+    }
+    .footerLeft {
+      display: flex;
+      font-size: 0.373rem;
+      float: left;
+      padding: 0.133rem 0 0.133rem 0.426rem;
+      .footerMenuTwo {
+        display: flex;
+        .containerBtn {
+          display: flex;
+          width: 2.96rem;
+          height: 0.96rem;
+          color: #ffffff;
+          margin-right: 0.133rem;
+          line-height: 0.96rem;
+          text-align: center;
+          border-radius: 0.213rem;
+          justify-content: center;
+        }
+        .noBullish {
+          background: #FA4975;
+        }
+        .bullish {
+          background: #03AEF9;
+        }
+      }
+      .footerMenuOne {
+        width: 6.213rem;
+        height: 0.906rem;
+        color: #C8C8C8;
+        line-height: 0.906rem;
+        border-radius: 0.106rem;
+        background: #F3F4F6;
+        padding-left: 0.266rem;
+        &.activeRed {
+          color: #FA4975;
+        }
+        &.activeBlue {
+          color: #03AEF9;
+        }
+      }
+    }
+    .footerRight {
+      color: #B4B4B6;
+      font-size: 0.266rem;
+      text-align: center;
+      display: -ms-flexbox;
+      display: flex;
+      .collectionComment {
+        width: 0.9rem;
+        height: 1.306rem;
+        flex-grow:1;
+        color: #808080;
+        padding-top: 0.373rem;
+        position: relative;
+        &.shareIcon {
+          .icon {
+            font-size: 0.426rem;
+          }
+        }
+        span {
+          position: absolute;
+          top: 0.293rem;
+          left: 0.826rem;
+          color: #FA4975;
+          font-size: 0.266rem;
+          margin-top: -0.106rem;
+        }
+      }
+      .icon {
+        font-size: 0.4rem;
+        /*margin-top: -0.106rem;*/
+      }
+    }
   }
-  .component-comment .item {
-    display: inline-block;
-    text-align: center;
-    color: gray;
+
+  .mui-ios {
+    .container-footer {
+      .footerMenuOne {
+        height: 0.8rem;
+        line-height: 0.8rem;
+      }
+      .collectionComment {
+        padding-top: 0.3rem;
+        span {
+          top: 0.2rem;
+        }
+      }
+    }
   }
-  .component-comment .item span {
-    font-size: 0.32rem;
-  }
-  .component-comment .item .icon {
-    color: gray;
-    margin-right: 0.133rem;
-  }
-  .component-comment .item.active {
-    color: #03aef9;
-  }
-  .component-comment .item.active .icon {
-    color: #03aef9;
-  }
-  .component-comment .item.btn-1 {
-    background: #03aef9;
-    color: #fff;
-    width: 3.893rem;
-    height: 1.173rem;
-    font-size: 0.4rem;
-  }
-  .component-comment .item.btn-1 span {
-    font-size: 0.4rem;
-  }
-  .component-comment .item.btn-1 .icon {
-    font-size: 0.453rem;
-    color: #fff;
-    margin-right: 0.133rem;
-  }
+
 
 </style>

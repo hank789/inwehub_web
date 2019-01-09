@@ -2901,6 +2901,11 @@ a {
   display: -ms-flexbox;
   display: flex;
   position: relative; }
+.container-control-logoAndTabsAndSearch .addIcon {
+  font-size: 0.48rem;
+  color: #444444;
+  padding-left: 0.4rem;
+}
 .container-control-logoAndTabsAndSearch .logoIcon {
   font-size: 2.16rem;
   position: relative;
@@ -2945,9 +2950,9 @@ a {
   top: 0.373rem; }
 .container-control-logoAndTabsAndSearch .topSearchWrapper {
   margin-top: 0.133rem;
-  margin-left: 0.533rem;}
+  margin-left: 0.46rem;}
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
-  width: 6.066rem;
+  width: 8.266rem;
   height: 0.906rem;
   padding-left: 0.266rem;
   line-height: 0.906rem;
@@ -2959,6 +2964,9 @@ a {
 }
 .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame .icon {
   font-size: 0.453rem;}
+.container-control-logoAndTabsAndSearch.searchBoxShadow {
+  box-shadow:0rem 0.053rem 0.693rem 0rem rgba(240,242,245,1);
+}
 
 .goEditWrapper {
   position: absolute;
@@ -3021,10 +3029,8 @@ a {
   font-size: 0.266rem;
   padding: 0 0.133rem;
   margin-right: 0.266rem; }
-
 .mui-android .component-item-article .itemArticleLeft .explain label {
-  line-height: 0.586rem;
-}
+  line-height: 0.586rem;}
 .component-item-article .itemArticleLeft .explain span {
   color: #03AEF9;
   font-size: 0.293rem;
@@ -3051,18 +3057,15 @@ a {
   height: 100%;
   -o-object-fit: cover;
   object-fit: cover; }
-
-
 .container-tabLabels .tab {
   display: inline-block;
   color: #808080;
-  font-size: 0.346rem;
+  font-size: 0.4rem;
   border: 0.026rem solid #DCDCDC;
   padding: 0.133rem 0.266rem;
   border-radius: 0.106rem;
   margin-right: 0.133rem; }
 .container-tabLabels .tab.active {
-  /*background: #F3F4F6;*/
   color: #444;
   border: none;
   font-family:PingFangSC-Medium; }
@@ -3339,18 +3342,35 @@ a {
   justify-content: space-around;
   box-shadow:0rem 0.2rem 0.3rem 0rem rgba(240,242,245,1);}
 .container-tags-home .container-allTags {
+  position: relative;
   line-height: 0.906rem;
   padding-right: 0.24rem;
   padding-left: 0.426rem;
+  font-size: 0.4rem;
   float: left;}
 .container-tags-home .container-allTags.active {
   font-family:PingFangSC-Medium;
   color: #444444;}
+.container-tags-home .activeLine {
+  width: 0.426rem;
+  height: 0.106rem;
+  border-radius: 0.666rem;
+  display: inline-block;
+  background: #03AEF9;
+  position: absolute;
+  bottom: 0.053rem;
+  left: 50%;
+  transform: translateX(-50%);}
+.container-tags-home .container-allTags .allTagsLine {
+  margin-left: 0.08rem;
+  bottom: 0.026rem;
+}
 .container-tags-home .container-tabLabels {
-  width: 7.466rem;
+  width: 8.4rem;
   line-height: 0.906rem;
   float: left;}
 .container-tags-home .container-tabLabels .tab {
+  position: relative;
   border: none;
   padding: 0 0.24rem;
   margin-right: 0;}

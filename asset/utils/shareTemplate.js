@@ -109,10 +109,17 @@ function getTextDiscoverDetail (pathUrl, title, imgUrl, username, groupName) {
     imgUrl = whiteLogo
   }
 
+  var content = ''
+  if (groupName) {
+    content = '来自InweHub「' + groupName + '」' + username + '的发布'
+  } else {
+    content = '来自InweHub的发布'
+  }
+
   return {
     title: title, // '分享 ' + username + ' 的InweHub动态',
     link: link,
-    content: '来自InweHub「' + groupName + '」' + username + '的发布',
+    content: content,
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '动态分享'
@@ -243,6 +250,27 @@ function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
   }
 }
 
+/**
+ * 首页分享
+ * @param pathUrl
+ * @param title
+ * @param imgUrl
+ */
+function getHomeDetail (pathUrl, title, imgUrl) {
+  if (!imgUrl) {
+    imgUrl = whiteLogo
+  }
+
+  return {
+    title: title,
+    link: pathUrl,
+    content: '来自InweHub的发布',
+    imageUrl: imgUrl,
+    thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
+    shareName: '首页分享'
+  }
+}
+
 export {
   getAskCommunityMajorDetail,
   getAskCommunityInteractionDetail,
@@ -255,5 +283,6 @@ export {
   getGroupDetail,
   getRecommends,
   getDianpingCommentDetail,
-  getDianpingProductDetail
+  getDianpingProductDetail,
+  getHomeDetail
 }

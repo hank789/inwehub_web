@@ -271,19 +271,19 @@ export function postRequest (url, data, showWaiting = true, options = {}, timeou
 
       if (code === 1129) {
         bindPhone()
-        return Promise.reject(response.data.message)
+        // return Promise.reject(response.data.message)
       }
 
       if (!window.mui.os.wechat) {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           window.mui.toast(response.data.message)
           logout()
-          return Promise.reject(response.data.message)
+          // return Promise.reject(response.data.message)
         }
       } else {
         if (code === 1001 || code === 1002 || code === 1004 || code === 1102) {
           rebootAuth()
-          return Promise.reject(response.data.message)
+          // return Promise.reject(response.data.message)
         }
       }
       if (response.data.needRefresh === true) {

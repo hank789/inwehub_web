@@ -6,7 +6,7 @@ import localEvent from '../stores/localStorage'
 import EventObj from './event'
 import { postRequest } from './request'
 import { checkUpdate } from './updateVersion'
-import { clearHomeData, getHomeData } from './home'
+import { clearHomeData } from './home'
 
 function dowloadFile (uri, path, callback) {
   window.mui.plusReady(() => {
@@ -560,6 +560,7 @@ function AppInit (context) {
           extras: {preload: true, custom_preload: true}
         })
         listPageWebview.addEventListener('popGesture', (e) => {
+          listPageWebview.evalJS('document.activeElement && document.activeElement.blur()')
           console.log('run in event popGesture')
           if (e.type === 'end' && e.result === true) {
             var parentWebview = getPrevWebview() // self.opener()

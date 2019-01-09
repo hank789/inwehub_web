@@ -225,7 +225,6 @@
   import { checkPermission, toSettingSystem } from '../../utils/plus'
   import { alertGroups } from '../../utils/dialogList'
   import FeedItem from '../../components/Feed.vue'
-  import { scrollPage } from '../../utils/dom'
   import { getIconMenus, iconMenusClickedItem } from '../../utils/feed'
 
   export default {
@@ -615,7 +614,7 @@
     }
   }
   .groups-list {
-    margin-top: 1.306rem;
+    /*margin-top: 1.306rem;*/
   }
   .listWrapper{
   }

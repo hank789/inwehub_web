@@ -2,6 +2,7 @@
 import { alertSkyTwo, alertSimple, getDialogObj, alertZoom, alertHtml } from '../utils/dialog'
 import { getLocalUserInfo } from './user'
 import { run, select } from '../utils/createjs.js'
+import { upvote, deleteItem } from '../utils/discover'
 
 function alertFenhongxize (context) {
   var dialogObj = getDialogObj(context)
@@ -485,6 +486,35 @@ function alertReport (context, callback) {
   }
 }
 
+// 首页加热度
+function alertHomeHeat (context, regions, item, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('homeHeat', {regions: {region: regions}, readList: item}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === 2) {
+          upvote(this, item.id, (rs) => {
+            callback(rs)
+          }, (res) => {
+            callback(res)
+          })
+        }
+        if (num === 1) {
+          context.$router.pushPlus('/comment/' + item.category_id + '/' + item.slug + '/' + item.id)
+          return true
+        }
+        if (num === 3) {
+          deleteItem(item.id)
+          return true
+        }
+        if (num > -1) {
+          return true
+        }
+      }, true)
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -513,6 +543,7 @@ export {
   alertHeadAndNickname,
   alertGroupsOld,
   alertAddWeHub,
-  alertReport
+  alertReport,
+  alertHomeHeat
   // alertshi
 }

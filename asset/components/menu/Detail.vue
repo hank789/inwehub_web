@@ -5,9 +5,9 @@
     </div>
     <div class="footerRight">
 
-      <div class="collectionComment" v-for="(menuItem, index) in iconOptions" :key="index" @tap.stop.prevent="detailMenuIcon(menuItem)">
-        <div :class="menuItem.showClass ? 'active' : ''">
-          <svg class="icon" :class="menuItem.showClass ? 'active' : ''" aria-hidden="true">
+      <div class="collectionComment" v-for="(menuItem, index) in iconOptions" :key="index" @tap.stop.prevent="detailMenuIcon(menuItem)" :title="menuItem.text">
+        <div :class="menuItem.showClass ? 'active' : ''" :title="menuItem.text">
+          <svg class="icon" :class="menuItem.showClass ? 'active' : ''" aria-hidden="true" :title="menuItem.text">
             <use :xlink:href="menuItem.icon"></use>
           </svg>
         </div>
