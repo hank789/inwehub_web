@@ -65,7 +65,7 @@
                     <span class="splitLine" v-if="isShowSplitLine(itemIndex, listDataIndex)"></span>
                   </div>
                   <div class="pointLine" v-if="type !== 0">
-                    <span class="number">{{ itemIndex+1 }}.</span>
+                    <span class="number">{{ getLiIndex(itemIndex, listDataIndex) }}.</span>
                   </div>
                   <div class="content">
                     <div class="top-time">
@@ -175,7 +175,8 @@
         activeItem: {},
         activeItemIndex: 0,
         activeListIndex: 0,
-        startAnimationNum: '1'
+        startAnimationNum: '1',
+        liIndexConfig: []
       }
     },
     components: {
@@ -215,8 +216,21 @@
     },
     activated: function () {},
     methods: {
+      getLiIndex (itemIndex, listDataIndex) {
+        if (!this.liIndexConfig[listDataIndex]) {
+          this.liIndexConfig[listDataIndex] = 1
+        } else {
+          this.liIndexConfig[listDataIndex]++
+        }
+
+        if (!this.isShowSplitLine(itemIndex - 1, listDataIndex)) {
+          this.liIndexConfig[listDataIndex] = 1
+        }
+
+        return this.liIndexConfig[listDataIndex]
+      },
       isShowSplitLine (itemIndex, listDataIndex) {
-        if (itemIndex === this.lists[listDataIndex].length - 1) {
+        if (itemIndex >= this.lists[listDataIndex].length - 1) {
           return false
         }
 
