@@ -141,8 +141,8 @@
         upvoteOnlyHome(this, this.localItem.id, (response) => {
           this.localItem.is_upvoted = 1
           this.localItem.support_number++
+          this.cancelShare()
           setTimeout(() => {
-            this.cancelShare()
             this.$emit('startAnimation', 1)
           }, 300)
         }, (response) => {

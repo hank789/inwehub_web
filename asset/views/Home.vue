@@ -90,7 +90,7 @@
                           </svg>
                         </div>
                       </div>
-                      <div class="right" v-if="item.img.length">
+                      <div class="right" v-if="item.img || item.img.length">
                         <div class="articleImg">
                           <ImageView :src="item.img" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
                         </div>
@@ -375,6 +375,7 @@
         this.$refs.inTags.swiper.slideTo(index - 1, 1000)
       },
       refreshPageData () {
+        userAbility.newbieTask(this)
         getHomeData((data) => {
           this.regions = data.regions
         })
@@ -502,14 +503,14 @@
               top: -0.746rem;
               left: 0.426rem;
               opacity: 0;
-              transition-delay: 0.8s;
-              -moz-transition-delay: 0.8s;
-              -webkit-transition-delay: 0.8s; /* Safari 和 Chrome */
-              -o-transition-delay: 0.8s;
-              animation: addone 0.6s;
-              -moz-animation: addone 0.6s; /* Firefox */
-              -webkit-animation: addone 0.6s; /* Safari and Chrome */
-              -o-animation: addone 0.6s; /* Opera */
+              transition-delay: 1.5s;
+              -moz-transition-delay: 1.5s;
+              -webkit-transition-delay: 1.5s; /* Safari 和 Chrome */
+              -o-transition-delay: 1.5s;
+              animation: addone 0.8s;
+              -moz-animation: addone 0.8s; /* Firefox */
+              -webkit-animation: addone 0.8s; /* Safari and Chrome */
+              -o-animation: addone 0.8s; /* Opera */
               i {
                 width: 0;
                 height: 0;
