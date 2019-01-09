@@ -89,6 +89,7 @@
   export default {
     data () {
       return {
+        localRegions: [],
         localItem: this.value
       }
     },
@@ -122,6 +123,11 @@
     },
     created () {},
     watch: {
+      regions: function (newValue, oldValue) {
+        if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+          this.localRegions = JSON.parse(JSON.stringify(newValue))
+        }
+      },
       localItem: function (newValue, oldValue) {
         if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
           this.$emit('input', newValue)
@@ -154,12 +160,12 @@
       submit () {
         var tags = []
         var newTags = []
-        for (var i = 0; i < this.regions.length; i++) {
-          if (this.regions[i].selected) {
-            tags.push(this.regions[i].value)
+        for (var i = 0; i < this.localRegions.length; i++) {
+          if (this.localRegions[i].selected) {
+            tags.push(this.localRegions[i].value)
             newTags.push({
-              id: this.regions[i].value,
-              name: this.regions[i].text
+              id: this.localRegions[i].value,
+              name: this.localRegions[i].text
             })
           }
         }
@@ -181,7 +187,7 @@
       },
       choiceItem (index, item) {
         item.selected = item.selected ? 0 : 1
-        Vue.set(this.regions, index, item)
+        Vue.set(this.localRegions, index, item)
       },
       deleteItem () {
         this.$emit('clickDelete')
@@ -206,15 +212,15 @@
       },
       hide () {},
       resetRegions () {
-        for (var i = 0; i < this.regions.length; i++) {
-          var item = this.regions[i]
+        for (var i = 0; i < this.localRegions.length; i++) {
+          var item = this.localRegions[i]
           item.selected = 0
 
           if (this.initTagsIds.indexOf(item.value) > -1) {
             item.selected = 1
           }
 
-          Vue.set(this.regions, i, item)
+          Vue.set(this.localRegions, i, item)
         }
       },
       show () {
