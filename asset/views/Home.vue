@@ -41,7 +41,9 @@
         class="refreshListWrapper"
         :api="'readList'"
         :listDataConfig="listDataConfig"
+        :isLoading="loading"
         v-model="lists"
+        @prevSuccessCallback="prevSuccessCallback"
         @curNavIndexChange="curNavIndexChange"
         @listScroll="listScroll"
       >
@@ -141,6 +143,7 @@
   import { getIndexByIdArray } from '../utils/array'
   import Vue from 'vue'
   import { getHomeData } from '../utils/home'
+  import localEvent from '../stores/localStorage'
 
   export default {
     data () {
@@ -203,6 +206,13 @@
         return rs
       }
     },
+    created () {
+      var dataList = localEvent.getLocalItem('HomeDataList')
+      if (dataList.length > 0 && this.lists.length === 0 && this.type === 0) {
+        this.lists[0] = dataList
+        this.loading = false
+      }
+    },
     activated: function () {},
     methods: {
       isShowSplitLine (itemIndex, listDataIndex) {
@@ -217,6 +227,11 @@
         }
 
         return true
+      },
+      prevSuccessCallback (data) {
+        if (this.type === 0) {
+          localEvent.setLocalItem('HomeDataList', data)
+        }
       },
       startAnimationEvent (num) {
         this.startAnimationNum = num

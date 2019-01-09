@@ -37,6 +37,7 @@
     created () {},
     methods: {
       getImage (src) {
+        if (!src) return src
         var width = parseFloat(this.width)
         if (width) {
           width *= getDpi()

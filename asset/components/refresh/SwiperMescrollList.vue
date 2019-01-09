@@ -8,7 +8,9 @@
         :prevOtherData="config.data"
         :nextOtherData="config.data"
         @listChange="listChange($event, index)"
+        @prevSuccessCallback="prevSuccessCallback"
         :pageMode="true"
+        :isLoading="loading"
         :autoShowEmpty="true"
         @listMounted="listMounted($event, index)"
         @listUpdated="listUpdated($event, index)"
@@ -35,6 +37,7 @@
       return {
         localListDataConfig: this.listDataConfig,
         curNavIndex: 0,
+        loading: this.isLoading,
         positionValues: [],
         swiperOption: {
           slidesPerView: 'auto',
@@ -57,6 +60,10 @@
       swiperSlide
     },
     props: {
+      isLoading: {
+        type: Boolean,
+        default: true
+      },
       listDataConfig: {
         type: Array,
         default: () => {
@@ -94,6 +101,9 @@
       listChange (list, index) {
         Vue.set(this.lists, index, list)
         this.$emit('input', this.lists)
+      },
+      prevSuccessCallback (data) {
+        this.$emit('prevSuccessCallback', data)
       },
       changePage (i) {
         if (this.curNavIndex === i) {
