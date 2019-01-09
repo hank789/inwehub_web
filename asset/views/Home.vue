@@ -90,7 +90,7 @@
                           </svg>
                         </div>
                       </div>
-                      <div class="right" v-if="item.img">
+                      <div class="right" v-if="item.img.length">
                         <div class="articleImg">
                           <ImageView :src="item.img" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
                         </div>
@@ -362,6 +362,7 @@
       },
       selectTag (index) {
         console.log('indexTAG:' + index)
+        this.loading = true
         this.$refs.inTags.swiper.slideTo(index - 1, 1000)
         this.$refs.RefreshList.slideTo(index)
       },

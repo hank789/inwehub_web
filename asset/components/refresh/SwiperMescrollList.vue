@@ -10,7 +10,7 @@
         @listChange="listChange($event, index)"
         @prevSuccessCallback="prevSuccessCallback"
         :pageMode="true"
-        :isLoading="loading"
+        :isLoading="isLoading"
         :autoShowEmpty="true"
         @listMounted="listMounted($event, index)"
         @listUpdated="listUpdated($event, index)"
@@ -37,7 +37,6 @@
       return {
         localListDataConfig: this.listDataConfig,
         curNavIndex: 0,
-        loading: this.isLoading,
         positionValues: [],
         swiperOption: {
           slidesPerView: 'auto',
