@@ -63,7 +63,7 @@
                     <span class="splitLine" v-if="isShowSplitLine(itemIndex, listDataIndex)"></span>
                   </div>
                   <div class="pointLine" v-if="type !== 0">
-                    <span class="number font-family-medium">{{ itemIndex+1 }}.</span>
+                    <span class="number">{{ itemIndex+1 }}.</span>
                   </div>
                   <div class="content">
                     <div class="top-time">
@@ -228,7 +228,7 @@
         setTimeout(() => {
           list[this.activeItemIndex].startAnimation = 0
           Vue.set(this.lists, this.activeListIndex, list)
-        }, 2000)
+        }, 1000)
       },
       showItemMore (item) {
         item.feed_type = 16
@@ -432,6 +432,7 @@
         .number {
           color: #444444;
           font-size: 0.293rem;
+          font-family: HelveticaNeue-Medium;
         }
         .splitCircle {
           width: 0.106rem;
@@ -487,13 +488,17 @@
             .addOne {
               height: 0.56rem;
               position: absolute;
-              top: -1.2rem;
+              top: -0.746rem;
               left: 0.426rem;
-              opacity: 1;
-              animation: addone 1s;
-              -moz-animation: addone 1s; /* Firefox */
-              -webkit-animation: addone 1s; /* Safari and Chrome */
-              -o-animation: addone 1s; /* Opera */
+              opacity: 0;
+              transition-delay: 0.8s;
+              -moz-transition-delay: 0.8s;
+              -webkit-transition-delay: 0.8s; /* Safari 和 Chrome */
+              -o-transition-delay: 0.8s;
+              animation: addone 0.6s;
+              -moz-animation: addone 0.6s; /* Firefox */
+              -webkit-animation: addone 0.6s; /* Safari and Chrome */
+              -o-animation: addone 0.6s; /* Opera */
               i {
                 width: 0;
                 height: 0;
@@ -635,63 +640,60 @@
   {
     0% {
       top: -0.746rem;
-    }
-    25% {
-      top: -1rem;
+      opacity: 1;
     }
     50% {
-      top: -1.2rem;
+      top: -0.746rem;
+      opacity: 5;
     }
     100% {
-      display: none;
+      top: -1.2rem;
+      opacity: 0;
     }
   }
-
   @-moz-keyframes addone /* Firefox */
   {
     0% {
       top: -0.746rem;
-    }
-    25% {
-      top: -1rem;
+      opacity: 1;
     }
     50% {
-      top: -1.2rem;
+      top: -0.746rem;
+      opacity: 5;
     }
     100% {
-      display: none;
+      top: -1.2rem;
+      opacity: 0;
     }
   }
-
   @-webkit-keyframes addone /* Safari and Chrome */
   {
     0% {
       top: -0.746rem;
-    }
-    25% {
-      top: -1rem;
+      opacity: 1;
     }
     50% {
-      top: -1.2rem;
+      top: -0.746rem;
+      opacity: 5;
     }
     100% {
-      display: none;
+      top: -1.2rem;
+      opacity: 0;
     }
   }
-
   @-o-keyframes addone /* Opera */
   {
     0% {
       top: -0.746rem;
-    }
-    25% {
-      top: -1rem;
+      opacity: 1;
     }
     50% {
-      top: -1.2rem;
+      top: -0.746rem;
+      opacity: 5;
     }
     100% {
-      display: none;
+      top: -1.2rem;
+      opacity: 0;
     }
   }
 </style>
