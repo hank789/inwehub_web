@@ -107,6 +107,15 @@
       }
     },
     computed: {
+      initTagsIds () {
+        var rtags = []
+
+        if (this.localItem.tags) {
+          rtags = this.localItem.tags
+        }
+        var tagsIds = rtags.map(tags => { return tags.id })
+        return tagsIds
+      },
       isAdmin () {
         return isAdmin()
       }
@@ -144,9 +153,14 @@
       },
       submit () {
         var tags = []
+        var newTags = []
         for (var i = 0; i < this.regions.length; i++) {
           if (this.regions[i].selected) {
             tags.push(this.regions[i].value)
+            newTags.push({
+              id: this.regions[i].value,
+              name: this.regions[i].text
+            })
           }
         }
         postRequest(`article/regionOperator`, {
@@ -158,6 +172,9 @@
             window.mui.toast(response.data.message)
             return
           }
+
+          this.localItem.tags = newTags
+
           window.mui.toast(response.data.message)
           this.cancelShare()
         })
@@ -190,16 +207,19 @@
       hide () {},
       resetRegions () {
         for (var i = 0; i < this.regions.length; i++) {
-          if (this.regions[i].selected) {
-            var item = this.regions[i]
-            item.selected = 0
-            Vue.set(this.regions, i, item)
+          var item = this.regions[i]
+          item.selected = 0
+
+          if (this.initTagsIds.indexOf(item.value) > -1) {
+            item.selected = 1
           }
+
+          Vue.set(this.regions, i, item)
         }
       },
       show () {
-        this.resetRegions()
         setTimeout(() => {
+          this.resetRegions()
           window.mui('#homeHeat').popover('toggle')
           window.mui('body').on('tap', '.mui-backdrop', () => {
             this.hide()
