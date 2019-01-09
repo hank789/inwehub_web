@@ -63,7 +63,7 @@
         <div class="bot"></div>
         <div class="title">设置精选</div>
         <div class="choiceList">
-          <span  v-for="(item, index) in regions" :key="index"
+          <span  v-for="(item, index) in localRegions" :key="index"
                 @tap.stop.prevent="choiceItem(index, item)" :class="{active: item.selected }">{{ item.text }}</span>
         </div>
       </div>
