@@ -825,7 +825,7 @@
 
           if (!this.detail.group) {
             this.detail.group = {
-              is_joined: 3,
+              is_joined: 1,
               id: null,
               public: 1,
               name: ''
