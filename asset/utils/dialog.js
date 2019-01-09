@@ -123,12 +123,15 @@ function alertZoom (contentHtml = '<btn class="alertConfirm"></btn>', callback =
 function getDialogObj (context) {
   if (typeof context !== 'undefined') {
     var parentObj = context.$parent
-
     if (typeof parentObj !== 'undefined') {
       if (parentObj.$refs.inwehubDialog) {
         return parentObj.$refs.inwehubDialog
-      } else if (typeof parentObj.$parent !== 'undefined' && parentObj.$parent.$refs.inwehubDialog) {
-        return parentObj.$parent.$refs.inwehubDialog
+      } else if (typeof parentObj.$parent !== 'undefined') {
+        if (parentObj.$parent.$refs.inwehubDialog) {
+          return parentObj.$parent.$refs.inwehubDialog
+        } else if (parentObj.$parent.$parent !== 'undefined' && parentObj.$parent.$parent.$refs.inwehubDialog) {
+          return parentObj.$parent.$parent.$refs.inwehubDialog
+        }
       } else if (typeof context.$refs.inwehubDialog !== 'undefined') {
         return context.$refs.inwehubDialog
       }
