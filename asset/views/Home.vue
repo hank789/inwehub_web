@@ -323,9 +323,11 @@
 
         var bmpPosition = ''
         var positionValues = this.$refs.RefreshList.positionValues[index]
-        for (var i = 0; i < positionValues.length; i++) {
-          if (positionValues[i].offsetTop <= y) {
-            bmpPosition = positionValues[i].text
+        if (positionValues.length) {
+          for (var i = 0; i < positionValues.length; i++) {
+            if (positionValues[i].offsetTop <= y) {
+              bmpPosition = positionValues[i].text
+            }
           }
         }
         navWarp.innerHTML = "<svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>" + bmpPosition

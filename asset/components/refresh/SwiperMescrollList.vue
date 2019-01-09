@@ -98,6 +98,9 @@
         this.$emit('listMounted', index)
       },
       listChange (list, index) {
+        var y = this.$refs.RefreshList[index].mescroll.getScrollTop()
+        this.$emit('listScroll', index, y, false)
+
         Vue.set(this.lists, index, list)
         this.$emit('input', this.lists)
       },
@@ -117,10 +120,11 @@
         // 定位菜单
         this.$emit('curNavIndexChange', this.curNavIndex)
 
-        setTimeout(() => {
-          var y = this.$refs.RefreshList[this.curNavIndex].mescroll.getScrollTop()
+        var curList = this.$refs.RefreshList[this.curNavIndex]
+        if (curList && curList.mescroll) {
+          var y = curList.mescroll.getScrollTop()
           this.$emit('listScroll', this.curNavIndex, y, false)
-        }, 500)
+        }
       },
       slideTo (i) {
         var listDataConfig = this.localListDataConfig[i]
@@ -129,10 +133,11 @@
 
         this.swiper.slideTo(i, 1000)
 
-        setTimeout(() => {
-          var y = this.$refs.RefreshList[i].mescroll.getScrollTop()
+        var curList = this.$refs.RefreshList[i]
+        if (curList && curList.mescroll) {
+          var y = curList.mescroll.getScrollTop()
           this.$emit('listScroll', this.curNavIndex, y, false)
-        }, 500)
+        }
       }
     },
     watch: {
