@@ -185,10 +185,11 @@
   .container-footer {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 10rem;
+    left: 50%;
     height: 1.173rem;
     overflow: hidden;
-    /*padding: 0.36rem 0.426rem;*/
+    margin-left: -5rem !important;
     background: #FFFFFF;
     &:before {
       position: absolute;

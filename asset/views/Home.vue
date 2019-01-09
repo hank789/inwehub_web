@@ -69,7 +69,7 @@
                   </div>
                   <div class="content">
                     <div class="top-time">
-                      <span class="time">{{ item.created_at.split(' ')[1] }}</span>
+                      <span class="time">{{ item.created_at.split(' ')[1].substring(0, 5) }}</span>
                       <i class="splitCircle"></i>
                       <span class="linkURL">{{ item.domain }}</span>
                     </div>
@@ -486,7 +486,7 @@
         display: flex;
         justify-content: space-between;
         /*overflow: hidden;*/
-        height: 1.893rem;
+        /*height: 1.893rem;*/
         margin-bottom: 0.533rem;
         margin-top: 0.133rem;
         .left {
@@ -592,7 +592,7 @@
 
   .refreshListWrapper{
     top: 2.08rem !important;
-    bottom: 1.333rem !important;
+    bottom: 50px !important; /* px不转换 */
   }
 
   .nav-sticky {
