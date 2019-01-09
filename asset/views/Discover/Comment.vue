@@ -279,7 +279,14 @@
   .mui-ios {
     .container-footer {
       .footerMenuOne {
-        height: 0.773rem;
+        height: 0.8rem;
+        line-height: 0.8rem;
+      }
+      .collectionComment {
+        padding-top: 0.3rem;
+        span {
+          top: 0.2rem;
+        }
       }
     }
   }
