@@ -90,7 +90,7 @@
                           </svg>
                         </div>
                       </div>
-                      <div class="right" v-if="item.img || item.img.length">
+                      <div class="right" v-if="item.img.length">
                         <div class="articleImg">
                           <ImageView :src="item.img" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
                         </div>
@@ -208,7 +208,7 @@
     },
     created () {
       var dataList = localEvent.getLocalItem('HomeDataList')
-      if (dataList.length > 0 && this.lists.length === 0 && this.type === 0) {
+      if (dataList.length > 0 && this.lists.length === 0 && this.type === 0 && dataList[0].type) {
         this.lists[0] = dataList
         this.loading = false
       }
@@ -377,6 +377,7 @@
       },
       curNavIndexChange (index) {
         this.type = index
+        this.loading = true
         this.$refs.inTags.swiper.slideTo(index - 1, 1000)
       },
       refreshPageData () {
