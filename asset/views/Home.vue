@@ -41,7 +41,9 @@
         class="refreshListWrapper"
         :api="'readList'"
         :listDataConfig="listDataConfig"
+        :isLoading="loading"
         v-model="lists"
+        @prevSuccessCallback="prevSuccessCallback"
         @curNavIndexChange="curNavIndexChange"
         @listScroll="listScroll"
       >
@@ -88,7 +90,7 @@
                           </svg>
                         </div>
                       </div>
-                      <div class="right" v-if="item.img">
+                      <div class="right" v-if="item.img.length">
                         <div class="articleImg">
                           <ImageView :src="item.img" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
                         </div>
@@ -141,6 +143,7 @@
   import { getIndexByIdArray } from '../utils/array'
   import Vue from 'vue'
   import { getHomeData } from '../utils/home'
+  import localEvent from '../stores/localStorage'
 
   export default {
     data () {
@@ -203,6 +206,13 @@
         return rs
       }
     },
+    created () {
+      var dataList = localEvent.getLocalItem('HomeDataList')
+      if (dataList.length > 0 && this.lists.length === 0 && this.type === 0) {
+        this.lists[0] = dataList
+        this.loading = false
+      }
+    },
     activated: function () {},
     methods: {
       isShowSplitLine (itemIndex, listDataIndex) {
@@ -217,6 +227,11 @@
         }
 
         return true
+      },
+      prevSuccessCallback (data) {
+        if (this.type === 0) {
+          localEvent.setLocalItem('HomeDataList', data)
+        }
       },
       startAnimationEvent (num) {
         this.startAnimationNum = num
@@ -347,6 +362,7 @@
       },
       selectTag (index) {
         console.log('indexTAG:' + index)
+        this.loading = true
         this.$refs.inTags.swiper.slideTo(index - 1, 1000)
         this.$refs.RefreshList.slideTo(index)
       },
