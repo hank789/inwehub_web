@@ -14,6 +14,7 @@
         :autoShowEmpty="true"
         @listMounted="listMounted($event, index)"
         @listUpdated="listUpdated($event, index)"
+        @listScroll="listScroll($event, index)"
         v-if="config.autoShow"
       >
 
@@ -89,18 +90,13 @@
           Vue.set(this.positionValues, index, positionValues)
         }
       },
+      listScroll (data, index) {
+        this.$emit('listScroll', index, data.y, data.isUp)
+      },
       listMounted (event, index) {
-        this.$refs.RefreshList[index].mescroll.optUp.onScroll = (mescroll, y, isUp) => {
-          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
-          this.$emit('listScroll', index, y, isUp)
-        }
-
         this.$emit('listMounted', index)
       },
       listChange (list, index) {
-        var y = this.$refs.RefreshList[index].mescroll.getScrollTop()
-        this.$emit('listScroll', index, y, false)
-
         Vue.set(this.lists, index, list)
         this.$emit('input', this.lists)
       },

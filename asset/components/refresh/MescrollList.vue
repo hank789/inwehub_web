@@ -186,6 +186,12 @@
       },
       mescrollInit (mescroll) {
         this.mescroll = mescroll
+        this.$emit('listMescrollInit')
+
+        this.mescroll.optUp.onScroll = (mescroll, y, isUp) => {
+          console.log('up --> onScroll 列表当前滚动的距离 y = ' + y + ', 是否向上滑动 isUp = ' + isUp)
+          this.$emit('listScroll', {y, isUp})
+        }
       },
       downCallback (mescroll) {
         mescroll.resetUpScroll(true)
