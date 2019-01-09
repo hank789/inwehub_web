@@ -187,7 +187,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 1.333rem;
+    height: 1.173rem;
     overflow: hidden;
     /*padding: 0.36rem 0.426rem;*/
     background: #FFFFFF;
@@ -205,7 +205,7 @@
       display: flex;
       font-size: 0.373rem;
       float: left;
-      padding: 0.186rem 0 0.186rem 0.426rem;
+      padding: 0.133rem 0 0.133rem 0.426rem;
       .footerMenuTwo {
         display: flex;
         .containerBtn {
@@ -228,14 +228,12 @@
       }
       .footerMenuOne {
         width: 6.213rem;
-        height: 0.96rem;
-        display: flex;
-        color: #03AEF9;
-        line-height: 0.96rem;
-        border-radius: 0.213rem;
+        height: 0.906rem;
+        color: #C8C8C8;
+        line-height: 0.906rem;
+        border-radius: 0.106rem;
         background: #F3F4F6;
-        text-align: center;
-        justify-content: center;
+        padding-left: 0.266rem;
         &.activeRed {
           color: #FA4975;
         }
