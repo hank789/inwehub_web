@@ -323,7 +323,7 @@
 
         var bmpPosition = ''
         var positionValues = this.$refs.RefreshList.positionValues[index]
-        if (positionValues.length) {
+        if (positionValues && positionValues.length) {
           for (var i = 0; i < positionValues.length; i++) {
             if (positionValues[i].offsetTop <= y) {
               bmpPosition = positionValues[i].text
