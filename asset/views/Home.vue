@@ -139,8 +139,8 @@
   import { iconMenusClickedItem } from '../utils/feed'
   import { getHomeDetail } from '../utils/shareTemplate'
   import { getIndexByIdArray } from '../utils/array'
-  import { postRequest } from '../utils/request'
   import Vue from 'vue'
+  import { getHomeData } from '../utils/home'
 
   export default {
     data () {
@@ -359,13 +359,8 @@
         this.$refs.inTags.swiper.slideTo(index - 1, 1000)
       },
       refreshPageData () {
-        postRequest(`home`, {}).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-          this.regions = response.data.data.regions
+        getHomeData((data) => {
+          this.regions = data.regions
         })
       }
     },

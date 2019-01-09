@@ -2,8 +2,8 @@ import { postRequest } from './request'
 import localEvent from '../stores/localStorage'
 
 function getHomeData (successCallback) {
-  var homeData = localEvent.getLocalItem('HomeDataBanners')
-  if (homeData.banners) {
+  var homeData = localEvent.getLocalItem('HomeData')
+  if (homeData.regions) {
     successCallback(homeData)
   } else {
     postRequest(`home`, {}, false, {}, 0, false).then(response => {
@@ -12,17 +12,15 @@ function getHomeData (successCallback) {
         window.mui.toast(response.data.message)
         return
       }
-
-      var result = {}
-      result.banners = response.data.data.notices
-      localEvent.setLocalItem('HomeDataBanners', result)
-      successCallback(result)
+      localEvent.setLocalItem('HomeData', response.data.data)
+      successCallback(response.data.data)
     })
   }
 }
 
 function clearHomeData () {
   localEvent.setLocalItem('HomeDataBanners', {})
+  localEvent.setLocalItem('HomeData', {})
 }
 
 function resetHomeData (successCallback) {

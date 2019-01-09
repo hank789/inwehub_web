@@ -105,7 +105,6 @@
   import { postRequest, apiRequest } from '../../utils/request'
   import { clearAllWebViewCache } from '../../utils/webview'
   import { getUserInfo, getLocalPhone } from '../../utils/user'
-  import { clearImageCache } from '../../utils/plus'
 
   export default {
     data () {

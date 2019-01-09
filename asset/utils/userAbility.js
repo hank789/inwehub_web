@@ -473,7 +473,7 @@ var UserAbility = () => {
   function jumpToDiscoverAdd (context, from) {
     var isValid = userAbilityCheck.checkPhoneCertification(context)
     if (isValid) {
-      var query = from ? from : ''
+      var query = from || ''
       context.$router.pushPlus('/discover/add' + query)
     }
   }
