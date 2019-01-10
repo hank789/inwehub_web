@@ -20,7 +20,7 @@
       <RefreshList
         ref="RefreshList"
         v-model="list"
-        
+
         :api="'group/mine'"
         :prevOtherData="{page: 1}"
         :nextOtherData="{}"
@@ -115,7 +115,7 @@
     },
     methods: {
       toGroupAdd () {
-        userAbility.jumpToGroupAdd()
+        userAbility.jumpToGroupAdd(this)
       },
       refreshPageData () {
         if (this.$route.query.refresh) {
