@@ -275,6 +275,8 @@
           item.title,
           item.img
         )
+        this.shareOption.targetId = item.slug
+        this.shareOption.targetType = 'submission'
         this.$refs.share.share()
       },
       iconMenusClickedItem (item) {
