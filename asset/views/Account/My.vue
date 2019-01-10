@@ -63,9 +63,9 @@
           <span>圈子</span>
         </li>
       </ul>
-      <div class="enjoy" @tap.stop.prevent="$router.pushPlus('/my/choiceRole')">
-        <img v-if="show_my_wallet" src="../../statics/images/enjoy2x.png" alt="">
-      </div>
+      <!--<div class="enjoy" @tap.stop.prevent="$router.pushPlus('/my/choiceRole')">-->
+        <!--<img v-if="show_my_wallet" src="../../statics/images/enjoy2x.png" alt="">-->
+      <!--</div>-->
       <div class="gray"></div>
 
       <!--列表内容-->
@@ -570,11 +570,11 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 1.013rem;
-    margin-top: 0.506rem;
+    height: 62px;
+    margin-top: 15px;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
-    background: #FFFFFF;
+    background: #ffffff;
     position: relative;
     li {
       float: left;
@@ -582,6 +582,7 @@
       height: 100%;
       text-align: center;
       position: relative;
+      margin-top: 8px;
       svg {
         font-size: 0.64rem;
         margin-top: 0.266rem;
