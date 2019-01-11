@@ -600,6 +600,7 @@
       </div>
     </div>
 
+    <!-- 订阅先开启通知 -->
     <div id="NewOpenNotice">
       <div class="contentWrapper">
 
@@ -625,6 +626,26 @@
       </div>
     </div>
 
+    <div id="hotRecommend">
+      <div class="hotRecommendWrapper">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+        <div class="title font-family-medium">热点推荐订阅</div>
+        <div class="text">开启订阅，我们将为您推送每日热点推荐~</div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">订阅</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 订阅服务号 -->
     <div id="subscribeGZH">
       <div class="subscribeWrapper">
 
@@ -644,6 +665,7 @@
 
       </div>
     </div>
+
 
   </div>
 </template>
@@ -2207,7 +2229,7 @@
     width: 300px;
     background: #FFFFFF;
   }
-  .contentWrapper .close, .subscribeWrapper .close {
+  .contentWrapper .close, .subscribeWrapper .close, .hotRecommendWrapper .close {
     text-align: right;
     padding: 15px;
     color: #808080;
@@ -2229,27 +2251,36 @@
     text-align: left;
     padding: 0 15px 30px;
   }
-  .contentWrapper .buttonWrapper {
+  .contentWrapper .buttonWrapper, .hotRecommendWrapper .buttonWrapper {
     position: relative;
     text-align: center;
     color: #03AEF9;
     line-height: 49px;
   }
-  .contentWrapper .buttonWrapper .bot {
+  .contentWrapper .buttonWrapper .bot, .hotRecommendWrapper .buttonWrapper .bot {
     top: 0;
   }
+
+  .hotRecommendWrapper {
+    width: 300px;
+    background: #ffffff;
+  }
+  .hotRecommendWrapper .text {
+    margin-bottom: 30px;
+  }
+
   .subscribeWrapper {
     width: 300px;
     background: #ffffff;
     padding-bottom: 30px;
   }
-  .subscribeWrapper .title {
+  .subscribeWrapper .title, .hotRecommendWrapper .title {
     color: #444444;
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 10px;
   }
-  .subscribeWrapper .text {
+  .subscribeWrapper .text, .hotRecommendWrapper .text {
     color: #808080;
     font-size: 13px;
     line-height: 21px;

@@ -528,6 +528,19 @@ function alertHotOpenNotice (context, callback) {
   }
 }
 
+function alertHotRecommend(context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('hotRecommend', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
 function alertSubscribeGZH (context, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
@@ -572,6 +585,7 @@ export {
   alertReport,
   alertHomeHeat,
   alertHotOpenNotice,
-  alertSubscribeGZH
+  alertSubscribeGZH,
+  alertHotRecommend
   // alertshi
 }
