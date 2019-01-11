@@ -213,6 +213,7 @@ import DianpingSearchCategory from '../../../views/Dianping/Search/Category.vue'
 import DianpingSearchCompany from '../../../views/Dianping/Search/Company.vue'
 import DianpingProductFeedback from '../../../views/Dianping/Product/Feedback.vue'
 import SearchSearchAll from '../../../views/Search/SearchAll.vue'
+import HotRecommend from '../../../views/HotRecommend.vue'
 
 export {
   Login,
@@ -429,5 +430,6 @@ export {
   DianpingSearchCategory,
   DianpingSearchCompany,
   DianpingProductFeedback,
-  SearchSearchAll
+  SearchSearchAll,
+  HotRecommend
 }

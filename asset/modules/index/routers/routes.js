@@ -2767,6 +2767,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/hotrecommend',
+    name: 'hotrecommend',
+    meta: {
+      title: '今日热点推荐',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: componets.HotRecommend,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',
