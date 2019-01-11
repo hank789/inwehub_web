@@ -666,6 +666,31 @@
       </div>
     </div>
 
+    <!-- 热点推荐-邮件订阅 -->
+    <div id="EmailSubscribe">
+      <div class="EmailSubscribe">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+
+        <div class="title font-family-medium">热点推荐-服务号订阅</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+
+        <div class="inputWrapper">
+          <input type="text" placeholder="输入您的邮箱地址">
+        </div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">订阅</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
 
   </div>
 </template>
@@ -2229,7 +2254,7 @@
     width: 300px;
     background: #FFFFFF;
   }
-  .contentWrapper .close, .subscribeWrapper .close, .hotRecommendWrapper .close {
+  .contentWrapper .close, .subscribeWrapper .close, .hotRecommendWrapper .close, .EmailSubscribe .close {
     text-align: right;
     padding: 15px;
     color: #808080;
@@ -2251,13 +2276,13 @@
     text-align: left;
     padding: 0 15px 30px;
   }
-  .contentWrapper .buttonWrapper, .hotRecommendWrapper .buttonWrapper {
+  .contentWrapper .buttonWrapper, .hotRecommendWrapper .buttonWrapper, .EmailSubscribe .buttonWrapper {
     position: relative;
     text-align: center;
     color: #03AEF9;
     line-height: 49px;
   }
-  .contentWrapper .buttonWrapper .bot, .hotRecommendWrapper .buttonWrapper .bot {
+  .contentWrapper .buttonWrapper .bot, .hotRecommendWrapper .buttonWrapper .bot, .EmailSubscribe .buttonWrapper .bot {
     top: 0;
   }
 
@@ -2274,13 +2299,13 @@
     background: #ffffff;
     padding-bottom: 30px;
   }
-  .subscribeWrapper .title, .hotRecommendWrapper .title {
+  .subscribeWrapper .title, .hotRecommendWrapper .title, EmailSubscribe .title {
     color: #444444;
     font-size: 18px;
     line-height: 24px;
     margin-bottom: 10px;
   }
-  .subscribeWrapper .text, .hotRecommendWrapper .text {
+  .subscribeWrapper .text, .hotRecommendWrapper .text, .EmailSubscribe .text {
     color: #808080;
     font-size: 13px;
     line-height: 21px;
@@ -2293,5 +2318,14 @@
   .subscribeWrapper .GZHimg img {
     width: 100%;
     height: 100%;
+  }
+
+  .EmailSubscribe {
+    width: 300px;
+    background: #ffffff;
+  }
+  .EmailSubscribe .inputWrapper {
+    width: 270px;
+    margin: 30px auto 0;
   }
 </style>

@@ -554,6 +554,20 @@ function alertSubscribeGZH (context, callback) {
   }
 }
 
+// EmailSubscribe
+function alertEmailSubscribe(context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('EmailSubscribe', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -586,6 +600,7 @@ export {
   alertHomeHeat,
   alertHotOpenNotice,
   alertSubscribeGZH,
-  alertHotRecommend
+  alertHotRecommend,
+  alertEmailSubscribe
   // alertshi
 }

@@ -64,7 +64,7 @@
                 </span>
                 <div class="text">APP推送</div>
               </div>
-              <div class="menu">
+              <div class="menu" @tap.stop.prvent="alertEmailSubscribe">
                 <span class="iconCircular two">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-youxiang"></use>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { alertHotOpenNotice, alertSubscribeGZH } from '../utils/dialogList'
+import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe } from '../utils/dialogList'
 export default {
   data () {
     return {}
@@ -102,6 +102,9 @@ export default {
     },
     subscribeGZH () {
       alertSubscribeGZH(this)
+    },
+    alertEmailSubscribe () {
+      alertEmailSubscribe(this)
     }
   }
 }
