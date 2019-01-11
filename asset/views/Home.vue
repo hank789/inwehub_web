@@ -34,7 +34,14 @@
         </div>
       </div>
 
-      <div class="leftTopFixed fixedData"></div>
+      <div class="leftTopFixed fixedData">
+        <template v-if="type !== 1">
+          <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>{{indexPosition}}
+        </template>
+        <template v-else>
+          {{indexPosition}} 分享 订阅
+        </template>
+     </div>
 
       <SwiperMescrollList
         ref="RefreshList"
@@ -176,7 +183,8 @@
         activeItemIndex: 0,
         activeListIndex: 0,
         startAnimationNum: '1',
-        liIndexConfig: []
+        liIndexConfig: [],
+        indexPosition: ''
       }
     },
     components: {
@@ -349,8 +357,8 @@
             }
           }
         }
-        navWarp.innerHTML = "<svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>" + bmpPosition
-        console.log(bmpPosition)
+
+        this.indexPosition = bmpPosition
       },
       toDetail (item) {
         switch (item.type) {
