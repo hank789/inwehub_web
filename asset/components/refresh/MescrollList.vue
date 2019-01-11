@@ -1,6 +1,6 @@
 <template>
     <div class='mescrollListWrapper'>
-      <div id='downloadTip' class='download-tip'>{{alertMsg}}</div>
+      <div class='download-tip'>{{alertMsg}}</div>
       <mescroll-vue ref='mescroll' :down='config.down' :up='config.up' @init='mescrollInit'>
         <slot name="listHeader"></slot>
 
@@ -147,13 +147,13 @@
         }
       },
       showDownloadTip () {
-        if (document.querySelector('#downloadTip')) {
-          document.querySelector('#downloadTip').style.top = '0rem'
+        if (this.$el.querySelector('.download-tip')) {
+          this.$el.querySelector('.download-tip').style.top = '0rem'
         }
       },
       hideDownloadTip () {
-        if (document.querySelector('#downloadTip')) {
-          document.querySelector('#downloadTip').style.top = '-0.826rem'
+        if (this.$el.querySelector('.download-tip')) {
+          this.$el.querySelector('.download-tip').style.top = '-0.826rem'
         }
       },
       getResponse () {

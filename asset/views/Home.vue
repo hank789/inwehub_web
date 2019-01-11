@@ -400,7 +400,25 @@
         userAbility.newbieTask(this)
         getHomeData((data) => {
           this.regions = data.regions
+
+          setTimeout(() => {
+            var type = this.$route.query.type
+            if (type) {
+              var typeIndex = this.getRegionIndex(type)
+              if (typeIndex) {
+                this.selectTag(typeIndex)
+              }
+            }
+          }, 1000)
         })
+      },
+      getRegionIndex (value) {
+        for (var i = 0; i < this.regions.length; i++) {
+          if (this.regions[i].value === parseInt(value)) {
+            return i + 1
+          }
+        }
+        return 0
       }
     },
     mounted () {
