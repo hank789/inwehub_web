@@ -41,6 +41,10 @@
               </div>
             </div>
           </div>
+          <div class="bottomLine"></div>
+          <div class="circular leftC"></div>
+          <div class="circular rightC"></div>
+
           <div class="footerMenu">
             <div class="left">
               <svg class="icon" aria-hidden="true">
@@ -203,9 +207,28 @@
         }
       }
     }
+    .bottomLine {
+      width: 100%;
+      margin: 15px 0 20px;
+      border: 0.5px dashed #DCDCDC;
+    }
+    .circular {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #82d1f8;
+      position: absolute;
+      bottom: 104px;
+      &.leftC {
+        left: -8px;
+      }
+      &.rightC {
+        right: -8px;
+      }
+    }
     .footerMenu {
       display: flex;
-      padding: 0 5px;
+      padding: 0 5px 20px;
       justify-content: space-between;
       .left {
         width: 46px;
