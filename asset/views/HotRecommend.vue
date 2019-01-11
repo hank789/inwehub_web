@@ -56,7 +56,7 @@
             </div>
             <div class="right">
               <div class="oneLine"></div>
-              <div class="menu">
+              <div class="menu" @tap.stop.prevent="appPush">
                 <span class="iconCircular one">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-xiazaiapp"></use>
@@ -72,7 +72,7 @@
                 </span>
                 <div class="text">邮件</div>
               </div>
-              <div class="menu">
+              <div class="menu" @tap.stop.prevent="subscribeGZH">
                 <span class="iconCircular three">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-weixinfuwuhao"></use>
@@ -91,8 +91,20 @@
 </template>
 
 <script>
-	export default {
-	}
+import { alertHotOpenNotice, alertSubscribeGZH } from '../utils/dialogList'
+export default {
+  data () {
+    return {}
+  },
+  methods: {
+    appPush () {
+      alertHotOpenNotice(this)
+    },
+    subscribeGZH () {
+      alertSubscribeGZH(this)
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">

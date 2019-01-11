@@ -599,6 +599,52 @@
 
       </div>
     </div>
+
+    <div id="NewOpenNotice">
+      <div class="contentWrapper">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+
+        <div class="text">请先开启通知，</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+        <div class="setingStep">“设置”-“通知”-开启InweHub</div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">现在开启</span>
+          <div class="bot"></div>
+        </div>
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">稍后提醒</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="subscribeGZH">
+      <div class="subscribeWrapper">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+        <div class="title font-family-medium">热点推荐-服务号订阅</div>
+
+        <div class="text">请先微信扫码关注InweHub服务号</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+
+        <div class="GZHimg">
+          <img src="../statics/images/GZHcode@3x.png" alt="">
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </template>
 <script type="text/javascript">
@@ -2146,4 +2192,75 @@
     color: #03AEF9;
   }
 
+  .bot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0rem;
+    height: 0.026rem;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+
+  .contentWrapper {
+    width: 300px;
+    background: #FFFFFF;
+  }
+  .contentWrapper .close, .subscribeWrapper .close {
+    text-align: right;
+    padding: 15px;
+    color: #808080;
+    font-size: 13px;
+  }
+  .contentWrapper .text {
+    color: #444444;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: left;
+    padding: 0 15px;
+    font-family:PingFangSC-Medium;
+  }
+  .contentWrapper .setingStep {
+    color: #808080;
+    font-size: 13px;
+    line-height: 18px;
+    margin-top: 10px;
+    text-align: left;
+    padding: 0 15px 30px;
+  }
+  .contentWrapper .buttonWrapper {
+    position: relative;
+    text-align: center;
+    color: #03AEF9;
+    line-height: 49px;
+  }
+  .contentWrapper .buttonWrapper .bot {
+    top: 0;
+  }
+  .subscribeWrapper {
+    width: 300px;
+    background: #ffffff;
+    padding-bottom: 30px;
+  }
+  .subscribeWrapper .title {
+    color: #444444;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 10px;
+  }
+  .subscribeWrapper .text {
+    color: #808080;
+    font-size: 13px;
+    line-height: 21px;
+  }
+  .subscribeWrapper .GZHimg {
+    width: 148px;
+    height: 150px;
+    margin: 10px auto 0;
+  }
+  .subscribeWrapper .GZHimg img {
+    width: 100%;
+    height: 100%;
+  }
 </style>

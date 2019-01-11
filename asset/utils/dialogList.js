@@ -515,6 +515,32 @@ function alertHomeHeat (context, regions, item, callback) {
   }
 }
 
+function alertHotOpenNotice (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('NewOpenNotice', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
+function alertSubscribeGZH (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('subscribeGZH', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -544,6 +570,8 @@ export {
   alertGroupsOld,
   alertAddWeHub,
   alertReport,
-  alertHomeHeat
+  alertHomeHeat,
+  alertHotOpenNotice,
+  alertSubscribeGZH
   // alertshi
 }
