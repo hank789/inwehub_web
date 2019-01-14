@@ -333,7 +333,7 @@
         if (!navWarp) {
           return
         }
-        if (this.$refs.RefreshList.$refs.RefreshList[index].mescroll.os.ios) {
+        if (window.mui.os.ios) {
           if (y < 10) {
             navWarp.classList.remove('leftTopFixedShow')
             navWarp.classList.remove('nav-sticky')
