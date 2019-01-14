@@ -2299,7 +2299,7 @@
     background: #ffffff;
     padding-bottom: 30px;
   }
-  .subscribeWrapper .title, .hotRecommendWrapper .title, EmailSubscribe .title {
+  .subscribeWrapper .title, .hotRecommendWrapper .title, .EmailSubscribe .title {
     color: #444444;
     font-size: 18px;
     line-height: 24px;
@@ -2326,6 +2326,13 @@
   }
   .EmailSubscribe .inputWrapper {
     width: 270px;
-    margin: 30px auto 0;
+    margin: 15px auto 0;
+  }
+  .EmailSubscribe .inputWrapper input {
+    border-color: #DCDCDC;
+  }
+  input::-webkit-input-placeholder {
+    color: #C8C8C8;
+    font-size: 14px;
   }
 </style>
