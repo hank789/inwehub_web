@@ -214,7 +214,7 @@ import DianpingSearchCompany from '../../../views/Dianping/Search/Company.vue'
 import DianpingProductFeedback from '../../../views/Dianping/Product/Feedback.vue'
 import SearchSearchAll from '../../../views/Search/SearchAll.vue'
 import HotRecommend from '../../../views/HotRecommend.vue'
-
+import SettingpushSettingSubscribe from '../../../views/Setting/pushSettingSubscribe.vue'
 export {
   Login,
   Register,
@@ -365,6 +365,7 @@ export {
   SettingpushSettingFollow,
   SettingpushSettingAboutMe,
   SeekingCooperation,
+  SettingpushSettingSubscribe,
   Project,
   HelpAsk,
   ProjectForm,
