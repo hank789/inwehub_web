@@ -8,7 +8,7 @@
     <div class="mui-content">
       <div class="notice_b">
         APP推送
-        <Switches type-bold="true" theme="custom" color="blue"></Switches>
+        <Switches v-model="AppPush" type-bold="true" theme="custom" color="blue"></Switches>
         <i class="bot"></i>
       </div>
       <div class="notice_b">
@@ -27,13 +27,70 @@
 </template>
 
 <script>
+  import { postRequest } from '../../utils/request'
+  import { checkPermission as checkPermissionMy } from '../../utils/plus'
   import Switches from 'vue-switches'
+
   export default {
     data () {
-      return {}
+      return {
+        AppPush: 0
+      }
     },
     components: {
       Switches
+    },
+    methods: {
+      closeAll () {
+        // this.AppPush = 0
+        console.log('closeAll')
+      },
+      refreshResumeData () {
+        this.checkPermissionSelf()
+      },
+      checkPermissionSelf () {
+        checkPermissionMy('NOTIFITION', () => {
+          this.getNotification()
+          console.log('checkPermissionSelf')
+        }, (result) => {
+          // this.closeAll()
+        })
+      },
+      openDisturb () {
+        this.updateNotification()
+      },
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.AppPush = response.data.data.push_daily_subscribe
+        })
+      },
+      updateNotification () {
+        postRequest(`notification/push/update`, {
+          push_daily_subscribe: this.AppPush ? 1 : 0
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.AppPush = response.data.data.push_daily_subscribe
+        })
+      }
+    },
+    mounted () {
+      this.getNotification()
+      // this.refreshResumeData()
+      this.checkPermissionSelf()
+    },
+    watch: {
+      'AppPush': function (newValue, oldValue) {
+        this.openDisturb('AppPush')
+      }
     }
   }
 </script>
