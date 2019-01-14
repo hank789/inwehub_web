@@ -61,7 +61,7 @@
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
 
-            <div class="everyDayWrapper">
+            <div class="everyDayWrapper" @tap.stop.prevent="sharHotspot">
               <div class="everyDay">
                 <svg class='icon' aria-hidden='true'>
                   <use xlink:href='#icon-dingyue-'></use>
@@ -71,6 +71,7 @@
                 </div>
               </div>
             </div>
+
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="goArticle(item)">
@@ -144,6 +145,12 @@
     >
     </BottomActions>
 
+    <HotBottomActions
+      ref="HotBottomActions"
+      v-model="activeItem"
+    >
+    </HotBottomActions>
+
     <PageMore
       ref="share"
       :shareOption="shareOption"
@@ -165,6 +172,7 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import BottomActions from '../components/BottomActions'
+  import HotBottomActions from '../components/HotBottomActions'
   import { deleteItem } from '../utils/discover'
   import PageMore from '../components/PageMore.vue'
   import { iconMenusClickedItem } from '../utils/feed'
@@ -214,7 +222,8 @@
       swiper,
       swiperSlide,
       BottomActions,
-      PageMore
+      PageMore,
+      HotBottomActions
     },
     computed: {
       listDataConfig () {
@@ -246,6 +255,9 @@
     },
     activated: function () {},
     methods: {
+      sharHotspot () {
+        this.$refs.HotBottomActions.show()
+      },
       getLiIndex (itemIndex, listDataIndex) {
         if (!this.liIndexConfig[listDataIndex]) {
           this.liIndexConfig[listDataIndex] = 1
