@@ -34,16 +34,16 @@
         </div>
       </div>
 
-      <div class="leftTopFixed fixedData" :class="type !== 0 ? 'centerFiexd':''">
-        <template v-if="type !== 1">
+      <div class="leftTopFixed fixedData">
+        <template>
           <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>{{indexPosition}}
         </template>
-        <template v-else>
-          {{indexPosition}}
-          <span class="subscribeText"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-dingyue-'></use></svg>订阅</span>
-          <i class="upLine"></i>
-          <span class="shereText" @tap.stop.prevent="$router.pushPlus('/hotrecommend')"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-fenxiang1'></use></svg>分享</span>
-        </template>
+        <!--<template v-else>-->
+          <!--{{indexPosition}}-->
+          <!--<span class="subscribeText"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-dingyue-'></use></svg>订阅</span>-->
+          <!--<i class="upLine"></i>-->
+          <!--<span class="shereText" @tap.stop.prevent="$router.pushPlus('/hotrecommend')"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-fenxiang1'></use></svg>分享</span>-->
+        <!--</template>-->
      </div>
 
       <SwiperMescrollList
@@ -60,16 +60,35 @@
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
+
+            <div class="everyDayWrapper">
+              <div class="everyDay">
+                <svg class='icon' aria-hidden='true'>
+                  <use xlink:href='#icon-dingyue-'></use>
+                </svg>
+                <div class="textImg">
+                  <img src="../statics/images/everyDay@3x.png" alt="">
+                </div>
+              </div>
+            </div>
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="goArticle(item)">
-                <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)" :class="itemIndex === 0 ? 'hideData' : ''">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-riliyouse"></use>
-                  </svg>
-                  <span>{{ timeToHumanText(item.created_at) }}</span>
+                <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)">
+                  <div class="LeftDate">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-riliyouse"></use>
+                    </svg>
+                    <span>{{ timeToHumanText(item.created_at) }}</span>
+                  </div>
+                  <div class="rightDaily"  @tap.stop.prevent="$router.pushPlus('/hotrecommend/?date=' + item.created_at.split(' ')[0])">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-fenxiang1"></use>
+                    </svg>
+                    <span>日报</span>
+                  </div>
                 </div>
-                <div class="container-list" :class="itemIndex === 0 ? 'container-list-top' : ''">
+                <div class="container-list">
                   <div class="pointLine" v-if="type === 0">
                     <span class="splitCircle"></span>
                     <span class="splitLine" v-if="isShowSplitLine(itemIndex, listDataIndex)"></span>
@@ -467,19 +486,23 @@
   .container-wrapper {
     /*margin-top: 0.4rem;*/
     .dateWrapper {
-      padding-left: 0.426rem;
+      padding: 0 0.426rem;
       height: 0.56rem;
-      display: inline-block;
+      display: flex;
+      justify-content: space-between;
       line-height: 0.56rem;
       margin-bottom: 0.533rem;
       margin-top: 0.266rem;
-
       .icon {
         font-size: 0.4rem;
       }
       span {
         color: #444444;
         font-size: 0.32rem;
+      }
+      .rightDaily {
+        position: relative;
+        z-index: 9999;
       }
     }
     .container-list {
@@ -696,6 +719,37 @@
       .icon {
         font-size: 15px;
         margin-right: 5px;
+      }
+    }
+  }
+
+  .everyDayWrapper {
+    padding: 0 16px;
+    margin-top: 10px;
+    .everyDay {
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      border-radius: 4px;
+      display: flex;
+      justify-content: center;
+      border: 1px solid #E8E8E8;
+      background: #ffffff;
+      .icon {
+        font-size: 14px;
+        color: #C8C8C8;
+        position: relative;
+        top: 14px;
+      }
+      .textImg {
+        width: 100px;
+        height: 12.5px;
+        line-height: 44px;
+        margin-left: 5px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }

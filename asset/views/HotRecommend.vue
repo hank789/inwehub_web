@@ -100,10 +100,17 @@
   export default {
     data () {
       return {
-        list: {}
+        list: {},
+        date: ''
       }
     },
     methods: {
+      refreshPageData () {
+        this.date = this.$route.query.date
+        if (this.date) {
+          this.getDailyReport()
+        }
+      },
       goArticle: function (detail) {
         if (detail.link_url.indexOf(process.env.H5_ROOT) === 0) {
           openAppUrlByUrl(detail.link_url)
@@ -118,7 +125,7 @@
         }
       },
       getDailyReport () {
-        postRequest(`dailyReport`, {date: '2019-01-09'}).then(response => {
+        postRequest(`dailyReport`, {date: this.date}).then(response => {
           this.list = response.data.data
         })
       },
@@ -133,7 +140,10 @@
       }
     },
     mounted () {
-      this.getDailyReport()
+      this.refreshPageData()
+    },
+    watch: {
+      '$route': 'refreshPageData'
     }
   }
 </script>
