@@ -34,12 +34,15 @@
         </div>
       </div>
 
-      <div class="leftTopFixed fixedData">
+      <div class="leftTopFixed fixedData" :class="type !== 0 ? 'centerFiexd':''">
         <template v-if="type !== 1">
           <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>{{indexPosition}}
         </template>
         <template v-else>
-          {{indexPosition}} 分享 订阅
+          {{indexPosition}}
+          <span class="subscribeText"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-dingyue-'></use></svg>订阅</span>
+          <i class="upLine"></i>
+          <span class="shereText" @tap.stop.prevent="$router.pushPlus('/hotrecommend')"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-fenxiang1'></use></svg>分享</span>
         </template>
      </div>
 
@@ -661,8 +664,39 @@
     border-top-right-radius: 1.333rem;
     border-bottom-right-radius: 1.333rem;
     box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
+    &.centerFiexd {
+      height: 29px;
+      line-height: 29px;
+      left: 50%;
+      transform: translateX(-21%);
+      border-radius: 1.333rem;
+    }
     .icon {
       font-size: 0.426rem;
+    }
+    .upLine {
+      width: 1px;
+      height: 12px;
+      background: #67CEFB;
+      display: inline-block;
+      position: relative;
+      top: 2px;
+      margin: 0 15px;
+    }
+    .subscribeText {
+      font-size: 12px;
+      margin-left: 57px;
+      .icon {
+        font-size: 14px;
+        margin-right: 5px;
+      }
+    }
+    .shareText {
+      font-size: 12px;
+      .icon {
+        font-size: 15px;
+        margin-right: 5px;
+      }
     }
   }
 
