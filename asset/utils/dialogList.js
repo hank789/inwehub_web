@@ -548,6 +548,7 @@ function alertSubscribeGZH (context, callback) {
   if (dialogObj) {
     dialogObj.getHtml('subscribeGZH', {}, (html) => {
       alertHtml(html, (num) => {
+        callback()
         if (num === -1) {
           return true
         }
@@ -562,6 +563,10 @@ function alertEmailSubscribe (context, callback) {
   if (dialogObj) {
     dialogObj.getHtml('EmailSubscribe', {}, (html) => {
       alertHtml(html, (num) => {
+        if (num === 0) {
+          var text = document.getElementsByClassName('EmailText')[1].value
+          callback(num, text)
+        }
         if (num === -1) {
           return true
         }

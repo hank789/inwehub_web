@@ -680,8 +680,10 @@
         <div class="text">我们将为您推送每日热点推荐~</div>
 
         <div class="inputWrapper">
-          <input type="text" placeholder="输入您的邮箱地址">
+          <input class="EmailText" type="text" placeholder="输入您的邮箱地址">
         </div>
+
+        <div class="tipsInfo">邮箱格式有误，请重新输入</div>
 
         <div class="buttonWrapper sure alertConfirm" >
           <span class="font-family-medium">订阅</span>
@@ -2330,6 +2332,14 @@
   }
   .EmailSubscribe .inputWrapper input {
     border-color: #DCDCDC;
+  }
+  .EmailSubscribe .tipsInfo {
+    color: #FA4975;
+    font-size: 11px;
+    text-align: left;
+    padding-left: 25px;
+    margin-top: -11px;
+    margin-bottom: 30px;
   }
   input::-webkit-input-placeholder {
     color: #C8C8C8;

@@ -71,7 +71,7 @@
                 <div class="text">APP推送</div>
               </div>
               <div class="menu" @tap.stop.prvent="alertEmailSubscribe">
-                <span class="iconCircular two">
+                <span class="iconCircular two" :class="email_subscribe ? 'grey':''">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-youxiang"></use>
                   </svg>
@@ -143,7 +143,9 @@
         itemOptionsObj: {},
         isOpenNotification: -1, // -1， 未知, 1 yes 0 no
         AppPush: 0,
-        wechat_subscribe: -1
+        wechat_subscribe: -1, // -1， 未知, 1 yes 0 no
+        emailText: '',
+        email_subscribe: ''
       }
     },
     components: {
@@ -156,6 +158,20 @@
           alertHotOpenNotice(this, (num) => {
             if (num === 0) {
               toSettingSystem('NOTIFITION')
+            }
+          })
+        }
+      },
+      subscribeGZH () {
+        alertSubscribeGZH(this)
+      },
+      alertEmailSubscribe () {
+        if (!this.email_subscribe) {
+          alertEmailSubscribe(this, (num, text) => {
+            if (num === 0) {
+              this.emailText = text
+              this.updateNotification()
+              console.log(num + '打印成功' + text)
             }
           })
         }
@@ -179,14 +195,18 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.AppPush = response.data.data.push_daily_subscribe
-          this.wechat_subscribe = response.data.data.wechat_daily_subscribe
+          var res = response.data.data
+          this.AppPush = res.push_daily_subscribe
+          this.wechat_subscribe = res.wechat_daily_subscribe
+          this.email_subscribe = res.email_daily_subscribe
         })
       },
       updateNotification () {
-        postRequest(`notification/push/update`, {
+        var data = {
+          email_daily_subscribe: this.emailText,
           push_daily_subscribe: this.AppPush ? 1 : 0
-        }).then(response => {
+        }
+        postRequest(`notification/push/update`, data).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
@@ -288,12 +308,6 @@
         postRequest(`dailyReport`, {date: this.date}).then(response => {
           this.list = response.data.data
         })
-      },
-      subscribeGZH () {
-        alertSubscribeGZH(this)
-      },
-      alertEmailSubscribe () {
-        alertEmailSubscribe(this)
       }
     },
     created () {
