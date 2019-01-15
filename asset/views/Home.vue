@@ -53,7 +53,7 @@
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
 
-            <div class="everyDayWrapper" @tap.stop.prevent="sharHotspot">
+            <div class="everyDayWrapper" @tap.stop.prevent="sharHotspot" v-if="type === 1">
               <div class="everyDay">
                 <svg class='icon' aria-hidden='true'>
                   <use xlink:href='#icon-dingyue-'></use>
@@ -74,7 +74,7 @@
                     </svg>
                     <span>{{ timeToHumanText(item.created_at) }}</span>
                   </div>
-                  <div class="rightDaily"  @tap.stop.prevent="$router.pushPlus('/hotrecommend/?date=' + item.created_at.split(' ')[0])">
+                  <div class="rightDaily"  @tap.stop.prevent="$router.pushPlus('/hotrecommend/' + item.created_at.split(' ')[0])" v-if="type === 1">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-fenxiang1"></use>
                     </svg>

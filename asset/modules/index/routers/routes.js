@@ -2780,8 +2780,8 @@ const routes = [
     }
   },
   {
-    path: '/hotrecommend',
-    name: 'hotrecommend',
+    path: '/hotrecommend/:date',
+    name: 'hotrecommend/:date',
     meta: {
       title: '今日热点推荐',
       wechatHideHeader: true,

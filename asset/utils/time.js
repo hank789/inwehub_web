@@ -125,5 +125,6 @@ function getTimestampByDateStr (str) {
 export {
   TimeEndText,
   timeToHumanText,
-  getTimestampByDateStr
+  getTimestampByDateStr,
+  timeToHumanDay
 }

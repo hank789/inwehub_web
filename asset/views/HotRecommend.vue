@@ -13,7 +13,7 @@
           <img src="../statics/images/hotTopImg@3x.png">
         </div>
         <div class="dateWrapper">
-          <div class="date">01月08日星期二</div>
+          <div class="date">{{ dateShow }}</div>
         </div>
       </div>
 
@@ -86,10 +86,8 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
-
 </template>
 
 <script>
@@ -97,17 +95,27 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe } from '../utils/dialogList'
+  import { timeToHumanDay } from '../utils/time'
+
   export default {
     data () {
       return {
         list: {},
-        date: ''
+        date: '',
+        dateTime: '',
+        dateShow: ''
       }
     },
     methods: {
       refreshPageData () {
-        this.date = this.$route.query.date
+        this.date = this.$route.params.date
         if (this.date) {
+          this.dateTime = new Date(this.date.replace(/-/g, '/')).getTime() / 1000
+
+          var day = timeToHumanDay(this.dateTime)
+          var dates = this.date.split('-')
+          this.dateShow = dates[1] + '月' + dates[2] + '日' + day
+
           this.getDailyReport()
         }
       },
@@ -139,11 +147,15 @@
         alertEmailSubscribe(this)
       }
     },
-    mounted () {
+    created () {
       this.refreshPageData()
     },
     watch: {
-      '$route': 'refreshPageData'
+      '$route' (to, from) {
+        if (to.name === from.name) {
+          this.refreshPageData()
+        }
+      }
     }
   }
 </script>

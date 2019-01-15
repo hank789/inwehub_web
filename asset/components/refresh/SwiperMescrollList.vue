@@ -83,7 +83,7 @@
           var dateWrappers = this.$refs.RefreshList[index].$el.querySelectorAll('.dateWrapper')
           for (var i = 0; i < dateWrappers.length; i++) {
             var offsetTop = dateWrappers[i].offsetTop
-            var text = dateWrappers[i].innerText
+            var text = dateWrappers[i].querySelector('.LeftDate').innerText
             positionValues.push({offsetTop: offsetTop, text: text})
           }
 
