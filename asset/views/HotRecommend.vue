@@ -25,7 +25,7 @@
             <div class="middle">
               <div class="left">
                 <div class="title font-family-medium text-line-2">{{ item.title }}</div>
-                <div class="heatWrapper border-football">
+                <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item, index)">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-huo"></use>
                   </svg>
@@ -87,6 +87,26 @@
         </div>
       </div>
     </div>
+
+    <BottomActions
+      ref="BottomActions"
+      v-model="activeItem"
+      :regions="regions"
+      @clickDelete="clickDelete"
+      @startAnimation="startAnimationEvent"
+    >
+    </BottomActions>
+
+    <PageMore
+      ref="share"
+      :shareOption="shareOption"
+      :hideShareBtn="true"
+      :iconMenu="shareIconMenus"
+      @success="shareSuccess"
+      @fail="shareFail"
+      @clickedItem="iconMenusClickedItem"
+    ></PageMore>
+
   </div>
 </template>
 
@@ -96,6 +116,13 @@
   import { openAppUrlByUrl } from '../utils/plus'
   import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe } from '../utils/dialogList'
   import { timeToHumanDay } from '../utils/time'
+  import BottomActions from '../components/BottomActions'
+  import { getHomeData } from '../utils/home'
+  import { deleteItem } from '../utils/discover'
+  import PageMore from '../components/PageMore.vue'
+  import Vue from 'vue'
+  import { iconMenusClickedItem } from '../utils/feed'
+  import { getHomeDetail } from '../utils/shareTemplate'
 
   export default {
     data () {
@@ -103,10 +130,81 @@
         list: {},
         date: '',
         dateTime: '',
-        dateShow: ''
+        dateShow: '',
+        activeItem: {},
+        activeItemIndex: 0,
+        regions: [],
+        startAnimationNum: '',
+        shareOption: {},
+        shareIconMenus: [],
+        itemOptionsObj: {}
       }
     },
+    components: {
+      BottomActions,
+      PageMore
+    },
     methods: {
+      showItemMore (item) {
+        item.feed_type = 16
+        item.user = {
+          id: 0
+        }
+        item.feed = {
+          is_bookmark: item.is_upvoted,
+          submission_id: item.id
+        }
+        this.shareIconMenus = [] // getIconMenus(item)
+        this.itemOptionsObj = item
+        this.shareOption = getHomeDetail(
+          '/c/' + item.category_id + '/' + item.slug, // item.link_url,
+          item.title,
+          item.img
+        )
+        this.shareOption.targetId = item.slug
+        this.shareOption.targetType = 'submission'
+        this.$refs.share.share()
+      },
+      iconMenusClickedItem (item) {
+        this.itemOptionsObj.feed_type = 16
+        this.itemOptionsObj.user = {
+          id: 0
+        }
+        this.itemOptionsObj.feed = {
+          is_bookmark: this.itemOptionsObj.is_upvoted,
+          submission_id: this.itemOptionsObj.id
+        }
+        iconMenusClickedItem(this, this.itemOptionsObj, item, () => {})
+      },
+      shareFail () {
+
+      },
+      shareSuccess () {
+        this.activeItem.share_number++
+        this.startAnimationEvent(3)
+      },
+      startAnimationEvent (num) {
+        this.startAnimationNum = num
+        this.activeItem.startAnimation = 1
+        this.activeItem.rate += num
+        Vue.set(this.list, this.activeListIndex, this.activeItem)
+
+        setTimeout(() => {
+          this.activeItem.startAnimation = 0
+          Vue.set(this.list, this.activeListIndex, this.activeItem)
+        }, 2500)
+      },
+      addHeat (item, itemIndex) {
+        this.activeItem = item
+        this.activeItemIndex = itemIndex
+        this.$refs.BottomActions.show()
+      },
+      clickDelete () {
+        this.$refs.BottomActions.cancelShare()
+        deleteItem(this.activeItem.id, (context) => {
+          this.lists.splice(this.activeItemIndex, 1)
+        })
+      },
       refreshPageData () {
         this.date = this.$route.params.date
         if (this.date) {
@@ -117,6 +215,10 @@
           this.dateShow = dates[1] + '月' + dates[2] + '日' + day
 
           this.getDailyReport()
+
+          getHomeData((data) => {
+            this.regions = data.regions
+          })
         }
       },
       goArticle: function (detail) {
