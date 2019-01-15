@@ -12,7 +12,7 @@
         <i class="bot"></i>
       </div>
       <div class="notice_b">
-        邮件订阅<span class="Email">zmysddh@163.com</span>
+        邮件订阅<span class="Email">{{ EmailText }}</span>
         <Switches type-bold="true" theme="custom" color="blue"></Switches>
         <i class="bot"></i>
       </div>
@@ -34,7 +34,8 @@
   export default {
     data () {
       return {
-        AppPush: 0
+        AppPush: 0,
+        EmailText: ''
       }
     },
     components: {
@@ -66,7 +67,9 @@
             window.mui.alert(response.data.message)
             return
           }
-          this.AppPush = response.data.data.push_daily_subscribe
+          var res = response.data.data
+          this.AppPush = res.push_daily_subscribe
+          this.EmailText = res.email_daily_subscribe
         })
       },
       updateNotification () {
