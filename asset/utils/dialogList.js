@@ -520,7 +520,8 @@ function alertHotOpenNotice (context, callback) {
   if (dialogObj) {
     dialogObj.getHtml('NewOpenNotice', {}, (html) => {
       alertHtml(html, (num) => {
-        if (num === -1) {
+        callback(num)
+        if (num === -1 || num === 1) {
           return true
         }
       })
@@ -528,11 +529,12 @@ function alertHotOpenNotice (context, callback) {
   }
 }
 
-function alertHotRecommend(context, callback) {
+function alertHotRecommend (context, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('hotRecommend', {}, (html) => {
       alertHtml(html, (num) => {
+        callback(num)
         if (num === -1) {
           return true
         }
@@ -555,7 +557,7 @@ function alertSubscribeGZH (context, callback) {
 }
 
 // EmailSubscribe
-function alertEmailSubscribe(context, callback) {
+function alertEmailSubscribe (context, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {
     dialogObj.getHtml('EmailSubscribe', {}, (html) => {

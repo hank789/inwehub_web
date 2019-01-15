@@ -63,7 +63,7 @@
             <div class="right">
               <div class="oneLine"></div>
               <div class="menu" @tap.stop.prevent="appPush">
-                <span class="iconCircular one">
+                <span class="iconCircular one" :class="isOpenNotification === 1 ? 'grey':''">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-xiazaiapp"></use>
                   </svg>
@@ -79,7 +79,7 @@
                 <div class="text">邮件</div>
               </div>
               <div class="menu" @tap.stop.prevent="subscribeGZH">
-                <span class="iconCircular three">
+                <span class="iconCircular three" :class="wechat_subscribe === 1 ? 'grey':''">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-weixinfuwuhao"></use>
                   </svg>
@@ -117,7 +117,7 @@
 <script>
   import { postRequest } from '../utils/request'
   import { goThirdPartyArticle } from '../utils/webview'
-  import { openAppUrlByUrl } from '../utils/plus'
+  import { openAppUrlByUrl, checkPermission as checkPermissionMy, toSettingSystem } from '../utils/plus'
   import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe } from '../utils/dialogList'
   import { timeToHumanDay } from '../utils/time'
   import BottomActions from '../components/BottomActions'
@@ -127,7 +127,6 @@
   import Vue from 'vue'
   import { iconMenusClickedItem } from '../utils/feed'
   import { getHomeDetail } from '../utils/shareTemplate'
-
   export default {
     data () {
       return {
@@ -141,7 +140,10 @@
         startAnimationNum: '',
         shareOption: {},
         shareIconMenus: [],
-        itemOptionsObj: {}
+        itemOptionsObj: {},
+        isOpenNotification: -1, // -1， 未知, 1 yes 0 no
+        AppPush: 0,
+        wechat_subscribe: -1
       }
     },
     components: {
@@ -149,6 +151,50 @@
       PageMore
     },
     methods: {
+      appPush () {
+        if (this.isOpenNotification !== 1) {
+          alertHotOpenNotice(this, (num) => {
+            if (num === 0) {
+              toSettingSystem('NOTIFITION')
+            }
+          })
+        }
+      },
+      checkPermissionSelf () {
+        console.log('checkPermissionSelfs哈哈哈哈')
+        checkPermissionMy('NOTIFITION', () => {
+          this.isOpenNotification = 1
+          this.AppPush = 1
+          this.getNotification()
+        }, (result) => {
+          this.isOpenNotification = 0
+          this.AppPush = 0
+          // this.closeAll()
+        })
+      },
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.AppPush = response.data.data.push_daily_subscribe
+          this.wechat_subscribe = response.data.data.wechat_daily_subscribe
+        })
+      },
+      updateNotification () {
+        postRequest(`notification/push/update`, {
+          push_daily_subscribe: this.AppPush ? 1 : 0
+        }).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          this.AppPush = response.data.data.push_daily_subscribe
+        })
+      },
       showItemMore (item) {
         item.feed_type = 16
         item.user = {
@@ -243,9 +289,6 @@
           this.list = response.data.data
         })
       },
-      appPush () {
-        alertHotOpenNotice(this)
-      },
       subscribeGZH () {
         alertSubscribeGZH(this)
       },
@@ -262,6 +305,10 @@
           this.refreshPageData()
         }
       }
+    },
+    mounted () {
+      this.getNotification()
+      this.checkPermissionSelf()
     }
   }
 </script>
@@ -489,6 +536,10 @@
             line-height: 1.173rem;
             border-radius: 50%;
             display: inline-block;
+            &.grey {
+              background: #F7F8FA;
+              color: #808080;
+            }
           }
           .text {
             color: #808080;
