@@ -1,66 +1,42 @@
 <template>
   <div id="hotHomeHeat" class="mui-popover mui-popover-action mui-popover-bottom">
     <div class="heat-wrapper">
-      <div class="heatTop">
+      <div class="footerMenu">
         <div class="left">
-          <div class="fire"><img src="../statics/images/fire@3x.png"></div>
-          <div class="heat"><img src="../statics/images/heat@2x.png"></div>
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-dingyue-"></use>
+          </svg>
+          <div class="hotRecommend">
+            <img src="../statics/images/hotrecommend@3x.png" alt="">
+          </div>
         </div>
         <div class="right">
           <div class="oneLine"></div>
-
-          <div class="iconList " @tap.stop.prevent="clickItem('分享')">
-            <div class="addNumber">
-              <span>+3</span>
-            </div>
-            <span class="iconCircular">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-shoucang-xiao"></use>
-                </svg>
-              </span>
-            <div class="text">分享</div>
+          <div class="menu" @tap.stop.prevent="appPush">
+                <span class="iconCircular one">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-xiazaiapp"></use>
+                  </svg>
+                </span>
+            <div class="text">APP推送</div>
           </div>
-
-          <div class="iconList" @tap.stop.prevent="clickItem('评论')">
-            <div class="addNumber">
-              <span>+2</span>
-            </div>
-            <span class="iconCircular">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-pinglun"></use>
-                </svg>
-              </span>
-            <div class="text active">评论<i>{{ localItem.comment_number }}</i></div>
+          <div class="menu" @tap.stop.prvent="alertEmailSubscribe">
+                <span class="iconCircular two">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-youxiang"></use>
+                  </svg>
+                </span>
+            <div class="text">邮件</div>
           </div>
-
-          <div class="iconList" :class="localItem.is_upvoted ? 'active' : ''" @tap.stop.prevent="vote">
-            <div class="addNumber">
-              <span>+1</span>
-            </div>
-            <span class="iconCircular">
-                <svg class="icon" aria-hidden="true">
-                  <use xlink:href="#icon-zan"></use>
-                </svg>
-              </span>
-            <div class="text">{{ localItem.is_upvoted ? '已赞' : '赞' }}</div>
+          <div class="menu" @tap.stop.prevent="subscribeGZH">
+                <span class="iconCircular three">
+                  <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-weixinfuwuhao"></use>
+                  </svg>
+                </span>
+            <div class="text">微信服务号</div>
           </div>
         </div>
-      </div>
-
-      <div class="deleteWrapper" v-if="isAdmin">
-        <div class="bot"></div>
-        <div class="single alertConfirm" @tap.stop.prevent="deleteItem">
-            <span class="iconW">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-shanchu1"></use>
-              </svg>
-            </span>
-          <span class="text">删除</span>
-        </div>
-      </div>
-
-      <div class="submit" @tap.stop.prevent="submit" v-if="isAdmin">
-        <span>确定</span>
       </div>
 
       <div class="cancelW" @tap.stop.prevent="cancelShare">
@@ -221,220 +197,86 @@
     background: #ffffff;
     border-top-left-radius: 0.48rem;
     border-top-right-radius: 0.48rem;
+    .cancelW {
+      position: relative;
+      text-align: center;
+      .bot {
+        top: 0 !important;
+      }
+      span {
+        color: #444444;
+        font-family: PingFangSC-Medium;
+        font-size: 0.426rem;
+        text-align: center;
+        line-height: 1.386rem;
+      }
+    }
   }
-
-  .heat-wrapper .heatTop {
-    overflow: hidden;
-    padding: 0 0.4rem 0.533rem;
-  }
-
-  .heat-wrapper .left {
+  .footerMenu {
     display: flex;
-    float: left;
-    margin-top: 0.373rem;
-    margin-left: 0.4rem;
-  }
-
-  .heat-wrapper .left .fire {
-    width: 0.586rem;
-    height: 0.666rem;
-    position: relative;
-    top: 0.146rem;
-    margin-right: 0.213rem;
-  }
-
-  .heat-wrapper .left .fire img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .heat-wrapper .left .heat {
-    width: 0.906rem;
-    height: 0.96rem;
-  }
-
-  .heat-wrapper .left .heat img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .heat-wrapper .right {
-    float: right;
-    display: flex;
-  }
-
-  .heat-wrapper .right .oneLine {
-    width: 0.026rem;
-    height: 1.173rem;
-    background: #DCDCDC;
-    margin-right: 0.4rem;
-    position: relative;
-    top: 0.266rem;
-  }
-
-  .heat-wrapper .right .iconList {
-    margin: 0 0.4rem;
-    position: relative;
-  }
-
-  .heat-wrapper .right .iconList.active .iconCircular {
-    color: #FFFFFF;
-    background: #03AEF9;
-  }
-
-  .heat-wrapper .right .iconList .addNumber {
-    height: 0.373rem;
-    line-height: 0.373rem;
-    position: absolute;
-    top: 0.08rem;
-    right: -0.266rem;
-    display: inline-block;
-    padding: 0 0.133rem;
-    background: #E5E5E5;
-    border-radius: 2.666rem;
-  }
-
-  .heat-wrapper .right .iconList .addNumber span {
-    color: #808080;
-    font-size: 0.266rem;
-    position: relative;
-    top: -0.053rem;
-  }
-
-  .heat-wrapper .right .iconList .iconCircular {
-    width: 1.173rem;
-    height: 1.173rem;
-    color: #808080;
-    font-size: 0.426rem;
-    text-align: center;
-    line-height: 1.173rem;
-    border-radius: 50%;
-    display: inline-block;
-    background: #F7F8FA;
-  }
-
-  .heat-wrapper .right .iconList .text {
-    color: #808080;
-    font-size: 0.293rem;
-    text-align: center;
-    margin-top: 0.133rem;
-  }
-
-  .heat-wrapper .right .iconList .text.active {
-    color: #444444;
-  }
-
-  .heat-wrapper .right .iconList .text i {
-    color: #FA4975;
-    font-style: normal;
-  }
-
-  .heat-wrapper .cancelW {
-    position: relative;
-    text-align: center;
-  }
-
-  .heat-wrapper .cancelW .bot {
-    top: 0 !important;
-  }
-
-  .heat-wrapper .cancelW span {
-    color: #444444;
-    font-family: PingFangSC-Medium;
-    font-size: 0.426rem;
-    text-align: center;
-    line-height: 1.386rem;
-  }
-
-  .heat-wrapper .submit {
-    width: 8.4rem;
-    height: 1.173rem;
-    margin: 0 auto 0.4rem;
-    line-height: 1.173rem;
-    text-align: center;
-    border-radius: 1.173rem;
-    background: #03AEF9;
-  }
-
-  .heat-wrapper .submit span {
-    color: #FFFFFF;
-    font-size: 0.426rem;
-  }
-
-  .deleteWrapper {
-    position: relative;
-    padding: 0.4rem 0 0.333rem;
-  }
-
-  .deleteWrapper .bot {
-    top: 0;
-  }
-
-  .deleteWrapper .single {
-    height: 1.866rem;
-    display: inline-block;
-    margin-left: 0.8rem;
-  }
-
-  .deleteWrapper .single .iconW {
-    width: 1.173rem;
-    height: 1.173rem;
-    /*margin: 0 0.32rem;*/
-    /*margin-left: 0.8rem;*/
-    line-height: 1.306rem;
-    text-align: center;
-    display: inline-block;
-    border-radius: 0.213rem;
-    border: 0.026rem solid #DCDCDC;
-    color: #C8C8C8;
-  }
-
-  .deleteWrapper .single .iconW .icon {
-    font-size: 0.586rem;
-  }
-
-  .deleteWrapper .single .text {
-    display: block;
-    font-size: 0.32rem;
-    color: #808080;
-    line-height: 0.426rem;
-    text-align: center;
-    margin-top: 0.213rem;
-  }
-
-  .choiceWrapper {
-    position: relative;
-    padding: 0.32rem 0.8rem 0.4rem;
-  }
-
-  .choiceWrapper .bot {
-    top: 0;
-  }
-
-  .choiceWrapper .title {
-    font-size: 0.293rem;
-    color: #B4B4B6;
-    line-height: 0.4rem;
-    margin-bottom: 0.053rem;
-  }
-
-  .choiceWrapper .choiceList {
-  }
-
-  .choiceWrapper .choiceList span {
-    height: 0.72rem;
-    padding: 0 0.266rem;
-    line-height: 0.72rem;
-    color: #444444;
-    font-size: 0.32rem;
-    display: inline-block;
-    background: #F3F4F6;
-    border-radius: 2.666rem;
-    margin: 0.266rem 0.266rem 0rem 0;
-  }
-
-  .choiceWrapper .choiceList span.active {
-    background: #03AEF9;
-    color: #FFFFFF;
+    padding: 0 5px 20px;
+    justify-content: space-between;
+    .left {
+      width: 46px;
+      text-align: center;
+      margin-left: 30px;
+      .icon {
+        color: #C8C8C8;
+        font-size: 21px;
+        text-align: center;
+      }
+      .hotRecommend {
+        width: 46px;
+        height: 26px;
+        margin-top: 10px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+    .right {
+      display: flex;
+      .oneLine {
+        width: 0.026rem;
+        height: 1.173rem;
+        background: #DCDCDC;
+        margin-right: 0.4rem;
+        position: relative;
+        top: 0.266rem;
+      }
+      .menu {
+        padding: 0 15px;
+        text-align: center;
+        &:last-child {
+          padding-right: 25px;
+        }
+        .one {
+          background: #03AEF9;
+        }
+        .two {
+          background: #5B84DE;
+        }
+        .three {
+          background: #77C819;
+        }
+        .iconCircular {
+          width: 1.173rem;
+          height: 1.173rem;
+          color: #FFFFFF;
+          font-size: 23px;
+          text-align: center;
+          line-height: 1.173rem;
+          border-radius: 50%;
+          display: inline-block;
+        }
+        .text {
+          color: #808080;
+          font-size: 0.293rem;
+          text-align: center;
+          margin-top: 0.133rem;
+        }
+      }
+    }
   }
 </style>
