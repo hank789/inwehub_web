@@ -34,17 +34,9 @@
         </div>
       </div>
 
-      <div class="leftTopFixed fixedData">
-        <template>
-          <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>{{indexPosition}}
-        </template>
-        <!--<template v-else>-->
-          <!--{{indexPosition}}-->
-          <!--<span class="subscribeText"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-dingyue-'></use></svg>订阅</span>-->
-          <!--<i class="upLine"></i>-->
-          <!--<span class="shereText" @tap.stop.prevent="$router.pushPlus('/hotrecommend')"><svg class='icon' aria-hidden='true'><use xlink:href='#icon-fenxiang1'></use></svg>分享</span>-->
-        <!--</template>-->
-     </div>
+      <div class="leftTopFixed fixedData" v-show="indexPosition">
+        <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>{{indexPosition}}
+      </div>
 
       <SwiperMescrollList
         ref="RefreshList"
