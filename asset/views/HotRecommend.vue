@@ -68,7 +68,7 @@
                     <use xlink:href="#icon-xiazaiapp"></use>
                   </svg>
                 </span>
-                <div class="text">APP推送</div>
+                <div class="text">{{ isOpenNotification === 1 ? '已订阅':'APP推送' }}</div>
               </div>
               <div class="menu" @tap.stop.prvent="alertEmailSubscribe">
                 <span class="iconCircular two" :class="email_subscribe ? 'grey':''">
@@ -76,7 +76,7 @@
                     <use xlink:href="#icon-youxiang"></use>
                   </svg>
                 </span>
-                <div class="text">邮件</div>
+                <div class="text">{{ email_subscribe ? '已订阅':'邮件' }}</div>
               </div>
               <div class="menu" @tap.stop.prevent="subscribeGZH">
                 <span class="iconCircular three" :class="wechat_subscribe === 1 ? 'grey':''">
@@ -84,7 +84,7 @@
                     <use xlink:href="#icon-weixinfuwuhao"></use>
                   </svg>
                 </span>
-                <div class="text">微信服务号</div>
+                <div class="text">{{ wechat_subscribe === 1 ? '已订阅' : '微信服务号' }}</div>
               </div>
             </div>
           </div>
