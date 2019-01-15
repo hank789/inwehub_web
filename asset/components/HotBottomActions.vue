@@ -54,119 +54,23 @@
   export default {
     data () {
       return {
-        localRegions: [],
-        localItem: this.value
       }
     },
     props: {
-      regions: {
-        type: Array,
-        default: () => {
-          return []
-        }
-      },
-      value: {
-        type: Object,
-        default: () => {
-          return {}
-        }
-      }
     },
     computed: {
-      initTagsIds () {
-        var rtags = []
-
-        if (this.localItem.tags) {
-          rtags = this.localItem.tags
-        }
-        var tagsIds = rtags.map(tags => { return tags.id })
-        return tagsIds
-      }
     },
     created () {},
     watch: {
-      regions: function (newValue, oldValue) {
-        if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-          this.localRegions = JSON.parse(JSON.stringify(newValue))
-        }
-      },
-      localItem: function (newValue, oldValue) {
-        if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
-          this.$emit('input', newValue)
-        }
-      },
-      value: function (newValue, oldValue) {
-        if (newValue) {
-          this.localItem = newValue
-        }
-      }
     },
     methods: {
-      setItem (item) {
-        this.localItem = item
-      },
-      submit () {
-        var tags = []
-        var newTags = []
-        for (var i = 0; i < this.localRegions.length; i++) {
-          if (this.localRegions[i].selected) {
-            tags.push(this.localRegions[i].value)
-            newTags.push({
-              id: this.localRegions[i].value,
-              name: this.localRegions[i].text
-            })
-          }
-        }
-        postRequest(`article/regionOperator`, {
-          id: this.localItem.id,
-          tags: tags
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
-            return
-          }
-
-          this.localItem.tags = newTags
-
-          window.mui.toast(response.data.message)
-          this.cancelShare()
-        })
-      },
-      clickItem (text) {
-        switch (text) {
-          case '评论':
-            this.cancelShare()
-            setTimeout(() => {
-              this.$router.pushPlus('/comment/' + this.localItem.category_id + '/' + this.localItem.slug + '/' + this.localItem.id)
-            }, 300)
-            break
-          case '分享':
-            this.cancelShare()
-            this.$parent.showItemMore(this.localItem)
-            break
-        }
-      },
       cancelShare () {
         window.mui('#hotHomeHeat').popover('toggle')
         this.hide()
       },
       hide () {},
-      resetRegions () {
-        for (var i = 0; i < this.localRegions.length; i++) {
-          var item = this.localRegions[i]
-          item.selected = 0
-
-          if (this.initTagsIds.indexOf(item.value) > -1) {
-            item.selected = 1
-          }
-
-          Vue.set(this.localRegions, i, item)
-        }
-      },
       show () {
         setTimeout(() => {
-          this.resetRegions()
           window.mui('#hotHomeHeat').popover('toggle')
           window.mui('body').on('tap', '.mui-backdrop', () => {
             this.hide()

@@ -139,7 +139,6 @@
 
     <HotBottomActions
       ref="HotBottomActions"
-      v-model="activeItem"
     >
     </HotBottomActions>
 
