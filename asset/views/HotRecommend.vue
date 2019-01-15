@@ -26,6 +26,10 @@
               <div class="left">
                 <div class="title font-family-medium text-line-2">{{ item.title }}</div>
                 <div class="heatWrapper border-football" @tap.stop.prevent="addHeat(item, index)">
+                  <div class="addOne" v-if="item.startAnimation">
+                    <i></i>
+                    <span>+{{startAnimationNum}}</span>
+                  </div>
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-huo"></use>
                   </svg>
@@ -325,6 +329,42 @@
               width: max-content;
               padding: 0 0.666rem 0 0.213rem;
               position: relative;
+              .addOne {
+                height: 0.56rem;
+                position: absolute;
+                top: -0.746rem;
+                left: 0.426rem;
+                opacity: 0;
+                transition-delay: 1.5s;
+                -moz-transition-delay: 1.5s;
+                -webkit-transition-delay: 1.5s; /* Safari 和 Chrome */
+                -o-transition-delay: 1.5s;
+                animation: addone 0.8s;
+                -moz-animation: addone 0.8s; /* Firefox */
+                -webkit-animation: addone 0.8s; /* Safari and Chrome */
+                -o-animation: addone 0.8s; /* Opera */
+                i {
+                  width: 0;
+                  height: 0;
+                  border-left: 0.08rem solid transparent;
+                  border-right: 0.08rem solid transparent;
+                  border-top: 0.08rem solid #FA4975;
+                  position: absolute;
+                  top: 0.5rem;
+                  left: 0.16rem;
+                }
+                span {
+                  width: 0.613rem;
+                  height: 0.48rem;
+                  line-height: 0.48rem;
+                  color: #FFFFFF;
+                  font-size: 0.293rem;
+                  text-align: center;
+                  border-radius: 0.106rem;
+                  background: #FA4975;
+                  display: inline-block;
+                }
+              }
               span {
                 color: #C8C8C8;
                 font-size: 0.293rem;
@@ -458,6 +498,67 @@
           }
         }
       }
+    }
+  }
+
+  @keyframes addone
+  {
+    0% {
+      top: -0.746rem;
+      opacity: 1;
+    }
+    50% {
+      top: -0.746rem;
+      opacity: 5;
+    }
+    100% {
+      top: -1.2rem;
+      opacity: 0;
+    }
+  }
+  @-moz-keyframes addone /* Firefox */
+  {
+    0% {
+      top: -0.746rem;
+      opacity: 1;
+    }
+    50% {
+      top: -0.746rem;
+      opacity: 5;
+    }
+    100% {
+      top: -1.2rem;
+      opacity: 0;
+    }
+  }
+  @-webkit-keyframes addone /* Safari and Chrome */
+  {
+    0% {
+      top: -0.746rem;
+      opacity: 1;
+    }
+    50% {
+      top: -0.746rem;
+      opacity: 5;
+    }
+    100% {
+      top: -1.2rem;
+      opacity: 0;
+    }
+  }
+  @-o-keyframes addone /* Opera */
+  {
+    0% {
+      top: -0.746rem;
+      opacity: 1;
+    }
+    50% {
+      top: -0.746rem;
+      opacity: 5;
+    }
+    100% {
+      top: -1.2rem;
+      opacity: 0;
     }
   }
 </style>
