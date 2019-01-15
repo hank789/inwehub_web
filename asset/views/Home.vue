@@ -313,7 +313,7 @@
         this.shareIconMenus = [] // getIconMenus(item)
         this.itemOptionsObj = item
         this.shareOption = getHomeDetail(
-          item.link_url,
+          '/c/' + item.category_id + '/' + item.slug, // item.link_url,
           item.title,
           item.img
         )

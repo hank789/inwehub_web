@@ -257,14 +257,16 @@ function getDianpingProductDetail (username, productName, productDesc, imgUrl) {
  * @param imgUrl
  */
 function getHomeDetail (pathUrl, title, imgUrl) {
+  var link = process.env.H5_ROOT + '/#' + pathUrl + '?noback=1' + '&uuid=' + getLocalUuid()
+
   if (!imgUrl) {
     imgUrl = whiteLogo
   }
 
   return {
     title: title,
-    link: pathUrl,
-    content: '来自InweHub的发布',
+    link: link,
+    content: '来自Inwehub，点击查看更多热度分享。',
     imageUrl: imgUrl,
     thumbUrl: imgUrl + '?x-oss-process=image/resize,h_100,w_100',
     shareName: '首页分享'
