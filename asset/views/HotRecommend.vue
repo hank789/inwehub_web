@@ -19,16 +19,17 @@
 
       <div class="domainWrapper">
         <div class="contentWrapper">
-          <div class="newsList">
-            <span class="indexNum">1.</span>
+
+          <div class="newsList" v-for="(item, index) in list" :key="index" @tap.stop.prevent="goArticle(item)">
+            <span class="indexNum">{{ index+1 }}.</span>
             <div class="middle">
               <div class="left">
-                <div class="title font-family-medium text-line-2">荣耀今年最后一款旗舰机，品牌形象瞄准年轻</div>
+                <div class="title font-family-medium text-line-2">{{ item.title }}</div>
                 <div class="heatWrapper border-football">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-huo"></use>
                   </svg>
-                  <span>1</span>
+                  <span>{{ item.rate }}</span>
                   <svg class="icon heatAddIcon" aria-hidden="true">
                     <use xlink:href="#icon-tianjia"></use>
                   </svg>
@@ -36,11 +37,12 @@
               </div>
               <div class="right">
                 <div class="articleImg">
-                  <ImageView src="../statics/images/hotTopImg@3x.png" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
+                  <ImageView :src="item.img" width="97" :isLazyload="true" :saveToLocal="true"></ImageView>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="bottomLine"></div>
           <div class="circular leftC"></div>
           <div class="circular rightC"></div>
@@ -91,23 +93,59 @@
 </template>
 
 <script>
-import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe } from '../utils/dialogList'
-export default {
-  data () {
-    return {}
-  },
-  methods: {
-    appPush () {
-      alertHotOpenNotice(this)
+  import { postRequest } from '../utils/request'
+  import { goThirdPartyArticle } from '../utils/webview'
+  import { openAppUrlByUrl } from '../utils/plus'
+  import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe } from '../utils/dialogList'
+  export default {
+    data () {
+      return {
+        list: {},
+        date: ''
+      }
     },
-    subscribeGZH () {
-      alertSubscribeGZH(this)
+    methods: {
+      refreshPageData () {
+        this.date = this.$route.query.date
+        if (this.date) {
+          this.getDailyReport()
+        }
+      },
+      goArticle: function (detail) {
+        if (detail.link_url.indexOf(process.env.H5_ROOT) === 0) {
+          openAppUrlByUrl(detail.link_url)
+        } else {
+          goThirdPartyArticle(
+            detail.link_url,
+            detail.id,
+            detail.title,
+            '/c/' + detail.category_id + '/' + detail.slug,
+            detail.img
+          )
+        }
+      },
+      getDailyReport () {
+        postRequest(`dailyReport`, {date: this.date}).then(response => {
+          this.list = response.data.data
+        })
+      },
+      appPush () {
+        alertHotOpenNotice(this)
+      },
+      subscribeGZH () {
+        alertSubscribeGZH(this)
+      },
+      alertEmailSubscribe () {
+        alertEmailSubscribe(this)
+      }
     },
-    alertEmailSubscribe () {
-      alertEmailSubscribe(this)
+    mounted () {
+      this.refreshPageData()
+    },
+    watch: {
+      '$route': 'refreshPageData'
     }
   }
-}
 </script>
 
 <style scoped lang="less">
@@ -143,7 +181,7 @@ export default {
   }
 
   .domainWrapper {
-    padding: 0 8px;
+    padding: 0 8px 8px;
     .contentWrapper {
       padding: 15px 17px 0;
       border-radius: 20px;

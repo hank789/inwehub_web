@@ -39,7 +39,7 @@
       </ul>
 
       <div class="grey"></div>
-      <div class="notice_b subscribe">
+      <div class="notice_b subscribe" @tap.stop.prevent="$router.pushPlus('/push/setting/subscribe')">
         订阅热点推荐
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-chakangengduojiantou"></use>
