@@ -580,9 +580,11 @@ function alertEditEmailSubscribe (context, callback) {
   if (dialogObj) {
     dialogObj.getHtml('EditEmailSubscribe', {}, (html) => {
       alertHtml(html, (num) => {
+        console.log(num)
         if (num === 0) {
           var text = document.getElementsByClassName('EditEmailText')[1].value
           callback(num, text)
+          return true
         }
         if (num === -1) {
           return true

@@ -28,9 +28,9 @@
 
 <script>
   import { postRequest } from '../../utils/request'
-  import { checkPermission as checkPermissionMy, toSettingSystem } from '../../utils/plus'
   import Switches from 'vue-switches'
   import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe, alertEditEmailSubscribe } from '../../utils/dialogList'
+  import { setHotRecommendAppPushStatus, setHotRecommendEmailStatus, setHotRecommendWechatStatus } from '../../utils/push'
 
   export default {
     data () {
@@ -48,7 +48,7 @@
         alertEditEmailSubscribe(this, (num, text) => {
           if (num === 0) {
             this.emailText = text
-            this.updateNotification()
+            setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {}, () => {})
           }
         })
       },
@@ -57,38 +57,29 @@
       },
       openDisturb (text) {
         if (text === 'isOpenAppPush') {
-          if (this.isOpenAppPush) {
-            checkPermissionMy('NOTIFITION', () => {
-              // @todo 接api
-            }, () => {
-              alertHotOpenNotice(this, (num) => {
-                console.log(num + '数字')
-                switch (num) {
-                  case -1:
-                    this.isOpenAppPush = 0
-                    break
-                  case 0:
-                    toSettingSystem('NOTIFITION')
-                    break
-                  case 1:
-                    this.isOpenAppPush = 0
-                    break
-                }
-              })
-            })
-          } else {
-            // @todo 接api
-          }
+          setHotRecommendAppPushStatus(this.isOpenAppPush, () => {
+          }, () => {
+            this.isOpenAppPush = 0
+          })
         }
 
         if (text === 'isOpenEmailPush') {
           if (this.isOpenEmailPush) {
             if (!this.emailText) {
-              this.editEmail()
+              alertEditEmailSubscribe(this, (num, text) => {
+                if (num === 0) {
+                  this.emailText = text
+                  setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {}, () => {
+                    this.isOpenEmailPush = 0
+                  })
+                }
+              })
               return
             }
           }
-          this.updateNotification(text)
+          setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {}, () => {
+            this.isOpenEmailPush = 0
+          })
         }
       },
       getNotification () {
@@ -104,27 +95,6 @@
           this.emailText = res.email_daily_subscribe
           if (this.emailText) {
             this.isOpenEmailPush = 1
-          }
-        })
-      },
-      updateNotification (text) {
-        postRequest(`notification/push/update`, {
-          push_daily_subscribe: parseInt(this.isOpenAppPush),
-          email_daily_subscribe: this.emailText
-        }).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.alert(response.data.message)
-            return
-          }
-
-          if (text === 'isOpenAppPush') {
-            var tips = this.isOpenAppPush ? '“APP订阅”成功' : '已关闭“APP订阅”'
-            window.mui.toast(tips)
-          }
-          if (text === 'isOpenEmailPush') {
-            var tipsText = this.isOpenEmailPush ? '“邮箱订阅”成功' : '已关闭“邮箱订阅”'
-            window.mui.toast(tipsText)
           }
         })
       }
