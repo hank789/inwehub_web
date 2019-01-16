@@ -13,28 +13,28 @@
         <div class="right">
           <div class="oneLine"></div>
           <div class="menu" @tap.stop.prevent="appPush">
-                <span class="iconCircular one">
+                <span class="iconCircular one" :class="isOpenAppPush === 1 ? 'grey':''">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-xiazaiapp"></use>
                   </svg>
                 </span>
-            <div class="text">APP推送</div>
+            <div class="text">{{ isOpenAppPush ? '已订阅':'APP推送' }}</div>
           </div>
-          <div class="menu" @tap.stop.prvent="alertEmailSubscribe">
-                <span class="iconCircular two">
+          <div class="menu" @tap.stop.prvent="subscribeEmail">
+                <span class="iconCircular two":class="isOpenEmailPush ? 'grey':''">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-youxiang"></use>
                   </svg>
                 </span>
-            <div class="text">邮件</div>
+            <div class="text">{{ isOpenEmailPush ? '已订阅':'邮件' }}</div>
           </div>
           <div class="menu" @tap.stop.prevent="subscribeGZH">
-                <span class="iconCircular three">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-weixinfuwuhao"></use>
-                  </svg>
-                </span>
-            <div class="text">微信服务号</div>
+              <span class="iconCircular three" :class="isOpenWeChatPush ? 'grey' : ''">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-weixinfuwuhao"></use>
+                </svg>
+              </span>
+            <div class="text">{{ isOpenWeChatPush ? '已订阅':'微信服务号' }}</div>
           </div>
         </div>
       </div>
@@ -49,21 +49,89 @@
 
 <script type="text/javascript">
   import { postRequest } from '../utils/request'
-  import Vue from 'vue'
+  import { setHotRecommendAppPushStatus, setHotRecommendEmailStatus, setHotRecommendWechatStatus } from '../utils/push'
+  import { alertSubscribeGZH, alertEmailSubscribe, alertEditEmailSubscribe } from '../utils/dialogList'
 
   export default {
     data () {
       return {
+        isOpenAppPush: -1,
+        isOpenEmailPush: -1,
+        isOpenWeChatPush: -1,
+        emailText: ''
       }
     },
     props: {
     },
     computed: {
     },
-    created () {},
+    created () {
+      this.refreshPageData()
+    },
     watch: {
     },
     methods: {
+      subscribeEmail () {
+        console.log('邮件订阅000')
+        if (!this.isOpenEmailPush) {
+          console.log('邮件订阅')
+          if (!this.emailText) {
+            console.log('邮件订阅123')
+            this.cancelShare()
+            alertEmailSubscribe(this, (num, text) => {
+              if (num === 0) {
+                this.emailText = text
+                setHotRecommendEmailStatus(1, this.emailText, () => {
+                  console.log('邮件订阅成功')
+                }, () => {
+                  this.isOpenEmailPush = 0
+                })
+              }
+            })
+            return
+          }
+        }
+        setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
+          console.log('邮件订阅巴啦啦')
+        }, () => {
+          console.log('邮件订阅124449999')
+          this.isOpenEmailPush = 0
+        })
+      },
+      subscribeGZH () {
+        setHotRecommendWechatStatus(this.isOpenWeChatPush, () => {
+          if (!this.isOpenWeChatPush) {
+            this.cancelShare()
+            alertSubscribeGZH(this)
+          } else {
+            this.isOpenWeChatPush = 0
+            window.mui.toast('已关闭“微信订阅”')
+          }
+        }, () => {
+          this.isOpenWeChatPush = 0
+        })
+      },
+      getNotification () {
+        postRequest(`notification/push/info`, {}).then(response => {
+          var code = response.data.code
+          if (code !== 1000) {
+            window.mui.alert(response.data.message)
+            return
+          }
+          var res = response.data.data
+
+          this.isOpenAppPush = res.push_daily_subscribe
+          this.emailText = res.email_daily_subscribe
+          this.isOpenWeChatPush = res.wechat_daily_subscribe
+          this.isOpenEmailPush = res.email_daily_subscribe
+          if (this.emailText) {
+            this.isOpenEmailPush = 1
+          }
+        })
+      },
+      refreshPageData () {
+        this.getNotification()
+      },
       cancelShare () {
         window.mui('#hotHomeHeat').popover('toggle')
         this.hide()
@@ -173,6 +241,10 @@
           line-height: 1.173rem;
           border-radius: 50%;
           display: inline-block;
+          &.grey {
+            background: #F7F8FA;
+            color: #808080;
+          }
         }
         .text {
           color: #808080;

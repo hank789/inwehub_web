@@ -83,7 +83,7 @@ function setHotRecommendEmailStatus (isOpen, email, successCallback, failCallbac
  */
 function setHotRecommendWechatStatus (isOpen, successCallback, failCallback) {
   _apiNotificationPushUpdate({
-    wechat_daily_subscribe: parseInt(isOpen)
+    wechat_daily_subscribe: isOpen ? 1 : 0
   }, successCallback, failCallback)
 }
 

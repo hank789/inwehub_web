@@ -29,7 +29,7 @@
 <script>
   import { postRequest } from '../../utils/request'
   import Switches from 'vue-switches'
-  import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe, alertEditEmailSubscribe } from '../../utils/dialogList'
+  import { alertSubscribeGZH, alertEmailSubscribe, alertEditEmailSubscribe } from '../../utils/dialogList'
   import { setHotRecommendAppPushStatus, setHotRecommendEmailStatus, setHotRecommendWechatStatus } from '../../utils/push'
 
   export default {
