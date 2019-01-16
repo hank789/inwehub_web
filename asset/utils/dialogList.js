@@ -548,7 +548,6 @@ function alertSubscribeGZH (context, callback) {
   if (dialogObj) {
     dialogObj.getHtml('subscribeGZH', {}, (html) => {
       alertHtml(html, (num) => {
-        callback()
         if (num === -1) {
           return true
         }
