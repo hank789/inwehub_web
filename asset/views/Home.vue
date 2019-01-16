@@ -435,7 +435,7 @@
           this.regions = data.regions
 
           setTimeout(() => {
-            var type = this.$route.query.type
+            var type = this.$route.query.type || -1
             if (type) {
               var typeIndex = this.getRegionIndex(type)
               if (typeIndex) {

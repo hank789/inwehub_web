@@ -78,9 +78,10 @@
     },
     methods: {
       listUpdated (event, index) {
-        if (this.$refs.RefreshList[index]) {
+        var curList = this.$refs.RefreshList[index]
+        if (curList) {
           var positionValues = []
-          var dateWrappers = this.$refs.RefreshList[index].$el.querySelectorAll('.dateWrapper')
+          var dateWrappers = curList.$el.querySelectorAll('.dateWrapper')
           for (var i = 0; i < dateWrappers.length; i++) {
             var offsetTop = dateWrappers[i].offsetTop
             var text = dateWrappers[i].querySelector('.LeftDate').innerText
@@ -116,11 +117,13 @@
         // 定位菜单
         this.$emit('curNavIndexChange', this.curNavIndex)
 
-        var curList = this.$refs.RefreshList[this.curNavIndex]
-        if (curList && curList.mescroll) {
-          var y = curList.mescroll.getScrollTop()
-          this.$emit('listScroll', this.curNavIndex, y, false)
-        }
+        setTimeout(() => {
+          var curList = this.$refs.RefreshList[this.curNavIndex]
+          if (curList && curList.mescroll) {
+            var y = curList.mescroll.getScrollTop()
+            this.$emit('listScroll', this.curNavIndex, y, false)
+          }
+        }, 500)
       },
       slideTo (i) {
         var listDataConfig = this.localListDataConfig[i]
@@ -129,11 +132,13 @@
 
         this.swiper.slideTo(i, 1000)
 
-        var curList = this.$refs.RefreshList[i]
-        if (curList && curList.mescroll) {
-          var y = curList.mescroll.getScrollTop()
-          this.$emit('listScroll', this.curNavIndex, y, false)
-        }
+        setTimeout(() => {
+          var curList = this.$refs.RefreshList[i]
+          if (curList && curList.mescroll) {
+            var y = curList.mescroll.getScrollTop()
+            this.$emit('listScroll', this.curNavIndex, y, false)
+          }
+        }, 500)
       }
     },
     watch: {
