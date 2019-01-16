@@ -9,7 +9,7 @@
             <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">资讯</div>
+        <div class="desc">首页</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.push('/home')" v-else>
         <div class="iconWrapper">
@@ -17,7 +17,7 @@
             <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">资讯</div>
+        <div class="desc">首页</div>
       </div>
 
       <div class="menu active" v-if="isFeed">
