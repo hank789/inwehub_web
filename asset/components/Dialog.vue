@@ -693,6 +693,33 @@
       </div>
     </div>
 
+    <!-- 热点推荐-修改邮件 -->
+    <div id="EditEmailSubscribe">
+      <div class="EmailSubscribe">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+
+        <div class="title font-family-medium">修改订阅邮箱</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+
+        <div class="inputWrapper">
+          <input class="EditEmailText" type="text" placeholder="输入您的邮箱地址">
+        </div>
+
+        <div class="tipsInfo">邮箱格式有误，请重新输入</div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">确认修改</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
 
   </div>
 </template>

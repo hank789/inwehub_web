@@ -575,6 +575,24 @@ function alertEmailSubscribe (context, callback) {
   }
 }
 
+// EmailSubscribe
+function alertEditEmailSubscribe (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('EditEmailSubscribe', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === 0) {
+          var text = document.getElementsByClassName('EditEmailText')[1].value
+          callback(num, text)
+        }
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -608,6 +626,7 @@ export {
   alertHotOpenNotice,
   alertSubscribeGZH,
   alertHotRecommend,
-  alertEmailSubscribe
+  alertEmailSubscribe,
+  alertEditEmailSubscribe
   // alertshi
 }

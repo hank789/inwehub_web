@@ -12,8 +12,8 @@
         <i class="bot"></i>
       </div>
       <div class="notice_b">
-        邮件订阅<span class="Email">{{ EmailText }}</span>
-        <Switches type-bold="true" theme="custom" color="blue"></Switches>
+        邮件订阅<span class="Email" v-if="EmailText" @tap.stop.prevent="editEmail">{{ EmailText }}</span>
+        <Switches v-model="EmailText" type-bold="true" theme="custom" color="blue"></Switches>
         <i class="bot"></i>
       </div>
       <div class="notice_b">
@@ -28,20 +28,30 @@
 
 <script>
   import { postRequest } from '../../utils/request'
-  import { checkPermission as checkPermissionMy } from '../../utils/plus'
+  import { checkPermission as checkPermissionMy, toSettingSystem } from '../../utils/plus'
   import Switches from 'vue-switches'
+  import { alertHotOpenNotice, alertSubscribeGZH, alertEmailSubscribe, alertEditEmailSubscribe } from '../../utils/dialogList'
 
   export default {
     data () {
       return {
         AppPush: 0,
-        EmailText: ''
+        EmailText: 1
       }
     },
     components: {
       Switches
     },
     methods: {
+      editEmail () {
+        alertEditEmailSubscribe(this, (num, text) => {
+          if (num === 0) {
+            this.EmailText = text
+            this.updateNotification()
+            return true
+          }
+        })
+      },
       closeAll () {
         // this.AppPush = 0
         console.log('closeAll')
@@ -57,8 +67,20 @@
           // this.closeAll()
         })
       },
-      openDisturb () {
-        this.updateNotification()
+      openDisturb (text) {
+        if (text === 'AppPush') {
+          alertHotOpenNotice(this, (num) => {
+            console.log(num + '数字')
+            if (num === 0) {
+              toSettingSystem('NOTIFITION')
+            } else {
+              this.AppPush = 0
+            }
+          })
+        }
+        if (text === 'EmailText') {
+          this.updateNotification(text)
+        }
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
@@ -72,16 +94,27 @@
           this.EmailText = res.email_daily_subscribe
         })
       },
-      updateNotification () {
+      updateNotification (text) {
         postRequest(`notification/push/update`, {
-          push_daily_subscribe: this.AppPush ? 1 : 0
+          push_daily_subscribe: this.AppPush ? 1 : 0,
+          email_daily_subscribe: this.EmailText ? this.EmailText : 0
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-          this.AppPush = response.data.data.push_daily_subscribe
+          var res = response.data.data
+          this.AppPush = res.push_daily_subscribe
+          this.EmailText = res.email_daily_subscribe
+          if (text === 'AppPush') {
+            var tips = this.AppPush ? '“APP订阅”成功' : '已关闭“APP订阅”'
+            window.mui.toast(tips)
+          }
+          if (text === 'EmailText') {
+            var tipsText = this.EmailText ? '“邮箱订阅”成功' : '已关闭“邮箱订阅”'
+            window.mui.toast(tipsText)
+          }
         })
       }
     },
@@ -93,6 +126,9 @@
     watch: {
       'AppPush': function (newValue, oldValue) {
         this.openDisturb('AppPush')
+      },
+      'EmailText': function (newValue, oldValue) {
+        this.openDisturb('EmailText')
       }
     }
   }
