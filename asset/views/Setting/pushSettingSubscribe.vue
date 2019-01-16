@@ -8,12 +8,12 @@
     <div class="mui-content">
       <div class="notice_b">
         APP推送
-        <Switches v-model="AppPush" type-bold="true" theme="custom" color="blue"></Switches>
+        <Switches v-model="isOpenAppPush" type-bold="true" theme="custom" color="blue"></Switches>
         <i class="bot"></i>
       </div>
       <div class="notice_b">
-        邮件订阅<span class="Email" v-if="EmailText" @tap.stop.prevent="editEmail">{{ EmailText }}</span>
-        <Switches v-model="EmailText" type-bold="true" theme="custom" color="blue"></Switches>
+        邮件订阅<span class="Email" v-if="emailText" @tap.stop.prevent="editEmail">{{ emailText }}</span>
+        <Switches v-model="isOpenEmailPush" type-bold="true" theme="custom" color="blue"></Switches>
         <i class="bot"></i>
       </div>
       <div class="notice_b">
@@ -35,8 +35,9 @@
   export default {
     data () {
       return {
-        AppPush: 0,
-        EmailText: 1
+        isOpenAppPush: -1,
+        isOpenEmailPush: -1,
+        emailText: ''
       }
     },
     components: {
@@ -46,39 +47,47 @@
       editEmail () {
         alertEditEmailSubscribe(this, (num, text) => {
           if (num === 0) {
-            this.EmailText = text
+            this.emailText = text
             this.updateNotification()
-            return true
           }
         })
       },
-      closeAll () {
-        // this.AppPush = 0
-        console.log('closeAll')
-      },
-      refreshResumeData () {
-        this.checkPermissionSelf()
-      },
-      checkPermissionSelf () {
-        checkPermissionMy('NOTIFITION', () => {
-          this.getNotification()
-          console.log('checkPermissionSelf')
-        }, (result) => {
-          // this.closeAll()
-        })
+      refreshPageData () {
+        this.getNotification()
       },
       openDisturb (text) {
-        if (text === 'AppPush') {
-          alertHotOpenNotice(this, (num) => {
-            console.log(num + '数字')
-            if (num === 0) {
-              toSettingSystem('NOTIFITION')
-            } else {
-              this.AppPush = 0
-            }
-          })
+        if (text === 'isOpenAppPush') {
+          if (this.isOpenAppPush) {
+            checkPermissionMy('NOTIFITION', () => {
+              // @todo 接api
+            }, () => {
+              alertHotOpenNotice(this, (num) => {
+                console.log(num + '数字')
+                switch (num) {
+                  case -1:
+                    this.isOpenAppPush = 0
+                    break
+                  case 0:
+                    toSettingSystem('NOTIFITION')
+                    break
+                  case 1:
+                    this.isOpenAppPush = 0
+                    break
+                }
+              })
+            })
+          } else {
+            // @todo 接api
+          }
         }
-        if (text === 'EmailText') {
+
+        if (text === 'isOpenEmailPush') {
+          if (this.isOpenEmailPush) {
+            if (!this.emailText) {
+              this.editEmail()
+              return
+            }
+          }
           this.updateNotification(text)
         }
       },
@@ -90,45 +99,47 @@
             return
           }
           var res = response.data.data
-          this.AppPush = res.push_daily_subscribe
-          this.EmailText = res.email_daily_subscribe
+
+          this.isOpenAppPush = res.push_daily_subscribe
+          this.emailText = res.email_daily_subscribe
+          if (this.emailText) {
+            this.isOpenEmailPush = 1
+          }
         })
       },
       updateNotification (text) {
         postRequest(`notification/push/update`, {
-          push_daily_subscribe: this.AppPush ? 1 : 0,
-          email_daily_subscribe: this.EmailText ? this.EmailText : 0
+          push_daily_subscribe: parseInt(this.isOpenAppPush),
+          email_daily_subscribe: this.emailText
         }).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
             return
           }
-          var res = response.data.data
-          this.AppPush = res.push_daily_subscribe
-          this.EmailText = res.email_daily_subscribe
-          if (text === 'AppPush') {
-            var tips = this.AppPush ? '“APP订阅”成功' : '已关闭“APP订阅”'
+
+          if (text === 'isOpenAppPush') {
+            var tips = this.isOpenAppPush ? '“APP订阅”成功' : '已关闭“APP订阅”'
             window.mui.toast(tips)
           }
-          if (text === 'EmailText') {
-            var tipsText = this.EmailText ? '“邮箱订阅”成功' : '已关闭“邮箱订阅”'
+          if (text === 'isOpenEmailPush') {
+            var tipsText = this.isOpenEmailPush ? '“邮箱订阅”成功' : '已关闭“邮箱订阅”'
             window.mui.toast(tipsText)
           }
         })
       }
     },
-    mounted () {
-      this.getNotification()
-      // this.refreshResumeData()
-      this.checkPermissionSelf()
+    created () {
+      this.refreshPageData()
     },
     watch: {
-      'AppPush': function (newValue, oldValue) {
-        this.openDisturb('AppPush')
+      'isOpenAppPush': function (newValue, oldValue) {
+        if (oldValue === -1) return
+        this.openDisturb('isOpenAppPush')
       },
-      'EmailText': function (newValue, oldValue) {
-        this.openDisturb('EmailText')
+      'isOpenEmailPush': function (newValue, oldValue) {
+        if (oldValue === -1) return
+        this.openDisturb('isOpenEmailPush')
       }
     }
   }
