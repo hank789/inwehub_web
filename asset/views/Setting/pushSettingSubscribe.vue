@@ -18,7 +18,7 @@
       </div>
       <div class="notice_b">
         微信订阅
-        <Switches type-bold="true" theme="custom" color="blue"></Switches>
+        <Switches v-model="isOpenWeChatPush" type-bold="true" theme="custom" color="blue"></Switches>
         <i class="bot"></i>
       </div>
     </div>
@@ -37,6 +37,7 @@
       return {
         isOpenAppPush: -1,
         isOpenEmailPush: -1,
+        isOpenWeChatPush: -1,
         emailText: ''
       }
     },
@@ -58,6 +59,11 @@
       openDisturb (text) {
         if (text === 'isOpenAppPush') {
           setHotRecommendAppPushStatus(this.isOpenAppPush, () => {
+            if (this.isOpenAppPush) {
+              window.mui.toast('“APP订阅”成功')
+            } else {
+              window.mui.toast('已关闭“APP订阅”')
+            }
           }, () => {
             this.isOpenAppPush = 0
           })
@@ -66,7 +72,7 @@
         if (text === 'isOpenEmailPush') {
           if (this.isOpenEmailPush) {
             if (!this.emailText) {
-              alertEditEmailSubscribe(this, (num, text) => {
+              alertEmailSubscribe(this, (num, text) => {
                 if (num === 0) {
                   this.emailText = text
                   setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {}, () => {
@@ -81,6 +87,18 @@
             this.isOpenEmailPush = 0
           })
         }
+
+        if (text === 'isOpenWeChatPush') {
+          setHotRecommendWechatStatus(this.isOpenWeChatPush, () => {
+            if (this.isOpenWeChatPush) {
+              alertSubscribeGZH(this)
+            } else {
+              window.mui.toast('已关闭“微信订阅”')
+            }
+          }, () => {
+            this.isOpenWeChatPush = 0
+          })
+        }
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
@@ -93,6 +111,7 @@
 
           this.isOpenAppPush = res.push_daily_subscribe
           this.emailText = res.email_daily_subscribe
+          this.isOpenWeChatPush = res.wechat_daily_subscribe
           if (this.emailText) {
             this.isOpenEmailPush = 1
           }
@@ -110,6 +129,10 @@
       'isOpenEmailPush': function (newValue, oldValue) {
         if (oldValue === -1) return
         this.openDisturb('isOpenEmailPush')
+      },
+      'isOpenWeChatPush': function (newValue, oldValue) {
+        if (oldValue === -1) return
+        this.openDisturb('isOpenWeChatPush')
       }
     }
   }
