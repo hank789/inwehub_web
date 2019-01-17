@@ -186,21 +186,21 @@
   }
   .footerMenu {
     display: flex;
-    padding: 0 5px 20px;
+    padding: 0 0.133rem 0.533rem;
     justify-content: space-between;
     .left {
-      width: 46px;
+      width: 1.226rem;
       text-align: center;
-      margin-left: 30px;
+      margin-left: 0.8rem;
       .icon {
         color: #C8C8C8;
-        font-size: 21px;
+        font-size: 0.56rem;
         text-align: center;
       }
       .hotRecommend {
-        width: 46px;
-        height: 26px;
-        margin-top: 10px;
+        width: 1.226rem;
+        height: 0.693rem;
+        margin-top: 0.266rem;
         img {
           width: 100%;
           height: 100%;
@@ -218,10 +218,10 @@
         top: 0.266rem;
       }
       .menu {
-        padding: 0 15px;
+        padding: 0 0.4rem;
         text-align: center;
         &:last-child {
-          padding-right: 25px;
+          padding-right: 0.666rem;
         }
         .one {
           background: #03AEF9;
@@ -236,7 +236,7 @@
           width: 1.173rem;
           height: 1.173rem;
           color: #FFFFFF;
-          font-size: 23px;
+          font-size: 0.613rem;
           text-align: center;
           line-height: 1.173rem;
           border-radius: 50%;

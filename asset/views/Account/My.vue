@@ -570,8 +570,8 @@
   .part2 {
     list-style: none;
     width: 100%;
-    height: 62px;
-    margin-top: 15px;
+    height: 1.653rem;
+    margin-top: 0.4rem;
     padding-left: 0.4rem;
     padding-right: 0.4rem;
     background: #ffffff;
@@ -582,7 +582,7 @@
       height: 100%;
       text-align: center;
       position: relative;
-      margin-top: 8px;
+      margin-top: 0.213rem;
       svg {
         font-size: 0.64rem;
         margin-top: 0.266rem;
