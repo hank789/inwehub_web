@@ -160,6 +160,10 @@
     methods: {
       clickShare () {
         this.$refs.share.share()
+        this.shareOption = getHomeDetail(
+          '/hotrecommend/' + this.date, // item.link_url,
+          '今日热点推荐'
+        )
       },
       openApp () {
         window.mui.trigger(document.querySelector('.AppOne'), 'tap')
@@ -321,6 +325,7 @@
     },
     mounted () {
       this.getNotification()
+      this.clickShare()
     }
   }
 </script>
