@@ -348,7 +348,7 @@
     position: relative;
     .bagImg {
       width: 100%;
-      height: 254px;
+      height: 6.773rem;
       img {
         width: 100%;
         height: 100%;
@@ -356,16 +356,16 @@
     }
     .dateWrapper {
       position: absolute;
-      top: 126px;
+      top: 3.36rem;
       left: 50%;
       transform: translateX(-50%);
       .date {
-        height: 16px;
-        padding: 0 5px;
+        height: 0.426rem;
+        padding: 0 0.133rem;
         color: #ffffff;
-        font-size: 12px;
-        line-height: 16px;
-        border-radius: 4px;
+        font-size: 0.32rem;
+        line-height: 0.426rem;
+        border-radius: 0.106rem;
         background: #024FDE;
       }
     }
@@ -373,19 +373,19 @@
   }
 
   .domainWrapper {
-    padding: 0 8px 8px;
+    padding: 0 0.213rem 0.213rem;
     .contentWrapper {
-      padding: 15px 17px 0;
-      border-radius: 20px;
+      padding: 0.4rem 0.453rem 0;
+      border-radius: 0.533rem;
       background: #ffffff;
-      margin-top: -56px;
+      margin-top: -1.493rem;
       position: relative;
       .newsList {
-        padding: 15px 0;
+        padding: 0.4rem 0;
         .indexNum {
-          font-size: 10px;
+          font-size: 0.266rem;
           color: #808080;
-          line-height: 11px;
+          line-height: 0.293rem;
           font-family:HelveticaNeue-Medium;
         }
         .middle {
@@ -394,8 +394,8 @@
           .left {
             .title {
               color: #444444;
-              font-size: 16px;
-              line-height: 23px;
+              font-size: 0.426rem;
+              line-height: 0.613rem;
             }
             .heatWrapper {
               height: 0.506rem;
@@ -490,39 +490,39 @@
     }
     .bottomLine {
       width: 100%;
-      margin: 15px 0 20px;
-      border: 0.5px dashed #DCDCDC;
+      margin: 0.4rem 0 0.533rem;
+      border: 0.013rem dashed #DCDCDC;
     }
     .circular {
-      width: 15px;
-      height: 15px;
+      width: 0.4rem;
+      height: 0.4rem;
       border-radius: 50%;
       background: #82d1f8;
       position: absolute;
-      bottom: 104px;
+      bottom: 2.773rem;
       &.leftC {
-        left: -8px;
+        left: -0.213rem;
       }
       &.rightC {
-        right: -8px;
+        right: -0.213rem;
       }
     }
     .footerMenu {
       display: flex;
-      padding: 0 5px 20px;
+      padding: 0 0.133rem 0.533rem;
       justify-content: space-between;
       .left {
-        width: 46px;
+        width: 1.226rem;
         text-align: center;
         .icon {
           color: #C8C8C8;
-          font-size: 21px;
+          font-size: 0.56rem;
           text-align: center;
         }
         .hotRecommend {
-          width: 46px;
-          height: 26px;
-          margin-top: 10px;
+          width: 1.226rem;
+          height: 0.693rem;
+          margin-top: 0.266rem;
           img {
             width: 100%;
             height: 100%;
@@ -540,7 +540,7 @@
           top: 0.266rem;
         }
         .menu {
-          padding: 0 15px;
+          padding: 0 0.4rem;
           text-align: center;
           &:last-child {
             padding-right: 0;
@@ -558,7 +558,7 @@
             width: 1.173rem;
             height: 1.173rem;
             color: #FFFFFF;
-            font-size: 23px;
+            font-size: 0.613rem;
             text-align: center;
             line-height: 1.173rem;
             border-radius: 50%;

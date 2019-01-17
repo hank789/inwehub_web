@@ -2280,69 +2280,69 @@
   }
 
   .contentWrapper {
-    width: 300px;
+    width: 8rem;
     background: #FFFFFF;
   }
   .contentWrapper .close, .subscribeWrapper .close, .hotRecommendWrapper .close, .EmailSubscribe .close {
     text-align: right;
-    padding: 15px;
+    padding: 0.4rem;
     color: #808080;
-    font-size: 13px;
+    font-size: 0.346rem;
   }
   .contentWrapper .text {
     color: #444444;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 0.426rem;
+    line-height: 0.64rem;
     text-align: left;
-    padding: 0 15px;
+    padding: 0 0.4rem;
     font-family:PingFangSC-Medium;
   }
   .contentWrapper .setingStep {
     color: #808080;
-    font-size: 13px;
-    line-height: 18px;
-    margin-top: 10px;
+    font-size: 0.346rem;
+    line-height: 0.48rem;
+    margin-top: 0.266rem;
     text-align: left;
-    padding: 0 15px 30px;
+    padding: 0 0.4rem 0.8rem;
   }
   .contentWrapper .buttonWrapper, .hotRecommendWrapper .buttonWrapper, .EmailSubscribe .buttonWrapper {
     position: relative;
     text-align: center;
     color: #03AEF9;
-    line-height: 49px;
+    line-height: 1.306rem;
   }
   .contentWrapper .buttonWrapper .bot, .hotRecommendWrapper .buttonWrapper .bot, .EmailSubscribe .buttonWrapper .bot {
     top: 0;
   }
 
   .hotRecommendWrapper {
-    width: 300px;
+    width: 8rem;
     background: #ffffff;
   }
   .hotRecommendWrapper .text {
-    margin-bottom: 30px;
+    margin-bottom: 0.8rem;
   }
 
   .subscribeWrapper {
-    width: 300px;
+    width: 8rem;
     background: #ffffff;
-    padding-bottom: 30px;
+    padding-bottom: 0.8rem;
   }
   .subscribeWrapper .title, .hotRecommendWrapper .title, .EmailSubscribe .title {
     color: #444444;
-    font-size: 18px;
-    line-height: 24px;
-    margin-bottom: 10px;
+    font-size: 0.48rem;
+    line-height: 0.64rem;
+    margin-bottom: 0.266rem;
   }
   .subscribeWrapper .text, .hotRecommendWrapper .text, .EmailSubscribe .text {
     color: #808080;
-    font-size: 13px;
-    line-height: 21px;
+    font-size: 0.346rem;
+    line-height: 0.56rem;
   }
   .subscribeWrapper .GZHimg {
-    width: 148px;
-    height: 150px;
-    margin: 10px auto 0;
+    width: 3.946rem;
+    height: 4rem;
+    margin: 0.266rem auto 0;
   }
   .subscribeWrapper .GZHimg img {
     width: 100%;
@@ -2350,29 +2350,29 @@
   }
 
   .EmailSubscribe {
-    width: 300px;
+    width: 8rem;
     background: #ffffff;
   }
   .EmailSubscribe .inputWrapper {
-    width: 270px;
-    margin: 15px auto 0;
+    width: 7.2rem;
+    margin: 0.4rem auto 0;
   }
   .EmailSubscribe .inputWrapper input {
     border-color: #DCDCDC;
   }
   .EmailSubscribe .tipsInfo {
     color: #FA4975;
-    font-size: 11px;
+    font-size: 0.293rem;
     text-align: left;
-    padding-left: 25px;
-    margin-top: -11px;
-    margin-bottom: 30px;
+    padding-left: 0.666rem;
+    margin-top: -0.293rem;
+    margin-bottom: 0.8rem;
   }
   .EmailSubscribe .tipsInfo.showEditEmailErrorTips, .EmailSubscribe .tipsInfo.showEmailErrorTips {
     display: none;
   }
   input::-webkit-input-placeholder {
     color: #C8C8C8;
-    font-size: 14px;
+    font-size: 0.373rem;
   }
 </style>

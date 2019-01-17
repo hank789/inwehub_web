@@ -171,7 +171,7 @@
     height: 1.173rem;
     line-height: 1.173rem;
     font-size: 0.373rem;
-    padding: 0 16px;
+    padding: 0 0.426rem;
     position: relative;
     .mui-switch {
       float: right;
@@ -182,7 +182,7 @@
     }
     .Email {
       color: #03AEF9;
-      margin-left: 10px;
+      margin-left: 0.266rem;
     }
   }
 

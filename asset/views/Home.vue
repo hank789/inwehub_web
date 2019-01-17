@@ -697,8 +697,8 @@
     border-bottom-right-radius: 1.333rem;
     box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
     &.centerFiexd {
-      height: 29px;
-      line-height: 29px;
+      height: 0.773rem;
+      line-height: 0.773rem;
       left: 50%;
       transform: translateX(-21%);
       border-radius: 1.333rem;
@@ -707,54 +707,54 @@
       font-size: 0.426rem;
     }
     .upLine {
-      width: 1px;
-      height: 12px;
+      width: 0.026rem;
+      height: 0.32rem;
       background: #67CEFB;
       display: inline-block;
       position: relative;
-      top: 2px;
-      margin: 0 15px;
+      top: 0.053rem;
+      margin: 0 0.4rem;
     }
     .subscribeText {
-      font-size: 12px;
-      margin-left: 57px;
+      font-size: 0.32rem;
+      margin-left: 1.52rem;
       .icon {
-        font-size: 14px;
-        margin-right: 5px;
+        font-size: 0.373rem;
+        margin-right: 0.133rem;
       }
     }
     .shareText {
-      font-size: 12px;
+      font-size: 0.32rem;
       .icon {
-        font-size: 15px;
-        margin-right: 5px;
+        font-size: 0.4rem;
+        margin-right: 0.133rem;
       }
     }
   }
 
   .everyDayWrapper {
-    padding: 0 16px;
-    margin-top: 10px;
+    padding: 0 0.426rem;
+    margin-top: 0.266rem;
     .everyDay {
-      height: 44px;
-      line-height: 44px;
+      height: 1.173rem;
+      line-height: 1.173rem;
       text-align: center;
-      border-radius: 4px;
+      border-radius: 0.106rem;
       display: flex;
       justify-content: center;
-      border: 1px solid #E8E8E8;
+      border: 0.026rem solid #E8E8E8;
       background: #ffffff;
       .icon {
-        font-size: 14px;
+        font-size: 0.373rem;
         color: #C8C8C8;
         position: relative;
-        top: 14px;
+        top: 0.373rem;
       }
       .textImg {
-        width: 100px;
-        height: 12.5px;
-        line-height: 44px;
-        margin-left: 5px;
+        width: 2.666rem;
+        height: 0.333rem;
+        line-height: 1.173rem;
+        margin-left: 0.133rem;
         img {
           width: 100%;
           height: 100%;
