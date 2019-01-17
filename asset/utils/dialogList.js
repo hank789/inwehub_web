@@ -565,6 +565,7 @@ function alertEmailSubscribe (context, callback) {
         if (num === 0) {
           var text = document.getElementsByClassName('EmailText')[1].value
           callback(num, text)
+          return true
         }
         if (num === -1) {
           return true
@@ -574,7 +575,7 @@ function alertEmailSubscribe (context, callback) {
   }
 }
 
-// EmailSubscribe
+// 修改EmailSubscribe
 function alertEditEmailSubscribe (context, callback) {
   var dialogObj = getDialogObj(context)
   if (dialogObj) {

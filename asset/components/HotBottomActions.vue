@@ -72,17 +72,14 @@
     },
     methods: {
       subscribeEmail () {
-        console.log('邮件订阅000')
         if (!this.isOpenEmailPush) {
-          console.log('邮件订阅')
           if (!this.emailText) {
-            console.log('邮件订阅123')
             this.cancelShare()
             alertEmailSubscribe(this, (num, text) => {
               if (num === 0) {
                 this.emailText = text
                 setHotRecommendEmailStatus(1, this.emailText, () => {
-                  console.log('邮件订阅成功')
+                  window.mui.toast('订阅成功，可前往设置进行订阅管理')
                 }, () => {
                   this.isOpenEmailPush = 0
                 })
@@ -91,12 +88,6 @@
             return
           }
         }
-        setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
-          console.log('邮件订阅巴啦啦')
-        }, () => {
-          console.log('邮件订阅124449999')
-          this.isOpenEmailPush = 0
-        })
       },
       subscribeGZH () {
         setHotRecommendWechatStatus(this.isOpenWeChatPush, () => {
