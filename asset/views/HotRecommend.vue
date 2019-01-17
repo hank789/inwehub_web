@@ -4,6 +4,9 @@
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
       <h1 class="mui-title">今日热点推荐</h1>
+      <svg class="icon shareIcon" aria-hidden="true" @tap.stop.prevent="clickShare">
+        <use xlink:href="#icon-shoucang-xiao"></use>
+      </svg>
     </header>
 
     <div class="mui-content">
@@ -153,6 +156,9 @@
       PageMore
     },
     methods: {
+      clickShare () {
+        this.$refs.share.share()
+      },
       appPush () {
         if (this.isOpenNotification !== 1) {
           alertHotOpenNotice(this, (num) => {
@@ -328,6 +334,16 @@
 </script>
 
 <style scoped lang="less">
+
+  .mui-bar-nav {
+    .shareIcon {
+      position: absolute;
+      top: 0.293rem;
+      right: 0.426rem;
+      font-size: 0.64rem;
+      color: #000000;
+    }
+  }
   .mui-content {
     background: #6AD2FF;
   }
