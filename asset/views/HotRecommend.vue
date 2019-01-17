@@ -150,6 +150,7 @@
         wechat_subscribe: -1, // -1， 未知, 1 yes 0 no
         emailText: '',
         email_subscribe: ''
+
       }
     },
     components: {
@@ -160,9 +161,15 @@
       clickShare () {
         this.$refs.share.share()
       },
+      openApp () {
+        window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
       appPush () {
         if (!this.AppPush) {
-          // @todo 非app跳转到app下载
+          if (!window.mui.os.plus) {
+            this.openApp()
+            return
+          }
           setHotRecommendAppPushStatus(true, () => {
             this.AppPush = 1
           }, () => {
@@ -179,9 +186,9 @@
         if (!this.email_subscribe) {
           alertEmailSubscribe(this, (num, text) => {
             if (num === 0) {
-              // @todo email验证
               this.email_subscribe = text
               setHotRecommendEmailStatus(true, this.email_subscribe, () => {
+                window.mui.toast('订阅成功，可前往设置进行订阅管理')
               }, () => {
                 this.email_subscribe = ''
               })
