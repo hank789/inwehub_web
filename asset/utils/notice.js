@@ -114,7 +114,7 @@ function noticeHandler (context, payload) {
       break
     case 'push_notice_app_self':
       // 推送app内页
-      router.push(payload.object_id, 'list-page')
+      router.push(payload.object_id)
       break
     case 'push_notice_article':
       // 推送公告文章
@@ -183,6 +183,10 @@ function noticeHandler (context, payload) {
     case 'group_audit_result':
       // 圈子审核结果
       router.pushPlus('/group/detail/' + payload.object_id, 'list-page')
+      break
+    case 'recommend_daily_subscribe':
+      // 每日热点推荐
+      router.pushPlus('/hotrecommend/' + payload.object_id, 'list-page')
       break
   }
 }
