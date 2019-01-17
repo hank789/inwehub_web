@@ -375,7 +375,7 @@
   .domainWrapper {
     padding: 0 0.213rem 0.213rem;
     .contentWrapper {
-      padding: 0.4rem 0.453rem 0;
+      padding: 0.3rem 0.453rem 0;
       border-radius: 0.533rem;
       background: #ffffff;
       margin-top: -1.493rem;
@@ -420,12 +420,12 @@
                 i {
                   width: 0;
                   height: 0;
-                  border-left: 0.08rem solid transparent;
-                  border-right: 0.08rem solid transparent;
-                  border-top: 0.08rem solid #FA4975;
+                  border-left: 4px solid transparent;
+                  border-right: 4px solid transparent;
+                  border-top: 4px solid #FA4975;
                   position: absolute;
-                  top: 0.5rem;
-                  left: 0.16rem;
+                  top: 20px;
+                  left: 5px;
                 }
                 span {
                   width: 0.613rem;
