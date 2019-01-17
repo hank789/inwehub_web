@@ -1,5 +1,6 @@
 <template>
-  <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container">
+  <div v-if="localListDataConfig.length">
+  <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container" >
     <swiper-slide v-for="(config, index) in localListDataConfig" :key="index">
       <RefreshList
         :ref="'RefreshList'"
@@ -20,12 +21,13 @@
 
         <slot :name="'swiperList-' + index"></slot>
         <!--<div v-for="(item, itemIndex) in lists[index]" :key="itemIndex">-->
-            <!--{{ item.id }}-->
+        <!--{{ item.id }}-->
         <!--</div>-->
 
       </RefreshList>
     </swiper-slide>
   </swiper>
+  </div>
 </template>
 
 <script>
@@ -36,18 +38,22 @@
   const SwiperMescrollList = {
     data () {
       return {
-        localListDataConfig: this.listDataConfig,
-        curNavIndex: 0,
+        localListDataConfig: [],
+        curNavIndex: this.initPageIndex,
         positionValues: [],
         swiperOption: {
+          initialSlide: this.initPageIndex,
           slidesPerView: 'auto',
           spaceBetween: 0,
           observer: true,
           freeMode: false,
           on: {
             slideChange: () => {
-              var i = this.swiper.activeIndex
-              this.changePage(i)
+              if (this.swiper) {
+                var i = this.swiper.activeIndex
+                console.log('swiper切换到:' + i)
+                this.changePage(i)
+              }
             }
           }
         },
@@ -60,6 +66,10 @@
       swiperSlide
     },
     props: {
+      initPageIndex: {
+        type: Number,
+        default: 0
+      },
       isLoading: {
         type: Boolean,
         default: true

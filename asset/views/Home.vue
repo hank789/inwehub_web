@@ -42,8 +42,10 @@
         ref="RefreshList"
         class="refreshListWrapper"
         :api="'readList'"
+        v-if="listDataConfig.length"
         :listDataConfig="listDataConfig"
         :isLoading="loading"
+        :initPageIndex="initPageIndex"
         v-model="lists"
         @prevSuccessCallback="prevSuccessCallback"
         @curNavIndexChange="curNavIndexChange"
@@ -198,7 +200,8 @@
           spaceBetween: 0,
           freeMode: true
         },
-        type: 0,
+        type: 1,
+        initPageIndex: 1,
         isShowAddOne: false,
         activeItem: {},
         activeItemIndex: 0,
@@ -232,8 +235,13 @@
           data: {
             tagFilter: ''
           },
-          autoShow: true
+          autoShow: false
         })
+
+        if (rs[this.initPageIndex]) {
+          rs[this.initPageIndex].autoShow = true
+        }
+
         return rs
       }
     },
@@ -242,6 +250,13 @@
       if (dataList.length > 0 && this.lists.length === 0 && this.type === 0 && dataList[0].type) {
         this.lists[0] = dataList
         this.loading = false
+      }
+
+      var type = this.$route.query.type
+      if (type) {
+        type = Number(type)
+        this.type = type
+        this.initPageIndex = type
       }
     },
     activated: function () {},
@@ -433,16 +448,6 @@
         userAbility.newbieTask(this)
         getHomeData((data) => {
           this.regions = data.regions
-
-          setTimeout(() => {
-            var type = this.$route.query.type || -1
-            if (type) {
-              var typeIndex = this.getRegionIndex(type)
-              if (typeIndex) {
-                this.selectTag(typeIndex)
-              }
-            }
-          }, 1000)
         })
       },
       getRegionIndex (value) {
