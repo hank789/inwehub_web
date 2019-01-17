@@ -467,6 +467,7 @@
 </script>
 
 <style scoped lang="less">
+
   .mui-content {
     background: #FFFFFF;}
   .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
@@ -851,5 +852,10 @@
       top: -1.2rem;
       opacity: 0;
     }
+  }
+</style>
+<style>
+  .mescrollList-swiper-container {
+    bottom: 50px !important; /* px不转换 */
   }
 </style>
