@@ -157,7 +157,7 @@
       appPush () {
         if (!this.AppPush) {
           // @todo 非app跳转到app下载
-          setHotRecommendAppPushStatus(true, () => {
+          setHotRecommendAppPushStatus(this, true, () => {
             this.AppPush = 1
           }, () => {
             this.AppPush = 0
@@ -196,7 +196,7 @@
           this.email_subscribe = res.email_daily_subscribe
 
           if (this.AppPush) {
-            needNotifitionPermission()
+            needNotifitionPermission(this)
           }
         })
       },

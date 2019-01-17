@@ -58,7 +58,7 @@
       },
       openDisturb (text) {
         if (text === 'isOpenAppPush') {
-          setHotRecommendAppPushStatus(this.isOpenAppPush, () => {
+          setHotRecommendAppPushStatus(this, this.isOpenAppPush, () => {
             if (this.isOpenAppPush) {
               window.mui.toast('“APP订阅”成功')
             } else {
@@ -117,7 +117,7 @@
           }
 
           if (this.isOpenAppPush) {
-            needNotifitionPermission()
+            needNotifitionPermission(this)
           }
         })
       }
