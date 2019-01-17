@@ -88,9 +88,9 @@
               if (num === 0) {
                 this.emailText = text
                 setHotRecommendEmailStatus(1, this.emailText, () => {
+                  this.isOpenEmailPush = 1
                   window.mui.toast('订阅成功，可前往设置进行订阅管理')
                 }, () => {
-                  this.isOpenEmailPush = 0
                 })
               }
             })
