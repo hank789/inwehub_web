@@ -49,7 +49,9 @@
         alertEditEmailSubscribe(this, (num, text) => {
           if (num === 0) {
             this.emailText = text
-            setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {}, () => {})
+            setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
+              window.mui.toast('订阅邮箱修改成功')
+            }, () => {})
           }
         })
       },
@@ -75,7 +77,11 @@
               alertEmailSubscribe(this, (num, text) => {
                 if (num === 0) {
                   this.emailText = text
-                  setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {}, () => {
+                  setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
+                    if (this.isOpenEmailPush) {
+                      window.mui.toast('“邮箱订阅”成功')
+                    }
+                  }, () => {
                     this.isOpenEmailPush = 0
                   })
                 }
@@ -83,7 +89,9 @@
               return
             }
           }
-          setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {}, () => {
+          setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
+            window.mui.toast('已关闭“邮箱订阅”')
+          }, () => {
             this.isOpenEmailPush = 0
           })
         }
@@ -114,6 +122,8 @@
           this.isOpenWeChatPush = res.wechat_daily_subscribe
           if (this.emailText) {
             this.isOpenEmailPush = 1
+          } else {
+            this.isOpenEmailPush = 0
           }
 
           if (this.isOpenAppPush) {
