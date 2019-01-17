@@ -12,7 +12,7 @@
         </div>
         <div class="right">
           <div class="oneLine"></div>
-          <div class="menu" @tap.stop.prevent="appPush">
+          <div class="menu" @tap.stop.prevent="subscribeApp">
                 <span class="iconCircular one" :class="isOpenAppPush === 1 ? 'grey':''">
                   <svg class="icon" aria-hidden="true">
                     <use xlink:href="#icon-xiazaiapp"></use>
@@ -71,6 +71,15 @@
     watch: {
     },
     methods: {
+      subscribeApp () {
+        if (!this.isOpenAppPush) {
+          setHotRecommendAppPushStatus(1, () => {
+            this.isOpenAppPush = 1
+            window.mui.toast('“APP订阅”成功')
+          }, () => {
+          })
+        }
+      },
       subscribeEmail () {
         if (!this.isOpenEmailPush) {
           if (!this.emailText) {
