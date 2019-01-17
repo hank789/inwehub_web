@@ -4,6 +4,9 @@
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
       <h1 class="mui-title">今日热点推荐</h1>
+      <svg class="icon shareIcon" aria-hidden="true" @tap.stop.prevent="clickShare">
+        <use xlink:href="#icon-shoucang-xiao"></use>
+      </svg>
     </header>
 
     <div class="mui-content">
@@ -147,6 +150,7 @@
         wechat_subscribe: -1, // -1， 未知, 1 yes 0 no
         emailText: '',
         email_subscribe: ''
+
       }
     },
     components: {
@@ -154,8 +158,22 @@
       PageMore
     },
     methods: {
+      clickShare () {
+        this.$refs.share.share()
+        this.shareOption = getHomeDetail(
+          '/hotrecommend/' + this.date, // item.link_url,
+          '今日热点推荐'
+        )
+      },
+      openApp () {
+        window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
       appPush () {
         if (!this.AppPush) {
+          if (!window.mui.os.plus) {
+            this.openApp()
+            return
+          }
           // @todo 非app跳转到app下载
           setHotRecommendAppPushStatus(this, true, () => {
             this.AppPush = 1
@@ -173,9 +191,9 @@
         if (!this.email_subscribe) {
           alertEmailSubscribe(this, (num, text) => {
             if (num === 0) {
-              // @todo email验证
               this.email_subscribe = text
               setHotRecommendEmailStatus(true, this.email_subscribe, () => {
+                window.mui.toast('订阅成功，可前往设置进行订阅管理')
               }, () => {
                 this.email_subscribe = ''
               })
@@ -307,11 +325,22 @@
     },
     mounted () {
       this.getNotification()
+      this.clickShare()
     }
   }
 </script>
 
 <style scoped lang="less">
+
+  .mui-bar-nav {
+    .shareIcon {
+      position: absolute;
+      top: 0.293rem;
+      right: 0.426rem;
+      font-size: 0.64rem;
+      color: #000000;
+    }
+  }
   .mui-content {
     background: #6AD2FF;
   }

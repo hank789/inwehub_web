@@ -3,7 +3,7 @@ import localEvent from '../stores/localStorage'
 
 function getHomeData (successCallback) {
   var homeData = localEvent.getLocalItem('HomeData')
-  if (homeData.regions) {
+  if (window.mui.os.plus && homeData.regions) {
     successCallback(homeData)
   } else {
     postRequest(`home`, {}, false, {}, 0, false).then(response => {

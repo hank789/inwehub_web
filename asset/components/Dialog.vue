@@ -683,7 +683,7 @@
           <input class="EmailText" type="text" placeholder="输入您的邮箱地址">
         </div>
 
-        <div class="tipsInfo" v-if="EmailError">邮箱格式有误，请重新输入</div>
+        <div class="tipsInfo showEmailErrorTips">邮箱格式有误，请重新输入</div>
 
         <div class="buttonWrapper sure alertConfirm" >
           <span class="font-family-medium">订阅</span>
@@ -710,7 +710,7 @@
           <input class="EditEmailText" type="text" placeholder="输入您的邮箱地址">
         </div>
 
-        <div class="tipsInfo" v-if="editEmailError">邮箱格式有误，请重新输入</div>
+        <div class="tipsInfo showEditEmailErrorTips">邮箱格式有误，请重新输入</div>
 
         <div class="buttonWrapper sure alertConfirm" >
           <span class="font-family-medium">确认修改</span>
@@ -738,8 +738,6 @@
           {text: '恶意辱骂、人身攻击'},
           {text: '其他'}
         ],
-        EmailError: false,
-        editEmailError: false,
         options: {
           ok: 'test',
           level: 3,
@@ -2369,6 +2367,9 @@
     padding-left: 25px;
     margin-top: -11px;
     margin-bottom: 30px;
+  }
+  .EmailSubscribe .tipsInfo.showEditEmailErrorTips, .EmailSubscribe .tipsInfo.showEmailErrorTips {
+    display: none;
   }
   input::-webkit-input-placeholder {
     color: #C8C8C8;

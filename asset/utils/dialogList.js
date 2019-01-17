@@ -564,6 +564,13 @@ function alertEmailSubscribe (context, callback) {
       alertHtml(html, (num) => {
         if (num === 0) {
           var text = document.getElementsByClassName('EmailText')[1].value
+
+          var re = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+          if (!re.test(text)) {
+            document.getElementsByClassName('showEmailErrorTips')[1].style.display = 'block'
+            return false
+          }
+
           callback(num, text)
           return true
         }
@@ -584,6 +591,12 @@ function alertEditEmailSubscribe (context, callback) {
         console.log(num)
         if (num === 0) {
           var text = document.getElementsByClassName('EditEmailText')[1].value
+
+          var re = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+          if (!re.test(text)) {
+            document.getElementsByClassName('showEditEmailErrorTips')[1].style.display = 'block'
+            return false
+          }
           callback(num, text)
           return true
         }
