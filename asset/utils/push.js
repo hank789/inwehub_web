@@ -19,6 +19,28 @@ function _apiNotificationPushUpdate (data, successCallback, failCallback) {
 }
 
 /**
+ * 需要app开启通知权限
+ * @private
+ */
+function needNotifitionPermission () {
+  if (window.mui.os.plus) {
+    checkPermission('NOTIFITION', () => {}, () => {
+      alertHotOpenNotice(this, (num) => {
+        switch (num) {
+          case -1:
+            break
+          case 0:
+            toSettingSystem('NOTIFITION')
+            break
+          case 1:
+            break
+        }
+      })
+    })
+  }
+}
+
+/**
  * 打开或关闭热点推荐-app推送
 * */
 function setHotRecommendAppPushStatus (isOpen, successCallback, failCallback) {
@@ -90,5 +112,6 @@ function setHotRecommendWechatStatus (isOpen, successCallback, failCallback) {
 export {
   setHotRecommendAppPushStatus,
   setHotRecommendEmailStatus,
-  setHotRecommendWechatStatus
+  setHotRecommendWechatStatus,
+  needNotifitionPermission
 }
