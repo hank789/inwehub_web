@@ -22,10 +22,10 @@ function _apiNotificationPushUpdate (data, successCallback, failCallback) {
  * 需要app开启通知权限
  * @private
  */
-function needNotifitionPermission () {
+function needNotifitionPermission (context) {
   if (window.mui.os.plus) {
     checkPermission('NOTIFITION', () => {}, () => {
-      alertHotOpenNotice(this, (num) => {
+      alertHotOpenNotice(context, (num) => {
         switch (num) {
           case -1:
             break
@@ -43,7 +43,7 @@ function needNotifitionPermission () {
 /**
  * 打开或关闭热点推荐-app推送
 * */
-function setHotRecommendAppPushStatus (isOpen, successCallback, failCallback) {
+function setHotRecommendAppPushStatus (context, isOpen, successCallback, failCallback) {
   if (isOpen) {
     if (window.mui.os.plus) {
       checkPermission('NOTIFITION', () => {
@@ -51,7 +51,7 @@ function setHotRecommendAppPushStatus (isOpen, successCallback, failCallback) {
           push_daily_subscribe: 1
         }, successCallback, failCallback)
       }, () => {
-        alertHotOpenNotice(this, (num) => {
+        alertHotOpenNotice(context, (num) => {
           switch (num) {
             case -1:
               failCallback()
@@ -63,7 +63,7 @@ function setHotRecommendAppPushStatus (isOpen, successCallback, failCallback) {
                 var hotRecommendAppMonitor = localEvent.getLocalItem('hotRecommendAppMonitor')
                 if (hotRecommendAppMonitor && hotRecommendAppMonitor.isTrue) {
                   localEvent.clearLocalItem('hotRecommendAppMonitor')
-                  setHotRecommendAppPushStatus(isOpen, successCallback, failCallback)
+                  setHotRecommendAppPushStatus(context, isOpen, successCallback, failCallback)
                 }
               }, false)
               break

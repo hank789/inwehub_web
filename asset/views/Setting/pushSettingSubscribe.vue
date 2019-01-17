@@ -30,7 +30,7 @@
   import { postRequest } from '../../utils/request'
   import Switches from 'vue-switches'
   import { alertSubscribeGZH, alertEmailSubscribe, alertEditEmailSubscribe } from '../../utils/dialogList'
-  import { setHotRecommendAppPushStatus, setHotRecommendEmailStatus, setHotRecommendWechatStatus } from '../../utils/push'
+  import { setHotRecommendAppPushStatus, setHotRecommendEmailStatus, setHotRecommendWechatStatus, needNotifitionPermission } from '../../utils/push'
 
   export default {
     data () {
@@ -58,7 +58,7 @@
       },
       openDisturb (text) {
         if (text === 'isOpenAppPush') {
-          setHotRecommendAppPushStatus(this.isOpenAppPush, () => {
+          setHotRecommendAppPushStatus(this, this.isOpenAppPush, () => {
             if (this.isOpenAppPush) {
               window.mui.toast('“APP订阅”成功')
             } else {
@@ -114,6 +114,10 @@
           this.isOpenWeChatPush = res.wechat_daily_subscribe
           if (this.emailText) {
             this.isOpenEmailPush = 1
+          }
+
+          if (this.isOpenAppPush) {
+            needNotifitionPermission(this)
           }
         })
       }

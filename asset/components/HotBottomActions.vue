@@ -73,7 +73,7 @@
     methods: {
       subscribeApp () {
         if (!this.isOpenAppPush) {
-          setHotRecommendAppPushStatus(1, () => {
+          setHotRecommendAppPushStatus(this, 1, () => {
             this.isOpenAppPush = 1
             window.mui.toast('“APP订阅”成功')
           }, () => {
