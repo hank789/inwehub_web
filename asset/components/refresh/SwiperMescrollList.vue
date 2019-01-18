@@ -85,6 +85,13 @@
       }
     },
     methods: {
+      getActiveRefreshList () {
+        var curList = null
+        if (this.$refs['RefreshList_' + this.curNavIndex] && this.$refs['RefreshList_' + this.curNavIndex][0]) {
+          curList = this.$refs['RefreshList_' + this.curNavIndex][0]
+        }
+        return curList
+      },
       listUpdated (event, index) {
         var curList = null
         if (this.$refs['RefreshList_' + index] && this.$refs['RefreshList_' + index][0]) {
