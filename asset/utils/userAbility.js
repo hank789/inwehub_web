@@ -400,8 +400,8 @@ var UserAbility = () => {
       context.$router.pushPlus('/login')
       return
     }
-    const currentUser = getLocalUserInfo()
-    var percent = currentUser.account_info_complete_percent
+    // const currentUser = getLocalUserInfo()
+    var percent = 100 // currentUser.account_info_complete_percent
     if (percent >= 90) {
       context.$router.pushPlus('/chat/' + resumeId)
     } else {
