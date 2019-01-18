@@ -563,7 +563,7 @@ function alertEmailSubscribe (context, callback) {
         if (num === 0) {
           var text = document.getElementsByClassName('EmailText')[1].value
 
-          var re = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+          var re = /^[.a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
           if (!re.test(text)) {
             document.getElementsByClassName('showEmailErrorTips')[1].style.display = 'block'
             return false
@@ -590,7 +590,7 @@ function alertEditEmailSubscribe (context, callback) {
         if (num === 0) {
           var text = document.getElementsByClassName('EditEmailText')[1].value
 
-          var re = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+          var re = /^[.a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
           if (!re.test(text)) {
             document.getElementsByClassName('showEditEmailErrorTips')[1].style.display = 'block'
             return false
