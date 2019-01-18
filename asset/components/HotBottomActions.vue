@@ -49,8 +49,8 @@
 
 <script type="text/javascript">
   import { postRequest } from '../utils/request'
-  import { setHotRecommendAppPushStatus, setHotRecommendEmailStatus, setHotRecommendWechatStatus } from '../utils/push'
-  import { alertSubscribeGZH, alertEmailSubscribe, alertEditEmailSubscribe } from '../utils/dialogList'
+  import { setHotRecommendAppPushStatus, setHotRecommendEmailStatus } from '../utils/push'
+  import { alertSubscribeGZH, alertEmailSubscribe } from '../utils/dialogList'
 
   export default {
     data () {
@@ -75,7 +75,7 @@
         if (!this.isOpenAppPush) {
           setHotRecommendAppPushStatus(this, 1, () => {
             this.isOpenAppPush = 1
-            window.mui.toast('“APP订阅”成功')
+            // window.mui.toast('“APP订阅”成功')
           }, () => {
           })
         }
@@ -89,7 +89,7 @@
                 this.emailText = text
                 setHotRecommendEmailStatus(1, this.emailText, () => {
                   this.isOpenEmailPush = 1
-                  window.mui.toast('订阅成功，可前往设置进行订阅管理')
+                  // window.mui.toast('订阅成功，可前往设置进行订阅管理')
                 }, () => {
                 })
               }
@@ -99,17 +99,18 @@
         }
       },
       subscribeGZH () {
-        setHotRecommendWechatStatus(this.isOpenWeChatPush, () => {
-          if (!this.isOpenWeChatPush) {
-            this.cancelShare()
-            alertSubscribeGZH(this)
-          } else {
-            this.isOpenWeChatPush = 0
-            window.mui.toast('已关闭“微信订阅”')
-          }
-        }, () => {
-          this.isOpenWeChatPush = 0
-        })
+        this.cancelShare()
+        alertSubscribeGZH(this)
+        // setHotRecommendWechatStatus(this.isOpenWeChatPush, () => {
+        //   if (!this.isOpenWeChatPush) {
+        //     this.cancelShare()
+        //   } else {
+        //     this.isOpenWeChatPush = 0
+        //     // window.mui.toast('已关闭“微信订阅”')
+        //   }
+        // }, () => {
+        //   this.isOpenWeChatPush = 0
+        // })
       },
       getNotification () {
         postRequest(`notification/push/info`, {}).then(response => {
