@@ -396,6 +396,7 @@
               color: #444444;
               font-size: 0.426rem;
               line-height: 0.613rem;
+              word-break: break-word;
             }
             .heatWrapper {
               height: 0.506rem;
