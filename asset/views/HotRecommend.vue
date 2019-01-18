@@ -162,7 +162,7 @@
         this.$refs.share.share()
         this.shareOption = getHomeDetail(
           '/hotrecommend/' + this.date, // item.link_url,
-          '今日热点推荐'
+          'InweHub今日热点推荐:' + this.date
         )
       },
       openApp () {
@@ -325,7 +325,9 @@
     },
     mounted () {
       this.getNotification()
-      this.clickShare()
+      if (window.mui.os.plus) {
+        this.clickShare()
+      }
     }
   }
 </script>
