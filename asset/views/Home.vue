@@ -764,7 +764,7 @@
   }
 
   .leftTopFixedShow{
-    display: inline-block;
+    display: inline-block !important;
   }
   .mui-ios {
     .heatWrapper {

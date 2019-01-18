@@ -3,7 +3,7 @@
   <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container" >
     <swiper-slide v-for="(config, index) in localListDataConfig" :key="index">
       <RefreshList
-        :ref="'RefreshList'"
+        :ref="'RefreshList_' + index"
         class="refreshListWrapper"
         :api="config.api"
         :prevOtherData="config.data"
@@ -88,7 +88,11 @@
     },
     methods: {
       listUpdated (event, index) {
-        var curList = this.$refs.RefreshList[index]
+        var curList = null
+        if (this.$refs['RefreshList_' + index] && this.$refs['RefreshList_' + index][0]) {
+          curList = this.$refs['RefreshList_' + index][0]
+        }
+
         if (curList) {
           var positionValues = []
           var dateWrappers = curList.$el.querySelectorAll('.dateWrapper')
@@ -128,7 +132,10 @@
         this.$emit('curNavIndexChange', this.curNavIndex)
 
         setTimeout(() => {
-          var curList = this.$refs.RefreshList[this.curNavIndex]
+          var curList = null
+          if (this.$refs['RefreshList_' + this.curNavIndex] && this.$refs['RefreshList_' + this.curNavIndex][0]) {
+            curList = this.$refs['RefreshList_' + this.curNavIndex][0]
+          }
           if (curList && curList.mescroll) {
             var y = curList.mescroll.getScrollTop()
             this.$emit('listScroll', this.curNavIndex, y, false)
@@ -143,7 +150,10 @@
         this.swiper.slideTo(i, 1000)
 
         setTimeout(() => {
-          var curList = this.$refs.RefreshList[i]
+          var curList = null
+          if (this.$refs['RefreshList_' + i] && this.$refs['RefreshList_' + i][0]) {
+            curList = this.$refs['RefreshList_' + i][0]
+          }
           if (curList && curList.mescroll) {
             var y = curList.mescroll.getScrollTop()
             this.$emit('listScroll', this.curNavIndex, y, false)
