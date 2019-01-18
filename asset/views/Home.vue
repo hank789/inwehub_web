@@ -294,6 +294,10 @@
         if (this.type === 0) {
           localEvent.setLocalItem('HomeDataList', data)
         }
+
+        if (this.type === 1) {
+          this.$refs.HotBottomActions.getNotification()
+        }
       },
       startAnimationEvent (num) {
         this.startAnimationNum = num

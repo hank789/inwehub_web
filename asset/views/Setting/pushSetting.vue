@@ -39,7 +39,7 @@
       </ul>
 
       <div class="grey"></div>
-      <div class="notice_b subscribe" @tap.stop.prevent="$router.pushPlus('/push/setting/subscribe')">
+      <div class="notice_b subscribe" @tap.stop.prevent="toSettingSubscribe">
         订阅热点推荐
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-chakangengduojiantou"></use>
@@ -60,6 +60,7 @@
   import { checkPermission as checkPermissionMy, toSettingSystem } from '../../utils/plus'
   import EventObj from '../../utils/event'
   import Switches from 'vue-switches'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -77,6 +78,10 @@
       Switches
     },
     methods: {
+      toSettingSubscribe () {
+        localEvent.setLocalItem('needRefresh', {value: true})
+        this.$router.pushPlus('/push/setting/subscribe')
+      },
       refreshResumeData () {
         this.checkPermissionSelf()
       },
