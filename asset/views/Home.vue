@@ -34,8 +34,8 @@
         </div>
       </div>
 
-      <div class="leftTopFixed fixedData" v-show="indexPosition">
-        <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>{{indexPosition}}
+      <div class="leftTopFixed fixedData">
+        <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg><span class="indexPosition"></span>
       </div>
 
       <SwiperMescrollList
@@ -402,7 +402,8 @@
           }
         }
 
-        this.indexPosition = bmpPosition
+        document.querySelector('.indexPosition').innerText = bmpPosition
+        // this.indexPosition = bmpPosition
       },
       toDetail (item) {
         switch (item.type) {
