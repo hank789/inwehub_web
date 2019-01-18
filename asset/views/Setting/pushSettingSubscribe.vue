@@ -58,8 +58,15 @@
       refreshPageData () {
         this.getNotification()
       },
+      openApp () {
+        window.mui.trigger(document.querySelector('.AppOne'), 'tap')
+      },
       openDisturb (text) {
         if (text === 'isOpenAppPush') {
+          if (!window.mui.os.plus) {
+            this.openApp()
+            return
+          }
           setHotRecommendAppPushStatus(this, this.isOpenAppPush, () => {
             if (this.isOpenAppPush) {
               window.mui.toast('“APP订阅”成功')
