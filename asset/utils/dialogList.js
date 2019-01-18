@@ -521,9 +521,7 @@ function alertHotOpenNotice (context, callback) {
     dialogObj.getHtml('NewOpenNotice', {}, (html) => {
       alertHtml(html, (num) => {
         callback(num)
-        if (num === -1 || num === 1) {
-          return true
-        }
+        return true
       })
     })
   }
