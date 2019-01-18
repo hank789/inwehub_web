@@ -69,7 +69,7 @@
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="goArticle(item)">
-                <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)">
+                <div class="dateWrapper" v-if="showData(item, itemIndex, listDataIndex)">
                   <div class="LeftDate">
                     <svg class="icon" aria-hidden="true">
                       <use xlink:href="#icon-riliyouse"></use>
@@ -424,8 +424,11 @@
       },
       showData (item, index, listDataIndex) {
         if (index >= 0) {
-          let currentData = item.created_at.split(' ')[0]
-          let prevData = this.lists[listDataIndex][index - 1] && this.lists[listDataIndex][index - 1].created_at.split(' ')[0]
+          var itemTime = item.created_at.split(' ')[0]
+          var time = timeToHumanText(getTimestampByDateStr(itemTime))
+
+          let currentData = time
+          let prevData = this.lists[listDataIndex][index - 1] && timeToHumanText(getTimestampByDateStr(this.lists[listDataIndex][index - 1].created_at.split(' ')[0]))
           return currentData !== prevData
         }
       },
@@ -573,6 +576,7 @@
             color: #444444;
             font-size: 0.426rem;
             line-height: 0.613rem;
+            word-break: break-word;
           }
           .heatWrapper {
             height: 0.506rem;
