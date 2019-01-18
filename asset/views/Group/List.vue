@@ -173,6 +173,11 @@
     top: 1.173rem !important;
     bottom: 50px !important; /* px不转换 */
   }
+
+  .immersed44 .listWrapper{
+    bottom: 84px !important; /* px不转换 */
+  }
+
   .foundGroup {
     text-align: center;
     margin-top: 0.32rem;

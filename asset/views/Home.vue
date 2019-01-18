@@ -34,14 +34,18 @@
         </div>
       </div>
 
-      <div class="leftTopFixed fixedData"></div>
+      <div class="leftTopFixed fixedData">
+        <svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg><span class="indexPosition"></span>
+      </div>
 
       <SwiperMescrollList
         ref="RefreshList"
         class="refreshListWrapper"
         :api="'readList'"
+        v-if="listDataConfig.length"
         :listDataConfig="listDataConfig"
         :isLoading="loading"
+        :initPageIndex="initPageIndex"
         v-model="lists"
         @prevSuccessCallback="prevSuccessCallback"
         @curNavIndexChange="curNavIndexChange"
@@ -50,16 +54,36 @@
 
         <template v-for="(listData, listDataIndex) in listDataConfig">
           <div :slot="'swiperList-' + listDataIndex">
+
+            <div class="everyDayWrapper" @tap.stop.prevent="sharHotspot" v-if="type === 1">
+              <div class="everyDay">
+                <svg class='icon' aria-hidden='true'>
+                  <use xlink:href='#icon-dingyue-'></use>
+                </svg>
+                <div class="textImg">
+                  <img src="../statics/images/everyDay@3x.png" alt="">
+                </div>
+              </div>
+            </div>
+
             <div v-for="(item, itemIndex) in lists[listDataIndex]" :key="itemIndex">
 
               <div class="container-wrapper" @tap.stop.prevent="goArticle(item)">
-                <div class="dateWrapper" v-if="showData(item,itemIndex, listDataIndex)" :class="itemIndex === 0 ? 'hideData' : ''">
-                  <svg class="icon" aria-hidden="true">
-                    <use xlink:href="#icon-riliyouse"></use>
-                  </svg>
-                  <span>{{ timeToHumanText(item.created_at) }}</span>
+                <div class="dateWrapper" v-if="showData(item, itemIndex, listDataIndex)">
+                  <div class="LeftDate">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-riliyouse"></use>
+                    </svg>
+                    <span>{{ timeToHumanText(item.created_at) }}</span>
+                  </div>
+                  <div class="rightDaily"  @tap.stop.prevent="$router.pushPlus('/hotrecommend/' + item.created_at.split(' ')[0])" v-if="type === 1">
+                    <svg class="icon" aria-hidden="true">
+                      <use xlink:href="#icon-fenxiang1"></use>
+                    </svg>
+                    <span>日报</span>
+                  </div>
                 </div>
-                <div class="container-list" :class="itemIndex === 0 ? 'container-list-top' : ''">
+                <div class="container-list">
                   <div class="pointLine" v-if="type === 0">
                     <span class="splitCircle"></span>
                     <span class="splitLine" v-if="isShowSplitLine(itemIndex, listDataIndex)"></span>
@@ -115,6 +139,11 @@
     >
     </BottomActions>
 
+    <HotBottomActions
+      ref="HotBottomActions"
+    >
+    </HotBottomActions>
+
     <PageMore
       ref="share"
       :shareOption="shareOption"
@@ -136,6 +165,7 @@
   import { goThirdPartyArticle } from '../utils/webview'
   import { openAppUrlByUrl } from '../utils/plus'
   import BottomActions from '../components/BottomActions'
+  import HotBottomActions from '../components/HotBottomActions'
   import { deleteItem } from '../utils/discover'
   import PageMore from '../components/PageMore.vue'
   import { iconMenusClickedItem } from '../utils/feed'
@@ -170,13 +200,15 @@
           spaceBetween: 0,
           freeMode: true
         },
-        type: 0,
+        type: 1,
+        initPageIndex: 1,
         isShowAddOne: false,
         activeItem: {},
         activeItemIndex: 0,
         activeListIndex: 0,
         startAnimationNum: '1',
-        liIndexConfig: []
+        liIndexConfig: [],
+        indexPosition: ''
       }
     },
     components: {
@@ -184,7 +216,8 @@
       swiper,
       swiperSlide,
       BottomActions,
-      PageMore
+      PageMore,
+      HotBottomActions
     },
     computed: {
       listDataConfig () {
@@ -202,8 +235,13 @@
           data: {
             tagFilter: ''
           },
-          autoShow: true
+          autoShow: false
         })
+
+        if (rs[this.initPageIndex]) {
+          rs[this.initPageIndex].autoShow = true
+        }
+
         return rs
       }
     },
@@ -213,9 +251,30 @@
         this.lists[0] = dataList
         this.loading = false
       }
+
+      var type = this.$route.query.type
+      if (type) {
+        type = Number(type)
+        this.type = type
+        this.initPageIndex = type
+      }
     },
     activated: function () {},
+    beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
+      next(vm => {
+        // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
+        vm.$refs.RefreshList.getActiveRefreshList() && vm.$refs.RefreshList.getActiveRefreshList().beforeRouteEnter() // 进入路由时,滚动到原来的列表位置,恢复回到顶部按钮和isBounce的配置
+      })
+    },
+    beforeRouteLeave (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteLeave不用写
+      // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteLeave方法
+      this.$refs.RefreshList.getActiveRefreshList() && this.$refs.RefreshList.getActiveRefreshList().beforeRouteLeave() // 退出路由时,记录列表滚动的位置,隐藏回到顶部按钮和isBounce的配置
+      next()
+    },
     methods: {
+      sharHotspot () {
+        this.$refs.HotBottomActions.show()
+      },
       getLiIndex (itemIndex, listDataIndex) {
         if (!this.liIndexConfig[listDataIndex]) {
           this.liIndexConfig[listDataIndex] = 1
@@ -246,6 +305,10 @@
         if (this.type === 0) {
           localEvent.setLocalItem('HomeDataList', data)
         }
+
+        if (this.type === 1) {
+          this.$refs.HotBottomActions.getNotification()
+        }
       },
       startAnimationEvent (num) {
         this.startAnimationNum = num
@@ -271,7 +334,7 @@
         this.shareIconMenus = [] // getIconMenus(item)
         this.itemOptionsObj = item
         this.shareOption = getHomeDetail(
-          item.link_url,
+          '/c/' + item.category_id + '/' + item.slug, // item.link_url,
           item.title,
           item.img
         )
@@ -322,7 +385,7 @@
         if (!navWarp) {
           return
         }
-        if (this.$refs.RefreshList.$refs.RefreshList[index].mescroll.os.ios) {
+        if (window.mui.os.ios) {
           if (y < 10) {
             navWarp.classList.remove('leftTopFixedShow')
             navWarp.classList.remove('nav-sticky')
@@ -349,8 +412,9 @@
             }
           }
         }
-        navWarp.innerHTML = "<svg class='icon' aria-hidden='true'><use xlink:href='#icon-rili'></use></svg>" + bmpPosition
-        console.log(bmpPosition)
+
+        document.querySelector('.indexPosition').innerText = bmpPosition
+        // this.indexPosition = bmpPosition
       },
       toDetail (item) {
         switch (item.type) {
@@ -376,8 +440,11 @@
       },
       showData (item, index, listDataIndex) {
         if (index >= 0) {
-          let currentData = item.created_at.split(' ')[0]
-          let prevData = this.lists[listDataIndex][index - 1] && this.lists[listDataIndex][index - 1].created_at.split(' ')[0]
+          var itemTime = item.created_at.split(' ')[0]
+          var time = timeToHumanText(getTimestampByDateStr(itemTime))
+
+          let currentData = time
+          let prevData = this.lists[listDataIndex][index - 1] && timeToHumanText(getTimestampByDateStr(this.lists[listDataIndex][index - 1].created_at.split(' ')[0]))
           return currentData !== prevData
         }
       },
@@ -400,16 +467,6 @@
         userAbility.newbieTask(this)
         getHomeData((data) => {
           this.regions = data.regions
-
-          setTimeout(() => {
-            var type = this.$route.query.type
-            if (type) {
-              var typeIndex = this.getRegionIndex(type)
-              if (typeIndex) {
-                this.selectTag(typeIndex)
-              }
-            }
-          }, 1000)
         })
       },
       getRegionIndex (value) {
@@ -429,6 +486,7 @@
 </script>
 
 <style scoped lang="less">
+
   .mui-content {
     background: #FFFFFF;}
   .container-control-logoAndTabsAndSearch .topSearchWrapper .searchFrame {
@@ -456,19 +514,23 @@
   .container-wrapper {
     /*margin-top: 0.4rem;*/
     .dateWrapper {
-      padding-left: 0.426rem;
+      padding: 0 0.426rem;
       height: 0.56rem;
-      display: inline-block;
+      display: flex;
+      justify-content: space-between;
       line-height: 0.56rem;
       margin-bottom: 0.533rem;
       margin-top: 0.266rem;
-
       .icon {
         font-size: 0.4rem;
       }
       span {
         color: #444444;
         font-size: 0.32rem;
+      }
+      .rightDaily {
+        position: relative;
+        z-index: 9999;
       }
     }
     .container-list {
@@ -530,6 +592,7 @@
             color: #444444;
             font-size: 0.426rem;
             line-height: 0.613rem;
+            word-break: break-word;
           }
           .heatWrapper {
             height: 0.506rem;
@@ -629,6 +692,10 @@
     bottom: 50px !important; /* px不转换 */
   }
 
+  .immersed44 .refreshListWrapper{
+    bottom: 84px !important; /* px不转换 */
+  }
+
   .nav-sticky {
     z-index: 9999;
     position: -webkit-sticky;
@@ -653,13 +720,78 @@
     border-top-right-radius: 1.333rem;
     border-bottom-right-radius: 1.333rem;
     box-shadow:0rem 0.133rem 0.266rem -0.053rem rgba(205,215,220,1);
+    &.centerFiexd {
+      height: 0.773rem;
+      line-height: 0.773rem;
+      left: 50%;
+      transform: translateX(-21%);
+      border-radius: 1.333rem;
+    }
     .icon {
-      font-size: 0.426rem;
+      font-size: 0.373rem;
+      position: relative;
+      top: 0.013rem;
+      color: #CCF2FF;
+    }
+    .upLine {
+      width: 0.026rem;
+      height: 0.32rem;
+      background: #67CEFB;
+      display: inline-block;
+      position: relative;
+      top: 0.053rem;
+      margin: 0 0.4rem;
+    }
+    .subscribeText {
+      font-size: 0.32rem;
+      margin-left: 1.52rem;
+      .icon {
+        font-size: 0.373rem;
+        margin-right: 0.133rem;
+      }
+    }
+    .shareText {
+      font-size: 0.32rem;
+      .icon {
+        font-size: 0.4rem;
+        margin-right: 0.133rem;
+      }
+    }
+  }
+
+  .everyDayWrapper {
+    padding: 0 0.426rem;
+    margin-top: 0.266rem;
+    .everyDay {
+      height: 1.173rem;
+      line-height: 1.173rem;
+      text-align: center;
+      border-radius: 0.106rem;
+      display: flex;
+      justify-content: center;
+      border: 0.026rem solid #E8E8E8;
+      background: #ffffff;
+      .icon {
+        font-size: 0.373rem;
+        color: #C8C8C8;
+        position: relative;
+        top: 0.373rem;
+      }
+      .textImg {
+        width: 2.666rem;
+        height: 0.333rem;
+        line-height: 1.173rem;
+        margin-left: 0.133rem;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
     }
   }
 
   .leftTopFixedShow{
-    display: inline-block;
+    display: inline-block !important;
   }
   .mui-ios {
     .heatWrapper {

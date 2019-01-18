@@ -34,9 +34,17 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-chakangengduojiantou"></use>
           </svg>
-          <i class="bot"></i>
+          <!--<i class="bot"></i>-->
         </li>
       </ul>
+
+      <div class="grey"></div>
+      <div class="notice_b subscribe" @tap.stop.prevent="toSettingSubscribe">
+        订阅热点推荐
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-chakangengduojiantou"></use>
+        </svg>
+      </div>
 
       <div class="grey"></div>
       <div class="notice_b">
@@ -52,6 +60,7 @@
   import { checkPermission as checkPermissionMy, toSettingSystem } from '../../utils/plus'
   import EventObj from '../../utils/event'
   import Switches from 'vue-switches'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -69,6 +78,10 @@
       Switches
     },
     methods: {
+      toSettingSubscribe () {
+        localEvent.setLocalItem('needRefresh', {value: true})
+        this.$router.pushPlus('/push/setting/subscribe')
+      },
       refreshResumeData () {
         this.checkPermissionSelf()
       },
@@ -279,6 +292,12 @@
   .vue-switcher{
     float: right;
     top: 0.453rem;
+  }
+  .subscribe .icon {
+    float: right;
+    font-size: 0.373rem;
+    margin-top: 0.4rem;
+    color: #808080;
   }
 </style>
 <style>

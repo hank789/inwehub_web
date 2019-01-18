@@ -515,6 +515,97 @@ function alertHomeHeat (context, regions, item, callback) {
   }
 }
 
+function alertHotOpenNotice (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('NewOpenNotice', {}, (html) => {
+      alertHtml(html, (num) => {
+        callback(num)
+        return true
+      })
+    })
+  }
+}
+
+function alertHotRecommend (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('hotRecommend', {}, (html) => {
+      alertHtml(html, (num) => {
+        callback(num)
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
+function alertSubscribeGZH (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('subscribeGZH', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
+// EmailSubscribe
+function alertEmailSubscribe (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('EmailSubscribe', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === 0) {
+          var text = document.getElementsByClassName('EmailText')[1].value
+
+          var re = /^[.a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+          if (!re.test(text)) {
+            document.getElementsByClassName('showEmailErrorTips')[1].style.display = 'block'
+            return false
+          }
+
+          callback(num, text)
+          return true
+        }
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
+// 修改EmailSubscribe
+function alertEditEmailSubscribe (context, callback) {
+  var dialogObj = getDialogObj(context)
+  if (dialogObj) {
+    dialogObj.getHtml('EditEmailSubscribe', {}, (html) => {
+      alertHtml(html, (num) => {
+        console.log(num)
+        if (num === 0) {
+          var text = document.getElementsByClassName('EditEmailText')[1].value
+
+          var re = /^[.a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+          if (!re.test(text)) {
+            document.getElementsByClassName('showEditEmailErrorTips')[1].style.display = 'block'
+            return false
+          }
+          callback(num, text)
+          return true
+        }
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -544,6 +635,11 @@ export {
   alertGroupsOld,
   alertAddWeHub,
   alertReport,
-  alertHomeHeat
+  alertHomeHeat,
+  alertHotOpenNotice,
+  alertSubscribeGZH,
+  alertHotRecommend,
+  alertEmailSubscribe,
+  alertEditEmailSubscribe
   // alertshi
 }

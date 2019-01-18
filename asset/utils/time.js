@@ -108,7 +108,7 @@ function timeToHumanText (time) {
   } else if (createDate >= todayDate - 2 * 7 * 60 * 60 * 24) {
     showDate = '1周前'
   } else if (createDate >= yearDate) {
-    showDate = createDateObj.getMonth() + '月' + createDateObj.getDay() + '日'
+    showDate = (createDateObj.getMonth() + 1) + '月' + createDateObj.getDate() + '日'
   } else {
     showDate = createFullDate
   }
@@ -125,5 +125,6 @@ function getTimestampByDateStr (str) {
 export {
   TimeEndText,
   timeToHumanText,
-  getTimestampByDateStr
+  getTimestampByDateStr,
+  timeToHumanDay
 }

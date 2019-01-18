@@ -1,8 +1,8 @@
 <template>
-  <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container">
+  <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container" v-if="localListDataConfig.length">
     <swiper-slide v-for="(config, index) in localListDataConfig" :key="index">
       <RefreshList
-        :ref="'RefreshList'"
+        :ref="'RefreshList_' + index"
         class="refreshListWrapper"
         :api="config.api"
         :prevOtherData="config.data"
@@ -20,7 +20,7 @@
 
         <slot :name="'swiperList-' + index"></slot>
         <!--<div v-for="(item, itemIndex) in lists[index]" :key="itemIndex">-->
-            <!--{{ item.id }}-->
+        <!--{{ item.id }}-->
         <!--</div>-->
 
       </RefreshList>
@@ -36,18 +36,22 @@
   const SwiperMescrollList = {
     data () {
       return {
-        localListDataConfig: this.listDataConfig,
-        curNavIndex: 0,
+        localListDataConfig: [],
+        curNavIndex: this.initPageIndex,
         positionValues: [],
         swiperOption: {
+          initialSlide: this.initPageIndex,
           slidesPerView: 'auto',
           spaceBetween: 0,
           observer: true,
           freeMode: false,
           on: {
             slideChange: () => {
-              var i = this.swiper.activeIndex
-              this.changePage(i)
+              if (this.swiper) {
+                var i = this.swiper.activeIndex
+                console.log('swiper切换到:' + i)
+                this.changePage(i)
+              }
             }
           }
         },
@@ -60,6 +64,10 @@
       swiperSlide
     },
     props: {
+      initPageIndex: {
+        type: Number,
+        default: 0
+      },
       isLoading: {
         type: Boolean,
         default: true
@@ -77,13 +85,25 @@
       }
     },
     methods: {
+      getActiveRefreshList () {
+        var curList = null
+        if (this.$refs['RefreshList_' + this.curNavIndex] && this.$refs['RefreshList_' + this.curNavIndex][0]) {
+          curList = this.$refs['RefreshList_' + this.curNavIndex][0]
+        }
+        return curList
+      },
       listUpdated (event, index) {
-        if (this.$refs.RefreshList[index]) {
+        var curList = null
+        if (this.$refs['RefreshList_' + index] && this.$refs['RefreshList_' + index][0]) {
+          curList = this.$refs['RefreshList_' + index][0]
+        }
+
+        if (curList) {
           var positionValues = []
-          var dateWrappers = this.$refs.RefreshList[index].$el.querySelectorAll('.dateWrapper')
+          var dateWrappers = curList.$el.querySelectorAll('.dateWrapper')
           for (var i = 0; i < dateWrappers.length; i++) {
             var offsetTop = dateWrappers[i].offsetTop
-            var text = dateWrappers[i].innerText
+            var text = dateWrappers[i].querySelector('.LeftDate').innerText
             positionValues.push({offsetTop: offsetTop, text: text})
           }
 
@@ -116,11 +136,16 @@
         // 定位菜单
         this.$emit('curNavIndexChange', this.curNavIndex)
 
-        var curList = this.$refs.RefreshList[this.curNavIndex]
-        if (curList && curList.mescroll) {
-          var y = curList.mescroll.getScrollTop()
-          this.$emit('listScroll', this.curNavIndex, y, false)
-        }
+        setTimeout(() => {
+          var curList = null
+          if (this.$refs['RefreshList_' + this.curNavIndex] && this.$refs['RefreshList_' + this.curNavIndex][0]) {
+            curList = this.$refs['RefreshList_' + this.curNavIndex][0]
+          }
+          if (curList && curList.mescroll) {
+            var y = curList.mescroll.getScrollTop()
+            this.$emit('listScroll', this.curNavIndex, y, false)
+          }
+        }, 500)
       },
       slideTo (i) {
         var listDataConfig = this.localListDataConfig[i]
@@ -129,11 +154,16 @@
 
         this.swiper.slideTo(i, 1000)
 
-        var curList = this.$refs.RefreshList[i]
-        if (curList && curList.mescroll) {
-          var y = curList.mescroll.getScrollTop()
-          this.$emit('listScroll', this.curNavIndex, y, false)
-        }
+        setTimeout(() => {
+          var curList = null
+          if (this.$refs['RefreshList_' + i] && this.$refs['RefreshList_' + i][0]) {
+            curList = this.$refs['RefreshList_' + i][0]
+          }
+          if (curList && curList.mescroll) {
+            var y = curList.mescroll.getScrollTop()
+            this.$emit('listScroll', this.curNavIndex, y, false)
+          }
+        }, 500)
       }
     },
     watch: {

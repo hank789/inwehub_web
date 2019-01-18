@@ -599,6 +599,128 @@
 
       </div>
     </div>
+
+    <!-- 订阅先开启通知 -->
+    <div id="NewOpenNotice">
+      <div class="contentWrapper">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+
+        <div class="text">请先开启通知，</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+        <div class="setingStep">“设置”-“通知”-开启InweHub</div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">现在开启</span>
+          <div class="bot"></div>
+        </div>
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">稍后提醒</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="hotRecommend">
+      <div class="hotRecommendWrapper">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+        <div class="title font-family-medium">热点推荐订阅</div>
+        <div class="text">开启订阅，我们将为您推送每日热点推荐~</div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">订阅</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 订阅服务号 -->
+    <div id="subscribeGZH">
+      <div class="subscribeWrapper">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+        <div class="title font-family-medium">热点推荐-服务号订阅</div>
+
+        <div class="text">请先微信扫码关注InweHub服务号</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+
+        <div class="GZHimg">
+          <img src="../statics/images/GZHcode@3x.png" alt="">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 热点推荐-邮件订阅 -->
+    <div id="EmailSubscribe">
+      <div class="EmailSubscribe">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+
+        <div class="title font-family-medium">热点推荐-服务号订阅</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+
+        <div class="inputWrapper">
+          <input class="EmailText" type="text" placeholder="输入您的邮箱地址">
+        </div>
+
+        <div class="tipsInfo showEmailErrorTips">邮箱格式有误，请重新输入</div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">订阅</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 热点推荐-修改邮件 -->
+    <div id="EditEmailSubscribe">
+      <div class="EmailSubscribe">
+
+        <div class="close alertClose">
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-times--"></use>
+          </svg>
+        </div>
+
+        <div class="title font-family-medium">修改订阅邮箱</div>
+        <div class="text">我们将为您推送每日热点推荐~</div>
+
+        <div class="inputWrapper">
+          <input class="EditEmailText" type="text" placeholder="输入您的邮箱地址">
+        </div>
+
+        <div class="tipsInfo showEditEmailErrorTips">邮箱格式有误，请重新输入</div>
+
+        <div class="buttonWrapper sure alertConfirm" >
+          <span class="font-family-medium">确认修改</span>
+          <div class="bot"></div>
+        </div>
+
+      </div>
+    </div>
+
+
   </div>
 </template>
 <script type="text/javascript">
@@ -2146,4 +2268,111 @@
     color: #03AEF9;
   }
 
+  .bot {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0rem;
+    height: 0.026rem;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    background-color: rgb(220, 220, 220);
+  }
+
+  .contentWrapper {
+    width: 8rem;
+    background: #FFFFFF;
+  }
+  .contentWrapper .close, .subscribeWrapper .close, .hotRecommendWrapper .close, .EmailSubscribe .close {
+    text-align: right;
+    padding: 0.4rem;
+    color: #808080;
+    font-size: 0.346rem;
+  }
+  .contentWrapper .text {
+    color: #444444;
+    font-size: 0.426rem;
+    line-height: 0.64rem;
+    text-align: left;
+    padding: 0 0.4rem;
+    font-family:PingFangSC-Medium;
+  }
+  .contentWrapper .setingStep {
+    color: #808080;
+    font-size: 0.346rem;
+    line-height: 0.48rem;
+    margin-top: 0.266rem;
+    text-align: left;
+    padding: 0 0.4rem 0.8rem;
+  }
+  .contentWrapper .buttonWrapper, .hotRecommendWrapper .buttonWrapper, .EmailSubscribe .buttonWrapper {
+    position: relative;
+    text-align: center;
+    color: #03AEF9;
+    line-height: 1.306rem;
+  }
+  .contentWrapper .buttonWrapper .bot, .hotRecommendWrapper .buttonWrapper .bot, .EmailSubscribe .buttonWrapper .bot {
+    top: 0;
+  }
+
+  .hotRecommendWrapper {
+    width: 8rem;
+    background: #ffffff;
+  }
+  .hotRecommendWrapper .text {
+    margin-bottom: 0.8rem;
+  }
+
+  .subscribeWrapper {
+    width: 8rem;
+    background: #ffffff;
+    padding-bottom: 0.8rem;
+  }
+  .subscribeWrapper .title, .hotRecommendWrapper .title, .EmailSubscribe .title {
+    color: #444444;
+    font-size: 0.48rem;
+    line-height: 0.64rem;
+    margin-bottom: 0.266rem;
+  }
+  .subscribeWrapper .text, .hotRecommendWrapper .text, .EmailSubscribe .text {
+    color: #808080;
+    font-size: 0.346rem;
+    line-height: 0.56rem;
+  }
+  .subscribeWrapper .GZHimg {
+    width: 3.946rem;
+    height: 4rem;
+    margin: 0.266rem auto 0;
+  }
+  .subscribeWrapper .GZHimg img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .EmailSubscribe {
+    width: 8rem;
+    background: #ffffff;
+  }
+  .EmailSubscribe .inputWrapper {
+    width: 7.2rem;
+    margin: 0.4rem auto 0;
+  }
+  .EmailSubscribe .inputWrapper input {
+    border-color: #DCDCDC;
+  }
+  .EmailSubscribe .tipsInfo {
+    color: #FA4975;
+    font-size: 0.293rem;
+    text-align: left;
+    padding-left: 0.666rem;
+    margin-top: -0.293rem;
+    margin-bottom: 0.8rem;
+  }
+  .EmailSubscribe .tipsInfo.showEditEmailErrorTips, .EmailSubscribe .tipsInfo.showEmailErrorTips {
+    display: none;
+  }
+  input::-webkit-input-placeholder {
+    color: #C8C8C8;
+    font-size: 0.373rem;
+  }
 </style>

@@ -2137,6 +2137,18 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  { // 订阅热点推荐
+    path: '/push/setting/subscribe',
+    name: 'push-setting-subscribe',
+    meta: {
+      title: '订阅热点推荐',
+      wechatHideHeader: true
+    },
+    component: componets.SettingpushSettingSubscribe,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 与我有关
     path: '/push/setting/aboutme',
     name: 'push-setting-aboutme',
@@ -2763,6 +2775,19 @@ const routes = [
       keepAlive: false
     },
     component: componets.Test,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
+  {
+    path: '/hotrecommend/:date',
+    name: 'hotrecommend/:date',
+    meta: {
+      title: '今日热点推荐',
+      wechatHideHeader: true,
+      keepAlive: false
+    },
+    component: componets.HotRecommend,
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }

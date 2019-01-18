@@ -9,7 +9,7 @@
             <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">资讯</div>
+        <div class="desc">首页</div>
       </div>
       <div class="menu" @tap.stop.prevent="$router.push('/home')" v-else>
         <div class="iconWrapper">
@@ -17,7 +17,7 @@
             <use xlink:href="#icon-shouye"></use>
           </svg>
         </div>
-        <div class="desc">资讯</div>
+        <div class="desc">首页</div>
       </div>
 
       <div class="menu active" v-if="isFeed">
@@ -296,6 +296,7 @@
     position: absolute;
     width: 100%;
     bottom: 0;
+    z-index: 9;
     padding: 0 12px; /* px不转换 */}
   .container-footer:before {
     position: absolute;
@@ -380,5 +381,10 @@
     left: 50%;
     top: 7px; /* px不转换 */
     margin-left: 12px; /* px不转换 */
+  }
+
+  .immersed44 .container-footer{
+    height: 84px; /* px不转换 */
+    padding-bottom:34px; /* px不转换 */
   }
 </style>

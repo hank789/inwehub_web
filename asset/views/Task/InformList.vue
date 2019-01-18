@@ -493,6 +493,10 @@
     bottom:50px !important;  /* px不转换 */
   }
 
+  .immersed44 .listWrapper{
+    bottom: 84px !important; /* px不转换 */
+  }
+
   /*待完成任务*/
   .notice{
     width:100%;
