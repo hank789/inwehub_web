@@ -1,6 +1,5 @@
 <template>
-  <div v-if="localListDataConfig.length">
-  <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container" >
+  <swiper ref="mySwiper" :options="swiperOption" class="mescrollList-swiper-container" v-if="localListDataConfig.length">
     <swiper-slide v-for="(config, index) in localListDataConfig" :key="index">
       <RefreshList
         :ref="'RefreshList_' + index"
@@ -27,7 +26,6 @@
       </RefreshList>
     </swiper-slide>
   </swiper>
-  </div>
 </template>
 
 <script>

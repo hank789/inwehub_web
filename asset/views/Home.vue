@@ -672,6 +672,10 @@
     bottom: 50px !important; /* px不转换 */
   }
 
+  .immersed44 .refreshListWrapper{
+    bottom: 84px !important; /* px不转换 */
+  }
+
   .nav-sticky {
     z-index: 9999;
     position: -webkit-sticky;
@@ -852,10 +856,5 @@
       top: -1.2rem;
       opacity: 0;
     }
-  }
-</style>
-<style>
-  .mescrollList-swiper-container {
-    bottom: 50px !important; /* px不转换 */
   }
 </style>

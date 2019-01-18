@@ -442,6 +442,10 @@
   bottom:50px !important; /* px不转换 */
 }
 
+.immersed44 .listWrapper{
+  bottom: 84px !important; /* px不转换 */
+}
+
 /*顾问社区*/
   .community{
     width:100%;
