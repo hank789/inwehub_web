@@ -382,4 +382,9 @@
     top: 7px; /* px不转换 */
     margin-left: 12px; /* px不转换 */
   }
+
+  .immersed44 .container-footer{
+    height: 84px; /* px不转换 */
+    padding-bottom:34px; /* px不转换 */
+  }
 </style>

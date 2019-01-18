@@ -649,6 +649,10 @@
     bottom: 50px !important; /* px不转换 */
   }
 
+  .immersed44 .listWrapper{
+    bottom: 84px !important; /* px不转换 */
+  }
+
   .swiper-container-horizontal > .swiper-pagination-bullets {
     bottom: 0.8rem;
   }

@@ -178,6 +178,10 @@
       bottom:50px !important; /* px不转换 */
     }
 
+    .immersed44 .listWrapper{
+      bottom: 84px !important; /* px不转换 */
+    }
+
     .switch{
       position: fixed;
       width:1.973rem;
