@@ -2,6 +2,12 @@ window.scrollEventContext = null
 
 var eventCallback = function () {
   var context = window.scrollEventContext
+
+  var slideActive = context.querySelector('.mescrollList-swiper-container .swiper-slide-active')
+  if (slideActive) {
+    context = slideActive
+  }
+
   var mescrollEle = context.querySelector('.mescroll')
   // document.querySelector('.mescroll').__vue__
   if (mescrollEle) {
@@ -17,6 +23,12 @@ var eventCallback = function () {
 
 var headerEventCallback = function () {
   var context = window.scrollHeaderEventContext
+
+  var slideActive = context.querySelector('.mescrollList-swiper-container .swiper-slide-active')
+  if (slideActive) {
+    context = slideActive
+  }
+
   var mescrollEle = context.querySelector('.mescroll')
   if (mescrollEle) {
     console.log('headder双击后找到 #mescroll')
