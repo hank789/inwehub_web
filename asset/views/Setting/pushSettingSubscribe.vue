@@ -74,7 +74,7 @@
             //   window.mui.toast('已关闭“APP订阅”')
             // }
           }, () => {
-            this.isOpenAppPush = 0
+            this.isOpenAppPush = false
           })
         }
 
@@ -89,7 +89,7 @@
                     //   window.mui.toast('“邮箱订阅”成功')
                     // }
                   }, () => {
-                    this.isOpenEmailPush = 0
+                    this.isOpenEmailPush = false
                   })
                 }
               })
@@ -103,7 +103,7 @@
             //   window.mui.toast('已关闭“邮箱订阅”')
             // }
           }, () => {
-            this.isOpenEmailPush = 0
+            this.isOpenEmailPush = false
           })
         }
 
@@ -115,7 +115,7 @@
               // window.mui.toast('已关闭“微信订阅”')
             }
           }, () => {
-            this.isOpenWeChatPush = 0
+            this.isOpenWeChatPush = false
           })
         }
       },
@@ -128,13 +128,13 @@
           }
           var res = response.data.data
 
-          this.isOpenAppPush = res.push_daily_subscribe
+          this.isOpenAppPush = !!res.push_daily_subscribe
           this.emailText = res.email_daily_subscribe
-          this.isOpenWeChatPush = res.wechat_daily_subscribe
+          this.isOpenWeChatPush = !!res.wechat_daily_subscribe
           if (this.emailText) {
-            this.isOpenEmailPush = 1
+            this.isOpenEmailPush = true
           } else {
-            this.isOpenEmailPush = 0
+            this.isOpenEmailPush = false
           }
 
           if (this.isOpenAppPush) {
