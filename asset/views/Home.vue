@@ -716,7 +716,10 @@
       border-radius: 1.333rem;
     }
     .icon {
-      font-size: 0.426rem;
+      font-size: 0.373rem;
+      position: relative;
+      top: 0.013rem;
+      color: #CCF2FF;
     }
     .upLine {
       width: 0.026rem;
