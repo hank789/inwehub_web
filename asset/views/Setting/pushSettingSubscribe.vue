@@ -50,7 +50,7 @@
           if (num === 0) {
             this.emailText = text
             setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
-              window.mui.toast('订阅邮箱修改成功')
+              // window.mui.toast('订阅邮箱修改成功')
             }, () => {})
           }
         })
@@ -68,11 +68,11 @@
             return
           }
           setHotRecommendAppPushStatus(this, this.isOpenAppPush, () => {
-            if (this.isOpenAppPush) {
-              window.mui.toast('“APP订阅”成功')
-            } else {
-              window.mui.toast('已关闭“APP订阅”')
-            }
+            // if (this.isOpenAppPush) {
+            //   window.mui.toast('“APP订阅”成功')
+            // } else {
+            //   window.mui.toast('已关闭“APP订阅”')
+            // }
           }, () => {
             this.isOpenAppPush = 0
           })
@@ -85,9 +85,9 @@
                 if (num === 0) {
                   this.emailText = text
                   setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
-                    if (this.isOpenEmailPush) {
-                      window.mui.toast('“邮箱订阅”成功')
-                    }
+                    // if (this.isOpenEmailPush) {
+                    //   window.mui.toast('“邮箱订阅”成功')
+                    // }
                   }, () => {
                     this.isOpenEmailPush = 0
                   })
@@ -97,11 +97,11 @@
             }
           }
           setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
-            if (this.isOpenEmailPush) {
-              window.mui.toast('“邮箱订阅”成功')
-            } else {
-              window.mui.toast('已关闭“邮箱订阅”')
-            }
+            // if (this.isOpenEmailPush) {
+            //   window.mui.toast('“邮箱订阅”成功')
+            // } else {
+            //   window.mui.toast('已关闭“邮箱订阅”')
+            // }
           }, () => {
             this.isOpenEmailPush = 0
           })
@@ -112,7 +112,7 @@
             if (this.isOpenWeChatPush) {
               alertSubscribeGZH(this)
             } else {
-              window.mui.toast('已关闭“微信订阅”')
+              // window.mui.toast('已关闭“微信订阅”')
             }
           }, () => {
             this.isOpenWeChatPush = 0

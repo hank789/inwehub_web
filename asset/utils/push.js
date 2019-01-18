@@ -14,7 +14,7 @@ function _apiNotificationPushUpdate (data, successCallback, failCallback) {
     }
 
     successCallback(response.data.message)
-    // window.mui.toast(response.data.message)
+    window.mui.toast(response.data.message)
   })
 }
 

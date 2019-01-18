@@ -193,7 +193,7 @@
             if (num === 0) {
               this.email_subscribe = text
               setHotRecommendEmailStatus(true, this.email_subscribe, () => {
-                window.mui.toast('订阅成功，可前往设置进行订阅管理')
+                // window.mui.toast('订阅成功，可前往设置进行订阅管理')
               }, () => {
                 this.email_subscribe = ''
               })
