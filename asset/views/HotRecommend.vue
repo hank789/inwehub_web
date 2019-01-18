@@ -420,12 +420,12 @@
                 i {
                   width: 0;
                   height: 0;
-                  border-left: 4px solid transparent;
-                  border-right: 4px solid transparent;
-                  border-top: 4px solid #FA4975;
+                  border-left: 0.106rem solid transparent;
+                  border-right: 0.106rem solid transparent;
+                  border-top: 0.106rem solid #FA4975;
                   position: absolute;
-                  top: 20px;
-                  left: 5px;
+                  top: 0.52rem;
+                  left: 0.13rem;
                 }
                 span {
                   width: 0.613rem;
