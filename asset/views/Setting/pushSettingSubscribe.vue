@@ -97,7 +97,11 @@
             }
           }
           setHotRecommendEmailStatus(this.isOpenEmailPush, this.emailText, () => {
-            window.mui.toast('已关闭“邮箱订阅”')
+            if (this.isOpenEmailPush) {
+              window.mui.toast('“邮箱订阅”成功')
+            } else {
+              window.mui.toast('已关闭“邮箱订阅”')
+            }
           }, () => {
             this.isOpenEmailPush = 0
           })
