@@ -2792,6 +2792,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/discover/addlink',
+    name: 'discover_add_link',
+    meta: {
+      title: '',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DiscoverAddLink,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // message
     path: '/*',
     name: '404',
