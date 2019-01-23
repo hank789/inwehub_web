@@ -507,7 +507,7 @@ function AppPageInit (context) {
 
     lockOrientation('portrait-primary')
 
-    if (window.mui.os.plus && window.mui.os.ios) {
+    if (window.mui.os.plus) {
       // 监听自定义事件，前往页面
       document.addEventListener('go_to_target_page', (event) => {
         var url = event.detail.url
