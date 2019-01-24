@@ -24,8 +24,8 @@
       isShow: 0
     }),
     created () {
+      this.getBoot_guide()
       openFullscreen()
-      this.toHome()
     },
     methods: {
       toHome () {
@@ -43,7 +43,7 @@
           closeSplashscreen()
 
           // 是否显示启动页面
-          if (response.data.data.show_guide) {
+          if (!response.data.data.show_guide) {
             openFullscreen()
 
             this.isShow = response.data.data.show_guide
@@ -70,7 +70,7 @@
             this.toHome()
           }
         }).catch(e => {
-          this.$router.push('/exception')
+          this.toHome()
         })
       }
     }

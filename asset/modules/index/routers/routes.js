@@ -38,7 +38,7 @@ const routes = [
         } else {
           window.mui.plusReady(function () {
             next({
-              path: '/home'
+              path: '/ad'
             })
           })
         }
