@@ -143,20 +143,20 @@
   }
   .submit {
     color: #03AEF9;
-    font-size: 15px;
+    font-size: 0.4rem;
     position: absolute;
-    right: 16px;
-    top: 11.5px;
+    right: 0.426rem;
+    top: 0.306rem;
   }
   .shareTitle {
-    font-size: 20px;
+    font-size: 0.533rem;
     color: #444444;
     text-align: center;
-    margin: 35px 0 55px;
+    margin: 0.933rem 0 1.466rem;
   }
 
   .inputWrapper {
-    padding: 0 25px;
+    padding: 0 0.666rem;
     .input {
       border: none;
       margin-bottom: 0;
@@ -165,54 +165,54 @@
 
   .linkWrapper {
     display: flex;
-    padding: 0 25px;
-    margin-top: 20px;
+    padding: 0 0.666rem;
+    margin-top: 0.533rem;
     justify-content: space-between;
     .leftText {
       .text {
         color: #444444;
-        font-size: 16px;
-        line-height: 23px;
+        font-size: 0.426rem;
+        line-height: 0.613rem;
       }
       .icon {
-        font-size: 8px;
+        font-size: 0.213rem;
         color: #808080;
-        margin-top: 11px;
+        margin-top: 0.293rem;
       }
     }
     .right {
-      margin-left: 14px;
+      margin-left: 0.373rem;
       .articleImg {
-        width: 97px;
-        height: 71px;
+        width: 2.586rem;
+        height: 1.893rem;
         img {
           width: 100%;
           height: 100%;
-          border-radius: 4px;
+          border-radius: 0.106rem;
           object-fit: cover;
         }
       }
     }
   }
   .tagsWapper {
-    padding: 0 25px;
-    margin-top: 20px;
+    padding: 0 0.666rem;
+    margin-top: 0.533rem;
     .title {
       color: #B4B4B6;
-      font-size: 11px;
+      font-size: 0.293rem;
     }
     .tagsList {
-      margin-top: 8px;
+      margin-top: 0.213rem;
       font-size: 0;
       span {
         color: #444444;
-        font-size: 12px;
-        padding: 5px 10px;
-        border-radius: 100px;
+        font-size: 0.32rem;
+        padding: 0.133rem 0.266rem;
+        border-radius: 2.666rem;
         display: inline-block;
         background: #F3F4F6;
-        margin-right: 10px;
-        margin-bottom: 10px;
+        margin-right: 0.266rem;
+        margin-bottom: 0.266rem;
         &.active {
           color: #FFF;
           background: #03AEF9;
@@ -223,14 +223,14 @@
 
   .footerWrapper {
     position: absolute;
-    bottom: 30px;
-    left: 25px;
+    bottom: 0.8rem;
+    left: 0.666rem;
     .text {
       color: #C8C8C8;
-      font-size: 11px;
-      line-height: 19px;
+      font-size: 0.293rem;
+      line-height: 0.506rem;
       span {
-        margin-right: 8px;
+        margin-right: 0.213rem;
       }
     }
   }
