@@ -3,27 +3,27 @@
     <header class="mui-bar mui-bar-nav">
       <Back></Back>
       <h1 class="mui-title">发布</h1>
-      <div class="submit font-family-medium">确认发布</div>
+      <div class="submit font-family-medium" @tap.stop.prevent="submit">确认发布</div>
     </header>
     <div class="mui-content">
 
       <div class="shareTitle font-family-medium">分享到首页</div>
 
       <div class="inputWrapper">
-        <input class="input" type="text" placeholder="输入文章链接">
+        <input class="input" v-model="url" type="text" placeholder="输入文章链接">
         <div class="line-river-after line-river-after-top"></div>
       </div>
 
-      <div class="linkWrapper">
+      <div class="linkWrapper" v-show="urlTitle">
         <div class="leftText">
-          <div class="text font-family-medium text-line-2">两位设计师创始人他们是如何把Airbnb从零到300亿？…还有戏吗</div>
-          <svg class="icon" aria-hidden="true">
+          <div class="text font-family-medium text-line-2">{{ urlTitle }}</div>
+          <svg class="icon" aria-hidden="true" @tap.stop.prevent="resetUrl">
             <use xlink:href="#icon-times--"></use>
           </svg>
         </div>
-        <div class="right">
+        <div class="right" v-show="urlImage">
           <div class="articleImg">
-            <img src="../../statics/images/uicon.jpg" alt="">
+            <ImageView :src="urlImage" width="97" height="71"></ImageView>
           </div>
         </div>
       </div>
@@ -32,8 +32,7 @@
         <div class="title">所属领域</div>
 
         <div class="tagsList">
-          <span class="active">服务</span>
-          <span class="">服务</span>
+          <span v-for="(item, index) in regions" :class="{active: item.selected}" @tap.stop.prevent="choiceItem(index, item)">{{item.text}}</span>
         </div>
       </div>
 
@@ -48,31 +47,92 @@
 </template>
 
 <script>
+  import { getHomeData } from '../../utils/home'
+  import Vue from 'vue'
+  import { fetchArticle } from '../../utils/url'
+  import { searchText } from '../../utils/search'
+  import { postRequest } from '../../utils/request'
 
   export default {
     data () {
       return {
         loading: 1,
-        lists: [],
-        listDataConfig: [
-          {
-            api: 'recommendRead',
-            data: {},
-            autoShow: true
-          },
-          {
-            api: 'recommendRead',
-            data: {},
-            autoShow: false
-          }
-        ]
+        regions: [],
+        originRegions: [],
+        urlTitle: '',
+        urlImage: '',
+        url: ''
       }
     },
     components: {
     },
+    created () {
+      this.refreshPageData()
+    },
+    watch: {
+      url: function (newValue) {
+        searchText(newValue, (text) => {
+          this.fetchUrlInfo(newValue)
+        })
+      }
+    },
     methods: {
-      curNavIndexChange: (index) => {
-        console.log('当前页数:' + index)
+      resetUrl () {
+        this.url = ''
+        this.urlTitle = ''
+        this.urlImage = ''
+      },
+      resetData () {
+        this.resetUrl()
+        this.regions = JSON.parse(JSON.stringify(this.originRegions))
+      },
+      fetchUrlInfo (url) {
+        fetchArticle(this, url, (data) => {
+          this.urlTitle = data.title
+          this.urlImage = data.img_url
+        })
+      },
+      submit () {
+        var selectedTags = []
+        for (var i = 0; i < this.regions.length; i++) {
+          if (this.regions[i].selected) {
+            selectedTags.push(this.regions[i].value)
+          }
+        }
+
+        var data = {
+          type: 'link',
+          title: this.urlTitle,
+          url: this.url,
+          tags: selectedTags,
+          draft: 0
+        }
+        postRequest(`article/store`, data).then(response => {
+          var code = response.data.code
+          if (code === 6101) {
+            // 已存在
+            window.mui.toast(response.data.message)
+            this.$router.replace(response.data.data.exist_url)
+            return
+          }
+          if (code !== 1000) {
+            window.mui.toast(response.data.message)
+            return
+          }
+
+          this.resetData()
+          this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
+        })
+      },
+      choiceItem (index, item) {
+        item.selected = item.selected ? 0 : 1
+        Vue.set(this.regions, index, item)
+      },
+      refreshPageData () {
+        getHomeData((data) => {
+          this.regions = data.regions
+          this.originRegions = data.regions
+        })
       }
     }
   }
