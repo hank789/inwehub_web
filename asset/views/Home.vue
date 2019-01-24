@@ -247,8 +247,8 @@
     },
     created () {
       var dataList = localEvent.getLocalItem('HomeDataList')
-      if (dataList.length > 0 && this.lists.length === 0 && this.type === 0 && dataList[0].type) {
-        this.lists[0] = dataList
+      if (dataList.length > 0 && this.lists.length === 0 && this.type === 1 && dataList[0].type) {
+        this.lists[this.type] = dataList
         this.loading = false
       }
 
@@ -302,11 +302,8 @@
         return true
       },
       prevSuccessCallback (data) {
-        if (this.type === 0) {
-          localEvent.setLocalItem('HomeDataList', data)
-        }
-
         if (this.type === 1) {
+          localEvent.setLocalItem('HomeDataList', data)
           this.$refs.HotBottomActions.getNotification()
         }
       },

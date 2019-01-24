@@ -202,7 +202,7 @@
         }
       },
       getNotification () {
-        postRequest(`notification/push/info`, {}).then(response => {
+        postRequest(`notification/push/info`, {}, false, {}, 0, false).then(response => {
           var code = response.data.code
           if (code !== 1000) {
             window.mui.alert(response.data.message)
