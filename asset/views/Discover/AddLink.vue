@@ -5,7 +5,7 @@
       <h1 class="mui-title">发布</h1>
       <div class="submit font-family-medium" @tap.stop.prevent="submit">确认发布</div>
     </header>
-    <div class="mui-content">
+    <div class="mui-content" v-if="!loading">
 
       <div class="shareTitle font-family-medium">分享到首页</div>
 
@@ -49,7 +49,7 @@
 <script>
   import { getHomeData } from '../../utils/home'
   import Vue from 'vue'
-  import { fetchArticle } from '../../utils/url'
+  import { fetchArticle, isUrl } from '../../utils/url'
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
 
@@ -72,7 +72,12 @@
     watch: {
       url: function (newValue) {
         searchText(newValue, (text) => {
-          this.fetchUrlInfo(newValue)
+          var rs = isUrl(text)
+          if (rs) {
+            this.fetchUrlInfo(newValue)
+          } else {
+            window.mui.toast('请正确输入文章链接')
+          }
         })
       }
     },
@@ -93,6 +98,11 @@
         })
       },
       submit () {
+        if (!this.url) {
+          window.mui.toast('请输入文章链接')
+          return
+        }
+
         var selectedTags = []
         for (var i = 0; i < this.regions.length; i++) {
           if (this.regions[i].selected) {
@@ -132,6 +142,7 @@
         getHomeData((data) => {
           this.regions = data.regions
           this.originRegions = data.regions
+          this.loading = 0
         })
       }
     }
