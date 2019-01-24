@@ -424,7 +424,7 @@
         }
       },
       jumpToDiscoverAdd () {
-        userAbility.jumpToDiscoverAdd(this, '?from=home')
+        userAbility.jumpToDiscoverAddLink(this)
       },
       addHeat (item, itemIndex, listIndex) {
         this.activeItem = item
