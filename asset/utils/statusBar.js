@@ -210,6 +210,10 @@ function getImmersedHeight () {
     }
   }
 
+  if (immersed) {
+    immersed = Math.ceil(immersed)
+  }
+
   console.log('最终immersedHeight:' + immersed)
   return immersed
 }
