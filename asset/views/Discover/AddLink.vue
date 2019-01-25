@@ -52,6 +52,7 @@
   import { fetchArticle, isUrl } from '../../utils/url'
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
+  import { customCheckClipbord } from '../../utils/allPlatform'
 
   export default {
     data () {
@@ -68,6 +69,7 @@
     },
     created () {
       this.refreshPageData()
+      this.monitorResume()
     },
     watch: {
       url: function (newValue) {
@@ -143,6 +145,29 @@
           this.regions = data.regions
           this.originRegions = data.regions
           this.loading = 0
+        })
+
+        this.checkClipbord()
+      },
+      monitorResume () {
+        window.addEventListener('resume', () => {
+          this.checkClipbord()
+        }, false)
+      },
+      checkClipbord () {
+        customCheckClipbord((text) => {
+          var urlReg = /[a-zA-z]+:\/\/[^\s"']*/g
+          if (!urlReg.test(text)) {
+            return
+          }
+
+          var matchs = text.match(urlReg)
+          var firstMatch = matchs[0]
+          window.mui.confirm('检测到您剪切板中有链接，是否添加？', '分享', ['取消', '确定'], e => {
+            if (e.index === 1) {
+              this.url = firstMatch
+            }
+          }, 'div')
         })
       }
     }
