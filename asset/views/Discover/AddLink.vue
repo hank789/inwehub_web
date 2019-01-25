@@ -53,6 +53,8 @@
   import { searchText } from '../../utils/search'
   import { postRequest } from '../../utils/request'
   import { customCheckClipbord } from '../../utils/allPlatform'
+  import { needRefresh } from '../../utils/plus'
+  import localEvent from '../../stores/localStorage'
 
   export default {
     data () {
@@ -133,7 +135,9 @@
           }
 
           this.resetData()
-          this.$router.replace('/c/' + response.data.data.category_id + '/' + response.data.data.slug)
+          needRefresh()
+          localEvent.setLocalItem('refreshHomeByAddLink', {status: true})
+          this.$router.pushPlus('/home')
         })
       },
       choiceItem (index, item) {

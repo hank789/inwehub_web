@@ -123,6 +123,12 @@
       prevSuccessCallback (data) {
         this.$emit('prevSuccessCallback', data)
       },
+      refreshPage (index) {
+        if (this.$refs['RefreshList_' + index] && this.$refs['RefreshList_' + index][0]) {
+          var curList = this.$refs['RefreshList_' + index][0]
+          curList.getPrevList()
+        }
+      },
       changePage (i) {
         if (this.curNavIndex === i) {
           return
@@ -149,8 +155,10 @@
       },
       slideTo (i) {
         var listDataConfig = this.localListDataConfig[i]
-        listDataConfig.autoShow = true
-        Vue.set(this.localListDataConfig, i, listDataConfig)
+        if (listDataConfig) {
+          listDataConfig.autoShow = true
+          Vue.set(this.localListDataConfig, i, listDataConfig)
+        }
 
         this.swiper.slideTo(i, 1000)
 
