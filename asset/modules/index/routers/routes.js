@@ -12,6 +12,7 @@ import localEvent from '../../../stores/localStorage'
 import { checkUpdate } from '../../../utils/updateVersion'
 const currentUser = localEvent.getLocalItem('UserInfo')
 import { openFullscreen } from '../../../utils/plus'
+import { isShowAd, checkShowAd } from '../../../utils/home'
 
 const routes = [
   {
@@ -26,6 +27,7 @@ const routes = [
         // 检查版本更新
         window.mui.plusReady(function () {
           checkUpdate()
+          checkShowAd()
         })
         var lauch = localEvent.getLocalItem('lauchFlag')
         if (!lauch.showGuide) {
@@ -36,9 +38,14 @@ const routes = [
             })
           })
         } else {
+          var isShowAdPage = isShowAd()
+          var nextUrl = '/home'
+          if (isShowAdPage) {
+            nextUrl = '/ad'
+          }
           window.mui.plusReady(function () {
             next({
-              path: '/ad'
+              path: nextUrl
             })
           })
         }

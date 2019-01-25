@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-content" v-if="isShow">
+    <div class="mui-content">
       <div style="background-color: #fff"></div>
       <div class="time" @tap.stop.prevent="toHome">
           <span id="micTime">3</span>s 跳过
@@ -17,15 +17,13 @@
 </template>
 
 <script>
-  import { postRequest } from '../utils/request'
   import { openFullscreen, closeFullscreen, closeSplashscreen } from '../utils/plus'
   export default {
     data: () => ({
-      isShow: 0
     }),
     created () {
-      this.getBoot_guide()
       openFullscreen()
+      this.getBoot_guide()
     },
     methods: {
       toHome () {
@@ -33,45 +31,25 @@
         this.$router.replace('/home')
       },
       getBoot_guide () {
-        postRequest(`system/boot_guide`, {}, false, {}, 6000).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
+        closeSplashscreen()
+        var endTime = 3  // 倒计时时间
+        var setTime = () => {
+          if (endTime < 1) {
             return
           }
-
-          closeSplashscreen()
-
-          // 是否显示启动页面
-          if (response.data.data.show_guide) {
-            openFullscreen()
-
-            this.isShow = response.data.data.show_guide
-            var endTime = 3  // 倒计时时间
-            var setTime = () => {
-              if (endTime < 1) {
-                return
-              }
-              if (document.getElementById('micTime')) {
-                document.getElementById('micTime').innerHTML = endTime.toString()
-              }
-            }
-            setTime()
-            var intervalObj = setInterval(() => {
-              endTime--
-              setTime()
-              if (endTime < 1) {
-                clearInterval(intervalObj)
-                this.toHome()
-              }
-            }, 1000)
-          } else {
-            this.isShow = response.data.data.show_guide
+          if (document.getElementById('micTime')) {
+            document.getElementById('micTime').innerHTML = endTime.toString()
+          }
+        }
+        setTime()
+        var intervalObj = setInterval(() => {
+          endTime--
+          setTime()
+          if (endTime < 1) {
+            clearInterval(intervalObj)
             this.toHome()
           }
-        }).catch(e => {
-          this.toHome()
-        })
+        }, 1000)
       }
     }
   }
