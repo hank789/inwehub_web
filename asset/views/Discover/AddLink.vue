@@ -100,6 +100,7 @@
     .input {
       border: none;
       margin-bottom: 0;
+      padding-left: 0;
     }
   }
 
