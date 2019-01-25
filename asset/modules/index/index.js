@@ -267,6 +267,7 @@ window.mui.back = function () {
       router.go(-1)
     }
   } else if (window.mui.os.plus && window.mui.os.android) {
+    console.log('back android 准备close当前webview')
     window.mui.muiOldBack()
   } else {
     router.go(-1)
