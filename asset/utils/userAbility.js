@@ -478,6 +478,13 @@ var UserAbility = () => {
     }
   }
 
+  function jumpToDiscoverAddLink (context) {
+    var isValid = userAbilityCheck.checkPhoneCertification(context)
+    if (isValid) {
+      context.$router.pushPlus('/discover/addlink')
+    }
+  }
+
   /* 邀请用户加入圈子 */
   var inviteJoinInGroup = (context, groupId, callback, groupInfo) => {
     if (groupInfo) {
@@ -530,7 +537,8 @@ var UserAbility = () => {
     inviteJoinInGroup: inviteJoinInGroup,
     jumpToDiscoverAdd: jumpToDiscoverAdd,
     jumpToGroupAdd: jumpToGroupAdd,
-    jumpToDianpingAdd: jumpToDianpingAdd
+    jumpToDianpingAdd: jumpToDianpingAdd,
+    jumpToDiscoverAddLink: jumpToDiscoverAddLink
   }
 }
 

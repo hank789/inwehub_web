@@ -20,7 +20,12 @@ function fetchArticle (context, url, succeeCallback) {
   })
 }
 
+function isUrl (url) {
+  return /^https?:\/\/[A-Za-z0-9]+\.[A-Za-z0-9]+/.test(url)
+}
+
 export {
-  fetchArticle
+  fetchArticle,
+  isUrl
 }
 
