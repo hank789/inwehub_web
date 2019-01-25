@@ -32,7 +32,7 @@
         <div class="title">所属领域</div>
 
         <div class="tagsList">
-          <span v-for="(item, index) in regions" :class="{active: item.selected}" @tap.stop.prevent="choiceItem(index, item)">{{item.text}}</span>
+          <span v-for="(item, index) in regions" v-if="item.value>0" :class="{active: item.selected}" @tap.stop.prevent="choiceItem(index, item)">{{item.text}}</span>
         </div>
       </div>
 
