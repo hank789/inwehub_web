@@ -203,11 +203,15 @@ function getImmersedHeight () {
   }
 
   // iphoneX 顶部距离缩小
-  if (window.mui.os.ios) {
+  if (window.mui.os.ios || window.mui.os.android) {
     var statusBarHeight = window.plus.navigator.getStatusbarHeight()
     if (statusBarHeight) {
       immersed = statusBarHeight
     }
+  }
+
+  if (immersed) {
+    immersed = Math.ceil(immersed)
   }
 
   console.log('最终immersedHeight:' + immersed)

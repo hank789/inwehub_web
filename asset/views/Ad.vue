@@ -1,31 +1,29 @@
 <template>
   <div>
-    <div class="mui-content" v-if="isShow">
+    <div class="mui-content">
       <div style="background-color: #fff"></div>
       <div class="time" @tap.stop.prevent="toHome">
           <span id="micTime">3</span>s 跳过
       </div>
       <div class="time_t"></div>
-      <div class="time_b">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-inwehubzuoyou"></use>
-        </svg>
-        <p>企业级应用&amp;服务广场</p>
-      </div>
+      <!--<div class="time_b">-->
+        <!--<svg class="icon" aria-hidden="true">-->
+          <!--<use xlink:href="#icon-inwehubzuoyou"></use>-->
+        <!--</svg>-->
+        <!--<p>企业级应用&amp;服务广场</p>-->
+      <!--</div>-->
     </div>
   </div>
 </template>
 
 <script>
-  import { postRequest } from '../utils/request'
   import { openFullscreen, closeFullscreen, closeSplashscreen } from '../utils/plus'
   export default {
     data: () => ({
-      isShow: 0
     }),
     created () {
       openFullscreen()
-      this.toHome()
+      this.getBoot_guide()
     },
     methods: {
       toHome () {
@@ -33,45 +31,25 @@
         this.$router.replace('/home')
       },
       getBoot_guide () {
-        postRequest(`system/boot_guide`, {}, false, {}, 6000).then(response => {
-          var code = response.data.code
-          if (code !== 1000) {
-            window.mui.toast(response.data.message)
+        closeSplashscreen()
+        var endTime = 3  // 倒计时时间
+        var setTime = () => {
+          if (endTime < 1) {
             return
           }
-
-          closeSplashscreen()
-
-          // 是否显示启动页面
-          if (response.data.data.show_guide) {
-            openFullscreen()
-
-            this.isShow = response.data.data.show_guide
-            var endTime = 3  // 倒计时时间
-            var setTime = () => {
-              if (endTime < 1) {
-                return
-              }
-              if (document.getElementById('micTime')) {
-                document.getElementById('micTime').innerHTML = endTime.toString()
-              }
-            }
-            setTime()
-            var intervalObj = setInterval(() => {
-              endTime--
-              setTime()
-              if (endTime < 1) {
-                clearInterval(intervalObj)
-                this.toHome()
-              }
-            }, 1000)
-          } else {
-            this.isShow = response.data.data.show_guide
+          if (document.getElementById('micTime')) {
+            document.getElementById('micTime').innerHTML = endTime.toString()
+          }
+        }
+        setTime()
+        var intervalObj = setInterval(() => {
+          endTime--
+          setTime()
+          if (endTime < 1) {
+            clearInterval(intervalObj)
             this.toHome()
           }
-        }).catch(e => {
-          this.$router.push('/exception')
-        })
+        }, 1000)
       }
     }
   }
@@ -98,8 +76,8 @@
   }
   .time_t{
     width: 100%;
-    height: 80%;
-    background: url("../statics/images/time@2x.png");
+    height: 100%;
+    background: url("../statics/images/newYear.jpg");
     background-size: cover;
     background-position: center;
   }

@@ -113,6 +113,19 @@ function checkClipbord () {
 }
 
 /**
+ * 自定义处理剪切板内容
+ * @param callback
+ */
+function customCheckClipbord (callback) {
+  var text = getClipbordText()
+
+  if (!text) {
+    return
+  }
+  callback(text)
+}
+
+/**
  * 提醒用户去开启通知权限
  */
 function noticeOpenNotifitionPermission (context) {
@@ -274,5 +287,6 @@ export {
   setClipboardText,
   getAnswerCache,
   setAnswerCache,
-  delAnswerCache
+  delAnswerCache,
+  customCheckClipbord
 }

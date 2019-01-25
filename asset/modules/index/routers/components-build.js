@@ -215,6 +215,8 @@ import DianpingProductFeedback from '../../../views/Dianping/Product/Feedback.vu
 import SearchSearchAll from '../../../views/Search/SearchAll.vue'
 import HotRecommend from '../../../views/HotRecommend.vue'
 import SettingpushSettingSubscribe from '../../../views/Setting/pushSettingSubscribe.vue'
+import DiscoverAddLink from '../../../views/Discover/AddLink.vue'
+
 export {
   Login,
   Register,
@@ -432,5 +434,6 @@ export {
   DianpingSearchCompany,
   DianpingProductFeedback,
   SearchSearchAll,
-  HotRecommend
+  HotRecommend,
+  DiscoverAddLink
 }

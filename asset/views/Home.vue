@@ -247,8 +247,8 @@
     },
     created () {
       var dataList = localEvent.getLocalItem('HomeDataList')
-      if (dataList.length > 0 && this.lists.length === 0 && this.type === 0 && dataList[0].type) {
-        this.lists[0] = dataList
+      if (dataList.length > 0 && this.lists.length === 0 && this.type === 1 && dataList[0].type) {
+        this.lists[this.type] = dataList
         this.loading = false
       }
 
@@ -259,7 +259,9 @@
         this.initPageIndex = type
       }
     },
-    activated: function () {},
+    activated () {
+      this.refreshPageData()
+    },
     beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
       next(vm => {
         // 找到当前mescroll的ref,调用子组件mescroll-vue的beforeRouteEnter方法
@@ -302,11 +304,8 @@
         return true
       },
       prevSuccessCallback (data) {
-        if (this.type === 0) {
-          localEvent.setLocalItem('HomeDataList', data)
-        }
-
         if (this.type === 1) {
+          localEvent.setLocalItem('HomeDataList', data)
           this.$refs.HotBottomActions.getNotification()
         }
       },
@@ -427,7 +426,7 @@
         }
       },
       jumpToDiscoverAdd () {
-        userAbility.jumpToDiscoverAdd(this, '?from=home')
+        userAbility.jumpToDiscoverAddLink(this)
       },
       addHeat (item, itemIndex, listIndex) {
         this.activeItem = item
@@ -464,10 +463,21 @@
         this.$refs.inTags.swiper.slideTo(index - 1, 1000)
       },
       refreshPageData () {
-        userAbility.newbieTask(this)
-        getHomeData((data) => {
-          this.regions = data.regions
-        })
+        var refreshHomeByAddLink = localEvent.getLocalItem('refreshHomeByAddLink')
+        if (refreshHomeByAddLink && refreshHomeByAddLink.status) {
+          localEvent.clearLocalItem('refreshHomeByAddLink')
+          this.refreshHomeByAddLink()
+        } else {
+          userAbility.newbieTask(this)
+          getHomeData((data) => {
+            this.regions = data.regions
+          })
+        }
+      },
+      refreshHomeByAddLink () {
+        // addlink页操作完后刷新首页
+        this.getAllRecommend()
+        this.$refs.RefreshList.refreshPage(0)
       },
       getRegionIndex (value) {
         for (var i = 0; i < this.regions.length; i++) {

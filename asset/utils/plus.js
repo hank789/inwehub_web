@@ -507,7 +507,7 @@ function AppPageInit (context) {
 
     lockOrientation('portrait-primary')
 
-    if (window.mui.os.plus && window.mui.os.ios) {
+    if (window.mui.os.plus) {
       // 监听自定义事件，前往页面
       document.addEventListener('go_to_target_page', (event) => {
         var url = event.detail.url
@@ -584,7 +584,7 @@ function AppInit (context) {
         /* 应用从后台切换回前台事件 */
         EventObj.addIntervalOnceEventListener('resume', () => {
           // 剪贴板
-          checkClipbord()
+          // checkClipbord()
           clearHomeData()
           // 存储用户位置信息
           var currentUser = localEvent.getLocalItem('UserInfo')
