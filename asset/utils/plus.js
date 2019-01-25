@@ -584,7 +584,7 @@ function AppInit (context) {
         /* 应用从后台切换回前台事件 */
         EventObj.addIntervalOnceEventListener('resume', () => {
           // 剪贴板
-          checkClipbord()
+          // checkClipbord()
           clearHomeData()
           // 存储用户位置信息
           var currentUser = localEvent.getLocalItem('UserInfo')
