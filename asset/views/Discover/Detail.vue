@@ -886,7 +886,7 @@
           }
           this.detail.supporter_list = this.detail.supporter_list.concat(support)
 
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:support:success',
@@ -912,7 +912,7 @@
             }
           }
 
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:support:success',
@@ -935,7 +935,7 @@
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.isUpvote = response.data.data.type
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:downvote:success',
@@ -956,7 +956,7 @@
           this.detail.is_downvoted = 0
           this.isUpvote = response.data.data.type
 
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:downvote:success',

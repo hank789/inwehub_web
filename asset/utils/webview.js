@@ -399,7 +399,7 @@ function goThirdPartyArticle (url, articleId, title, detailUrl, imgUrl) {
   var pathUrl = detailUrl
 
   if (/^http/i.test(url)) {
-    if (window.mixpanel.track) {
+    if (window.mixpanel) {
       window.mixpanel.track(
         'inwehub:read_page_detail', {
           'app': 'inwehub',

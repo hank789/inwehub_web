@@ -359,7 +359,7 @@
             }
             this.ask.answer.supporter_list = this.ask.answer.supporter_list.concat(support)
           }
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:support:success',

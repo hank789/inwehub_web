@@ -132,7 +132,7 @@ function supportAnswer (context, answerId, increaseCallback, decreaseCallback) {
     } else {
       increaseCallback(response)
     }
-    if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+    if (process.env.NODE_ENV === 'production' && window.mixpanel) {
       // mixpanel
       window.mixpanel.track(
         'inwehub:support:success',
@@ -170,7 +170,7 @@ function unSupportAnswer (context, answerId, increaseCallback, decreaseCallback)
     } else {
       increaseCallback(response)
     }
-    if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+    if (process.env.NODE_ENV === 'production' && window.mixpanel) {
       // mixpanel
       window.mixpanel.track(
         'inwehub:support:success',

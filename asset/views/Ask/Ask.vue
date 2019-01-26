@@ -397,7 +397,7 @@
           var result = response.data.data
           var id = result.id
           var timeend = result.waiting_second ? result.waiting_second : 15
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:ask:store:success',

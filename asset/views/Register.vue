@@ -410,7 +410,7 @@
             this.timer()
 
             window.mui.toast('验证码发送成功')
-            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            if (process.env.NODE_ENV === 'production' && window.mixpanel) {
               // mixpanel
               window.mixpanel.track(
                 'inwehub:register:sendPhoneCode',
@@ -532,7 +532,7 @@
 
             this.$store.dispatch(USERS_APPEND, cb => getUserInfo(response.data.data.user_id, user => {
               cb(user)
-              if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+              if (process.env.NODE_ENV === 'production' && window.mixpanel) {
                 // mixpanel
                 window.mixpanel.track(
                   'inwehub:register:success',

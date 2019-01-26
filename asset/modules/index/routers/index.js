@@ -46,7 +46,7 @@ router.pushPlus = function (url, id = '', autoShow = true, aniShow = 'slide-in-r
   if (window.mui.os.plus && window.mui.os.ios) {
     var matchedRoute = this.resolve(url)
     if (process.env.NODE_ENV !== 'development') {
-      if (window.mixpanel.track) {
+      if (window.mixpanel) {
         var mixpanelEvent = 'inwehub:'
         if (matchedRoute.route.name) {
           mixpanelEvent += matchedRoute.route.name
@@ -137,11 +137,8 @@ router.beforeEach((to, from, next) => {
   autoBlur()
   var referer = from.path
   localEvent.setLocalItem('referer', {path: referer})
-  if (to.path !== '/ad' && to.path !== '/') {
-    checkClipbord()
-  }
 
-  if (from.path === 'login') {
+  if (referer === 'login') {
     openFullscreen()
   } else {
     closeFullscreen()
@@ -151,7 +148,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-  if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+  if (process.env.NODE_ENV === 'production' && window.mixpanel) {
     var mixpanelEvent = 'inwehub:'
     if (to.name) {
       mixpanelEvent += to.name
