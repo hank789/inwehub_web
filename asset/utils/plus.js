@@ -591,7 +591,7 @@ function AppInit (context) {
           if (currentUser.user_id) {
             saveLocationInfo()
           }
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:app:resume',

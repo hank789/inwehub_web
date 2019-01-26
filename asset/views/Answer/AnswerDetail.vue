@@ -270,7 +270,7 @@
             // 回答过的；
             if (code === 3003) {
               alertAnswerRepeat(this)
-              if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+              if (process.env.NODE_ENV === 'production' && window.mixpanel) {
                 // mixpanel
                 window.mixpanel.track(
                   'inwehub:answer:confirm:robbed',
@@ -289,7 +289,7 @@
 
             return
           }
-          if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+          if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
             window.mixpanel.track(
               'inwehub:answer:confirm:success',

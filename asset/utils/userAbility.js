@@ -301,7 +301,7 @@ var UserAbility = () => {
                     window.mui.toast(response.data.data.tip)
                   })
                 }
-                if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+                if (process.env.NODE_ENV === 'production' && window.mixpanel) {
                   // mixpanel
                   window.mixpanel.track(
                     'inwehub:activity:sign_daily',

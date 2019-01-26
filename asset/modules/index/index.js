@@ -39,8 +39,6 @@ if (process.env.NODE_ENV !== 'development') {
     .config(sentryUrl)
     .addPlugin(RavenVue, Vue)
     .install()
-} else {
-  window.mixpanel = {}
 }
 var infiniteScroll = require('vue-infinite-scroll')
 Vue.use(infiniteScroll)
@@ -181,7 +179,7 @@ window.mixpanelIdentify = function (alias = false) {
   }
 }
 window.trackMixpanelEvent = function (eventName, page, pageName, pageTitle, referrerPage = '') {
-  if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+  if (process.env.NODE_ENV === 'production' && window.mixpanel) {
     // mixpanel
     window.mixpanel.track(
       'inwehub:' + eventName,

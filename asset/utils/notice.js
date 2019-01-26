@@ -31,7 +31,7 @@ function setIncBadgeNumber () {
 
 function noticeHandler (context, payload) {
   if (!payload) return
-  if (window.mixpanel.track) {
+  if (window.mixpanel) {
     window.mixpanel.track(
       'inwehub:push:click',
       {'app': 'inwehub', 'user_device': window.getUserAppDevice(), 'page': payload.object_id, 'page_name': payload.object_type, 'page_title': '打开推送'}

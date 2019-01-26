@@ -165,7 +165,7 @@
       cancelShare () {
         window.mui('#shareWrapper').popover('toggle')
         this.hide()
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+        if (process.env.NODE_ENV === 'production' && window.mixpanel) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:cancel',
@@ -183,7 +183,7 @@
       shareToCopyLink () {
         // setClipboardText(this.link)
         window.mui.toast('已复制')
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+        if (process.env.NODE_ENV === 'production' && window.mixpanel) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:copyLink',
@@ -204,7 +204,7 @@
         this.$router.pushPlus('/collectUser?from=all')
         // 保存链接
         localEvent.setLocalItem('share', this.link)
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+        if (process.env.NODE_ENV === 'production' && window.mixpanel) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:shareToChat',
@@ -280,7 +280,7 @@
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+        if (process.env.NODE_ENV === 'production' && window.mixpanel) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:shareToHaoyou',
@@ -306,7 +306,7 @@
           window.mui('#shareShowWrapper').popover('toggle')
         }
         this.hide()
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+        if (process.env.NODE_ENV === 'production' && window.mixpanel) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:shareToPengyouQuan',
@@ -445,7 +445,7 @@
         }).then(response => {
 
         })
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+        if (process.env.NODE_ENV === 'production' && window.mixpanel) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:success',
@@ -487,7 +487,7 @@
         }, 150)
 
         this.$emit('share')
-        if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+        if (process.env.NODE_ENV === 'production' && window.mixpanel) {
           // mixpanel
           window.mixpanel.track(
             'inwehub:share:show',

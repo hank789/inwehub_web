@@ -224,7 +224,7 @@
               hot.is_upvoted = 0
               hot.upvotes -= 1
             }
-            if (process.env.NODE_ENV === 'production' && window.mixpanel.track) {
+            if (process.env.NODE_ENV === 'production' && window.mixpanel) {
               // mixpanel
               window.mixpanel.track(
                 'inwehub:support:success',
