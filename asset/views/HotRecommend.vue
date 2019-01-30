@@ -326,7 +326,7 @@
     mounted () {
       this.getNotification()
       if (window.mui.os.plus) {
-        if (this.$route.query.showShare !== 0) {
+        if (this.$route.query.showShare !== '0') {
           this.clickShare()
         }
       }
