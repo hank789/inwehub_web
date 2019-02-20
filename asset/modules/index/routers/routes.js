@@ -2812,6 +2812,16 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/bodymovin',
+    name: 'bodymovin',
+    meta: {
+      title: '',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.Bodymovin
+  },
   { // message
     path: '/*',
     name: '404',
