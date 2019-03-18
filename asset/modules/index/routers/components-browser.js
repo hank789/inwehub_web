@@ -223,6 +223,7 @@ const HotRecommend = () => import(/* webpackChunkName: "HotRecommend" */ '../../
 const SettingpushSettingSubscribe = () => import(/* webpackChunkName: "SettingpushSettingSubscribe" */ '../../../views/Setting/pushSettingSubscribe.vue')
 const DiscoverAddLink = () => import(/* webpackChunkName: "DiscoverAddLink" */ '../../../views/Discover/AddLink.vue')
 const Bodymovin = () => import(/* webpackChunkName: "Bodymovin" */ '../../../views/Bodymovin.vue')
+const DianpingMain = () => import(/* webpackChunkName: "DianpingMain" */ '../../../views/Dianping/Main.vue')
 
 export {
   Login,
@@ -443,5 +444,6 @@ export {
   SearchSearchAll,
   HotRecommend,
   DiscoverAddLink,
-  Bodymovin
+  Bodymovin,
+  DianpingMain
 }

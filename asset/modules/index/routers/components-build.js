@@ -217,6 +217,7 @@ import HotRecommend from '../../../views/HotRecommend.vue'
 import SettingpushSettingSubscribe from '../../../views/Setting/pushSettingSubscribe.vue'
 import DiscoverAddLink from '../../../views/Discover/AddLink.vue'
 import Bodymovin from '../../../views/Bodymovin.vue'
+import DianpingMain from '../../../views/Dianping/Main.vue'
 
 export {
   Login,
@@ -437,5 +438,6 @@ export {
   SearchSearchAll,
   HotRecommend,
   DiscoverAddLink,
-  Bodymovin
+  Bodymovin,
+  DianpingMain
 }
