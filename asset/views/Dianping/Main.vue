@@ -71,9 +71,9 @@
 </template>
 
 
-<style>
-  .mui-content{
-    background:#fff !important;
+<style scoped lang="less">
+  .mui-content {
+    background: #fff !important;
   }
 
   .topTitle {
@@ -85,67 +85,69 @@
   .heatAlbum {
     padding: 0 16.000px;
     margin-top: 13.000px;
+
+    .albumList {
+      display: inline-block;
+    }
   }
 
-  .heatAlbum .albumList {
-    display: inline-block;
-  }
+  .albumList {
+    .componentCarAlbum {
+      width: 113.000px;
+      height: 152.500px;
+      position: relative;
+      border-radius: 4.000px;
+      margin: 2.000px 2.000px 0 0;
+      background: linear-gradient(39deg, rgba(60, 87, 119, 1) 0%, rgba(28, 44, 66, 1) 100%);
 
-  .albumList .componentCarAlbum {
-    width: 113.000px;
-    height: 152.500px;
-    position: relative;
-    border-radius: 4.000px;
-    margin: 2.000px 2.000px 0 0;
-    background: linear-gradient(39deg, rgba(60, 87, 119, 1) 0%, rgba(28, 44, 66, 1) 100%);
-  }
+      &:nth-of-type(2) {
+        margin-right: 0;
+      }
 
-  .albumList .componentCarAlbum:nth-of-type(2) {
-    margin-right: 0;
-  }
+      .albumName {
+        position: relative;
+        z-index: 1;
+        color: #FFFFFF;
+        font-size: 14.000px;
+        padding: 20.000px 15.000px 0;
+        line-height: 22.000px;
+      }
 
-  .albumList .componentCarAlbum .albumName {
-    position: relative;
-    z-index: 1;
-    color: #FFFFFF;
-    font-size: 14.000px;
-    padding: 20.000px 15.000px 0;
-    line-height: 22.000px;
-  }
+      .tags {
+        position: absolute;
+        z-index: 1;
+        left: 15.000px;
+        bottom: 20.000px;
+        height: 15.000px;
+        padding: 0 5.000px;
+        line-height: 15.000px;
+        border-radius: 0px 4.000px 0px 4.000px;
+        background: linear-gradient(45deg, rgba(83, 223, 221, 1) 0%, rgba(41, 188, 184, 1) 100%);
 
-  .albumList .componentCarAlbum .tags {
-    position: absolute;
-    z-index: 1;
-    left: 15.000px;
-    bottom: 20.000px;
-    height: 15.000px;
-    padding: 0 5.000px;
-    line-height: 15.000px;
-    border-radius: 0px 4.000px 0px 4.000px;
-    background: linear-gradient(45deg, rgba(83, 223, 221, 1) 0%, rgba(41, 188, 184, 1) 100%);
-  }
+        span {
+          color: #1C2C42;
+          font-size: 10.000px;
+          line-height: 14.000px;
+        }
+      }
 
-  .albumList .componentCarAlbum .tags span {
-    color: #1C2C42;
-    font-size: 10.000px;
-    line-height: 14.000px;
-  }
+      .backgroundSmall {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 113.000px;
+        height: 152.500px;
+      }
 
-  .albumList .componentCarAlbum .backgroundSmall {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 113.000px;
-    height: 152.500px;
-  }
-
-  .albumList .componentCarAlbum .backgroundBig {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 228.000px;
-    height: 152.500px;
-    display: none;
+      .backgroundBig {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 228.000px;
+        height: 152.500px;
+        display: none;
+      }
+    }
   }
 
   .albumList .componentCarAlbum .backgroundSmall image,
@@ -168,76 +170,80 @@
     background: #FFFFFF;
     border-radius: 4.000px;
     box-shadow: 0px 0px 26px 0px rgba(232, 241, 241, 1);
-  }
 
-  .componentCarProduct .topInfo {
-    display: flex;
-    justify-content: space-between;
-  }
+    .topInfo {
+      display: flex;
+      justify-content: space-between;
 
-  .componentCarProduct .topInfo .left {
-    display: flex;
-  }
+      .left {
+        display: flex;
 
-  .componentCarProduct .topInfo .left .nameMark .title {
-    color: #3C3E44;
-    font-size: 16.000px;
-    line-height: 22.500px;
-    margin-bottom: 7.000px;
-  }
+        .nameMark {
+          .title {
+            color: #3C3E44;
+            font-size: 16.000px;
+            line-height: 22.500px;
+            margin-bottom: 7.000px;
+          }
 
-  .componentCarProduct .topInfo .left .nameMark .stars {
-    display: flex;
-  }
+          .stars {
+            display: flex;
 
-  .componentCarProduct .topInfo .left .nameMark .stars .span {
-    font-size: 11.000px;
-    line-height: 15.000px;
-    margin-left: 3.000px;
-    margin-top: 1.500px;
-  }
+            .span {
+              font-size: 11.000px;
+              line-height: 15.000px;
+              margin-left: 3.000px;
+              margin-top: 1.500px;
+            }
+          }
+        }
 
-  .componentCarProduct .topInfo .left .logo {
-    width: 44.000px;
-    height: 44.000px;
-    margin-right: 10.000px;
-    overflow: hidden;
-    border-radius: 4.000px;
-    border: 0.500px solid #ECECEE;
-  }
+        .logo {
+          width: 44.000px;
+          height: 44.000px;
+          margin-right: 10.000px;
+          overflow: hidden;
+          border-radius: 4.000px;
+          border: 0.500px solid #ECECEE;
 
-  .componentCarProduct .topInfo .left .logo img {
-    width: 100%;
-    height: 100%;
-  }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
 
-  .componentCarProduct .topInfo .right {
-    display: flex;
-  }
+      .right {
+        display: flex;
 
-  .componentCarProduct .topInfo .right .heatICon {
-    width: 9.000px;
-    height: 11.500px;
-    margin-right: 4.000px;
-  }
+        .heatICon {
+          width: 9.000px;
+          height: 11.500px;
+          margin-right: 4.000px;
 
-  .componentCarProduct .topInfo .right .heatICon img {
-    width: 100%;
-    height: 100%;
-  }
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
 
-  .componentCarProduct .topInfo .right .textNumber {
-    color: #3C3E44;
-    font-size: 12.000px;
-    line-height: 14.500px;
-    margin-top: 1.000px;
-  }
+        .textNumber {
+          color: #3C3E44;
+          font-size: 12.000px;
+          line-height: 14.500px;
+          margin-top: 1.000px;
+        }
+      }
+    }
 
-  .componentCarProduct .bottom .describe {
-    color: #808080;
-    font-size: 14.000px;
-    line-height: 22.500px;
-    margin-top: 10.000px;
+    .bottom {
+      .describe {
+        color: #808080;
+        font-size: 14.000px;
+        line-height: 22.500px;
+        margin-top: 10.000px;
+      }
+    }
   }
 
   .specialWrapper {
@@ -247,78 +253,80 @@
     overflow: hidden;
     white-space: nowrap;
     margin-bottom: 30.000px;
-  }
 
-  .specialWrapper .specialList {
-    position: relative;
-    margin: 10.000px 0.000px 0 0;
+    .specialList {
+      position: relative;
+      margin: 10.000px 0.000px 0 0;
+
+      .img {
+        width: 166.500px;
+        height: 79.500px;
+        border-radius: 4.000px;
+      }
+
+      img {
+        height: 100%;
+        width: 100%;
+        border-radius: 4.000px;
+      }
+
+      .text {
+        font-size: 13.000px;
+        color: #FFFFFF;
+        position: absolute;
+        bottom: 15.000px;
+        left: 15.000px;
+        white-space: normal;
+        padding-right: 15.000px;
+      }
+
+      .mask {
+        width: 166.500px;
+        height: 79.500px;
+        background: linear-gradient(180deg, rgba(28, 44, 66, 0) 0%, rgba(28, 44, 66, 1) 100%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 4.000px;
+      }
+    }
   }
 
   .display {
     display: inline-block;
     vertical-align: top;
     margin-left: 10.000px;
-  }
 
-  .display:last-child {
-    margin-right: 10.000px;
+    &:last-child {
+      margin-right: 10.000px;
+    }
   }
 
   .marginR {
     margin-right: 20.000px;
   }
 
-  .specialWrapper .specialList .img {
-    width: 166.500px;
-    height: 79.500px;
-    border-radius: 4.000px;
-  }
-
-  .specialWrapper .specialList img {
-    height: 100%;
-    width: 100%;
-    border-radius: 4.000px;
-  }
-
-  .specialWrapper .specialList .text {
-    font-size: 13.000px;
-    color: #FFFFFF;
-    position: absolute;
-    bottom: 15.000px;
-    left: 15.000px;
-    white-space: normal;
-    padding-right: 15.000px;
-  }
-
-  .specialWrapper .specialList .mask {
-    width: 166.500px;
-    height: 79.500px;
-    background: linear-gradient(180deg, rgba(28, 44, 66, 0) 0%, rgba(28, 44, 66, 1) 100%);
-    /* opacity:0.7; */
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-radius: 4.000px;
-  }
-
   .expectWrapper {
     width: 166.500px;
     height: 78.000px;
-  }
-  .expectWrapper .content {
-    height: 100%;
-    line-height: 78.000px;
-    border-radius: 4.000px;
-    border: 0.500px solid #DCDCDC;
-  }
-  .expectWrapper .content .iconfont {
-    font-size: 13.000px;
-    color: #3C3E44;
-    margin-left: 15.000px;
-    margin-right: 3.500px;
-  }
-  .expectWrapper .content .expectText {
-    color: #808080;
-    font-size: 13.000px;
+
+    .content {
+      height: 100%;
+      line-height: 78.000px;
+      border-radius: 4.000px;
+      border: 0.500px solid #DCDCDC;
+
+      .iconfont {
+        font-size: 13.000px;
+        color: #3C3E44;
+        margin-left: 15.000px;
+        margin-right: 3.500px;
+      }
+
+      .expectText {
+        color: #808080;
+        font-size: 13.000px;
+      }
+    }
   }
 </style>
