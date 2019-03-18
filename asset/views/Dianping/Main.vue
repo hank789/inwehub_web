@@ -1,8 +1,8 @@
 <template>
   <div class="mui-content">
+
     <div class="topTitle font-family-medium">热门专题</div>
     <div class="heatAlbum">
-
       <div class="albumList">
         <div class="componentCarAlbum">
           <div class="albumName font-family-medium">表单调查工具大全</div>
@@ -18,9 +18,7 @@
     </div>
 
     <div class="topTitle font-family-medium">热门产品</div>
-
     <div class="heatProduct">
-
       <div class="productList">
         <div class="componentCarProduct">
           <div class="topInfo">
@@ -32,7 +30,6 @@
               <div class="nameMark">
                 <div class="title font-family-medium">阿里云</div>
                 <div class="stars">
-
                   <span class="span">4分</span>
                 </div>
               </div>
@@ -52,7 +49,6 @@
     </div>
 
     <div class="topTitle font-family-medium">专题集</div>
-
     <div class="specialWrapper">
       <div class="display">
         <div>
@@ -61,7 +57,6 @@
             <div class="img"><img src="../../statics/images/remen_zhunti_big1@3x.png"></div>
             <div class="text font-family-medium">分析与商业智能</div>
           </div>
-
           <div class="expectWrapper specialList">
             <div class="content">
               <span class="iconfont icon-tianjia"></span>
@@ -72,10 +67,7 @@
       </div>
     </div>
 
-
   </div>
-
-
 </template>
 
 
