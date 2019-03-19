@@ -216,6 +216,21 @@ function gethotAlbum (context, callback) {
   })
 }
 
+/* 更多专题 */
+
+function getAlbumList (context, perPage, callback) {
+  getRequest(`weapp/product/albumList`, {
+    perPage: perPage
+  }).then(res => {
+    var code = res.data.code
+    if (code !== 1000) {
+      window.mui.toast(res.data.message)
+      return
+    }
+    callback(res.data.data)
+  })
+}
+
 export {
   add,
   getCommentDetail,
@@ -228,6 +243,7 @@ export {
   addProduct,
   feedBackProduct,
   getHotProduct,
-  gethotAlbum
+  gethotAlbum,
+  getAlbumList
 }
 

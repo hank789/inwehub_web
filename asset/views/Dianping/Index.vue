@@ -82,16 +82,16 @@
 
           </div>
 
-          <div class="topTitle font-family-medium">专题集</div>
+          <div class="topTitle font-family-medium">更多专题</div>
           <div class="specialWrapper">
-            <div class="display">
-              <div>
-                <div class="specialList">
+            <div class="display" v-for="(item, index) in albumList" :key="index">
+              <div v-for="(list, itemIndex) in item" :key="itemIndex">
+                <div class="specialList" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + list.id + '/' + encodeURIComponent(list.name))">
                   <div class="mask"></div>
-                  <div class="img"><img src="../../statics/images/remen_zhunti_big1@3x.png"></div>
-                  <div class="text font-family-medium">分析与商业智能</div>
+                  <div class="img"><img :src="list.icon"></div>
+                  <div class="text font-family-medium">{{ list.name }}</div>
                 </div>
-                <div class="expectWrapper specialList">
+                <div class="expectWrapper specialList" v-if="list.type === 'lastElement'">
                   <div class="content">
                     <span class="iconfont icon-tianjia"></span>
                     <span class="expectText">我期待</span>
@@ -143,7 +143,7 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import RefreshList from '../../components/refresh/MescrollList.vue'
-  import { getRecommandProductList, getCategories, getHotProduct, gethotAlbum } from '../../utils/dianping'
+  import { getRecommandProductList, getCategories, getHotProduct, gethotAlbum, getAlbumList } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
   import { getImageSuffix } from '../../utils/image'
@@ -157,6 +157,7 @@
         list: [],
         hotProductList: [],
         hotAlbum: [],
+        albumList: [],
         recommandProductList: [],
         orderBy: 1,
         category: {
@@ -284,8 +285,28 @@
         getHotProduct(this, 3, (hotProductList) => {
           this.hotProductList = hotProductList
         })
+
         gethotAlbum(this, (hotAlbum) => {
           this.hotAlbum = hotAlbum
+        })
+
+        getAlbumList(this, 100, (res) => {
+          let listArry = res.data
+
+          listArry.push({
+            type: 'lastElement'
+          })
+
+          let len = listArry.length
+          let n = 5 // 假设每行显示5个
+          let lineNum = len % 5 === 0 ? len / 5 : Math.ceil(len / 5)
+          let resD = []
+          for (let i = 0; i < lineNum; i++) {
+            let temp = listArry.slice(i * n, i * n + n)
+            resD.push(temp)
+          }
+          console.log(listArry, '数据')
+          this.albumList = resD
         })
       }
     },
