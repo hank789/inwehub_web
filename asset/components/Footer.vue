@@ -45,7 +45,7 @@
         </div>
         <div class="desc">社区</div>
       </div>
-      <div class="menu" @tap.stop.prevent="$router.replace('/groups')" v-else>
+      <div class="menu" @tap.stop.prevent="$router.replace('/dianping')" v-else>
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shequ1"></use>
