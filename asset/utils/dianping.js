@@ -231,6 +231,22 @@ function getAlbumList (context, perPage, callback) {
   })
 }
 
+/* 我期待的专题 */
+
+function submitFeedback (context, title, callback) {
+  postRequest(`system/feedback`, {
+    title: title,
+    content: title
+  }).then(res => {
+    var code = res.data.code
+    if (code !== 1000) {
+      window.mui.toast(res.data.message)
+      return
+    }
+    callback(res.data)
+  })
+}
+
 export {
   add,
   getCommentDetail,
@@ -244,6 +260,7 @@ export {
   feedBackProduct,
   getHotProduct,
   gethotAlbum,
-  getAlbumList
+  getAlbumList,
+  submitFeedback
 }
 

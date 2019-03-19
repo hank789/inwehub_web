@@ -721,6 +721,19 @@
     </div>
 
 
+    <!-- 我期待的专题 -->
+
+    <div id="expect">
+      <div class="wxPopup">
+        <div class='codeWrapper'>
+          <div class='title'>我期待的专题</div>
+          <input class="expectInput" placeholder="输入您期待的专题名称" />
+          <div class='submit alertConfirm' ><label class="alertClose">取消</label><label>提交</label></div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </template>
 <script type="text/javascript">
@@ -2375,4 +2388,44 @@
     color: #C8C8C8;
     font-size: 0.373rem;
   }
+
+
+  .codeWrapper {
+    width: 300px;
+    /*height: 160px;*/
+    padding: 30px 0px 0;
+    background:#FFFFFF;
+    border-radius: 18px;
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+  }
+  .codeWrapper .title {
+    color: #444;
+    font-size:18px;
+    font-family:PingFangSC-Medium;
+  }
+  .codeWrapper input {
+    width: 250px;
+    margin: 15px auto 29.5px;
+    height: 39px;
+    line-height: 39px;
+    text-align: left;
+    border-radius: 5px;
+    padding: 0 10px;
+    color: #444;
+    border: 0.5px solid #DCDCDC;
+  }
+  .codeWrapper .submit {
+    color: #03AEF9;
+    font-size: 16px;
+    line-height:49.5px;
+    font-family:PingFangSC-Medium;
+    border-top: 0.5px solid #DCDCDC;
+  }
+
+  .codeWrapper label {
+    padding: 0 40px;
+  }
+
 </style>

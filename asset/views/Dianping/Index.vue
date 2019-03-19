@@ -75,7 +75,7 @@
                   </div>
                 </div>
                 <div class="bottom">
-                  <div class="describe">{{ item.advance_desc }}</div>
+                  <div class="describe text-line-2">{{ item.summary }}</div>
                 </div>
               </div>
             </div>
@@ -91,7 +91,7 @@
                   <div class="img"><img :src="list.icon"></div>
                   <div class="text font-family-medium">{{ list.name }}</div>
                 </div>
-                <div class="expectWrapper specialList" v-if="list.type === 'lastElement'">
+                <div class="expectWrapper specialList" v-if="list.type === 'lastElement'"  @tap.stop.prevent="showExpect">
                   <div class="content">
                     <span class="iconfont icon-tianjia"></span>
                     <span class="expectText">我期待</span>
@@ -143,12 +143,13 @@
 <script>
   import { swiper, swiperSlide } from 'vue-awesome-swiper'
   import RefreshList from '../../components/refresh/MescrollList.vue'
-  import { getRecommandProductList, getCategories, getHotProduct, gethotAlbum, getAlbumList } from '../../utils/dianping'
+  import { getRecommandProductList, getCategories, getHotProduct, gethotAlbum, getAlbumList, submitFeedback } from '../../utils/dianping'
   import DropDownMenu from '../../components/select/DropDownMenu.vue'
   import Options from '../../components/Options.vue'
   import { getImageSuffix } from '../../utils/image'
   import StarView from '../../components/star-rating/starView.vue'
   import localEvent from '../../stores/localStorage'
+  import { alertExpect } from '../../utils/dialogList'
 
   export default {
     data () {
@@ -201,6 +202,16 @@
       StarView
     },
     methods: {
+      showExpect () {
+        alertExpect(this, (num, text) => {
+          if (num === 0) {
+            console.log(num, '数字数字数字数字数字数字')
+            submitFeedback(this, text, (res) => {
+              console.log(res, '打印成功', text)
+            })
+          }
+        })
+      },
       getImageSuffix (img, width, height) {
         return getImageSuffix(img, width, height)
       },
@@ -305,7 +316,6 @@
             let temp = listArry.slice(i * n, i * n + n)
             resD.push(temp)
           }
-          console.log(listArry, '数据')
           this.albumList = resD
         })
       }
