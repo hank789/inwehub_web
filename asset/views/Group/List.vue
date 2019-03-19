@@ -6,9 +6,9 @@
           <use xlink:href="#icon-logowenzi"></use>
         </svg><span class="splitCircle"></span>
         <div class="logoAndTabsAndSearchTabs">
+          <div class="tab" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
           <div class="tab active" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
           <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
-          <div class="tab" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
         </div>
         <svg class="icon searchIcon" aria-hidden="true"  @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
           <use xlink:href="#icon-sousuo"></use>

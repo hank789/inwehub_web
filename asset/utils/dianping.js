@@ -1,4 +1,4 @@
-import { postRequest } from './request'
+import {getRequest, postRequest} from './request'
 
 /* 产品详情 */
 function getProductDetail (context, title, callback) {
@@ -188,6 +188,34 @@ function feedBackProduct (context, data, callback) {
   })
 }
 
+/* 热门产品 */
+
+function getHotProduct (context, perPage, callback) {
+  getRequest(`weapp/product/getHot`, {
+    perPage: perPage
+  }).then(res => {
+    var code = res.data.code
+    if (code !== 1000) {
+      window.mui.toast(res.data.message)
+      return
+    }
+    callback(res.data.data.data)
+  })
+}
+
+/* 热门专题 */
+
+function gethotAlbum (context, callback) {
+  getRequest(`weapp/product/hotAlbum`, {}).then(res => {
+    var code = res.data.code
+    if (code !== 1000) {
+      window.mui.toast(res.data.message)
+      return
+    }
+    callback(res.data.data)
+  })
+}
+
 export {
   add,
   getCommentDetail,
@@ -198,6 +226,8 @@ export {
   getProductComments,
   getTags,
   addProduct,
-  feedBackProduct
+  feedBackProduct,
+  getHotProduct,
+  gethotAlbum
 }
 
