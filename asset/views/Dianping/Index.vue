@@ -84,21 +84,30 @@
 
           <div class="topTitle font-family-medium">更多专题</div>
           <div class="specialWrapper">
-            <div class="display" v-for="(item, index) in albumList" :key="index">
-              <div v-for="(list, itemIndex) in item" :key="itemIndex">
-                <div class="specialList" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + list.id + '/' + encodeURIComponent(list.name))">
-                  <div class="mask"></div>
-                  <div class="img"><img :src="list.icon"></div>
-                  <div class="text font-family-medium">{{ list.name }}</div>
-                </div>
-                <div class="expectWrapper specialList" v-if="list.type === 'lastElement'"  @tap.stop.prevent="showExpect">
-                  <div class="content">
-                    <span class="iconfont icon-tianjia"></span>
-                    <span class="expectText">我期待</span>
+
+          <swiper :options="swiperOption" class="moreAlbum">
+            <swiper-slide v-for="(item, index) in albumList" :key="index">
+              <div class="display">
+                <div v-for="(list, itemIndex) in item" :key="itemIndex">
+                  <div class="specialList" v-if="list.type === 'product_album'" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + list.id + '/' + encodeURIComponent(list.name))">
+                    <div class="mask"></div>
+                    <div class="img"><img :src="list.icon"></div>
+                    <div class="text font-family-medium">{{ list.name }}</div>
+                  </div>
+                  <div class="expectWrapper specialList" v-if="list.type === 'lastElement'"  @tap.stop.prevent="showExpect">
+                    <div class="content">
+                      <svg class="icon iconfont" aria-hidden="true">
+                        <use xlink:href="#icon-tianjia"></use>
+                      </svg>
+                      <span class="expectText">我期待</span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+
+              </swiper-slide>
+              <div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
           </div>
         </div>
 
@@ -167,10 +176,10 @@
         sortOrderByName: '排序',
         swiperOption: {
           loop: false,
-          effect: 'coverflow',
-          centeredSlides: true,
+          effect: 'cubeEffect',
+          centeredSlides: false,
           slidesPerView: 'auto',
-          spaceBetween: 30,
+          spaceBetween: 0,
           coverflowEffect: {
             rotate: 0,
             stretch: 0,
@@ -179,7 +188,7 @@
             slideShadows: false
           },
           pagination: {
-            el: '.swiper-pagination'
+            el: 'null'
           }
         },
         iconOptions: []
@@ -205,9 +214,7 @@
       showExpect () {
         alertExpect(this, (num, text) => {
           if (num === 0) {
-            console.log(num, '数字数字数字数字数字数字')
             submitFeedback(this, text, (res) => {
-              console.log(res, '打印成功', text)
             })
           }
         })
@@ -378,6 +385,16 @@
   }
   .main-content {
     margin-top: 12px;
+  }
+  .moreAlbum {
+    .swiper-slide {
+      margin-right: 0 !important;
+      width: auto !important;
+    }
+  }
+
+  .moreAlbum .swiper-wrapper .swiper-slide:last-child .display {
+    margin-right: 10px !important;
   }
 
   .topTitle {
@@ -593,10 +610,6 @@
     display: inline-block;
     vertical-align: top;
     margin-left: 10px;
-
-    &:last-child {
-      margin-right: 10px;
-    }
   }
 
   .marginR {
