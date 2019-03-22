@@ -400,6 +400,7 @@
   .heatAlbum {
     padding: 0 0.426rem;
     margin-top: 0.346rem;
+    margin-bottom: 12px;
   }
 
   .albumList {
@@ -408,6 +409,12 @@
     &:nth-of-type(1) {
       .componentCarAlbum {
         width: 6.08rem;
+        .tags {
+          background:linear-gradient(90deg,rgba(253,128,173,1) 0%,rgba(250,73,117,1) 100%);
+          span {
+            color: #ffffff;
+          }
+        }
       }
     }
     &:nth-of-type(2) {
@@ -442,7 +449,7 @@
         bottom: 0.533rem;
         height: 0.4rem;
         padding: 0 0.133rem;
-        line-height: 0.4rem;
+        line-height: 0.33rem;
         border-radius: 0rem 0.106rem 0rem 0.106rem;
         background: linear-gradient(45deg, rgba(83, 223, 221, 1) 0%, rgba(41, 188, 184, 1) 100%);
         span {
@@ -475,6 +482,7 @@
   }
   .heatProduct {
     margin-top: 0.4rem;
+    margin-bottom: 12px;
   }
   .productList {
     margin-top: 0.266rem;
