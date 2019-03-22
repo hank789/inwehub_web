@@ -70,7 +70,7 @@
       document.getElementById('close').addEventListener('tap', function (event) {
         localEvent.setLocalItem('lauchFlag', {showGuide: true})
         closeFullscreen()
-        t.$router.replace('/ad')
+        t.$router.replace('/home')
       }, false)
 
       // 图片切换时，触发动画
