@@ -2391,41 +2391,41 @@
 
 
   .codeWrapper {
-    width: 300px;
-    /*height: 160px;*/
-    padding: 30px 0px 0;
+    width: 8rem;
+    /*height: 4.266rem;*/
+    padding: 0.8rem 0rem 0;
     background:#FFFFFF;
-    border-radius: 18px;
+    border-radius: 0.48rem;
     text-align: center;
     margin: 0 auto;
     position: relative;
   }
   .codeWrapper .title {
     color: #444;
-    font-size:18px;
+    font-size:0.48rem;
     font-family:PingFangSC-Medium;
   }
   .codeWrapper input {
-    width: 250px;
-    margin: 15px auto 29.5px;
-    height: 39px;
-    line-height: 39px;
+    width: 6.666rem;
+    margin: 0.4rem auto 0.786rem;
+    height: 1.04rem;
+    line-height: 1.04rem;
     text-align: left;
-    border-radius: 5px;
-    padding: 0 10px;
+    border-radius: 0.133rem;
+    padding: 0 0.266rem;
     color: #444;
-    border: 0.5px solid #DCDCDC;
+    border: 0.013rem solid #DCDCDC;
   }
   .codeWrapper .submit {
     color: #03AEF9;
-    font-size: 16px;
-    line-height:49.5px;
+    font-size: 0.426rem;
+    line-height:1.32rem;
     font-family:PingFangSC-Medium;
-    border-top: 0.5px solid #DCDCDC;
+    border-top: 0.013rem solid #DCDCDC;
   }
 
   .codeWrapper label {
-    padding: 0 40px;
+    padding: 0 1.066rem;
   }
 
 </style>

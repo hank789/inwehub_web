@@ -378,13 +378,13 @@
 <style scoped lang="less">
   .listWrapper {
     top: 1.173rem !important;
-    bottom: 50px !important;
+    bottom: 1.333rem !important;
   }
   .mui-content {
     background: #fff !important;
   }
   .main-content {
-    margin-top: 12px;
+    margin-top: 0.32rem;
   }
   .moreAlbum {
     .swiper-slide {
@@ -394,17 +394,17 @@
   }
 
   .moreAlbum .swiper-wrapper .swiper-slide:last-child .display {
-    margin-right: 10px !important;
+    margin-right: 0.266rem !important;
   }
 
   .topTitle {
     color: #3C3E44;
-    font-size: 20px;
-    padding: 18px 16px 0;
+    font-size: 0.533rem;
+    padding: 0.48rem 0.426rem 0;
   }
   .heatAlbum {
-    padding: 0 16px;
-    margin-top: 13px;
+    padding: 0 0.426rem;
+    margin-top: 0.346rem;
   }
 
   .albumList {
@@ -412,7 +412,7 @@
     vertical-align: top;
     &:nth-of-type(1) {
       .componentCarAlbum {
-        width: 228px;
+        width: 6.08rem;
       }
     }
     &:nth-of-type(2) {
@@ -426,49 +426,49 @@
       }
     }
     .componentCarAlbum {
-      width: 113px;
-      height: 152.500px;
+      width: 3.013rem;
+      height: 4.066rem;
       position: relative;
-      border-radius: 4px;
-      margin: 1px 2px 0 0;
+      border-radius: 0.106rem;
+      margin: 0.026rem 0.053rem 0 0;
       background: linear-gradient(39deg, rgba(60, 87, 119, 1) 0%, rgba(28, 44, 66, 1) 100%);
       .albumName {
         position: relative;
         z-index: 1;
         color: #FFFFFF;
-        font-size: 14px;
-        padding: 20px 15px 0;
-        line-height: 22px;
+        font-size: 0.373rem;
+        padding: 0.533rem 0.4rem 0;
+        line-height: 0.586rem;
       }
       .tags {
         position: absolute;
         z-index: 1;
-        left: 15px;
-        bottom: 20px;
-        height: 15px;
-        padding: 0 5px;
-        line-height: 15px;
-        border-radius: 0px 4px 0px 4px;
+        left: 0.4rem;
+        bottom: 0.533rem;
+        height: 0.4rem;
+        padding: 0 0.133rem;
+        line-height: 0.4rem;
+        border-radius: 0rem 0.106rem 0rem 0.106rem;
         background: linear-gradient(45deg, rgba(83, 223, 221, 1) 0%, rgba(41, 188, 184, 1) 100%);
         span {
           color: #1C2C42;
-          font-size: 10px;
-          line-height: 14px;
+          font-size: 0.266rem;
+          line-height: 0.373rem;
         }
       }
       .backgroundSmall {
         position: absolute;
         top: 0;
         left: 0;
-        width: 113px;
-        height: 152.500px;
+        width: 3.013rem;
+        height: 4.066rem;
       }
       .backgroundBig {
         position: absolute;
         top: 0;
         left: 0;
-        width: 228px;
-        height: 152.5px;
+        width: 6.08rem;
+        height: 4.066rem;
       }
     }
   }
@@ -479,17 +479,17 @@
     height: 100%;
   }
   .heatProduct {
-    margin-top: 15px;
+    margin-top: 0.4rem;
   }
   .productList {
-    margin-top: 10px;
-    padding: 0 16px;
+    margin-top: 0.266rem;
+    padding: 0 0.426rem;
   }
   .componentCarProduct {
-    padding: 15px;
+    padding: 0.4rem;
     background: #FFFFFF;
-    border-radius: 4px;
-    box-shadow: 0px 0px 26px 0px rgba(232, 241, 241, 1);
+    border-radius: 0.106rem;
+    box-shadow: 0rem 0rem 0.693rem 0rem rgba(232, 241, 241, 1);
 
     .topInfo {
       display: flex;
@@ -499,31 +499,31 @@
         display: flex;
         .nameMark {
           .title {
-            width: 204px;
+            width: 5.44rem;
             color: #3C3E44;
-            font-size: 16px;
-            line-height: 22.500px;
-            margin-bottom: 7px;
+            font-size: 0.426rem;
+            line-height: 0.6rem;
+            margin-bottom: 0.186rem;
           }
           .stars {
             display: flex;
-            margin-top: -5px;
+            margin-top: -0.133rem;
             .span {
-              font-size: 11px;
-              line-height: 15px;
-              margin-left: 3px;
-              margin-top: 4px;
+              font-size: 0.293rem;
+              line-height: 0.4rem;
+              margin-left: 0.08rem;
+              margin-top: 0.106rem;
               display: inline-block;
             }
           }
         }
         .logo {
-          width: 44px;
-          height: 44px;
-          margin-right: 10px;
+          width: 1.173rem;
+          height: 1.173rem;
+          margin-right: 0.266rem;
           overflow: hidden;
-          border-radius: 4px;
-          border: 0.500px solid #ECECEE;
+          border-radius: 0.106rem;
+          border: 0.013rem solid #ECECEE;
           img {
             width: 100%;
             height: 100%;
@@ -535,9 +535,9 @@
       .right {
         display: flex;
         .heatICon {
-          width: 9px;
-          height: 11.500px;
-          margin-right: 4px;
+          width: 0.24rem;
+          height: 0.306rem;
+          margin-right: 0.106rem;
           img {
             width: 100%;
             height: 100%;
@@ -546,9 +546,9 @@
         }
         .textNumber {
           color: #3C3E44;
-          font-size: 12px;
-          line-height: 14.500px;
-          margin-top: 1px;
+          font-size: 0.32rem;
+          line-height: 0.386rem;
+          margin-top: 0.026rem;
         }
       }
     }
@@ -556,52 +556,52 @@
     .bottom {
       .describe {
         color: #808080;
-        font-size: 14px;
-        line-height: 22.500px;
-        margin-top: 10px;
+        font-size: 0.373rem;
+        line-height: 0.6rem;
+        margin-top: 0.266rem;
       }
     }
   }
 
   .specialWrapper {
     width: 100%;
-    height: 446.500px;
-    padding: 0px 0 0 0px;
+    height: 11.906rem;
+    padding: 0rem 0 0 0rem;
     overflow: hidden;
     white-space: nowrap;
-    margin-bottom: 30px;
+    margin-bottom: 0.8rem;
 
     .specialList {
       position: relative;
-      margin: 10px 0px 0 0;
+      margin: 0.266rem 0rem 0 0;
 
       .img {
-        width: 166.500px;
-        height: 79.500px;
-        border-radius: 4px;
+        width: 4.44rem;
+        height: 2.12rem;
+        border-radius: 0.106rem;
         img {
           height: 100%;
           width: 100%;
-          border-radius: 4px;
+          border-radius: 0.106rem;
         }
       }
       .text {
-        font-size: 13px;
+        font-size: 0.346rem;
         color: #FFFFFF;
         position: absolute;
-        bottom: 15px;
-        left: 15px;
+        bottom: 0.4rem;
+        left: 0.4rem;
         white-space: normal;
-        padding-right: 15px;
+        padding-right: 0.4rem;
       }
       .mask {
-        width: 166.500px;
-        height: 79.500px;
+        width: 4.44rem;
+        height: 2.12rem;
         background: linear-gradient(180deg, rgba(28, 44, 66, 0) 0%, rgba(28, 44, 66, 1) 100%);
         position: absolute;
         top: 0;
         left: 0;
-        border-radius: 4px;
+        border-radius: 0.106rem;
       }
     }
   }
@@ -609,33 +609,33 @@
   .display {
     display: inline-block;
     vertical-align: top;
-    margin-left: 10px;
+    margin-left: 0.266rem;
   }
 
   .marginR {
-    margin-right: 20px;
+    margin-right: 0.533rem;
   }
 
   .expectWrapper {
-    width: 166.500px;
-    height: 78px;
+    width: 4.44rem;
+    height: 2.08rem;
 
     .content {
       height: 100%;
-      line-height: 78px;
-      border-radius: 4px;
-      border: 0.500px solid #DCDCDC;
+      line-height: 2.08rem;
+      border-radius: 0.106rem;
+      border: 0.013rem solid #DCDCDC;
 
       .iconfont {
-        font-size: 13px;
+        font-size: 0.346rem;
         color: #3C3E44;
-        margin-left: 15px;
-        margin-right: 3.500px;
+        margin-left: 0.4rem;
+        margin-right: 0.093rem;
       }
 
       .expectText {
         color: #808080;
-        font-size: 13px;
+        font-size: 0.346rem;
       }
     }
   }
