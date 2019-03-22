@@ -235,13 +235,15 @@ function getAlbumList (context, perPage, callback) {
 
 function submitFeedback (context, title, callback) {
   postRequest(`system/feedback`, {
-    title: title,
+    title: '期待专题',
     content: title
   }).then(res => {
     var code = res.data.code
     if (code !== 1000) {
       window.mui.toast(res.data.message)
       return
+    } else {
+      window.mui.toast('提交成功')
     }
     callback(res.data)
   })
