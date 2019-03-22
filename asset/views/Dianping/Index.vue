@@ -1,25 +1,24 @@
 <template>
   <div>
-
-    <div class="container-control-logoAndTabsAndSearch">
-      <svg class="icon logoIcon" aria-hidden="true">
-        <use xlink:href="#icon-logowenzi"></use>
-      </svg>
-      <span class="splitCircle"></span>
-      <div class="logoAndTabsAndSearchTabs">
-        <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
-        <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
-        <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
-      </div>
-      <svg class="icon searchIcon" aria-hidden="true"
-           @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
-        <use xlink:href="#icon-sousuo"></use>
-      </svg>
-    </div>
-
-    <div class="line-river-after line-river-after-top marginTop"></div>
     <div id="home-content" class="mui-content">
 
+      <div class="container-control-logoAndTabsAndSearch">
+        <svg class="icon logoIcon" aria-hidden="true">
+          <use xlink:href="#icon-logowenzi"></use>
+        </svg>
+        <span class="splitCircle"></span>
+        <div class="logoAndTabsAndSearchTabs">
+          <div class="tab active" @tap.stop.prevent="$router.replace('/dianping')">点评</div>
+          <div class="tab" @tap.stop.prevent="$router.replace('/groups')">圈子</div>
+          <div class="tab" @tap.stop.prevent="$router.replace('/ask/offers')">问答</div>
+        </div>
+        <svg class="icon searchIcon" aria-hidden="true"
+             @tap.stop.prevent="$router.pushPlus('/searchAll','list-detail-page-three')">
+          <use xlink:href="#icon-sousuo"></use>
+        </svg>
+      </div>
+
+      <div class="line-river-after line-river-after-top marginTop"></div>
 
 
         <div class="main-content">
@@ -367,15 +366,6 @@
 </script>
 
 <style scoped lang="less">
-  .container-control-logoAndTabsAndSearch {
-    top: 1.306rem !important;
-    z-index: 9;
-    background: #ffffff;
-  }
-  .line-river-after-top.marginTop {
-    top: 1.306rem;
-    z-index: 10;
-  }
   .listWrapper {
     top: 1.173rem !important;
     bottom: 1.333rem !important;
@@ -383,14 +373,19 @@
   .mui-content {
     background: #fff !important;
   }
-  .main-content {
-    margin-top: 1.306rem;
-  }
   .moreAlbum {
     .swiper-slide {
       margin-right: 0 !important;
       width: auto !important;
     }
+  }
+  .main-content {
+    position: absolute;
+    left:0;
+    top:44px;
+    bottom:50px;
+    width:100%;
+    overflow-y: scroll;
   }
 
   .moreAlbum .swiper-wrapper .swiper-slide:last-child .display {
@@ -569,7 +564,7 @@
     padding: 0rem 0 0 0rem;
     overflow: hidden;
     white-space: nowrap;
-    margin-bottom: 80px;
+    margin-bottom: 30px;
     .specialList {
       position: relative;
       margin: 0.266rem 0rem 0 0;
