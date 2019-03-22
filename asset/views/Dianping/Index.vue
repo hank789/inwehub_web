@@ -400,7 +400,7 @@
   .heatAlbum {
     padding: 0 0.426rem;
     margin-top: 0.346rem;
-    margin-bottom: 12px;
+    margin-bottom: 0.32rem;
   }
 
   .albumList {
@@ -482,7 +482,7 @@
   }
   .heatProduct {
     margin-top: 0.4rem;
-    margin-bottom: 12px;
+    margin-bottom: 0.32rem;
   }
   .productList {
     margin-top: 0.266rem;
