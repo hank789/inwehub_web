@@ -449,7 +449,7 @@
         bottom: 0.533rem;
         height: 0.4rem;
         padding: 0 0.133rem;
-        line-height: 0.33rem;
+        line-height: 0.32rem;
         border-radius: 0rem 0.106rem 0rem 0.106rem;
         background: linear-gradient(45deg, rgba(83, 223, 221, 1) 0%, rgba(41, 188, 184, 1) 100%);
         span {
