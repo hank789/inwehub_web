@@ -28,7 +28,7 @@
             <div class="albumList" v-for="(item, indexAlbum) in hotAlbum" :key="indexAlbum" @tap.stop.prevent="$router.pushPlus('/dianping/products/' + item.id + '/' + encodeURIComponent(item.name))">
               <div class="componentCarAlbum">
                 <div class="albumName font-family-medium">{{ item.name }}</div>
-                <div class="tags"><span>{{ item.tips }}</span></div>
+                <div class="tags"><label>{{ item.tips }}</label></div>
                 <div class="backgroundBig" v-if="indexAlbum === 0">
                   <img src="../../statics/images/remen_zhunti_big1@3x.png">
                 </div>
@@ -410,9 +410,9 @@
       .componentCarAlbum {
         width: 6.08rem;
         .tags {
-          background:linear-gradient(90deg,rgba(253,128,173,1) 0%,rgba(250,73,117,1) 100%);
-          span {
+          label {
             color: #ffffff;
+            background:linear-gradient(90deg,rgba(253,128,173,1) 0%,rgba(250,73,117,1) 100%);
           }
         }
       }
@@ -447,15 +447,15 @@
         z-index: 1;
         left: 0.4rem;
         bottom: 0.533rem;
-        height: 0.4rem;
-        padding: 0 0.133rem;
-        line-height: 0.32rem;
-        border-radius: 0rem 0.106rem 0rem 0.106rem;
-        background: linear-gradient(45deg, rgba(83, 223, 221, 1) 0%, rgba(41, 188, 184, 1) 100%);
-        span {
+        label {
+          height: 0.426rem;
           color: #1C2C42;
           font-size: 0.266rem;
-          line-height: 0.373rem;
+          line-height: 0.44rem;
+          padding: 0 0.133rem;
+          display: inline-block;
+          border-radius: 0rem 0.106rem 0rem 0.106rem;
+          background: linear-gradient(45deg, rgba(83, 223, 221, 1) 0%, rgba(41, 188, 184, 1) 100%);
         }
       }
       .backgroundSmall {
