@@ -382,8 +382,8 @@
   .main-content {
     position: absolute;
     left:0;
-    top:44px;
-    bottom:50px;
+    top:1.173rem;
+    bottom:1.333rem;
     width:100%;
     overflow-y: scroll;
   }
@@ -564,7 +564,7 @@
     padding: 0rem 0 0 0rem;
     overflow: hidden;
     white-space: nowrap;
-    margin-bottom: 30px;
+    margin-bottom: 0.8rem;
     .specialList {
       position: relative;
       margin: 0.266rem 0rem 0 0;
