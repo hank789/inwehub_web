@@ -606,6 +606,25 @@ function alertEditEmailSubscribe (context, callback) {
   }
 }
 
+function alertExpect (context, callback) {
+  var dialog = getDialogObj(context)
+  if (dialog) {
+    dialog.getHtml('expect', {}, (html) => {
+      alertHtml(html, (num) => {
+        if (num === 0) {
+          var text = document.getElementsByClassName('expectInput')[1].value
+          callback(num, text)
+          return true
+        }
+
+        if (num === -1) {
+          return true
+        }
+      })
+    })
+  }
+}
+
 export {
   alertFenhongxize,
   alertAskCommunityDetailShareSuccess,
@@ -640,6 +659,7 @@ export {
   alertSubscribeGZH,
   alertHotRecommend,
   alertEmailSubscribe,
-  alertEditEmailSubscribe
+  alertEditEmailSubscribe,
+  alertExpect
   // alertshi
 }

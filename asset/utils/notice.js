@@ -186,7 +186,7 @@ function noticeHandler (context, payload) {
       break
     case 'recommend_daily_subscribe':
       // 每日热点推荐
-      router.pushPlus('/hotrecommend/' + payload.object_id, 'list-page')
+      router.pushPlus('/hotrecommend/' + payload.object_id + '?showShare=0', 'list-page')
       break
   }
 }

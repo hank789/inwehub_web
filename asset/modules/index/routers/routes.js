@@ -2570,6 +2570,19 @@ const routes = [
       requestAuth(to, from, next)
     }
   },
+  {
+    path: '/dianping/main',
+    name: 'dianping_main',
+    meta: {
+      title: '',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.DianpingMain,
+    beforeEnter: (to, from, next) => {
+      requestAuth(to, from, next)
+    }
+  },
   { // 添加点评
     path: '/dianping/add/:id',
     name: 'dianping-add',
@@ -2811,6 +2824,16 @@ const routes = [
     beforeEnter: (to, from, next) => {
       requestAuth(to, from, next)
     }
+  },
+  {
+    path: '/bodymovin',
+    name: 'bodymovin',
+    meta: {
+      title: '',
+      wechatHideHeader: false,
+      keepAlive: false
+    },
+    component: componets.Bodymovin
   },
   { // message
     path: '/*',
