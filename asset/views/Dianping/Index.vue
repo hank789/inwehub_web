@@ -569,7 +569,7 @@
     padding: 0rem 0 0 0rem;
     overflow: hidden;
     white-space: nowrap;
-    margin-bottom: 80px;
+    margin-bottom: 2.133rem;
     .specialList {
       position: relative;
       margin: 0.266rem 0rem 0 0;
