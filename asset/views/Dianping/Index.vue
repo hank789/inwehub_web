@@ -383,7 +383,7 @@
     position: absolute;
     left:0;
     top:1.173rem;
-    bottom:1.333rem;
+    bottom: 50px; /* px不转换 */
     width:100%;
     overflow-y: scroll;
   }
