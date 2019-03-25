@@ -410,7 +410,7 @@
         } else {
           goThirdPartyArticle(
             item.feed.link_url,
-            item.submission_id,
+            item.feed.submission_id,
             item.feed.article_title,
             item.feed.comment_url,
             item.feed.img
