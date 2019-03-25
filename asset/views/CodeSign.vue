@@ -11,7 +11,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-shoujihao"></use>
           </svg>
-          <input placeholder="请输入手机号" pattern="\d*" ref="phone" @focus="focus" @blur="blur"
+          <input placeholder="请输入手机号" pattern="\d*" ref="phone" autofocus="autofocus" @focus="focus" @blur="blur"
                  v-tooltip="{content:errorMsg, placement:'bottom', trigger:'manual'}" @tap.stop.prevent="entryPhone"
                  class="text" type="text" name="phone" v-model.trim.num="phone" autocomplete="off">
 
@@ -22,7 +22,7 @@
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-yanzhengma"></use>
           </svg>
-          <input placeholder="请输入验证码" @focus="focus" @blur="blur" class="text" type="text" name="code"
+          <input placeholder="请输入验证码" ref="yzmInput" @focus="focus" @blur="blur" class="text" type="text" name="code"
                  v-model.trim.num="code" autocomplete="off" @tap.stop.prevent="entryYzm"/>
         </div>
 
@@ -316,6 +316,7 @@
             this.timer()
 
             window.mui.toast('验证码发送成功')
+            this.$refs.yzmInput.focus()
             if (process.env.NODE_ENV === 'production' && window.mixpanel) {
               // mixpanel
               window.mixpanel.track(
