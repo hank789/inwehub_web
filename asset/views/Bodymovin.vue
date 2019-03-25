@@ -1,6 +1,7 @@
 <template>
   <div class="mui-content">
-    <div id="bm"></div>
+    <div @tap.stop.prevent="click">点击</div>
+    <div class="upvote" id="bm"></div>
   </div>
 </template>
 
@@ -28,18 +29,31 @@
     components: {
     },
     mounted () {
-      var anim = window.bodymovin.loadAnimation({
-        container: document.getElementById('bm'),
-        renderer: 'svg',
-        loop: false,
-        autoplay: false,
-        animationData: upvote
-      })
-      anim.play()
+
 //      anim.stop()
 //      anim.destroy()
     },
     methods: {
+      upvote () {
+        var anim = window.bodymovin.loadAnimation({
+          container: document.getElementById('bm'),
+          renderer: 'svg',
+          loop: false,
+          autoplay: false,
+          animationData: upvote
+        })
+        anim.play()
+      },
+      click () {
+        this.upvote()
+      }
     }
   }
 </script>
+<style lang="less" scoped>
+  .upvote {
+    width: 100px;
+    height: 100px;
+    margin: 100px auto;
+  }
+</style>

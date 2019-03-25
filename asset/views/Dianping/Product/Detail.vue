@@ -79,7 +79,7 @@
 
           <div>
             <template v-for="(comment, index) in productComments">
-              <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
+              <feedDianping :item="comment" :index="index" @showItemMore="showItemMore"></feedDianping>
             </template>
           </div>
 
