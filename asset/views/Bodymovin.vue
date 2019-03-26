@@ -52,8 +52,8 @@
 </script>
 <style lang="less" scoped>
   .upvote {
-    width: 100px;
-    height: 100px;
-    margin: 100px auto;
+    width: 2.666rem;
+    height: 2.666rem;
+    margin: 2.666rem auto;
   }
 </style>

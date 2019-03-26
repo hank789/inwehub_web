@@ -936,20 +936,20 @@
           }
         }
         .first {
-          margin-right: 45px;
+          margin-right: 1.2rem;
         }
         .posiZan {
           position: absolute;
-          top: 3px;
-          right: -7px;
+          top: 0.08rem;
+          right: -0.186rem;
           .upvoted {
-            width: 31px;
-            height: 31px;
+            width: 0.826rem;
+            height: 0.826rem;
             display: inline-block;
             position: absolute;
-            top: -5px;
-            right: 36px;
-            padding: 0 0 0 20px;
+            top: -0.133rem;
+            right: 0.96rem;
+            padding: 0 0 0 0.533rem;
             svg {
               position: absolute;
               top: 0;
