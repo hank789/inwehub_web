@@ -19,7 +19,7 @@
         @prevSuccessCallback="prevSuccessCallback"
       >
         <template v-for="(comment, index) in list">
-          <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
+          <feedDianping :item="comment" :index="index" @showItemMore="showItemMore"></feedDianping>
         </template>
       </RefreshList>
 

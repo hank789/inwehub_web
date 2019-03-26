@@ -186,7 +186,7 @@
             <svg class="icon" aria-hidden="true" v-if="item.feed.is_upvoted === 0">
               <use xlink:href="#icon-zan"></use>
             </svg>
-            <svg class="icon yizan" aria-hidden="true"  v-if="item.feed.is_upvoted === 1 || item.feed.is_upvoted === 100">
+            <svg class="icon yizan" aria-hidden="true"  v-if="item.feed.is_upvoted === 1">
               <use xlink:href="#icon-yizan"></use>
             </svg><i class="numberColor" v-if="item.feed.support_number">{{item.feed.support_number}}</i>
           </span>
@@ -459,14 +459,13 @@
         anim.play()
       },
       dianpingDiscoverUp (index) {
-        console.log('点赞成功')
         upvote(this, this.item.feed.submission_id, (response) => {
           this.item.feed.support_number++
           this.item.feed.is_upvoted = -1
           this.showUpvo = true
           this.isUpvoteAnim(index)
           setTimeout(() => {
-            this.item.feed.is_upvoted = response.data.data.support_percent
+            this.item.feed.is_upvoted = 1
             document.getElementById('zan' + index).style.display = 'none'
           }, 1200)
         }, (response) => {
