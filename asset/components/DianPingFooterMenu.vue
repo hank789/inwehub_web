@@ -86,21 +86,21 @@
     font-size: 0.586rem;
   }
   .follwers {
-    width: 29px;
-    height: 29px;
+    width: 0.773rem;
+    height: 0.773rem;
     position: absolute;
-    top: 3px;
-    left: 173px;
+    top: 0.08rem;
+    left: 4.613rem;
   }
   .follwers svg {
   }
   .collectProduct {
     position: absolute;
-    top: 6px;
-    left: 177px;
+    top: 0.16rem;
+    left: 4.72rem;
   }
   .collectProduct .icon {
     color: #FA4975;
-    font-size: 22px;
+    font-size: 0.586rem;
   }
 </style>
