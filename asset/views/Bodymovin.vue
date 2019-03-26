@@ -23,7 +23,8 @@
             data: {},
             autoShow: false
           }
-        ]
+        ],
+        animObject: null
       }
     },
     components: {
@@ -35,14 +36,20 @@
     },
     methods: {
       upvote () {
-        var anim = window.bodymovin.loadAnimation({
-          container: document.getElementById('bm'),
-          renderer: 'svg',
-          loop: false,
-          autoplay: false,
-          animationData: upvote
-        })
-        anim.play()
+        if (!this.animObject) {
+          this.animObject = window.bodymovin.loadAnimation({
+            container: document.getElementById('bm'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: upvote
+          })
+          this.animObject.addEventListener('complete', () => {
+            console.log('onComplete')
+          })
+        }
+        console.log(this.animObject)
+        this.animObject.goToAndPlay(0)
       },
       click () {
         this.upvote()
