@@ -12,23 +12,16 @@
       </div>
       <!--<div class="line-vertical" v-if="item.rightLine"></div>-->
     </template>
+    <div class="follwers" v-show="isFollwers" @tap.click.prevent="isCollect"></div>
+    <div class="collectProduct" v-if="collect" @tap.click.prevent="isCollect">
+      <svg class="icon" aria-hidden="true">
+        <use xlink:href="#icon-shoucanghover"></use>
+      </svg>
+    </div>
   </div>
 </template>
 
 <script type="text/javascript">
-  /**
-   * options: [
-   *  {
-        icon: '#icon-pinglun',
-        text: '评论',
-        number: this.detail.comments_number,
-        disable: false,
-        rightLine: true,
-        isLight: false,
-        newNum: 5
-      },
-   * ]
-   */
   export default {
     data () {
       return {}
@@ -40,12 +33,25 @@
         default: () => {
           return []
         }
+      },
+      isFollwers: {
+        type: Boolean,
+        default: false
+      },
+      collect: {
+        type: Number,
+        default: false
       }
     },
     methods: {
       clickItem (item) {
         this.$emit('clickedItem', item)
+      },
+      isCollect () {
+        this.$emit('clickCollect')
       }
+    },
+    mounted () {
     }
   }
 </script>
@@ -62,6 +68,10 @@
     top: 0.293rem;
     left: 0.426rem;
   }
+
+  .container-menuFooter .menu.lightWidth {
+    position: relative;
+  }
   .container-menuFooter .menu .iconWrapper svg {
     color: #808080;
   }
@@ -74,5 +84,23 @@
 
   .container-menuFooter .menu_1 .iconWrapper svg {
     font-size: 0.586rem;
+  }
+  .follwers {
+    width: 29px;
+    height: 29px;
+    position: absolute;
+    top: 3px;
+    left: 173px;
+  }
+  .follwers svg {
+  }
+  .collectProduct {
+    position: absolute;
+    top: 6px;
+    left: 177px;
+  }
+  .collectProduct .icon {
+    color: #FA4975;
+    font-size: 22px;
   }
 </style>

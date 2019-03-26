@@ -190,7 +190,7 @@
               <use xlink:href="#icon-yizan"></use>
             </svg><i class="numberColor" v-if="item.feed.support_number">{{item.feed.support_number}}</i>
           </span>
-            <span v-show="showUpvo" class="upvoted" :id="'zan' + index"></span>
+            <span v-show="showUpvo" class="upvoted" :class="'zan' + index" @tap.stop.prevent="dianpingDiscoverUp(index)"></span>
 
           </div>
 
@@ -219,7 +219,8 @@
       return {
         shareOption: {},
         isUpvote: '',
-        showUpvo: false
+        showUpvo: false,
+        animObjects: []
       }
     },
     components: {
@@ -448,28 +449,31 @@
 
         this.$emit('showItemMore', this.shareOption, this.item)
       },
-      isUpvoteAnim (index) {
-        var anim = window.bodymovin.loadAnimation({
-          container: document.getElementById('zan' + index),
-          renderer: 'svg',
-          loop: false,
-          autoplay: false,
-          animationData: upvoteAnim
-        })
-        anim.play()
+      getAnimObject (index) {
+        if (!this.animObjects[index]) {
+          var animObject = window.bodymovin.loadAnimation({
+            container: document.querySelector('.zan' + index),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: upvoteAnim
+          })
+          animObject.addEventListener('complete', () => {
+            console.log('onComplete')
+          })
+          this.animObjects[index] = animObject
+        }
+
+        return this.animObjects[index]
       },
       dianpingDiscoverUp (index) {
         upvote(this, this.item.feed.submission_id, (response) => {
           this.item.feed.support_number++
           this.item.feed.is_upvoted = -1
           this.showUpvo = true
-          this.isUpvoteAnim(index)
-          setTimeout(() => {
-            this.item.feed.is_upvoted = 1
-            document.getElementById('zan' + index).style.display = 'none'
-          }, 1200)
+          var animObject = this.getAnimObject(index)
+          animObject.goToAndPlay(0)
         }, (response) => {
-          document.getElementById('zan' + index).innerHTML = ''
           this.showUpvo = false
           this.item.feed.support_number--
           this.item.feed.is_upvoted = 0

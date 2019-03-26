@@ -160,7 +160,10 @@
 
     <FooterMenu
       :options="footerMenus"
+      :isFollwers="isFollwers"
+      :collect="detail.is_followed"
       @clickedItem="footerMenuClickedItem"
+      @clickCollect="clickCollect"
     ></FooterMenu>
 
     <PageMore
@@ -188,6 +191,7 @@
   import StarView from '../../../components/star-rating/starView.vue'
   import { getLocalName } from '../../../utils/user.js'
   import MescrollDetail from '../../../components/refresh/MescrollDetail.vue'
+  import followersAnim from '../../../bodymovin/followers.json'
 
   export default {
     data () {
@@ -198,8 +202,10 @@
         userName: currentUser.name,
         detail: {
           reviews: 0,
-          followers: 0
+          followers: 0,
+          is_followed: 0
         },
+        isFollwers: false,
         swiperOption: {
           loop: false,
           effect: 'coverflow',
@@ -220,7 +226,8 @@
         productComments: [],
         shareOption: {},
         iconMenus: [],
-        star: 0
+        star: 0,
+        animObjects: []
       }
     },
     computed: {
@@ -339,6 +346,31 @@
       goDianping () {
         userAbility.jumpToDianpingAdd(this, urlencode(this.detail.name))
       },
+      getAnimObject (item) {
+        if (!this.animObjects[item]) {
+          var animObject = window.bodymovin.loadAnimation({
+            container: document.querySelector('.follwers'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: followersAnim
+          })
+          animObject.addEventListener('complete', () => {
+            console.log('onComplete')
+          })
+          this.animObjects[item] = animObject
+        }
+
+        return this.animObjects[item]
+      },
+      clickCollect () {
+        collectProduct(this, this.detail.id, () => {
+        }, () => {
+          this.isFollwers = false
+          this.detail.followers--
+          this.detail.is_followed = 0
+        })
+      },
       footerMenuClickedItem (item) {
         switch (item.text) {
           case '写点评':
@@ -346,9 +378,14 @@
             break
           case '关注':
             collectProduct(this, this.detail.id, () => {
-              this.detail.followers = 1
+              this.detail.followers++
+              this.isFollwers = true
+              var animObject = this.getAnimObject(item)
+              animObject.goToAndPlay(0)
             }, () => {
-              this.detail.followers = 0
+              this.isFollwers = true
+              this.detail.followers--
+              this.detail.is_followed = 0
             })
             break
           case '邀人点评':
