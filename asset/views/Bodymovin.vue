@@ -24,7 +24,7 @@
             autoShow: false
           }
         ],
-        animObject: null
+        animObjects: []
       }
     },
     components: {
@@ -36,20 +36,25 @@
     },
     methods: {
       upvote () {
-        if (!this.animObject) {
-          this.animObject = window.bodymovin.loadAnimation({
+        var animObject = this.getAnimObject(1)
+        animObject.goToAndPlay(0)
+      },
+      getAnimObject (index) {
+        if (!this.animObjects[index]) {
+          var animObject = window.bodymovin.loadAnimation({
             container: document.getElementById('bm'),
             renderer: 'svg',
             loop: false,
             autoplay: false,
             animationData: upvote
           })
-          this.animObject.addEventListener('complete', () => {
+          animObject.addEventListener('complete', () => {
             console.log('onComplete')
           })
+          this.animObjects[index] = animObject
         }
-        console.log(this.animObject)
-        this.animObject.goToAndPlay(0)
+
+        return this.animObjects[index]
       },
       click () {
         this.upvote()
