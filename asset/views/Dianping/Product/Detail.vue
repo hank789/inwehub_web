@@ -227,7 +227,8 @@
         shareOption: {},
         iconMenus: [],
         star: 0,
-        animObjects: []
+        animObjects: [],
+        is_FollWers: false
       }
     },
     computed: {
@@ -238,15 +239,17 @@
           number: 0,
           disable: false,
           rightLine: true,
-          isLight: false
+          isLight: false,
+          is_FollWers: false
         },
         {
           icon: '#icon-shoucang',
           text: '关注',
           number: this.detail.followers,
-          disable: this.detail.followers,
+          disable: this.detail.is_followed,
           rightLine: true,
-          isLight: false
+          isLight: false,
+          is_FollWers: this.is_FollWers
         },
         {
           // icon: '#icon-pinglun',
@@ -254,7 +257,8 @@
           number: 0,
           disable: false,
           rightLine: false,
-          isLight: true
+          isLight: true,
+          is_FollWers: false
         }]
       }
     },
@@ -366,6 +370,7 @@
       clickCollect () {
         collectProduct(this, this.detail.id, () => {
         }, () => {
+          this.is_FollWers = false
           this.isFollwers = false
           this.detail.followers--
           this.detail.is_followed = 0
@@ -380,9 +385,11 @@
             collectProduct(this, this.detail.id, () => {
               this.detail.followers++
               this.isFollwers = true
+              this.is_FollWers = true
               var animObject = this.getAnimObject(item)
               animObject.goToAndPlay(0)
             }, () => {
+              this.is_FollWers = false
               this.isFollwers = true
               this.detail.followers--
               this.detail.is_followed = 0

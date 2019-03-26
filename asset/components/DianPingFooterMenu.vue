@@ -1,7 +1,7 @@
 <template>
   <div class="container-menuFooter" v-if="options.length">
     <template v-for="(item, index) in options">
-      <div class="menu" :class="[{lightWidth: item.isLight, disable: item.disable, 'new': item.isNew}, 'menu_' + index, item.class]" @tap.click.prevent="clickItem(item)">
+      <div class="menu" :class="[{lightWidth: item.isLight, is_FollWers: item.is_FollWers , disable: item.disable, 'new': item.isNew}, 'menu_' + index, item.class]" @tap.click.prevent="clickItem(item)">
         <div class="iconWrapper">
           <svg class="icon" aria-hidden="true">
             <use :xlink:href="item.icon"></use>
@@ -71,6 +71,9 @@
 
   .container-menuFooter .menu.lightWidth {
     position: relative;
+  }
+  .container-menuFooter .menu.is_FollWers .icon {
+    display: none;
   }
   .container-menuFooter .menu .iconWrapper svg {
     color: #808080;
