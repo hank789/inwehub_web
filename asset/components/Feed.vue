@@ -948,11 +948,12 @@
             display: inline-block;
             position: absolute;
             top: -0.1rem;
-            right: 0.9rem;
-            padding: 0 0 0 0.533rem;
+            right: 0.4rem;
+            /*padding: 0 0 0 0.533rem;*/
             svg {
               position: absolute;
               top: 0;
+              right: 0;
             }
           }
         }
