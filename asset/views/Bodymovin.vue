@@ -1,7 +1,7 @@
 <template>
   <div class="mui-content">
     <div @tap.stop.prevent="click">点击</div>
-    <div class="upvote" id="bm"></div>
+    <div class="upvote bm_1"></div>
   </div>
 </template>
 
@@ -42,7 +42,7 @@
       getAnimObject (index) {
         if (!this.animObjects[index]) {
           var animObject = window.bodymovin.loadAnimation({
-            container: document.getElementById('bm'),
+            container: document.querySelector('.bm_' + index),
             renderer: 'svg',
             loop: false,
             autoplay: false,
