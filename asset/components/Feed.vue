@@ -182,7 +182,7 @@
         <div class="feed-operation">
 
           <div class="first">
-            <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
+            <span @tap.stop.prevent="toDetail(item)">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-pinglun"></use>
               </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
