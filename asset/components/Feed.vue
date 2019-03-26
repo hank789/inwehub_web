@@ -509,7 +509,7 @@
           this.item.feed.is_downvoted = response.data.data.support_percent
         }, (response) => {
           this.item.feed.downvote_number--
-          this.item.feed.is_downvoted = response.data.data.support_percent
+          this.item.feed.is_downvoted = 0
         })
       },
       toTagDetail (name) {
