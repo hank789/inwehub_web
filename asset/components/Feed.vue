@@ -928,7 +928,7 @@
             color: #03AEF9;
           }
           .yizan {
-            font-size: 0.39rem;
+            font-size: 0.4rem;
             margin-right: 0.18rem;
           }
           .numberColor {
@@ -947,8 +947,8 @@
             height: 0.826rem;
             display: inline-block;
             position: absolute;
-            top: -0.133rem;
-            right: 0.96rem;
+            top: -0.1rem;
+            right: 0.9rem;
             padding: 0 0 0 0.533rem;
             svg {
               position: absolute;
