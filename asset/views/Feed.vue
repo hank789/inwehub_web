@@ -100,6 +100,7 @@
           <FeedItem
             :item="item"
             :isShowLink="true"
+            :index="index"
             :key="'feedItem_' + item.id"
             @showItemMore="showItemMore"
           ></FeedItem>
