@@ -14,8 +14,8 @@
         <span>{{ detail.comments_number }}</span>
       </div>
 
-      <div class="collectionComment" @tap.stop.prevent="support">
-        <div :class="{active:!!detail.is_bookmark}">
+      <div class="collectionComment" @tap.stop.prevent="support"  :class="[{ showZan: showSupport || detail.is_upvoted}]">
+        <div>
           <svg class="icon" :class="{active:!!detail.is_bookmark}" aria-hidden="true">
             <use xlink:href="#icon-zan"></use>
           </svg>
@@ -31,6 +31,13 @@
         </div>
       </div>
 
+      <div class="detailFollwers" @tap.click.prevent="support" v-show="showSupport"></div>
+      <div class="collectProduct" @tap.click.prevent="support" v-if="detail.is_upvoted">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yizan"></use>
+        </svg>
+      </div>
+
     </div>
   </div>
 
@@ -38,6 +45,7 @@
 
 <script>
   import { postRequest } from '../../utils/request'
+  import upvoteAnim from '../../bodymovin/upvote.json'
 
   export default {
     data () {
@@ -54,7 +62,9 @@
             img: ''
           },
           created_at: ''
-        }
+        },
+        animObjects: [],
+        showSupport: false
       }
     },
     methods: {
@@ -92,6 +102,24 @@
           window.mui.toast(response.data.message)
         })
       },
+
+      getAnimObject (item) {
+        if (!this.animObjects[item]) {
+          var animObject = window.bodymovin.loadAnimation({
+            container: document.querySelector('.detailFollwers'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: upvoteAnim
+          })
+          animObject.addEventListener('complete', () => {
+            console.log('onComplete')
+          })
+          this.animObjects[item] = animObject
+        }
+
+        return this.animObjects[item]
+      },
       support () {
         var data = {
           submission_id: this.id
@@ -112,12 +140,16 @@
             window.mui.alert(response.data.message)
             return
           }
-
-          this.detail.is_upvoted = response.data.data.type === 'upvote' ? 1 : 0
-          if (this.detail.is_upvoted) {
+          var isUpvoted = response.data.data.type === 'upvote' ? 1 : 0
+          if (isUpvoted) {
             this.detail.upvotes++
+            this.showSupport = true
+            var animObject = this.getAnimObject(0)
+            animObject.goToAndPlay(0)
           } else {
+            this.showSupport = false
             this.detail.upvotes--
+            this.detail.is_upvoted = 0
           }
           if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
@@ -255,6 +287,14 @@
         color: #808080;
         padding-top: 0.373rem;
         position: relative;
+        &.showZan {
+          .icon {
+            color: #ffffff;
+          }
+          span {
+            color: #03AEF9;
+          }
+        }
         &.shareIcon {
           .icon {
             font-size: 0.426rem;
@@ -264,7 +304,7 @@
           position: absolute;
           top: 0.293rem;
           left: 0.826rem;
-          color: #FA4975;
+          color: #808080;
           font-size: 0.266rem;
           margin-top: -0.106rem;
         }
@@ -292,4 +332,20 @@
   }
 
 
+  .collectProduct {
+    position: absolute;
+    top: 0.3rem;
+    right: 56px;
+    .icon {
+      color: #03AEF9;
+      font-size: 0.426rem;
+    }
+  }
+  .detailFollwers {
+    width: 0.78rem;
+    height: 0.78rem;
+    position: absolute;
+    top: 5.5px;
+    right: 49px;
+  }
 </style>
