@@ -73,7 +73,7 @@
     position: relative;
   }
   .container-menuFooter .menu.is_FollWers .icon {
-    display: none;
+    color: #ffffff;
   }
   .container-menuFooter .menu .iconWrapper svg {
     color: #808080;
