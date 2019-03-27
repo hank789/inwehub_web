@@ -24,7 +24,7 @@
       >
 
         <template v-for="(comment, index) in list">
-          <feedDianping :item="comment" @showItemMore="showItemMore"></feedDianping>
+          <feedDianping :item="comment" :index="index" @showItemMore="showItemMore"></feedDianping>
         </template>
 
         <div class="noResult increase dianping-search" v-if="!list.length">

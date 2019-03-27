@@ -80,28 +80,43 @@
         </div>
         <!--操作区-->
         <div class="feed-moreOperation">
+
           <div class="feed-mord" @tap.stop.prevent="showItemMore">
             <svg class="icon" aria-hidden="true">
               <use xlink:href="#icon-gengduo1"></use>
             </svg>
           </div>
           <div class="feed-operation">
-            <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-pinglun"></use>
-              </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
-            </span>
-            <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-cai"></use>
-              </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
-            </span>
-            <span @tap.stop.prevent="discoverUp()" :class="item.feed.is_upvoted ? 'activeSpan':''">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zan"></use>
-              </svg><i v-if="item.feed.support_number">{{item.feed.support_number}}</i>
-            </span>
+
+            <div class="first">
+              <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-pinglun"></use>
+                </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
+              </span>
+              <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
+                <svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-cai"></use>
+                </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
+              </span>
+            </div>
+
+            <div class="posiZan">
+
+              <span @tap.stop.prevent="dianpingDiscoverUp(index)" :class="item.feed.is_upvoted ? 'activeSpan':''">
+                <svg class="icon" aria-hidden="true" v-if="item.feed.is_upvoted === 0">
+                  <use xlink:href="#icon-zan"></use>
+                </svg>
+                <svg class="icon yizan" aria-hidden="true"  v-if="item.feed.is_upvoted === 1">
+                  <use xlink:href="#icon-yizan"></use>
+                </svg><i class="numberColor" v-if="item.feed.support_number">{{item.feed.support_number}}</i>
+              </span>
+                  <span v-show="showUpvo" class="upvoted" :class="'zan' + index" @tap.stop.prevent="dianpingDiscoverUp(index)"></span>
+
+            </div>
+
           </div>
+
         </div>
 
         <div class="line-river-after line-river-after-top"></div>
@@ -165,21 +180,35 @@
           </svg>
         </div>
         <div class="feed-operation">
-            <span @tap.stop.prevent="$router.pushPlus('/comment/' + item.feed.comment_url.replace('/c/', '') + '/' + item.feed.submission_id)">
+
+          <div class="first">
+            <span @tap.stop.prevent="toDetail(item)">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-pinglun"></use>
               </svg><i v-if="item.feed.comment_number">{{item.feed.comment_number}}</i>
             </span>
-          <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
+
+            <span @tap.stop.prevent="discoverDown()" :class="item.feed.is_downvoted ? 'activeSpan':''">
               <svg class="icon" aria-hidden="true">
                 <use xlink:href="#icon-cai"></use>
               </svg><i v-if="item.feed.downvote_number">{{item.feed.downvote_number}}</i>
             </span>
-          <span @tap.stop.prevent="discoverUp()" :class="item.feed.is_upvoted ? 'activeSpan':''">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-zan"></use>
-              </svg><i v-if="item.feed.support_number">{{item.feed.support_number}}</i>
-            </span>
+          </div>
+
+          <div class="posiZan">
+
+          <span @tap.stop.prevent="dianpingDiscoverUp(index)" :class="item.feed.is_upvoted ? 'activeSpan':''">
+            <svg class="icon" aria-hidden="true" v-if="item.feed.is_upvoted === 0">
+              <use xlink:href="#icon-zan"></use>
+            </svg>
+            <svg class="icon yizan" aria-hidden="true"  v-if="item.feed.is_upvoted === 1">
+              <use xlink:href="#icon-yizan"></use>
+            </svg><i class="numberColor" v-if="item.feed.support_number">{{item.feed.support_number}}</i>
+          </span>
+            <span v-show="showUpvo" class="upvoted" :class="'zan' + index" @tap.stop.prevent="dianpingDiscoverUp(index)"></span>
+
+          </div>
+
         </div>
       </div>
       <div class="line-river-after line-river-after-top"></div>
@@ -198,12 +227,15 @@
   import { getDianpingCommentDetail, getTextDiscoverDetail, getAskCommunityInteractionDetail } from '../utils/shareTemplate'
   import { postRequest } from '../utils/request'
   import StarView from '../components/star-rating/starView.vue'
+  import upvoteAnim from '../bodymovin/upvote.json'
 
   export default {
     data () {
       return {
         shareOption: {},
-        isUpvote: ''
+        isUpvote: '',
+        showUpvo: false,
+        animObjects: []
       }
     },
     components: {
@@ -302,6 +334,10 @@
       isShowLink: {
         type: Boolean,
         default: false
+      },
+      index: {
+        type: Number,
+        default: 0
       }
     },
     mounted () {
@@ -428,6 +464,36 @@
 
         this.$emit('showItemMore', this.shareOption, this.item)
       },
+      getAnimObject (index) {
+        if (!this.animObjects[index]) {
+          var animObject = window.bodymovin.loadAnimation({
+            container: document.querySelector('.zan' + index),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: upvoteAnim
+          })
+          animObject.addEventListener('complete', () => {
+            console.log('onComplete')
+          })
+          this.animObjects[index] = animObject
+        }
+
+        return this.animObjects[index]
+      },
+      dianpingDiscoverUp (index) {
+        upvote(this, this.item.feed.submission_id, (response) => {
+          this.item.feed.support_number++
+          this.item.feed.is_upvoted = -1
+          this.showUpvo = true
+          var animObject = this.getAnimObject(index)
+          animObject.goToAndPlay(0)
+        }, (response) => {
+          this.showUpvo = false
+          this.item.feed.support_number--
+          this.item.feed.is_upvoted = 0
+        })
+      },
       discoverUp () {
         upvote(this, this.item.feed.submission_id, (response) => {
           this.item.feed.support_number++
@@ -443,7 +509,7 @@
           this.item.feed.is_downvoted = response.data.data.support_percent
         }, (response) => {
           this.item.feed.downvote_number--
-          this.item.feed.is_downvoted = response.data.data.support_percent
+          this.item.feed.is_downvoted = 0
         })
       },
       toTagDetail (name) {
@@ -659,6 +725,8 @@
         color: #808080;
       }
       .feed-operation {
+        position: relative;
+        padding-top: 0.133rem;
         span {
           padding: 0.133rem 0.266rem;
           font-size: 0.293rem;
@@ -673,10 +741,34 @@
             font-style: normal;
           }
         }
+        .first {
+          margin-right: 1.2rem;
+        }
+        .posiZan {
+          position: absolute;
+          top: 0.08rem;
+          right: -0.186rem;
+          .upvoted {
+            width: 0.826rem;
+            height: 0.826rem;
+            display: inline-block;
+            position: absolute;
+            top: -0.1rem;
+            right: 0.4rem;
+            svg {
+              position: absolute;
+              top: 0;
+              right: 0;
+            }
+          }
+        }
         .activeSpan {
           color: #B4B4B6;
           .icon {
-            color: #B4B4B6;
+            color: #03AEF9;
+          }
+          .numberColor {
+            color: #03AEF9;
           }
         }
       }
@@ -860,6 +952,7 @@
       }
       .feed-operation {
         padding-top: 0.133rem;
+        position: relative;
         span {
           padding: 0.133rem 0.266rem;
           font-size: 0.293rem;
@@ -877,7 +970,36 @@
         .activeSpan {
           color: #B4B4B6;
           .icon {
-            color: #B4B4B6;
+            color: #03AEF9;
+          }
+          .yizan {
+            font-size: 0.4rem;
+            margin-right: 0.18rem;
+          }
+          .numberColor {
+            color: #03AEF9;
+          }
+        }
+        .first {
+          margin-right: 1.2rem;
+        }
+        .posiZan {
+          position: absolute;
+          top: 0.08rem;
+          right: -0.186rem;
+          .upvoted {
+            width: 0.826rem;
+            height: 0.826rem;
+            display: inline-block;
+            position: absolute;
+            top: -0.1rem;
+            right: 0.4rem;
+            /*padding: 0 0 0 0.533rem;*/
+            svg {
+              position: absolute;
+              top: 0;
+              right: 0;
+            }
           }
         }
       }

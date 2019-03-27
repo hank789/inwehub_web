@@ -142,8 +142,11 @@
     <Detail
       :detail="this.detail"
       :iconOptions="iconOptions"
+      :isDetailUpVote="isDetailUpVote"
+      :isNumUpVote="detail.is_upvoted"
       @detailMenuIcon="detailMenuIcon"
       @WriteComment="goComment"
+      @clickUpVote="upVote"
     ></Detail>
 
     <PageMore
@@ -177,6 +180,7 @@
   import AlertTextarea from '../../../components/comment/AlertTextarea.vue'
   import { showComment } from '../../../utils/comment'
   import MescrollDetail from '../../../components/refresh/MescrollDetail.vue'
+  import upvoteAnim from '../../../bodymovin/upvote.json'
 
   export default {
     data () {
@@ -213,7 +217,9 @@
           },
           readOnly: true
         },
-        tags: {}
+        tags: {},
+        isDetailUpVote: false,
+        animObjects: []
       }
     },
     components: {
@@ -239,24 +245,32 @@
           {
             icon: '#icon-pinglun',
             text: '评论',
-            number: this.detail.comments_number
+            number: this.detail.comments_number,
+            showNumer: false,
+            ShowIsUpVote: false
           },
           {
             icon: '#icon-cai',
             text: '踩',
             number: this.detail.downvotes,
-            showClass: this.detail.is_downvoted
+            showClass: this.detail.is_downvoted,
+            showNumer: false,
+            ShowIsUpVote: false
           },
           {
             icon: '#icon-zan',
             text: '赞',
             number: this.detail.upvotes,
-            showClass: this.detail.is_upvoted
+            showClass: this.isDetailUpVote,
+            showNumber: this.isDetailUpVote,
+            ShowIsUpVote: this.detail.is_upvoted
           },
           {
             icon: '#icon-shoucang-xiao',
             text: '分享',
-            number: 0
+            number: 0,
+            showNumer: false,
+            ShowIsUpVote: false
           }
         ]
       },
@@ -467,10 +481,27 @@
           }
         })
       },
+      getAnimObject (item) {
+        if (!this.animObjects[item]) {
+          var animObject = window.bodymovin.loadAnimation({
+            container: document.querySelector('.detailFollwers'),
+            renderer: 'svg',
+            loop: false,
+            autoplay: false,
+            animationData: upvoteAnim
+          })
+          animObject.addEventListener('complete', () => {
+            console.log('onComplete')
+          })
+          this.animObjects[item] = animObject
+        }
+
+        return this.animObjects[item]
+      },
       upVote () {
         upvote(this, this.detail.id, (response) => {
           this.detail.upvotes++
-          this.detail.is_upvoted = 1
+          // this.detail.is_upvoted = 1
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.isUpvote = response.data.data.type
@@ -479,6 +510,9 @@
             uuid: this.uuid
           }
           this.detail.supporter_list = this.detail.supporter_list.concat(support)
+          this.isDetailUpVote = true
+          var animObject = this.getAnimObject(0)
+          animObject.goToAndPlay(0)
 
           if (process.env.NODE_ENV === 'production' && window.mixpanel) {
             // mixpanel
@@ -497,6 +531,7 @@
         }, (response) => {
           this.detail.upvotes--
           this.detail.is_upvoted = 0
+          this.isDetailUpVote = false
           this.detail.support_description = response.data.data.support_description
           this.detail.support_percent = response.data.data.support_percent
           this.isUpvote = response.data.data.type

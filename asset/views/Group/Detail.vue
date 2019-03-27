@@ -170,6 +170,7 @@
 
               <FeedItem
                 :item="item"
+                :index="index"
                 @showItemMore="showItemOptions"
               ></FeedItem>
 
