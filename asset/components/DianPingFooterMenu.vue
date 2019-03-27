@@ -82,7 +82,7 @@
     color: #B4B4B6;
   }
   .container-menuFooter .menu.disable .iconWrapper svg {
-    color: #c8c8c8;
+    color: #fff;
   }
 
   .container-menuFooter .menu_1 .iconWrapper svg {
