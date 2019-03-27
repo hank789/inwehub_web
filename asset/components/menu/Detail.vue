@@ -5,13 +5,20 @@
     </div>
     <div class="footerRight">
 
-      <div class="collectionComment" v-for="(menuItem, index) in iconOptions" :key="index" @tap.stop.prevent="detailMenuIcon(menuItem)" :title="menuItem.text">
-        <div :class="menuItem.showClass ? 'active' : ''" :title="menuItem.text">
+      <div class="collectionComment" :class="[{showNumer: menuItem.showNumber || menuItem.ShowIsUpVote }]" v-for="(menuItem, index) in iconOptions" :key="index" @tap.stop.prevent="detailMenuIcon(menuItem)" :title="menuItem.text">
+        <div :class="[{active: menuItem.showClass}]" :title="menuItem.text">
           <svg class="icon" :class="menuItem.showClass ? 'active' : ''" aria-hidden="true" :title="menuItem.text">
             <use :xlink:href="menuItem.icon"></use>
           </svg>
         </div>
         <span v-if="menuItem.number">{{ menuItem.number }}</span>
+      </div>
+
+      <div class="detailFollwers" v-show="isDetailUpVote" @tap.click.prevent="clickUpVote"></div>
+      <div class="collectProduct" v-if="isNumUpVote" @tap.click.prevent="clickUpVote">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-yizan"></use>
+        </svg>
       </div>
 
     </div>
@@ -32,6 +39,14 @@
       iconOptions: {
         type: Array,
         default: []
+      },
+      isDetailUpVote: {
+        type: Boolean,
+        default: false
+      },
+      isNumUpVote: {
+        type: Number,
+        default: 0
       }
     },
     methods: {
@@ -40,6 +55,9 @@
       },
       WriteComment () {
         this.$emit('WriteComment')
+      },
+      clickUpVote () {
+        this.$emit('clickUpVote')
       }
     }
   }
@@ -112,6 +130,7 @@
       font-size: 0.266rem;
       text-align: center;
       display: flex;
+      position: relative;
       .collectionComment {
         width: 1.333rem;
         height: 1.306rem;
@@ -119,6 +138,13 @@
         color: #808080;
         padding-top: 0.373rem;
         position: relative;
+        &.showNumer {
+          svg {
+            color: #ffffff;
+          }
+          span {
+          }
+        }
         span {
           position: absolute;
           top: 0.293rem;
@@ -135,5 +161,22 @@
         }
       }
     }
+  }
+
+  .collectProduct {
+    position: absolute;
+    top: 0.373rem;
+    right: 57px;
+    .icon {
+      color: #03AEF9;
+      font-size: 0.426rem;
+    }
+  }
+  .detailFollwers {
+    width: 0.773rem;
+    height: 0.773rem;
+    position: absolute;
+    top: 7.5px;
+    right: 50px;
   }
 </style>
