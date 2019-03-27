@@ -166,7 +166,7 @@
   .collectProduct {
     position: absolute;
     top: 0.373rem;
-    right: 57px;
+    right: 1.52rem;
     .icon {
       color: #03AEF9;
       font-size: 0.426rem;
@@ -176,7 +176,7 @@
     width: 0.773rem;
     height: 0.773rem;
     position: absolute;
-    top: 7.5px;
-    right: 50px;
+    top: 0.2rem;
+    right: 1.333rem;
   }
 </style>

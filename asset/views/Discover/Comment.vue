@@ -335,7 +335,7 @@
   .collectProduct {
     position: absolute;
     top: 0.3rem;
-    right: 56px;
+    right: 1.493rem;
     .icon {
       color: #03AEF9;
       font-size: 0.426rem;
@@ -345,7 +345,7 @@
     width: 0.78rem;
     height: 0.78rem;
     position: absolute;
-    top: 5.5px;
-    right: 49px;
+    top: 0.146rem;
+    right: 1.306rem;
   }
 </style>
