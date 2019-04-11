@@ -205,6 +205,10 @@ function openWebviewByHome (ws, id, url, pathUrl, title, imgUrl) {
     }
   })
 
+  webview.overrideUrlLoading({effect: 'touchstart', mode: 'reject'}, function (e) {
+    console.log('reject url: ' + e.url)
+  })
+
   webview.addEventListener('loaded', () => {
     window.plus.nativeUI.closeWaiting()
   })
