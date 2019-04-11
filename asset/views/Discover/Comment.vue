@@ -280,6 +280,8 @@
       text-align: center;
       display: -ms-flexbox;
       display: flex;
+      z-index: 777;
+      position: relative;
       .collectionComment {
         width: 0.9rem;
         height: 1.306rem;
