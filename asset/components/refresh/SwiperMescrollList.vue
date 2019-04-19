@@ -81,7 +81,10 @@
     },
     computed: {
       swiper () {
-        return this.$refs.mySwiper.swiper
+        if (this.$refs.mySwiper) {
+          return this.$refs.mySwiper.swiper
+        }
+        return false
       }
     },
     methods: {
